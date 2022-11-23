@@ -1,0 +1,9 @@
+﻿Category/Name/lib_EDAE01B4_4C57BF78=Variables
+Category/Name/lib_EDAE01B4_6C63C182=Supplies Limit For | SL
+Category/Name/lib_EDAE01B4_B0B78F73=Triggers
+Library/Name/EDAE01B4=Library
+Trigger/Name/lib_EDAE01B4_307A4C93=SL | Give_Limit_Supply
+Trigger/Name/lib_EDAE01B4_67C164A2=SL | NoSupplyBlock
+Trigger/Name/lib_EDAE01B4_E76886AF=SL | Launch
+Variable/Name/lib_EDAE01B4_2495D815=get supplies limit
+Variable/Name/lib_EDAE01B4_B7BB8E98=_count_player

@@ -1,0 +1,844 @@
+include "TriggerLibs/NativeLib"
+
+include "Lib4147430F_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void lib4147430F_InitLibraries () {
+    libNtve_InitVariables();
+}
+
+// Variable Initialization
+bool lib4147430F_InitVariables_completed = false;
+
+void lib4147430F_InitVariables () {
+    int init_i;
+    int init_j;
+
+    if (lib4147430F_InitVariables_completed) {
+        return;
+    }
+
+    lib4147430F_InitVariables_completed = true;
+
+    for (init_i = 0; init_i <= 16; init_i += 1) {
+        lib4147430F_gv_f2Rdialog[init_i] = c_invalidDialogId;
+    }
+    for (init_i = 0; init_i <= 16; init_i += 1) {
+        for (init_j = 0; init_j <= 1; init_j += 1) {
+            lib4147430F_gv_f2Rdialogitem[init_i][init_j] = c_invalidDialogControlId;
+        }
+    }
+    lib4147430F_gv_f2RObserver = CatalogFieldValueGetAsInt(c_gameCatalogGameUI, "Dflt", "DefaultObservedPlayerId", c_playerAny);
+    lib4147430F_gv_f2RButton_Dialog = c_invalidDialogId;
+    for (init_i = 0; init_i <= 16; init_i += 1) {
+        lib4147430F_gv_f2RButton_Item[init_i] = c_invalidDialogControlId;
+    }
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: debugCheat
+//--------------------------------------------------------------------------------------------------
+bool lib4147430F_gt_debugCheat_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    Wait(1.0, c_timeGame);
+    UnitCreate(8, "Stalker", 0, EventPlayer(), RegionRandomPoint(RegionCircle(PlayerStartLocation(1), 10.0)), 270.0);
+    UnitCreate(4, "Immortal", 0, EventPlayer(), RegionRandomPoint(RegionCircle(PlayerStartLocation(1), 10.0)), 270.0);
+    UnitCreate(4, "VoidRay", 0, EventPlayer(), RegionRandomPoint(RegionCircle(PlayerStartLocation(1), 10.0)), 270.0);
+    PlayerModifyPropertyInt(EventPlayer(), c_playerPropMinerals, c_playerPropOperSetTo, 20000);
+    PlayerModifyPropertyInt(EventPlayer(), c_playerPropVespene, c_playerPropOperSetTo, 10000);
+    TriggerDebugOutput(1, StringExternal("Param/Value/lib_4147430F_85587F33"), true);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib4147430F_gt_debugCheat_Init () {
+    lib4147430F_gt_debugCheat = TriggerCreate("lib4147430F_gt_debugCheat_Func");
+    TriggerAddEventChatMessage(lib4147430F_gt_debugCheat, c_playerAny, "-debug", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: debugText
+//--------------------------------------------------------------------------------------------------
+bool lib4147430F_gt_debugText_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((lib4147430F_gv_debugtext == false)) {
+        TriggerDebugOutputEnable(true);
+        lib4147430F_gv_debugtext = true;
+        TriggerDebugOutput(1, StringExternal("Param/Value/lib_4147430F_E8B6A0F7"), true);
+    }
+    else {
+        TriggerDebugOutputEnable(false);
+        lib4147430F_gv_debugtext = false;
+        TriggerDebugOutput(1, StringExternal("Param/Value/lib_4147430F_5E649CF9"), true);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib4147430F_gt_debugText_Init () {
+    lib4147430F_gt_debugText = TriggerCreate("lib4147430F_gt_debugText_Func");
+    TriggerAddEventChatMessage(lib4147430F_gt_debugText, c_playerAny, "-debugtext", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: debugTeam
+//--------------------------------------------------------------------------------------------------
+bool lib4147430F_gt_debugTeam_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__countPlayer;
+
+    // Automatic Variable Declarations
+    const int autoE252AFA0_ae = 12;
+    const int autoE252AFA0_ai = 1;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv__countPlayer = 1;
+    for ( ; ( (autoE252AFA0_ai >= 0 && lv__countPlayer <= autoE252AFA0_ae) || (autoE252AFA0_ai < 0 && lv__countPlayer >= autoE252AFA0_ae) ) ; lv__countPlayer += autoE252AFA0_ai ) {
+        TextExpressionSetToken("Param/Expression/lib_4147430F_70191894", "Player", IntToText(lv__countPlayer));
+        TextExpressionSetToken("Param/Expression/lib_4147430F_70191894", "Team", IntToText(lib4147430F_gv_f2RteamPlayer[lv__countPlayer]));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, TextExpressionAssemble("Param/Expression/lib_4147430F_70191894"));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib4147430F_gt_debugTeam_Init () {
+    lib4147430F_gt_debugTeam = TriggerCreate("lib4147430F_gt_debugTeam_Func");
+    TriggerAddEventChatMessage(lib4147430F_gt_debugTeam, c_playerAny, "-debugteam", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: F2R | Launch
+//--------------------------------------------------------------------------------------------------
+bool lib4147430F_gt_F2RLaunch_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__teamNumber;
+    bool lv__rescost_mineral_common;
+    bool lv__rescost_vespen_common;
+    bool[17] lv__rescost_mineral_individual;
+    bool[17] lv__rescost_vespen_individual;
+    int lv__count_cost_mineral_individual;
+    int lv__count_cost_vespen_individual;
+    int lv__count_player;
+
+    // Automatic Variable Declarations
+    string autoF0DA7058_val;
+    const int auto2E15202E_ae = 12;
+    const int auto2E15202E_ai = 1;
+    string autoDA16B4E7_val;
+    const int auto99E96C51_ae = 12;
+    const int auto99E96C51_ai = 1;
+    const int autoB71ED4C4_ae = 12;
+    const int autoB71ED4C4_ai = 1;
+    const int autoC849AD0D_ae = 12;
+    const int autoC849AD0D_ai = 1;
+    const int auto8ECC6B2C_ae = 12;
+    const int auto8ECC6B2C_ai = 1;
+    string auto89A0A284_val;
+    string auto3A57A783_val;
+    string auto35E50733_val;
+    const int auto083991D2_ae = 12;
+    const int auto083991D2_ai = 1;
+    const int auto91E61C3D_ae = 12;
+    const int auto91E61C3D_ai = 1;
+    const int auto44F6D927_ae = 12;
+    const int auto44F6D927_ai = 1;
+    const int autoECE7FFBA_ae = 12;
+    const int autoECE7FFBA_ai = 1;
+    const int auto721C72A7_ae = 12;
+    const int auto721C72A7_ai = 1;
+    const int auto9B743B52_ae = 12;
+    const int auto9B743B52_ai = 1;
+    const int auto707CC7AC_ae = 12;
+    const int auto707CC7AC_ai = 1;
+    const int auto1B701847_ae = 12;
+    const int auto1B701847_ai = 1;
+    const int auto418033FD_ae = 12;
+    const int auto418033FD_ai = 1;
+    const int autoF2C484EE_ae = 12;
+    const int autoF2C484EE_ai = 1;
+    const int autoBDAFEB9E_ae = 12;
+    const int autoBDAFEB9E_ai = 1;
+    const int autoA5BDCD5D_ae = 12;
+    const int autoA5BDCD5D_ai = 1;
+    string auto51484D23_val;
+    const int autoD407C7EB_ae = 12;
+    const int autoD407C7EB_ai = 1;
+    const int auto5EF9795E_ae = 12;
+    const int auto5EF9795E_ai = 1;
+    const int auto83DBB99B_ae = 12;
+    const int auto83DBB99B_ai = 1;
+    const int autoFCD3D936_ae = 12;
+    const int autoFCD3D936_ai = 1;
+    const int autoB3528C81_ae = 12;
+    const int autoB3528C81_ai = 1;
+    const int auto9FDF469C_ae = 12;
+    const int auto9FDF469C_ai = 1;
+    const int autoCB0DE98E_ae = 12;
+    const int autoCB0DE98E_ai = 1;
+    const int autoC9F95C6F_ae = 12;
+    const int autoC9F95C6F_ai = 1;
+    const int auto29CD9B68_ae = 12;
+    const int auto29CD9B68_ai = 1;
+    const int auto7431BF48_ae = 12;
+    const int auto7431BF48_ai = 1;
+    const int autoE6435207_ae = 12;
+    const int autoE6435207_ai = 1;
+    const int auto4033C27C_ae = 12;
+    const int auto4033C27C_ai = 1;
+    const int auto5E39847F_ae = 12;
+    const int auto5E39847F_ai = 1;
+    const int auto458EB4F9_ae = 12;
+    const int auto458EB4F9_ai = 1;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    autoF0DA7058_val = GameAttributeGameValue("1");
+    if (autoF0DA7058_val == "0005") {
+        lv__count_player = 1;
+        for ( ; ( (auto2E15202E_ai >= 0 && lv__count_player <= auto2E15202E_ae) || (auto2E15202E_ai < 0 && lv__count_player >= auto2E15202E_ae) ) ; lv__count_player += auto2E15202E_ai ) {
+            autoDA16B4E7_val = GameAttributePlayerValue("2", lv__count_player);
+            if (autoDA16B4E7_val == "0002") {
+                lib4147430F_gv_f2Rwork[lv__count_player][0] = true;
+                lib4147430F_gv_f2Rwork[lv__count_player][1] = true;
+            }
+            else if (autoDA16B4E7_val == "0003") {
+                lib4147430F_gv_f2Rwork[lv__count_player][0] = true;
+                lib4147430F_gv_f2Rwork[lv__count_player][2] = true;
+            }
+            else if (autoDA16B4E7_val == "0004") {
+                lib4147430F_gv_f2Rwork[lv__count_player][0] = true;
+                lib4147430F_gv_f2Rwork[lv__count_player][3] = true;
+            }
+            else {
+            }
+        }
+    }
+    else if (autoF0DA7058_val == "0002") {
+        lv__count_player = 1;
+        for ( ; ( (auto99E96C51_ai >= 0 && lv__count_player <= auto99E96C51_ae) || (auto99E96C51_ai < 0 && lv__count_player >= auto99E96C51_ae) ) ; lv__count_player += auto99E96C51_ai ) {
+            lib4147430F_gv_f2Rwork[lv__count_player][0] = true;
+            lib4147430F_gv_f2Rwork[lv__count_player][1] = true;
+        }
+    }
+    else if (autoF0DA7058_val == "0004") {
+        lv__count_player = 1;
+        for ( ; ( (autoB71ED4C4_ai >= 0 && lv__count_player <= autoB71ED4C4_ae) || (autoB71ED4C4_ai < 0 && lv__count_player >= autoB71ED4C4_ae) ) ; lv__count_player += autoB71ED4C4_ai ) {
+            lib4147430F_gv_f2Rwork[lv__count_player][0] = true;
+            lib4147430F_gv_f2Rwork[lv__count_player][2] = true;
+        }
+    }
+    else if (autoF0DA7058_val == "0003") {
+        lv__count_player = 1;
+        for ( ; ( (autoC849AD0D_ai >= 0 && lv__count_player <= autoC849AD0D_ae) || (autoC849AD0D_ai < 0 && lv__count_player >= autoC849AD0D_ae) ) ; lv__count_player += autoC849AD0D_ai ) {
+            lib4147430F_gv_f2Rwork[lv__count_player][0] = true;
+            lib4147430F_gv_f2Rwork[lv__count_player][3] = true;
+        }
+    }
+    else {
+    }
+    if ((GameAttributeGameValue("1") == "0005")) {
+        lv__count_player = 1;
+        for ( ; ( (auto8ECC6B2C_ai >= 0 && lv__count_player <= auto8ECC6B2C_ae) || (auto8ECC6B2C_ai < 0 && lv__count_player >= auto8ECC6B2C_ae) ) ; lv__count_player += auto8ECC6B2C_ai ) {
+            if ((GameAttributePlayerValue("7", lv__count_player) == "0001")) {
+            }
+            else {
+                auto89A0A284_val = GameAttributePlayerValue("7", lv__count_player);
+                if (auto89A0A284_val == "0002") {
+                    lib4147430F_gv_f2Ramt_minerals[lv__count_player] = 50;
+                }
+                else if (auto89A0A284_val == "0003") {
+                    lib4147430F_gv_f2Ramt_minerals[lv__count_player] = 100;
+                }
+                else if (auto89A0A284_val == "0004") {
+                    lib4147430F_gv_f2Ramt_minerals[lv__count_player] = 150;
+                }
+                else if (auto89A0A284_val == "0005") {
+                    lib4147430F_gv_f2Ramt_minerals[lv__count_player] = 200;
+                }
+                else if (auto89A0A284_val == "0006") {
+                    lib4147430F_gv_f2Ramt_minerals[lv__count_player] = 250;
+                }
+                else if (auto89A0A284_val == "0007") {
+                    lib4147430F_gv_f2Ramt_minerals[lv__count_player] = 300;
+                }
+                else if (auto89A0A284_val == "0008") {
+                    lib4147430F_gv_f2Ramt_minerals[lv__count_player] = 350;
+                }
+                else if (auto89A0A284_val == "0009") {
+                    lib4147430F_gv_f2Ramt_minerals[lv__count_player] = 400;
+                }
+                else if (auto89A0A284_val == "0010") {
+                    lib4147430F_gv_f2Ramt_minerals[lv__count_player] = 450;
+                }
+                else if (auto89A0A284_val == "0011") {
+                    lib4147430F_gv_f2Ramt_minerals[lv__count_player] = 500;
+                }
+                else if (auto89A0A284_val == "0012") {
+                    lib4147430F_gv_f2Ramt_minerals[lv__count_player] = 750;
+                }
+                else if (auto89A0A284_val == "0013") {
+                    lib4147430F_gv_f2Ramt_minerals[lv__count_player] = 1000;
+                }
+                else {
+                }
+                lv__rescost_mineral_individual[lv__count_player] = true;
+            }
+            if ((GameAttributePlayerValue("8", lv__count_player) == "0001")) {
+            }
+            else {
+                auto3A57A783_val = GameAttributePlayerValue("8", lv__count_player);
+                if (auto3A57A783_val == "0002") {
+                    lib4147430F_gv_f2Ramt_vespen[lv__count_player] = 50;
+                }
+                else if (auto3A57A783_val == "0003") {
+                    lib4147430F_gv_f2Ramt_vespen[lv__count_player] = 100;
+                }
+                else if (auto3A57A783_val == "0004") {
+                    lib4147430F_gv_f2Ramt_vespen[lv__count_player] = 150;
+                }
+                else if (auto3A57A783_val == "0005") {
+                    lib4147430F_gv_f2Ramt_vespen[lv__count_player] = 200;
+                }
+                else if (auto3A57A783_val == "0006") {
+                    lib4147430F_gv_f2Ramt_vespen[lv__count_player] = 250;
+                }
+                else if (auto3A57A783_val == "0007") {
+                    lib4147430F_gv_f2Ramt_vespen[lv__count_player] = 300;
+                }
+                else if (auto3A57A783_val == "0008") {
+                    lib4147430F_gv_f2Ramt_vespen[lv__count_player] = 350;
+                }
+                else if (auto3A57A783_val == "0009") {
+                    lib4147430F_gv_f2Ramt_vespen[lv__count_player] = 400;
+                }
+                else if (auto3A57A783_val == "0010") {
+                    lib4147430F_gv_f2Ramt_vespen[lv__count_player] = 450;
+                }
+                else if (auto3A57A783_val == "0011") {
+                    lib4147430F_gv_f2Ramt_vespen[lv__count_player] = 500;
+                }
+                else if (auto3A57A783_val == "0012") {
+                    lib4147430F_gv_f2Ramt_vespen[lv__count_player] = 750;
+                }
+                else if (auto3A57A783_val == "0013") {
+                    lib4147430F_gv_f2Ramt_vespen[lv__count_player] = 1000;
+                }
+                else {
+                }
+                lv__rescost_vespen_individual[lv__count_player] = true;
+            }
+        }
+    }
+    else {
+        if ((GameAttributeGameValue("3") == "0013")) {
+        }
+        else {
+            lv__rescost_mineral_common = true;
+            auto35E50733_val = GameAttributeGameValue("3");
+            if (auto35E50733_val == "0001") {
+                lv__count_player = 1;
+                for ( ; ( (auto083991D2_ai >= 0 && lv__count_player <= auto083991D2_ae) || (auto083991D2_ai < 0 && lv__count_player >= auto083991D2_ae) ) ; lv__count_player += auto083991D2_ai ) {
+                    lib4147430F_gv_f2Ramt_minerals[lv__count_player] = 50;
+                }
+            }
+            else if (auto35E50733_val == "0002") {
+                lv__count_player = 1;
+                for ( ; ( (auto91E61C3D_ai >= 0 && lv__count_player <= auto91E61C3D_ae) || (auto91E61C3D_ai < 0 && lv__count_player >= auto91E61C3D_ae) ) ; lv__count_player += auto91E61C3D_ai ) {
+                    lib4147430F_gv_f2Ramt_minerals[lv__count_player] = 100;
+                }
+            }
+            else if (auto35E50733_val == "0003") {
+                lv__count_player = 1;
+                for ( ; ( (auto44F6D927_ai >= 0 && lv__count_player <= auto44F6D927_ae) || (auto44F6D927_ai < 0 && lv__count_player >= auto44F6D927_ae) ) ; lv__count_player += auto44F6D927_ai ) {
+                    lib4147430F_gv_f2Ramt_minerals[lv__count_player] = 150;
+                }
+            }
+            else if (auto35E50733_val == "0004") {
+                lv__count_player = 1;
+                for ( ; ( (autoECE7FFBA_ai >= 0 && lv__count_player <= autoECE7FFBA_ae) || (autoECE7FFBA_ai < 0 && lv__count_player >= autoECE7FFBA_ae) ) ; lv__count_player += autoECE7FFBA_ai ) {
+                    lib4147430F_gv_f2Ramt_minerals[lv__count_player] = 200;
+                }
+            }
+            else if (auto35E50733_val == "0005") {
+                lv__count_player = 1;
+                for ( ; ( (auto721C72A7_ai >= 0 && lv__count_player <= auto721C72A7_ae) || (auto721C72A7_ai < 0 && lv__count_player >= auto721C72A7_ae) ) ; lv__count_player += auto721C72A7_ai ) {
+                    lib4147430F_gv_f2Ramt_minerals[lv__count_player] = 250;
+                }
+            }
+            else if (auto35E50733_val == "0006") {
+                lv__count_player = 1;
+                for ( ; ( (auto9B743B52_ai >= 0 && lv__count_player <= auto9B743B52_ae) || (auto9B743B52_ai < 0 && lv__count_player >= auto9B743B52_ae) ) ; lv__count_player += auto9B743B52_ai ) {
+                    lib4147430F_gv_f2Ramt_minerals[lv__count_player] = 300;
+                }
+            }
+            else if (auto35E50733_val == "0012") {
+                lv__count_player = 1;
+                for ( ; ( (auto707CC7AC_ai >= 0 && lv__count_player <= auto707CC7AC_ae) || (auto707CC7AC_ai < 0 && lv__count_player >= auto707CC7AC_ae) ) ; lv__count_player += auto707CC7AC_ai ) {
+                    lib4147430F_gv_f2Ramt_minerals[lv__count_player] = 350;
+                }
+            }
+            else if (auto35E50733_val == "0007") {
+                lv__count_player = 1;
+                for ( ; ( (auto1B701847_ai >= 0 && lv__count_player <= auto1B701847_ae) || (auto1B701847_ai < 0 && lv__count_player >= auto1B701847_ae) ) ; lv__count_player += auto1B701847_ai ) {
+                    lib4147430F_gv_f2Ramt_minerals[lv__count_player] = 400;
+                }
+            }
+            else if (auto35E50733_val == "0008") {
+                lv__count_player = 1;
+                for ( ; ( (auto418033FD_ai >= 0 && lv__count_player <= auto418033FD_ae) || (auto418033FD_ai < 0 && lv__count_player >= auto418033FD_ae) ) ; lv__count_player += auto418033FD_ai ) {
+                    lib4147430F_gv_f2Ramt_minerals[lv__count_player] = 450;
+                }
+            }
+            else if (auto35E50733_val == "0009") {
+                lv__count_player = 1;
+                for ( ; ( (autoF2C484EE_ai >= 0 && lv__count_player <= autoF2C484EE_ae) || (autoF2C484EE_ai < 0 && lv__count_player >= autoF2C484EE_ae) ) ; lv__count_player += autoF2C484EE_ai ) {
+                    lib4147430F_gv_f2Ramt_minerals[lv__count_player] = 500;
+                }
+            }
+            else if (auto35E50733_val == "0010") {
+                lv__count_player = 1;
+                for ( ; ( (autoBDAFEB9E_ai >= 0 && lv__count_player <= autoBDAFEB9E_ae) || (autoBDAFEB9E_ai < 0 && lv__count_player >= autoBDAFEB9E_ae) ) ; lv__count_player += autoBDAFEB9E_ai ) {
+                    lib4147430F_gv_f2Ramt_minerals[lv__count_player] = 750;
+                }
+            }
+            else if (auto35E50733_val == "0011") {
+                lv__count_player = 1;
+                for ( ; ( (autoA5BDCD5D_ai >= 0 && lv__count_player <= autoA5BDCD5D_ae) || (autoA5BDCD5D_ai < 0 && lv__count_player >= autoA5BDCD5D_ae) ) ; lv__count_player += autoA5BDCD5D_ai ) {
+                    lib4147430F_gv_f2Ramt_minerals[lv__count_player] = 1000;
+                }
+            }
+            else {
+            }
+        }
+        if ((GameAttributeGameValue("5") == "0013")) {
+        }
+        else {
+            lv__rescost_vespen_common = true;
+            auto51484D23_val = GameAttributeGameValue("5");
+            if (auto51484D23_val == "0001") {
+                lv__count_player = 1;
+                for ( ; ( (autoD407C7EB_ai >= 0 && lv__count_player <= autoD407C7EB_ae) || (autoD407C7EB_ai < 0 && lv__count_player >= autoD407C7EB_ae) ) ; lv__count_player += autoD407C7EB_ai ) {
+                    lib4147430F_gv_f2Ramt_vespen[lv__count_player] = 50;
+                }
+            }
+            else if (auto51484D23_val == "0002") {
+                lv__count_player = 1;
+                for ( ; ( (auto5EF9795E_ai >= 0 && lv__count_player <= auto5EF9795E_ae) || (auto5EF9795E_ai < 0 && lv__count_player >= auto5EF9795E_ae) ) ; lv__count_player += auto5EF9795E_ai ) {
+                    lib4147430F_gv_f2Ramt_vespen[lv__count_player] = 100;
+                }
+            }
+            else if (auto51484D23_val == "0003") {
+                lv__count_player = 1;
+                for ( ; ( (auto83DBB99B_ai >= 0 && lv__count_player <= auto83DBB99B_ae) || (auto83DBB99B_ai < 0 && lv__count_player >= auto83DBB99B_ae) ) ; lv__count_player += auto83DBB99B_ai ) {
+                    lib4147430F_gv_f2Ramt_vespen[lv__count_player] = 150;
+                }
+            }
+            else if (auto51484D23_val == "0004") {
+                lv__count_player = 1;
+                for ( ; ( (autoFCD3D936_ai >= 0 && lv__count_player <= autoFCD3D936_ae) || (autoFCD3D936_ai < 0 && lv__count_player >= autoFCD3D936_ae) ) ; lv__count_player += autoFCD3D936_ai ) {
+                    lib4147430F_gv_f2Ramt_vespen[lv__count_player] = 200;
+                }
+            }
+            else if (auto51484D23_val == "0005") {
+                lv__count_player = 1;
+                for ( ; ( (autoB3528C81_ai >= 0 && lv__count_player <= autoB3528C81_ae) || (autoB3528C81_ai < 0 && lv__count_player >= autoB3528C81_ae) ) ; lv__count_player += autoB3528C81_ai ) {
+                    lib4147430F_gv_f2Ramt_vespen[lv__count_player] = 250;
+                }
+            }
+            else if (auto51484D23_val == "0006") {
+                lv__count_player = 1;
+                for ( ; ( (auto9FDF469C_ai >= 0 && lv__count_player <= auto9FDF469C_ae) || (auto9FDF469C_ai < 0 && lv__count_player >= auto9FDF469C_ae) ) ; lv__count_player += auto9FDF469C_ai ) {
+                    lib4147430F_gv_f2Ramt_vespen[lv__count_player] = 300;
+                }
+            }
+            else if (auto51484D23_val == "0007") {
+                lv__count_player = 1;
+                for ( ; ( (autoCB0DE98E_ai >= 0 && lv__count_player <= autoCB0DE98E_ae) || (autoCB0DE98E_ai < 0 && lv__count_player >= autoCB0DE98E_ae) ) ; lv__count_player += autoCB0DE98E_ai ) {
+                    lib4147430F_gv_f2Ramt_vespen[lv__count_player] = 350;
+                }
+            }
+            else if (auto51484D23_val == "0008") {
+                lv__count_player = 1;
+                for ( ; ( (autoC9F95C6F_ai >= 0 && lv__count_player <= autoC9F95C6F_ae) || (autoC9F95C6F_ai < 0 && lv__count_player >= autoC9F95C6F_ae) ) ; lv__count_player += autoC9F95C6F_ai ) {
+                    lib4147430F_gv_f2Ramt_vespen[lv__count_player] = 400;
+                }
+            }
+            else if (auto51484D23_val == "0009") {
+                lv__count_player = 1;
+                for ( ; ( (auto29CD9B68_ai >= 0 && lv__count_player <= auto29CD9B68_ae) || (auto29CD9B68_ai < 0 && lv__count_player >= auto29CD9B68_ae) ) ; lv__count_player += auto29CD9B68_ai ) {
+                    lib4147430F_gv_f2Ramt_vespen[lv__count_player] = 450;
+                }
+            }
+            else if (auto51484D23_val == "0010") {
+                lv__count_player = 1;
+                for ( ; ( (auto7431BF48_ai >= 0 && lv__count_player <= auto7431BF48_ae) || (auto7431BF48_ai < 0 && lv__count_player >= auto7431BF48_ae) ) ; lv__count_player += auto7431BF48_ai ) {
+                    lib4147430F_gv_f2Ramt_vespen[lv__count_player] = 500;
+                }
+            }
+            else if (auto51484D23_val == "0011") {
+                lv__count_player = 1;
+                for ( ; ( (autoE6435207_ai >= 0 && lv__count_player <= autoE6435207_ae) || (autoE6435207_ai < 0 && lv__count_player >= autoE6435207_ae) ) ; lv__count_player += autoE6435207_ai ) {
+                    lib4147430F_gv_f2Ramt_vespen[lv__count_player] = 750;
+                }
+            }
+            else if (auto51484D23_val == "0012") {
+                lv__count_player = 1;
+                for ( ; ( (auto4033C27C_ai >= 0 && lv__count_player <= auto4033C27C_ae) || (auto4033C27C_ai < 0 && lv__count_player >= auto4033C27C_ae) ) ; lv__count_player += auto4033C27C_ai ) {
+                    lib4147430F_gv_f2Ramt_vespen[lv__count_player] = 1000;
+                }
+            }
+            else {
+            }
+        }
+    }
+    lv__count_player = 1;
+    for ( ; ( (auto5E39847F_ai >= 0 && lv__count_player <= auto5E39847F_ae) || (auto5E39847F_ai < 0 && lv__count_player >= auto5E39847F_ae) ) ; lv__count_player += auto5E39847F_ai ) {
+        lv__teamNumber = 1;
+        for ( ; ( (auto458EB4F9_ai >= 0 && lv__teamNumber <= auto458EB4F9_ae) || (auto458EB4F9_ai < 0 && lv__teamNumber >= auto458EB4F9_ae) ) ; lv__teamNumber += auto458EB4F9_ai ) {
+            if ((PlayerGroupHasPlayer(GameAttributePlayersForTeam(lv__teamNumber), lv__count_player) == true)) {
+                lib4147430F_gv_f2RteamPlayer[lv__count_player] = lv__teamNumber;
+            }
+
+        }
+        if ((lv__rescost_mineral_individual[lv__count_player] == true)) {
+            lv__count_cost_mineral_individual = (lv__count_cost_mineral_individual + 1);
+        }
+
+        if ((lv__rescost_vespen_individual[lv__count_player] == true)) {
+            lv__count_cost_vespen_individual = (lv__count_cost_vespen_individual + 1);
+        }
+
+    }
+    if (((lv__rescost_mineral_common == true) || (lv__count_cost_mineral_individual >= 1) || (lv__rescost_vespen_common == true) || (lv__count_cost_vespen_individual >= 1))) {
+        lib4147430F_gv_f2Rwork[0][0] = true;
+    }
+    else {
+        TriggerStop(lib4147430F_gt_F2RLaunch);
+    }
+    TriggerExecute(lib4147430F_gt_F2RObserver, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib4147430F_gt_F2RLaunch_Init () {
+    lib4147430F_gt_F2RLaunch = TriggerCreate("lib4147430F_gt_F2RLaunch_Func");
+    TriggerAddEventMapInit(lib4147430F_gt_F2RLaunch);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: F2R | Observer
+//--------------------------------------------------------------------------------------------------
+bool lib4147430F_gt_F2RObserver_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__observer;
+    int lv__count;
+
+    // Automatic Variable Declarations
+    const int auto14081148_ae = 12;
+    const int auto14081148_ai = 1;
+
+    // Variable Initialization
+    lv__observer = CatalogFieldValueGetAsInt(c_gameCatalogGameUI, "Dflt", "DefaultObservedPlayerId", c_playerAny);
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv__count = 1;
+    for ( ; ( (auto14081148_ai >= 0 && lv__count <= auto14081148_ae) || (auto14081148_ai < 0 && lv__count >= auto14081148_ae) ) ; lv__count += auto14081148_ai ) {
+        libNtve_gf_SetAllianceOneWay(lv__observer, lv__count, libNtve_ge_AllianceSetting_Neutral);
+        PlayerSetAlliance(lv__count, c_allianceIdDefeat, lv__observer, true);
+        PlayerSetAlliance(lv__count, c_allianceIdPassive, lv__observer, true);
+        PlayerSetAlliance(lv__count, c_allianceIdControl, lv__observer, true);
+        PlayerSetAlliance(lv__count, c_allianceIdVision, lv__observer, true);
+    }
+    TriggerExecute(lib4147430F_gt_F2RDialog_F2, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib4147430F_gt_F2RObserver_Init () {
+    lib4147430F_gt_F2RObserver = TriggerCreate("lib4147430F_gt_F2RObserver_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: F2R | Dialog_F2
+//--------------------------------------------------------------------------------------------------
+bool lib4147430F_gt_F2RDialog_F2_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__count_player;
+
+    // Automatic Variable Declarations
+    const int auto1E4B7430_ae = 12;
+    const int auto1E4B7430_ai = 1;
+    const int autoCB354C33_ae = 12;
+    const int autoCB354C33_ai = 1;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    TriggerDebugOutputEnable(false);
+    DialogControlHookupStandard(c_triggerControlTypePanel, "UIContainer/ConsoleUIContainer/ArmyButton");
+    DialogControlSetPosition(DialogControlLastCreated(), PlayerGroupAll(), c_anchorBottomLeft, -100, -100);
+    lv__count_player = 1;
+    for ( ; ( (auto1E4B7430_ai >= 0 && lv__count_player <= auto1E4B7430_ae) || (auto1E4B7430_ai < 0 && lv__count_player >= auto1E4B7430_ae) ) ; lv__count_player += auto1E4B7430_ai ) {
+        if ((PlayerStatus(lv__count_player) == c_playerStatusActive)) {
+            DialogCreate(350, 100, c_anchorBottomLeft, 0, 375, true);
+            lib4147430F_gv_f2Rdialog[lv__count_player] = DialogLastCreated();
+            DialogSetVisible(DialogLastCreated(), PlayerGroupSingle(lv__count_player), true);
+            libNtve_gf_CreateDialogItemLabel(lib4147430F_gv_f2Rdialog[lv__count_player], 325, 40, c_anchorTopLeft, 35, 35, PlayerName(lv__count_player), Color(100,100,100), false, 2.0);
+            lib4147430F_gv_f2Rdialogitem[lv__count_player][0] = DialogControlLastCreated();
+            DialogControlSetVisible(DialogControlLastCreated(), PlayerGroupSingle(lv__count_player), true);
+            libNtve_gf_CreateDialogItemLabel(lib4147430F_gv_f2Rdialog[lv__count_player], 325, 40, c_anchorTopLeft, 35, 55, (StringExternal("Param/Value/lib_4147430F_542DEA2A") + (IntToText(lib4147430F_gv_f2RcountF2[lv__count_player]) + StringExternal("Param/Value/lib_4147430F_6603A2EF"))), Color(100,100,100), false, 2.0);
+            lib4147430F_gv_f2Rdialogitem[lv__count_player][1] = DialogControlLastCreated();
+            DialogControlSetVisible(DialogControlLastCreated(), PlayerGroupSingle(lv__count_player), true);
+        }
+
+    }
+    lv__count_player = 1;
+    for ( ; ( (autoCB354C33_ai >= 0 && lv__count_player <= autoCB354C33_ae) || (autoCB354C33_ai < 0 && lv__count_player >= autoCB354C33_ae) ) ; lv__count_player += autoCB354C33_ai ) {
+        if ((PlayerStatus(lv__count_player) == c_playerStatusActive)) {
+            if ((lib4147430F_gv_f2Rwork[lv__count_player][1] == true)) {
+                TextExpressionSetToken("Param/Expression/lib_4147430F_723B3075", "name", PlayerName(lv__count_player));
+                TextExpressionSetToken("Param/Expression/lib_4147430F_723B3075", "mineral", FormatNumber(lib4147430F_gv_f2Ramt_minerals[lv__count_player]));
+                TextExpressionSetToken("Param/Expression/lib_4147430F_723B3075", "vespen", FormatNumber(lib4147430F_gv_f2Ramt_vespen[lv__count_player]));
+                HelpPanelAddTip(PlayerGroupSingle(lv__count_player), libNtve_gf_FormatTipTitle(StringExternal("Param/Value/lib_4147430F_027A0D5D"), libNtve_ge_TipType_NormalTip), TextExpressionAssemble("Param/Expression/lib_4147430F_723B3075"), StringExternal("Param/Value/lib_4147430F_6EC7C30B"), "Assets\\Textures\\ui_glues_helpmenu_armybuttonicon.dds");
+                UIDisplayMessage(PlayerGroupSingle(lv__count_player), c_messageAreaSubtitle, ((PlayerName(lv__count_player) + StringExternal("Param/Value/lib_4147430F_9F4C0EED")) + ((IntToText(lib4147430F_gv_f2Ramt_minerals[lv__count_player]) + StringExternal("Param/Value/lib_4147430F_6CA1149D")) + (IntToText(lib4147430F_gv_f2Ramt_vespen[lv__count_player]) + StringExternal("Param/Value/lib_4147430F_FAAF8766")))));
+            }
+            else if ((lib4147430F_gv_f2Rwork[lv__count_player][2] == true)) {
+                TextExpressionSetToken("Param/Expression/lib_4147430F_481FD618", "name", PlayerName(lv__count_player));
+                TextExpressionSetToken("Param/Expression/lib_4147430F_481FD618", "mineral", FormatNumber(lib4147430F_gv_f2Ramt_minerals[lv__count_player]));
+                TextExpressionSetToken("Param/Expression/lib_4147430F_481FD618", "vespen", FormatNumber(lib4147430F_gv_f2Ramt_vespen[lv__count_player]));
+                HelpPanelAddTip(PlayerGroupSingle(lv__count_player), libNtve_gf_FormatTipTitle(StringExternal("Param/Value/lib_4147430F_1DB15124"), libNtve_ge_TipType_NormalTip), TextExpressionAssemble("Param/Expression/lib_4147430F_481FD618"), StringExternal("Param/Value/lib_4147430F_1F836B2F"), "Assets\\Textures\\ui_glues_helpmenu_armybuttonicon.dds");
+                UIDisplayMessage(PlayerGroupSingle(lv__count_player), c_messageAreaSubtitle, ((PlayerName(lv__count_player) + StringExternal("Param/Value/lib_4147430F_66FC3D44")) + ((IntToText(lib4147430F_gv_f2Ramt_minerals[lv__count_player]) + StringExternal("Param/Value/lib_4147430F_1DF6DF73")) + (IntToText(lib4147430F_gv_f2Ramt_vespen[lv__count_player]) + StringExternal("Param/Value/lib_4147430F_308F9C04")))));
+                UIDisplayMessage(PlayerGroupSingle(lv__count_player), c_messageAreaSubtitle, StringExternal("Param/Value/lib_4147430F_649F88A2"));
+            }
+            else if ((lib4147430F_gv_f2Rwork[lv__count_player][3] == true)) {
+                TextExpressionSetToken("Param/Expression/lib_4147430F_AB57026C", "name", PlayerName(lv__count_player));
+                TextExpressionSetToken("Param/Expression/lib_4147430F_AB57026C", "mineral", FormatNumber(lib4147430F_gv_f2Ramt_minerals[lv__count_player]));
+                TextExpressionSetToken("Param/Expression/lib_4147430F_AB57026C", "vespen", FormatNumber(lib4147430F_gv_f2Ramt_vespen[lv__count_player]));
+                HelpPanelAddTip(PlayerGroupSingle(lv__count_player), libNtve_gf_FormatTipTitle(StringExternal("Param/Value/lib_4147430F_16BB61E9"), libNtve_ge_TipType_NormalTip), TextExpressionAssemble("Param/Expression/lib_4147430F_AB57026C"), StringExternal("Param/Value/lib_4147430F_35F1C190"), "Assets\\Textures\\ui_glues_helpmenu_armybuttonicon.dds");
+                UIDisplayMessage(PlayerGroupSingle(lv__count_player), c_messageAreaSubtitle, ((PlayerName(lv__count_player) + StringExternal("Param/Value/lib_4147430F_30059056")) + ((IntToText(lib4147430F_gv_f2Ramt_minerals[lv__count_player]) + StringExternal("Param/Value/lib_4147430F_A88AE9FE")) + (IntToText(lib4147430F_gv_f2Ramt_vespen[lv__count_player]) + StringExternal("Param/Value/lib_4147430F_5F84546D")))));
+            }
+        }
+
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib4147430F_gt_F2RDialog_F2_Init () {
+    lib4147430F_gt_F2RDialog_F2 = TriggerCreate("lib4147430F_gt_F2RDialog_F2_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: F2R | Dialog_F2_Observer
+//--------------------------------------------------------------------------------------------------
+bool lib4147430F_gt_F2RDialog_F2_Observer_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__count_player;
+    int lv__number_player;
+    int lv__offset_Y;
+
+    // Automatic Variable Declarations
+    const int auto629F78CB_ae = 12;
+    const int auto629F78CB_ai = 1;
+    const int autoD993CD9C_ae = 12;
+    const int autoD993CD9C_ai = 1;
+
+    // Variable Initialization
+    lv__offset_Y = 35;
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((EventPlayer() == 14)) {
+        lv__count_player = 1;
+        for ( ; ( (auto629F78CB_ai >= 0 && lv__count_player <= auto629F78CB_ae) || (auto629F78CB_ai < 0 && lv__count_player >= auto629F78CB_ae) ) ; lv__count_player += auto629F78CB_ai ) {
+            if ((PlayerStatus(lv__count_player) == c_playerStatusActive)) {
+                lv__number_player = (lv__number_player + 1);
+            }
+
+        }
+        DialogCreate(350, (350 + (lv__number_player * 100)), c_anchorRight, 0, 0, true);
+        lib4147430F_gv_f2RButton_Dialog = DialogLastCreated();
+        DialogSetVisible(lib4147430F_gv_f2RButton_Dialog, PlayerGroupSingle(lib4147430F_gv_f2RObserver), true);
+        lv__count_player = 1;
+        for ( ; ( (autoD993CD9C_ai >= 0 && lv__count_player <= autoD993CD9C_ae) || (autoD993CD9C_ai < 0 && lv__count_player >= autoD993CD9C_ae) ) ; lv__count_player += autoD993CD9C_ai ) {
+            if ((PlayerStatus(lv__count_player) == c_playerStatusActive)) {
+                libNtve_gf_CreateDialogItemLabel(lib4147430F_gv_f2RButton_Dialog, 325, 40, c_anchorTopLeft, 35, lv__offset_Y, PlayerName(lv__count_player), libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(lv__count_player, false)), false, 2.0);
+                lv__offset_Y = (lv__offset_Y + 20);
+                libNtve_gf_CreateDialogItemLabel(lib4147430F_gv_f2RButton_Dialog, 325, 40, c_anchorTopLeft, 35, lv__offset_Y, (StringExternal("Param/Value/lib_4147430F_7B8825D6") + (IntToText(lib4147430F_gv_f2RcountF2[lv__count_player]) + StringExternal("Param/Value/lib_4147430F_60930F94"))), libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(lv__count_player, false)), false, 2.0);
+                lv__offset_Y = (lv__offset_Y + 30);
+            }
+
+        }
+        Wait(10.0, c_timeReal);
+        DialogSetVisible(lib4147430F_gv_f2RButton_Dialog, PlayerGroupSingle(lib4147430F_gv_f2RObserver), false);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib4147430F_gt_F2RDialog_F2_Observer_Init () {
+    lib4147430F_gt_F2RDialog_F2_Observer = TriggerCreate("lib4147430F_gt_F2RDialog_F2_Observer_Func");
+    TriggerAddEventChatMessage(lib4147430F_gt_F2RDialog_F2_Observer, c_playerAny, "-info", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: F2R | who pressed F2
+//--------------------------------------------------------------------------------------------------
+bool lib4147430F_gt_F2RwhopressedF2_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__count_player;
+
+    // Automatic Variable Declarations
+    const int auto65CE2511_ae = 12;
+    const int auto65CE2511_ai = 1;
+    const int autoD3EC5A5A_ae = 12;
+    const int autoD3EC5A5A_ai = 1;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((lib4147430F_gv_f2Rwork[0][0] == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if (((lib4147430F_gv_f2Rwork[EventPlayer()][0] == true) && ((lib4147430F_gv_f2Rwork[EventPlayer()][1] == true) || (lib4147430F_gv_f2Rwork[EventPlayer()][2] == true)))) {
+        if (((AIHasRes(EventPlayer(), lib4147430F_gv_f2Ramt_minerals[EventPlayer()], lib4147430F_gv_f2Ramt_vespen[EventPlayer()]) == true))) {
+            PlayerModifyPropertyInt(EventPlayer(), c_playerPropMinerals, c_playerPropOperSubtract, lib4147430F_gv_f2Ramt_minerals[EventPlayer()]);
+            PlayerModifyPropertyInt(EventPlayer(), c_playerPropVespene, c_playerPropOperSubtract, lib4147430F_gv_f2Ramt_vespen[EventPlayer()]);
+            TriggerDebugOutput(1, (PlayerName(EventPlayer()) + StringExternal("Param/Value/lib_4147430F_691F8BCC")), true);
+            UIDisplayMessage(PlayerGroupSingle(EventPlayer()), c_messageAreaSubtitle, StringExternal("Param/Value/lib_4147430F_C62940A3"));
+            UIDisplayMessage(PlayerGroupSingle(lib4147430F_gv_f2RObserver), c_messageAreaSubtitle, ((StringExternal("Param/Value/lib_4147430F_E37F511B") + PlayerName(EventPlayer())) + StringExternal("Param/Value/lib_4147430F_F005023E")));
+            if ((lib4147430F_gv_f2Rwork[EventPlayer()][2] == true)) {
+                lv__count_player = 1;
+                for ( ; ( (auto65CE2511_ai >= 0 && lv__count_player <= auto65CE2511_ae) || (auto65CE2511_ai < 0 && lv__count_player >= auto65CE2511_ae) ) ; lv__count_player += auto65CE2511_ai ) {
+                    if ((PlayerStatus(lv__count_player) == c_playerStatusActive)) {
+                        if (((lv__count_player == EventPlayer()) || (lib4147430F_gv_f2RteamPlayer[lv__count_player] == lib4147430F_gv_f2RteamPlayer[EventPlayer()]))) {
+                            TriggerDebugOutput(1, (PlayerName(EventPlayer()) + StringExternal("Param/Value/lib_4147430F_4A65ABE7")), true);
+                        }
+                        else {
+                            PlayerModifyPropertyInt(lv__count_player, c_playerPropMinerals, c_playerPropOperAdd, lib4147430F_gv_f2Ramt_minerals[EventPlayer()]);
+                            PlayerModifyPropertyInt(lv__count_player, c_playerPropVespene, c_playerPropOperAdd, lib4147430F_gv_f2Ramt_vespen[EventPlayer()]);
+                            TriggerDebugOutput(1, (PlayerName(lv__count_player) + StringExternal("Param/Value/lib_4147430F_2EE7C090")), true);
+                        }
+                    }
+
+                }
+                UIDisplayMessage(PlayerGroupSingle(lib4147430F_gv_f2RObserver), c_messageAreaSubtitle, (StringExternal("Param/Value/lib_4147430F_71E89306") + PlayerName(EventPlayer())));
+            }
+
+        }
+        else {
+            UnitGroupSelect(UnitGroup(null, EventPlayer(), RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterAlly) | (1 << c_targetFilterNeutral) | (1 << c_targetFilterEnemy), (1 << (c_targetFilterDead - 32))), 0), EventPlayer(), false);
+            TriggerDebugOutput(1, (PlayerName(EventPlayer()) + StringExternal("Param/Value/lib_4147430F_2E755414")), true);
+            UIDisplayMessage(PlayerGroupSingle(EventPlayer()), c_messageAreaSubtitle, StringExternal("Param/Value/lib_4147430F_46C3F8A3"));
+            UIDisplayMessage(PlayerGroupSingle(lib4147430F_gv_f2RObserver), c_messageAreaSubtitle, (PlayerName(EventPlayer()) + StringExternal("Param/Value/lib_4147430F_8E7AA70C")));
+        }
+    }
+
+    if (((lib4147430F_gv_f2Rwork[EventPlayer()][0] == true) && (lib4147430F_gv_f2Rwork[EventPlayer()][3] == true))) {
+        lv__count_player = 1;
+        for ( ; ( (autoD3EC5A5A_ai >= 0 && lv__count_player <= autoD3EC5A5A_ae) || (autoD3EC5A5A_ai < 0 && lv__count_player >= autoD3EC5A5A_ae) ) ; lv__count_player += autoD3EC5A5A_ai ) {
+            if ((PlayerStatus(lv__count_player) == c_playerStatusActive)) {
+                if (((lv__count_player == EventPlayer()) || (lib4147430F_gv_f2RteamPlayer[lv__count_player] == lib4147430F_gv_f2RteamPlayer[EventPlayer()]))) {
+                    TriggerDebugOutput(1, (PlayerName(EventPlayer()) + StringExternal("Param/Value/lib_4147430F_36E856FE")), true);
+                }
+                else {
+                    PlayerModifyPropertyInt(lv__count_player, c_playerPropMinerals, c_playerPropOperAdd, lib4147430F_gv_f2Ramt_minerals[EventPlayer()]);
+                    PlayerModifyPropertyInt(lv__count_player, c_playerPropVespene, c_playerPropOperAdd, lib4147430F_gv_f2Ramt_vespen[EventPlayer()]);
+                    TriggerDebugOutput(1, (PlayerName(lv__count_player) + StringExternal("Param/Value/lib_4147430F_D86C6732")), true);
+                    UIDisplayMessage(PlayerGroupSingle(lv__count_player), c_messageAreaSubtitle, (StringExternal("Param/Value/lib_4147430F_1D101264") + PlayerName(EventPlayer())));
+                }
+            }
+
+        }
+        UIDisplayMessage(PlayerGroupSingle(lib4147430F_gv_f2RObserver), c_messageAreaSubtitle, (StringExternal("Param/Value/lib_4147430F_E4769141") + PlayerName(EventPlayer())));
+    }
+
+    lib4147430F_gv_f2RcountF2[EventPlayer()] = (lib4147430F_gv_f2RcountF2[EventPlayer()] + 1);
+    UIDisplayMessage(PlayerGroupSingle(lib4147430F_gv_f2RObserver), c_messageAreaSubtitle, ((PlayerName(EventPlayer()) + StringExternal("Param/Value/lib_4147430F_076EF607")) + (IntToText(lib4147430F_gv_f2RcountF2[EventPlayer()]) + StringExternal("Param/Value/lib_4147430F_589C1462"))));
+    DialogControlDestroy(lib4147430F_gv_f2Rdialogitem[EventPlayer()][1]);
+    libNtve_gf_CreateDialogItemLabel(lib4147430F_gv_f2Rdialog[EventPlayer()], 325, 40, c_anchorTopLeft, 35, 55, (StringExternal("Param/Value/lib_4147430F_9D62C84B") + (IntToText(lib4147430F_gv_f2RcountF2[EventPlayer()]) + StringExternal("Param/Value/lib_4147430F_4F9CC338"))), Color(100,100,100), false, 2.0);
+    lib4147430F_gv_f2Rdialogitem[EventPlayer()][1] = DialogControlLastCreated();
+    DialogControlSetVisible(DialogControlLastCreated(), PlayerGroupSingle(EventPlayer()), true);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib4147430F_gt_F2RwhopressedF2_Init () {
+    lib4147430F_gt_F2RwhopressedF2 = TriggerCreate("lib4147430F_gt_F2RwhopressedF2_Func");
+    TriggerAddEventHotkeyPressed(lib4147430F_gt_F2RwhopressedF2, c_playerAny, c_hotkeyArmySelect, true);
+}
+
+void lib4147430F_InitTriggers () {
+    lib4147430F_gt_debugCheat_Init();
+    lib4147430F_gt_debugText_Init();
+    lib4147430F_gt_debugTeam_Init();
+    lib4147430F_gt_F2RLaunch_Init();
+    lib4147430F_gt_F2RObserver_Init();
+    lib4147430F_gt_F2RDialog_F2_Init();
+    lib4147430F_gt_F2RDialog_F2_Observer_Init();
+    lib4147430F_gt_F2RwhopressedF2_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool lib4147430F_InitLib_completed = false;
+
+void lib4147430F_InitLib () {
+    if (lib4147430F_InitLib_completed) {
+        return;
+    }
+
+    lib4147430F_InitLib_completed = true;
+
+    lib4147430F_InitLibraries();
+    lib4147430F_InitVariables();
+    lib4147430F_InitTriggers();
+}
+

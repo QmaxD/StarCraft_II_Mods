@@ -1,0 +1,11 @@
+﻿FunctionDef/Name/lib_7C370FE8_9E54C622=IfUnitIsMineral
+FunctionDef/Name/lib_7C370FE8_CBA00B40=IfUnitIsGas
+Library/Name/7C370FE8=Killable resources
+ParamDef/Name/lib_7C370FE8_76A76C19=Unit
+ParamDef/Name/lib_7C370FE8_B9928234=Unit
+Trigger/Name/lib_7C370FE8_D1A0B476=Make Resources Vulnerable
+Trigger/Name/lib_7C370FE8_F0A0D2C4=Change Resources Of Life
+Trigger/Name/lib_7C370FE8_F0DCC0CA=Change Life Of Resources
+Variable/Name/lib_7C370FE8_2E26AB29=AllNeutralBuildings
+Variable/Name/lib_7C370FE8_8E554454=GasResToLife
+Variable/Name/lib_7C370FE8_C374B658=MinResToLife

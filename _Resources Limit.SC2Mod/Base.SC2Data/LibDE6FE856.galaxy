@@ -1,0 +1,644 @@
+include "TriggerLibs/NativeLib"
+
+include "LibDE6FE856_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Resources Limit | RL
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void libDE6FE856_InitLibraries () {
+    libNtve_InitVariables();
+}
+
+// Variable Initialization
+bool libDE6FE856_InitVariables_completed = false;
+
+void libDE6FE856_InitVariables () {
+    int init_i;
+
+    if (libDE6FE856_InitVariables_completed) {
+        return;
+    }
+
+    libDE6FE856_InitVariables_completed = true;
+
+    for (init_i = 0; init_i <= 15; init_i += 1) {
+        libDE6FE856_gv_dialogCheck[init_i] = c_invalidDialogId;
+    }
+    for (init_i = 0; init_i <= 15; init_i += 1) {
+        libDE6FE856_gv_dialogItemCheckValue[init_i] = c_invalidDialogControlId;
+    }
+    for (init_i = 0; init_i <= 15; init_i += 1) {
+        libDE6FE856_gv_dialogItemCheckText[init_i] = c_invalidDialogControlId;
+    }
+    for (init_i = 0; init_i <= 15; init_i += 1) {
+        libDE6FE856_gv_dialogLostResources[init_i] = c_invalidDialogId;
+    }
+    for (init_i = 0; init_i <= 15; init_i += 1) {
+        libDE6FE856_gv_dialogItemMineralsLost[init_i] = c_invalidDialogControlId;
+    }
+    for (init_i = 0; init_i <= 15; init_i += 1) {
+        libDE6FE856_gv_dialogItemMineralsCollected[init_i] = c_invalidDialogControlId;
+    }
+    for (init_i = 0; init_i <= 15; init_i += 1) {
+        libDE6FE856_gv_dialogItemVespenLost[init_i] = c_invalidDialogControlId;
+    }
+    for (init_i = 0; init_i <= 15; init_i += 1) {
+        libDE6FE856_gv_dialogItemVespenCollected[init_i] = c_invalidDialogControlId;
+    }
+    libDE6FE856_gv_rLlimitMinerals = 999999;
+    libDE6FE856_gv_rLlimitVespene = 999999;
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: RL | Launch
+//--------------------------------------------------------------------------------------------------
+bool libDE6FE856_gt_RLLaunch_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    text lv__description;
+
+    // Automatic Variable Declarations
+    string auto19450A99_val;
+    string auto85B9D45F_val;
+    string auto04C172B0_val;
+
+    // Variable Initialization
+    lv__description = StringExternal("Param/Value/lib_DE6FE856_B2886D64");
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto19450A99_val = GameAttributeGameValue("3");
+    if (auto19450A99_val == "0002") {
+        libDE6FE856_gv_rLeventOption = 1;
+    }
+    else if (auto19450A99_val == "0003") {
+        libDE6FE856_gv_rLeventOption = 2;
+    }
+    else {
+    }
+    if ((GameAttributeGameValue("4") == "0002")) {
+        libDE6FE856_gv_rLwriteOffResources = true;
+    }
+
+    auto85B9D45F_val = GameAttributeGameValue("1");
+    if (auto85B9D45F_val == "0001") {
+        libDE6FE856_gv_rLlimitMinerals = 500;
+        libDE6FE856_gv_rLmodifyMinerals = true;
+    }
+    else if (auto85B9D45F_val == "0007") {
+        libDE6FE856_gv_rLlimitMinerals = 750;
+        libDE6FE856_gv_rLmodifyMinerals = true;
+    }
+    else if (auto85B9D45F_val == "0002") {
+        libDE6FE856_gv_rLlimitMinerals = 1000;
+        libDE6FE856_gv_rLmodifyMinerals = true;
+    }
+    else if (auto85B9D45F_val == "0008") {
+        libDE6FE856_gv_rLlimitMinerals = 1250;
+        libDE6FE856_gv_rLmodifyMinerals = true;
+    }
+    else if (auto85B9D45F_val == "0003") {
+        libDE6FE856_gv_rLlimitMinerals = 1500;
+        libDE6FE856_gv_rLmodifyMinerals = true;
+    }
+    else if (auto85B9D45F_val == "0009") {
+        libDE6FE856_gv_rLlimitMinerals = 1750;
+        libDE6FE856_gv_rLmodifyMinerals = true;
+    }
+    else if (auto85B9D45F_val == "0004") {
+        libDE6FE856_gv_rLlimitMinerals = 2000;
+        libDE6FE856_gv_rLmodifyMinerals = true;
+    }
+    else if (auto85B9D45F_val == "0010") {
+        libDE6FE856_gv_rLlimitMinerals = 2250;
+        libDE6FE856_gv_rLmodifyMinerals = true;
+    }
+    else if (auto85B9D45F_val == "0005") {
+        libDE6FE856_gv_rLlimitMinerals = 2500;
+        libDE6FE856_gv_rLmodifyMinerals = true;
+    }
+    else if (auto85B9D45F_val == "0011") {
+        libDE6FE856_gv_rLlimitMinerals = 3000;
+        libDE6FE856_gv_rLmodifyMinerals = true;
+    }
+    else if (auto85B9D45F_val == "0012") {
+        libDE6FE856_gv_rLlimitMinerals = 3500;
+        libDE6FE856_gv_rLmodifyMinerals = true;
+    }
+    else if (auto85B9D45F_val == "0013") {
+        libDE6FE856_gv_rLlimitMinerals = 4000;
+        libDE6FE856_gv_rLmodifyMinerals = true;
+    }
+    else if (auto85B9D45F_val == "0014") {
+        libDE6FE856_gv_rLlimitMinerals = 4500;
+        libDE6FE856_gv_rLmodifyMinerals = true;
+    }
+    else if (auto85B9D45F_val == "0015") {
+        libDE6FE856_gv_rLlimitMinerals = 5000;
+        libDE6FE856_gv_rLmodifyMinerals = true;
+    }
+    else {
+    }
+    auto04C172B0_val = GameAttributeGameValue("2");
+    if (auto04C172B0_val == "0001") {
+        libDE6FE856_gv_rLlimitVespene = 250;
+        libDE6FE856_gv_rLmodifyVespene = true;
+    }
+    else if (auto04C172B0_val == "0002") {
+        libDE6FE856_gv_rLlimitVespene = 500;
+        libDE6FE856_gv_rLmodifyVespene = true;
+    }
+    else if (auto04C172B0_val == "0003") {
+        libDE6FE856_gv_rLlimitVespene = 750;
+        libDE6FE856_gv_rLmodifyVespene = true;
+    }
+    else if (auto04C172B0_val == "0004") {
+        libDE6FE856_gv_rLlimitVespene = 1000;
+        libDE6FE856_gv_rLmodifyVespene = true;
+    }
+    else if (auto04C172B0_val == "0005") {
+        libDE6FE856_gv_rLlimitVespene = 1250;
+        libDE6FE856_gv_rLmodifyVespene = true;
+    }
+    else if (auto04C172B0_val == "0006") {
+        libDE6FE856_gv_rLlimitVespene = 1500;
+        libDE6FE856_gv_rLmodifyVespene = true;
+    }
+    else if (auto04C172B0_val == "0008") {
+        libDE6FE856_gv_rLlimitVespene = 1750;
+        libDE6FE856_gv_rLmodifyVespene = true;
+    }
+    else if (auto04C172B0_val == "0009") {
+        libDE6FE856_gv_rLlimitVespene = 2000;
+        libDE6FE856_gv_rLmodifyVespene = true;
+    }
+    else if (auto04C172B0_val == "0010") {
+        libDE6FE856_gv_rLlimitVespene = 2250;
+        libDE6FE856_gv_rLmodifyVespene = true;
+    }
+    else if (auto04C172B0_val == "0011") {
+        libDE6FE856_gv_rLlimitVespene = 2500;
+        libDE6FE856_gv_rLmodifyVespene = true;
+    }
+    else if (auto04C172B0_val == "0012") {
+        libDE6FE856_gv_rLlimitVespene = 3000;
+        libDE6FE856_gv_rLmodifyVespene = true;
+    }
+    else if (auto04C172B0_val == "0013") {
+        libDE6FE856_gv_rLlimitVespene = 3500;
+        libDE6FE856_gv_rLmodifyVespene = true;
+    }
+    else if (auto04C172B0_val == "0014") {
+        libDE6FE856_gv_rLlimitVespene = 4000;
+        libDE6FE856_gv_rLmodifyVespene = true;
+    }
+    else if (auto04C172B0_val == "0015") {
+        libDE6FE856_gv_rLlimitVespene = 4500;
+        libDE6FE856_gv_rLmodifyVespene = true;
+    }
+    else if (auto04C172B0_val == "0016") {
+        libDE6FE856_gv_rLlimitVespene = 5000;
+        libDE6FE856_gv_rLmodifyVespene = true;
+    }
+    else {
+    }
+    Wait(1.0, c_timeReal);
+    if ((libDE6FE856_gv_rLeventOption != 0)) {
+        if ((libDE6FE856_gv_rLmodifyMinerals == true)) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, (StringExternal("Param/Value/lib_DE6FE856_32BECE39") + (TextWithColor(IntToText(libDE6FE856_gv_rLlimitMinerals), Color(100.00, 0.00, 0.00)) + StringExternal("Param/Value/lib_DE6FE856_9991F527"))));
+            TextExpressionSetToken("Param/Expression/lib_DE6FE856_D6DF595A", "limitMinerals", IntToText(libDE6FE856_gv_rLlimitMinerals));
+            lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_DE6FE856_D6DF595A"));
+        }
+        else {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Param/Value/lib_DE6FE856_EA57C384"));
+            lv__description = (lv__description + StringExternal("Param/Value/lib_DE6FE856_911301FE"));
+        }
+        if ((libDE6FE856_gv_rLmodifyVespene == true)) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, (StringExternal("Param/Value/lib_DE6FE856_E0A62C22") + (TextWithColor(IntToText(libDE6FE856_gv_rLlimitVespene), Color(100.00, 0.00, 0.00)) + StringExternal("Param/Value/lib_DE6FE856_2AA09984"))));
+            TextExpressionSetToken("Param/Expression/lib_DE6FE856_83BBD4ED", "limitVespene", IntToText(libDE6FE856_gv_rLlimitVespene));
+            lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_DE6FE856_83BBD4ED"));
+        }
+        else {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Param/Value/lib_DE6FE856_7B7529C4"));
+            lv__description = (lv__description + StringExternal("Param/Value/lib_DE6FE856_6858BAA3"));
+        }
+        if ((libDE6FE856_gv_rLwriteOffResources == true)) {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, TextExpressionAssemble("Param/Expression/lib_DE6FE856_6AD42FE2"));
+            lv__description = (lv__description + StringExternal("Param/Value/lib_DE6FE856_03EF7681"));
+        }
+        else {
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, TextExpressionAssemble("Param/Expression/lib_DE6FE856_C399DCBF"));
+            lv__description = (lv__description + StringExternal("Param/Value/lib_DE6FE856_BA974F0D"));
+        }
+        HelpPanelAddTip(PlayerGroupAll(), libNtve_gf_FormatTipTitle(StringExternal("Param/Value/lib_DE6FE856_B7A58AC8"), libNtve_ge_TipType_NormalTip), lv__description, StringExternal("Param/Value/lib_DE6FE856_ECFFEA67"), "Assets\\Textures\\btn-tips-resourcecaches.dds");
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDE6FE856_gt_RLLaunch_Init () {
+    libDE6FE856_gt_RLLaunch = TriggerCreate("libDE6FE856_gt_RLLaunch_Func");
+    TriggerAddEventMapInit(libDE6FE856_gt_RLLaunch);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: RL | CreateDialog
+//--------------------------------------------------------------------------------------------------
+bool libDE6FE856_gt_RLCreateDialog_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    text lv__dialogItemCheckText;
+    text lv__dialogItemMineralsText;
+    text lv__dialogItemVespenText;
+    text lv__dialogItemTextLost;
+    text lv__dialogItemTextCollected;
+    color lv__colorLost;
+    color lv__colorCollected;
+
+    // Automatic Variable Declarations
+    playergroup autoFBF461F0_g;
+    int autoFBF461F0_var;
+    playergroup auto388A1C58_g;
+    int auto388A1C58_var;
+
+    // Variable Initialization
+    lv__dialogItemCheckText = TextExpressionAssemble("Param/Expression/lib_DE6FE856_6414BA1D");
+    lv__dialogItemMineralsText = TextExpressionAssemble("Param/Expression/lib_DE6FE856_675A1D8F");
+    lv__dialogItemVespenText = TextExpressionAssemble("Param/Expression/lib_DE6FE856_E1F32FF9");
+    lv__dialogItemTextLost = TextExpressionAssemble("Param/Expression/lib_DE6FE856_C813B7EF");
+    lv__dialogItemTextCollected = TextExpressionAssemble("Param/Expression/lib_DE6FE856_F485DDB8");
+    lv__colorLost = Color(100.00, 0.00, 0.00);
+    lv__colorCollected = Color(16*100/255,98*100/255,70*100/255);
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    autoFBF461F0_g = PlayerGroupActive();
+    autoFBF461F0_var = -1;
+    while (true) {
+        autoFBF461F0_var = PlayerGroupNextPlayer(autoFBF461F0_g, autoFBF461F0_var);
+        if (autoFBF461F0_var < 0) { break; }
+        DialogCreate(135, 60, c_anchorTopLeft, 0, 0, true);
+        libDE6FE856_gv_dialogCheck[autoFBF461F0_var] = DialogLastCreated();
+        libNtve_gf_CreateDialogItemCheckBox(libDE6FE856_gv_dialogCheck[autoFBF461F0_var], 50, 50, c_anchorTopLeft, 0, 5, StringExternal("Param/Value/lib_DE6FE856_0A81B989"), false);
+        libDE6FE856_gv_dialogItemCheckValue[autoFBF461F0_var] = DialogControlLastCreated();
+        TextExpressionSetToken("Param/Expression/lib_DE6FE856_4D3F154F", "A", lv__dialogItemCheckText);
+        libNtve_gf_CreateDialogItemButton(libDE6FE856_gv_dialogCheck[autoFBF461F0_var], 80, 30, c_anchorTopLeft, 40, 15, StringToText(""), TextExpressionAssemble("Param/Expression/lib_DE6FE856_4D3F154F"), "");
+        libDE6FE856_gv_dialogItemCheckText[autoFBF461F0_var] = DialogControlLastCreated();
+        DialogSetImageVisible(libDE6FE856_gv_dialogCheck[autoFBF461F0_var], false);
+        DialogSetVisible(libDE6FE856_gv_dialogCheck[autoFBF461F0_var], PlayerGroupSingle(autoFBF461F0_var), true);
+    }
+    auto388A1C58_g = PlayerGroupActive();
+    auto388A1C58_var = -1;
+    while (true) {
+        auto388A1C58_var = PlayerGroupNextPlayer(auto388A1C58_g, auto388A1C58_var);
+        if (auto388A1C58_var < 0) { break; }
+        DialogCreate(280, 220, c_anchorTopLeft, 0, 50, true);
+        libDE6FE856_gv_dialogLostResources[auto388A1C58_var] = DialogLastCreated();
+        libNtve_gf_CreateDialogItemLabel(libDE6FE856_gv_dialogLostResources[auto388A1C58_var], 130, 35, c_anchorTopRight, 20, 35, lv__dialogItemMineralsText, ColorWithAlpha(0,0,0,0), false, 2.0);
+        libNtve_gf_CreateDialogItemLabel(libDE6FE856_gv_dialogLostResources[auto388A1C58_var], 130, 35, c_anchorTopRight, 115, 60, lv__dialogItemTextLost, ColorWithAlpha(0,0,0,0), false, 2.0);
+        libNtve_gf_CreateDialogItemLabel(libDE6FE856_gv_dialogLostResources[auto388A1C58_var], 130, 35, c_anchorTopRight, 10, 54, IntToText(libDE6FE856_gv_rLlostMinerals[auto388A1C58_var]), ColorWithAlpha(0,0,0,0), false, 2.0);
+        libDE6FE856_gv_dialogItemMineralsLost[auto388A1C58_var] = DialogControlLastCreated();
+        libNtve_gf_SetDialogItemStyle(libDE6FE856_gv_dialogItemMineralsLost[auto388A1C58_var], "ResourceValue", PlayerGroupSingle(auto388A1C58_var));
+        libNtve_gf_SetDialogItemColor(libDE6FE856_gv_dialogItemMineralsLost[auto388A1C58_var], lv__colorLost, PlayerGroupSingle(auto388A1C58_var));
+        libNtve_gf_CreateDialogItemLabel(libDE6FE856_gv_dialogLostResources[auto388A1C58_var], 130, 35, c_anchorTopRight, 96, 85, lv__dialogItemTextCollected, ColorWithAlpha(0,0,0,0), false, 2.0);
+        libNtve_gf_CreateDialogItemLabel(libDE6FE856_gv_dialogLostResources[auto388A1C58_var], 130, 35, c_anchorTopRight, 10, 79, IntToText(PlayerGetPropertyInt(auto388A1C58_var, c_playerPropMineralsCollected)), ColorWithAlpha(0,0,0,0), false, 2.0);
+        libDE6FE856_gv_dialogItemMineralsCollected[auto388A1C58_var] = DialogControlLastCreated();
+        libNtve_gf_SetDialogItemStyle(libDE6FE856_gv_dialogItemMineralsCollected[auto388A1C58_var], "ResourceValue", PlayerGroupSingle(auto388A1C58_var));
+        libNtve_gf_SetDialogItemColor(libDE6FE856_gv_dialogItemMineralsCollected[auto388A1C58_var], lv__colorCollected, PlayerGroupSingle(auto388A1C58_var));
+        libNtve_gf_CreateDialogItemLabel(libDE6FE856_gv_dialogLostResources[auto388A1C58_var], 130, 35, c_anchorTopRight, 20, 115, lv__dialogItemVespenText, ColorWithAlpha(0,0,0,0), false, 2.0);
+        libNtve_gf_CreateDialogItemLabel(libDE6FE856_gv_dialogLostResources[auto388A1C58_var], 130, 35, c_anchorTopRight, 115, 140, lv__dialogItemTextLost, ColorWithAlpha(0,0,0,0), false, 2.0);
+        libNtve_gf_CreateDialogItemLabel(libDE6FE856_gv_dialogLostResources[auto388A1C58_var], 130, 35, c_anchorTopRight, 10, 134, IntToText(libDE6FE856_gv_rLlostVespene[auto388A1C58_var]), ColorWithAlpha(0,0,0,0), false, 2.0);
+        libDE6FE856_gv_dialogItemVespenLost[auto388A1C58_var] = DialogControlLastCreated();
+        libNtve_gf_SetDialogItemStyle(libDE6FE856_gv_dialogItemVespenLost[auto388A1C58_var], "ResourceValue", PlayerGroupSingle(auto388A1C58_var));
+        libNtve_gf_SetDialogItemColor(libDE6FE856_gv_dialogItemVespenLost[auto388A1C58_var], lv__colorLost, PlayerGroupSingle(auto388A1C58_var));
+        libNtve_gf_CreateDialogItemLabel(libDE6FE856_gv_dialogLostResources[auto388A1C58_var], 130, 35, c_anchorTopRight, 96, 165, lv__dialogItemTextCollected, ColorWithAlpha(0,0,0,0), false, 2.0);
+        libNtve_gf_CreateDialogItemLabel(libDE6FE856_gv_dialogLostResources[auto388A1C58_var], 130, 35, c_anchorTopRight, 10, 159, IntToText(PlayerGetPropertyInt(auto388A1C58_var, c_playerPropVespeneCollected)), ColorWithAlpha(0,0,0,0), false, 2.0);
+        libDE6FE856_gv_dialogItemVespenCollected[auto388A1C58_var] = DialogControlLastCreated();
+        libNtve_gf_SetDialogItemStyle(libDE6FE856_gv_dialogItemVespenCollected[auto388A1C58_var], "ResourceValue", PlayerGroupSingle(auto388A1C58_var));
+        libNtve_gf_SetDialogItemColor(libDE6FE856_gv_dialogItemVespenCollected[auto388A1C58_var], lv__colorCollected, PlayerGroupSingle(auto388A1C58_var));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDE6FE856_gt_RLCreateDialog_Init () {
+    libDE6FE856_gt_RLCreateDialog = TriggerCreate("libDE6FE856_gt_RLCreateDialog_Func");
+    TriggerAddEventMapInit(libDE6FE856_gt_RLCreateDialog);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: RL | PeriodicModifyMinerals
+//--------------------------------------------------------------------------------------------------
+bool libDE6FE856_gt_RLPeriodicModifyMinerals_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    playergroup auto013B09CE_g;
+    int auto013B09CE_var;
+
+    // Conditions
+    if (testConds) {
+        if (!(((libDE6FE856_gv_rLeventOption == 1) && (libDE6FE856_gv_rLmodifyMinerals == true)))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto013B09CE_g = PlayerGroupActive();
+    auto013B09CE_var = -1;
+    while (true) {
+        auto013B09CE_var = PlayerGroupNextPlayer(auto013B09CE_g, auto013B09CE_var);
+        if (auto013B09CE_var < 0) { break; }
+        if ((PlayerGetPropertyInt(auto013B09CE_var, c_playerPropMinerals) > libDE6FE856_gv_rLlimitMinerals)) {
+            if ((libDE6FE856_gv_rLwriteOffResources == true)) {
+                PlayerModifyPropertyInt(auto013B09CE_var, c_playerPropMinerals, c_playerPropOperSetTo, 0);
+            }
+            else {
+                PlayerModifyPropertyInt(auto013B09CE_var, c_playerPropMinerals, c_playerPropOperSetTo, libDE6FE856_gv_rLlimitMinerals);
+            }
+        }
+
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDE6FE856_gt_RLPeriodicModifyMinerals_Init () {
+    libDE6FE856_gt_RLPeriodicModifyMinerals = TriggerCreate("libDE6FE856_gt_RLPeriodicModifyMinerals_Func");
+    TriggerAddEventTimePeriodic(libDE6FE856_gt_RLPeriodicModifyMinerals, 0.25, c_timeGame);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: RL | PeriodicModifyVespene
+//--------------------------------------------------------------------------------------------------
+bool libDE6FE856_gt_RLPeriodicModifyVespene_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    playergroup auto0A8D287E_g;
+    int auto0A8D287E_var;
+
+    // Conditions
+    if (testConds) {
+        if (!(((libDE6FE856_gv_rLeventOption == 1) && (libDE6FE856_gv_rLmodifyVespene == true)))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto0A8D287E_g = PlayerGroupActive();
+    auto0A8D287E_var = -1;
+    while (true) {
+        auto0A8D287E_var = PlayerGroupNextPlayer(auto0A8D287E_g, auto0A8D287E_var);
+        if (auto0A8D287E_var < 0) { break; }
+        if ((PlayerGetPropertyInt(auto0A8D287E_var, c_playerPropVespene) > libDE6FE856_gv_rLlimitVespene)) {
+            if ((libDE6FE856_gv_rLwriteOffResources == true)) {
+                PlayerModifyPropertyInt(auto0A8D287E_var, c_playerPropVespene, c_playerPropOperSetTo, 0);
+            }
+            else {
+                PlayerModifyPropertyInt(auto0A8D287E_var, c_playerPropVespene, c_playerPropOperSetTo, libDE6FE856_gv_rLlimitVespene);
+            }
+        }
+
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDE6FE856_gt_RLPeriodicModifyVespene_Init () {
+    libDE6FE856_gt_RLPeriodicModifyVespene = TriggerCreate("libDE6FE856_gt_RLPeriodicModifyVespene_Func");
+    TriggerAddEventTimePeriodic(libDE6FE856_gt_RLPeriodicModifyVespene, 0.25, c_timeGame);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: RL | PlayerModifyMinerals
+//--------------------------------------------------------------------------------------------------
+bool libDE6FE856_gt_RLPlayerModifyMinerals_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__tmp;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!(((libDE6FE856_gv_rLeventOption == 2) && (libDE6FE856_gv_rLmodifyMinerals == true)))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libNtve_gf_SetDialogItemText(libDE6FE856_gv_dialogItemMineralsCollected[EventPlayer()], IntToText(PlayerGetPropertyInt(EventPlayer(), c_playerPropMineralsCollected)), PlayerGroupSingle(EventPlayer()));
+    if ((PlayerGetPropertyInt(EventPlayer(), c_playerPropMinerals) > libDE6FE856_gv_rLlimitMinerals)) {
+        if ((libDE6FE856_gv_rLwriteOffResources == true)) {
+            PlayerModifyPropertyInt(EventPlayer(), c_playerPropMinerals, c_playerPropOperSubtract, libDE6FE856_gv_rLlimitMinerals);
+            libDE6FE856_gv_rLlostMinerals[EventPlayer()] += libDE6FE856_gv_rLlimitMinerals;
+        }
+        else {
+            lv__tmp = (PlayerGetPropertyInt(EventPlayer(), c_playerPropMinerals) - libDE6FE856_gv_rLlimitMinerals);
+            PlayerModifyPropertyInt(EventPlayer(), c_playerPropMinerals, c_playerPropOperSetTo, libDE6FE856_gv_rLlimitMinerals);
+            libDE6FE856_gv_rLlostMinerals[EventPlayer()] += lv__tmp;
+        }
+        libNtve_gf_SetDialogItemText(libDE6FE856_gv_dialogItemMineralsLost[EventPlayer()], IntToText(libDE6FE856_gv_rLlostMinerals[EventPlayer()]), PlayerGroupSingle(EventPlayer()));
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDE6FE856_gt_RLPlayerModifyMinerals_Init () {
+    libDE6FE856_gt_RLPlayerModifyMinerals = TriggerCreate("libDE6FE856_gt_RLPlayerModifyMinerals_Func");
+    TriggerAddEventPlayerPropChange(libDE6FE856_gt_RLPlayerModifyMinerals, 1, c_playerPropMinerals);
+    TriggerAddEventPlayerPropChange(libDE6FE856_gt_RLPlayerModifyMinerals, 2, c_playerPropMinerals);
+    TriggerAddEventPlayerPropChange(libDE6FE856_gt_RLPlayerModifyMinerals, 3, c_playerPropMinerals);
+    TriggerAddEventPlayerPropChange(libDE6FE856_gt_RLPlayerModifyMinerals, 4, c_playerPropMinerals);
+    TriggerAddEventPlayerPropChange(libDE6FE856_gt_RLPlayerModifyMinerals, 5, c_playerPropMinerals);
+    TriggerAddEventPlayerPropChange(libDE6FE856_gt_RLPlayerModifyMinerals, 6, c_playerPropMinerals);
+    TriggerAddEventPlayerPropChange(libDE6FE856_gt_RLPlayerModifyMinerals, 7, c_playerPropMinerals);
+    TriggerAddEventPlayerPropChange(libDE6FE856_gt_RLPlayerModifyMinerals, 8, c_playerPropMinerals);
+    TriggerAddEventPlayerPropChange(libDE6FE856_gt_RLPlayerModifyMinerals, 9, c_playerPropMinerals);
+    TriggerAddEventPlayerPropChange(libDE6FE856_gt_RLPlayerModifyMinerals, 10, c_playerPropMinerals);
+    TriggerAddEventPlayerPropChange(libDE6FE856_gt_RLPlayerModifyMinerals, 11, c_playerPropMinerals);
+    TriggerAddEventPlayerPropChange(libDE6FE856_gt_RLPlayerModifyMinerals, 12, c_playerPropMinerals);
+    TriggerAddEventPlayerPropChange(libDE6FE856_gt_RLPlayerModifyMinerals, 13, c_playerPropMinerals);
+    TriggerAddEventPlayerPropChange(libDE6FE856_gt_RLPlayerModifyMinerals, 14, c_playerPropMinerals);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: RL | PlayerModifyVespene
+//--------------------------------------------------------------------------------------------------
+bool libDE6FE856_gt_RLPlayerModifyVespene_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__tmp;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!(((libDE6FE856_gv_rLeventOption == 2) && (libDE6FE856_gv_rLmodifyVespene == true)))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libNtve_gf_SetDialogItemText(libDE6FE856_gv_dialogItemVespenCollected[EventPlayer()], IntToText(PlayerGetPropertyInt(EventPlayer(), c_playerPropVespeneCollected)), PlayerGroupSingle(EventPlayer()));
+    if ((PlayerGetPropertyInt(EventPlayer(), c_playerPropVespene) > libDE6FE856_gv_rLlimitVespene)) {
+        if ((libDE6FE856_gv_rLwriteOffResources == true)) {
+            PlayerModifyPropertyInt(EventPlayer(), c_playerPropVespene, c_playerPropOperSubtract, libDE6FE856_gv_rLlimitVespene);
+            libDE6FE856_gv_rLlostVespene[EventPlayer()] += libDE6FE856_gv_rLlimitVespene;
+        }
+        else {
+            lv__tmp = (PlayerGetPropertyInt(EventPlayer(), c_playerPropVespene) - libDE6FE856_gv_rLlimitVespene);
+            PlayerModifyPropertyInt(EventPlayer(), c_playerPropVespene, c_playerPropOperSetTo, libDE6FE856_gv_rLlimitVespene);
+            libDE6FE856_gv_rLlostVespene[EventPlayer()] += lv__tmp;
+        }
+        libNtve_gf_SetDialogItemText(libDE6FE856_gv_dialogItemVespenLost[EventPlayer()], IntToText(libDE6FE856_gv_rLlostVespene[EventPlayer()]), PlayerGroupSingle(EventPlayer()));
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDE6FE856_gt_RLPlayerModifyVespene_Init () {
+    libDE6FE856_gt_RLPlayerModifyVespene = TriggerCreate("libDE6FE856_gt_RLPlayerModifyVespene_Func");
+    TriggerAddEventPlayerPropChange(libDE6FE856_gt_RLPlayerModifyVespene, 1, c_playerPropVespene);
+    TriggerAddEventPlayerPropChange(libDE6FE856_gt_RLPlayerModifyVespene, 2, c_playerPropVespene);
+    TriggerAddEventPlayerPropChange(libDE6FE856_gt_RLPlayerModifyVespene, 3, c_playerPropVespene);
+    TriggerAddEventPlayerPropChange(libDE6FE856_gt_RLPlayerModifyVespene, 4, c_playerPropVespene);
+    TriggerAddEventPlayerPropChange(libDE6FE856_gt_RLPlayerModifyVespene, 5, c_playerPropVespene);
+    TriggerAddEventPlayerPropChange(libDE6FE856_gt_RLPlayerModifyVespene, 6, c_playerPropVespene);
+    TriggerAddEventPlayerPropChange(libDE6FE856_gt_RLPlayerModifyVespene, 7, c_playerPropVespene);
+    TriggerAddEventPlayerPropChange(libDE6FE856_gt_RLPlayerModifyVespene, 8, c_playerPropVespene);
+    TriggerAddEventPlayerPropChange(libDE6FE856_gt_RLPlayerModifyVespene, 9, c_playerPropVespene);
+    TriggerAddEventPlayerPropChange(libDE6FE856_gt_RLPlayerModifyVespene, 10, c_playerPropVespene);
+    TriggerAddEventPlayerPropChange(libDE6FE856_gt_RLPlayerModifyVespene, 11, c_playerPropVespene);
+    TriggerAddEventPlayerPropChange(libDE6FE856_gt_RLPlayerModifyVespene, 12, c_playerPropVespene);
+    TriggerAddEventPlayerPropChange(libDE6FE856_gt_RLPlayerModifyVespene, 13, c_playerPropVespene);
+    TriggerAddEventPlayerPropChange(libDE6FE856_gt_RLPlayerModifyVespene, 14, c_playerPropVespene);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: RL | ChangeItemCheck
+//--------------------------------------------------------------------------------------------------
+bool libDE6FE856_gt_RLChangeItemCheck_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((EventDialogControl() == libDE6FE856_gv_dialogItemCheckValue[EventPlayer()])) {
+        if ((libNtve_gf_DialogItemIsChecked(EventDialogControl(), EventPlayer()) == true)) {
+            libDE6FE856_gv_isCheck = true;
+            DialogSetVisible(libDE6FE856_gv_dialogLostResources[EventPlayer()], PlayerGroupSingle(EventPlayer()), true);
+        }
+        else {
+            libDE6FE856_gv_isCheck = false;
+            DialogSetVisible(libDE6FE856_gv_dialogLostResources[EventPlayer()], PlayerGroupSingle(EventPlayer()), false);
+        }
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDE6FE856_gt_RLChangeItemCheck_Init () {
+    libDE6FE856_gt_RLChangeItemCheck = TriggerCreate("libDE6FE856_gt_RLChangeItemCheck_Func");
+    TriggerAddEventDialogControl(libDE6FE856_gt_RLChangeItemCheck, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeChecked);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: RL | EnterTextBox
+//--------------------------------------------------------------------------------------------------
+bool libDE6FE856_gt_RLEnterTextBox_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if (((EventDialogControl() == libDE6FE856_gv_dialogItemCheckText[EventPlayer()]) && (libDE6FE856_gv_isCheck == false))) {
+        DialogSetVisible(libDE6FE856_gv_dialogLostResources[EventPlayer()], PlayerGroupSingle(EventPlayer()), true);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDE6FE856_gt_RLEnterTextBox_Init () {
+    libDE6FE856_gt_RLEnterTextBox = TriggerCreate("libDE6FE856_gt_RLEnterTextBox_Func");
+    TriggerAddEventDialogControl(libDE6FE856_gt_RLEnterTextBox, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeMouseEnter);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: RL | ExitTextBox
+//--------------------------------------------------------------------------------------------------
+bool libDE6FE856_gt_RLExitTextBox_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if (((EventDialogControl() == libDE6FE856_gv_dialogItemCheckText[EventPlayer()]) && (libDE6FE856_gv_isCheck == false))) {
+        DialogSetVisible(libDE6FE856_gv_dialogLostResources[EventPlayer()], PlayerGroupSingle(EventPlayer()), false);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDE6FE856_gt_RLExitTextBox_Init () {
+    libDE6FE856_gt_RLExitTextBox = TriggerCreate("libDE6FE856_gt_RLExitTextBox_Func");
+    TriggerAddEventDialogControl(libDE6FE856_gt_RLExitTextBox, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeMouseExit);
+}
+
+void libDE6FE856_InitTriggers () {
+    libDE6FE856_gt_RLLaunch_Init();
+    libDE6FE856_gt_RLCreateDialog_Init();
+    libDE6FE856_gt_RLPeriodicModifyMinerals_Init();
+    libDE6FE856_gt_RLPeriodicModifyVespene_Init();
+    libDE6FE856_gt_RLPlayerModifyMinerals_Init();
+    libDE6FE856_gt_RLPlayerModifyVespene_Init();
+    libDE6FE856_gt_RLChangeItemCheck_Init();
+    libDE6FE856_gt_RLEnterTextBox_Init();
+    libDE6FE856_gt_RLExitTextBox_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool libDE6FE856_InitLib_completed = false;
+
+void libDE6FE856_InitLib () {
+    if (libDE6FE856_InitLib_completed) {
+        return;
+    }
+
+    libDE6FE856_InitLib_completed = true;
+
+    libDE6FE856_InitLibraries();
+    libDE6FE856_InitVariables();
+    libDE6FE856_InitTriggers();
+}
+

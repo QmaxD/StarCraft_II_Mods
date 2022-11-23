@@ -1,0 +1,10 @@
+﻿Category/Name/lib_7C370FE8_CA290BD7=KR | Killable resources
+FunctionDef/Name/lib_7C370FE8_9E54C622=KR | IfUnitIsMineral
+FunctionDef/Name/lib_7C370FE8_CBA00B40=KR | IfUnitIsGas
+Library/Name/7C370FE8=Library
+Trigger/Name/lib_7C370FE8_D1A0B476=KR | Make Resources Vulnerable
+Trigger/Name/lib_7C370FE8_F0A0D2C4=KR | Change Resources Of Life
+Trigger/Name/lib_7C370FE8_F0DCC0CA=KR | Change Life Of Resources
+Variable/Name/lib_7C370FE8_2E26AB29=_AllNeutralBuildings
+Variable/Name/lib_7C370FE8_8E554454=KR | GasResToLife
+Variable/Name/lib_7C370FE8_C374B658=KR | MinResToLife

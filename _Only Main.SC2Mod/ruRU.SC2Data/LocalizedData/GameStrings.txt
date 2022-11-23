@@ -1,0 +1,10 @@
+﻿Attribute003/Desc=Type of game
+Attribute003/Name=Type
+Attribute003/Value001/Desc=без изменений
+Attribute003/Value001/Name=Normal
+Attribute003/Value002/Desc=только мейны игроков
+Attribute003/Value002/Name=Only Mains
+DocInfo/DescLong=Removes all resources from map except main base.
+DocInfo/DescShort=Any
+DocInfo/Name=[ ZERGTV ] Только мейн
+DocInfo/Website=zergtv.tv/gg

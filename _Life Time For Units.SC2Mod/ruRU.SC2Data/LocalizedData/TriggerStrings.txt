@@ -1,0 +1,6 @@
+﻿FunctionDef/Name/lib_CE7F32F1_5F1CC08F=Get Time Existing Of Unit Type
+Library/Name/CE7F32F1=Temp Units
+ParamDef/Name/lib_CE7F32F1_7F99AF8B=Unit Type
+Trigger/Name/lib_CE7F32F1_5FC00845=You Are Too Old
+Trigger/Name/lib_CE7F32F1_982870B8=Aging Start
+Variable/Name/lib_CE7F32F1_8EE5F41D=Defined Time

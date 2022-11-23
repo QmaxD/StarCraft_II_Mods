@@ -1,0 +1,31 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// Constants
+const int lib394B321C_gv_uGupgradesAmount = 44;
+const int lib394B321C_gv_uGprotossUpgradesAmount = 12;
+const int lib394B321C_gv_uGterranUpgradesAmount = 17;
+const int lib394B321C_gv_uGzergUpgradesAmount = 15;
+
+// Variable Declarations
+bool lib394B321C_gv_uGisMaxUnitEnergy;
+string[91] lib394B321C_gv_uGupgradesArray;
+string[5][34] lib394B321C_gv_uGupgradesArrayOfRace;
+
+// Function Declarations
+bool lib394B321C_gf_DoesUnitTypeHaveEnergy (string lp_unitType);
+void lib394B321C_gf_UGAllowAddUpgrades_1 ();
+void lib394B321C_gf_UGAllowAddUpgrades_2 ();
+
+// Trigger Declarations
+trigger lib394B321C_gt_UGDebug;
+trigger lib394B321C_gt_UGDebug2;
+trigger lib394B321C_gt_UGLaunch;
+trigger lib394B321C_gt_UGWriteUpgrades;
+trigger lib394B321C_gt_UGSetMaxEnergy;
+
+// Library Initialization
+void lib394B321C_InitVariables ();
+

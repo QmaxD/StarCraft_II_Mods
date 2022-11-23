@@ -1,0 +1,19 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// Variable Declarations
+int lib3F95FD60_gv_mIGVespen_Index;
+int lib3F95FD60_gv_mIGOption_Game;
+
+// Function Declarations
+int lib3F95FD60_gf_MIGRecalculation_Of_Cost (string lp_currentUnit);
+
+// Trigger Declarations
+trigger lib3F95FD60_gt_MIGLaunch;
+trigger lib3F95FD60_gt_MIGInitialization;
+
+// Library Initialization
+void lib3F95FD60_InitVariables ();
+

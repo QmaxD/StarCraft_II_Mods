@@ -1,0 +1,2 @@
+﻿Behavior/Name/BecomeFlyingID=BecomeFlying
+Behavior/Tooltip/BecomeFlyingID=Эта единица особо крупных размеров. По ней можно стрелять, как будто она летает.

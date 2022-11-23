@@ -1,0 +1,2 @@
+﻿Behavior/Name/BecomeFlyingID=BecomeFlying
+Behavior/Tooltip/BecomeFlyingID=This unit is especially large. You can shoot at her as if she were flying.

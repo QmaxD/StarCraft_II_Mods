@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Preload>
+<Abil id="HallucinationArchon"/>
+<Abil id="HallucinationColossus"/>
+<Abil id="HallucinationHighTemplar"/>
+<Abil id="HallucinationImmortal"/>
+<Abil id="HallucinationPhoenix"/>
+<Abil id="HallucinationProbe"/>
+<Abil id="HallucinationStalker"/>
+<Abil id="HallucinationVoidRay"/>
+<Abil id="HallucinationWarpPrism"/>
+<Abil id="HallucinationZealot"/>
+<Abil id="HallucinationOracle"/>
+<Abil id="HallucinationDisruptor"/>
+<Abil id="HallucinationAdept"/>
+<Actor id="SYSTEM_ActorConfig"/>
+<Behavior id="idAgingBehaviour"/>
+<Unit id="Sentry"/>
+<Unit id="Immortal"/>
+</Preload>

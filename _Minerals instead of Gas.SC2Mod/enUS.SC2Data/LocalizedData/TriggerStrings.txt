@@ -1,0 +1,8 @@
+﻿Category/Name/lib_3F95FD60_FE969943=Minerals instead of Gas | MIG
+FunctionDef/Name/lib_3F95FD60_64936B73=MIG | Recalculation_Of_Cost
+Library/Name/3F95FD60=Library
+ParamDef/Name/lib_3F95FD60_B240301D=Current Unit
+Trigger/Name/lib_3F95FD60_C3DF22B7=MIG | Initialization
+Trigger/Name/lib_3F95FD60_D278252D=MIG | Launch
+Variable/Name/lib_3F95FD60_3EF4311D=MIG | Vespen_Index
+Variable/Name/lib_3F95FD60_42981221=MIG | Option_Game

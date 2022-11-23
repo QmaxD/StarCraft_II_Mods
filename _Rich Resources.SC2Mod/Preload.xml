@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Preload>
+<Actor id="SYSTEM_ActorConfig"/>
+<Unit id="RichMineralField"/>
+<Unit id="RichMineralField750"/>
+<Unit id="RichVespeneGeyser"/>
+</Preload>

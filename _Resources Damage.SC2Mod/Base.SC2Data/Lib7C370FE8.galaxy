@@ -1,0 +1,175 @@
+include "TriggerLibs/NativeLib"
+
+include "Lib7C370FE8_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void lib7C370FE8_InitLibraries () {
+    libNtve_InitVariables();
+}
+
+// Variable Initialization
+bool lib7C370FE8_InitVariables_completed = false;
+
+void lib7C370FE8_InitVariables () {
+    if (lib7C370FE8_InitVariables_completed) {
+        return;
+    }
+
+    lib7C370FE8_InitVariables_completed = true;
+
+}
+
+// Functions
+bool lib7C370FE8_gf_KRIfUnitIsMineral (unit lp_unit) {
+    // Automatic Variable Declarations
+    // Implementation
+    if (((UnitGetType(lp_unit) == "MineralField") || (UnitGetType(lp_unit) == "MineralField450") || (UnitGetType(lp_unit) == "MineralField750") || (UnitGetType(lp_unit) == "LabMineralField750") || (UnitGetType(lp_unit) == "LabMineralField") || (UnitGetType(lp_unit) == "BattleStationMineralField") || (UnitGetType(lp_unit) == "BattleStationMineralField750") || (UnitGetType(lp_unit) == "PurifierMineralField") || (UnitGetType(lp_unit) == "PurifierMineralField750") || (UnitGetType(lp_unit) == "RichMineralField") || (UnitGetType(lp_unit) == "RichMineralField750") || (UnitGetType(lp_unit) == "PurifierRichMineralField") || (UnitGetType(lp_unit) == "PurifierRichMineralField750") || (UnitGetType(lp_unit) == "MineralFieldOpaque900") || (UnitGetType(lp_unit) == "MineralFieldOpaque"))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool lib7C370FE8_gf_KRIfUnitIsGas (unit lp_unit) {
+    // Automatic Variable Declarations
+    // Implementation
+    if (((UnitGetType(lp_unit) == "RichVespeneGeyser") || (UnitGetType(lp_unit) == "VespeneGeyser") || (UnitGetType(lp_unit) == "SpacePlatformGeyser") || (UnitGetType(lp_unit) == "ProtossVespeneGeyser") || (UnitGetType(lp_unit) == "PurifierVespeneGeyser") || (UnitGetType(lp_unit) == "ShakurasVespeneGeyser"))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: KR | Make Resources Vulnerable
+//--------------------------------------------------------------------------------------------------
+bool lib7C370FE8_gt_InitHighMineral5_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unitgroup lv_MineralGroup;
+
+    // Automatic Variable Declarations
+    unitgroup autoE8F02FA7_g;
+    int autoE8F02FA7_u;
+    unit autoE8F02FA7_var;
+
+    // Variable Initialization
+    lv_MineralGroup = UnitGroupEmpty();
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_MineralGroup = UnitGroup(null, 0, RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterPlayer) | (1 << c_targetFilterAlly) | (1 << c_targetFilterEnemy) | (1 << c_targetFilterMissile) | (1 << c_targetFilterDestructible), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+    autoE8F02FA7_g = lv_MineralGroup;
+    autoE8F02FA7_u = UnitGroupCount(autoE8F02FA7_g, c_unitCountAll);
+    for (;; autoE8F02FA7_u -= 1) {
+        autoE8F02FA7_var = UnitGroupUnitFromEnd(autoE8F02FA7_g, autoE8F02FA7_u);
+        if (autoE8F02FA7_var == null) { break; }
+        if ((lib7C370FE8_gf_KRIfUnitIsMineral(autoE8F02FA7_var) == true)) {
+            UnitSetPropertyFixed(autoE8F02FA7_var, c_unitPropLifeMax, (UnitGetPropertyFixed(autoE8F02FA7_var, c_unitPropResources, c_unitPropCurrent) * lib7C370FE8_gv_kRMinResToLife));
+            UnitSetPropertyFixed(autoE8F02FA7_var, c_unitPropLifePercent, 100.0);
+            libNtve_gf_MakeUnitInvulnerable(autoE8F02FA7_var, false);
+            UnitBehaviorAdd(autoE8F02FA7_var, "UnknownBehavior", autoE8F02FA7_var, 1);
+        }
+
+        if ((lib7C370FE8_gf_KRIfUnitIsGas(autoE8F02FA7_var) == true)) {
+            UnitSetPropertyFixed(autoE8F02FA7_var, c_unitPropLifeMax, (UnitGetPropertyFixed(autoE8F02FA7_var, c_unitPropResources, c_unitPropCurrent) * lib7C370FE8_gv_kRGasResToLife));
+            UnitSetPropertyFixed(autoE8F02FA7_var, c_unitPropLifePercent, 100.0);
+            libNtve_gf_MakeUnitInvulnerable(autoE8F02FA7_var, false);
+            UnitBehaviorAdd(autoE8F02FA7_var, "UnknownBehavior2", autoE8F02FA7_var, 1);
+        }
+
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib7C370FE8_gt_InitHighMineral5_Init () {
+    lib7C370FE8_gt_InitHighMineral5 = TriggerCreate("lib7C370FE8_gt_InitHighMineral5_Func");
+    TriggerAddEventMapInit(lib7C370FE8_gt_InitHighMineral5);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: KR | Change Resources Of Life
+//--------------------------------------------------------------------------------------------------
+bool lib7C370FE8_gt_InitHighMineral6_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((lib7C370FE8_gf_KRIfUnitIsMineral(EventUnit()) == true)) {
+        UnitSetPropertyFixed(EventUnit(), c_unitPropResources, (UnitGetPropertyFixed(EventUnit(), c_unitPropLife, c_unitPropCurrent) / lib7C370FE8_gv_kRMinResToLife));
+    }
+
+    if ((lib7C370FE8_gf_KRIfUnitIsGas(EventUnit()) == true)) {
+        UnitSetPropertyFixed(EventUnit(), c_unitPropResources, (UnitGetPropertyFixed(EventUnit(), c_unitPropLife, c_unitPropCurrent) / lib7C370FE8_gv_kRGasResToLife));
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib7C370FE8_gt_InitHighMineral6_Init () {
+    lib7C370FE8_gt_InitHighMineral6 = TriggerCreate("lib7C370FE8_gt_InitHighMineral6_Func");
+    TriggerAddEventUnitDamaged(lib7C370FE8_gt_InitHighMineral6, null, c_unitDamageTypeAny, c_unitDamageEither, null);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: KR | Change Life Of Resources
+//--------------------------------------------------------------------------------------------------
+bool lib7C370FE8_gt_InitHighMineral7_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((lib7C370FE8_gf_KRIfUnitIsMineral(EventUnit()) == true)) {
+        UnitSetPropertyFixed(EventUnit(), c_unitPropLife, (UnitGetPropertyFixed(EventUnit(), c_unitPropResources, c_unitPropCurrent) * lib7C370FE8_gv_kRMinResToLife));
+    }
+
+    if ((lib7C370FE8_gf_KRIfUnitIsGas(EventUnit()) == true)) {
+        UnitSetPropertyFixed(EventUnit(), c_unitPropLife, (UnitGetPropertyFixed(EventUnit(), c_unitPropResources, c_unitPropCurrent) * lib7C370FE8_gv_kRGasResToLife));
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib7C370FE8_gt_InitHighMineral7_Init () {
+    lib7C370FE8_gt_InitHighMineral7 = TriggerCreate("lib7C370FE8_gt_InitHighMineral7_Func");
+    TriggerAddEventUnitProperty(lib7C370FE8_gt_InitHighMineral7, null, c_unitPropResources);
+}
+
+void lib7C370FE8_InitTriggers () {
+    lib7C370FE8_gt_InitHighMineral5_Init();
+    lib7C370FE8_gt_InitHighMineral6_Init();
+    lib7C370FE8_gt_InitHighMineral7_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool lib7C370FE8_InitLib_completed = false;
+
+void lib7C370FE8_InitLib () {
+    if (lib7C370FE8_InitLib_completed) {
+        return;
+    }
+
+    lib7C370FE8_InitLib_completed = true;
+
+    lib7C370FE8_InitLibraries();
+    lib7C370FE8_InitVariables();
+    lib7C370FE8_InitTriggers();
+}
+

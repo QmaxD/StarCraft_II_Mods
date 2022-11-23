@@ -1,0 +1,50 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// Variable Declarations
+timer lib13484647_gv_aDDefendTimer_Countdown;
+int lib13484647_gv_aDDefendTimer_Window;
+int lib13484647_gv_aDget_DefendTimer_Window;
+int lib13484647_gv_aDget_DefendTimeinteger;
+int lib13484647_gv_aDget_TypeOf_DR;
+bool lib13484647_gv_aDVictoryFor_Time;
+int[16] lib13484647_gv_aDget_RadiusOf_DR_individualinteger;
+int[16] lib13484647_gv_aDWHOISPlayer;
+playergroup lib13484647_gv_aDAttackPlayers;
+playergroup lib13484647_gv_aDDefendPlayers;
+point[16] lib13484647_gv_aDget_Point_DefendPlayer;
+region[16] lib13484647_gv_aDget_DR_Individual;
+unit[16] lib13484647_gv_aDSearchNodeCopy;
+playergroup[7] lib13484647_gv_aDget_TeamOf_DR;
+region[7] lib13484647_gv_aDget_DR_Team;
+region lib13484647_gv_aDget_DR_Common;
+bool lib13484647_gv_aDStart_LeaveEnter_DR_Individual;
+bool lib13484647_gv_aDStart_LeaveEnter_DR_Team;
+bool lib13484647_gv_aDStart_LeaveEnter_DR_Common;
+bool lib13484647_gv_aDUnitEntersDiesinGame;
+unitgroup[16] lib13484647_gv_aDUnits_Of_DefenderPlayers;
+
+// Function Declarations
+int lib13484647_gf_ADgetRight_DefendTime ();
+void lib13484647_gf_ADgetRight_DefendTimer_Window ();
+void lib13484647_gf_ADgetRight_TypeOf_DRGame ();
+fixed lib13484647_gf_ADgetRight_RadiusOf_DR_commonreal ();
+void lib13484647_gf_ADgetRight_RadiusOf_DR_individualinteger (int lp_player);
+string lib13484647_gf_ADgetRight_BehaviourFor_Individual (int lp_player);
+string lib13484647_gf_ADgetRight_BehaviourFor_Team (int lp_player);
+string lib13484647_gf_ADgetRight_BehaviourFor_Common (int lp_player);
+
+// Trigger Declarations
+trigger lib13484647_gt_ADLaunch;
+trigger lib13484647_gt_ADUnitEnterToLeaveFromDR1;
+trigger lib13484647_gt_ADUnitLeaveFromDR2;
+trigger lib13484647_gt_ADUnitEnterToDR2;
+trigger lib13484647_gt_ADUnitEnterToLeaveFromDR3;
+trigger lib13484647_gt_ADUnitEntersDiesinGame;
+trigger lib13484647_gt_ADEndGame;
+
+// Library Initialization
+void lib13484647_InitVariables ();
+

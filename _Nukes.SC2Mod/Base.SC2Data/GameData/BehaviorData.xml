@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CBehaviorBuff id="ImmuneToDamage">
+        <InfoFlags index="Hidden" value="1"/>
+        <DamageResponse ModifyFraction="0">
+            <Chance value="1"/>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SafeZone10">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/SensorTowerRadar"/>
+            <Cooldown Link="Behavior/SensorTowerRadar"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-status-radar.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Structures"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Modification RadarFilters="-;Player,Ally,Neutral,Enemy,Air,Ground,Structure,Worker,RawResource,HarvestableResource,Missile,Destructible,Buried,Cloaked"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SensorTowerRadar"/>
+                <Cooldown Link="Behavior/SensorTowerRadar"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SafeZone10Line">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/SensorTowerRadar"/>
+            <Cooldown Link="Behavior/SensorTowerRadar"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-status-radar.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Structures"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Modification RadarFilters="-;Player,Ally,Neutral,Enemy,Air,Ground,Structure,Worker,RawResource,HarvestableResource,Missile,Destructible,Buried,Cloaked"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SensorTowerRadar"/>
+                <Cooldown Link="Behavior/SensorTowerRadar"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SafeZone15">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/SensorTowerRadar"/>
+            <Cooldown Link="Behavior/SensorTowerRadar"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-status-radar.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Structures"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Modification RadarFilters="-;Player,Ally,Neutral,Enemy,Air,Ground,Structure,Worker,RawResource,HarvestableResource,Missile,Destructible,Buried,Cloaked"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SensorTowerRadar"/>
+                <Cooldown Link="Behavior/SensorTowerRadar"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SafeZone15Line">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/SensorTowerRadar"/>
+            <Cooldown Link="Behavior/SensorTowerRadar"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-status-radar.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Structures"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Modification RadarFilters="-;Player,Ally,Neutral,Enemy,Air,Ground,Structure,Worker,RawResource,HarvestableResource,Missile,Destructible,Buried,Cloaked"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SensorTowerRadar"/>
+                <Cooldown Link="Behavior/SensorTowerRadar"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SafeZone20">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/SensorTowerRadar"/>
+            <Cooldown Link="Behavior/SensorTowerRadar"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-status-radar.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Structures"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Modification RadarFilters="-;Player,Ally,Neutral,Enemy,Air,Ground,Structure,Worker,RawResource,HarvestableResource,Missile,Destructible,Buried,Cloaked"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SensorTowerRadar"/>
+                <Cooldown Link="Behavior/SensorTowerRadar"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SafeZone20Line">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/SensorTowerRadar"/>
+            <Cooldown Link="Behavior/SensorTowerRadar"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-status-radar.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Structures"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Modification RadarFilters="-;Player,Ally,Neutral,Enemy,Air,Ground,Structure,Worker,RawResource,HarvestableResource,Missile,Destructible,Buried,Cloaked"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SensorTowerRadar"/>
+                <Cooldown Link="Behavior/SensorTowerRadar"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SafeZone25">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/SensorTowerRadar"/>
+            <Cooldown Link="Behavior/SensorTowerRadar"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-status-radar.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Structures"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Modification RadarFilters="-;Player,Ally,Neutral,Enemy,Air,Ground,Structure,Worker,RawResource,HarvestableResource,Missile,Destructible,Buried,Cloaked"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SensorTowerRadar"/>
+                <Cooldown Link="Behavior/SensorTowerRadar"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SafeZone25Line">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/SensorTowerRadar"/>
+            <Cooldown Link="Behavior/SensorTowerRadar"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-status-radar.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Structures"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Modification RadarFilters="-;Player,Ally,Neutral,Enemy,Air,Ground,Structure,Worker,RawResource,HarvestableResource,Missile,Destructible,Buried,Cloaked"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SensorTowerRadar"/>
+                <Cooldown Link="Behavior/SensorTowerRadar"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SafeZone30">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/SensorTowerRadar"/>
+            <Cooldown Link="Behavior/SensorTowerRadar"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-status-radar.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Structures"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Modification RadarFilters="-;Player,Ally,Neutral,Enemy,Air,Ground,Structure,Worker,RawResource,HarvestableResource,Missile,Destructible,Buried,Cloaked"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SensorTowerRadar"/>
+                <Cooldown Link="Behavior/SensorTowerRadar"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SafeZone30Line">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/SensorTowerRadar"/>
+            <Cooldown Link="Behavior/SensorTowerRadar"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-status-radar.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Structures"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Modification RadarFilters="-;Player,Ally,Neutral,Enemy,Air,Ground,Structure,Worker,RawResource,HarvestableResource,Missile,Destructible,Buried,Cloaked"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SensorTowerRadar"/>
+                <Cooldown Link="Behavior/SensorTowerRadar"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SafeZone35">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/SensorTowerRadar"/>
+            <Cooldown Link="Behavior/SensorTowerRadar"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-status-radar.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Structures"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Modification RadarFilters="-;Player,Ally,Neutral,Enemy,Air,Ground,Structure,Worker,RawResource,HarvestableResource,Missile,Destructible,Buried,Cloaked"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SensorTowerRadar"/>
+                <Cooldown Link="Behavior/SensorTowerRadar"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SafeZone35Line">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/SensorTowerRadar"/>
+            <Cooldown Link="Behavior/SensorTowerRadar"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-status-radar.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Structures"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Modification RadarFilters="-;Player,Ally,Neutral,Enemy,Air,Ground,Structure,Worker,RawResource,HarvestableResource,Missile,Destructible,Buried,Cloaked"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SensorTowerRadar"/>
+                <Cooldown Link="Behavior/SensorTowerRadar"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SafeZone40">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/SensorTowerRadar"/>
+            <Cooldown Link="Behavior/SensorTowerRadar"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-status-radar.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Structures"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Modification RadarFilters="-;Player,Ally,Neutral,Enemy,Air,Ground,Structure,Worker,RawResource,HarvestableResource,Missile,Destructible,Buried,Cloaked"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SensorTowerRadar"/>
+                <Cooldown Link="Behavior/SensorTowerRadar"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SafeZone40Line">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/SensorTowerRadar"/>
+            <Cooldown Link="Behavior/SensorTowerRadar"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-status-radar.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Structures"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Modification RadarFilters="-;Player,Ally,Neutral,Enemy,Air,Ground,Structure,Worker,RawResource,HarvestableResource,Missile,Destructible,Buried,Cloaked"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SensorTowerRadar"/>
+                <Cooldown Link="Behavior/SensorTowerRadar"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SafeZone45">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/SensorTowerRadar"/>
+            <Cooldown Link="Behavior/SensorTowerRadar"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-status-radar.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Structures"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Modification RadarFilters="-;Player,Ally,Neutral,Enemy,Air,Ground,Structure,Worker,RawResource,HarvestableResource,Missile,Destructible,Buried,Cloaked"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SensorTowerRadar"/>
+                <Cooldown Link="Behavior/SensorTowerRadar"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SafeZone45Line">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/SensorTowerRadar"/>
+            <Cooldown Link="Behavior/SensorTowerRadar"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-status-radar.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Structures"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Modification RadarFilters="-;Player,Ally,Neutral,Enemy,Air,Ground,Structure,Worker,RawResource,HarvestableResource,Missile,Destructible,Buried,Cloaked"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SensorTowerRadar"/>
+                <Cooldown Link="Behavior/SensorTowerRadar"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SafeZone50">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/SensorTowerRadar"/>
+            <Cooldown Link="Behavior/SensorTowerRadar"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-status-radar.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Structures"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Modification RadarFilters="-;Player,Ally,Neutral,Enemy,Air,Ground,Structure,Worker,RawResource,HarvestableResource,Missile,Destructible,Buried,Cloaked"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SensorTowerRadar"/>
+                <Cooldown Link="Behavior/SensorTowerRadar"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SafeZone50Line">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/SensorTowerRadar"/>
+            <Cooldown Link="Behavior/SensorTowerRadar"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-status-radar.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Structures"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Modification RadarFilters="-;Player,Ally,Neutral,Enemy,Air,Ground,Structure,Worker,RawResource,HarvestableResource,Missile,Destructible,Buried,Cloaked"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SensorTowerRadar"/>
+                <Cooldown Link="Behavior/SensorTowerRadar"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+</Catalog>

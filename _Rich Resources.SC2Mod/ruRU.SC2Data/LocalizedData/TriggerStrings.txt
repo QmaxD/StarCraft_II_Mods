@@ -1,0 +1,6 @@
+﻿Library/Name/53355882=HighMineral
+Trigger/Name/lib_53355882_28C4D1AD=Untitled Trigger 001
+Variable/Name/lib_53355882_5CE9D4F9=Untitled Variable 001
+Variable/Name/lib_53355882_6707760E=Untitled Variable 001
+Variable/Name/lib_53355882_C65E38AA=Untitled Variable 001
+Variable/Name/lib_53355882_E1F8A9BB=Untitled Variable 001

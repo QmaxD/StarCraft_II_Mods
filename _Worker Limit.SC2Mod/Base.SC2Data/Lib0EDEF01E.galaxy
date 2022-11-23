@@ -1,0 +1,648 @@
+include "TriggerLibs/NativeLib"
+
+include "Lib0EDEF01E_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library Worker Limit (WL)
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void lib0EDEF01E_InitLibraries () {
+    libNtve_InitVariables();
+}
+
+// Variable Initialization
+bool lib0EDEF01E_InitVariables_completed = false;
+
+void lib0EDEF01E_InitVariables () {
+    int init_i;
+
+    if (lib0EDEF01E_InitVariables_completed) {
+        return;
+    }
+
+    lib0EDEF01E_InitVariables_completed = true;
+
+    lib0EDEF01E_gv_wLplayers_InGame = PlayerGroupEmpty();
+    for (init_i = 0; init_i <= 17; init_i += 1) {
+        lib0EDEF01E_gv_wLget_WorkerLimit[init_i] = 12;
+    }
+    for (init_i = 0; init_i <= 17; init_i += 1) {
+        lib0EDEF01E_gv_wLgive_WorkersInStart[init_i] = 12;
+    }
+}
+
+// Functions
+void lib0EDEF01E_gf_WLDisableWorkersForPlayer (int lp_player, string lp_raceOfPlayer) {
+    // Automatic Variable Declarations
+    string auto2C9AF89D_val;
+
+    // Implementation
+    auto2C9AF89D_val = lp_raceOfPlayer;
+    if (auto2C9AF89D_val == "Prot") {
+        TechTreeUnitAllow(lp_player, "Probe", false);
+    }
+    else if (auto2C9AF89D_val == "Terr") {
+        TechTreeUnitAllow(lp_player, "SCV", false);
+    }
+    else if (auto2C9AF89D_val == "Zerg") {
+        TechTreeUnitAllow(lp_player, "Drone", false);
+    }
+    else {
+        TechTreeUnitAllow(lp_player, "Probe", false);
+        TechTreeUnitAllow(lp_player, "SCV", false);
+        TechTreeUnitAllow(lp_player, "Drone", false);
+    }
+}
+
+void lib0EDEF01E_gf_WLEnableWorkersForPlayer (int lp_player, string lp_raceOfPlayer) {
+    // Automatic Variable Declarations
+    string auto7C1B935F_val;
+
+    // Implementation
+    auto7C1B935F_val = lp_raceOfPlayer;
+    if (auto7C1B935F_val == "Prot") {
+        TechTreeUnitAllow(lp_player, "Probe", true);
+    }
+    else if (auto7C1B935F_val == "Terr") {
+        TechTreeUnitAllow(lp_player, "SCV", true);
+    }
+    else if (auto7C1B935F_val == "Zerg") {
+        TechTreeUnitAllow(lp_player, "Drone", true);
+    }
+    else {
+        TechTreeUnitAllow(lp_player, "Probe", true);
+        TechTreeUnitAllow(lp_player, "SCV", true);
+        TechTreeUnitAllow(lp_player, "Drone", true);
+    }
+}
+
+void lib0EDEF01E_gf_WLCreateWorkersandOrderToMineral (int lp_countCreate, string lp_unitType, string lp_command, int lp_player, string lp_raceOfPlayer, fixed lp_radiusCreate, fixed lp_radiusGetWorkers) {
+    // Variable Declarations
+    const int lv__workers_InStartGame = 12;
+
+    // Automatic Variable Declarations
+    unitgroup auto29942D46_g;
+    int auto29942D46_u;
+    unit auto29942D46_var;
+
+    // Variable Initialization
+
+    // Implementation
+    libNtve_gf_CreateUnitsAtPoint2(lp_countCreate, lp_unitType, 0, lp_player, RegionRandomPoint(RegionCircle(PlayerStartLocation(lp_player), lp_radiusCreate)));
+    auto29942D46_g = UnitGroup(lp_unitType, lp_player, RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+    auto29942D46_u = UnitGroupCount(auto29942D46_g, c_unitCountAll);
+    for (;; auto29942D46_u -= 1) {
+        auto29942D46_var = UnitGroupUnitFromEnd(auto29942D46_g, auto29942D46_u);
+        if (auto29942D46_var == null) { break; }
+        UnitIssueOrder(auto29942D46_var, OrderTargetingUnit(StringToAbilCmd(lp_command), UnitGroupClosestToPoint(UnitGroup(lib0EDEF01E_gf_WLGetResourceType(lp_player, lp_radiusGetWorkers), c_playerAny, RegionCircle(PlayerStartLocation(lp_player), lp_radiusGetWorkers), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0), UnitGetPosition(auto29942D46_var))), c_orderQueueReplace);
+    }
+}
+
+string lib0EDEF01E_gf_WLGetResourceType (int lp_player, fixed lp_radius) {
+    // Variable Declarations
+    unitgroup lv__resources;
+
+    // Automatic Variable Declarations
+    unitgroup auto4BD1850D_g;
+    int auto4BD1850D_u;
+    unit auto4BD1850D_var;
+
+    // Variable Initialization
+    lv__resources = UnitGroupEmpty();
+
+    // Implementation
+    auto4BD1850D_g = UnitGroup(null, 0, RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+    auto4BD1850D_u = UnitGroupCount(auto4BD1850D_g, c_unitCountAll);
+    for (;; auto4BD1850D_u -= 1) {
+        auto4BD1850D_var = UnitGroupUnitFromEnd(auto4BD1850D_g, auto4BD1850D_u);
+        if (auto4BD1850D_var == null) { break; }
+        if (((RegionContainsPoint(RegionCircle(PlayerStartLocation(lp_player), lp_radius), UnitGetPosition(auto4BD1850D_var)) == true) && ((UnitGetType(auto4BD1850D_var) == "MineralField") || (UnitGetType(auto4BD1850D_var) == "MineralField750") || (UnitGetType(auto4BD1850D_var) == "MineralField450") || (UnitGetType(auto4BD1850D_var) == "MineralFieldOpaque") || (UnitGetType(auto4BD1850D_var) == "MineralFieldOpaque900") || (UnitGetType(auto4BD1850D_var) == "BattleStationMineralField") || (UnitGetType(auto4BD1850D_var) == "BattleStationMineralField750") || (UnitGetType(auto4BD1850D_var) == "LabMineralField") || (UnitGetType(auto4BD1850D_var) == "LabMineralField750") || (UnitGetType(auto4BD1850D_var) == "PurifierMineralField") || (UnitGetType(auto4BD1850D_var) == "PurifierMineralField750") || (UnitGetType(auto4BD1850D_var) == "PurifierRichMineralField") || (UnitGetType(auto4BD1850D_var) == "PurifierRichMineralField750") || (UnitGetType(auto4BD1850D_var) == "RichMineralField") || (UnitGetType(auto4BD1850D_var) == "RichMineralField750")))) {
+            UnitGroupAdd(lv__resources, auto4BD1850D_var);
+        }
+
+    }
+    return UnitGetType(UnitGroupRandomUnit(lv__resources, c_unitCountAll));
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: WL | Launch
+//--------------------------------------------------------------------------------------------------
+bool lib0EDEF01E_gt_WLLaunch_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__player;
+
+    // Automatic Variable Declarations
+    const int autoEAB27878_ae = 14;
+    const int autoEAB27878_ai = 1;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    Wait(0.1, c_timeGame);
+    lv__player = 1;
+    for ( ; ( (autoEAB27878_ai >= 0 && lv__player <= autoEAB27878_ae) || (autoEAB27878_ai < 0 && lv__player >= autoEAB27878_ae) ) ; lv__player += autoEAB27878_ai ) {
+        if ((PlayerStatus(lv__player) == c_playerStatusActive)) {
+            PlayerGroupAdd(lib0EDEF01E_gv_wLplayers_InGame, lv__player);
+        }
+
+    }
+    if ((GameAttributeGameValue("1") == "0013")) {
+        TriggerStop(lib0EDEF01E_gt_WLLaunch);
+        TriggerEnable(lib0EDEF01E_gt_WLLaunch, false);
+        TriggerEnable(lib0EDEF01E_gt_WLLookAfter_WorkerLimit, false);
+        HelpPanelAddTip(PlayerGroupAll(), libNtve_gf_FormatTipTitle(StringToText(""), libNtve_ge_TipType_NormalTip), TextExpressionAssemble("Param/Expression/lib_0EDEF01E_27F5C2D8"), StringToText(""), "Assets\\Textures\\btn-unit-collection-blizzcon17-drone.dds");
+    }
+    else {
+        TriggerExecute(lib0EDEF01E_gt_WLGetAttribute, true, false);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib0EDEF01E_gt_WLLaunch_Init () {
+    lib0EDEF01E_gt_WLLaunch = TriggerCreate("lib0EDEF01E_gt_WLLaunch_Func");
+    TriggerAddEventMapInit(lib0EDEF01E_gt_WLLaunch);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: WL | GetAttribute
+//--------------------------------------------------------------------------------------------------
+bool lib0EDEF01E_gt_WLGetAttribute_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    playergroup auto506196A6_g;
+    int auto506196A6_var;
+    string auto582ED0FE_val;
+    playergroup autoD83F2A52_g;
+    int autoD83F2A52_var;
+    string autoEEBB2E6B_val;
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((GameAttributeGameValue("1") == "0012")) {
+        autoD83F2A52_g = lib0EDEF01E_gv_wLplayers_InGame;
+        autoD83F2A52_var = -1;
+        while (true) {
+            autoD83F2A52_var = PlayerGroupNextPlayer(autoD83F2A52_g, autoD83F2A52_var);
+            if (autoD83F2A52_var < 0) { break; }
+            autoEEBB2E6B_val = GameAttributePlayerValue("2", autoD83F2A52_var);
+            if (autoEEBB2E6B_val == "0015") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[autoD83F2A52_var] = 999;
+            }
+            else if (autoEEBB2E6B_val == "0016") {
+                lib0EDEF01E_gv_wLget_Worker_BuildingBan[autoD83F2A52_var] = true;
+                lib0EDEF01E_gv_wLget_WorkerLimit[autoD83F2A52_var] = 999;
+            }
+            else if (autoEEBB2E6B_val == "0001") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[autoD83F2A52_var] = 16;
+            }
+            else if (autoEEBB2E6B_val == "0002") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[autoD83F2A52_var] = 22;
+            }
+            else if (autoEEBB2E6B_val == "0017") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[autoD83F2A52_var] = 24;
+            }
+            else if (autoEEBB2E6B_val == "0003") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[autoD83F2A52_var] = 30;
+            }
+            else if (autoEEBB2E6B_val == "0004") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[autoD83F2A52_var] = 32;
+            }
+            else if (autoEEBB2E6B_val == "0005") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[autoD83F2A52_var] = 40;
+            }
+            else if (autoEEBB2E6B_val == "0006") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[autoD83F2A52_var] = 44;
+            }
+            else if (autoEEBB2E6B_val == "0007") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[autoD83F2A52_var] = 50;
+            }
+            else if (autoEEBB2E6B_val == "0008") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[autoD83F2A52_var] = 56;
+            }
+            else if (autoEEBB2E6B_val == "0009") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[autoD83F2A52_var] = 60;
+            }
+            else if (autoEEBB2E6B_val == "0010") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[autoD83F2A52_var] = 66;
+            }
+            else if (autoEEBB2E6B_val == "0011") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[autoD83F2A52_var] = 70;
+            }
+            else if (autoEEBB2E6B_val == "0012") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[autoD83F2A52_var] = 72;
+            }
+            else if (autoEEBB2E6B_val == "0013") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[autoD83F2A52_var] = 76;
+            }
+            else if (autoEEBB2E6B_val == "0014") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[autoD83F2A52_var] = 80;
+            }
+            else if (autoEEBB2E6B_val == "0018") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[autoD83F2A52_var] = 88;
+            }
+            else {
+            }
+        }
+    }
+    else {
+        auto506196A6_g = lib0EDEF01E_gv_wLplayers_InGame;
+        auto506196A6_var = -1;
+        while (true) {
+            auto506196A6_var = PlayerGroupNextPlayer(auto506196A6_g, auto506196A6_var);
+            if (auto506196A6_var < 0) { break; }
+            auto582ED0FE_val = GameAttributeGameValue("1");
+            if (auto582ED0FE_val == "0017") {
+                lib0EDEF01E_gv_wLget_Worker_BuildingBan[auto506196A6_var] = true;
+            }
+            else if (auto582ED0FE_val == "0003") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[auto506196A6_var] = 16;
+            }
+            else if (auto582ED0FE_val == "0004") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[auto506196A6_var] = 22;
+            }
+            else if (auto582ED0FE_val == "0019") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[auto506196A6_var] = 24;
+            }
+            else if (auto582ED0FE_val == "0001") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[auto506196A6_var] = 30;
+            }
+            else if (auto582ED0FE_val == "0005") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[auto506196A6_var] = 32;
+            }
+            else if (auto582ED0FE_val == "0006") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[auto506196A6_var] = 40;
+            }
+            else if (auto582ED0FE_val == "0008") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[auto506196A6_var] = 44;
+            }
+            else if (auto582ED0FE_val == "0009") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[auto506196A6_var] = 50;
+            }
+            else if (auto582ED0FE_val == "0010") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[auto506196A6_var] = 56;
+            }
+            else if (auto582ED0FE_val == "0011") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[auto506196A6_var] = 60;
+            }
+            else if (auto582ED0FE_val == "0014") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[auto506196A6_var] = 66;
+            }
+            else if (auto582ED0FE_val == "0015") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[auto506196A6_var] = 70;
+            }
+            else if (auto582ED0FE_val == "0016") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[auto506196A6_var] = 72;
+            }
+            else if (auto582ED0FE_val == "0002") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[auto506196A6_var] = 76;
+            }
+            else if (auto582ED0FE_val == "0007") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[auto506196A6_var] = 80;
+            }
+            else if (auto582ED0FE_val == "0018") {
+                lib0EDEF01E_gv_wLget_WorkerLimit[auto506196A6_var] = 88;
+            }
+            else {
+            }
+        }
+    }
+    TriggerExecute(lib0EDEF01E_gt_WLGiveWorkers, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib0EDEF01E_gt_WLGetAttribute_Init () {
+    lib0EDEF01E_gt_WLGetAttribute = TriggerCreate("lib0EDEF01E_gt_WLGetAttribute_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: WL | GiveWorkers
+//--------------------------------------------------------------------------------------------------
+bool lib0EDEF01E_gt_WLGiveWorkers_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    const int lv__workers_InStartGame = 12;
+    const fixed lv__radiusCreate = 5.0;
+    const fixed lv__radiusGetWorkers = 8.0;
+    string lv__abilityCommand;
+
+    // Automatic Variable Declarations
+    playergroup auto9515151E_g;
+    int auto9515151E_var;
+    string autoF0D2E366_val;
+    string auto2AD79B37_val;
+    playergroup autoD6B92C7A_g;
+    int autoD6B92C7A_var;
+    string auto0DD05CF1_val;
+    playergroup auto44D2776A_g;
+    int auto44D2776A_var;
+    playergroup auto282AE280_g;
+    int auto282AE280_var;
+
+    // Variable Initialization
+    lv__abilityCommand = "";
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((GameAttributeGameValue("3") == "0002")) {
+        autoD6B92C7A_g = lib0EDEF01E_gv_wLplayers_InGame;
+        autoD6B92C7A_var = -1;
+        while (true) {
+            autoD6B92C7A_var = PlayerGroupNextPlayer(autoD6B92C7A_g, autoD6B92C7A_var);
+            if (autoD6B92C7A_var < 0) { break; }
+            if (((GameAttributePlayerValue("2", autoD6B92C7A_var) == "0015") || (GameAttributePlayerValue("2", autoD6B92C7A_var) == "0016"))) {
+            }
+            else {
+                lib0EDEF01E_gv_wLgive_WorkersInStart[autoD6B92C7A_var] = (lib0EDEF01E_gv_wLget_WorkerLimit[autoD6B92C7A_var] - lv__workers_InStartGame);
+                auto0DD05CF1_val = PlayerRace(autoD6B92C7A_var);
+                if (auto0DD05CF1_val == "Prot") {
+                    lv__abilityCommand = "Gather (Probe)";
+                    lib0EDEF01E_gf_WLCreateWorkersandOrderToMineral(lib0EDEF01E_gv_wLgive_WorkersInStart[autoD6B92C7A_var], "Probe", lv__abilityCommand, autoD6B92C7A_var, PlayerRace(autoD6B92C7A_var), lv__radiusCreate, lv__radiusGetWorkers);
+                }
+                else if (auto0DD05CF1_val == "Terr") {
+                    lv__abilityCommand = "Gather (SCV)";
+                    lib0EDEF01E_gf_WLCreateWorkersandOrderToMineral(lib0EDEF01E_gv_wLgive_WorkersInStart[autoD6B92C7A_var], "SCV", lv__abilityCommand, autoD6B92C7A_var, PlayerRace(autoD6B92C7A_var), lv__radiusCreate, lv__radiusGetWorkers);
+                }
+                else if (auto0DD05CF1_val == "Zerg") {
+                    lv__abilityCommand = "Gather (Drone)";
+                    lib0EDEF01E_gf_WLCreateWorkersandOrderToMineral(lib0EDEF01E_gv_wLgive_WorkersInStart[autoD6B92C7A_var], "Drone", lv__abilityCommand, autoD6B92C7A_var, PlayerRace(autoD6B92C7A_var), lv__radiusCreate, lv__radiusGetWorkers);
+                }
+                else {
+                }
+            }
+        }
+    }
+    else {
+        auto9515151E_g = lib0EDEF01E_gv_wLplayers_InGame;
+        auto9515151E_var = -1;
+        while (true) {
+            auto9515151E_var = PlayerGroupNextPlayer(auto9515151E_g, auto9515151E_var);
+            if (auto9515151E_var < 0) { break; }
+            autoF0D2E366_val = GameAttributeGameValue("3");
+            if (autoF0D2E366_val == "0003") {
+                lib0EDEF01E_gv_wLgive_WorkersInStart[auto9515151E_var] = 16;
+            }
+            else if (autoF0D2E366_val == "0004") {
+                lib0EDEF01E_gv_wLgive_WorkersInStart[auto9515151E_var] = 22;
+            }
+            else if (autoF0D2E366_val == "0013") {
+                lib0EDEF01E_gv_wLgive_WorkersInStart[auto9515151E_var] = 24;
+            }
+            else if (autoF0D2E366_val == "0005") {
+                lib0EDEF01E_gv_wLgive_WorkersInStart[auto9515151E_var] = 30;
+            }
+            else if (autoF0D2E366_val == "0006") {
+                lib0EDEF01E_gv_wLgive_WorkersInStart[auto9515151E_var] = 32;
+            }
+            else if (autoF0D2E366_val == "0007") {
+                lib0EDEF01E_gv_wLgive_WorkersInStart[auto9515151E_var] = 40;
+            }
+            else if (autoF0D2E366_val == "0008") {
+                lib0EDEF01E_gv_wLgive_WorkersInStart[auto9515151E_var] = 44;
+            }
+            else if (autoF0D2E366_val == "0009") {
+                lib0EDEF01E_gv_wLgive_WorkersInStart[auto9515151E_var] = 50;
+            }
+            else if (autoF0D2E366_val == "0010") {
+                lib0EDEF01E_gv_wLgive_WorkersInStart[auto9515151E_var] = 56;
+            }
+            else if (autoF0D2E366_val == "0011") {
+                lib0EDEF01E_gv_wLgive_WorkersInStart[auto9515151E_var] = 60;
+            }
+            else if (autoF0D2E366_val == "0012") {
+                lib0EDEF01E_gv_wLgive_WorkersInStart[auto9515151E_var] = 66;
+            }
+            else if (autoF0D2E366_val == "0014") {
+                lib0EDEF01E_gv_wLgive_WorkersInStart[auto9515151E_var] = 70;
+            }
+            else if (autoF0D2E366_val == "0015") {
+                lib0EDEF01E_gv_wLgive_WorkersInStart[auto9515151E_var] = 72;
+            }
+            else if (autoF0D2E366_val == "0016") {
+                lib0EDEF01E_gv_wLgive_WorkersInStart[auto9515151E_var] = 80;
+            }
+            else {
+            }
+            lib0EDEF01E_gv_wLgive_WorkersInStart[auto9515151E_var] = (lib0EDEF01E_gv_wLgive_WorkersInStart[auto9515151E_var] - lv__workers_InStartGame);
+            auto2AD79B37_val = PlayerRace(auto9515151E_var);
+            if (auto2AD79B37_val == "Prot") {
+                lv__abilityCommand = "Gather (Probe)";
+                lib0EDEF01E_gf_WLCreateWorkersandOrderToMineral(lib0EDEF01E_gv_wLgive_WorkersInStart[auto9515151E_var], "Probe", lv__abilityCommand, auto9515151E_var, PlayerRace(auto9515151E_var), lv__radiusCreate, lv__radiusGetWorkers);
+            }
+            else if (auto2AD79B37_val == "Terr") {
+                lv__abilityCommand = "Gather (SCV)";
+                lib0EDEF01E_gf_WLCreateWorkersandOrderToMineral(lib0EDEF01E_gv_wLgive_WorkersInStart[auto9515151E_var], "SCV", lv__abilityCommand, auto9515151E_var, PlayerRace(auto9515151E_var), lv__radiusCreate, lv__radiusGetWorkers);
+            }
+            else if (auto2AD79B37_val == "Zerg") {
+                lv__abilityCommand = "Gather (Drone)";
+                lib0EDEF01E_gf_WLCreateWorkersandOrderToMineral(lib0EDEF01E_gv_wLgive_WorkersInStart[auto9515151E_var], "Drone", lv__abilityCommand, auto9515151E_var, PlayerRace(auto9515151E_var), lv__radiusCreate, lv__radiusGetWorkers);
+            }
+            else {
+            }
+        }
+    }
+    if ((GameAttributeGameValue("1") == "0017")) {
+        lib0EDEF01E_gv_wLget_Worker_BuildingBan[0] = true;
+        auto282AE280_g = lib0EDEF01E_gv_wLplayers_InGame;
+        auto282AE280_var = -1;
+        while (true) {
+            auto282AE280_var = PlayerGroupNextPlayer(auto282AE280_g, auto282AE280_var);
+            if (auto282AE280_var < 0) { break; }
+            lib0EDEF01E_gf_WLDisableWorkersForPlayer(auto282AE280_var, PlayerRace(auto282AE280_var));
+        }
+        TriggerStop(lib0EDEF01E_gt_WLGiveWorkers);
+        TriggerEnable(lib0EDEF01E_gt_WLGiveWorkers, false);
+        TriggerEnable(lib0EDEF01E_gt_WLLookAfter_WorkerLimit, false);
+    }
+    else {
+        auto44D2776A_g = lib0EDEF01E_gv_wLplayers_InGame;
+        auto44D2776A_var = -1;
+        while (true) {
+            auto44D2776A_var = PlayerGroupNextPlayer(auto44D2776A_g, auto44D2776A_var);
+            if (auto44D2776A_var < 0) { break; }
+            if ((lib0EDEF01E_gv_wLget_Worker_BuildingBan[auto44D2776A_var] == true)) {
+                lib0EDEF01E_gf_WLDisableWorkersForPlayer(auto44D2776A_var, PlayerRace(auto44D2776A_var));
+            }
+
+        }
+        lib0EDEF01E_gv_wLget_LookAfter_WorkerLimit_true = true;
+    }
+    TriggerExecute(lib0EDEF01E_gt_WLMessage, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib0EDEF01E_gt_WLGiveWorkers_Init () {
+    lib0EDEF01E_gt_WLGiveWorkers = TriggerCreate("lib0EDEF01E_gt_WLGiveWorkers_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: WL | Message
+//--------------------------------------------------------------------------------------------------
+bool lib0EDEF01E_gt_WLMessage_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    text lv__playersSettings;
+
+    // Automatic Variable Declarations
+    playergroup auto866E8928_g;
+    int auto866E8928_var;
+
+    // Variable Initialization
+    lv__playersSettings = StringToText("");
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto866E8928_g = lib0EDEF01E_gv_wLplayers_InGame;
+    auto866E8928_var = -1;
+    while (true) {
+        auto866E8928_var = PlayerGroupNextPlayer(auto866E8928_g, auto866E8928_var);
+        if (auto866E8928_var < 0) { break; }
+        TextExpressionSetToken("Param/Expression/lib_0EDEF01E_150CD768", "A", TextWithColor(PlayerName(auto866E8928_var), libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(auto866E8928_var, false))));
+        lv__playersSettings = (lv__playersSettings + TextExpressionAssemble("Param/Expression/lib_0EDEF01E_150CD768"));
+        if (((GameAttributeGameValue("1") == "0020") || (GameAttributeGameValue("1") == "0003") || (GameAttributeGameValue("1") == "0004") || (GameAttributeGameValue("1") == "0019") || (GameAttributeGameValue("1") == "0001") || (GameAttributeGameValue("1") == "0005") || (GameAttributeGameValue("1") == "0006") || (GameAttributeGameValue("1") == "0008") || (GameAttributeGameValue("1") == "0009") || (GameAttributeGameValue("1") == "0010") || (GameAttributeGameValue("1") == "0011") || (GameAttributeGameValue("1") == "0014") || (GameAttributeGameValue("1") == "0015") || (GameAttributeGameValue("1") == "0016") || (GameAttributeGameValue("1") == "0002") || (GameAttributeGameValue("1") == "0007") || (GameAttributeGameValue("1") == "0018") || (GameAttributePlayerValue("2", auto866E8928_var) == "0019") || (GameAttributePlayerValue("2", auto866E8928_var) == "0001") || (GameAttributePlayerValue("2", auto866E8928_var) == "0002") || (GameAttributePlayerValue("2", auto866E8928_var) == "0017") || (GameAttributePlayerValue("2", auto866E8928_var) == "0003") || (GameAttributePlayerValue("2", auto866E8928_var) == "0004") || (GameAttributePlayerValue("2", auto866E8928_var) == "0005") || (GameAttributePlayerValue("2", auto866E8928_var) == "0006") || (GameAttributePlayerValue("2", auto866E8928_var) == "0007") || (GameAttributePlayerValue("2", auto866E8928_var) == "0008") || (GameAttributePlayerValue("2", auto866E8928_var) == "0009") || (GameAttributePlayerValue("2", auto866E8928_var) == "0010") || (GameAttributePlayerValue("2", auto866E8928_var) == "0011") || (GameAttributePlayerValue("2", auto866E8928_var) == "0012") || (GameAttributePlayerValue("2", auto866E8928_var) == "0013") || (GameAttributePlayerValue("2", auto866E8928_var) == "0014") || (GameAttributePlayerValue("2", auto866E8928_var) == "0018"))) {
+            TextExpressionSetToken("Param/Expression/lib_0EDEF01E_1BDB1319", "A", FixedToText(lib0EDEF01E_gv_wLget_WorkerLimit[auto866E8928_var], 0));
+            lv__playersSettings = (lv__playersSettings + TextExpressionAssemble("Param/Expression/lib_0EDEF01E_1BDB1319"));
+        }
+
+        if (((GameAttributeGameValue("1") == "0017") || (GameAttributePlayerValue("2", auto866E8928_var) == "0016"))) {
+            lv__playersSettings = (lv__playersSettings + TextExpressionAssemble("Param/Expression/lib_0EDEF01E_3C7C0033"));
+        }
+
+        if ((GameAttributePlayerValue("2", auto866E8928_var) == "0015")) {
+            lv__playersSettings = (lv__playersSettings + TextExpressionAssemble("Param/Expression/lib_0EDEF01E_B174B189"));
+        }
+
+        if (((GameAttributeGameValue("3") == "0002") && ((GameAttributePlayerValue("2", auto866E8928_var) == "0015") || (GameAttributePlayerValue("2", auto866E8928_var) == "0016")))) {
+        }
+
+        if ((((GameAttributeGameValue("3") == "0002") || (GameAttributeGameValue("3") == "0001")) && ((GameAttributePlayerValue("2", auto866E8928_var) != "0015") && (GameAttributePlayerValue("2", auto866E8928_var) != "0016")))) {
+            TextExpressionSetToken("Param/Expression/lib_0EDEF01E_5E8C6BB9", "A", FixedToText((lib0EDEF01E_gv_wLgive_WorkersInStart[auto866E8928_var] + 0), 0));
+            lv__playersSettings = (lv__playersSettings + TextExpressionAssemble("Param/Expression/lib_0EDEF01E_5E8C6BB9"));
+        }
+
+        if (((GameAttributeGameValue("3") == "0003") || (GameAttributeGameValue("3") == "0004") || (GameAttributeGameValue("3") == "0013") || (GameAttributeGameValue("3") == "0005") || (GameAttributeGameValue("3") == "0006") || (GameAttributeGameValue("3") == "0007") || (GameAttributeGameValue("3") == "0008") || (GameAttributeGameValue("3") == "0009") || (GameAttributeGameValue("3") == "0010") || (GameAttributeGameValue("3") == "0011") || (GameAttributeGameValue("3") == "0012") || (GameAttributeGameValue("3") == "0014") || (GameAttributeGameValue("3") == "0015") || (GameAttributeGameValue("3") == "0016"))) {
+            TextExpressionSetToken("Param/Expression/lib_0EDEF01E_86805748", "A", FixedToText((lib0EDEF01E_gv_wLgive_WorkersInStart[auto866E8928_var] + 12), 0));
+            lv__playersSettings = (lv__playersSettings + TextExpressionAssemble("Param/Expression/lib_0EDEF01E_86805748"));
+        }
+
+        lv__playersSettings = (lv__playersSettings + TextExpressionAssemble("Param/Expression/lib_0EDEF01E_29EDD27A"));
+    }
+    TextExpressionSetToken("Param/Expression/lib_0EDEF01E_15D0239A", "Players", lv__playersSettings);
+    HelpPanelAddTip(PlayerGroupAll(), libNtve_gf_FormatTipTitle(StringExternal("Param/Value/lib_0EDEF01E_432362F2"), libNtve_ge_TipType_NormalTip), TextExpressionAssemble("Param/Expression/lib_0EDEF01E_15D0239A"), StringExternal("Param/Value/lib_0EDEF01E_C7472A1A"), "Assets\\Textures\\btn-unit-collection-blizzcon17-drone.dds");
+    TriggerExecute(lib0EDEF01E_gt_WLLookAfter_WorkerLimit, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib0EDEF01E_gt_WLMessage_Init () {
+    lib0EDEF01E_gt_WLMessage = TriggerCreate("lib0EDEF01E_gt_WLMessage_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: WL | LookAfter_WorkerLimit
+//--------------------------------------------------------------------------------------------------
+bool lib0EDEF01E_gt_WLLookAfter_WorkerLimit_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__countWorkers;
+    int lv__countPlayer;
+
+    // Automatic Variable Declarations
+    playergroup auto836F9E34_g;
+    int auto836F9E34_var;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!(((lib0EDEF01E_gv_wLget_LookAfter_WorkerLimit_true == true) && (lib0EDEF01E_gv_wLget_Worker_BuildingBan[0] == false)))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto836F9E34_g = lib0EDEF01E_gv_wLplayers_InGame;
+    auto836F9E34_var = -1;
+    while (true) {
+        auto836F9E34_var = PlayerGroupNextPlayer(auto836F9E34_g, auto836F9E34_var);
+        if (auto836F9E34_var < 0) { break; }
+        if ((PlayerStatus(auto836F9E34_var) == c_playerStatusActive)) {
+            lv__countWorkers = UnitCount(null, auto836F9E34_var, RegionEntireMap(), UnitFilter((1 << c_targetFilterWorker), 0, (1 << c_targetFilterAlly) | (1 << c_targetFilterNeutral) | (1 << c_targetFilterEnemy) | (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32))), 0);
+            if ((lib0EDEF01E_gv_wLget_Worker_BuildingBan[auto836F9E34_var] == true)) {
+            }
+            else {
+                if ((lv__countWorkers > lib0EDEF01E_gv_wLget_WorkerLimit[auto836F9E34_var])) {
+                    lib0EDEF01E_gf_WLDisableWorkersForPlayer(auto836F9E34_var, PlayerRace(auto836F9E34_var));
+                    if ((PlayerRace(auto836F9E34_var) == "Terr")) {
+                        UnitKill(UnitGroupRandomUnit(UnitGroup("SCV", auto836F9E34_var, RegionEntireMap(), UnitFilter((1 << c_targetFilterWorker), 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0), c_unitCountAlive));
+                    }
+                    else {
+                        UnitKill(UnitGroupRandomUnit(UnitGroup(null, auto836F9E34_var, RegionEntireMap(), UnitFilter((1 << c_targetFilterWorker), 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0), c_unitCountAlive));
+                    }
+                }
+                else {
+                    if ((lv__countWorkers == lib0EDEF01E_gv_wLget_WorkerLimit[auto836F9E34_var])) {
+                        lib0EDEF01E_gf_WLDisableWorkersForPlayer(auto836F9E34_var, PlayerRace(auto836F9E34_var));
+                    }
+                    else {
+                        if ((lv__countWorkers < lib0EDEF01E_gv_wLget_WorkerLimit[auto836F9E34_var])) {
+                            lib0EDEF01E_gf_WLEnableWorkersForPlayer(auto836F9E34_var, PlayerRace(auto836F9E34_var));
+                        }
+
+                    }
+                }
+            }
+        }
+
+    }
+    Wait(1.0, c_timeGame);
+    TriggerExecute(lib0EDEF01E_gt_WLLookAfter_WorkerLimit, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib0EDEF01E_gt_WLLookAfter_WorkerLimit_Init () {
+    lib0EDEF01E_gt_WLLookAfter_WorkerLimit = TriggerCreate("lib0EDEF01E_gt_WLLookAfter_WorkerLimit_Func");
+}
+
+void lib0EDEF01E_InitTriggers () {
+    lib0EDEF01E_gt_WLLaunch_Init();
+    lib0EDEF01E_gt_WLGetAttribute_Init();
+    lib0EDEF01E_gt_WLGiveWorkers_Init();
+    lib0EDEF01E_gt_WLMessage_Init();
+    lib0EDEF01E_gt_WLLookAfter_WorkerLimit_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool lib0EDEF01E_InitLib_completed = false;
+
+void lib0EDEF01E_InitLib () {
+    if (lib0EDEF01E_InitLib_completed) {
+        return;
+    }
+
+    lib0EDEF01E_InitLib_completed = true;
+
+    lib0EDEF01E_InitLibraries();
+    lib0EDEF01E_InitVariables();
+    lib0EDEF01E_InitTriggers();
+}
+

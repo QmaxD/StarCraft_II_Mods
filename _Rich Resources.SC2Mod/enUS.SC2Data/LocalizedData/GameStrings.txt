@@ -1,0 +1,16 @@
+﻿Attribute001/Desc=What do we do rich on the map?
+Attribute001/Name=Make rich
+Attribute001/Value001/Name=And minerals and gas
+Attribute001/Value002/Name=Only minerals
+Attribute001/Value003/Name=Only gas
+Attribute002/Desc=Minor Resources: Druze with few minerals (usually less than 50). They are replaced by gold, but with the same amount of minerals.
+Attribute002/Name=Replace small resources?
+Attribute002/Value001/Desc=Small druses from standard ones are replaced by gold ones. The amount of minerals in them will remain the same.
+Attribute002/Value001/Name=Change to gold
+Attribute002/Value002/Desc=Small resources will be ignored.
+Attribute002/Value002/Name=Not
+DocInfo/DescLong=Replaces standard minerals and gas with rich ones.<n/><n/>Creators: Adollor, Swarm, Qmax.
+DocInfo/DescShort=Any
+DocInfo/Name=[ ZERGTV ] 16. Rich resources
+DocInfo/Website=http://ZERGTV.tv
+Param/Value/lib_53355882_98AEA4C2=Well, let's walk!

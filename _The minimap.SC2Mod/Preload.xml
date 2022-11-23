@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Preload>
+<Asset path="library\cover_2g2bb.tga" Type="Image"/>
+<Abil id="OracleCloakField"/>
+<Actor id="SYSTEM_ActorConfig"/>
+<Unit id="Baneling"/>
+<Unit id="Mothership"/>
+<Unit id="Ghost"/>
+<Unit id="Banshee"/>
+<Unit id="DarkTemplar"/>
+<Unit id="Observer"/>
+<Unit id="Drone"/>
+<Unit id="Zergling"/>
+<Unit id="Hydralisk"/>
+<Unit id="Ultralisk"/>
+<Unit id="Roach"/>
+<Unit id="Infestor"/>
+<Unit id="Queen"/>
+<Unit id="LurkerMP"/>
+<Unit id="Ravager"/>
+<Unit id="WidowMine"/>
+<Unit id="SwarmHostMP"/>
+</Preload>

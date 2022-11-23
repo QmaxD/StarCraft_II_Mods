@@ -1,0 +1,4 @@
+﻿Category/Name/lib_6C992D8A_F8BF0416=Untitled Folder 001
+Library/Name/6C992D8A=Library
+Trigger/Name/lib_6C992D8A_48236256=Untitled Trigger 001
+Variable/Name/lib_6C992D8A_5131932D=angle of rotation

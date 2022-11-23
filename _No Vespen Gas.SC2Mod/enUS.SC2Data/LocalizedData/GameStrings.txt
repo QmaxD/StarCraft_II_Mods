@@ -1,0 +1,10 @@
+﻿Attribute001/Name=Без веспен газа
+Attribute001/Value001/Desc=играть стандартно с веспеном
+Attribute001/Value001/Name=Нет
+Attribute001/Value002/Desc=игрок не сможет строить юниты и здания, которые требуют веспена, т.к. не может его добыть
+Attribute001/Value002/Name=Убрать веспеновые газилки с карты
+Attribute001/Value003/Desc=игрок сможет строить юниты и здания за веспен, но веспен не будет учитываться при строительстве + газилки не убираются с карты
+Attribute001/Value003/Name=Не учитывать веспен при строительстве юнитов и зданий
+DocInfo/DescLong=Игра без газа - нет веспеновых гейзеров.<n/>На карте остаются только минералы.<n/><n/>Only minerals. No vespen gas.<n/><n/>Создатели / Creators: Adollor, Swarm, Qmax.
+DocInfo/Name=[ ZERGTV ] No vespen gas
+DocInfo/Website=zergtv.tv/gg
