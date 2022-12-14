@@ -1,0 +1,234 @@
+include "TriggerLibs/NativeLib"
+include "Lib39D1ECFB_h"
+include "Lib36280BFF_h"
+
+include "LibE019E1BF_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: 13 Any unit kills any unit | UKU
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void libE019E1BF_InitLibraries () {
+    libNtve_InitVariables();
+    lib39D1ECFB_InitVariables();
+    lib36280BFF_InitVariables();
+}
+
+// Variable Initialization
+bool libE019E1BF_InitVariables_completed = false;
+
+void libE019E1BF_InitVariables () {
+    if (libE019E1BF_InitVariables_completed) {
+        return;
+    }
+
+    libE019E1BF_InitVariables_completed = true;
+
+    libE019E1BF_gv_modInformation.lv_aUKUOption_1 = "";
+}
+
+// Functions
+void libE019E1BF_gf_SetupInformation (int lp_modIndex) {
+    // Variable Declarations
+    int lv__optionIndex;
+    int lv__optionValueIndex;
+    int lv__default_Option_1;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv__default_Option_1 = 1;
+
+    // Implementation
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_name = StringExternal("Param/Value/lib_E019E1BF_52EEAA37");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_fullName = StringExternal("Param/Value/lib_E019E1BF_2394813A");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_description = StringExternal("Param/Value/lib_E019E1BF_36BB74D9");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_icon_Path = "Assets\\Textures\\ui_story_attackmode_targeticon_green.dds";
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_is_Included = true;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_saturation = 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_number_Game_Options = lv__optionIndex;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_start_Trigger = libE019E1BF_gt_Launch;
+}
+
+void libE019E1BF_gf_GetOptions () {
+    // Automatic Variable Declarations
+}
+
+void libE019E1BF_gf_TriggersTurnOn () {
+    // Automatic Variable Declarations
+    // Implementation
+    TriggerEnable(libE019E1BF_gt_UKUAddNewUnit, true);
+}
+
+void libE019E1BF_gf_UKUGetInfoForPlayer () {
+    // Automatic Variable Declarations
+    // Implementation
+    lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = TextExpressionAssemble("Param/Expression/lib_E019E1BF_F2EE815D");
+    lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat = StringToText("");
+}
+
+void libE019E1BF_gf_UKUApplyOptions () {
+    // Variable Declarations
+    unitgroup lv__allunits;
+
+    // Automatic Variable Declarations
+    unitgroup autoC0948308_g;
+    int autoC0948308_u;
+    unit autoC0948308_var;
+    playergroup auto0A73B8EE_g;
+    int auto0A73B8EE_var;
+
+    // Variable Initialization
+    lv__allunits = UnitGroupEmpty();
+
+    // Implementation
+    UnitGroupAddUnitGroup(lv__allunits, UnitGroup(null, c_playerAny, RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0));
+    autoC0948308_g = lv__allunits;
+    autoC0948308_u = UnitGroupCount(autoC0948308_g, c_unitCountAll);
+    for (;; autoC0948308_u -= 1) {
+        autoC0948308_var = UnitGroupUnitFromEnd(autoC0948308_g, autoC0948308_u);
+        if (autoC0948308_var == null) { break; }
+        UnitBehaviorAdd(autoC0948308_var, "GroundAirID", autoC0948308_var, 1);
+    }
+    auto0A73B8EE_g = lib36280BFF_gv_commonplayers_Active_Group;
+    auto0A73B8EE_var = -1;
+    while (true) {
+        auto0A73B8EE_var = PlayerGroupNextPlayer(auto0A73B8EE_g, auto0A73B8EE_var);
+        if (auto0A73B8EE_var < 0) { break; }
+        libE019E1BF_gf_UKUEnableAirGroundWeaponForPlayer(auto0A73B8EE_var);
+    }
+}
+
+void libE019E1BF_gf_UKUEnableAirGroundWeaponForPlayer (int lp_player) {
+    // Variable Declarations
+    string lv__weaponTargetFilters;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv__weaponTargetFilters = "Visible;Missile,Stasis,Dead,Hidden,Invulnerable";
+
+    // Implementation
+    CatalogFieldValueSet(c_gameCatalogWeapon, "ParticleBeam", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "PsiBlades", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "Adept", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "WarpBlades", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "HighTemplarWeapon", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "PhaseDisruptors", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "ThermalLances", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "IonCannons", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "Oracle", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "RepulsorCannon", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "Spines", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "Claws", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "AcidSaliva", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "RoachMelee", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "RavagerWeapon", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "VolatileBurst", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "VolatileBurstDummy", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "VolatileBurstBuilding", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "LurkerMP", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "ParasiteSpore", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "BroodlingStrike", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "BroodlingEscort", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "NeedleClaws", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "LocustMPMelee", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "KaiserBlades", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "ImpalerTentacle", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "AcidSpew", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "FusionCutter", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "PunisherGrenades", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "P38ScytheGuassPistol", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "90mmCannons", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "CrucioShockCannon", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "InfernalFlameThrower", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "HellionTank", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "LiberatorMissileLaunchers", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "LiberatorAGWeapon", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "BacklashRockets", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "LanzerTorpedoes", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "TwinGatlingCannon", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "TwinIbiksCannon", "TargetFilters", lp_player, lv__weaponTargetFilters);
+    CatalogFieldValueSet(c_gameCatalogWeapon, "LongboltMissile", "TargetFilters", lp_player, lv__weaponTargetFilters);
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: Launch
+//--------------------------------------------------------------------------------------------------
+bool libE019E1BF_gt_Launch_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libE019E1BF_gf_UKUApplyOptions();
+    libE019E1BF_gf_UKUGetInfoForPlayer();
+    TextExpressionSetToken("Param/Expression/lib_E019E1BF_74C1A404", "FulName", lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_fullName);
+    HelpPanelAddTip(PlayerGroupAll(), libNtve_gf_FormatTipTitle(TextExpressionAssemble("Param/Expression/lib_E019E1BF_74C1A404"), libNtve_ge_TipType_NormalTip), lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_name, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_icon_Path);
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat);
+    libE019E1BF_gf_TriggersTurnOn();
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libE019E1BF_gt_Launch_Init () {
+    libE019E1BF_gt_Launch = TriggerCreate("libE019E1BF_gt_Launch_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: UKU | AddNewUnit
+//--------------------------------------------------------------------------------------------------
+bool libE019E1BF_gt_UKUAddNewUnit_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((lib36280BFF_gf_Commonis_UnitOwnerActivePlayer(EventUnit()) == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((UnitGetType(EventUnit()) != "Nexus")) {
+        UnitBehaviorAdd(EventUnit(), "GroundAirID", EventUnit(), 1);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libE019E1BF_gt_UKUAddNewUnit_Init () {
+    libE019E1BF_gt_UKUAddNewUnit = TriggerCreate("libE019E1BF_gt_UKUAddNewUnit_Func");
+    TriggerEnable(libE019E1BF_gt_UKUAddNewUnit, false);
+    TriggerAddEventUnitRegion(libE019E1BF_gt_UKUAddNewUnit, null, RegionEntireMap(), true);
+}
+
+void libE019E1BF_InitTriggers () {
+    libE019E1BF_gt_Launch_Init();
+    libE019E1BF_gt_UKUAddNewUnit_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool libE019E1BF_InitLib_completed = false;
+
+void libE019E1BF_InitLib () {
+    if (libE019E1BF_InitLib_completed) {
+        return;
+    }
+
+    libE019E1BF_InitLib_completed = true;
+
+    libE019E1BF_InitLibraries();
+    libE019E1BF_InitVariables();
+    libE019E1BF_InitTriggers();
+}
+
+include "Lib39D1ECFB"
+include "Lib36280BFF"
+

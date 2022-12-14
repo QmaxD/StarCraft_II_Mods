@@ -1,8 +1,0 @@
-﻿Library/Name/53355882=Onlymain
-Trigger/Name/lib_53355882_28C4D1AD=only main trigger
-Trigger/Name/lib_53355882_2AA96589=attributes
-Variable/Name/lib_53355882_2BA9FB6D=Untitled Variable 001
-Variable/Name/lib_53355882_5CE9D4F9=Untitled Variable 001
-Variable/Name/lib_53355882_6707760E=Untitled Variable 001
-Variable/Name/lib_53355882_DCB0CD37=Untitled Variable 002
-Variable/Name/lib_53355882_E1F8A9BB=Untitled Variable 001

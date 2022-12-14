@@ -1,0 +1,613 @@
+include "TriggerLibs/NativeLib"
+include "Lib39D1ECFB_h"
+
+include "Lib3A730930_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: 04 Game Speed | GS
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void lib3A730930_InitLibraries () {
+    libNtve_InitVariables();
+    lib39D1ECFB_InitVariables();
+}
+
+// Variable Initialization
+bool lib3A730930_InitVariables_completed = false;
+
+void lib3A730930_InitVariables () {
+    if (lib3A730930_InitVariables_completed) {
+        return;
+    }
+
+    lib3A730930_InitVariables_completed = true;
+
+    lib3A730930_gv_modInformation.lv_gSOption_1050 = "50%";
+    lib3A730930_gv_modInformation.lv_gSOption_1075 = "75%";
+    lib3A730930_gv_modInformation.lv_gSOption_1080 = "80%";
+    lib3A730930_gv_modInformation.lv_gSOption_1085 = "85%";
+    lib3A730930_gv_modInformation.lv_gSOption_1090 = "90%";
+    lib3A730930_gv_modInformation.lv_gSOption_1095 = "95%";
+    lib3A730930_gv_modInformation.lv_gSOption_1100 = "100%";
+    lib3A730930_gv_modInformation.lv_gSOption_1105 = "105%";
+    lib3A730930_gv_modInformation.lv_gSOption_1110 = "110%";
+    lib3A730930_gv_modInformation.lv_gSOption_1115 = "115%";
+    lib3A730930_gv_modInformation.lv_gSOption_1120 = "120%";
+    lib3A730930_gv_modInformation.lv_gSOption_1125 = "125%";
+    lib3A730930_gv_modInformation.lv_gSOption_1130 = "130%";
+    lib3A730930_gv_modInformation.lv_gSOption_1135 = "135%";
+    lib3A730930_gv_modInformation.lv_gSOption_1140 = "140%";
+    lib3A730930_gv_modInformation.lv_gSOption_1145 = "145%";
+    lib3A730930_gv_modInformation.lv_gSOption_1150 = "150%";
+    lib3A730930_gv_modInformation.lv_gSOption_1175 = "175%";
+    lib3A730930_gv_modInformation.lv_gSOption_1200 = "200%";
+    lib3A730930_gv_modInformation.lv_gSOption_1225 = "225%";
+    lib3A730930_gv_modInformation.lv_gSOption_1250 = "250%";
+    lib3A730930_gv_modInformation.lv_gSOption_1275 = "275%";
+    lib3A730930_gv_modInformation.lv_gSOption_1300 = "300%";
+    lib3A730930_gv_modInformation.lv_gSOption_1400 = "400%";
+    lib3A730930_gv_modInformation.lv_gSOption_1500 = "500%";
+    lib3A730930_gv_modInformation.lv_gSOption_1D092D0B2D0B5D181D182D0B8D0B7D0BDD0B0D187D0B5D0BDD0B8D0B5 = "Ввести значение";
+    lib3A730930_gv_modInformation.lv_gSOption_2D094D0B0D0BFD0BBD0B0D0B2D0BDD0BE = "Да, плавно";
+    lib3A730930_gv_modInformation.lv_gSOption_2D0A1D180D0B0D0B7D183 = "Сразу";
+    lib3A730930_gv_modInformation.lv_gSOption_3D09DD0B5D182 = "Нет";
+    lib3A730930_gv_modInformation.lv_gSOption_3D094D0B0 = "Да";
+    lib3A730930_gv_modInformation.lv_gSOption_3D094D0B0D091D183D0B4D183D182D0BED0B1D0B0D182D0B0D0B9D0BCD0B5D180D0B0 = "Да. Будут оба таймера";
+    lib3A730930_gv_gSnewGlobalSpeed = 1000;
+    lib3A730930_gv_gSorigGlobalSpeed = GameGetGlobalTimeScale();
+    lib3A730930_gv_gStimerTickTock = TimerCreate();
+    lib3A730930_gv_gSwindowDialog = c_invalidDialogId;
+    lib3A730930_gv_gSwindowDialogItemPanel = c_invalidDialogControlId;
+    lib3A730930_gv_gSwindowDialogItemLabel = c_invalidDialogControlId;
+    lib3A730930_gv_gSwindowDialogItemImage = c_invalidDialogControlId;
+    lib3A730930_gv_gStimerForFormat = TimerCreate();
+    lib3A730930_gv_gStimeFormat = StringToText("<min2/>:<sec2/>");
+}
+
+// Functions
+void lib3A730930_gf_SetupInformation (int lp_modIndex) {
+    // Variable Declarations
+    int lv__optionIndex;
+    int lv__optionValueIndex;
+    int lv__default_Option_1;
+    int lv__default_Option_2;
+    int lv__default_Option_3;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv__default_Option_1 = 7;
+    lv__default_Option_2 = 2;
+    lv__default_Option_3 = 2;
+
+    // Implementation
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_name = StringExternal("Param/Value/lib_3A730930_2FF96B78");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_fullName = StringExternal("Param/Value/lib_3A730930_89F5C198");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_description = StringExternal("Param/Value/lib_3A730930_CDD52083");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_icon_Path = "Assets\\Textures\\btn-ability-stetmann-stetelliteoverloadspeed.dds";
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_is_Included = true;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_saturation = 1;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_3A730930_662E901C");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_3A730930_8F03DA62");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3A730930_gv_modInformation.lv_gSOption_1050;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3A730930_7CDF5620");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3A730930_gv_modInformation.lv_gSOption_1075;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3A730930_A9357437");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3A730930_gv_modInformation.lv_gSOption_1080;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3A730930_DDF77E09");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3A730930_gv_modInformation.lv_gSOption_1085;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3A730930_3470F2F3");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3A730930_gv_modInformation.lv_gSOption_1090;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3A730930_DCB0ECED");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3A730930_gv_modInformation.lv_gSOption_1095;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3A730930_F33F7A46");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3A730930_gv_modInformation.lv_gSOption_1100;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3A730930_83505D73");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3A730930_gv_modInformation.lv_gSOption_1105;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3A730930_D597A014");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3A730930_gv_modInformation.lv_gSOption_1110;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3A730930_BC510B67");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3A730930_gv_modInformation.lv_gSOption_1115;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3A730930_D37AB223");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3A730930_gv_modInformation.lv_gSOption_1120;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3A730930_B6E575B7");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3A730930_gv_modInformation.lv_gSOption_1125;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3A730930_A43E76BA");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3A730930_gv_modInformation.lv_gSOption_1130;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3A730930_12C74088");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3A730930_gv_modInformation.lv_gSOption_1135;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3A730930_8B04A162");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3A730930_gv_modInformation.lv_gSOption_1140;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3A730930_6123D595");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3A730930_gv_modInformation.lv_gSOption_1145;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3A730930_FF4F9027");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3A730930_gv_modInformation.lv_gSOption_1150;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3A730930_46401E5C");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3A730930_gv_modInformation.lv_gSOption_1175;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3A730930_653E66CA");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3A730930_gv_modInformation.lv_gSOption_1200;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3A730930_C2B1164A");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3A730930_gv_modInformation.lv_gSOption_1225;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3A730930_67511A54");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3A730930_gv_modInformation.lv_gSOption_1250;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3A730930_F421D035");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3A730930_gv_modInformation.lv_gSOption_1275;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3A730930_73970B10");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3A730930_gv_modInformation.lv_gSOption_1300;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3A730930_0DF65970");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3A730930_gv_modInformation.lv_gSOption_1400;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3A730930_061B4373");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3A730930_gv_modInformation.lv_gSOption_1500;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3A730930_8858A715");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3A730930_gv_modInformation.lv_gSOption_1D092D0B2D0B5D181D182D0B8D0B7D0BDD0B0D187D0B5D0BDD0B8D0B5;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3A730930_E121502E");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_is_ValueType_EditBox = true;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_1].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_3A730930_9F316176");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_3A730930_AE392563");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3A730930_gv_modInformation.lv_gSOption_2D094D0B0D0BFD0BBD0B0D0B2D0BDD0BE;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3A730930_914237AA");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3A730930_gv_modInformation.lv_gSOption_2D0A1D180D0B0D0B7D183;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3A730930_16B1DDF1");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_2;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_2].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_3A730930_A9D3EB6C");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_3A730930_4C2EF877");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3A730930_gv_modInformation.lv_gSOption_3D09DD0B5D182;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3A730930_8047BB86");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3A730930_gv_modInformation.lv_gSOption_3D094D0B0;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3A730930_85675C24");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3A730930_gv_modInformation.lv_gSOption_3D094D0B0D091D183D0B4D183D182D0BED0B1D0B0D182D0B0D0B9D0BCD0B5D180D0B0;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3A730930_5B5ED535");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_3;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_3].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_number_Game_Options = lv__optionIndex;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_start_Trigger = lib3A730930_gt_Launch;
+}
+
+void lib3A730930_gf_GetOptions () {
+    // Automatic Variable Declarations
+    string auto32FCA35B_val;
+    string autoCA54166C_val;
+
+    // Implementation
+    auto32FCA35B_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[1].lv_values[0].lv_valueString;
+    if (auto32FCA35B_val == lib3A730930_gv_modInformation.lv_gSOption_1050) {
+        lib3A730930_gv_gSnewGlobalSpeed = 500;
+    }
+    else if (auto32FCA35B_val == lib3A730930_gv_modInformation.lv_gSOption_1075) {
+        lib3A730930_gv_gSnewGlobalSpeed = 750;
+    }
+    else if (auto32FCA35B_val == lib3A730930_gv_modInformation.lv_gSOption_1080) {
+        lib3A730930_gv_gSnewGlobalSpeed = 800;
+    }
+    else if (auto32FCA35B_val == lib3A730930_gv_modInformation.lv_gSOption_1085) {
+        lib3A730930_gv_gSnewGlobalSpeed = 850;
+    }
+    else if (auto32FCA35B_val == lib3A730930_gv_modInformation.lv_gSOption_1090) {
+        lib3A730930_gv_gSnewGlobalSpeed = 900;
+    }
+    else if (auto32FCA35B_val == lib3A730930_gv_modInformation.lv_gSOption_1095) {
+        lib3A730930_gv_gSnewGlobalSpeed = 950;
+    }
+    else if (auto32FCA35B_val == lib3A730930_gv_modInformation.lv_gSOption_1105) {
+        lib3A730930_gv_gSnewGlobalSpeed = 1050;
+    }
+    else if (auto32FCA35B_val == lib3A730930_gv_modInformation.lv_gSOption_1100) {
+        lib3A730930_gv_gSnewGlobalSpeed = 1000;
+    }
+    else if (auto32FCA35B_val == lib3A730930_gv_modInformation.lv_gSOption_1110) {
+        lib3A730930_gv_gSnewGlobalSpeed = 1100;
+    }
+    else if (auto32FCA35B_val == lib3A730930_gv_modInformation.lv_gSOption_1115) {
+        lib3A730930_gv_gSnewGlobalSpeed = 1150;
+    }
+    else if (auto32FCA35B_val == lib3A730930_gv_modInformation.lv_gSOption_1120) {
+        lib3A730930_gv_gSnewGlobalSpeed = 1200;
+    }
+    else if (auto32FCA35B_val == lib3A730930_gv_modInformation.lv_gSOption_1125) {
+        lib3A730930_gv_gSnewGlobalSpeed = 1250;
+    }
+    else if (auto32FCA35B_val == lib3A730930_gv_modInformation.lv_gSOption_1130) {
+        lib3A730930_gv_gSnewGlobalSpeed = 1300;
+    }
+    else if (auto32FCA35B_val == lib3A730930_gv_modInformation.lv_gSOption_1135) {
+        lib3A730930_gv_gSnewGlobalSpeed = 1350;
+    }
+    else if (auto32FCA35B_val == lib3A730930_gv_modInformation.lv_gSOption_1140) {
+        lib3A730930_gv_gSnewGlobalSpeed = 1400;
+    }
+    else if (auto32FCA35B_val == lib3A730930_gv_modInformation.lv_gSOption_1145) {
+        lib3A730930_gv_gSnewGlobalSpeed = 1450;
+    }
+    else if (auto32FCA35B_val == lib3A730930_gv_modInformation.lv_gSOption_1150) {
+        lib3A730930_gv_gSnewGlobalSpeed = 1500;
+    }
+    else if (auto32FCA35B_val == lib3A730930_gv_modInformation.lv_gSOption_1175) {
+        lib3A730930_gv_gSnewGlobalSpeed = 1750;
+    }
+    else if (auto32FCA35B_val == lib3A730930_gv_modInformation.lv_gSOption_1200) {
+        lib3A730930_gv_gSnewGlobalSpeed = 2000;
+    }
+    else if (auto32FCA35B_val == lib3A730930_gv_modInformation.lv_gSOption_1225) {
+        lib3A730930_gv_gSnewGlobalSpeed = 2250;
+    }
+    else if (auto32FCA35B_val == lib3A730930_gv_modInformation.lv_gSOption_1250) {
+        lib3A730930_gv_gSnewGlobalSpeed = 2500;
+    }
+    else if (auto32FCA35B_val == lib3A730930_gv_modInformation.lv_gSOption_1275) {
+        lib3A730930_gv_gSnewGlobalSpeed = 2750;
+    }
+    else if (auto32FCA35B_val == lib3A730930_gv_modInformation.lv_gSOption_1300) {
+        lib3A730930_gv_gSnewGlobalSpeed = 3000;
+    }
+    else if (auto32FCA35B_val == lib3A730930_gv_modInformation.lv_gSOption_1400) {
+        lib3A730930_gv_gSnewGlobalSpeed = 4000;
+    }
+    else if (auto32FCA35B_val == lib3A730930_gv_modInformation.lv_gSOption_1500) {
+        lib3A730930_gv_gSnewGlobalSpeed = 5000;
+    }
+    else {
+        lib3A730930_gv_gSnewGlobalSpeed = StringToInt(lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[1].lv_values[0].lv_valueString);
+        lib3A730930_gv_gSnewGlobalSpeed = (lib3A730930_gv_gSnewGlobalSpeed * 10);
+    }
+    if ((lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[2].lv_values[0].lv_valueString == lib3A730930_gv_modInformation.lv_gSOption_2D094D0B0D0BFD0BBD0B0D0B2D0BDD0BE)) {
+        lib3A730930_gv_gSchangeSmoothly = true;
+    }
+
+    autoCA54166C_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[3].lv_values[0].lv_valueString;
+    if (autoCA54166C_val == lib3A730930_gv_modInformation.lv_gSOption_3D094D0B0) {
+        lib3A730930_gv_gStimerType = 1;
+    }
+    else if (autoCA54166C_val == lib3A730930_gv_modInformation.lv_gSOption_3D094D0B0D091D183D0B4D183D182D0BED0B1D0B0D182D0B0D0B9D0BCD0B5D180D0B0) {
+        lib3A730930_gv_gStimerType = 2;
+    }
+    else {
+    }
+}
+
+void lib3A730930_gf_TriggersTurnOn () {
+    // Automatic Variable Declarations
+    // Implementation
+    TriggerEnable(lib3A730930_gt_UntitledTrigger002, true);
+    TriggerEnable(lib3A730930_gt_GSChangeTimerFormat, true);
+}
+
+void lib3A730930_gf_GSGetInfoForPlayer () {
+    // Variable Declarations
+    int lv__speedForText;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Implementation
+    lv__speedForText = (lib3A730930_gv_gSnewGlobalSpeed / 10);
+    if ((lv__speedForText == 100)) {
+        TextExpressionSetToken("Param/Expression/lib_3A730930_02E77941", "speedForText", IntToText(lv__speedForText));
+        lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = TextExpressionAssemble("Param/Expression/lib_3A730930_02E77941");
+        lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat = (StringExternal("Param/Value/lib_3A730930_E33E69CD") + (IntToText(lv__speedForText) + StringExternal("Param/Value/lib_3A730930_BDC7D2FE")));
+    }
+    else if ((lv__speedForText < 100)) {
+        TextExpressionSetToken("Param/Expression/lib_3A730930_475F3BE3", "speedForText", IntToText(lv__speedForText));
+        lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = TextExpressionAssemble("Param/Expression/lib_3A730930_475F3BE3");
+        lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat = (StringExternal("Param/Value/lib_3A730930_9E666249") + (IntToText(lv__speedForText) + StringExternal("Param/Value/lib_3A730930_30A527A2")));
+    }
+    else if ((lv__speedForText > 100)) {
+        TextExpressionSetToken("Param/Expression/lib_3A730930_DA35EBDF", "speedForText", IntToText(lv__speedForText));
+        lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = TextExpressionAssemble("Param/Expression/lib_3A730930_DA35EBDF");
+        lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat = (StringExternal("Param/Value/lib_3A730930_F399F42A") + (IntToText(lv__speedForText) + StringExternal("Param/Value/lib_3A730930_E1176E4C")));
+    }
+}
+
+trigger auto_lib3A730930_gf_GSStartGameTimer_Trigger = null;
+
+void lib3A730930_gf_GSStartGameTimer () {
+    if (auto_lib3A730930_gf_GSStartGameTimer_Trigger == null) {
+        auto_lib3A730930_gf_GSStartGameTimer_Trigger = TriggerCreate("auto_lib3A730930_gf_GSStartGameTimer_TriggerFunc");
+    }
+
+    TriggerExecute(auto_lib3A730930_gf_GSStartGameTimer_Trigger, false, false);
+}
+
+bool auto_lib3A730930_gf_GSStartGameTimer_TriggerFunc (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__dialogWidth;
+    int lv__dialogHeight;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv__dialogWidth = 200;
+    lv__dialogHeight = 44;
+
+    // Implementation
+    if (((lib3A730930_gv_gSnewGlobalSpeed != 1000) && (lib3A730930_gv_gSnewGlobalSpeed >= 500) && (lib3A730930_gv_gSnewGlobalSpeed <= 2000) && ((lib3A730930_gv_gStimerType == 1) || (lib3A730930_gv_gStimerType == 2)))) {
+        Wait(5.0, c_timeReal);
+        TimerStart(lib3A730930_gv_gStimerTickTock, (lib3A730930_gv_gSms / lib3A730930_gv_gSnewGlobalSpeed), true, c_timeReal);
+        TimerStart(lib3A730930_gv_gStimerForFormat, ((lib3A730930_gv_gSms / lib3A730930_gv_gSnewGlobalSpeed) * 2700.0), false, c_timeReal);
+    }
+
+    return true;
+}
+
+trigger auto_lib3A730930_gf_GSChangeGameTimer_Trigger = null;
+
+void lib3A730930_gf_GSChangeGameTimer () {
+    if (auto_lib3A730930_gf_GSChangeGameTimer_Trigger == null) {
+        auto_lib3A730930_gf_GSChangeGameTimer_Trigger = TriggerCreate("auto_lib3A730930_gf_GSChangeGameTimer_TriggerFunc");
+    }
+
+    TriggerExecute(auto_lib3A730930_gf_GSChangeGameTimer_Trigger, false, false);
+}
+
+bool auto_lib3A730930_gf_GSChangeGameTimer_TriggerFunc (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__dialogWidth;
+    int lv__dialogHeight;
+
+    // Automatic Variable Declarations
+    int auto8673CA2F_val;
+
+    // Variable Initialization
+    lv__dialogWidth = 200;
+    lv__dialogHeight = 44;
+
+    // Implementation
+    if (((lib3A730930_gv_gSnewGlobalSpeed != 1000) && (lib3A730930_gv_gSnewGlobalSpeed >= 500) && (lib3A730930_gv_gSnewGlobalSpeed <= 2000) && ((lib3A730930_gv_gStimerType == 1) || (lib3A730930_gv_gStimerType == 2)))) {
+        auto8673CA2F_val = lib3A730930_gv_gStimerType;
+        if (auto8673CA2F_val == 1) {
+            DialogCreate(lv__dialogWidth, lv__dialogHeight, c_anchorBottomLeft, 280, 302, true);
+            UISetFrameVisible(PlayerGroupActive(), c_syncFrameTypeMissionTimePanel, false);
+        }
+        else if (auto8673CA2F_val == 2) {
+            DialogCreate(lv__dialogWidth, lv__dialogHeight, c_anchorBottomLeft, 280, 340, true);
+        }
+        else {
+        }
+        lib3A730930_gv_gSwindowDialog = DialogLastCreated();
+        DialogSetImageVisible(lib3A730930_gv_gSwindowDialog, false);
+        DialogControlCreate(lib3A730930_gv_gSwindowDialog, c_triggerControlTypePanel);
+        lib3A730930_gv_gSwindowDialogItemPanel = DialogControlLastCreated();
+        DialogControlSetSize(lib3A730930_gv_gSwindowDialogItemPanel, PlayerGroupAll(), lv__dialogWidth, lv__dialogHeight);
+        DialogControlSetPosition(lib3A730930_gv_gSwindowDialogItemPanel, PlayerGroupAll(), c_anchorTopLeft, 10, 0);
+        DialogControlCreateInPanelFromTemplate(lib3A730930_gv_gSwindowDialogItemPanel, c_triggerControlTypeLabel, "MissionTimePanel/MissionTimePanelTemplate/TimeLabel");
+        lib3A730930_gv_gSwindowDialogItemLabel = DialogControlLastCreated();
+        DialogControlCreateInPanelFromTemplate(lib3A730930_gv_gSwindowDialogItemPanel, c_triggerControlTypeImage, "MissionTimePanel/MissionTimePanelTemplate/BackgroundImage");
+        lib3A730930_gv_gSwindowDialogItemImage = DialogControlLastCreated();
+        DialogSetVisible(lib3A730930_gv_gSwindowDialog, PlayerGroupAll(), true);
+        DialogControlSetVisible(lib3A730930_gv_gSwindowDialogItemPanel, PlayerGroupAll(), true);
+        DialogControlSetVisible(lib3A730930_gv_gSwindowDialogItemLabel, PlayerGroupAll(), true);
+        DialogControlSetVisible(lib3A730930_gv_gSwindowDialogItemImage, PlayerGroupAll(), true);
+        Wait(5.0, c_timeReal);
+        TimerStart(lib3A730930_gv_gStimerTickTock, (lib3A730930_gv_gSms / lib3A730930_gv_gSnewGlobalSpeed), true, c_timeReal);
+        TimerStart(lib3A730930_gv_gStimerForFormat, ((lib3A730930_gv_gSms / lib3A730930_gv_gSnewGlobalSpeed) * 2700.0), false, c_timeReal);
+    }
+
+    return true;
+}
+
+void lib3A730930_gf_GSChangeGameSpeed () {
+    // Automatic Variable Declarations
+    // Implementation
+    if ((lib3A730930_gv_gSnewGlobalSpeed == 1000)) {
+    }
+    else {
+        if ((lib3A730930_gv_gSchangeSmoothly == true)) {
+            lib3A730930_gf_GSChangeSmoothly(lib3A730930_gv_gSnewGlobalSpeed);
+        }
+        else {
+            GameSetGlobalTimeScale((lib3A730930_gv_gSnewGlobalSpeed / 1000.0));
+            GameSetSpeedLocked(true);
+        }
+    }
+}
+
+void lib3A730930_gf_GSChangeSmoothly (int lp_speed) {
+    // Variable Declarations
+    int lv__speed;
+    int lv__count;
+    int lv__shift;
+    fixed lv__wait;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv__speed = lp_speed;
+    lv__count = 1000;
+    lv__shift = 25;
+    lv__wait = 0.5;
+
+    // Implementation
+    Wait(5.0, c_timeReal);
+    if ((lv__speed < 1000)) {
+        if ((lv__speed > 750)) {
+            lv__wait = 1.0;
+        }
+
+        while ((lv__count > lv__speed)) {
+            lv__count -= lv__shift;
+            GameSetGlobalTimeScale((lv__count / 1000.0));
+            Wait(lv__wait, c_timeReal);
+        }
+    }
+    else {
+        if ((lv__speed < 2500)) {
+            lv__wait = 0.75;
+            if ((lv__speed < 1500)) {
+                lv__wait = 1.0;
+            }
+
+        }
+
+        while ((lv__count < lv__speed)) {
+            lv__count += lv__shift;
+            GameSetGlobalTimeScale((lv__count / 1000.0));
+            Wait(lv__wait, c_timeReal);
+        }
+    }
+    if (((lv__count / 1000.0) == GameGetGlobalTimeScale())) {
+    }
+    else {
+        GameSetGlobalTimeScale((lib3A730930_gv_gSnewGlobalSpeed / 1000.0));
+    }
+    GameSetSpeedLocked(true);
+}
+
+trigger auto_lib3A730930_gf_GSChangeAndDisplayInformationToTimer_Trigger = null;
+
+void lib3A730930_gf_GSChangeAndDisplayInformationToTimer () {
+    if (auto_lib3A730930_gf_GSChangeAndDisplayInformationToTimer_Trigger == null) {
+        auto_lib3A730930_gf_GSChangeAndDisplayInformationToTimer_Trigger = TriggerCreate("auto_lib3A730930_gf_GSChangeAndDisplayInformationToTimer_TriggerFunc");
+    }
+
+    TriggerExecute(auto_lib3A730930_gf_GSChangeAndDisplayInformationToTimer_Trigger, false, false);
+}
+
+bool auto_lib3A730930_gf_GSChangeAndDisplayInformationToTimer_TriggerFunc (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Implementation
+    lib3A730930_gv_gSdialogValue += 1.0;
+    libNtve_gf_SetDialogItemText(lib3A730930_gv_gSwindowDialogItemLabel, TextTimeFormat(lib3A730930_gv_gStimeFormat, FixedToInt(lib3A730930_gv_gSdialogValue)), PlayerGroupAll());
+    return true;
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: Launch
+//--------------------------------------------------------------------------------------------------
+bool lib3A730930_gt_Launch_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    GameSetSpeedLocked(false);
+    lib3A730930_gf_GetOptions();
+    lib3A730930_gf_GSGetInfoForPlayer();
+    TextExpressionSetToken("Param/Expression/lib_3A730930_21B26F44", "FulName", lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_fullName);
+    HelpPanelAddTip(PlayerGroupAll(), libNtve_gf_FormatTipTitle(TextExpressionAssemble("Param/Expression/lib_3A730930_21B26F44"), libNtve_ge_TipType_NormalTip), lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_name, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_icon_Path);
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat);
+    lib3A730930_gf_GSChangeGameTimer();
+    lib3A730930_gf_GSStartGameTimer();
+    lib3A730930_gf_GSChangeGameSpeed();
+    lib3A730930_gf_TriggersTurnOn();
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib3A730930_gt_Launch_Init () {
+    lib3A730930_gt_Launch = TriggerCreate("lib3A730930_gt_Launch_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: GS | CountOnTimerTickTock
+//--------------------------------------------------------------------------------------------------
+bool lib3A730930_gt_UntitledTrigger002_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lib3A730930_gf_GSChangeAndDisplayInformationToTimer();
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib3A730930_gt_UntitledTrigger002_Init () {
+    lib3A730930_gt_UntitledTrigger002 = TriggerCreate("lib3A730930_gt_UntitledTrigger002_Func");
+    TriggerEnable(lib3A730930_gt_UntitledTrigger002, false);
+    TriggerAddEventTimer(lib3A730930_gt_UntitledTrigger002, lib3A730930_gv_gStimerTickTock);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: GS | ChangeTimerFormat
+//--------------------------------------------------------------------------------------------------
+bool lib3A730930_gt_GSChangeTimerFormat_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    text lv__timeFormat;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv__timeFormat = StringExternal("Param/Value/lib_3A730930_564E4B5F");
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lib3A730930_gv_gStimeFormat = lv__timeFormat;
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib3A730930_gt_GSChangeTimerFormat_Init () {
+    lib3A730930_gt_GSChangeTimerFormat = TriggerCreate("lib3A730930_gt_GSChangeTimerFormat_Func");
+    TriggerEnable(lib3A730930_gt_GSChangeTimerFormat, false);
+    TriggerAddEventTimer(lib3A730930_gt_GSChangeTimerFormat, lib3A730930_gv_gStimerForFormat);
+}
+
+void lib3A730930_InitTriggers () {
+    lib3A730930_gt_Launch_Init();
+    lib3A730930_gt_UntitledTrigger002_Init();
+    lib3A730930_gt_GSChangeTimerFormat_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool lib3A730930_InitLib_completed = false;
+
+void lib3A730930_InitLib () {
+    if (lib3A730930_InitLib_completed) {
+        return;
+    }
+
+    lib3A730930_InitLib_completed = true;
+
+    lib3A730930_InitLibraries();
+    lib3A730930_InitVariables();
+    lib3A730930_InitTriggers();
+}
+
+include "Lib39D1ECFB"
+

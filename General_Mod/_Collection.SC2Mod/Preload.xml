@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Preload>
+<Asset path="assets\textures\battlestation_number_decals_diff_03.dds" Type="Image"/>
+<Asset path="assets\textures\battlestation_number_decals_diff_02.dds" Type="Image"/>
+<Asset path="assets\textures\battlestation_number_decals_diff_05.lvl0" Type="Image"/>
+<Asset path="resources\ui\go 1_forscii.dds" Type="Image"/>
+<Asset path="assets\textures\battlestation_number_decals_diff_04.lvl0" Type="Image"/>
+<Asset path="assets\textures\battlestation_number_decals_diff_03.lvl0" Type="Image"/>
+<Asset path="assets\textures\ui_battlenet_glues_pageassets_dialog_hexpatternorange.dds" Type="Image"/>
+<Asset path="assets\textures\battlestation_number_decals_diff_05.dds" Type="Image"/>
+<Asset path="assets\textures\battlestation_number_decals_diff_04.dds" Type="Image"/>
+<Asset path="assets\textures\battlestation_number_decals_diff_02.lvl0" Type="Image"/>
+<Asset path="assets\textures\ui_ingame_help_techtree_questionmark.dds" Type="Image"/>
+<Abil id="HallucinationArchon"/>
+<Abil id="HallucinationColossus"/>
+<Abil id="HallucinationHighTemplar"/>
+<Abil id="HallucinationImmortal"/>
+<Abil id="HallucinationPhoenix"/>
+<Abil id="HallucinationProbe"/>
+<Abil id="HallucinationStalker"/>
+<Abil id="HallucinationVoidRay"/>
+<Abil id="HallucinationWarpPrism"/>
+<Abil id="HallucinationZealot"/>
+<Abil id="HallucinationOracle"/>
+<Abil id="HallucinationDisruptor"/>
+<Abil id="HallucinationAdept"/>
+<Actor id="SYSTEM_ActorConfig"/>
+<Behavior id="ArmorUpgradeID"/>
+<Behavior id="AttackUpgradeID"/>
+<Behavior id="BerserkDownAttack_ForProtossLife"/>
+<Behavior id="BerserkUpAttack_ForProtossLife"/>
+<Behavior id="BerserkDownAttack_ForProtossShield"/>
+<Behavior id="BerserkUpAttack_ForProtossShield"/>
+<Behavior id="BerserkDownAttack_ForTerranZerg"/>
+<Behavior id="BerserkUpAttack_ForTerranZerg"/>
+<Behavior id="BerserkDownSpeed_ForProtossLife"/>
+<Behavior id="BerserkUpSpeed_ForProtossLife"/>
+<Behavior id="BerserkDownSpeed_ForProtossShield"/>
+<Behavior id="BerserkUpSpeed_ForProtossShield"/>
+<Behavior id="BerserkDownSpeed_ForTerranZerg"/>
+<Behavior id="BerserkUpSpeed_ForTerranZerg"/>
+<Behavior id="GroundAirID"/>
+<Behavior id="HighYieldMineralFieldMinerals15"/>
+<Behavior id="HighYieldMineralFieldMinerals20"/>
+<Behavior id="HighYieldMineralFieldMinerals9"/>
+<Behavior id="HighYieldMineralFieldMinerals12"/>
+<Behavior id="MineralFieldMinerals15"/>
+<Behavior id="MineralFieldMinerals7"/>
+<Behavior id="MineralFieldMinerals9"/>
+<Behavior id="MineralFieldMinerals12"/>
+<Behavior id="RawRichVespeneGeyserGas12"/>
+<Behavior id="RawRichVespeneGeyserGas16"/>
+<Behavior id="RawRichVespeneGeyserGas20"/>
+<Behavior id="RawRichVespeneGeyserGas30"/>
+<Behavior id="AgingBehaviourID"/>
+<Behavior id="RawVespeneGeyserGas15"/>
+<Behavior id="RawVespeneGeyserGas6"/>
+<Behavior id="RawVespeneGeyserGas8"/>
+<Behavior id="RawVespeneGeyserGas10"/>
+<Behavior id="UnknownBehavior"/>
+<Behavior id="UnknownBehavior2"/>
+<Sound id="StartTurn"/>
+<Unit id="Colossus"/>
+<Unit id="Baneling"/>
+<Unit id="Mothership"/>
+<Unit id="MissileTurret"/>
+<Unit id="SiegeTankSieged"/>
+<Unit id="VikingFighter"/>
+<Unit id="SCV"/>
+<Unit id="Marine"/>
+<Unit id="Reaper"/>
+<Unit id="Ghost"/>
+<Unit id="Marauder"/>
+<Unit id="Hellion"/>
+<Unit id="Medivac"/>
+<Unit id="Banshee"/>
+<Unit id="Raven"/>
+<Unit id="Battlecruiser"/>
+<Unit id="PhotonCannon"/>
+<Unit id="Zealot"/>
+<Unit id="Stalker"/>
+<Unit id="HighTemplar"/>
+<Unit id="DarkTemplar"/>
+<Unit id="Sentry"/>
+<Unit id="Phoenix"/>
+<Unit id="Carrier"/>
+<Unit id="VoidRay"/>
+<Unit id="WarpPrism"/>
+<Unit id="Observer"/>
+<Unit id="Immortal"/>
+<Unit id="Probe"/>
+<Unit id="SpineCrawler"/>
+<Unit id="SporeCrawler"/>
+<Unit id="Drone"/>
+<Unit id="Zergling"/>
+<Unit id="Overlord"/>
+<Unit id="Hydralisk"/>
+<Unit id="Mutalisk"/>
+<Unit id="Ultralisk"/>
+<Unit id="Roach"/>
+<Unit id="Infestor"/>
+<Unit id="Corruptor"/>
+<Unit id="BroodLord"/>
+<Unit id="Queen"/>
+<Unit id="Overseer"/>
+<Unit id="PlanetaryFortress"/>
+<Unit id="Archon"/>
+<Unit id="RichMineralField"/>
+<Unit id="RichMineralField750"/>
+<Unit id="LurkerMP"/>
+<Unit id="OverlordTransport"/>
+<Unit id="Ravager"/>
+<Unit id="Oracle"/>
+<Unit id="Tempest"/>
+<Unit id="HellionTank"/>
+<Unit id="Cyclone"/>
+<Unit id="WidowMine"/>
+<Unit id="Liberator"/>
+<Unit id="Adept"/>
+<Unit id="Disruptor"/>
+<Unit id="SwarmHostMP"/>
+<Unit id="Viper"/>
+<Unit id="RichVespeneGeyser"/>
+<Unit id="MineralField"/>
+<Unit id="MineralField750"/>
+<Unit id="VespeneGeyser"/>
+<Unit id="ThorAP"/>
+</Preload>

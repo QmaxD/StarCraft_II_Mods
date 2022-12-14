@@ -1,0 +1,136 @@
+include "TriggerLibs/NativeLib"
+include "Lib39D1ECFB_h"
+include "Lib36280BFF_h"
+include "LibCC907F2F_h"
+
+include "LibA97D4977_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Handicap | HH
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void libA97D4977_InitLibraries () {
+    libNtve_InitVariables();
+    lib39D1ECFB_InitVariables();
+    lib36280BFF_InitVariables();
+    libCC907F2F_InitVariables();
+}
+
+// Variable Initialization
+bool libA97D4977_InitVariables_completed = false;
+
+void libA97D4977_InitVariables () {
+    if (libA97D4977_InitVariables_completed) {
+        return;
+    }
+
+    libA97D4977_InitVariables_completed = true;
+
+    libA97D4977_gv_modInformation.lv_aUKUOption_1 = "";
+}
+
+// Functions
+void libA97D4977_gf_SetupInformation (int lp_modIndex) {
+    // Variable Declarations
+    int lv__optionIndex;
+    int lv__optionValueIndex;
+    int lv__default_Option_1;
+    int lv__player;
+
+    // Automatic Variable Declarations
+    playergroup autoE7497A15_g;
+
+    // Variable Initialization
+    lv__default_Option_1 = 1;
+
+    // Implementation
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_name = StringExternal("Param/Value/lib_A97D4977_835B8BD5");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_fullName = StringExternal("Param/Value/lib_A97D4977_DB4EF755");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_description = StringExternal("Param/Value/lib_A97D4977_CF99C7DE");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_icon_Path = "Assets\\Textures\\ui_story_attackmode_targeticon_green.dds";
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_is_Included = false;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_saturation = 1;
+    autoE7497A15_g = lib36280BFF_gv_commonplayers_Active_Group;
+    lv__player = -1;
+    while (true) {
+        lv__player = PlayerGroupNextPlayer(autoE7497A15_g, lv__player);
+        if (lv__player < 0) { break; }
+    }
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_A97D4977_D551F529");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_A97D4977_D7F4BDF7");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libCC907F2F_gv_modInformation.lv_rROption_1D098D0BCD0B8D0BDD0B5D180D0B0D0BBD18BD0B8D0B3D0B0D0B7;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_A97D4977_BA808991");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_1].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_number_Game_Options = lv__optionIndex;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_start_Trigger = libA97D4977_gt_Launch;
+}
+
+void libA97D4977_gf_TriggersTurnOn () {
+    // Automatic Variable Declarations
+}
+
+void libA97D4977_gf_GetOptions () {
+    // Automatic Variable Declarations
+    // Implementation
+}
+
+void libA97D4977_gf_GetInfoForPlayer () {
+    // Automatic Variable Declarations
+    // Implementation
+    lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = TextExpressionAssemble("Param/Expression/lib_A97D4977_E92F6E2D");
+    lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat = StringToText("");
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: Launch
+//--------------------------------------------------------------------------------------------------
+bool libA97D4977_gt_Launch_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    TextExpressionSetToken("Param/Expression/lib_A97D4977_CD4DD92F", "FulName", lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_fullName);
+    HelpPanelAddTip(PlayerGroupAll(), libNtve_gf_FormatTipTitle(TextExpressionAssemble("Param/Expression/lib_A97D4977_CD4DD92F"), libNtve_ge_TipType_NormalTip), lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_name, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_icon_Path);
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libA97D4977_gt_Launch_Init () {
+    libA97D4977_gt_Launch = TriggerCreate("libA97D4977_gt_Launch_Func");
+}
+
+void libA97D4977_InitTriggers () {
+    libA97D4977_gt_Launch_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool libA97D4977_InitLib_completed = false;
+
+void libA97D4977_InitLib () {
+    if (libA97D4977_InitLib_completed) {
+        return;
+    }
+
+    libA97D4977_InitLib_completed = true;
+
+    libA97D4977_InitLibraries();
+    libA97D4977_InitVariables();
+    libA97D4977_InitTriggers();
+}
+
+include "Lib39D1ECFB"
+include "Lib36280BFF"
+include "LibCC907F2F"
+

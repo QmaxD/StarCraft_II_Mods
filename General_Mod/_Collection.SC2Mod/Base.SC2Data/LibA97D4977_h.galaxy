@@ -1,0 +1,25 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Handicap | HH
+//--------------------------------------------------------------------------------------------------
+// Structures
+struct libA97D4977_gs_Information {
+    string lv_aUKUOption_1;
+};
+
+// Variable Declarations
+libA97D4977_gs_Information libA97D4977_gv_modInformation;
+
+// Function Declarations
+void libA97D4977_gf_SetupInformation (int lp_modIndex);
+void libA97D4977_gf_TriggersTurnOn ();
+void libA97D4977_gf_GetOptions ();
+void libA97D4977_gf_GetInfoForPlayer ();
+
+// Trigger Declarations
+trigger libA97D4977_gt_Launch;
+
+// Library Initialization
+void libA97D4977_InitVariables ();
+

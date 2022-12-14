@@ -1,5 +1,0 @@
-﻿Behavior/Name/GroundAirID=Ground and Air Attack
-DocInfo/DescLong=Allows any unit to attack both ground and air.<n/><n/>Creators: GelioS, ShadowDragon, Qmax
-DocInfo/Name=[ ZERGTV ] 13. Any unit kills any unit
-DocInfo/Website=http://ZERGTV.tv
-Param/Value/lib_CB611753_6954E776=It will be interesting!

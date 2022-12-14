@@ -1,0 +1,77 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: 04 Game Speed | GS
+//--------------------------------------------------------------------------------------------------
+// Constants
+const fixed lib3A730930_gv_gSms = 1000.0;
+
+// Structures
+struct lib3A730930_gs_Information {
+    string lv_gSOption_1050;
+    string lv_gSOption_1075;
+    string lv_gSOption_1080;
+    string lv_gSOption_1085;
+    string lv_gSOption_1090;
+    string lv_gSOption_1095;
+    string lv_gSOption_1100;
+    string lv_gSOption_1105;
+    string lv_gSOption_1110;
+    string lv_gSOption_1115;
+    string lv_gSOption_1120;
+    string lv_gSOption_1125;
+    string lv_gSOption_1130;
+    string lv_gSOption_1135;
+    string lv_gSOption_1140;
+    string lv_gSOption_1145;
+    string lv_gSOption_1150;
+    string lv_gSOption_1175;
+    string lv_gSOption_1200;
+    string lv_gSOption_1225;
+    string lv_gSOption_1250;
+    string lv_gSOption_1275;
+    string lv_gSOption_1300;
+    string lv_gSOption_1400;
+    string lv_gSOption_1500;
+    string lv_gSOption_1D092D0B2D0B5D181D182D0B8D0B7D0BDD0B0D187D0B5D0BDD0B8D0B5;
+    string lv_gSOption_2D094D0B0D0BFD0BBD0B0D0B2D0BDD0BE;
+    string lv_gSOption_2D0A1D180D0B0D0B7D183;
+    string lv_gSOption_3D09DD0B5D182;
+    string lv_gSOption_3D094D0B0;
+    string lv_gSOption_3D094D0B0D091D183D0B4D183D182D0BED0B1D0B0D182D0B0D0B9D0BCD0B5D180D0B0;
+};
+
+// Variable Declarations
+lib3A730930_gs_Information lib3A730930_gv_modInformation;
+int lib3A730930_gv_gSnewGlobalSpeed;
+bool lib3A730930_gv_gSchangeSmoothly;
+int lib3A730930_gv_gStimerType;
+fixed lib3A730930_gv_gSorigGlobalSpeed;
+timer lib3A730930_gv_gStimerTickTock;
+fixed lib3A730930_gv_gSdialogValue;
+int lib3A730930_gv_gSwindowDialog;
+int lib3A730930_gv_gSwindowDialogItemPanel;
+int lib3A730930_gv_gSwindowDialogItemLabel;
+int lib3A730930_gv_gSwindowDialogItemImage;
+timer lib3A730930_gv_gStimerForFormat;
+text lib3A730930_gv_gStimeFormat;
+
+// Function Declarations
+void lib3A730930_gf_SetupInformation (int lp_modIndex);
+void lib3A730930_gf_GetOptions ();
+void lib3A730930_gf_TriggersTurnOn ();
+void lib3A730930_gf_GSGetInfoForPlayer ();
+void lib3A730930_gf_GSStartGameTimer ();
+void lib3A730930_gf_GSChangeGameTimer ();
+void lib3A730930_gf_GSChangeGameSpeed ();
+void lib3A730930_gf_GSChangeSmoothly (int lp_speed);
+void lib3A730930_gf_GSChangeAndDisplayInformationToTimer ();
+
+// Trigger Declarations
+trigger lib3A730930_gt_Launch;
+trigger lib3A730930_gt_UntitledTrigger002;
+trigger lib3A730930_gt_GSChangeTimerFormat;
+
+// Library Initialization
+void lib3A730930_InitVariables ();
+

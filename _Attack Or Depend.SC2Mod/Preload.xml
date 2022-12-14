@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Preload>
-<Actor id="SYSTEM_ActorConfig"/>
-<Behavior id="CantAttackBattlBehavior"/>
-<Behavior id="CantAttackBehavior1"/>
-<Sound id="UI_ZergWarning"/>
-<Unit id="NovaPack03SearchNode2"/>
-</Preload>

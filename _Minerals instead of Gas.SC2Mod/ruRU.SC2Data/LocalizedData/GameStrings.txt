@@ -1,4 +1,0 @@
-﻿DocInfo/DescLong=Completely devoid of any description whatsoever.
-DocInfo/DescShort=Any
-DocInfo/Name=[ ZERGTV ] Минералы взамен Газа
-DocInfo/Website=zergtv.tv/gg

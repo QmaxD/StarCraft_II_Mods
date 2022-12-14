@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CGame id="Dflt">
+        <TriggerLibs Id="39D1ECFB"/>
+        <TriggerLibs Id="3A730930"/>
+        <TriggerLibs Id="FE150EF4"/>
+        <TriggerLibs Id="737D3B35"/>
+        <TriggerLibs Id="1F307236"/>
+        <TriggerLibs Id="3BFC9D7F"/>
+        <TriggerLibs Id="0D5719D7"/>
+        <TriggerLibs Id="620365F2"/>
+        <TriggerLibs Id="1F00594A"/>
+        <TriggerLibs Id="A56FBBB5"/>
+        <TriggerLibs Id="CBA2262F"/>
+        <TriggerLibs Id="E019E1BF"/>
+        <TriggerLibs Id="72901696"/>
+        <TriggerLibs Id="DF67D79D"/>
+        <TriggerLibs Id="CC907F2F"/>
+        <TriggerLibs Id="81F0063E"/>
+        <TriggerLibs Id="36280BFF"/>
+        <TriggerLibs Id="0A71E558"/>
+        <TriggerLibs Id="11FC914E"/>
+        <TriggerLibs Id="068B439D"/>
+        <TriggerLibs Id="63FEFBFB"/>
+        <TriggerLibs Id="A47BADE5"/>
+        <TriggerLibs Id="D1B016C7"/>
+        <TriggerLibs Id="CBB3B2AF"/>
+        <TriggerLibs Id="94C369B5"/>
+        <TriggerLibs Id="A97D4977"/>
+        <TriggerLibs Id="FCA5BFB2"/>
+    </CGame>
+</Catalog>

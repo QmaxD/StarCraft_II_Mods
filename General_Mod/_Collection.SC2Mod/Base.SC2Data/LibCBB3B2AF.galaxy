@@ -1,0 +1,21 @@
+include "TriggerLibs/natives"
+
+include "LibCBB3B2AF_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Player Viewing Angle | PVA
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool libCBB3B2AF_InitLib_completed = false;
+
+void libCBB3B2AF_InitLib () {
+    if (libCBB3B2AF_InitLib_completed) {
+        return;
+    }
+
+    libCBB3B2AF_InitLib_completed = true;
+
+}
+

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CSound id="StartTurn">
+        <AssetArray File="Assets\Sounds\Uni\UI\BattleNet_UI\UI_Bnet_GameModeBig.ogg" FacialGroup=""/>
+    </CSound>
+</Catalog>

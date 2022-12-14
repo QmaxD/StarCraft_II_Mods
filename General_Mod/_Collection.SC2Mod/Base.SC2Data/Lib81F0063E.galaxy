@@ -1,0 +1,712 @@
+include "TriggerLibs/NativeLib"
+include "Lib39D1ECFB_h"
+include "Lib36280BFF_h"
+
+include "Lib81F0063E_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: 17 All Upgrades | AU
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void lib81F0063E_InitLibraries () {
+    libNtve_InitVariables();
+    lib39D1ECFB_InitVariables();
+    lib36280BFF_InitVariables();
+}
+
+// Variable Initialization
+bool lib81F0063E_InitVariables_completed = false;
+
+void lib81F0063E_InitVariables () {
+    if (lib81F0063E_InitVariables_completed) {
+        return;
+    }
+
+    lib81F0063E_InitVariables_completed = true;
+
+    lib81F0063E_gv_modInformation.lv_aUOption_1D090D0BFD0B3D180D0B5D0B9D0B4D18BD182D0BED0BBD18CD0BAD0BED0BDD0B0D0B0D182D0B0D0BAD183D0B1D180D0BED0BDD18ED0B8D189D0B8D182D18B = "Апгрейды только на атаку, броню и щиты";
+    lib81F0063E_gv_modInformation.lv_aUOption_1D092D181D0B5D0B0D0BFD0B3D180D0B5D0B9D0B4D18BD180D0B0D181D18BD0B8D0B3D180D0BED0BAD0B0 = "Все апгрейды расы игрока";
+    lib81F0063E_gv_modInformation.lv_aUOption_2D090D0BFD0B3D180D0B5D0B9D0B4D18B1D0B3D0BED183D180D0BED0B2D0BDD18F = "Апгрейды 1-го уровня";
+    lib81F0063E_gv_modInformation.lv_aUOption_2D090D0BFD0B3D180D0B5D0B9D0B4D18B2D0B3D0BED183D180D0BED0B2D0BDD18F = "Апгрейды 2-го уровня";
+    lib81F0063E_gv_modInformation.lv_aUOption_2D090D0BFD0B3D180D0B5D0B9D0B4D18B3D0B3D0BED183D180D0BED0B2D0BDD18F = "Апгрейды 3-го уровня";
+    lib81F0063E_gv_modInformation.lv_aUOption_3D094D0B0 = "Да";
+    lib81F0063E_gv_modInformation.lv_aUOption_3D09DD0B5D182 = "Нет";
+}
+
+// Functions
+void lib81F0063E_gf_SetupInformation (int lp_modIndex) {
+    // Variable Declarations
+    int lv__optionIndex;
+    int lv__optionValueIndex;
+    int lv__default_Option_1;
+    int lv__default_Option_2;
+    int lv__default_Option_3;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv__default_Option_1 = 2;
+    lv__default_Option_2 = 3;
+    lv__default_Option_3 = 2;
+
+    // Implementation
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_name = StringExternal("Param/Value/lib_81F0063E_7506383D");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_fullName = StringExternal("Param/Value/lib_81F0063E_9D684CD8");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_description = StringExternal("Param/Value/lib_81F0063E_05E12F14");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_icon_Path = "Assets\\Textures\\btn-upgrade-nova-tacticalstealthsuit.dds";
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_is_Included = true;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_saturation = 1;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_81F0063E_5251B65E");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_81F0063E_49BDB0D1");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib81F0063E_gv_modInformation.lv_aUOption_1D090D0BFD0B3D180D0B5D0B9D0B4D18BD182D0BED0BBD18CD0BAD0BED0BDD0B0D0B0D182D0B0D0BAD183D0B1D180D0BED0BDD18ED0B8D189D0B8D182D18B;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_81F0063E_FCBC0647");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib81F0063E_gv_modInformation.lv_aUOption_1D092D181D0B5D0B0D0BFD0B3D180D0B5D0B9D0B4D18BD180D0B0D181D18BD0B8D0B3D180D0BED0BAD0B0;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_81F0063E_39049B22");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_1].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_81F0063E_894D2066");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_81F0063E_8528590D");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib81F0063E_gv_modInformation.lv_aUOption_2D090D0BFD0B3D180D0B5D0B9D0B4D18B1D0B3D0BED183D180D0BED0B2D0BDD18F;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_81F0063E_CF34DE9D");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib81F0063E_gv_modInformation.lv_aUOption_2D090D0BFD0B3D180D0B5D0B9D0B4D18B2D0B3D0BED183D180D0BED0B2D0BDD18F;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_81F0063E_F046C9C1");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib81F0063E_gv_modInformation.lv_aUOption_2D090D0BFD0B3D180D0B5D0B9D0B4D18B3D0B3D0BED183D180D0BED0B2D0BDD18F;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_81F0063E_A65B3C15");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_2;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_2].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_81F0063E_0F6F56CC");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_81F0063E_9CF7E891");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib81F0063E_gv_modInformation.lv_aUOption_3D094D0B0;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_81F0063E_D5DC5BA0");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib81F0063E_gv_modInformation.lv_aUOption_3D09DD0B5D182;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_81F0063E_341A16E5");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_3;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_3].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_number_Game_Options = lv__optionIndex;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_start_Trigger = lib81F0063E_gt_Launch;
+}
+
+void lib81F0063E_gf_GetOptions () {
+    // Automatic Variable Declarations
+    string auto2F75CC88_val;
+    unitgroup auto46B7ECFD_g;
+    int auto46B7ECFD_u;
+    unit auto46B7ECFD_var;
+
+    // Implementation
+    if ((lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[1].lv_values[0].lv_valueString == lib81F0063E_gv_modInformation.lv_aUOption_1D092D181D0B5D0B0D0BFD0B3D180D0B5D0B9D0B4D18BD180D0B0D181D18BD0B8D0B3D180D0BED0BAD0B0)) {
+        lib81F0063E_gv_aUis_SetupAllUpgrades = true;
+    }
+
+    auto2F75CC88_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[2].lv_values[0].lv_valueString;
+    if (auto2F75CC88_val == lib81F0063E_gv_modInformation.lv_aUOption_2D090D0BFD0B3D180D0B5D0B9D0B4D18B1D0B3D0BED183D180D0BED0B2D0BDD18F) {
+        lib81F0063E_gv_aULevelOfBasicUpgrades = 1;
+    }
+    else if (auto2F75CC88_val == lib81F0063E_gv_modInformation.lv_aUOption_2D090D0BFD0B3D180D0B5D0B9D0B4D18B2D0B3D0BED183D180D0BED0B2D0BDD18F) {
+        lib81F0063E_gv_aULevelOfBasicUpgrades = 2;
+    }
+    else if (auto2F75CC88_val == lib81F0063E_gv_modInformation.lv_aUOption_2D090D0BFD0B3D180D0B5D0B9D0B4D18B3D0B3D0BED183D180D0BED0B2D0BDD18F) {
+        lib81F0063E_gv_aULevelOfBasicUpgrades = 3;
+    }
+    else {
+    }
+    if ((lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[3].lv_values[0].lv_valueString == lib81F0063E_gv_modInformation.lv_aUOption_3D094D0B0)) {
+        lib81F0063E_gv_aUis_SetMaxUnitEnergy = true;
+        auto46B7ECFD_g = UnitGroup("Nexus", c_playerAny, RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterNeutral) | (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+        auto46B7ECFD_u = UnitGroupCount(auto46B7ECFD_g, c_unitCountAll);
+        for (;; auto46B7ECFD_u -= 1) {
+            auto46B7ECFD_var = UnitGroupUnitFromEnd(auto46B7ECFD_g, auto46B7ECFD_u);
+            if (auto46B7ECFD_var == null) { break; }
+            UnitSetPropertyFixed(auto46B7ECFD_var, c_unitPropEnergyPercent, 100.0);
+        }
+    }
+
+}
+
+void lib81F0063E_gf_TriggersTurnOn () {
+    // Automatic Variable Declarations
+    // Implementation
+    TriggerEnable(lib81F0063E_gt_AUSetMaxEnergy, true);
+}
+
+void lib81F0063E_gf_AUGetInfoForPlayer () {
+    // Variable Declarations
+    text lv__description;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Implementation
+    lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = StringExternal("Param/Value/lib_81F0063E_BAFC9D08");
+    TextExpressionSetToken("Param/Expression/lib_81F0063E_377C1F44", "LevelUpgrade", IntToText(lib81F0063E_gv_aULevelOfBasicUpgrades));
+    lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = (lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description + TextExpressionAssemble("Param/Expression/lib_81F0063E_377C1F44"));
+    if ((lib81F0063E_gv_aUis_SetupAllUpgrades == true)) {
+        lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = (lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description + StringExternal("Param/Value/lib_81F0063E_395489DA"));
+    }
+
+    if ((lib81F0063E_gv_aUis_SetMaxUnitEnergy == true)) {
+        lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = (lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description + StringExternal("Param/Value/lib_81F0063E_25BA5EE0"));
+    }
+
+    lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat = StringToText("");
+}
+
+void lib81F0063E_gf_AUWriteUpgrades () {
+    // Variable Declarations
+    int lv__countAllUpgades;
+    int lv__countProtossUpgades;
+    int lv__countTerranUpgades;
+    int lv__countZergUpgades;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv__countAllUpgades = 1;
+    lv__countProtossUpgades = 1;
+    lv__countTerranUpgades = 1;
+    lv__countZergUpgades = 1;
+
+    // Implementation
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("WarpGateResearch");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[1][lv__countProtossUpgades] = ("WarpGateResearch");
+    lv__countProtossUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("Charge");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[1][lv__countProtossUpgades] = ("Charge");
+    lv__countProtossUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("BlinkTech");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[1][lv__countProtossUpgades] = ("BlinkTech");
+    lv__countProtossUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("AdeptPiercingAttack");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[1][lv__countProtossUpgades] = ("AdeptPiercingAttack");
+    lv__countProtossUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("PsiStormTech");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[1][lv__countProtossUpgades] = ("PsiStormTech");
+    lv__countProtossUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("DarkTemplarBlinkUpgrade");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[1][lv__countProtossUpgades] = ("DarkTemplarBlinkUpgrade");
+    lv__countProtossUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("ObserverGraviticBooster");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[1][lv__countProtossUpgades] = ("ObserverGraviticBooster");
+    lv__countProtossUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("GraviticDrive");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[1][lv__countProtossUpgades] = ("GraviticDrive");
+    lv__countProtossUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("ExtendedThermalLance");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[1][lv__countProtossUpgades] = ("ExtendedThermalLance");
+    lv__countProtossUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("PhoenixRangeUpgrade");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[1][lv__countProtossUpgades] = ("PhoenixRangeUpgrade");
+    lv__countProtossUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("VoidRaySpeedUpgrade");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[1][lv__countProtossUpgades] = ("VoidRaySpeedUpgrade");
+    lv__countProtossUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("TempestGroundAttackUpgrade");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[1][lv__countProtossUpgades] = ("TempestGroundAttackUpgrade");
+    lv__countProtossUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("ShieldWall");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__countTerranUpgades] = ("ShieldWall");
+    lv__countTerranUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("Stimpack");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__countTerranUpgades] = ("Stimpack");
+    lv__countTerranUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("PunisherGrenades");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__countTerranUpgades] = ("PunisherGrenades");
+    lv__countTerranUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("EnhancedShockwaves");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__countTerranUpgades] = ("EnhancedShockwaves");
+    lv__countTerranUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("PersonalCloaking");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__countTerranUpgades] = ("PersonalCloaking");
+    lv__countTerranUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("HighCapacityBarrels");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__countTerranUpgades] = ("HighCapacityBarrels");
+    lv__countTerranUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("CycloneLockOnDamageUpgrade");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__countTerranUpgades] = ("CycloneLockOnDamageUpgrade");
+    lv__countTerranUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("DrillClaws");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__countTerranUpgades] = ("DrillClaws");
+    lv__countTerranUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("SmartServos");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__countTerranUpgades] = ("SmartServos");
+    lv__countTerranUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("RavenCorvidReactor");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__countTerranUpgades] = ("RavenCorvidReactor");
+    lv__countTerranUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("BansheeCloak");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__countTerranUpgades] = ("BansheeCloak");
+    lv__countTerranUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("BansheeSpeed");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__countTerranUpgades] = ("BansheeSpeed");
+    lv__countTerranUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("BattlecruiserEnableSpecializations");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__countTerranUpgades] = ("BattlecruiserEnableSpecializations");
+    lv__countTerranUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("MedivacIncreaseSpeedBoost");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__countTerranUpgades] = ("MedivacIncreaseSpeedBoost");
+    lv__countTerranUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("LiberatorAGRangeUpgrade");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__countTerranUpgades] = ("LiberatorAGRangeUpgrade");
+    lv__countTerranUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("HiSecAutoTracking");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__countTerranUpgades] = ("HiSecAutoTracking");
+    lv__countTerranUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("TerranBuildingArmor");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__countTerranUpgades] = ("TerranBuildingArmor");
+    lv__countTerranUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("zerglingmovementspeed");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[3][lv__countZergUpgades] = ("zerglingmovementspeed");
+    lv__countZergUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("zerglingattackspeed");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[3][lv__countZergUpgades] = ("zerglingattackspeed");
+    lv__countZergUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("CentrificalHooks");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[3][lv__countZergUpgades] = ("CentrificalHooks");
+    lv__countZergUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("GlialReconstitution");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[3][lv__countZergUpgades] = ("GlialReconstitution");
+    lv__countZergUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("TunnelingClaws");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[3][lv__countZergUpgades] = ("TunnelingClaws");
+    lv__countZergUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("overlordspeed");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[3][lv__countZergUpgades] = ("overlordspeed");
+    lv__countZergUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("Burrow");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[3][lv__countZergUpgades] = ("Burrow");
+    lv__countZergUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("EvolveGroovedSpines");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[3][lv__countZergUpgades] = ("EvolveGroovedSpines");
+    lv__countZergUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("EvolveMuscularAugments");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[3][lv__countZergUpgades] = ("EvolveMuscularAugments");
+    lv__countZergUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("DiggingClaws");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[3][lv__countZergUpgades] = ("DiggingClaws");
+    lv__countZergUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("LurkerRange");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[3][lv__countZergUpgades] = ("LurkerRange");
+    lv__countZergUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("InfestorEnergyUpgrade");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[3][lv__countZergUpgades] = ("InfestorEnergyUpgrade");
+    lv__countZergUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("NeuralParasite");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[3][lv__countZergUpgades] = ("NeuralParasite");
+    lv__countZergUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("ChitinousPlating");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[3][lv__countZergUpgades] = ("ChitinousPlating");
+    lv__countZergUpgades += 1;
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("AnabolicSynthesis");
+    lv__countAllUpgades += 1;
+    lib81F0063E_gv_aUupgradesArrayOfRace[3][lv__countZergUpgades] = ("AnabolicSynthesis");
+    lv__countZergUpgades += 1;
+    lv__countAllUpgades -= 1;
+    lv__countProtossUpgades -= 1;
+    lv__countTerranUpgades -= 1;
+    lv__countZergUpgades -= 1;
+    if (((lib81F0063E_gv_aUupgradesAmount == lv__countAllUpgades) && (lib81F0063E_gv_aUprotossUpgradesAmount == lv__countProtossUpgades) && (lib81F0063E_gv_aUterranUpgradesAmount == lv__countTerranUpgades) && (lib81F0063E_gv_aUzergUpgradesAmount == lv__countZergUpgades) && (lv__countAllUpgades == (lv__countProtossUpgades + lv__countTerranUpgades + lv__countZergUpgades)))) {
+    }
+    else {
+        TextExpressionSetToken("Param/Expression/lib_81F0063E_89FCD69A", "_countUpgrades", IntToText(lv__countAllUpgades));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, TextExpressionAssemble("Param/Expression/lib_81F0063E_89FCD69A"));
+        TextExpressionSetToken("Param/Expression/lib_81F0063E_4EE9EA8F", "_countUpgrades", IntToText(lv__countAllUpgades));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, TextExpressionAssemble("Param/Expression/lib_81F0063E_4EE9EA8F"));
+        TextExpressionSetToken("Param/Expression/lib_81F0063E_B1FCEFED", "_countUpgrades", IntToText(lv__countAllUpgades));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, TextExpressionAssemble("Param/Expression/lib_81F0063E_B1FCEFED"));
+        TextExpressionSetToken("Param/Expression/lib_81F0063E_83BD9038", "_countUpgrades", IntToText(lv__countAllUpgades));
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, TextExpressionAssemble("Param/Expression/lib_81F0063E_83BD9038"));
+    }
+}
+
+void lib81F0063E_gf_AUSetUpgrades () {
+    // Variable Declarations
+    int lv__number_Player;
+
+    // Automatic Variable Declarations
+    playergroup auto8A8B185B_g;
+
+    // Variable Initialization
+
+    // Implementation
+    auto8A8B185B_g = lib36280BFF_gv_commonplayers_Active_Group;
+    lv__number_Player = -1;
+    while (true) {
+        lv__number_Player = PlayerGroupNextPlayer(auto8A8B185B_g, lv__number_Player);
+        if (lv__number_Player < 0) { break; }
+        lib81F0063E_gf_AUAllowAddBasicUpgrades(lv__number_Player);
+        if ((lib81F0063E_gv_aUis_SetupAllUpgrades == true)) {
+            lib81F0063E_gf_AUAllowAddExtraUpgrades(lv__number_Player);
+        }
+
+    }
+}
+
+void lib81F0063E_gf_AUAllowAddBasicUpgrades (int lp_numberPlayer) {
+    // Variable Declarations
+    int lv__levelUpgrade;
+
+    // Automatic Variable Declarations
+    string auto54B0EEA7_val;
+    int autoCF0FACA3_ae;
+    const int autoCF0FACA3_ai = 1;
+    int auto967D220A_val;
+    int auto7E1CF5DB_ae;
+    const int auto7E1CF5DB_ai = 1;
+    int auto0A6D1EB2_val;
+    int autoE9C25B23_ae;
+    const int autoE9C25B23_ai = 1;
+    int autoE4BAEE54_val;
+
+    // Variable Initialization
+
+    // Implementation
+    auto54B0EEA7_val = PlayerRace(lp_numberPlayer);
+    if (auto54B0EEA7_val == "Prot") {
+        autoCF0FACA3_ae = lib81F0063E_gv_aULevelOfBasicUpgrades;
+        lv__levelUpgrade = 1;
+        for ( ; ( (autoCF0FACA3_ai >= 0 && lv__levelUpgrade <= autoCF0FACA3_ae) || (autoCF0FACA3_ai < 0 && lv__levelUpgrade >= autoCF0FACA3_ae) ) ; lv__levelUpgrade += autoCF0FACA3_ai ) {
+            auto967D220A_val = lv__levelUpgrade;
+            if (auto967D220A_val == 1) {
+                TechTreeUpgradeAllow(lp_numberPlayer, "ProtossGroundWeaponsLevel1", true);
+                TechTreeUpgradeAllow(lp_numberPlayer, "ProtossAirWeaponsLevel1", true);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "ProtossGroundWeaponsLevel1", 1);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "ProtossAirWeaponsLevel1", 1);
+                TechTreeUpgradeAllow(lp_numberPlayer, "ProtossGroundArmorsLevel1", true);
+                TechTreeUpgradeAllow(lp_numberPlayer, "ProtossAirArmorsLevel1", true);
+                TechTreeUpgradeAllow(lp_numberPlayer, "ProtossShieldsLevel1", true);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "ProtossGroundArmorsLevel1", 1);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "ProtossAirArmorsLevel1", 1);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "ProtossShieldsLevel1", 1);
+            }
+            else if (auto967D220A_val == 2) {
+                TechTreeUpgradeAllow(lp_numberPlayer, "ProtossGroundWeaponsLevel2", true);
+                TechTreeUpgradeAllow(lp_numberPlayer, "ProtossAirWeaponsLevel2", true);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "ProtossGroundWeaponsLevel2", 1);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "ProtossAirWeaponsLevel2", 1);
+                TechTreeUpgradeAllow(lp_numberPlayer, "ProtossGroundArmorsLevel2", true);
+                TechTreeUpgradeAllow(lp_numberPlayer, "ProtossAirArmorsLevel2", true);
+                TechTreeUpgradeAllow(lp_numberPlayer, "ProtossShieldsLevel2", true);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "ProtossGroundArmorsLevel2", 1);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "ProtossAirArmorsLevel2", 1);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "ProtossShieldsLevel2", 1);
+            }
+            else if (auto967D220A_val == 3) {
+                TechTreeUpgradeAllow(lp_numberPlayer, "ProtossGroundWeaponsLevel3", true);
+                TechTreeUpgradeAllow(lp_numberPlayer, "ProtossAirWeaponsLevel3", true);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "ProtossGroundWeaponsLevel3", 1);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "ProtossAirWeaponsLevel3", 1);
+                TechTreeUpgradeAllow(lp_numberPlayer, "ProtossGroundArmorsLevel3", true);
+                TechTreeUpgradeAllow(lp_numberPlayer, "ProtossAirArmorsLevel3", true);
+                TechTreeUpgradeAllow(lp_numberPlayer, "ProtossShieldsLevel3", true);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "ProtossGroundArmorsLevel3", 1);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "ProtossAirArmorsLevel3", 1);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "ProtossShieldsLevel3", 1);
+            }
+            else {
+            }
+        }
+    }
+    else if (auto54B0EEA7_val == "Terr") {
+        auto7E1CF5DB_ae = lib81F0063E_gv_aULevelOfBasicUpgrades;
+        lv__levelUpgrade = 1;
+        for ( ; ( (auto7E1CF5DB_ai >= 0 && lv__levelUpgrade <= auto7E1CF5DB_ae) || (auto7E1CF5DB_ai < 0 && lv__levelUpgrade >= auto7E1CF5DB_ae) ) ; lv__levelUpgrade += auto7E1CF5DB_ai ) {
+            auto0A6D1EB2_val = lv__levelUpgrade;
+            if (auto0A6D1EB2_val == 1) {
+                TechTreeUpgradeAllow(lp_numberPlayer, "TerranInfantryWeaponsLevel1", true);
+                TechTreeUpgradeAllow(lp_numberPlayer, "TerranVehicleWeaponsLevel1", true);
+                TechTreeUpgradeAllow(lp_numberPlayer, "TerranShipWeaponsLevel1", true);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "TerranInfantryWeaponsLevel1", 1);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "TerranVehicleWeaponsLevel1", 1);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "TerranShipWeaponsLevel1", 1);
+                TechTreeUpgradeAllow(lp_numberPlayer, "TerranInfantryArmorsLevel1", true);
+                TechTreeUpgradeAllow(lp_numberPlayer, "TerranVehicleAndShipArmorsLevel1", true);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "TerranInfantryArmorsLevel1", 1);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "TerranVehicleAndShipArmorsLevel1", 1);
+            }
+            else if (auto0A6D1EB2_val == 2) {
+                TechTreeUpgradeAllow(lp_numberPlayer, "TerranInfantryWeaponsLevel2", true);
+                TechTreeUpgradeAllow(lp_numberPlayer, "TerranVehicleWeaponsLevel2", true);
+                TechTreeUpgradeAllow(lp_numberPlayer, "TerranShipWeaponsLevel2", true);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "TerranInfantryWeaponsLevel2", 1);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "TerranVehicleWeaponsLevel2", 1);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "TerranShipWeaponsLevel2", 1);
+                TechTreeUpgradeAllow(lp_numberPlayer, "TerranInfantryArmorsLevel2", true);
+                TechTreeUpgradeAllow(lp_numberPlayer, "TerranVehicleAndShipArmorsLevel2", true);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "TerranInfantryArmorsLevel2", 1);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "TerranVehicleAndShipArmorsLevel2", 1);
+            }
+            else if (auto0A6D1EB2_val == 3) {
+                TechTreeUpgradeAllow(lp_numberPlayer, "TerranInfantryWeaponsLevel3", true);
+                TechTreeUpgradeAllow(lp_numberPlayer, "TerranVehicleWeaponsLevel3", true);
+                TechTreeUpgradeAllow(lp_numberPlayer, "TerranShipWeaponsLevel3", true);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "TerranInfantryWeaponsLevel3", 1);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "TerranVehicleWeaponsLevel3", 1);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "TerranShipWeaponsLevel3", 1);
+                TechTreeUpgradeAllow(lp_numberPlayer, "TerranInfantryArmorsLevel3", true);
+                TechTreeUpgradeAllow(lp_numberPlayer, "TerranVehicleAndShipArmorsLevel3", true);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "TerranInfantryArmorsLevel3", 1);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "TerranVehicleAndShipArmorsLevel3", 1);
+            }
+            else {
+            }
+        }
+    }
+    else if (auto54B0EEA7_val == "Zerg") {
+        autoE9C25B23_ae = lib81F0063E_gv_aULevelOfBasicUpgrades;
+        lv__levelUpgrade = 1;
+        for ( ; ( (autoE9C25B23_ai >= 0 && lv__levelUpgrade <= autoE9C25B23_ae) || (autoE9C25B23_ai < 0 && lv__levelUpgrade >= autoE9C25B23_ae) ) ; lv__levelUpgrade += autoE9C25B23_ai ) {
+            autoE4BAEE54_val = lv__levelUpgrade;
+            if (autoE4BAEE54_val == 1) {
+                TechTreeUpgradeAllow(lp_numberPlayer, "ZergMeleeWeaponsLevel1", true);
+                TechTreeUpgradeAllow(lp_numberPlayer, "ZergMissileWeaponsLevel1", true);
+                TechTreeUpgradeAllow(lp_numberPlayer, "ZergFlyerWeaponsLevel1", true);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "ZergMeleeWeaponsLevel1", 1);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "ZergMissileWeaponsLevel1", 1);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "ZergFlyerWeaponsLevel1", 1);
+                TechTreeUpgradeAllow(lp_numberPlayer, "ZergGroundArmorsLevel1", true);
+                TechTreeUpgradeAllow(lp_numberPlayer, "ZergFlyerArmorsLevel1", true);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "ZergGroundArmorsLevel1", 1);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "ZergFlyerArmorsLevel1", 1);
+            }
+            else if (autoE4BAEE54_val == 2) {
+                TechTreeUpgradeAllow(lp_numberPlayer, "ZergMeleeWeaponsLevel2", true);
+                TechTreeUpgradeAllow(lp_numberPlayer, "ZergMissileWeaponsLevel2", true);
+                TechTreeUpgradeAllow(lp_numberPlayer, "ZergFlyerWeaponsLevel2", true);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "ZergMeleeWeaponsLevel2", 1);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "ZergMissileWeaponsLevel2", 1);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "ZergFlyerWeaponsLevel2", 1);
+                TechTreeUpgradeAllow(lp_numberPlayer, "ZergGroundArmorsLevel2", true);
+                TechTreeUpgradeAllow(lp_numberPlayer, "ZergFlyerArmorsLevel2", true);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "ZergGroundArmorsLevel2", 1);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "ZergFlyerArmorsLevel2", 1);
+            }
+            else if (autoE4BAEE54_val == 3) {
+                TechTreeUpgradeAllow(lp_numberPlayer, "ZergMeleeWeaponsLevel3", true);
+                TechTreeUpgradeAllow(lp_numberPlayer, "ZergMissileWeaponsLevel3", true);
+                TechTreeUpgradeAllow(lp_numberPlayer, "ZergFlyerWeaponsLevel3", true);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "ZergMeleeWeaponsLevel3", 1);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "ZergMissileWeaponsLevel3", 1);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "ZergFlyerWeaponsLevel3", 1);
+                TechTreeUpgradeAllow(lp_numberPlayer, "ZergGroundArmorsLevel3", true);
+                TechTreeUpgradeAllow(lp_numberPlayer, "ZergFlyerArmorsLevel3", true);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "ZergGroundArmorsLevel3", 1);
+                TechTreeUpgradeAddLevel(lp_numberPlayer, "ZergFlyerArmorsLevel3", 1);
+            }
+            else {
+            }
+        }
+    }
+    else {
+    }
+}
+
+trigger auto_lib81F0063E_gf_AUAllowAddExtraUpgrades_Trigger = null;
+int auto_lib81F0063E_gf_AUAllowAddExtraUpgrades_lp_numberPlayer;
+
+void lib81F0063E_gf_AUAllowAddExtraUpgrades (int lp_numberPlayer) {
+    auto_lib81F0063E_gf_AUAllowAddExtraUpgrades_lp_numberPlayer = lp_numberPlayer;
+
+    if (auto_lib81F0063E_gf_AUAllowAddExtraUpgrades_Trigger == null) {
+        auto_lib81F0063E_gf_AUAllowAddExtraUpgrades_Trigger = TriggerCreate("auto_lib81F0063E_gf_AUAllowAddExtraUpgrades_TriggerFunc");
+    }
+
+    TriggerExecute(auto_lib81F0063E_gf_AUAllowAddExtraUpgrades_Trigger, false, false);
+}
+
+bool auto_lib81F0063E_gf_AUAllowAddExtraUpgrades_TriggerFunc (bool testConds, bool runActions) {
+    int lp_numberPlayer = auto_lib81F0063E_gf_AUAllowAddExtraUpgrades_lp_numberPlayer;
+
+    // Variable Declarations
+    int lv__upgradeNumber;
+
+    // Automatic Variable Declarations
+    string auto86EF343C_val;
+    const int autoD4B35EA9_ae = lib81F0063E_gv_aUprotossUpgradesAmount;
+    const int autoD4B35EA9_ai = 1;
+    const int auto6566472A_ae = lib81F0063E_gv_aUterranUpgradesAmount;
+    const int auto6566472A_ai = 1;
+    const int autoC769C87D_ae = lib81F0063E_gv_aUzergUpgradesAmount;
+    const int autoC769C87D_ai = 1;
+
+    // Variable Initialization
+
+    // Implementation
+    auto86EF343C_val = PlayerRace(lp_numberPlayer);
+    if (auto86EF343C_val == "Prot") {
+        lv__upgradeNumber = 1;
+        for ( ; ( (autoD4B35EA9_ai >= 0 && lv__upgradeNumber <= autoD4B35EA9_ae) || (autoD4B35EA9_ai < 0 && lv__upgradeNumber >= autoD4B35EA9_ae) ) ; lv__upgradeNumber += autoD4B35EA9_ai ) {
+            TechTreeUpgradeAllow(lp_numberPlayer, lib81F0063E_gv_aUupgradesArrayOfRace[1][lv__upgradeNumber], true);
+            TechTreeUpgradeAddLevel(lp_numberPlayer, lib81F0063E_gv_aUupgradesArrayOfRace[1][lv__upgradeNumber], 1);
+        }
+    }
+    else if (auto86EF343C_val == "Terr") {
+        lv__upgradeNumber = 1;
+        for ( ; ( (auto6566472A_ai >= 0 && lv__upgradeNumber <= auto6566472A_ae) || (auto6566472A_ai < 0 && lv__upgradeNumber >= auto6566472A_ae) ) ; lv__upgradeNumber += auto6566472A_ai ) {
+            TechTreeUpgradeAllow(lp_numberPlayer, lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__upgradeNumber], true);
+            TechTreeUpgradeAddLevel(lp_numberPlayer, lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__upgradeNumber], 1);
+        }
+    }
+    else if (auto86EF343C_val == "Zerg") {
+        lv__upgradeNumber = 1;
+        for ( ; ( (autoC769C87D_ai >= 0 && lv__upgradeNumber <= autoC769C87D_ae) || (autoC769C87D_ai < 0 && lv__upgradeNumber >= autoC769C87D_ae) ) ; lv__upgradeNumber += autoC769C87D_ai ) {
+            TechTreeUpgradeAllow(lp_numberPlayer, lib81F0063E_gv_aUupgradesArrayOfRace[3][lv__upgradeNumber], true);
+            TechTreeUpgradeAddLevel(lp_numberPlayer, lib81F0063E_gv_aUupgradesArrayOfRace[3][lv__upgradeNumber], 1);
+        }
+    }
+    else {
+    }
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, TextExpressionAssemble("Param/Expression/lib_81F0063E_2DCA9678"));
+    return true;
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: Launch
+//--------------------------------------------------------------------------------------------------
+bool lib81F0063E_gt_Launch_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lib81F0063E_gf_AUWriteUpgrades();
+    lib81F0063E_gf_GetOptions();
+    lib81F0063E_gf_AUSetUpgrades();
+    lib81F0063E_gf_AUGetInfoForPlayer();
+    TextExpressionSetToken("Param/Expression/lib_81F0063E_459B066F", "FulName", lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_fullName);
+    HelpPanelAddTip(PlayerGroupAll(), libNtve_gf_FormatTipTitle(TextExpressionAssemble("Param/Expression/lib_81F0063E_459B066F"), libNtve_ge_TipType_NormalTip), lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_name, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_icon_Path);
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat);
+    lib81F0063E_gf_TriggersTurnOn();
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib81F0063E_gt_Launch_Init () {
+    lib81F0063E_gt_Launch = TriggerCreate("lib81F0063E_gt_Launch_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: AU | SetMaxEnergy
+//--------------------------------------------------------------------------------------------------
+bool lib81F0063E_gt_AUSetMaxEnergy_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv__unitType;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv__unitType = UnitGetType(EventUnit());
+
+    // Conditions
+    if (testConds) {
+        if (!((lib81F0063E_gv_aUis_SetMaxUnitEnergy == true))) {
+            return false;
+        }
+
+        if (!((lib36280BFF_gf_Commonis_UnitOwnerActivePlayer(EventUnit()) == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((lib36280BFF_gf_Commonis_UnitType_Have_Energy(lv__unitType) == true)) {
+        UnitSetPropertyFixed(EventUnit(), c_unitPropEnergyPercent, 100.0);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib81F0063E_gt_AUSetMaxEnergy_Init () {
+    lib81F0063E_gt_AUSetMaxEnergy = TriggerCreate("lib81F0063E_gt_AUSetMaxEnergy_Func");
+    TriggerEnable(lib81F0063E_gt_AUSetMaxEnergy, false);
+    TriggerAddEventUnitRegion(lib81F0063E_gt_AUSetMaxEnergy, null, RegionEntireMap(), true);
+    TriggerAddEventUnitAbility(lib81F0063E_gt_AUSetMaxEnergy, null, AbilityCommand("MorphToOverseer", 0), c_abilMorphStageAbilsEnd, false);
+}
+
+void lib81F0063E_InitTriggers () {
+    lib81F0063E_gt_Launch_Init();
+    lib81F0063E_gt_AUSetMaxEnergy_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool lib81F0063E_InitLib_completed = false;
+
+void lib81F0063E_InitLib () {
+    if (lib81F0063E_InitLib_completed) {
+        return;
+    }
+
+    lib81F0063E_InitLib_completed = true;
+
+    lib81F0063E_InitLibraries();
+    lib81F0063E_InitVariables();
+    lib81F0063E_InitTriggers();
+}
+
+include "Lib39D1ECFB"
+include "Lib36280BFF"
+

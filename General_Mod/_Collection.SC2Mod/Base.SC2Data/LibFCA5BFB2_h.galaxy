@@ -1,0 +1,25 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Example
+//--------------------------------------------------------------------------------------------------
+// Structures
+struct libFCA5BFB2_gs_Information {
+    string lv_exampleOption_1;
+};
+
+// Variable Declarations
+libFCA5BFB2_gs_Information libFCA5BFB2_gv_modInformation;
+
+// Function Declarations
+void libFCA5BFB2_gf_SetupInformation (int lp_modIndex);
+void libFCA5BFB2_gf_TriggersTurnOn ();
+void libFCA5BFB2_gf_GetOptions ();
+void libFCA5BFB2_gf_GetInfoForPlayer ();
+
+// Trigger Declarations
+trigger libFCA5BFB2_gt_Launch;
+
+// Library Initialization
+void libFCA5BFB2_InitVariables ();
+

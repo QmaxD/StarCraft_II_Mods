@@ -1,0 +1,99 @@
+include "TriggerLibs/NativeLib"
+include "Lib39D1ECFB_h"
+include "Lib3A730930_h"
+
+include "LibFE150EF4_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: ++11 Nukes | NN
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void libFE150EF4_InitLibraries () {
+    libNtve_InitVariables();
+    lib39D1ECFB_InitVariables();
+    lib3A730930_InitVariables();
+}
+
+// Variable Initialization
+bool libFE150EF4_InitVariables_completed = false;
+
+void libFE150EF4_InitVariables () {
+    if (libFE150EF4_InitVariables_completed) {
+        return;
+    }
+
+    libFE150EF4_InitVariables_completed = true;
+
+    libFE150EF4_gv_modInformation.lv_gSOption_1 = "";
+}
+
+// Functions
+void libFE150EF4_gf_SetupInformation (int lp_modIndex) {
+    // Automatic Variable Declarations
+    // Implementation
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_name = StringExternal("Param/Value/lib_FE150EF4_160E91E8");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_fullName = StringExternal("Param/Value/lib_FE150EF4_AC03C84C");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_description = StringExternal("Param/Value/lib_FE150EF4_D76A01AB");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_icon_Path = "Assets\\Textures\\btn-progression-hornerhan-14-nukefortelefrag.dds";
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_is_Included = false;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_saturation = 2;
+}
+
+void libFE150EF4_gf_GetOptions () {
+    // Automatic Variable Declarations
+}
+
+void libFE150EF4_gf_TriggersTurnOn () {
+    // Automatic Variable Declarations
+    // Implementation
+    TriggerEnable(lib3A730930_gt_UntitledTrigger002, true);
+}
+
+void libFE150EF4_gf_GetInfoForPlayer () {
+    // Automatic Variable Declarations
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: Launch
+//--------------------------------------------------------------------------------------------------
+bool libFE150EF4_gt_Launch_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libFE150EF4_gf_TriggersTurnOn();
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFE150EF4_gt_Launch_Init () {
+    libFE150EF4_gt_Launch = TriggerCreate("libFE150EF4_gt_Launch_Func");
+}
+
+void libFE150EF4_InitTriggers () {
+    libFE150EF4_gt_Launch_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool libFE150EF4_InitLib_completed = false;
+
+void libFE150EF4_InitLib () {
+    if (libFE150EF4_InitLib_completed) {
+        return;
+    }
+
+    libFE150EF4_InitLib_completed = true;
+
+    libFE150EF4_InitLibraries();
+    libFE150EF4_InitVariables();
+    libFE150EF4_InitTriggers();
+}
+
+include "Lib39D1ECFB"
+include "Lib3A730930"
+

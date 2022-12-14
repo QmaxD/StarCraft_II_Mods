@@ -1,0 +1,54 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: 06 Units get stronger from kills | UBK
+//--------------------------------------------------------------------------------------------------
+// Constants
+const fixed lib1F307236_gv_uBKindexZerg = 0.9;
+const fixed lib1F307236_gv_uBKindexTerran = 1.0;
+const fixed lib1F307236_gv_uBKindexProtoss = 1.1;
+
+// Structures
+struct lib1F307236_gs_Information {
+    string lv_uBKOption_1D18540;
+    string lv_uBKOption_1D18520;
+    string lv_uBKOption_1D18510;
+    string lv_uBKOption_1D1855;
+    string lv_uBKOption_2D094D0B0;
+    string lv_uBKOption_2D09DD0B5D182;
+    string lv_uBKOption_3D094D0B0;
+    string lv_uBKOption_3D09DD0B5D182;
+    string lv_uBKOption_4D094D0B0;
+    string lv_uBKOption_4D09DD0B5D182;
+};
+
+// Variable Declarations
+lib1F307236_gs_Information lib1F307236_gv_modInformation;
+bool lib1F307236_gv_uBKis_RiseUnitLevel;
+int lib1F307236_gv_uBKkillBuff;
+fixed lib1F307236_gv_uBKdataBonus;
+bool lib1F307236_gv_uBKis_ResizeUnit;
+bool lib1F307236_gv_uBKis_DependingOnRace;
+bool lib1F307236_gv_uBKis_DependingFromTheirUnit;
+
+// Function Declarations
+void lib1F307236_gf_SetupInformation (int lp_modIndex);
+void lib1F307236_gf_GetOptions ();
+void lib1F307236_gf_TriggersTurnOn ();
+void lib1F307236_gf_UBKGetInfoForPlayer ();
+fixed lib1F307236_gf_UBKmaxLife (int lp_kills, fixed lp_index);
+fixed lib1F307236_gf_UBKmaxShield (int lp_kills, fixed lp_index);
+fixed lib1F307236_gf_UBKregenLife (int lp_kills, fixed lp_index);
+fixed lib1F307236_gf_UBKregenShield (int lp_kills, fixed lp_index);
+fixed lib1F307236_gf_UBKgetSizeUnit (int lp_kills);
+fixed lib1F307236_gf_UBKgetRadiusUnit (int lp_kills);
+string lib1F307236_gf_UBKgetBehavior (unit lp_unit, int lp_kills);
+void lib1F307236_gf_UBKGiveBuff (unit lp_killingUnit, string lp_typeOfKillingUnit, string lp_race);
+
+// Trigger Declarations
+trigger lib1F307236_gt_Launch;
+trigger lib1F307236_gt_UBKmakeUnitBuff;
+
+// Library Initialization
+void lib1F307236_InitVariables ();
+

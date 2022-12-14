@@ -1,0 +1,29 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: 02 No vespen gas | NVG
+//--------------------------------------------------------------------------------------------------
+// Structures
+struct lib3BFC9D7F_gs_Information {
+    string lv_nVGOption_1;
+    string lv_nVGOption_1D09DD0B5D183D187D0B8D182D18BD0B2D0B0D182D18CD0B2D0B5D181D0BFD0B5D0BDD0B3D0B0D0B7D0BFD180D0B8D181D182D180D0BED0B8D182D0B5D0BBD18CD181D182D0B2D0B5D18ED0BDD0B8D182D0BED0B2;
+};
+
+// Variable Declarations
+lib3BFC9D7F_gs_Information lib3BFC9D7F_gv_modInformation;
+bool lib3BFC9D7F_gv_nVGis_removeVespenFromMap;
+bool lib3BFC9D7F_gv_nVGis_useVespenWhenOrderUnit;
+
+// Function Declarations
+void lib3BFC9D7F_gf_SetupInformation (int lp_modIndex);
+void lib3BFC9D7F_gf_GetOptions ();
+void lib3BFC9D7F_gf_TriggersTurnOn ();
+void lib3BFC9D7F_gf_NVGGetInfoForPlayer ();
+void lib3BFC9D7F_gf_NVGStart ();
+
+// Trigger Declarations
+trigger lib3BFC9D7F_gt_Launch;
+
+// Library Initialization
+void lib3BFC9D7F_InitVariables ();
+

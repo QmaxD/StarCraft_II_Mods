@@ -1,0 +1,277 @@
+include "TriggerLibs/NativeLib"
+include "Lib39D1ECFB_h"
+include "Lib36280BFF_h"
+
+include "Lib1F00594A_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: 09 Supplies limit | SL
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void lib1F00594A_InitLibraries () {
+    libNtve_InitVariables();
+    lib39D1ECFB_InitVariables();
+    lib36280BFF_InitVariables();
+}
+
+// Variable Initialization
+bool lib1F00594A_InitVariables_completed = false;
+
+void lib1F00594A_InitVariables () {
+    if (lib1F00594A_InitVariables_completed) {
+        return;
+    }
+
+    lib1F00594A_InitVariables_completed = true;
+
+    lib1F00594A_gv_modInformation.lv_sLOption_1050 = "050";
+    lib1F00594A_gv_modInformation.lv_sLOption_1075 = "075";
+    lib1F00594A_gv_modInformation.lv_sLOption_1100 = "100";
+    lib1F00594A_gv_modInformation.lv_sLOption_1125 = "125";
+    lib1F00594A_gv_modInformation.lv_sLOption_1150 = "150";
+    lib1F00594A_gv_modInformation.lv_sLOption_1175 = "175";
+    lib1F00594A_gv_modInformation.lv_sLOption_1200 = "200";
+    lib1F00594A_gv_modInformation.lv_sLOption_1250 = "250";
+    lib1F00594A_gv_modInformation.lv_sLOption_1300 = "300";
+    lib1F00594A_gv_modInformation.lv_sLOption_1400 = "400";
+    lib1F00594A_gv_modInformation.lv_sLOption_1500 = "500";
+    lib1F00594A_gv_modInformation.lv_sLOption_1D092D0B2D0B5D181D182D0B8D0B7D0BDD0B0D187D0B5D0BDD0B8D0B5 = "Ввести значение";
+    lib1F00594A_gv_modInformation.lv_sLOption_2D0A3D0B1D180D0B0D182D18CD181D0B0D0BFD0BBD0B0D0B9D0B1D0BBD0BED0BA = "Убрать саплай блок";
+    lib1F00594A_gv_modInformation.lv_sLOption_2D0A1D182D0B0D0BDD0B4D0B0D180D182D0BDD0BE = "Стандартно";
+    lib1F00594A_gv_sLgetSupplyLimit = 200;
+}
+
+// Functions
+void lib1F00594A_gf_SetupInformation (int lp_modIndex) {
+    // Variable Declarations
+    int lv__optionIndex;
+    int lv__optionValueIndex;
+    int lv__default_Option_1;
+    int lv__default_Option_2;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv__default_Option_1 = 7;
+    lv__default_Option_2 = 1;
+
+    // Implementation
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_name = StringExternal("Param/Value/lib_1F00594A_08F89D1C");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_fullName = StringExternal("Param/Value/lib_1F00594A_643E3566");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_description = StringExternal("Param/Value/lib_1F00594A_D3966AB2");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_icon_Path = "Assets\\Textures\\btn-tips-sellprotossartifacts.dds";
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_is_Included = true;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_saturation = 1;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_1F00594A_6F6A64FD");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_1F00594A_AA0F90EE");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib1F00594A_gv_modInformation.lv_sLOption_1050;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_1F00594A_5A0CB473");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib1F00594A_gv_modInformation.lv_sLOption_1075;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_1F00594A_598CFED2");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib1F00594A_gv_modInformation.lv_sLOption_1100;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_1F00594A_40B8A07A");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib1F00594A_gv_modInformation.lv_sLOption_1125;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_1F00594A_A52B068C");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib1F00594A_gv_modInformation.lv_sLOption_1150;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_1F00594A_20EEC20E");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib1F00594A_gv_modInformation.lv_sLOption_1175;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_1F00594A_1AE4C850");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib1F00594A_gv_modInformation.lv_sLOption_1200;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_1F00594A_BE34B7BF");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib1F00594A_gv_modInformation.lv_sLOption_1250;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_1F00594A_4DCCEA93");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib1F00594A_gv_modInformation.lv_sLOption_1300;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_1F00594A_E94DCC92");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib1F00594A_gv_modInformation.lv_sLOption_1400;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_1F00594A_E0D81B60");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib1F00594A_gv_modInformation.lv_sLOption_1500;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_1F00594A_2811871B");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib1F00594A_gv_modInformation.lv_sLOption_1D092D0B2D0B5D181D182D0B8D0B7D0BDD0B0D187D0B5D0BDD0B8D0B5;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_1F00594A_6DA37E13");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_is_ValueType_EditBox = true;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_1].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_1F00594A_02B15798");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_1F00594A_DDA5D1BA");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib1F00594A_gv_modInformation.lv_sLOption_2D0A1D182D0B0D0BDD0B4D0B0D180D182D0BDD0BE;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_1F00594A_C0A87FDE");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib1F00594A_gv_modInformation.lv_sLOption_2D0A3D0B1D180D0B0D182D18CD181D0B0D0BFD0BBD0B0D0B9D0B1D0BBD0BED0BA;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_1F00594A_95362832");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_2;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_2].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_number_Game_Options = lv__optionIndex;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_start_Trigger = lib1F00594A_gt_Launch;
+}
+
+void lib1F00594A_gf_GetOptions () {
+    // Automatic Variable Declarations
+    string auto26C3DA88_val;
+
+    // Implementation
+    auto26C3DA88_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[1].lv_values[0].lv_valueString;
+    if (auto26C3DA88_val == lib1F00594A_gv_modInformation.lv_sLOption_1050) {
+        lib1F00594A_gv_sLgetSupplyLimit = 50;
+    }
+    else if (auto26C3DA88_val == lib1F00594A_gv_modInformation.lv_sLOption_1075) {
+        lib1F00594A_gv_sLgetSupplyLimit = 75;
+    }
+    else if (auto26C3DA88_val == lib1F00594A_gv_modInformation.lv_sLOption_1100) {
+        lib1F00594A_gv_sLgetSupplyLimit = 100;
+    }
+    else if (auto26C3DA88_val == lib1F00594A_gv_modInformation.lv_sLOption_1125) {
+        lib1F00594A_gv_sLgetSupplyLimit = 125;
+    }
+    else if (auto26C3DA88_val == lib1F00594A_gv_modInformation.lv_sLOption_1150) {
+        lib1F00594A_gv_sLgetSupplyLimit = 150;
+    }
+    else if (auto26C3DA88_val == lib1F00594A_gv_modInformation.lv_sLOption_1175) {
+        lib1F00594A_gv_sLgetSupplyLimit = 175;
+    }
+    else if (auto26C3DA88_val == lib1F00594A_gv_modInformation.lv_sLOption_1200) {
+        lib1F00594A_gv_sLgetSupplyLimit = 200;
+    }
+    else if (auto26C3DA88_val == lib1F00594A_gv_modInformation.lv_sLOption_1250) {
+        lib1F00594A_gv_sLgetSupplyLimit = 250;
+    }
+    else if (auto26C3DA88_val == lib1F00594A_gv_modInformation.lv_sLOption_1300) {
+        lib1F00594A_gv_sLgetSupplyLimit = 300;
+    }
+    else if (auto26C3DA88_val == lib1F00594A_gv_modInformation.lv_sLOption_1400) {
+        lib1F00594A_gv_sLgetSupplyLimit = 400;
+    }
+    else if (auto26C3DA88_val == lib1F00594A_gv_modInformation.lv_sLOption_1500) {
+        lib1F00594A_gv_sLgetSupplyLimit = 500;
+    }
+    else {
+        lib1F00594A_gv_sLgetSupplyLimit = StringToInt(lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[1].lv_values[0].lv_valueString);
+    }
+    if ((lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[2].lv_values[0].lv_valueString == lib1F00594A_gv_modInformation.lv_sLOption_2D0A3D0B1D180D0B0D182D18CD181D0B0D0BFD0BBD0B0D0B9D0B1D0BBD0BED0BA)) {
+        lib1F00594A_gv_sLis_NoSupplyBlock = true;
+    }
+
+}
+
+void lib1F00594A_gf_TriggersTurnOn () {
+    // Automatic Variable Declarations
+}
+
+void lib1F00594A_gf_SLGetInfoForPlayer () {
+    // Variable Declarations
+    text lv__description;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Implementation
+    TextExpressionSetToken("Param/Expression/lib_1F00594A_B43A1C44", "SupplyLimit", IntToText(lib1F00594A_gv_sLgetSupplyLimit));
+    lv__description = TextExpressionAssemble("Param/Expression/lib_1F00594A_B43A1C44");
+    if ((lib1F00594A_gv_sLis_NoSupplyBlock == true)) {
+        lv__description = (lv__description + StringExternal("Param/Value/lib_1F00594A_2D985635"));
+    }
+
+    lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = lv__description;
+}
+
+trigger auto_lib1F00594A_gf_SLGiveSupplyLimit_Trigger = null;
+
+void lib1F00594A_gf_SLGiveSupplyLimit () {
+    if (auto_lib1F00594A_gf_SLGiveSupplyLimit_Trigger == null) {
+        auto_lib1F00594A_gf_SLGiveSupplyLimit_Trigger = TriggerCreate("auto_lib1F00594A_gf_SLGiveSupplyLimit_TriggerFunc");
+    }
+
+    TriggerExecute(auto_lib1F00594A_gf_SLGiveSupplyLimit_Trigger, false, false);
+}
+
+bool auto_lib1F00594A_gf_SLGiveSupplyLimit_TriggerFunc (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__number_Player;
+
+    // Automatic Variable Declarations
+    playergroup auto011C98DF_g;
+
+    // Variable Initialization
+
+    // Implementation
+    Wait(0.5, c_timeGame);
+    auto011C98DF_g = lib36280BFF_gv_commonplayers_Active_Group;
+    lv__number_Player = -1;
+    while (true) {
+        lv__number_Player = PlayerGroupNextPlayer(auto011C98DF_g, lv__number_Player);
+        if (lv__number_Player < 0) { break; }
+        PlayerModifyPropertyFixed(lv__number_Player, c_playerPropSuppliesLimit, c_playerPropOperSetTo, lib1F00594A_gv_sLgetSupplyLimit);
+        if ((lib1F00594A_gv_sLis_NoSupplyBlock == true)) {
+            PlayerModifyPropertyFixed(lv__number_Player, c_playerPropSuppliesMade, c_playerPropOperSetTo, lib1F00594A_gv_sLgetSupplyLimit);
+        }
+
+    }
+    return true;
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: Launch
+//--------------------------------------------------------------------------------------------------
+bool lib1F00594A_gt_Launch_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lib1F00594A_gf_GetOptions();
+    lib1F00594A_gf_SLGetInfoForPlayer();
+    TextExpressionSetToken("Param/Expression/lib_1F00594A_70A59A91", "FulName", lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_fullName);
+    HelpPanelAddTip(PlayerGroupAll(), libNtve_gf_FormatTipTitle(TextExpressionAssemble("Param/Expression/lib_1F00594A_70A59A91"), libNtve_ge_TipType_NormalTip), lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_name, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_icon_Path);
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat);
+    lib1F00594A_gf_SLGiveSupplyLimit();
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib1F00594A_gt_Launch_Init () {
+    lib1F00594A_gt_Launch = TriggerCreate("lib1F00594A_gt_Launch_Func");
+}
+
+void lib1F00594A_InitTriggers () {
+    lib1F00594A_gt_Launch_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool lib1F00594A_InitLib_completed = false;
+
+void lib1F00594A_InitLib () {
+    if (lib1F00594A_InitLib_completed) {
+        return;
+    }
+
+    lib1F00594A_InitLib_completed = true;
+
+    lib1F00594A_InitLibraries();
+    lib1F00594A_InitVariables();
+    lib1F00594A_InitTriggers();
+}
+
+include "Lib39D1ECFB"
+include "Lib36280BFF"
+

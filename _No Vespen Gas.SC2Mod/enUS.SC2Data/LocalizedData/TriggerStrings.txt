@@ -1,7 +1,0 @@
-﻿Category/Name/lib_53355882_0C12FB2E=No Vespen Gas | NVG
-Library/Name/53355882=library
-Trigger/Name/lib_53355882_28C4D1AD=NVG | start no vespen gas
-Variable/Name/lib_53355882_5CE9D4F9=_neutral units
-Variable/Name/lib_53355882_6707760E=Untitled Variable 001
-Variable/Name/lib_53355882_C65E38AA=Untitled Variable 001
-Variable/Name/lib_53355882_E1F8A9BB=_point of unit

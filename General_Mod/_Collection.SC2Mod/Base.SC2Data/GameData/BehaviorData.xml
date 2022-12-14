@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CBehaviorBuff id="ArmorUpgradeID">
+        <Alignment value="Positive"/>
+        <InfoIcon value="Assets\Textures\btn-upgrade-terran-buildingarmor.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <MaxStackCount value="65535"/>
+        <Modification ShieldArmorBonus="1">
+            <LifeArmorBonus value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AttackUpgradeID">
+        <Alignment value="Positive"/>
+        <InfoIcon value="Assets\Textures\command_attack_ac.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <MaxStackCount value="65535"/>
+        <Modification>
+            <DamageTotalMultiplier index="Spell" value="0.025"/>
+            <DamageTotalMultiplier index="Melee" value="0.025"/>
+            <DamageTotalMultiplier index="Ranged" value="0.025"/>
+            <DamageTotalMultiplier index="Splash" value="0.025"/>
+            <DamageTotalMultiplier index="NoProc" value="0.025"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BerserkDownAttack_ForProtossLife">
+        <Alignment value="Negative"/>
+        <Cost>
+            <Charge Link="Behavior/Berserk90A"/>
+            <Cooldown Link="Behavior/Berserk90A"/>
+        </Cost>
+        <InfoIcon value="Assets\Textures\btn-tips-terran-penetrator.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units,Race:Protoss"/>
+        <MaxStackCount value="10"/>
+        <Modification>
+            <DamageTotalMultiplier index="Spell" value="-0.025"/>
+            <DamageTotalMultiplier index="Melee" value="-0.025"/>
+            <DamageTotalMultiplier index="Ranged" value="-0.025"/>
+            <DamageTotalMultiplier index="Splash" value="-0.025"/>
+            <DamageTotalMultiplier index="NoProc" value="-0.025"/>
+        </Modification>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/Berserk90A"/>
+                <Cooldown Link="Behavior/Berserk90A"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BerserkUpAttack_ForProtossLife">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/Berserk90A"/>
+            <Cooldown Link="Behavior/Berserk90A"/>
+        </Cost>
+        <InfoIcon value="Assets\Textures\btn-tips-terran-penetrator.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units,Race:Protoss"/>
+        <MaxStackCount value="10"/>
+        <Modification>
+            <DamageTotalMultiplier index="Spell" value="0.025"/>
+            <DamageTotalMultiplier index="Melee" value="0.025"/>
+            <DamageTotalMultiplier index="Ranged" value="0.025"/>
+            <DamageTotalMultiplier index="Splash" value="0.025"/>
+            <DamageTotalMultiplier index="NoProc" value="0.025"/>
+        </Modification>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/Berserk90A"/>
+                <Cooldown Link="Behavior/Berserk90A"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BerserkDownAttack_ForProtossShield">
+        <Alignment value="Negative"/>
+        <Cost>
+            <Charge Link="Behavior/Berserk90A"/>
+            <Cooldown Link="Behavior/Berserk90A"/>
+        </Cost>
+        <InfoIcon value="Assets\Textures\btn-ability-protoss-hardenedshields-color.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units,Race:Protoss"/>
+        <MaxStackCount value="10"/>
+        <Modification>
+            <DamageTotalMultiplier index="Spell" value="-0.025"/>
+            <DamageTotalMultiplier index="Melee" value="-0.025"/>
+            <DamageTotalMultiplier index="Ranged" value="-0.025"/>
+            <DamageTotalMultiplier index="Splash" value="-0.025"/>
+            <DamageTotalMultiplier index="NoProc" value="-0.025"/>
+        </Modification>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/Berserk90A"/>
+                <Cooldown Link="Behavior/Berserk90A"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BerserkUpAttack_ForProtossShield">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/Berserk90A"/>
+            <Cooldown Link="Behavior/Berserk90A"/>
+        </Cost>
+        <InfoIcon value="Assets\Textures\btn-ability-protoss-hardenedshields-color.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units,Race:Protoss"/>
+        <MaxStackCount value="10"/>
+        <Modification>
+            <DamageTotalMultiplier index="Spell" value="0.025"/>
+            <DamageTotalMultiplier index="Melee" value="0.025"/>
+            <DamageTotalMultiplier index="Ranged" value="0.025"/>
+            <DamageTotalMultiplier index="Splash" value="0.025"/>
+            <DamageTotalMultiplier index="NoProc" value="0.025"/>
+        </Modification>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/Berserk90A"/>
+                <Cooldown Link="Behavior/Berserk90A"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BerserkDownAttack_ForTerranZerg">
+        <Alignment value="Negative"/>
+        <Cost>
+            <Charge Link="Behavior/Berserk90A"/>
+            <Cooldown Link="Behavior/Berserk90A"/>
+        </Cost>
+        <InfoIcon value="Assets\Textures\btn-tips-terran-penetrator.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <MaxStackCount value="10"/>
+        <Modification>
+            <DamageTotalMultiplier index="Spell" value="-0.05"/>
+            <DamageTotalMultiplier index="Melee" value="-0.05"/>
+            <DamageTotalMultiplier index="Ranged" value="-0.05"/>
+            <DamageTotalMultiplier index="Splash" value="-0.05"/>
+            <DamageTotalMultiplier index="NoProc" value="-0.05"/>
+        </Modification>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/Berserk90A"/>
+                <Cooldown Link="Behavior/Berserk90A"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BerserkUpAttack_ForTerranZerg">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/Berserk90A"/>
+            <Cooldown Link="Behavior/Berserk90A"/>
+        </Cost>
+        <InfoIcon value="Assets\Textures\btn-tips-terran-penetrator.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <MaxStackCount value="10"/>
+        <Modification>
+            <DamageTotalMultiplier index="Spell" value="0.05"/>
+            <DamageTotalMultiplier index="Melee" value="0.05"/>
+            <DamageTotalMultiplier index="Ranged" value="0.05"/>
+            <DamageTotalMultiplier index="Splash" value="0.05"/>
+            <DamageTotalMultiplier index="NoProc" value="0.05"/>
+        </Modification>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/Berserk90A"/>
+                <Cooldown Link="Behavior/Berserk90A"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BerserkDownSpeed_ForProtossLife">
+        <Alignment value="Negative"/>
+        <Cost>
+            <Charge Link="Behavior/Stimpack"/>
+            <Cooldown Link="Behavior/Stimpack"/>
+        </Cost>
+        <InfoIcon value="Assets\Textures\btn-upgrade-terran-reapercombatdrugs.dds"/>
+        <EditorCategories value="Race:Protoss,AbilityorEffectType:Units"/>
+        <MaxStackCount value="10"/>
+        <Modification MoveSpeedMultiplier="0.975" AttackSpeedMultiplier="0.975"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/Stimpack"/>
+                <Cooldown Link="Behavior/Stimpack"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BerserkUpSpeed_ForProtossLife">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/Stimpack"/>
+            <Cooldown Link="Behavior/Stimpack"/>
+        </Cost>
+        <InfoIcon value="Assets\Textures\btn-upgrade-terran-reapercombatdrugs.dds"/>
+        <EditorCategories value="Race:Protoss,AbilityorEffectType:Units"/>
+        <MaxStackCount value="10"/>
+        <Modification MoveSpeedMultiplier="1.025" AttackSpeedMultiplier="1.025"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/Stimpack"/>
+                <Cooldown Link="Behavior/Stimpack"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BerserkDownSpeed_ForProtossShield">
+        <Alignment value="Negative"/>
+        <Cost>
+            <Charge Link="Behavior/Stimpack"/>
+            <Cooldown Link="Behavior/Stimpack"/>
+        </Cost>
+        <InfoIcon value="Assets\Textures\btn-tips-terran-psishield.dds"/>
+        <EditorCategories value="Race:Protoss,AbilityorEffectType:Units"/>
+        <MaxStackCount value="10"/>
+        <Modification MoveSpeedMultiplier="0.975" AttackSpeedMultiplier="0.975"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/Stimpack"/>
+                <Cooldown Link="Behavior/Stimpack"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BerserkUpSpeed_ForProtossShield">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/Stimpack"/>
+            <Cooldown Link="Behavior/Stimpack"/>
+        </Cost>
+        <InfoIcon value="Assets\Textures\btn-tips-terran-psishield.dds"/>
+        <EditorCategories value="Race:Protoss,AbilityorEffectType:Units"/>
+        <MaxStackCount value="10"/>
+        <Modification MoveSpeedMultiplier="1.025" AttackSpeedMultiplier="1.025"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/Stimpack"/>
+                <Cooldown Link="Behavior/Stimpack"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BerserkDownSpeed_ForTerranZerg">
+        <Alignment value="Negative"/>
+        <Cost>
+            <Charge Link="Behavior/Stimpack"/>
+            <Cooldown Link="Behavior/Stimpack"/>
+        </Cost>
+        <InfoIcon value="Assets\Textures\btn-upgrade-terran-reapercombatdrugs.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <MaxStackCount value="10"/>
+        <Modification MoveSpeedMultiplier="0.95" AttackSpeedMultiplier="0.95"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/Stimpack"/>
+                <Cooldown Link="Behavior/Stimpack"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BerserkUpSpeed_ForTerranZerg">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/Stimpack"/>
+            <Cooldown Link="Behavior/Stimpack"/>
+        </Cost>
+        <InfoIcon value="Assets\Textures\btn-upgrade-terran-reapercombatdrugs.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <MaxStackCount value="10"/>
+        <Modification MoveSpeedMultiplier="1.05" AttackSpeedMultiplier="1.05"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/Stimpack"/>
+                <Cooldown Link="Behavior/Stimpack"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="LargeCombatUnitID">
+        <InfoIcon value="Assets\Textures\btn-upgrade-karax-unitybarrier.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <StateFlags index="UnitAttrOnMassive" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BecomeFlyingID">
+        <Alignment value="Negative"/>
+        <InfoIcon value="Assets\Textures\btn-tips-laserdrillantiair.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <PlaneDelta index="Air" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="GroundAirID">
+        <InfoIcon value="Assets\Textures\btn-upgrade-tychus-attackspeed.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <PlaneDelta index="Ground" value="1"/>
+            <PlaneDelta index="Air" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorResource id="HighYieldMineralFieldMinerals">
+        <Capacity value="9000"/>
+    </CBehaviorResource>
+    <CBehaviorResource id="HighYieldMineralFieldMinerals15" parent="HighYieldMineralFieldMinerals">
+        <Name value="Behavior/Name/HighYieldMineralFieldMinerals15"/>
+        <Tooltip value="Behavior/Tooltip/HighYieldMineralFieldMinerals15"/>
+        <Cost>
+            <Charge Link="Behavior/HighYieldMineralFieldMinerals15"/>
+            <Cooldown Link="Behavior/HighYieldMineralFieldMinerals15"/>
+        </Cost>
+        <HarvestAmount value="15"/>
+    </CBehaviorResource>
+    <CBehaviorResource id="HighYieldMineralFieldMinerals20" parent="HighYieldMineralFieldMinerals">
+        <Name value="Behavior/Name/HighYieldMineralFieldMinerals20"/>
+        <Tooltip value="Behavior/Tooltip/HighYieldMineralFieldMinerals20"/>
+        <Cost>
+            <Charge Link="Behavior/HighYieldMineralFieldMinerals20"/>
+            <Cooldown Link="Behavior/HighYieldMineralFieldMinerals20"/>
+        </Cost>
+        <HarvestAmount value="20"/>
+    </CBehaviorResource>
+    <CBehaviorResource id="HighYieldMineralFieldMinerals9" parent="HighYieldMineralFieldMinerals">
+        <Name value="Behavior/Name/HighYieldMineralFieldMinerals9"/>
+        <Tooltip value="Behavior/Tooltip/HighYieldMineralFieldMinerals9"/>
+        <Cost>
+            <Charge Link="Behavior/HighYieldMineralFieldMinerals9"/>
+            <Cooldown Link="Behavior/HighYieldMineralFieldMinerals9"/>
+        </Cost>
+        <HarvestAmount value="9"/>
+    </CBehaviorResource>
+    <CBehaviorResource id="HighYieldMineralFieldMinerals750">
+        <Capacity value="4500"/>
+    </CBehaviorResource>
+    <CBehaviorResource id="HighYieldMineralFieldMinerals12" parent="HighYieldMineralFieldMinerals">
+        <Name value="Behavior/Name/HighYieldMineralFieldMinerals12"/>
+        <Tooltip value="Behavior/Tooltip/HighYieldMineralFieldMinerals12"/>
+        <Cost>
+            <Charge Link="Behavior/HighYieldMineralFieldMinerals12"/>
+            <Cooldown Link="Behavior/HighYieldMineralFieldMinerals12"/>
+        </Cost>
+        <HarvestAmount value="12"/>
+    </CBehaviorResource>
+    <CBehaviorResource id="MineralFieldMinerals">
+        <Capacity value="9000"/>
+    </CBehaviorResource>
+    <CBehaviorResource id="MineralFieldMinerals15" parent="MineralFieldMinerals">
+        <Name value="Behavior/Name/MineralFieldMinerals15"/>
+        <Tooltip value="Behavior/Tooltip/MineralFieldMinerals15"/>
+        <Cost>
+            <Charge Link="Behavior/MineralFieldMinerals15"/>
+            <Cooldown Link="Behavior/MineralFieldMinerals15"/>
+        </Cost>
+        <HarvestAmount value="15"/>
+    </CBehaviorResource>
+    <CBehaviorResource id="MineralFieldMinerals7" parent="MineralFieldMinerals">
+        <Name value="Behavior/Name/MineralFieldMinerals7"/>
+        <Tooltip value="Behavior/Tooltip/MineralFieldMinerals7"/>
+        <Cost>
+            <Charge Link="Behavior/MineralFieldMinerals7"/>
+            <Cooldown Link="Behavior/MineralFieldMinerals7"/>
+        </Cost>
+        <HarvestAmount value="7"/>
+    </CBehaviorResource>
+    <CBehaviorResource id="MineralFieldMinerals450">
+        <Capacity value="2250"/>
+    </CBehaviorResource>
+    <CBehaviorResource id="MineralFieldMinerals9" parent="MineralFieldMinerals">
+        <Name value="Behavior/Name/MineralFieldMinerals9"/>
+        <Tooltip value="Behavior/Tooltip/MineralFieldMinerals9"/>
+        <Cost>
+            <Charge Link="Behavior/MineralFieldMinerals9"/>
+            <Cooldown Link="Behavior/MineralFieldMinerals9"/>
+        </Cost>
+        <HarvestAmount value="9"/>
+    </CBehaviorResource>
+    <CBehaviorResource id="MineralFieldMinerals750">
+        <Capacity value="4500"/>
+    </CBehaviorResource>
+    <CBehaviorResource id="MineralFieldMinerals12" parent="MineralFieldMinerals">
+        <Name value="Behavior/Name/MineralFieldMinerals12"/>
+        <Tooltip value="Behavior/Tooltip/MineralFieldMinerals12"/>
+        <Cost>
+            <Charge Link="Behavior/MineralFieldMinerals12"/>
+            <Cooldown Link="Behavior/MineralFieldMinerals12"/>
+        </Cost>
+        <HarvestAmount value="12"/>
+    </CBehaviorResource>
+    <CBehaviorResource id="MineralFieldMineralsOpaque">
+        <Capacity value="9000"/>
+    </CBehaviorResource>
+    <CBehaviorResource id="MineralFieldMineralsOpaque900">
+        <Capacity value="4500"/>
+    </CBehaviorResource>
+    <CBehaviorResource id="RawRichVespeneGeyserGas">
+        <Capacity value="11250"/>
+    </CBehaviorResource>
+    <CBehaviorResource id="RawRichVespeneGeyserGas12" parent="RawRichVespeneGeyserGas">
+        <Name value="Behavior/Name/RawRichVespeneGeyserGas12"/>
+        <Tooltip value="Behavior/Tooltip/RawRichVespeneGeyserGas12"/>
+        <Cost>
+            <Charge Link="Behavior/RawRichVespeneGeyserGas12"/>
+            <Cooldown Link="Behavior/RawRichVespeneGeyserGas12"/>
+        </Cost>
+        <HarvestAmount value="12"/>
+    </CBehaviorResource>
+    <CBehaviorResource id="RawRichVespeneGeyserGas16" parent="RawRichVespeneGeyserGas">
+        <Name value="Behavior/Name/RawRichVespeneGeyserGas16"/>
+        <Tooltip value="Behavior/Tooltip/RawRichVespeneGeyserGas16"/>
+        <Cost>
+            <Charge Link="Behavior/RawRichVespeneGeyserGas16"/>
+            <Cooldown Link="Behavior/RawRichVespeneGeyserGas16"/>
+        </Cost>
+        <HarvestAmount value="16"/>
+    </CBehaviorResource>
+    <CBehaviorResource id="RawRichVespeneGeyserGas20" parent="RawRichVespeneGeyserGas">
+        <Name value="Behavior/Name/RawRichVespeneGeyserGas20"/>
+        <Tooltip value="Behavior/Tooltip/RawRichVespeneGeyserGas20"/>
+        <Cost>
+            <Charge Link="Behavior/RawRichVespeneGeyserGas20"/>
+            <Cooldown Link="Behavior/RawRichVespeneGeyserGas20"/>
+        </Cost>
+        <HarvestAmount value="20"/>
+    </CBehaviorResource>
+    <CBehaviorResource id="RawRichVespeneGeyserGas30" parent="RawRichVespeneGeyserGas">
+        <Name value="Behavior/Name/RawRichVespeneGeyserGas30"/>
+        <Tooltip value="Behavior/Tooltip/RawRichVespeneGeyserGas30"/>
+        <Cost>
+            <Charge Link="Behavior/RawRichVespeneGeyserGas30"/>
+            <Cooldown Link="Behavior/RawRichVespeneGeyserGas30"/>
+        </Cost>
+        <HarvestAmount value="30"/>
+    </CBehaviorResource>
+    <CBehaviorResource id="RawVespeneGeyserGas">
+        <Capacity value="11250"/>
+    </CBehaviorResource>
+    <CBehaviorBuff id="AgingBehaviourID">
+        <InfoIcon value="EditorData\Images\TriggerLabels\Time.tga"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisplayDuration index="Self" value="1"/>
+        <DisplayDuration index="Ally" value="1"/>
+        <DisplayDuration index="Neutral" value="1"/>
+        <DisplayDuration index="Enemy" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorResource id="RawVespeneGeyserGas15" parent="RawVespeneGeyserGas">
+        <Name value="Behavior/Name/RawVespeneGeyserGas15"/>
+        <Tooltip value="Behavior/Tooltip/RawVespeneGeyserGas15"/>
+        <Cost>
+            <Charge Link="Behavior/RawVespeneGeyserGas15"/>
+            <Cooldown Link="Behavior/RawVespeneGeyserGas15"/>
+        </Cost>
+        <HarvestAmount value="15"/>
+    </CBehaviorResource>
+    <CBehaviorResource id="RawVespeneGeyserGas6" parent="RawVespeneGeyserGas">
+        <Name value="Behavior/Name/RawVespeneGeyserGas6"/>
+        <Tooltip value="Behavior/Tooltip/RawVespeneGeyserGas6"/>
+        <Cost>
+            <Charge Link="Behavior/RawVespeneGeyserGas6"/>
+            <Cooldown Link="Behavior/RawVespeneGeyserGas6"/>
+        </Cost>
+        <HarvestAmount value="6"/>
+    </CBehaviorResource>
+    <CBehaviorResource id="RawVespeneGeyserGas8" parent="RawVespeneGeyserGas">
+        <Name value="Behavior/Name/RawVespeneGeyserGas8"/>
+        <Tooltip value="Behavior/Tooltip/RawVespeneGeyserGas8"/>
+        <Cost>
+            <Charge Link="Behavior/RawVespeneGeyserGas8"/>
+            <Cooldown Link="Behavior/RawVespeneGeyserGas8"/>
+        </Cost>
+        <HarvestAmount value="8"/>
+    </CBehaviorResource>
+    <CBehaviorResource id="RawVespeneGeyserGas10" parent="RawVespeneGeyserGas">
+        <Name value="Behavior/Name/RawVespeneGeyserGas10"/>
+        <Tooltip value="Behavior/Tooltip/RawVespeneGeyserGas10"/>
+        <Cost>
+            <Charge Link="Behavior/RawVespeneGeyserGas10"/>
+            <Cooldown Link="Behavior/RawVespeneGeyserGas10"/>
+        </Cost>
+        <HarvestAmount value="10"/>
+    </CBehaviorResource>
+    <CBehaviorBuff id="UnknownBehavior">
+        <InfoIcon value="Assets\Textures\ui_tipicon_campaign_attack.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DamageResponse>
+            <Kind index="Spell" value="0"/>
+            <Kind index="Splash" value="0"/>
+            <Kind index="NoProc" value="0"/>
+            <ModifyAmount value="7"/>
+            <Chance value="1"/>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="UnknownBehavior2">
+        <Cost>
+            <Charge Link="Behavior/UnknownBehavior"/>
+            <Cooldown Link="Behavior/UnknownBehavior"/>
+        </Cost>
+        <InfoIcon value="Assets\Textures\ui_tipicon_campaign_attack.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DamageResponse>
+            <Kind index="Spell" value="0"/>
+            <Kind index="Splash" value="0"/>
+            <Kind index="NoProc" value="0"/>
+            <ModifyAmount value="5"/>
+            <Chance value="1"/>
+            <Cost>
+                <Charge Link="Behavior/UnknownBehavior"/>
+                <Cooldown Link="Behavior/UnknownBehavior"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+</Catalog>

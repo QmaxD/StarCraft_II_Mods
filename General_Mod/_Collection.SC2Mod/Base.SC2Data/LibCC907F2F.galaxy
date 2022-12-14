@@ -1,0 +1,302 @@
+include "TriggerLibs/NativeLib"
+include "Lib39D1ECFB_h"
+include "Lib36280BFF_h"
+
+include "LibCC907F2F_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: 03 Rich Resources | RR
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void libCC907F2F_InitLibraries () {
+    libNtve_InitVariables();
+    lib39D1ECFB_InitVariables();
+    lib36280BFF_InitVariables();
+}
+
+// Variable Initialization
+bool libCC907F2F_InitVariables_completed = false;
+
+void libCC907F2F_InitVariables () {
+    if (libCC907F2F_InitVariables_completed) {
+        return;
+    }
+
+    libCC907F2F_InitVariables_completed = true;
+
+    libCC907F2F_gv_modInformation.lv_rROption_1D098D0BCD0B8D0BDD0B5D180D0B0D0BBD18BD0B8D0B3D0B0D0B7 = "И минералы и газилки";
+    libCC907F2F_gv_modInformation.lv_rROption_1D0A2D0BED0BBD18CD0BAD0BED0BCD0B8D0BDD0B5D180D0B0D0BBD18B = "Только минералы";
+    libCC907F2F_gv_modInformation.lv_rROption_1D0A2D0BED0BBD18CD0BAD0BED0B3D0B0D0B7D0B8D0BBD0BAD0B8 = "Только газилки";
+    libCC907F2F_gv_modInformation.lv_rROption_2D097D0B0D0BCD0B5D0BDD0B8D182D18CD0BDD0B0D0B7D0BED0BBD0BED182D18BD0B5 = "Заменить на золотые";
+    libCC907F2F_gv_modInformation.lv_rROption_2D09DD0B5D182 = "Нет";
+}
+
+// Functions
+void libCC907F2F_gf_SetupInformation (int lp_modIndex) {
+    // Variable Declarations
+    int lv__optionIndex;
+    int lv__optionValueIndex;
+    int lv__default_Option_1;
+    int lv__default_Option_2;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv__default_Option_1 = 1;
+    lv__default_Option_2 = 1;
+
+    // Implementation
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_name = StringExternal("Param/Value/lib_CC907F2F_AEBB1A2F");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_fullName = StringExternal("Param/Value/lib_CC907F2F_8537EF8A");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_description = StringExternal("Param/Value/lib_CC907F2F_144817D2");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_icon_Path = "Assets\\Textures\\btn-tips-richminerals.dds";
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_is_Included = true;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_saturation = 1;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_CC907F2F_4362338A");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_CC907F2F_78A29DD8");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libCC907F2F_gv_modInformation.lv_rROption_1D098D0BCD0B8D0BDD0B5D180D0B0D0BBD18BD0B8D0B3D0B0D0B7;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_CC907F2F_5786FECA");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libCC907F2F_gv_modInformation.lv_rROption_1D0A2D0BED0BBD18CD0BAD0BED0BCD0B8D0BDD0B5D180D0B0D0BBD18B;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_CC907F2F_ACC7BFA4");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libCC907F2F_gv_modInformation.lv_rROption_1D0A2D0BED0BBD18CD0BAD0BED0B3D0B0D0B7D0B8D0BBD0BAD0B8;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_CC907F2F_03851C5D");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_1].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_CC907F2F_FE38E4C0");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_CC907F2F_0F3ECCAE");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libCC907F2F_gv_modInformation.lv_rROption_2D097D0B0D0BCD0B5D0BDD0B8D182D18CD0BDD0B0D0B7D0BED0BBD0BED182D18BD0B5;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_CC907F2F_7B023BC2");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libCC907F2F_gv_modInformation.lv_rROption_2D09DD0B5D182;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_CC907F2F_F8653FD8");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_2;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_2].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_number_Game_Options = lv__optionIndex;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_start_Trigger = libCC907F2F_gt_Launch;
+}
+
+void libCC907F2F_gf_GetOptions () {
+    // Automatic Variable Declarations
+    string auto4BB356AE_val;
+
+    // Implementation
+    auto4BB356AE_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[1].lv_values[0].lv_valueString;
+    if (auto4BB356AE_val == libCC907F2F_gv_modInformation.lv_rROption_1D098D0BCD0B8D0BDD0B5D180D0B0D0BBD18BD0B8D0B3D0B0D0B7) {
+        libCC907F2F_gv_rRis_Rich_Mineral = true;
+        libCC907F2F_gv_rRis_Rich_Vespen = true;
+    }
+    else if (auto4BB356AE_val == libCC907F2F_gv_modInformation.lv_rROption_1D0A2D0BED0BBD18CD0BAD0BED0BCD0B8D0BDD0B5D180D0B0D0BBD18B) {
+        libCC907F2F_gv_rRis_Rich_Mineral = true;
+    }
+    else if (auto4BB356AE_val == libCC907F2F_gv_modInformation.lv_rROption_1D0A2D0BED0BBD18CD0BAD0BED0B3D0B0D0B7D0B8D0BBD0BAD0B8) {
+        libCC907F2F_gv_rRis_Rich_Vespen = true;
+    }
+    else {
+    }
+    if ((lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[2].lv_values[0].lv_valueString == libCC907F2F_gv_modInformation.lv_rROption_2D097D0B0D0BCD0B5D0BDD0B8D182D18CD0BDD0B0D0B7D0BED0BBD0BED182D18BD0B5)) {
+        libCC907F2F_gv_rRis_Replace_Small_Resources = true;
+    }
+
+}
+
+void libCC907F2F_gf_TriggersTurnOn () {
+    // Automatic Variable Declarations
+}
+
+void libCC907F2F_gf_RRGetInfoForPlayer () {
+    // Variable Declarations
+    text lv__description;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Implementation
+    if ((libCC907F2F_gv_rRis_Rich_Mineral == true) && (libCC907F2F_gv_rRis_Rich_Vespen == true)) {
+        lv__description = TextExpressionAssemble("Param/Expression/lib_CC907F2F_B2FE1393");
+    }
+    else if ((libCC907F2F_gv_rRis_Rich_Mineral == true)) {
+        lv__description = TextExpressionAssemble("Param/Expression/lib_CC907F2F_0B4A5525");
+    }
+    else if ((libCC907F2F_gv_rRis_Rich_Vespen == true)) {
+        lv__description = TextExpressionAssemble("Param/Expression/lib_CC907F2F_0DA3811A");
+    }
+    if ((libCC907F2F_gv_rRis_Replace_Small_Resources == true)) {
+        lv__description = (lv__description + StringExternal("Param/Value/lib_CC907F2F_995C197F"));
+    }
+    else {
+        lv__description = (lv__description + StringExternal("Param/Value/lib_CC907F2F_32346B36"));
+    }
+    lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = lv__description;
+    lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat = StringToText("");
+}
+
+void libCC907F2F_gf_RRPickEachResources () {
+    // Automatic Variable Declarations
+    unitgroup auto3D9E44B5_g;
+    int auto3D9E44B5_u;
+    unit auto3D9E44B5_var;
+
+    // Implementation
+    auto3D9E44B5_g = UnitGroup(null, 0, RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterAlly) | (1 << c_targetFilterEnemy) | (1 << c_targetFilterMissile) | (1 << c_targetFilterDestructible), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+    auto3D9E44B5_u = UnitGroupCount(auto3D9E44B5_g, c_unitCountAll);
+    for (;; auto3D9E44B5_u -= 1) {
+        auto3D9E44B5_var = UnitGroupUnitFromEnd(auto3D9E44B5_g, auto3D9E44B5_u);
+        if (auto3D9E44B5_var == null) { break; }
+        if ((libCC907F2F_gf_RRis_ReplaceSmallResource(auto3D9E44B5_var) == true)) {
+            if ((lib36280BFF_gf_Commonis_Mineral_1800(auto3D9E44B5_var) == true)) {
+                libCC907F2F_gf_RRReplaceMineral1800(auto3D9E44B5_var);
+            }
+            else if ((lib36280BFF_gf_Commonis_Mineral_900(auto3D9E44B5_var) == true)) {
+                libCC907F2F_gf_RRReplaceMineral900(auto3D9E44B5_var);
+            }
+            else if ((lib36280BFF_gf_Commonis_Vespene_2250(auto3D9E44B5_var) == true)) {
+                libCC907F2F_gf_RRReplaceVespenGeyser(auto3D9E44B5_var);
+            }
+        }
+
+        if ((libCC907F2F_gv_rRis_Rich_Mineral == true)) {
+            if ((lib36280BFF_gf_Commonis_Mineral_1800(auto3D9E44B5_var) == true)) {
+                libCC907F2F_gf_RRReplaceMineral1800(auto3D9E44B5_var);
+            }
+            else if ((lib36280BFF_gf_Commonis_Mineral_900(auto3D9E44B5_var) == true)) {
+                libCC907F2F_gf_RRReplaceMineral900(auto3D9E44B5_var);
+            }
+        }
+
+        if ((libCC907F2F_gv_rRis_Rich_Vespen == true)) {
+            if ((lib36280BFF_gf_Commonis_Vespene_2250(auto3D9E44B5_var) == true)) {
+                libCC907F2F_gf_RRReplaceVespenGeyser(auto3D9E44B5_var);
+            }
+        }
+
+    }
+}
+
+bool libCC907F2F_gf_RRis_ReplaceSmallResource (unit lp_unit) {
+    // Automatic Variable Declarations
+    // Implementation
+    if ((libNtve_gf_UnitGetPropertyResources(lp_unit, c_unitPropCurrent) <= lib36280BFF_gv_commonsmallMineralResource)) {
+        if ((libCC907F2F_gv_rRis_Replace_Small_Resources == true)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    else {
+        return false;
+    }
+}
+
+void libCC907F2F_gf_RRReplaceMineral1800 (unit lp_unit) {
+    // Variable Declarations
+    point lv_Point;
+    int lv_Quant;
+    unit lv_Druza;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Implementation
+    lv_Point = UnitGetPosition(lp_unit);
+    lv_Quant = libNtve_gf_UnitGetPropertyResources(lp_unit, c_unitPropCurrent);
+    UnitRemove(lp_unit);
+    libNtve_gf_CreateUnitsAtPoint2(1, "RichMineralField", c_unitCreateIgnorePlacement, 0, lv_Point);
+    lv_Druza = UnitLastCreated();
+    UnitSetPropertyFixed(lv_Druza, c_unitPropResources, lv_Quant);
+}
+
+void libCC907F2F_gf_RRReplaceMineral900 (unit lp_unit) {
+    // Variable Declarations
+    point lv_Point;
+    int lv_Quant;
+    unit lv_Druza;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Implementation
+    lv_Point = UnitGetPosition(lp_unit);
+    lv_Quant = libNtve_gf_UnitGetPropertyResources(lp_unit, c_unitPropCurrent);
+    UnitRemove(lp_unit);
+    libNtve_gf_CreateUnitsAtPoint2(1, "RichMineralField750", c_unitCreateIgnorePlacement, 0, lv_Point);
+    lv_Druza = UnitLastCreated();
+    UnitSetPropertyFixed(lv_Druza, c_unitPropResources, lv_Quant);
+}
+
+void libCC907F2F_gf_RRReplaceVespenGeyser (unit lp_unit) {
+    // Variable Declarations
+    point lv_Point;
+    int lv_Quant;
+    unit lv_Druza;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Implementation
+    lv_Point = UnitGetPosition(lp_unit);
+    lv_Quant = libNtve_gf_UnitGetPropertyResources(lp_unit, c_unitPropCurrent);
+    UnitRemove(lp_unit);
+    libNtve_gf_CreateUnitsAtPoint2(1, "RichVespeneGeyser", c_unitCreateIgnorePlacement, 0, lv_Point);
+    lv_Druza = UnitLastCreated();
+    UnitSetPropertyFixed(lv_Druza, c_unitPropResources, lv_Quant);
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: Launch
+//--------------------------------------------------------------------------------------------------
+bool libCC907F2F_gt_Launch_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libCC907F2F_gf_GetOptions();
+    libCC907F2F_gf_RRGetInfoForPlayer();
+    TextExpressionSetToken("Param/Expression/lib_CC907F2F_A9782117", "FulName", lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_fullName);
+    HelpPanelAddTip(PlayerGroupAll(), libNtve_gf_FormatTipTitle(TextExpressionAssemble("Param/Expression/lib_CC907F2F_A9782117"), libNtve_ge_TipType_NormalTip), lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_name, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_icon_Path);
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat);
+    libCC907F2F_gf_RRPickEachResources();
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libCC907F2F_gt_Launch_Init () {
+    libCC907F2F_gt_Launch = TriggerCreate("libCC907F2F_gt_Launch_Func");
+}
+
+void libCC907F2F_InitTriggers () {
+    libCC907F2F_gt_Launch_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool libCC907F2F_InitLib_completed = false;
+
+void libCC907F2F_InitLib () {
+    if (libCC907F2F_InitLib_completed) {
+        return;
+    }
+
+    libCC907F2F_InitLib_completed = true;
+
+    libCC907F2F_InitLibraries();
+    libCC907F2F_InitVariables();
+    libCC907F2F_InitTriggers();
+}
+
+include "Lib39D1ECFB"
+include "Lib36280BFF"
+

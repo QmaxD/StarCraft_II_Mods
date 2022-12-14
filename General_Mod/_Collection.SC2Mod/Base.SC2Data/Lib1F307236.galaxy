@@ -1,0 +1,481 @@
+include "TriggerLibs/NativeLib"
+include "Lib39D1ECFB_h"
+include "Lib36280BFF_h"
+
+include "Lib1F307236_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: 06 Units get stronger from kills | UBK
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void lib1F307236_InitLibraries () {
+    libNtve_InitVariables();
+    lib39D1ECFB_InitVariables();
+    lib36280BFF_InitVariables();
+}
+
+// Variable Initialization
+bool lib1F307236_InitVariables_completed = false;
+
+void lib1F307236_InitVariables () {
+    if (lib1F307236_InitVariables_completed) {
+        return;
+    }
+
+    lib1F307236_InitVariables_completed = true;
+
+    lib1F307236_gv_modInformation.lv_uBKOption_1D18540 = "х40";
+    lib1F307236_gv_modInformation.lv_uBKOption_1D18520 = "х20";
+    lib1F307236_gv_modInformation.lv_uBKOption_1D18510 = "х10";
+    lib1F307236_gv_modInformation.lv_uBKOption_1D1855 = "х5";
+    lib1F307236_gv_modInformation.lv_uBKOption_2D094D0B0 = "Да";
+    lib1F307236_gv_modInformation.lv_uBKOption_2D09DD0B5D182 = "Нет";
+    lib1F307236_gv_modInformation.lv_uBKOption_3D094D0B0 = "Да";
+    lib1F307236_gv_modInformation.lv_uBKOption_3D09DD0B5D182 = "Нет";
+    lib1F307236_gv_modInformation.lv_uBKOption_4D094D0B0 = "Да";
+    lib1F307236_gv_modInformation.lv_uBKOption_4D09DD0B5D182 = "Нет";
+    lib1F307236_gv_uBKkillBuff = 20;
+    lib1F307236_gv_uBKdataBonus = 0.05;
+}
+
+// Functions
+void lib1F307236_gf_SetupInformation (int lp_modIndex) {
+    // Variable Declarations
+    int lv__optionIndex;
+    int lv__optionValueIndex;
+    int lv__default_Option_1;
+    int lv__default_Option_2;
+    int lv__default_Option_3;
+    int lv__default_Option_4;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv__default_Option_1 = 3;
+    lv__default_Option_2 = 1;
+    lv__default_Option_3 = 2;
+    lv__default_Option_4 = 1;
+
+    // Implementation
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_name = StringExternal("Param/Value/lib_1F307236_4DB0F3DE");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_fullName = StringExternal("Param/Value/lib_1F307236_57BE7C52");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_description = StringExternal("Param/Value/lib_1F307236_A6EE720D");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_icon_Path = "Assets\\Textures\\killbots_coop.dds";
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_is_Included = true;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_saturation = 3;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_1F307236_C8A54FC5");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_1F307236_8ABDD3C0");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib1F307236_gv_modInformation.lv_uBKOption_1D18540;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_1F307236_5C2581D8");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib1F307236_gv_modInformation.lv_uBKOption_1D18520;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_1F307236_3DD8A47D");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib1F307236_gv_modInformation.lv_uBKOption_1D18510;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_1F307236_31DA5896");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib1F307236_gv_modInformation.lv_uBKOption_1D1855;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_1F307236_F53F7A39");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_1].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_1F307236_96E1A4F0");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_1F307236_509CFA8A");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib1F307236_gv_modInformation.lv_uBKOption_2D094D0B0;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_1F307236_3962BAAD");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib1F307236_gv_modInformation.lv_uBKOption_2D09DD0B5D182;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_1F307236_FE36C2B7");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_2;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_2].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_1F307236_92555BEB");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_1F307236_53DA24AC");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib1F307236_gv_modInformation.lv_uBKOption_3D094D0B0;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_1F307236_976DA444");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib1F307236_gv_modInformation.lv_uBKOption_3D09DD0B5D182;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_1F307236_87DB72C6");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_3;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_3].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_1F307236_16FB6C74");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_1F307236_95A26A5D");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib1F307236_gv_modInformation.lv_uBKOption_4D094D0B0;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_1F307236_0F56F231");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib1F307236_gv_modInformation.lv_uBKOption_4D09DD0B5D182;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_1F307236_3FA86930");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_4;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_4].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_number_Game_Options = lv__optionIndex;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_start_Trigger = lib1F307236_gt_Launch;
+}
+
+void lib1F307236_gf_GetOptions () {
+    // Automatic Variable Declarations
+    string autoEEAC70C0_val;
+    playergroup auto5A9C4865_g;
+    int auto5A9C4865_var;
+    playergroup auto10454AFF_g;
+    int auto10454AFF_var;
+    playergroup auto46DEABB9_g;
+    int auto46DEABB9_var;
+    playergroup auto7706B839_g;
+    int auto7706B839_var;
+
+    // Implementation
+    autoEEAC70C0_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[1].lv_values[0].lv_valueString;
+    if (autoEEAC70C0_val == lib1F307236_gv_modInformation.lv_uBKOption_1D18540) {
+        lib1F307236_gv_uBKis_RiseUnitLevel = true;
+        lib1F307236_gv_uBKdataBonus = 0.025;
+        lib1F307236_gv_uBKkillBuff = 40;
+        auto5A9C4865_g = PlayerGroupActive();
+        auto5A9C4865_var = -1;
+        while (true) {
+            auto5A9C4865_var = PlayerGroupNextPlayer(auto5A9C4865_g, auto5A9C4865_var);
+            if (auto5A9C4865_var < 0) { break; }
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackUpgradeID", "Modification.DamageTotalMultiplier[" + IntToString(0) + "]", auto5A9C4865_var, "0.025", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackUpgradeID", "Modification.DamageTotalMultiplier[" + IntToString(1) + "]", auto5A9C4865_var, "0.025", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackUpgradeID", "Modification.DamageTotalMultiplier[" + IntToString(2) + "]", auto5A9C4865_var, "0.025", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackUpgradeID", "Modification.DamageTotalMultiplier[" + IntToString(3) + "]", auto5A9C4865_var, "0.025", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackUpgradeID", "Modification.DamageTotalMultiplier[" + IntToString(4) + "]", auto5A9C4865_var, "0.025", c_upgradeOperationSet);
+        }
+    }
+    else if (autoEEAC70C0_val == lib1F307236_gv_modInformation.lv_uBKOption_1D18520) {
+        lib1F307236_gv_uBKis_RiseUnitLevel = true;
+        lib1F307236_gv_uBKdataBonus = 0.05;
+        lib1F307236_gv_uBKkillBuff = 20;
+        auto10454AFF_g = PlayerGroupActive();
+        auto10454AFF_var = -1;
+        while (true) {
+            auto10454AFF_var = PlayerGroupNextPlayer(auto10454AFF_g, auto10454AFF_var);
+            if (auto10454AFF_var < 0) { break; }
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackUpgradeID", "Modification.DamageTotalMultiplier[" + IntToString(0) + "]", auto10454AFF_var, "0.05", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackUpgradeID", "Modification.DamageTotalMultiplier[" + IntToString(1) + "]", auto10454AFF_var, "0.05", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackUpgradeID", "Modification.DamageTotalMultiplier[" + IntToString(2) + "]", auto10454AFF_var, "0.05", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackUpgradeID", "Modification.DamageTotalMultiplier[" + IntToString(3) + "]", auto10454AFF_var, "0.05", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackUpgradeID", "Modification.DamageTotalMultiplier[" + IntToString(4) + "]", auto10454AFF_var, "0.05", c_upgradeOperationSet);
+        }
+    }
+    else if (autoEEAC70C0_val == lib1F307236_gv_modInformation.lv_uBKOption_1D18510) {
+        lib1F307236_gv_uBKis_RiseUnitLevel = true;
+        lib1F307236_gv_uBKdataBonus = 0.1;
+        lib1F307236_gv_uBKkillBuff = 10;
+        auto46DEABB9_g = PlayerGroupActive();
+        auto46DEABB9_var = -1;
+        while (true) {
+            auto46DEABB9_var = PlayerGroupNextPlayer(auto46DEABB9_g, auto46DEABB9_var);
+            if (auto46DEABB9_var < 0) { break; }
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackUpgradeID", "Modification.DamageTotalMultiplier[" + IntToString(0) + "]", auto46DEABB9_var, "0.1", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackUpgradeID", "Modification.DamageTotalMultiplier[" + IntToString(1) + "]", auto46DEABB9_var, "0.1", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackUpgradeID", "Modification.DamageTotalMultiplier[" + IntToString(2) + "]", auto46DEABB9_var, "0.1", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackUpgradeID", "Modification.DamageTotalMultiplier[" + IntToString(3) + "]", auto46DEABB9_var, "0.1", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackUpgradeID", "Modification.DamageTotalMultiplier[" + IntToString(4) + "]", auto46DEABB9_var, "0.1", c_upgradeOperationSet);
+        }
+    }
+    else if (autoEEAC70C0_val == lib1F307236_gv_modInformation.lv_uBKOption_1D1855) {
+        lib1F307236_gv_uBKis_RiseUnitLevel = true;
+        lib1F307236_gv_uBKdataBonus = 0.2;
+        lib1F307236_gv_uBKkillBuff = 5;
+        auto7706B839_g = PlayerGroupActive();
+        auto7706B839_var = -1;
+        while (true) {
+            auto7706B839_var = PlayerGroupNextPlayer(auto7706B839_g, auto7706B839_var);
+            if (auto7706B839_var < 0) { break; }
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackUpgradeID", "Modification.DamageTotalMultiplier[" + IntToString(0) + "]", auto7706B839_var, "0.2", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackUpgradeID", "Modification.DamageTotalMultiplier[" + IntToString(1) + "]", auto7706B839_var, "0.2", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackUpgradeID", "Modification.DamageTotalMultiplier[" + IntToString(2) + "]", auto7706B839_var, "0.2", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackUpgradeID", "Modification.DamageTotalMultiplier[" + IntToString(3) + "]", auto7706B839_var, "0.2", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackUpgradeID", "Modification.DamageTotalMultiplier[" + IntToString(4) + "]", auto7706B839_var, "0.2", c_upgradeOperationSet);
+        }
+    }
+    else {
+    }
+    if ((lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[2].lv_values[0].lv_valueString == lib1F307236_gv_modInformation.lv_uBKOption_2D094D0B0)) {
+        lib1F307236_gv_uBKis_ResizeUnit = true;
+    }
+
+    if ((lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[3].lv_values[0].lv_valueString == lib1F307236_gv_modInformation.lv_uBKOption_3D094D0B0)) {
+        lib1F307236_gv_uBKis_DependingOnRace = true;
+    }
+
+    if ((lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[4].lv_values[0].lv_valueString == lib1F307236_gv_modInformation.lv_uBKOption_4D094D0B0)) {
+        lib1F307236_gv_uBKis_DependingFromTheirUnit = true;
+    }
+
+}
+
+void lib1F307236_gf_TriggersTurnOn () {
+    // Automatic Variable Declarations
+    // Implementation
+    TriggerEnable(lib1F307236_gt_UBKmakeUnitBuff, true);
+}
+
+void lib1F307236_gf_UBKGetInfoForPlayer () {
+    // Variable Declarations
+    text lv__description;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Implementation
+    if ((lib1F307236_gv_uBKis_RiseUnitLevel == true)) {
+        TextExpressionSetToken("Param/Expression/lib_1F307236_5A2936CE", "killBuff", IntToText(lib1F307236_gv_uBKkillBuff));
+        lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_1F307236_5A2936CE"));
+    }
+
+    if ((lib1F307236_gv_uBKis_ResizeUnit == true)) {
+        lv__description = (lv__description + StringExternal("Param/Value/lib_1F307236_AC6A7093"));
+    }
+    else {
+        lv__description = (lv__description + StringExternal("Param/Value/lib_1F307236_544BD752"));
+    }
+    if ((lib1F307236_gv_uBKis_DependingOnRace == true)) {
+        lv__description = (lv__description + StringExternal("Param/Value/lib_1F307236_6E279959"));
+    }
+    else {
+        lv__description = (lv__description + StringExternal("Param/Value/lib_1F307236_1D83C8B9"));
+    }
+    if ((lib1F307236_gv_uBKis_DependingFromTheirUnit == true)) {
+        lv__description = (lv__description + StringExternal("Param/Value/lib_1F307236_37F0358F"));
+    }
+    else {
+        lv__description = (lv__description + StringExternal("Param/Value/lib_1F307236_BDA0B740"));
+    }
+    lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = lv__description;
+    lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat = StringToText("");
+}
+
+fixed lib1F307236_gf_UBKmaxLife (int lp_kills, fixed lp_index) {
+    // Automatic Variable Declarations
+    // Implementation
+    return (1.0 + (lp_kills / (lib1F307236_gv_uBKkillBuff * lp_index)));
+}
+
+fixed lib1F307236_gf_UBKmaxShield (int lp_kills, fixed lp_index) {
+    // Automatic Variable Declarations
+    // Implementation
+    return (1.0 + (lp_kills / (lib1F307236_gv_uBKkillBuff * lp_index)));
+}
+
+fixed lib1F307236_gf_UBKregenLife (int lp_kills, fixed lp_index) {
+    // Automatic Variable Declarations
+    // Implementation
+    return ((lp_kills * lib1F307236_gv_uBKdataBonus) / lp_index);
+}
+
+fixed lib1F307236_gf_UBKregenShield (int lp_kills, fixed lp_index) {
+    // Automatic Variable Declarations
+    // Implementation
+    return ((lp_kills * lib1F307236_gv_uBKdataBonus) / lp_index);
+}
+
+fixed lib1F307236_gf_UBKgetSizeUnit (int lp_kills) {
+    // Automatic Variable Declarations
+    // Implementation
+    return (Pow((1.0 + (lp_kills * (1.0 / lib1F307236_gv_uBKkillBuff))), 0.3333) * 100.0);
+}
+
+fixed lib1F307236_gf_UBKgetRadiusUnit (int lp_kills) {
+    // Automatic Variable Declarations
+    // Implementation
+    return (Pow((1.0 + (lp_kills * (1.0 / lib1F307236_gv_uBKkillBuff))), 0.3333) * 100.0);
+}
+
+string lib1F307236_gf_UBKgetBehavior (unit lp_unit, int lp_kills) {
+    // Automatic Variable Declarations
+    // Implementation
+    UnitBehaviorRemove(lp_unit, "LargeCombatUnitID", -1);
+    UnitBehaviorRemove(lp_unit, "BecomeFlyingID", -1);
+    if (((lp_kills >= (lib1F307236_gv_uBKkillBuff * 1)) && (lp_kills < (lib1F307236_gv_uBKkillBuff * 2)))) {
+        return "LargeCombatUnitID";
+    }
+    else {
+        if ((lp_kills >= (lib1F307236_gv_uBKkillBuff * 2))) {
+            return "BecomeFlyingID";
+        }
+        else {
+            return "";
+        }
+    }
+}
+
+trigger auto_lib1F307236_gf_UBKGiveBuff_Trigger = null;
+unit auto_lib1F307236_gf_UBKGiveBuff_lp_killingUnit;
+string auto_lib1F307236_gf_UBKGiveBuff_lp_typeOfKillingUnit;
+string auto_lib1F307236_gf_UBKGiveBuff_lp_race;
+
+void lib1F307236_gf_UBKGiveBuff (unit lp_killingUnit, string lp_typeOfKillingUnit, string lp_race) {
+    auto_lib1F307236_gf_UBKGiveBuff_lp_killingUnit = lp_killingUnit;
+    auto_lib1F307236_gf_UBKGiveBuff_lp_typeOfKillingUnit = lp_typeOfKillingUnit;
+    auto_lib1F307236_gf_UBKGiveBuff_lp_race = lp_race;
+
+    if (auto_lib1F307236_gf_UBKGiveBuff_Trigger == null) {
+        auto_lib1F307236_gf_UBKGiveBuff_Trigger = TriggerCreate("auto_lib1F307236_gf_UBKGiveBuff_TriggerFunc");
+    }
+
+    TriggerExecute(auto_lib1F307236_gf_UBKGiveBuff_Trigger, false, false);
+}
+
+bool auto_lib1F307236_gf_UBKGiveBuff_TriggerFunc (bool testConds, bool runActions) {
+    unit lp_killingUnit = auto_lib1F307236_gf_UBKGiveBuff_lp_killingUnit;
+    string lp_typeOfKillingUnit = auto_lib1F307236_gf_UBKGiveBuff_lp_typeOfKillingUnit;
+    string lp_race = auto_lib1F307236_gf_UBKGiveBuff_lp_race;
+
+    // Variable Declarations
+    int lv__kills;
+    fixed lv__sizeUnit;
+    fixed lv__indexRace;
+    fixed lv__indexRise;
+    int lv__originalMaxLife;
+    int lv__originalRegenLife;
+    int lv__originalMaxShield;
+    int lv__originalRegenShield;
+
+    // Automatic Variable Declarations
+    string auto669DDC35_val;
+
+    // Variable Initialization
+    lv__kills = libNtve_gf_UnitGetPropertyKills(libNtve_gf_KillingUnit(), c_unitPropCurrent);
+    lv__indexRace = 1.0;
+    lv__indexRise = 1.0;
+
+    // Implementation
+    if (((lib1F307236_gv_uBKis_DependingFromTheirUnit == true) && (UnitGetOwner(EventUnit()) == libNtve_gf_KillingPlayer()) && ((UnitGetType(libNtve_gf_KillingUnit()) != "OrbitalCommand") && (UnitGetType(EventUnit()) != "MULE")) && ((lp_typeOfKillingUnit != "AdeptPhaseShift") && (UnitGetType(libNtve_gf_KillingUnit()) != "AdeptPhaseShift") && (UnitGetType(EventUnit()) != "AdeptPhaseShift")))) {
+        UnitSetPropertyFixed(lp_killingUnit, c_unitPropKills, (UnitGetPropertyInt(lp_killingUnit, c_unitPropKills, c_unitPropCurrent) + 1));
+        lv__kills = libNtve_gf_UnitGetPropertyKills(lp_killingUnit, c_unitPropCurrent);
+    }
+
+    if ((lib1F307236_gv_uBKis_DependingOnRace == true)) {
+        auto669DDC35_val = lp_race;
+        if (auto669DDC35_val == "Prot") {
+            lv__indexRace = lib1F307236_gv_uBKindexProtoss;
+        }
+        else if (auto669DDC35_val == "Terr") {
+            lv__indexRace = lib1F307236_gv_uBKindexTerran;
+        }
+        else if (auto669DDC35_val == "Zerg") {
+            lv__indexRace = lib1F307236_gv_uBKindexZerg;
+        }
+        else {
+        }
+    }
+
+    lv__originalMaxLife = CatalogFieldValueGetAsInt(c_gameCatalogUnit, lp_typeOfKillingUnit, "LifeMax", libNtve_gf_KillingPlayer());
+    lv__originalRegenLife = CatalogFieldValueGetAsInt(c_gameCatalogUnit, lp_typeOfKillingUnit, "LifeRegenRate", libNtve_gf_KillingPlayer());
+    UnitSetPropertyFixed(lp_killingUnit, c_unitPropLifeMax, FloorI((lv__originalMaxLife * (lib1F307236_gf_UBKmaxLife(lv__kills, lv__indexRace) * lv__indexRise))));
+    UnitSetPropertyFixed(lp_killingUnit, c_unitPropLifeRegen, FloorI((lv__originalRegenLife + (lib1F307236_gf_UBKregenLife(lv__kills, lv__indexRace) * lv__indexRise))));
+    if ((lp_race == "Prot")) {
+        lv__originalMaxShield = CatalogFieldValueGetAsInt(c_gameCatalogUnit, lp_typeOfKillingUnit, "ShieldsMax", libNtve_gf_KillingPlayer());
+        lv__originalRegenShield = CatalogFieldValueGetAsInt(c_gameCatalogUnit, lp_typeOfKillingUnit, "ShieldRegenRate", libNtve_gf_KillingPlayer());
+        UnitSetPropertyFixed(lp_killingUnit, c_unitPropShieldsMax, FloorI((lv__originalMaxShield * (lib1F307236_gf_UBKmaxShield(lv__kills, lv__indexRace) * lv__indexRise))));
+        UnitSetPropertyFixed(lp_killingUnit, c_unitPropShieldsRegen, FloorI((lv__originalRegenShield + (lib1F307236_gf_UBKregenShield(lv__kills, lv__indexRace) * lv__indexRise))));
+    }
+
+    UnitBehaviorRemove(lp_killingUnit, "AttackUpgradeID", -1);
+    UnitBehaviorAdd(lp_killingUnit, "AttackUpgradeID", lp_killingUnit, FloorI((lv__kills * (1.0 / lv__indexRace))));
+    UnitBehaviorRemove(lp_killingUnit, "ArmorUpgradeID", -1);
+    UnitBehaviorAdd(lp_killingUnit, "ArmorUpgradeID", lp_killingUnit, FloorI((FloorI((lv__kills * (1.0 / lv__indexRace))) / lib1F307236_gv_uBKkillBuff)));
+    if ((lib1F307236_gv_uBKis_ResizeUnit == true)) {
+        lv__sizeUnit = lib1F307236_gf_UBKgetSizeUnit(lv__kills);
+        UnitSetScale(lp_killingUnit, lv__sizeUnit, lv__sizeUnit, lv__sizeUnit);
+        UnitBehaviorAdd(lp_killingUnit, lib1F307236_gf_UBKgetBehavior(lp_killingUnit, lv__kills), lp_killingUnit, FloorI((UnitTypeGetProperty(UnitGetType(lp_killingUnit), c_unitPropRadius) * (lv__sizeUnit / 110.0))));
+    }
+
+    return true;
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: Launch
+//--------------------------------------------------------------------------------------------------
+bool lib1F307236_gt_Launch_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lib1F307236_gf_GetOptions();
+    lib1F307236_gf_UBKGetInfoForPlayer();
+    TextExpressionSetToken("Param/Expression/lib_1F307236_A2EA92B3", "FulName", lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_fullName);
+    HelpPanelAddTip(PlayerGroupAll(), libNtve_gf_FormatTipTitle(TextExpressionAssemble("Param/Expression/lib_1F307236_A2EA92B3"), libNtve_ge_TipType_NormalTip), lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_name, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_icon_Path);
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat);
+    lib1F307236_gf_TriggersTurnOn();
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib1F307236_gt_Launch_Init () {
+    lib1F307236_gt_Launch = TriggerCreate("lib1F307236_gt_Launch_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: UBK | makeUnitBuff
+//--------------------------------------------------------------------------------------------------
+bool lib1F307236_gt_UBKmakeUnitBuff_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((lib36280BFF_gf_Commonis_UnitOwnerActivePlayer(EventUnit()) == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((lib1F307236_gv_uBKis_RiseUnitLevel == true)) {
+        lib1F307236_gf_UBKGiveBuff(libNtve_gf_KillingUnit(), UnitGetType(libNtve_gf_KillingUnit()), PlayerRace(libNtve_gf_KillingPlayer()));
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib1F307236_gt_UBKmakeUnitBuff_Init () {
+    lib1F307236_gt_UBKmakeUnitBuff = TriggerCreate("lib1F307236_gt_UBKmakeUnitBuff_Func");
+    TriggerEnable(lib1F307236_gt_UBKmakeUnitBuff, false);
+    TriggerAddEventUnitDied(lib1F307236_gt_UBKmakeUnitBuff, null);
+}
+
+void lib1F307236_InitTriggers () {
+    lib1F307236_gt_Launch_Init();
+    lib1F307236_gt_UBKmakeUnitBuff_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool lib1F307236_InitLib_completed = false;
+
+void lib1F307236_InitLib () {
+    if (lib1F307236_InitLib_completed) {
+        return;
+    }
+
+    lib1F307236_InitLib_completed = true;
+
+    lib1F307236_InitLibraries();
+    lib1F307236_InitVariables();
+    lib1F307236_InitTriggers();
+}
+
+include "Lib39D1ECFB"
+include "Lib36280BFF"
+

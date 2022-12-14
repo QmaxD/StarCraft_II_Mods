@@ -1,0 +1,1316 @@
+include "TriggerLibs/NativeLib"
+include "Lib36280BFF_h"
+include "Lib3BFC9D7F_h"
+include "LibCC907F2F_h"
+include "Lib3A730930_h"
+include "Lib0D5719D7_h"
+include "Lib1F307236_h"
+include "Lib737D3B35_h"
+include "Lib620365F2_h"
+include "Lib1F00594A_h"
+include "LibA56FBBB5_h"
+include "LibFE150EF4_h"
+include "LibCBA2262F_h"
+include "LibE019E1BF_h"
+include "Lib72901696_h"
+include "LibDF67D79D_h"
+include "Lib81F0063E_h"
+include "Lib0A71E558_h"
+include "Lib63FEFBFB_h"
+include "LibA47BADE5_h"
+
+include "Lib39D1ECFB_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Navigation
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void lib39D1ECFB_InitLibraries () {
+    libNtve_InitVariables();
+    lib36280BFF_InitVariables();
+    lib3BFC9D7F_InitVariables();
+    libCC907F2F_InitVariables();
+    lib3A730930_InitVariables();
+    lib0D5719D7_InitVariables();
+    lib1F307236_InitVariables();
+    lib737D3B35_InitVariables();
+    lib620365F2_InitVariables();
+    lib1F00594A_InitVariables();
+    libA56FBBB5_InitVariables();
+    libFE150EF4_InitVariables();
+    libCBA2262F_InitVariables();
+    libE019E1BF_InitVariables();
+    lib72901696_InitVariables();
+    libDF67D79D_InitVariables();
+    lib81F0063E_InitVariables();
+    lib0A71E558_InitVariables();
+    lib63FEFBFB_InitVariables();
+    libA47BADE5_InitVariables();
+}
+
+// Variable Initialization
+bool lib39D1ECFB_InitVariables_completed = false;
+
+void lib39D1ECFB_InitVariables () {
+    int init_i;
+    int init_i1;
+    int init_i2;
+
+    if (lib39D1ECFB_InitVariables_completed) {
+        return;
+    }
+
+    lib39D1ECFB_InitVariables_completed = true;
+
+    for (init_i = 0; init_i <= 31; init_i += 1) {
+        for (init_i1 = 0; init_i1 <= 20; init_i1 += 1) {
+            for (init_i2 = 0; init_i2 <= 50; init_i2 += 1) {
+                lib39D1ECFB_gv_mods[init_i].lv_game_Options[init_i1].lv_values[init_i2].lv_valueString = "";
+            }
+            lib39D1ECFB_gv_mods[init_i].lv_game_Options[init_i1].lv_listBox_Label = c_invalidDialogControlId;
+            lib39D1ECFB_gv_mods[init_i].lv_game_Options[init_i1].lv_listBox_Pulldown = c_invalidDialogControlId;
+            lib39D1ECFB_gv_mods[init_i].lv_game_Options[init_i1].lv_defaultIndex = 1;
+            lib39D1ECFB_gv_mods[init_i].lv_game_Options[init_i1].lv_editBox_Input = c_invalidDialogControlId;
+            lib39D1ECFB_gv_mods[init_i].lv_game_Options[init_i1].lv_editBox_Label = c_invalidDialogControlId;
+        }
+        lib39D1ECFB_gv_mods[init_i].lv_modDescriptionDialog = c_invalidDialogId;
+        lib39D1ECFB_gv_mods[init_i].lv_modSettingsDialog = c_invalidDialogId;
+        lib39D1ECFB_gv_mods[init_i].lv_item_Button_ModSettings = c_invalidDialogControlId;
+        lib39D1ECFB_gv_mods[init_i].lv_item_Label_ModSettings_SettingsType = c_invalidDialogControlId;
+        lib39D1ECFB_gv_mods[init_i].lv_item_CheckBox_ModSettings_Players = c_invalidDialogControlId;
+    }
+    lib39D1ECFB_gv_is_First_Create = true;
+    lib39D1ECFB_gv_players_Group_UI = PlayerGroupEmpty();
+    lib39D1ECFB_gv_first_Mod_In_Navigation = 1;
+    lib39D1ECFB_gv_dialog_Nav = c_invalidDialogId;
+    lib39D1ECFB_gv_item_CheckBox_Common = c_invalidDialogControlId;
+    lib39D1ECFB_gv_item_Button_Nav_Up = c_invalidDialogControlId;
+    lib39D1ECFB_gv_item_Button_Nav_Down = c_invalidDialogControlId;
+    lib39D1ECFB_gv_dialog_ModsList = c_invalidDialogId;
+    for (init_i = 0; init_i <= 25; init_i += 1) {
+        lib39D1ECFB_gv_item_CheckBox_ModsList[init_i] = c_invalidDialogControlId;
+    }
+    for (init_i = 0; init_i <= 25; init_i += 1) {
+        lib39D1ECFB_gv_item_Button_ModsList[init_i] = c_invalidDialogControlId;
+    }
+    lib39D1ECFB_gv_dialog_ModBottom = c_invalidDialogId;
+    lib39D1ECFB_gv_item_Button_ModBottom_Start = c_invalidDialogControlId;
+    lib39D1ECFB_gv_item_Button_Nav_Color_On = Color(90.20, 55.69, 4.31);
+    lib39D1ECFB_gv_item_Button_Nav_Color_Off = Color(98.82, 90.98, 72.94);
+    lib39D1ECFB_gv_item_Button_Nav_Text_Color = Color(0,0,0);
+    lib39D1ECFB_gv_item_Button_Mod_Color_On = Color(100.00, 100.00, 0.00);
+    lib39D1ECFB_gv_item_Button_Mod_Color_Off = Color(100.00, 100.00, 100.00);
+    lib39D1ECFB_gv_item_Button_Mod_Color_Enable = Color(78.43, 3.92, 5.88);
+    lib39D1ECFB_gv_item_Button_Mod_Text_Color_On = Color(100.00, 100.00, 100.00);
+    lib39D1ECFB_gv_item_Button_Mod_Text_Color_Off = Color(30.20, 30.20, 30.20);
+    lib39D1ECFB_gv_item_Button_Mod_Text_Color_Enable = Color(100.00, 0.00, 0.00);
+    lib39D1ECFB_gv_item_Name_ModDescription_Color = Color(66.67, 0.00, 0.00);
+    lib39D1ECFB_gv_item_Description_ModDescription_Color = Color(100.00, 100.00, 100.00);
+    lib39D1ECFB_gv_item_Button_ModSettings_Color_Enable = Color(0.00, 100.00, 0.00);
+    lib39D1ECFB_gv_item_Button_ModSettings_Color_Disable = Color(100.00, 100.00, 100.00);
+    lib39D1ECFB_gv_item_Button_ModSettings_Color_Header = Color(62.35, 5.88, 7.06);
+    lib39D1ECFB_gv_item_Button_ModSettings_Color_Pulldown = Color(100.00, 100.00, 0.00);
+    lib39D1ECFB_gv_item_Button_ModBottom_Start_Color_Enable = Color(0.00, 100.00, 0.00);
+    lib39D1ECFB_gv_item_Button_ModBottom_Start_Color_Disable = Color(100.00, 50.20, 25.10);
+    lib39D1ECFB_gv_item_Button_Mod_Enable_Text = StringExternal("Param/Value/lib_39D1ECFB_33C53F08");
+    lib39D1ECFB_gv_item_Button_Mod_Disable_Text = StringExternal("Param/Value/lib_39D1ECFB_7E91DAF0");
+    lib39D1ECFB_gv_item_Button_ModBottom_Random_Text = StringExternal("Param/Value/lib_39D1ECFB_1E5117DF");
+    lib39D1ECFB_gv_item_Button_ModBottom_Start_Text = StringExternal("Param/Value/lib_39D1ECFB_236343E0");
+    lib39D1ECFB_gv_dialog_Mods_Width = 575;
+    lib39D1ECFB_gv_dialog_Mods_Height = 750;
+    lib39D1ECFB_gv_item_Button_Nav_Width = 505;
+    lib39D1ECFB_gv_item_Button_Nav_Height = 50;
+    lib39D1ECFB_gv_item_Button_Standard_Width = 75;
+    lib39D1ECFB_gv_item_Button_Standard_Height = 75;
+    lib39D1ECFB_gv_dialog_ModsList_Height = 550;
+    lib39D1ECFB_gv_item_CheckBox_Width = 50;
+    lib39D1ECFB_gv_item_CheckBox_Height = 50;
+    lib39D1ECFB_gv_item_Button_Mod_Width = 475;
+    lib39D1ECFB_gv_item_Button_Mod_Height = 50;
+    lib39D1ECFB_gv_dialog_ModDescription_Height = 165;
+    lib39D1ECFB_gv_dialog_ModSettings_Width = 1030;
+    lib39D1ECFB_gv_dialog_ModSettings_Height = 908;
+    lib39D1ECFB_gv_dialog_ModBottom_Width = 1600;
+    lib39D1ECFB_gv_dialog_ModBottom_Height = 165;
+    lib39D1ECFB_gv_dialog_Mods_OffsetX = -512;
+    lib39D1ECFB_gv_dialog_Mods_OffsetY = -25;
+    lib39D1ECFB_gv_item_CheckBox_OffsetX = 20;
+    lib39D1ECFB_gv_item_ModsList_OffsetY_Shift = 50;
+    lib39D1ECFB_gv_dialog_ModDescription_OffsetY = -475;
+    lib39D1ECFB_gv_dialog_ModSettings_OffsetX = 284;
+    lib39D1ECFB_gv_dialog_ModSettings_OffsetY = -104;
+    lib39D1ECFB_gv_dialog_ModBottom_OffsetY = 425;
+    lib39D1ECFB_gv_dialog = c_invalidDialogId;
+    lib39D1ECFB_gv_dialogpanel = c_invalidDialogControlId;
+    lib39D1ECFB_gv_dialogbutton = c_invalidDialogControlId;
+    lib39D1ECFB_gv_dialogbutton2 = c_invalidDialogControlId;
+    lib39D1ECFB_gv_dialogcheck = c_invalidDialogControlId;
+    lib39D1ECFB_gv_dialogimage = c_invalidDialogControlId;
+}
+
+// Functions
+void lib39D1ECFB_gf_GetWriteMods () {
+    // Automatic Variable Declarations
+    // Implementation
+    lib39D1ECFB_gv_amount_Mods += 1;
+    lib3BFC9D7F_gf_SetupInformation(lib39D1ECFB_gv_amount_Mods);
+    lib39D1ECFB_gv_amount_Mods += 1;
+    libCC907F2F_gf_SetupInformation(lib39D1ECFB_gv_amount_Mods);
+    lib39D1ECFB_gv_amount_Mods += 1;
+    lib3A730930_gf_SetupInformation(lib39D1ECFB_gv_amount_Mods);
+    lib39D1ECFB_gv_amount_Mods += 1;
+    lib0D5719D7_gf_SetupInformation(lib39D1ECFB_gv_amount_Mods);
+    lib39D1ECFB_gv_amount_Mods += 1;
+    lib1F307236_gf_SetupInformation(lib39D1ECFB_gv_amount_Mods);
+    lib39D1ECFB_gv_amount_Mods += 1;
+    lib737D3B35_gf_SetupInformation(lib39D1ECFB_gv_amount_Mods);
+    lib39D1ECFB_gv_amount_Mods += 1;
+    lib620365F2_gf_SetupInformation(lib39D1ECFB_gv_amount_Mods);
+    lib39D1ECFB_gv_amount_Mods += 1;
+    lib1F00594A_gf_SetupInformation(lib39D1ECFB_gv_amount_Mods);
+    lib39D1ECFB_gv_amount_Mods += 1;
+    libA56FBBB5_gf_SetupInformation(lib39D1ECFB_gv_amount_Mods);
+    lib39D1ECFB_gv_amount_Mods += 1;
+    libFE150EF4_gf_SetupInformation(lib39D1ECFB_gv_amount_Mods);
+    lib39D1ECFB_gv_amount_Mods += 1;
+    libCBA2262F_gf_SetupInformation(lib39D1ECFB_gv_amount_Mods);
+    lib39D1ECFB_gv_amount_Mods += 1;
+    libE019E1BF_gf_SetupInformation(lib39D1ECFB_gv_amount_Mods);
+    lib39D1ECFB_gv_amount_Mods += 1;
+    lib72901696_gf_SetupInformation(lib39D1ECFB_gv_amount_Mods);
+    lib39D1ECFB_gv_amount_Mods += 1;
+    libDF67D79D_gf_SetupInformation(lib39D1ECFB_gv_amount_Mods);
+    lib39D1ECFB_gv_amount_Mods += 1;
+    lib81F0063E_gf_SetupInformation(lib39D1ECFB_gv_amount_Mods);
+    lib39D1ECFB_gv_amount_Mods += 1;
+    lib0A71E558_gf_SetupInformation(lib39D1ECFB_gv_amount_Mods);
+    lib39D1ECFB_gv_amount_Mods += 1;
+    lib63FEFBFB_gf_SetupInformation(lib39D1ECFB_gv_amount_Mods);
+    lib39D1ECFB_gv_amount_Mods += 1;
+    libA47BADE5_gf_SetupInformation(lib39D1ECFB_gv_amount_Mods);
+}
+
+void lib39D1ECFB_gf_GetValueTextFromValueString () {
+    // Variable Declarations
+    int lv__number_Mod;
+    int lv__number_Option;
+    int lv__number_Option_Value;
+
+    // Automatic Variable Declarations
+    int auto23B67E2F_ae;
+    const int auto23B67E2F_ai = 1;
+    int auto14D17EC5_ae;
+    const int auto14D17EC5_ai = 1;
+    int auto0037034C_ae;
+    const int auto0037034C_ai = 1;
+
+    // Variable Initialization
+
+    // Implementation
+    auto23B67E2F_ae = lib39D1ECFB_gv_amount_Mods;
+    lv__number_Mod = 1;
+    for ( ; ( (auto23B67E2F_ai >= 0 && lv__number_Mod <= auto23B67E2F_ae) || (auto23B67E2F_ai < 0 && lv__number_Mod >= auto23B67E2F_ae) ) ; lv__number_Mod += auto23B67E2F_ai ) {
+        auto14D17EC5_ae = lib39D1ECFB_gv_mods[lv__number_Mod].lv_number_Game_Options;
+        lv__number_Option = 1;
+        for ( ; ( (auto14D17EC5_ai >= 0 && lv__number_Option <= auto14D17EC5_ae) || (auto14D17EC5_ai < 0 && lv__number_Option >= auto14D17EC5_ae) ) ; lv__number_Option += auto14D17EC5_ai ) {
+            auto0037034C_ae = lib39D1ECFB_gv_mods[lv__number_Mod].lv_game_Options[lv__number_Option].lv_valuesNumber;
+            lv__number_Option_Value = 1;
+            for ( ; ( (auto0037034C_ai >= 0 && lv__number_Option_Value <= auto0037034C_ae) || (auto0037034C_ai < 0 && lv__number_Option_Value >= auto0037034C_ae) ) ; lv__number_Option_Value += auto0037034C_ai ) {
+                lib39D1ECFB_gv_mods[lv__number_Mod].lv_game_Options[lv__number_Option].lv_values[lv__number_Option_Value].lv_valueText = StringToText(lib39D1ECFB_gv_mods[lv__number_Mod].lv_game_Options[lv__number_Option].lv_values[lv__number_Option_Value].lv_valueString);
+            }
+        }
+    }
+}
+
+void lib39D1ECFB_gf_GetPlayersGroup () {
+    // Variable Declarations
+    int lv__number_Player;
+
+    // Automatic Variable Declarations
+    const int auto699274CD_ae = 12;
+    const int auto699274CD_ai = 1;
+
+    // Variable Initialization
+
+    // Implementation
+    lv__number_Player = 1;
+    for ( ; ( (auto699274CD_ai >= 0 && lv__number_Player <= auto699274CD_ae) || (auto699274CD_ai < 0 && lv__number_Player >= auto699274CD_ae) ) ; lv__number_Player += auto699274CD_ai ) {
+        if ((PlayerStatus(lv__number_Player) == c_playerStatusActive) && (PlayerType(lv__number_Player) == c_playerTypeUser)) {
+            PlayerGroupAdd(lib36280BFF_gv_commonplayers_Active_Group, lv__number_Player);
+        }
+
+    }
+}
+
+void lib39D1ECFB_gf_PauseGame () {
+    // Automatic Variable Declarations
+    playergroup auto4399C4C2_g;
+    int auto4399C4C2_var;
+    unitgroup autoCB2BD71B_g;
+    int autoCB2BD71B_u;
+    unit autoCB2BD71B_var;
+
+    // Implementation
+    UnitPauseAll(true);
+    AITimePause(true);
+    GameSetMissionTimePaused(true);
+    GamePauseAllCooldowns(true);
+    GamePauseAllCharges(true);
+    auto4399C4C2_g = PlayerGroupAll();
+    auto4399C4C2_var = -1;
+    while (true) {
+        auto4399C4C2_var = PlayerGroupNextPlayer(auto4399C4C2_g, auto4399C4C2_var);
+        if (auto4399C4C2_var < 0) { break; }
+        MeleeSetOption(auto4399C4C2_var, c_meleeOptionVictory, false);
+        MeleeSetOption(auto4399C4C2_var, c_meleeOptionDefeat, false);
+        MeleeSetOption(auto4399C4C2_var, c_meleeOptionStalemate, false);
+        CameraLockInput(auto4399C4C2_var, true);
+        autoCB2BD71B_g = UnitGroup(null, auto4399C4C2_var, RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+        autoCB2BD71B_u = UnitGroupCount(autoCB2BD71B_g, c_unitCountAll);
+        for (;; autoCB2BD71B_u -= 1) {
+            autoCB2BD71B_var = UnitGroupUnitFromEnd(autoCB2BD71B_g, autoCB2BD71B_u);
+            if (autoCB2BD71B_var == null) { break; }
+            libNtve_gf_MakeUnitUncommandable(autoCB2BD71B_var, true);
+        }
+    }
+}
+
+void lib39D1ECFB_gf_UnpauseGame () {
+    // Automatic Variable Declarations
+    playergroup autoEE0551CB_g;
+    int autoEE0551CB_var;
+    unitgroup auto71700D9B_g;
+    int auto71700D9B_u;
+    unit auto71700D9B_var;
+
+    // Implementation
+    autoEE0551CB_g = PlayerGroupAll();
+    autoEE0551CB_var = -1;
+    while (true) {
+        autoEE0551CB_var = PlayerGroupNextPlayer(autoEE0551CB_g, autoEE0551CB_var);
+        if (autoEE0551CB_var < 0) { break; }
+        MeleeSetOption(autoEE0551CB_var, c_meleeOptionVictory, true);
+        MeleeSetOption(autoEE0551CB_var, c_meleeOptionDefeat, true);
+        MeleeSetOption(autoEE0551CB_var, c_meleeOptionStalemate, true);
+        CameraLockInput(autoEE0551CB_var, false);
+        auto71700D9B_g = UnitGroup(null, autoEE0551CB_var, RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+        auto71700D9B_u = UnitGroupCount(auto71700D9B_g, c_unitCountAll);
+        for (;; auto71700D9B_u -= 1) {
+            auto71700D9B_var = UnitGroupUnitFromEnd(auto71700D9B_g, auto71700D9B_u);
+            if (auto71700D9B_var == null) { break; }
+            libNtve_gf_MakeUnitUncommandable(auto71700D9B_var, false);
+        }
+    }
+    GamePauseAllCharges(false);
+    GamePauseAllCooldowns(false);
+    GameSetMissionTimePaused(false);
+    AITimePause(false);
+    UnitPauseAll(false);
+}
+
+void lib39D1ECFB_gf_StartMods () {
+    // Automatic Variable Declarations
+    int autoE3AE3986_ae;
+    const int autoE3AE3986_ai = 1;
+
+    // Implementation
+    DialogDestroy(lib39D1ECFB_gv_dialog_Nav);
+    DialogDestroy(lib39D1ECFB_gv_dialog_ModsList);
+    DialogDestroy(lib39D1ECFB_gv_dialog_ModBottom);
+    DialogDestroy(lib39D1ECFB_gv_mods[0].lv_modDescriptionDialog);
+    DialogDestroy(lib39D1ECFB_gv_mods[0].lv_modSettingsDialog);
+    autoE3AE3986_ae = lib39D1ECFB_gv_amount_Mods;
+    lib39D1ECFB_gv_selected_Mod = 1;
+    for ( ; ( (autoE3AE3986_ai >= 0 && lib39D1ECFB_gv_selected_Mod <= autoE3AE3986_ae) || (autoE3AE3986_ai < 0 && lib39D1ECFB_gv_selected_Mod >= autoE3AE3986_ae) ) ; lib39D1ECFB_gv_selected_Mod += autoE3AE3986_ai ) {
+        DialogDestroy(lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_modDescriptionDialog);
+        DialogDestroy(lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_modSettingsDialog);
+        if ((lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_is_Included == true) && (lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_is_Enable == true)) {
+            TriggerExecute(lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_start_Trigger, true, false);
+        }
+
+    }
+    lib39D1ECFB_gf_UIPlayerElements(true);
+    lib39D1ECFB_gf_GetCount();
+    lib39D1ECFB_gf_UnpauseGame();
+}
+
+void lib39D1ECFB_gf_GetCount () {
+    // Variable Declarations
+    int lv__dialog_Count;
+    int lv__image_Count;
+    int lv__time;
+
+    // Automatic Variable Declarations
+    int autoAC2822C4_val;
+
+    // Variable Initialization
+    lv__dialog_Count = c_invalidDialogId;
+    lv__image_Count = c_invalidDialogControlId;
+    lv__time = lib39D1ECFB_gv_countForStart;
+
+    // Implementation
+    do {
+        DialogDestroy(lv__dialog_Count);
+        DialogCreate(1000, 1000, c_anchorCenter, 0, 0, true);
+        lv__dialog_Count = DialogLastCreated();
+        DialogSetImageVisible(lv__dialog_Count, false);
+        autoAC2822C4_val = lv__time;
+        if (autoAC2822C4_val == 5) {
+            libNtve_gf_CreateDialogItemImage(lv__dialog_Count, 600, 600, c_anchorCenter, 0, 0, StringToText(""), "Assets\\Textures\\battlestation_number_decals_diff_05.dds", c_triggerImageTypeNormal, false, Color(100,100,100), c_triggerBlendModeNormal);
+        }
+        else if (autoAC2822C4_val == 4) {
+            libNtve_gf_CreateDialogItemImage(lv__dialog_Count, 600, 600, c_anchorCenter, 0, 0, StringToText(""), "Assets\\Textures\\battlestation_number_decals_diff_04.dds", c_triggerImageTypeNormal, false, Color(100,100,100), c_triggerBlendModeNormal);
+        }
+        else if (autoAC2822C4_val == 3) {
+            libNtve_gf_CreateDialogItemImage(lv__dialog_Count, 600, 600, c_anchorCenter, 0, 0, StringToText(""), "Assets\\Textures\\battlestation_number_decals_diff_03.dds", c_triggerImageTypeNormal, false, Color(100,100,100), c_triggerBlendModeNormal);
+        }
+        else if (autoAC2822C4_val == 2) {
+            libNtve_gf_CreateDialogItemImage(lv__dialog_Count, 600, 600, c_anchorCenter, 0, 0, StringToText(""), "Assets\\Textures\\battlestation_number_decals_diff_02.dds", c_triggerImageTypeNormal, false, Color(100,100,100), c_triggerBlendModeNormal);
+        }
+        else if (autoAC2822C4_val == 1) {
+            libNtve_gf_CreateDialogItemImage(lv__dialog_Count, 1000, 600, c_anchorCenter, 0, 0, StringToText(""), "Resources\\UI\\go 1_forSCII.dds", c_triggerImageTypeNormal, false, Color(100,100,100), c_triggerBlendModeNormal);
+        }
+        else {
+        }
+        lv__image_Count = DialogControlLastCreated();
+        DialogSetVisible(lv__dialog_Count, PlayerGroupAll(), true);
+        DialogControlFadeTransparency(lv__image_Count, PlayerGroupAll(), 1.25, 100.0);
+        SoundPlayForPlayer(SoundLink("StartTurn", -1), c_maxPlayers, PlayerGroupAll(), 100.0, 0.0);
+        Wait(1.0, c_timeReal);
+        lv__time -= 1;
+    }while ((lv__time > 0));
+    DialogDestroy(lv__dialog_Count);
+}
+
+void lib39D1ECFB_gf_CreateDialogs () {
+    // Automatic Variable Declarations
+    // Implementation
+    lib39D1ECFB_gf_CreateNavigationDialog();
+    lib39D1ECFB_gf_CreateModsListDialog();
+    lib39D1ECFB_gf_CreateModDescriptionDialogs();
+    lib39D1ECFB_gf_CreateModSettingsDialogs();
+    lib39D1ECFB_gf_CreateModBottomDialogs();
+    DialogSetVisible(lib39D1ECFB_gv_dialog_Nav, PlayerGroupAll(), true);
+    DialogSetVisible(lib39D1ECFB_gv_dialog_ModsList, PlayerGroupAll(), true);
+    DialogSetVisible(lib39D1ECFB_gv_mods[0].lv_modDescriptionDialog, PlayerGroupAll(), true);
+    DialogSetVisible(lib39D1ECFB_gv_mods[0].lv_modSettingsDialog, PlayerGroupAll(), true);
+    DialogSetVisible(lib39D1ECFB_gv_dialog_ModBottom, PlayerGroupAll(), true);
+}
+
+void lib39D1ECFB_gf_CreateNavigationDialog () {
+    // Automatic Variable Declarations
+    // Implementation
+    DialogCreate(lib39D1ECFB_gv_dialog_Mods_Width, lib39D1ECFB_gv_dialog_Mods_Height, c_anchorCenter, lib39D1ECFB_gv_dialog_Mods_OffsetX, lib39D1ECFB_gv_dialog_Mods_OffsetY, true);
+    lib39D1ECFB_gv_dialog_Nav = DialogLastCreated();
+    DialogSetImageVisible(DialogLastCreated(), false);
+    libNtve_gf_CreateDialogItemImage(DialogLastCreated(), lib39D1ECFB_gv_dialog_Mods_Width, lib39D1ECFB_gv_dialog_Mods_Height, c_anchorTopLeft, 0, 0, StringToText(""), lib39D1ECFB_gv_dIALOG_IMAGE, c_triggerImageTypeHorizontalBorder, true, lib39D1ECFB_gv_dIALOG_COLOR, c_triggerBlendModeNormal);
+    libNtve_gf_CreateDialogItemImage(DialogLastCreated(), 700, 264, c_anchorTop, 0, 0, StringToText(""), "Assets\\Textures\\ui_battlenet_glues_pageassets_dialog_hexpatternorange.dds", c_triggerImageTypeNormal, true, Color(149*100/255,150*100/255,151*100/255), c_triggerBlendModeNormal);
+    libNtve_gf_CreateDialogItemImage(DialogLastCreated(), 700, 264, c_anchorBottom, 0, 0, StringToText(""), "Assets\\Textures\\ui_battlenet_glues_pageassets_dialog_hexpatternorange.dds", c_triggerImageTypeNormal, true, Color(149*100/255,150*100/255,151*100/255), c_triggerBlendModeNormal);
+    libNtve_gf_SetDialogItemRotation(DialogControlLastCreated(), 180, PlayerGroupAll());
+    libNtve_gf_CreateDialogItemLabel(DialogLastCreated(), 200, 40, c_anchorTopLeft, (lib39D1ECFB_gv_item_CheckBox_OffsetX + 40), 38, StringExternal("Param/Value/lib_39D1ECFB_5CEE03BD"), ColorWithAlpha(0,0,0,0), false, 2.0);
+    libNtve_gf_CreateDialogItemLabel(DialogLastCreated(), 250, 40, c_anchorTopRight, 0, 38, StringExternal("Param/Value/lib_39D1ECFB_F1729025"), ColorWithAlpha(0,0,0,0), false, 2.0);
+}
+
+void lib39D1ECFB_gf_CreateModsListDialog () {
+    // Automatic Variable Declarations
+    // Implementation
+    DialogCreate(lib39D1ECFB_gv_dialog_Mods_Width, lib39D1ECFB_gv_dialog_ModsList_Height, c_anchorCenter, lib39D1ECFB_gv_dialog_Mods_OffsetX, (lib39D1ECFB_gv_dialog_Mods_OffsetY + 20), true);
+    lib39D1ECFB_gv_dialog_ModsList = DialogLastCreated();
+    DialogSetImageVisible(DialogLastCreated(), false);
+}
+
+void lib39D1ECFB_gf_CreateModDescriptionDialogs () {
+    // Variable Declarations
+    int lv__number_Mod;
+    int lv__item_Icon_offsetX;
+    int lv__item_Icon_offsetY;
+    int lv__item_Name_offsetX;
+    int lv__item_Name_offsetY;
+    int lv__item_Description_offsetX;
+    int lv__item_Description_offsetY;
+
+    // Automatic Variable Declarations
+    int autoAF755E13_ae;
+    const int autoAF755E13_ai = 1;
+
+    // Variable Initialization
+    lv__item_Icon_offsetX = 35;
+    lv__item_Icon_offsetY = 60;
+    lv__item_Name_offsetX = 35;
+    lv__item_Name_offsetY = 35;
+    lv__item_Description_offsetX = 130;
+    lv__item_Description_offsetY = 65;
+
+    // Implementation
+    DialogCreate(lib39D1ECFB_gv_dialog_Mods_Width, lib39D1ECFB_gv_dialog_ModDescription_Height, c_anchorCenter, lib39D1ECFB_gv_dialog_Mods_OffsetX, lib39D1ECFB_gv_dialog_ModDescription_OffsetY, true);
+    lib39D1ECFB_gv_mods[0].lv_modDescriptionDialog = DialogLastCreated();
+    DialogSetImageVisible(DialogLastCreated(), false);
+    libNtve_gf_CreateDialogItemImage(DialogLastCreated(), lib39D1ECFB_gv_dialog_Mods_Width, lib39D1ECFB_gv_dialog_ModDescription_Height, c_anchorTopLeft, 0, 0, StringToText(""), lib39D1ECFB_gv_dIALOG_IMAGE, c_triggerImageTypeHorizontalBorder, true, lib39D1ECFB_gv_dIALOG_COLOR, c_triggerBlendModeNormal);
+    libNtve_gf_CreateDialogItemImage(DialogLastCreated(), 700, 264, c_anchorTop, 0, 0, StringToText(""), "Assets\\Textures\\ui_battlenet_glues_pageassets_dialog_hexpatternorange.dds", c_triggerImageTypeNormal, true, Color(149*100/255,150*100/255,151*100/255), c_triggerBlendModeNormal);
+    libNtve_gf_CreateDialogItemImage(DialogLastCreated(), 700, 264, c_anchorBottom, 0, 0, StringToText(""), "Assets\\Textures\\ui_battlenet_glues_pageassets_dialog_hexpatternorange.dds", c_triggerImageTypeNormal, true, Color(149*100/255,150*100/255,151*100/255), c_triggerBlendModeNormal);
+    libNtve_gf_SetDialogItemRotation(DialogControlLastCreated(), 180, PlayerGroupAll());
+    libNtve_gf_CreateDialogItemImage(DialogLastCreated(), 76, 76, c_anchorTopLeft, lv__item_Icon_offsetX, lv__item_Icon_offsetY, StringToText(""), "Assets\\Textures\\ui_ingame_help_techtree_questionmark.dds", c_triggerImageTypeNormal, true, Color(100,100,100), c_triggerBlendModeNormal);
+    libNtve_gf_CreateDialogItemLabel(DialogLastCreated(), 425, 30, c_anchorTopLeft, lv__item_Name_offsetX, lv__item_Name_offsetY, TextExpressionAssemble("Param/Expression/lib_39D1ECFB_9C97EBED"), ColorWithAlpha(0,0,0,0), false, 2.0);
+    libNtve_gf_SetDialogItemColor(DialogControlLastCreated(), Color(62.35, 5.88, 7.06), PlayerGroupAll());
+    libNtve_gf_CreateDialogItemLabel(DialogLastCreated(), 425, 80, c_anchorTopLeft, lv__item_Description_offsetX, lv__item_Description_offsetY, TextExpressionAssemble("Param/Expression/lib_39D1ECFB_35D868E4"), ColorWithAlpha(0,0,0,0), false, 2.0);
+    libNtve_gf_SetDialogItemColor(DialogControlLastCreated(), Color(100,100,100), PlayerGroupAll());
+    autoAF755E13_ae = lib39D1ECFB_gv_amount_Mods;
+    lv__number_Mod = 1;
+    for ( ; ( (autoAF755E13_ai >= 0 && lv__number_Mod <= autoAF755E13_ae) || (autoAF755E13_ai < 0 && lv__number_Mod >= autoAF755E13_ae) ) ; lv__number_Mod += autoAF755E13_ai ) {
+        DialogCreate(lib39D1ECFB_gv_dialog_Mods_Width, lib39D1ECFB_gv_dialog_ModDescription_Height, c_anchorCenter, lib39D1ECFB_gv_dialog_Mods_OffsetX, lib39D1ECFB_gv_dialog_ModDescription_OffsetY, true);
+        lib39D1ECFB_gv_mods[lv__number_Mod].lv_modDescriptionDialog = DialogLastCreated();
+        DialogSetImageVisible(DialogLastCreated(), false);
+        libNtve_gf_CreateDialogItemImage(DialogLastCreated(), lib39D1ECFB_gv_dialog_Mods_Width, lib39D1ECFB_gv_dialog_ModDescription_Height, c_anchorTopLeft, 0, 0, StringToText(""), lib39D1ECFB_gv_dIALOG_IMAGE, c_triggerImageTypeHorizontalBorder, true, lib39D1ECFB_gv_dIALOG_COLOR, c_triggerBlendModeNormal);
+        libNtve_gf_CreateDialogItemImage(DialogLastCreated(), 700, 264, c_anchorTop, 0, 0, StringToText(""), "Assets\\Textures\\ui_battlenet_glues_pageassets_dialog_hexpatternorange.dds", c_triggerImageTypeNormal, true, Color(149*100/255,150*100/255,151*100/255), c_triggerBlendModeNormal);
+        libNtve_gf_CreateDialogItemImage(DialogLastCreated(), 700, 264, c_anchorBottom, 0, 0, StringToText(""), "Assets\\Textures\\ui_battlenet_glues_pageassets_dialog_hexpatternorange.dds", c_triggerImageTypeNormal, true, Color(149*100/255,150*100/255,151*100/255), c_triggerBlendModeNormal);
+        libNtve_gf_SetDialogItemRotation(DialogControlLastCreated(), 180, PlayerGroupAll());
+        libNtve_gf_CreateDialogItemImage(DialogLastCreated(), 76, 76, c_anchorTopLeft, lv__item_Icon_offsetX, lv__item_Icon_offsetY, StringToText(""), lib39D1ECFB_gv_mods[lv__number_Mod].lv_icon_Path, c_triggerImageTypeNormal, true, Color(100,100,100), c_triggerBlendModeNormal);
+        TextExpressionSetToken("Param/Expression/lib_39D1ECFB_49994B9B", "ModName", lib39D1ECFB_gv_mods[lv__number_Mod].lv_fullName);
+        libNtve_gf_CreateDialogItemLabel(DialogLastCreated(), 425, 30, c_anchorTopLeft, lv__item_Name_offsetX, lv__item_Name_offsetY, TextExpressionAssemble("Param/Expression/lib_39D1ECFB_49994B9B"), ColorWithAlpha(0,0,0,0), false, 2.0);
+        libNtve_gf_SetDialogItemColor(DialogControlLastCreated(), Color(62.35, 5.88, 7.06), PlayerGroupAll());
+        TextExpressionSetToken("Param/Expression/lib_39D1ECFB_943B4D36", "ModDescription", lib39D1ECFB_gv_mods[lv__number_Mod].lv_description);
+        libNtve_gf_CreateDialogItemLabel(DialogLastCreated(), 425, 80, c_anchorTopLeft, lv__item_Description_offsetX, lv__item_Description_offsetY, TextExpressionAssemble("Param/Expression/lib_39D1ECFB_943B4D36"), ColorWithAlpha(0,0,0,0), false, 2.0);
+        libNtve_gf_SetDialogItemColor(DialogControlLastCreated(), Color(100,100,100), PlayerGroupAll());
+    }
+}
+
+void lib39D1ECFB_gf_CreateModSettingsDialogs () {
+    // Variable Declarations
+    int lv__number_Mod;
+    int lv__number_Option;
+    int lv__number_Option_Value;
+    int lv__item_Label_offsetX;
+    int lv__item_Label_offsetY;
+    int lv__item_Pulldown_offsetX;
+    int lv__item_Pulldown_offsetY;
+
+    // Automatic Variable Declarations
+    int autoE1148EA6_ae;
+    const int autoE1148EA6_ai = 1;
+    int autoAD166E90_ae;
+    const int autoAD166E90_ai = 1;
+    int autoE29FCD18_ae;
+    const int autoE29FCD18_ai = 1;
+
+    // Variable Initialization
+
+    // Implementation
+    DialogCreate(lib39D1ECFB_gv_dialog_ModSettings_Width, lib39D1ECFB_gv_dialog_ModSettings_Height, c_anchorCenter, lib39D1ECFB_gv_dialog_ModSettings_OffsetX, lib39D1ECFB_gv_dialog_ModSettings_OffsetY, true);
+    lib39D1ECFB_gv_mods[0].lv_modSettingsDialog = DialogLastCreated();
+    DialogSetImageVisible(DialogLastCreated(), false);
+    libNtve_gf_CreateDialogItemImage(DialogLastCreated(), lib39D1ECFB_gv_dialog_ModSettings_Width, lib39D1ECFB_gv_dialog_ModSettings_Height, c_anchorTopLeft, 0, 0, StringToText(""), lib39D1ECFB_gv_dIALOG_IMAGE, c_triggerImageTypeHorizontalBorder, true, lib39D1ECFB_gv_dIALOG_COLOR, c_triggerBlendModeNormal);
+    libNtve_gf_CreateDialogItemImage(DialogLastCreated(), 700, 264, c_anchorTop, 0, 0, StringToText(""), "Assets\\Textures\\ui_battlenet_glues_pageassets_dialog_hexpatternorange.dds", c_triggerImageTypeNormal, true, Color(149*100/255,150*100/255,151*100/255), c_triggerBlendModeNormal);
+    libNtve_gf_CreateDialogItemImage(DialogLastCreated(), 700, 264, c_anchorBottom, 0, 0, StringToText(""), "Assets\\Textures\\ui_battlenet_glues_pageassets_dialog_hexpatternorange.dds", c_triggerImageTypeNormal, true, Color(149*100/255,150*100/255,151*100/255), c_triggerBlendModeNormal);
+    libNtve_gf_SetDialogItemRotation(DialogControlLastCreated(), 180, PlayerGroupAll());
+    autoE1148EA6_ae = lib39D1ECFB_gv_amount_Mods;
+    lv__number_Mod = 1;
+    for ( ; ( (autoE1148EA6_ai >= 0 && lv__number_Mod <= autoE1148EA6_ae) || (autoE1148EA6_ai < 0 && lv__number_Mod >= autoE1148EA6_ae) ) ; lv__number_Mod += autoE1148EA6_ai ) {
+        DialogCreate(lib39D1ECFB_gv_dialog_ModSettings_Width, lib39D1ECFB_gv_dialog_ModSettings_Height, c_anchorCenter, lib39D1ECFB_gv_dialog_ModSettings_OffsetX, lib39D1ECFB_gv_dialog_ModSettings_OffsetY, true);
+        lib39D1ECFB_gv_mods[lv__number_Mod].lv_modSettingsDialog = DialogLastCreated();
+        DialogSetImageVisible(DialogLastCreated(), false);
+        libNtve_gf_CreateDialogItemImage(DialogLastCreated(), lib39D1ECFB_gv_dialog_ModSettings_Width, lib39D1ECFB_gv_dialog_ModSettings_Height, c_anchorTopLeft, 0, 0, StringToText(""), lib39D1ECFB_gv_dIALOG_IMAGE, c_triggerImageTypeHorizontalBorder, true, lib39D1ECFB_gv_dIALOG_COLOR, c_triggerBlendModeNormal);
+        libNtve_gf_CreateDialogItemImage(DialogLastCreated(), 700, 264, c_anchorTop, 0, 0, StringToText(""), "Assets\\Textures\\ui_battlenet_glues_pageassets_dialog_hexpatternorange.dds", c_triggerImageTypeNormal, true, Color(149*100/255,150*100/255,151*100/255), c_triggerBlendModeNormal);
+        libNtve_gf_CreateDialogItemImage(DialogLastCreated(), 700, 264, c_anchorBottom, 0, 0, StringToText(""), "Assets\\Textures\\ui_battlenet_glues_pageassets_dialog_hexpatternorange.dds", c_triggerImageTypeNormal, true, Color(149*100/255,150*100/255,151*100/255), c_triggerBlendModeNormal);
+        libNtve_gf_SetDialogItemRotation(DialogControlLastCreated(), 180, PlayerGroupAll());
+        libNtve_gf_CreateDialogItemLabel(DialogLastCreated(), 300, 40, c_anchorTopLeft, 250, 45, StringExternal("Param/Value/lib_39D1ECFB_6AB41D37"), ColorWithAlpha(0,0,0,0), false, 2.0);
+        lib39D1ECFB_gv_mods[lv__number_Mod].lv_item_Label_ModSettings_SettingsType = DialogControlLastCreated();
+        libNtve_gf_SetDialogItemColor(DialogControlLastCreated(), lib39D1ECFB_gv_item_Button_ModSettings_Color_Header, PlayerGroupAll());
+        lv__item_Label_offsetX = 35;
+        lv__item_Label_offsetY = 85;
+        lv__item_Pulldown_offsetX = 30;
+        lv__item_Pulldown_offsetY = 130;
+        autoAD166E90_ae = lib39D1ECFB_gv_mods[lv__number_Mod].lv_number_Game_Options;
+        lv__number_Option = 1;
+        for ( ; ( (autoAD166E90_ai >= 0 && lv__number_Option <= autoAD166E90_ae) || (autoAD166E90_ai < 0 && lv__number_Option >= autoAD166E90_ae) ) ; lv__number_Option += autoAD166E90_ai ) {
+            libNtve_gf_CreateDialogItemLabel(DialogLastCreated(), 400, 50, c_anchorTopLeft, lv__item_Label_offsetX, lv__item_Label_offsetY, lib39D1ECFB_gv_mods[lv__number_Mod].lv_game_Options[lv__number_Option].lv_optionName, ColorWithAlpha(0,0,0,0), false, 2.0);
+            lib39D1ECFB_gv_mods[lv__number_Mod].lv_game_Options[lv__number_Option].lv_listBox_Label = DialogControlLastCreated();
+            libNtve_gf_SetDialogItemStyle(lib39D1ECFB_gv_mods[lv__number_Mod].lv_game_Options[lv__number_Option].lv_listBox_Label, "_Question_what_to_do", PlayerGroupAll());
+            libNtve_gf_SetDialogItemTooltip(lib39D1ECFB_gv_mods[lv__number_Mod].lv_game_Options[lv__number_Option].lv_listBox_Label, lib39D1ECFB_gv_mods[lv__number_Mod].lv_game_Options[lv__number_Option].lv_optionComment, PlayerGroupAll());
+            DialogControlCreate(DialogLastCreated(), c_triggerControlTypePulldown);
+            lib39D1ECFB_gv_mods[lv__number_Mod].lv_game_Options[lv__number_Option].lv_listBox_Pulldown = DialogControlLastCreated();
+            DialogControlSetPosition(lib39D1ECFB_gv_mods[lv__number_Mod].lv_game_Options[lv__number_Option].lv_listBox_Pulldown, PlayerGroupAll(), c_anchorTopLeft, lv__item_Pulldown_offsetX, lv__item_Pulldown_offsetY);
+            DialogControlSetSize(lib39D1ECFB_gv_mods[lv__number_Mod].lv_game_Options[lv__number_Option].lv_listBox_Pulldown, PlayerGroupAll(), 400, 50);
+            libNtve_gf_SetDialogItemStyle(lib39D1ECFB_gv_mods[lv__number_Mod].lv_game_Options[lv__number_Option].lv_listBox_Pulldown, "_The_name_of_the_selected_option", PlayerGroupAll());
+            autoE29FCD18_ae = lib39D1ECFB_gv_mods[lv__number_Mod].lv_game_Options[lv__number_Option].lv_valuesNumber;
+            lv__number_Option_Value = 1;
+            for ( ; ( (autoE29FCD18_ai >= 0 && lv__number_Option_Value <= autoE29FCD18_ae) || (autoE29FCD18_ai < 0 && lv__number_Option_Value >= autoE29FCD18_ae) ) ; lv__number_Option_Value += autoE29FCD18_ai ) {
+                TextExpressionSetToken("Param/Expression/lib_39D1ECFB_47BCA03F", "A", lib39D1ECFB_gv_mods[lv__number_Mod].lv_game_Options[lv__number_Option].lv_values[lv__number_Option_Value].lv_valueText);
+                DialogControlAddItem(lib39D1ECFB_gv_mods[lv__number_Mod].lv_game_Options[lv__number_Option].lv_listBox_Pulldown, PlayerGroupAll(), TextExpressionAssemble("Param/Expression/lib_39D1ECFB_47BCA03F"));
+                if (true) {
+                    lv__item_Pulldown_offsetX += 450;
+                    lv__item_Pulldown_offsetY += 10;
+                    libNtve_gf_CreateDialogItemLabel(DialogLastCreated(), 100, 50, c_anchorTopLeft, lv__item_Pulldown_offsetX, lv__item_Pulldown_offsetY, StringExternal("Param/Value/lib_39D1ECFB_BD8E8DED"), ColorWithAlpha(0,0,0,0), false, 2.0);
+                    lib39D1ECFB_gv_mods[lv__number_Mod].lv_game_Options[lv__number_Option].lv_editBox_Label = DialogControlLastCreated();
+                    DialogControlSetVisible(lib39D1ECFB_gv_mods[lv__number_Mod].lv_game_Options[lv__number_Option].lv_editBox_Label, PlayerGroupAll(), false);
+                    lv__item_Pulldown_offsetY -= 12;
+                    lv__item_Pulldown_offsetX += 100;
+                    DialogControlCreate(DialogLastCreated(), c_triggerControlTypeEditBox);
+                    lib39D1ECFB_gv_mods[lv__number_Mod].lv_game_Options[lv__number_Option].lv_editBox_Input = DialogControlLastCreated();
+                    DialogControlSetSize(lib39D1ECFB_gv_mods[lv__number_Mod].lv_game_Options[lv__number_Option].lv_editBox_Input, PlayerGroupAll(), 150, 52);
+                    DialogControlSetPosition(lib39D1ECFB_gv_mods[lv__number_Mod].lv_game_Options[lv__number_Option].lv_editBox_Input, PlayerGroupAll(), c_anchorTopLeft, lv__item_Pulldown_offsetX, lv__item_Pulldown_offsetY);
+                    DialogControlSetVisible(lib39D1ECFB_gv_mods[lv__number_Mod].lv_game_Options[lv__number_Option].lv_editBox_Input, PlayerGroupAll(), false);
+                    lv__item_Pulldown_offsetY += 2;
+                    lv__item_Pulldown_offsetX -= 550;
+                }
+
+            }
+            DialogControlSelectItem(lib39D1ECFB_gv_mods[lv__number_Mod].lv_game_Options[lv__number_Option].lv_listBox_Pulldown, PlayerGroupAll(), lib39D1ECFB_gv_mods[lv__number_Mod].lv_game_Options[lv__number_Option].lv_defaultIndex);
+            libNtve_gf_SetDialogItemTooltip(lib39D1ECFB_gv_mods[lv__number_Mod].lv_game_Options[lv__number_Option].lv_listBox_Pulldown, lib39D1ECFB_gv_mods[lv__number_Mod].lv_game_Options[lv__number_Option].lv_values[lib39D1ECFB_gv_mods[lv__number_Mod].lv_game_Options[lv__number_Option].lv_defaultIndex].lv_valueComment, PlayerGroupAll());
+            libNtve_gf_SetDialogItemDesaturationColor(lib39D1ECFB_gv_mods[lv__number_Mod].lv_game_Options[lv__number_Option].lv_listBox_Pulldown, lib39D1ECFB_gv_item_Button_ModSettings_Color_Pulldown, PlayerGroupAll());
+            libNtve_gf_SetDialogItemDesaturated(lib39D1ECFB_gv_mods[lv__number_Mod].lv_game_Options[lv__number_Option].lv_listBox_Pulldown, true, PlayerGroupAll());
+            lv__item_Label_offsetY += 95;
+            lv__item_Pulldown_offsetY += 95;
+        }
+    }
+}
+
+void lib39D1ECFB_gf_CreateModBottomDialogs () {
+    // Automatic Variable Declarations
+    // Implementation
+    DialogCreate(lib39D1ECFB_gv_dialog_ModBottom_Width, lib39D1ECFB_gv_dialog_ModBottom_Height, c_anchorCenter, lib39D1ECFB_gv_dialog_ModBottom_OffsetX, lib39D1ECFB_gv_dialog_ModBottom_OffsetY, true);
+    lib39D1ECFB_gv_dialog_ModBottom = DialogLastCreated();
+    DialogSetImageVisible(DialogLastCreated(), false);
+    libNtve_gf_CreateDialogItemImage(DialogLastCreated(), lib39D1ECFB_gv_dialog_ModBottom_Width, lib39D1ECFB_gv_dialog_ModBottom_Height, c_anchorTopLeft, 0, 0, StringToText(""), lib39D1ECFB_gv_dIALOG_IMAGE, c_triggerImageTypeHorizontalBorder, true, lib39D1ECFB_gv_dIALOG_COLOR, c_triggerBlendModeNormal);
+    libNtve_gf_CreateDialogItemImage(DialogLastCreated(), 700, 264, c_anchorTop, 0, 0, StringToText(""), "Assets\\Textures\\ui_battlenet_glues_pageassets_dialog_hexpatternorange.dds", c_triggerImageTypeNormal, true, Color(149*100/255,150*100/255,151*100/255), c_triggerBlendModeNormal);
+    libNtve_gf_CreateDialogItemImage(DialogLastCreated(), 700, 264, c_anchorBottom, 0, 0, StringToText(""), "Assets\\Textures\\ui_battlenet_glues_pageassets_dialog_hexpatternorange.dds", c_triggerImageTypeNormal, true, Color(149*100/255,150*100/255,151*100/255), c_triggerBlendModeNormal);
+    libNtve_gf_SetDialogItemRotation(DialogControlLastCreated(), 180, PlayerGroupAll());
+    libNtve_gf_CreateDialogItemButton(DialogLastCreated(), 300, 100, c_anchorRight, 35, 0, StringExternal("Param/Value/lib_39D1ECFB_63061E4A"), lib39D1ECFB_gv_item_Button_ModBottom_Start_Text, "");
+    lib39D1ECFB_gv_item_Button_ModBottom_Start = DialogControlLastCreated();
+    libNtve_gf_SetDialogItemDesaturationColor(DialogControlLastCreated(), Color(100.00, 50.20, 25.10), PlayerGroupAll());
+    libNtve_gf_SetDialogItemDesaturated(DialogControlLastCreated(), true, PlayerGroupAll());
+    libNtve_gf_SetDialogItemStyle(lib39D1ECFB_gv_item_Button_ModBottom_Start, "_Start_False", PlayerGroupAll());
+}
+
+void lib39D1ECFB_gf_WriteModsList (int lp_firstMod) {
+    // Variable Declarations
+    int lv__modNumber;
+    int lv__item_ModsList_Name_OffsetY;
+    int lv__item_ModsList_OffsetY;
+
+    // Automatic Variable Declarations
+    int auto540617BE_ae;
+    const int auto540617BE_ai = 1;
+
+    // Variable Initialization
+    lv__item_ModsList_Name_OffsetY = (lib39D1ECFB_gv_item_CheckBox_OffsetX + 45);
+    lv__item_ModsList_OffsetY = lib39D1ECFB_gv_item_ModsList_OffsetY;
+
+    // Implementation
+    if ((lib39D1ECFB_gv_is_First_Create == true)) {
+        auto540617BE_ae = lib39D1ECFB_gv_amount_Mods;
+        lv__modNumber = 1;
+        for ( ; ( (auto540617BE_ai >= 0 && lv__modNumber <= auto540617BE_ae) || (auto540617BE_ai < 0 && lv__modNumber >= auto540617BE_ae) ) ; lv__modNumber += auto540617BE_ai ) {
+            libNtve_gf_CreateDialogItemCheckBox(lib39D1ECFB_gv_dialog_ModsList, 50, 50, c_anchorTopLeft, lib39D1ECFB_gv_item_CheckBox_OffsetX, lv__item_ModsList_OffsetY, StringExternal("Param/Value/lib_39D1ECFB_A450E26E"), false);
+            lib39D1ECFB_gv_item_CheckBox_ModsList[lv__modNumber] = DialogControlLastCreated();
+            TextExpressionSetToken("Param/Expression/lib_39D1ECFB_A0D93591", "FullName", lib39D1ECFB_gv_mods[lv__modNumber].lv_description);
+            TextExpressionSetToken("Param/Expression/lib_39D1ECFB_5E1A5D07", "FullName", lib39D1ECFB_gv_mods[lv__modNumber].lv_fullName);
+            libNtve_gf_CreateDialogItemButton(lib39D1ECFB_gv_dialog_ModsList, lib39D1ECFB_gv_item_Button_Mod_Width, lib39D1ECFB_gv_item_Button_Mod_Height, c_anchorTopLeft, lv__item_ModsList_Name_OffsetY, lv__item_ModsList_OffsetY, TextExpressionAssemble("Param/Expression/lib_39D1ECFB_A0D93591"), TextExpressionAssemble("Param/Expression/lib_39D1ECFB_5E1A5D07"), "");
+            lib39D1ECFB_gv_item_Button_ModsList[lv__modNumber] = DialogControlLastCreated();
+            libNtve_gf_SetDialogItemStyle(lib39D1ECFB_gv_item_Button_ModsList[lv__modNumber], "GameListName", PlayerGroupAll());
+            libNtve_gf_SetDialogItemStyle(lib39D1ECFB_gv_item_Button_ModsList[lv__modNumber], "_00_Mod_Current_Name", PlayerGroupAll());
+            if ((lib39D1ECFB_gv_mods[lv__modNumber].lv_is_Included == true)) {
+                libNtve_gf_SetDialogItemDesaturationColor(lib39D1ECFB_gv_item_Button_ModsList[lv__modNumber], lib39D1ECFB_gv_item_Button_Mod_Color_On, PlayerGroupAll());
+                libNtve_gf_SetDialogItemColor(lib39D1ECFB_gv_item_Button_ModsList[lv__modNumber], lib39D1ECFB_gv_item_Button_Mod_Text_Color_On, PlayerGroupAll());
+            }
+            else {
+                libNtve_gf_SetDialogItemDesaturationColor(lib39D1ECFB_gv_item_Button_ModsList[lv__modNumber], lib39D1ECFB_gv_item_Button_Mod_Color_Off, PlayerGroupAll());
+                libNtve_gf_SetDialogItemColor(lib39D1ECFB_gv_item_Button_ModsList[lv__modNumber], lib39D1ECFB_gv_item_Button_Mod_Text_Color_Off, PlayerGroupAll());
+            }
+            libNtve_gf_SetDialogItemDesaturated(lib39D1ECFB_gv_item_Button_ModsList[lv__modNumber], true, PlayerGroupAll());
+            lv__item_ModsList_OffsetY += lib39D1ECFB_gv_item_ModsList_OffsetY_Shift;
+        }
+    }
+
+}
+
+void lib39D1ECFB_gf_CreateButtonForNav (int lp_firstMod) {
+    // Variable Declarations
+    int lv__item_Button_Nav_OffsetX;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Implementation
+    if ((lib39D1ECFB_gv_is_First_Create == true)) {
+        libNtve_gf_CreateDialogItemCheckBox(lib39D1ECFB_gv_dialog_Nav, 50, 50, c_anchorTopLeft, lib39D1ECFB_gv_item_CheckBox_OffsetX, 20, StringExternal("Param/Value/lib_39D1ECFB_D029B1D5"), false);
+        lib39D1ECFB_gv_item_CheckBox_Common = DialogControlLastCreated();
+        libNtve_gf_CreateDialogItemButton(lib39D1ECFB_gv_dialog_Nav, lib39D1ECFB_gv_item_Button_Nav_Width, lib39D1ECFB_gv_item_Button_Nav_Height, c_anchorTop, lv__item_Button_Nav_OffsetX, 70, StringExternal("Param/Value/lib_39D1ECFB_41B9957A"), StringExternal("Param/Value/lib_39D1ECFB_E892556E"), "");
+        lib39D1ECFB_gv_item_Button_Nav_Up = DialogControlLastCreated();
+        libNtve_gf_SetDialogItemDesaturated(lib39D1ECFB_gv_item_Button_Nav_Up, true, PlayerGroupAll());
+        libNtve_gf_CreateDialogItemButton(lib39D1ECFB_gv_dialog_Nav, lib39D1ECFB_gv_item_Button_Nav_Width, lib39D1ECFB_gv_item_Button_Nav_Height, c_anchorBottom, lv__item_Button_Nav_OffsetX, 30, StringExternal("Param/Value/lib_39D1ECFB_921C7081"), StringExternal("Param/Value/lib_39D1ECFB_E1E9D883"), "");
+        lib39D1ECFB_gv_item_Button_Nav_Down = DialogControlLastCreated();
+        libNtve_gf_SetDialogItemDesaturated(lib39D1ECFB_gv_item_Button_Nav_Down, true, PlayerGroupAll());
+    }
+
+    if ((lp_firstMod <= 1)) {
+        libNtve_gf_SetDialogItemDesaturationColor(lib39D1ECFB_gv_item_Button_Nav_Up, lib39D1ECFB_gv_item_Button_Nav_Color_Off, PlayerGroupAll());
+    }
+    else {
+        libNtve_gf_SetDialogItemDesaturationColor(lib39D1ECFB_gv_item_Button_Nav_Up, lib39D1ECFB_gv_item_Button_Nav_Color_On, PlayerGroupAll());
+    }
+    if (((lp_firstMod + 10) >= lib39D1ECFB_gv_amount_Mods)) {
+        libNtve_gf_SetDialogItemDesaturationColor(lib39D1ECFB_gv_item_Button_Nav_Down, lib39D1ECFB_gv_item_Button_Nav_Color_Off, PlayerGroupAll());
+    }
+    else {
+        libNtve_gf_SetDialogItemDesaturationColor(lib39D1ECFB_gv_item_Button_Nav_Down, lib39D1ECFB_gv_item_Button_Nav_Color_On, PlayerGroupAll());
+    }
+}
+
+void lib39D1ECFB_gf_CreateButtonForSettings () {
+    // Variable Declarations
+    int lv__number_Mod;
+    int lv__item_Button_ModSettings_Width;
+    int lv__item_Button_ModSettings_Height;
+    int lv__item_Button_ModSettings_OffsetX;
+    int lv__item_Button_ModSettings_OffsetY;
+
+    // Automatic Variable Declarations
+    int autoD8EF8BBF_ae;
+    const int autoD8EF8BBF_ai = 1;
+
+    // Variable Initialization
+    lv__item_Button_ModSettings_Width = 200;
+    lv__item_Button_ModSettings_Height = 50;
+    lv__item_Button_ModSettings_OffsetX = 35;
+    lv__item_Button_ModSettings_OffsetY = 30;
+
+    // Implementation
+    autoD8EF8BBF_ae = lib39D1ECFB_gv_amount_Mods;
+    lv__number_Mod = 1;
+    for ( ; ( (autoD8EF8BBF_ai >= 0 && lv__number_Mod <= autoD8EF8BBF_ae) || (autoD8EF8BBF_ai < 0 && lv__number_Mod >= autoD8EF8BBF_ae) ) ; lv__number_Mod += autoD8EF8BBF_ai ) {
+        if ((lib39D1ECFB_gv_is_First_Create == true)) {
+            libNtve_gf_CreateDialogItemButton(lib39D1ECFB_gv_mods[lv__number_Mod].lv_modSettingsDialog, lv__item_Button_ModSettings_Width, lv__item_Button_ModSettings_Height, c_anchorTopLeft, lv__item_Button_ModSettings_OffsetX, lv__item_Button_ModSettings_OffsetY, StringExternal("Param/Value/lib_39D1ECFB_550A6BE3"), lib39D1ECFB_gv_item_Button_Mod_Disable_Text, "");
+            lib39D1ECFB_gv_mods[lv__number_Mod].lv_item_Button_ModSettings = DialogControlLastCreated();
+            libNtve_gf_SetDialogItemDesaturationColor(DialogControlLastCreated(), lib39D1ECFB_gv_item_Button_ModSettings_Color_Disable, PlayerGroupAll());
+            libNtve_gf_SetDialogItemDesaturated(DialogControlLastCreated(), true, PlayerGroupAll());
+            libNtve_gf_SetDialogItemStyle(lib39D1ECFB_gv_mods[lv__number_Mod].lv_item_Button_ModSettings, "_Disable", PlayerGroupAll());
+        }
+
+    }
+}
+
+void lib39D1ECFB_gf_UIPlayerElements (bool lp_status) {
+    // Automatic Variable Declarations
+    // Implementation
+    UISetFrameVisible(PlayerGroupAll(), c_syncFrameTypeConsolePanel, lp_status);
+    UISetFrameVisible(PlayerGroupAll(), c_syncFrameTypeIdleWorkerButton, lp_status);
+    UISetFrameVisible(PlayerGroupAll(), c_syncFrameTypeMinimapPanel, lp_status);
+    UISetFrameVisible(PlayerGroupAll(), c_syncFrameTypeMissionTimePanel, lp_status);
+    UISetFrameVisible(PlayerGroupAll(), c_syncFrameTypeControlGroupPanel, lp_status);
+    UISetFrameVisible(PlayerGroupAll(), c_syncFrameTypeArmyButton, lp_status);
+    UISetFrameVisible(PlayerGroupAll(), c_syncFrameTypeCommandPanel, lp_status);
+    UISetFrameVisible(PlayerGroupAll(), c_syncFrameTypeInfoPanel, lp_status);
+}
+
+void lib39D1ECFB_gf_CheckedUncheckedMod (int lp_modNumber) {
+    // Automatic Variable Declarations
+    // Implementation
+    if ((lib39D1ECFB_gv_mods[lp_modNumber].lv_is_Included == true)) {
+        if ((lib39D1ECFB_gv_mods[lp_modNumber].lv_is_Enable == false)) {
+            libNtve_gf_SetDialogItemChecked(lib39D1ECFB_gv_item_CheckBox_ModsList[lp_modNumber], true, PlayerGroupAll());
+            lib39D1ECFB_gv_mods[lp_modNumber].lv_is_Enable = true;
+            libNtve_gf_SetDialogItemDesaturationColor(lib39D1ECFB_gv_item_Button_ModsList[lp_modNumber], lib39D1ECFB_gv_item_Button_Mod_Color_Enable, PlayerGroupAll());
+            libNtve_gf_SetDialogItemColor(lib39D1ECFB_gv_item_Button_ModsList[lp_modNumber], lib39D1ECFB_gv_item_Button_Mod_Text_Color_Enable, PlayerGroupAll());
+        }
+        else {
+            libNtve_gf_SetDialogItemChecked(lib39D1ECFB_gv_item_CheckBox_ModsList[lp_modNumber], false, PlayerGroupAll());
+            lib39D1ECFB_gv_mods[lp_modNumber].lv_is_Enable = false;
+            libNtve_gf_SetDialogItemDesaturationColor(lib39D1ECFB_gv_item_Button_ModsList[lp_modNumber], lib39D1ECFB_gv_item_Button_Mod_Color_On, PlayerGroupAll());
+            libNtve_gf_SetDialogItemColor(lib39D1ECFB_gv_item_Button_ModsList[lp_modNumber], lib39D1ECFB_gv_item_Button_Mod_Text_Color_On, PlayerGroupAll());
+        }
+    }
+    else {
+        libNtve_gf_SetDialogItemChecked(lib39D1ECFB_gv_item_CheckBox_ModsList[lp_modNumber], false, PlayerGroupAll());
+    }
+}
+
+void lib39D1ECFB_gf_ChangeStartButton () {
+    // Automatic Variable Declarations
+    // Implementation
+    if ((lib39D1ECFB_gv_amount_EnabledMod > 0)) {
+        libNtve_gf_SetDialogItemDesaturationColor(lib39D1ECFB_gv_item_Button_ModBottom_Start, lib39D1ECFB_gv_item_Button_ModBottom_Start_Color_Enable, PlayerGroupAll());
+        libNtve_gf_SetDialogItemStyle(lib39D1ECFB_gv_item_Button_ModBottom_Start, "_Start_True", PlayerGroupAll());
+    }
+    else {
+        libNtve_gf_SetDialogItemDesaturationColor(lib39D1ECFB_gv_item_Button_ModBottom_Start, lib39D1ECFB_gv_item_Button_ModBottom_Start_Color_Disable, PlayerGroupAll());
+        libNtve_gf_SetDialogItemStyle(lib39D1ECFB_gv_item_Button_ModBottom_Start, "_Start_False", PlayerGroupAll());
+    }
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: Launch
+//--------------------------------------------------------------------------------------------------
+bool lib39D1ECFB_gt_Launch_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    Wait(0.125, c_timeGame);
+    lib36280BFF_gf_CommonAddPlayerInActiveGroup();
+    lib39D1ECFB_gf_PauseGame();
+    lib39D1ECFB_gf_UIPlayerElements(false);
+    lib39D1ECFB_gf_GetWriteMods();
+    lib39D1ECFB_gf_GetValueTextFromValueString();
+    lib39D1ECFB_gf_CreateDialogs();
+    lib39D1ECFB_gf_WriteModsList(1);
+    lib39D1ECFB_gf_CreateButtonForNav(1);
+    lib39D1ECFB_gf_CreateButtonForSettings();
+    lib39D1ECFB_gv_is_First_Create = false;
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib39D1ECFB_gt_Launch_Init () {
+    lib39D1ECFB_gt_Launch = TriggerCreate("lib39D1ECFB_gt_Launch_Func");
+    TriggerAddEventMapInit(lib39D1ECFB_gt_Launch);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: clickedNavigateButton
+//--------------------------------------------------------------------------------------------------
+bool lib39D1ECFB_gt_clickedNavigateButton_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__number_Mod;
+    int lv__item_ModsList_Name_OffsetY;
+    int lv__item_ModsList_OffsetY;
+
+    // Automatic Variable Declarations
+    int autoDD142BE1_ae;
+    const int autoDD142BE1_ai = 1;
+    int auto5013B171_ae;
+    const int auto5013B171_ai = 1;
+
+    // Variable Initialization
+    lv__item_ModsList_Name_OffsetY = (lib39D1ECFB_gv_item_CheckBox_OffsetX + 45);
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((EventDialogControl() == lib39D1ECFB_gv_item_Button_Nav_Up) && (lib39D1ECFB_gv_first_Mod_In_Navigation > 1)) {
+        lib39D1ECFB_gv_item_ModsList_OffsetY += lib39D1ECFB_gv_item_ModsList_OffsetY_Shift;
+        lv__item_ModsList_OffsetY = lib39D1ECFB_gv_item_ModsList_OffsetY;
+        autoDD142BE1_ae = lib39D1ECFB_gv_amount_Mods;
+        lv__number_Mod = 1;
+        for ( ; ( (autoDD142BE1_ai >= 0 && lv__number_Mod <= autoDD142BE1_ae) || (autoDD142BE1_ai < 0 && lv__number_Mod >= autoDD142BE1_ae) ) ; lv__number_Mod += autoDD142BE1_ai ) {
+            DialogControlSetPosition(lib39D1ECFB_gv_item_CheckBox_ModsList[lv__number_Mod], PlayerGroupAll(), c_anchorTopLeft, lib39D1ECFB_gv_item_CheckBox_OffsetX, lv__item_ModsList_OffsetY);
+            DialogControlSetPosition(lib39D1ECFB_gv_item_Button_ModsList[lv__number_Mod], PlayerGroupAll(), c_anchorTopLeft, lv__item_ModsList_Name_OffsetY, lv__item_ModsList_OffsetY);
+            lv__item_ModsList_OffsetY += lib39D1ECFB_gv_item_ModsList_OffsetY_Shift;
+        }
+        lib39D1ECFB_gv_first_Mod_In_Navigation -= 1;
+        lib39D1ECFB_gf_CreateButtonForNav(lib39D1ECFB_gv_first_Mod_In_Navigation);
+    }
+
+    if ((EventDialogControl() == lib39D1ECFB_gv_item_Button_Nav_Down) && ((lib39D1ECFB_gv_first_Mod_In_Navigation + 10) < lib39D1ECFB_gv_amount_Mods)) {
+        lib39D1ECFB_gv_item_ModsList_OffsetY -= lib39D1ECFB_gv_item_ModsList_OffsetY_Shift;
+        lv__item_ModsList_OffsetY = lib39D1ECFB_gv_item_ModsList_OffsetY;
+        auto5013B171_ae = lib39D1ECFB_gv_amount_Mods;
+        lv__number_Mod = 1;
+        for ( ; ( (auto5013B171_ai >= 0 && lv__number_Mod <= auto5013B171_ae) || (auto5013B171_ai < 0 && lv__number_Mod >= auto5013B171_ae) ) ; lv__number_Mod += auto5013B171_ai ) {
+            DialogControlSetPosition(lib39D1ECFB_gv_item_CheckBox_ModsList[lv__number_Mod], PlayerGroupAll(), c_anchorTopLeft, lib39D1ECFB_gv_item_CheckBox_OffsetX, lv__item_ModsList_OffsetY);
+            DialogControlSetPosition(lib39D1ECFB_gv_item_Button_ModsList[lv__number_Mod], PlayerGroupAll(), c_anchorTopLeft, lv__item_ModsList_Name_OffsetY, lv__item_ModsList_OffsetY);
+            lv__item_ModsList_OffsetY += lib39D1ECFB_gv_item_ModsList_OffsetY_Shift;
+        }
+        lib39D1ECFB_gv_first_Mod_In_Navigation += 1;
+        lib39D1ECFB_gf_CreateButtonForNav(lib39D1ECFB_gv_first_Mod_In_Navigation);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib39D1ECFB_gt_clickedNavigateButton_Init () {
+    lib39D1ECFB_gt_clickedNavigateButton = TriggerCreate("lib39D1ECFB_gt_clickedNavigateButton_Func");
+    TriggerAddEventDialogControl(lib39D1ECFB_gt_clickedNavigateButton, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeClick);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: clickedModButton
+//--------------------------------------------------------------------------------------------------
+bool lib39D1ECFB_gt_clickedModButton_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__number_Mod;
+
+    // Automatic Variable Declarations
+    int auto1D47699E_ae;
+    const int auto1D47699E_ai = 1;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto1D47699E_ae = lib39D1ECFB_gv_amount_Mods;
+    lv__number_Mod = 1;
+    for ( ; ( (auto1D47699E_ai >= 0 && lv__number_Mod <= auto1D47699E_ae) || (auto1D47699E_ai < 0 && lv__number_Mod >= auto1D47699E_ae) ) ; lv__number_Mod += auto1D47699E_ai ) {
+        if ((EventDialogControl() == lib39D1ECFB_gv_item_Button_ModsList[lv__number_Mod])) {
+            DialogSetVisible(lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_modDescriptionDialog, PlayerGroupAll(), false);
+            DialogSetVisible(lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_modSettingsDialog, PlayerGroupAll(), false);
+            lib39D1ECFB_gv_selected_Mod = lv__number_Mod;
+            DialogSetVisible(lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_modDescriptionDialog, PlayerGroupAll(), true);
+            DialogSetVisible(lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_modSettingsDialog, PlayerGroupAll(), true);
+            break;
+        }
+
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib39D1ECFB_gt_clickedModButton_Init () {
+    lib39D1ECFB_gt_clickedModButton = TriggerCreate("lib39D1ECFB_gt_clickedModButton_Func");
+    TriggerAddEventDialogControl(lib39D1ECFB_gt_clickedModButton, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeClick);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: clickedSettingsButton
+//--------------------------------------------------------------------------------------------------
+bool lib39D1ECFB_gt_clickedSettingsButton_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((EventDialogControl() == lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_item_Button_ModSettings)) {
+        if ((lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_is_Included == true)) {
+            if ((lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_is_Enable == false)) {
+                libNtve_gf_SetDialogItemChecked(lib39D1ECFB_gv_item_CheckBox_ModsList[lib39D1ECFB_gv_selected_Mod], true, PlayerGroupAll());
+            }
+            else {
+                libNtve_gf_SetDialogItemChecked(lib39D1ECFB_gv_item_CheckBox_ModsList[lib39D1ECFB_gv_selected_Mod], false, PlayerGroupAll());
+            }
+        }
+        else {
+            libNtve_gf_SetDialogItemChecked(lib39D1ECFB_gv_item_CheckBox_ModsList[lib39D1ECFB_gv_selected_Mod], false, PlayerGroupAll());
+        }
+
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib39D1ECFB_gt_clickedSettingsButton_Init () {
+    lib39D1ECFB_gt_clickedSettingsButton = TriggerCreate("lib39D1ECFB_gt_clickedSettingsButton_Func");
+    TriggerAddEventDialogControl(lib39D1ECFB_gt_clickedSettingsButton, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeClick);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: clickedStartButton
+//--------------------------------------------------------------------------------------------------
+bool lib39D1ECFB_gt_clickedStartButton_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__count_Enable;
+    int lv__number_Mod;
+
+    // Automatic Variable Declarations
+    int autoE59BFA4D_ae;
+    const int autoE59BFA4D_ai = 1;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((EventDialogControl() == lib39D1ECFB_gv_item_Button_ModBottom_Start)) {
+        autoE59BFA4D_ae = lib39D1ECFB_gv_amount_Mods;
+        lv__number_Mod = 1;
+        for ( ; ( (autoE59BFA4D_ai >= 0 && lv__number_Mod <= autoE59BFA4D_ae) || (autoE59BFA4D_ai < 0 && lv__number_Mod >= autoE59BFA4D_ae) ) ; lv__number_Mod += autoE59BFA4D_ai ) {
+            if (((lib39D1ECFB_gv_mods[lv__number_Mod].lv_is_Included == true) && (lib39D1ECFB_gv_mods[lv__number_Mod].lv_is_Enable == true))) {
+                lv__count_Enable += 1;
+            }
+
+        }
+        if ((lv__count_Enable > 0)) {
+            lib39D1ECFB_gf_StartMods();
+        }
+
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib39D1ECFB_gt_clickedStartButton_Init () {
+    lib39D1ECFB_gt_clickedStartButton = TriggerCreate("lib39D1ECFB_gt_clickedStartButton_Func");
+    TriggerAddEventDialogControl(lib39D1ECFB_gt_clickedStartButton, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeClick);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: checkedCheckBox
+//--------------------------------------------------------------------------------------------------
+bool lib39D1ECFB_gt_checkedCheckBox_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__number_Mod;
+
+    // Automatic Variable Declarations
+    int autoDA4604E3_ae;
+    const int autoDA4604E3_ai = 1;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    autoDA4604E3_ae = lib39D1ECFB_gv_amount_Mods;
+    lv__number_Mod = 1;
+    for ( ; ( (autoDA4604E3_ai >= 0 && lv__number_Mod <= autoDA4604E3_ae) || (autoDA4604E3_ai < 0 && lv__number_Mod >= autoDA4604E3_ae) ) ; lv__number_Mod += autoDA4604E3_ai ) {
+        if ((EventDialogControl() == lib39D1ECFB_gv_item_CheckBox_ModsList[lv__number_Mod])) {
+            if ((lib39D1ECFB_gv_mods[lv__number_Mod].lv_is_Included == true)) {
+                if ((lib39D1ECFB_gv_mods[lv__number_Mod].lv_is_Enable == false)) {
+                    lib39D1ECFB_gv_mods[lv__number_Mod].lv_is_Enable = true;
+                    lib39D1ECFB_gv_amount_EnabledMod += 1;
+                    libNtve_gf_SetDialogItemDesaturationColor(lib39D1ECFB_gv_item_Button_ModsList[lv__number_Mod], lib39D1ECFB_gv_item_Button_Mod_Color_Enable, PlayerGroupAll());
+                    libNtve_gf_SetDialogItemColor(lib39D1ECFB_gv_item_Button_ModsList[lv__number_Mod], lib39D1ECFB_gv_item_Button_Mod_Text_Color_Enable, PlayerGroupAll());
+                    libNtve_gf_SetDialogItemColor(lib39D1ECFB_gv_mods[lv__number_Mod].lv_item_Button_ModSettings, lib39D1ECFB_gv_item_Button_ModSettings_Color_Enable, PlayerGroupAll());
+                    libNtve_gf_SetDialogItemText(lib39D1ECFB_gv_mods[lv__number_Mod].lv_item_Button_ModSettings, lib39D1ECFB_gv_item_Button_Mod_Enable_Text, PlayerGroupAll());
+                    libNtve_gf_SetDialogItemStyle(lib39D1ECFB_gv_mods[lv__number_Mod].lv_item_Button_ModSettings, "_Enable", PlayerGroupAll());
+                }
+                else {
+                    lib39D1ECFB_gv_mods[lv__number_Mod].lv_is_Enable = false;
+                    lib39D1ECFB_gv_amount_EnabledMod -= 1;
+                    libNtve_gf_SetDialogItemDesaturationColor(lib39D1ECFB_gv_item_Button_ModsList[lv__number_Mod], lib39D1ECFB_gv_item_Button_Mod_Color_On, PlayerGroupAll());
+                    libNtve_gf_SetDialogItemColor(lib39D1ECFB_gv_item_Button_ModsList[lv__number_Mod], lib39D1ECFB_gv_item_Button_Mod_Text_Color_On, PlayerGroupAll());
+                    libNtve_gf_SetDialogItemColor(lib39D1ECFB_gv_mods[lv__number_Mod].lv_item_Button_ModSettings, lib39D1ECFB_gv_item_Button_ModSettings_Color_Disable, PlayerGroupAll());
+                    libNtve_gf_SetDialogItemText(lib39D1ECFB_gv_mods[lv__number_Mod].lv_item_Button_ModSettings, lib39D1ECFB_gv_item_Button_Mod_Disable_Text, PlayerGroupAll());
+                    libNtve_gf_SetDialogItemStyle(lib39D1ECFB_gv_mods[lv__number_Mod].lv_item_Button_ModSettings, "_Disable", PlayerGroupAll());
+                }
+            }
+            else {
+                libNtve_gf_SetDialogItemChecked(lib39D1ECFB_gv_item_CheckBox_ModsList[lv__number_Mod], false, PlayerGroupAll());
+            }
+            lib39D1ECFB_gf_ChangeStartButton();
+            break;
+        }
+
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib39D1ECFB_gt_checkedCheckBox_Init () {
+    lib39D1ECFB_gt_checkedCheckBox = TriggerCreate("lib39D1ECFB_gt_checkedCheckBox_Func");
+    TriggerAddEventDialogControl(lib39D1ECFB_gt_checkedCheckBox, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeChecked);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: checkedCheckBoxCommon
+//--------------------------------------------------------------------------------------------------
+bool lib39D1ECFB_gt_checkedCheckBoxCommon_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__number_Mod;
+
+    // Automatic Variable Declarations
+    int auto137280B5_ae;
+    const int auto137280B5_ai = 1;
+    int auto143C8CB8_ae;
+    const int auto143C8CB8_ai = 1;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((EventDialogControl() == lib39D1ECFB_gv_item_CheckBox_Common)) {
+        if ((libNtve_gf_DialogItemIsChecked(lib39D1ECFB_gv_item_CheckBox_Common, EventPlayer()) == true)) {
+            auto143C8CB8_ae = lib39D1ECFB_gv_amount_Mods;
+            lv__number_Mod = 1;
+            for ( ; ( (auto143C8CB8_ai >= 0 && lv__number_Mod <= auto143C8CB8_ae) || (auto143C8CB8_ai < 0 && lv__number_Mod >= auto143C8CB8_ae) ) ; lv__number_Mod += auto143C8CB8_ai ) {
+                libNtve_gf_SetDialogItemChecked(lib39D1ECFB_gv_item_CheckBox_ModsList[lv__number_Mod], true, PlayerGroupAll());
+            }
+        }
+        else {
+            auto137280B5_ae = lib39D1ECFB_gv_amount_Mods;
+            lv__number_Mod = 1;
+            for ( ; ( (auto137280B5_ai >= 0 && lv__number_Mod <= auto137280B5_ae) || (auto137280B5_ai < 0 && lv__number_Mod >= auto137280B5_ae) ) ; lv__number_Mod += auto137280B5_ai ) {
+                libNtve_gf_SetDialogItemChecked(lib39D1ECFB_gv_item_CheckBox_ModsList[lv__number_Mod], false, PlayerGroupAll());
+            }
+        }
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib39D1ECFB_gt_checkedCheckBoxCommon_Init () {
+    lib39D1ECFB_gt_checkedCheckBoxCommon = TriggerCreate("lib39D1ECFB_gt_checkedCheckBoxCommon_Func");
+    TriggerAddEventDialogControl(lib39D1ECFB_gt_checkedCheckBoxCommon, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeChecked);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: checkedCheckBoxPlayers
+//--------------------------------------------------------------------------------------------------
+bool lib39D1ECFB_gt_checkedCheckBoxPlayers_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__number_Mod;
+
+    // Automatic Variable Declarations
+    int auto8AE67C93_ae;
+    const int auto8AE67C93_ai = 1;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto8AE67C93_ae = lib39D1ECFB_gv_amount_Mods;
+    lv__number_Mod = 1;
+    for ( ; ( (auto8AE67C93_ai >= 0 && lv__number_Mod <= auto8AE67C93_ae) || (auto8AE67C93_ai < 0 && lv__number_Mod >= auto8AE67C93_ae) ) ; lv__number_Mod += auto8AE67C93_ai ) {
+        if ((EventDialogControl() == lib39D1ECFB_gv_mods[lv__number_Mod].lv_item_CheckBox_ModSettings_Players)) {
+            if ((lib39D1ECFB_gv_mods[lv__number_Mod].lv_is_Settings_For_Each_Player == false)) {
+                lib39D1ECFB_gv_mods[lv__number_Mod].lv_is_Settings_For_Each_Player = true;
+            }
+            else {
+                lib39D1ECFB_gv_mods[lv__number_Mod].lv_is_Settings_For_Each_Player = false;
+            }
+            break;
+        }
+
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib39D1ECFB_gt_checkedCheckBoxPlayers_Init () {
+    lib39D1ECFB_gt_checkedCheckBoxPlayers = TriggerCreate("lib39D1ECFB_gt_checkedCheckBoxPlayers_Func");
+    TriggerAddEventDialogControl(lib39D1ECFB_gt_checkedCheckBoxPlayers, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeChecked);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: scrolledMouse
+//--------------------------------------------------------------------------------------------------
+bool lib39D1ECFB_gt_scrolledMouse_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__number_Mod;
+    int lv__item_ModsList_Name_OffsetY;
+    int lv__item_ModsList_OffsetY;
+
+    // Automatic Variable Declarations
+    int auto89B83B49_ae;
+    const int auto89B83B49_ai = 1;
+    int auto544FBE00_ae;
+    const int auto544FBE00_ai = 1;
+
+    // Variable Initialization
+    lv__item_ModsList_Name_OffsetY = (lib39D1ECFB_gv_item_CheckBox_OffsetX + 45);
+
+    // Conditions
+    if (testConds) {
+        if (!(((lib39D1ECFB_gv_first_Mod_In_Navigation > 1) || ((lib39D1ECFB_gv_first_Mod_In_Navigation + 10) < lib39D1ECFB_gv_amount_Mods)))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((EventMouseWheelSpin() == 1.0) && (lib39D1ECFB_gv_first_Mod_In_Navigation > 1)) {
+        lib39D1ECFB_gv_item_ModsList_OffsetY += lib39D1ECFB_gv_item_ModsList_OffsetY_Shift;
+        lv__item_ModsList_OffsetY = lib39D1ECFB_gv_item_ModsList_OffsetY;
+        auto89B83B49_ae = lib39D1ECFB_gv_amount_Mods;
+        lv__number_Mod = 1;
+        for ( ; ( (auto89B83B49_ai >= 0 && lv__number_Mod <= auto89B83B49_ae) || (auto89B83B49_ai < 0 && lv__number_Mod >= auto89B83B49_ae) ) ; lv__number_Mod += auto89B83B49_ai ) {
+            DialogControlSetPosition(lib39D1ECFB_gv_item_CheckBox_ModsList[lv__number_Mod], PlayerGroupAll(), c_anchorTopLeft, lib39D1ECFB_gv_item_CheckBox_OffsetX, lv__item_ModsList_OffsetY);
+            DialogControlSetPosition(lib39D1ECFB_gv_item_Button_ModsList[lv__number_Mod], PlayerGroupAll(), c_anchorTopLeft, lv__item_ModsList_Name_OffsetY, lv__item_ModsList_OffsetY);
+            lv__item_ModsList_OffsetY += lib39D1ECFB_gv_item_ModsList_OffsetY_Shift;
+        }
+        lib39D1ECFB_gv_first_Mod_In_Navigation -= 1;
+        lib39D1ECFB_gf_CreateButtonForNav(lib39D1ECFB_gv_first_Mod_In_Navigation);
+    }
+
+    if ((EventMouseWheelSpin() == -1.0) && ((lib39D1ECFB_gv_first_Mod_In_Navigation + 10) < lib39D1ECFB_gv_amount_Mods)) {
+        lib39D1ECFB_gv_item_ModsList_OffsetY -= lib39D1ECFB_gv_item_ModsList_OffsetY_Shift;
+        lv__item_ModsList_OffsetY = lib39D1ECFB_gv_item_ModsList_OffsetY;
+        auto544FBE00_ae = lib39D1ECFB_gv_amount_Mods;
+        lv__number_Mod = 1;
+        for ( ; ( (auto544FBE00_ai >= 0 && lv__number_Mod <= auto544FBE00_ae) || (auto544FBE00_ai < 0 && lv__number_Mod >= auto544FBE00_ae) ) ; lv__number_Mod += auto544FBE00_ai ) {
+            DialogControlSetPosition(lib39D1ECFB_gv_item_CheckBox_ModsList[lv__number_Mod], PlayerGroupAll(), c_anchorTopLeft, lib39D1ECFB_gv_item_CheckBox_OffsetX, lv__item_ModsList_OffsetY);
+            DialogControlSetPosition(lib39D1ECFB_gv_item_Button_ModsList[lv__number_Mod], PlayerGroupAll(), c_anchorTopLeft, lv__item_ModsList_Name_OffsetY, lv__item_ModsList_OffsetY);
+            lv__item_ModsList_OffsetY += lib39D1ECFB_gv_item_ModsList_OffsetY_Shift;
+        }
+        lib39D1ECFB_gv_first_Mod_In_Navigation += 1;
+        lib39D1ECFB_gf_CreateButtonForNav(lib39D1ECFB_gv_first_Mod_In_Navigation);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib39D1ECFB_gt_scrolledMouse_Init () {
+    lib39D1ECFB_gt_scrolledMouse = TriggerCreate("lib39D1ECFB_gt_scrolledMouse_Func");
+    TriggerAddEventMouseWheel(lib39D1ECFB_gt_scrolledMouse, c_playerAny);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: selectedOptionPulldown
+//--------------------------------------------------------------------------------------------------
+bool lib39D1ECFB_gt_selectedOptionPulldown_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__number_Option;
+    int lv__number_Option_Value;
+
+    // Automatic Variable Declarations
+    int auto0708B9CD_ae;
+    const int auto0708B9CD_ai = 1;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto0708B9CD_ae = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_number_Game_Options;
+    lv__number_Option = 1;
+    for ( ; ( (auto0708B9CD_ai >= 0 && lv__number_Option <= auto0708B9CD_ae) || (auto0708B9CD_ai < 0 && lv__number_Option >= auto0708B9CD_ae) ) ; lv__number_Option += auto0708B9CD_ai ) {
+        if ((EventDialogControl() == lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[lv__number_Option].lv_listBox_Pulldown)) {
+            lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[lv__number_Option].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[lv__number_Option].lv_values[DialogControlGetSelectedItem(lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[lv__number_Option].lv_listBox_Pulldown, EventPlayer())].lv_valueString;
+            libNtve_gf_SetDialogItemTooltip(lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[lv__number_Option].lv_listBox_Pulldown, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[lv__number_Option].lv_values[DialogControlGetSelectedItem(lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[lv__number_Option].lv_listBox_Pulldown, EventPlayer())].lv_valueComment, PlayerGroupAll());
+            if ((lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[lv__number_Option].lv_values[DialogControlGetSelectedItem(lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[lv__number_Option].lv_listBox_Pulldown, EventPlayer())].lv_is_ValueType_EditBox == true)) {
+                DialogControlSetVisible(lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[lv__number_Option].lv_editBox_Label, PlayerGroupAll(), true);
+                DialogControlSetVisible(lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[lv__number_Option].lv_editBox_Input, PlayerGroupAll(), true);
+            }
+            else {
+                DialogControlSetVisible(lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[lv__number_Option].lv_editBox_Label, PlayerGroupAll(), false);
+                DialogControlSetVisible(lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[lv__number_Option].lv_editBox_Input, PlayerGroupAll(), false);
+            }
+            break;
+        }
+
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib39D1ECFB_gt_selectedOptionPulldown_Init () {
+    lib39D1ECFB_gt_selectedOptionPulldown = TriggerCreate("lib39D1ECFB_gt_selectedOptionPulldown_Func");
+    TriggerAddEventDialogControl(lib39D1ECFB_gt_selectedOptionPulldown, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeSelectionChanged);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: changedEditBoxInput
+//--------------------------------------------------------------------------------------------------
+bool lib39D1ECFB_gt_changedEditBoxInput_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__number_Option;
+    int lv__number_Option_Value;
+
+    // Automatic Variable Declarations
+    int auto89E0B121_ae;
+    const int auto89E0B121_ai = 1;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto89E0B121_ae = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_number_Game_Options;
+    lv__number_Option = 1;
+    for ( ; ( (auto89E0B121_ai >= 0 && lv__number_Option <= auto89E0B121_ae) || (auto89E0B121_ai < 0 && lv__number_Option >= auto89E0B121_ae) ) ; lv__number_Option += auto89E0B121_ai ) {
+        if ((EventDialogControl() == lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[lv__number_Option].lv_editBox_Input)) {
+            TriggerDebugOutput(1, (StringExternal("Param/Value/lib_39D1ECFB_1C9F3354") + StringToText(libNtve_gf_DialogItemEditValue(EventDialogControl(), EventPlayer()))), true);
+            lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[lv__number_Option].lv_values[0].lv_valueString = libNtve_gf_DialogItemEditValue(EventDialogControl(), EventPlayer());
+            break;
+        }
+
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib39D1ECFB_gt_changedEditBoxInput_Init () {
+    lib39D1ECFB_gt_changedEditBoxInput = TriggerCreate("lib39D1ECFB_gt_changedEditBoxInput_Func");
+    TriggerAddEventDialogControl(lib39D1ECFB_gt_changedEditBoxInput, c_playerAny, c_invalidDialogControlId, c_triggerControlEventTypeTextChanged);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: playerLeaveFromGame
+//--------------------------------------------------------------------------------------------------
+bool lib39D1ECFB_gt_playerLeaveFromGame_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    PlayerGroupRemove(lib36280BFF_gv_commonplayers_Active_Group, EventPlayer());
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib39D1ECFB_gt_playerLeaveFromGame_Init () {
+    lib39D1ECFB_gt_playerLeaveFromGame = TriggerCreate("lib39D1ECFB_gt_playerLeaveFromGame_Func");
+    TriggerAddEventPlayerLeft(lib39D1ECFB_gt_playerLeaveFromGame, c_playerAny, c_gameResultUndecided);
+}
+
+void lib39D1ECFB_InitTriggers () {
+    lib39D1ECFB_gt_Launch_Init();
+    lib39D1ECFB_gt_clickedNavigateButton_Init();
+    lib39D1ECFB_gt_clickedModButton_Init();
+    lib39D1ECFB_gt_clickedSettingsButton_Init();
+    lib39D1ECFB_gt_clickedStartButton_Init();
+    lib39D1ECFB_gt_checkedCheckBox_Init();
+    lib39D1ECFB_gt_checkedCheckBoxCommon_Init();
+    lib39D1ECFB_gt_checkedCheckBoxPlayers_Init();
+    lib39D1ECFB_gt_scrolledMouse_Init();
+    lib39D1ECFB_gt_selectedOptionPulldown_Init();
+    lib39D1ECFB_gt_changedEditBoxInput_Init();
+    lib39D1ECFB_gt_playerLeaveFromGame_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool lib39D1ECFB_InitLib_completed = false;
+
+void lib39D1ECFB_InitLib () {
+    if (lib39D1ECFB_InitLib_completed) {
+        return;
+    }
+
+    lib39D1ECFB_InitLib_completed = true;
+
+    lib39D1ECFB_InitLibraries();
+    lib39D1ECFB_InitVariables();
+    lib39D1ECFB_InitTriggers();
+}
+
+include "Lib36280BFF"
+include "Lib3BFC9D7F"
+include "LibCC907F2F"
+include "Lib3A730930"
+include "Lib0D5719D7"
+include "Lib1F307236"
+include "Lib737D3B35"
+include "Lib620365F2"
+include "Lib1F00594A"
+include "LibA56FBBB5"
+include "LibFE150EF4"
+include "LibCBA2262F"
+include "LibE019E1BF"
+include "Lib72901696"
+include "LibDF67D79D"
+include "Lib81F0063E"
+include "Lib0A71E558"
+include "Lib63FEFBFB"
+include "LibA47BADE5"
+

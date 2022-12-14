@@ -1,0 +1,37 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: 03 Rich Resources | RR
+//--------------------------------------------------------------------------------------------------
+// Structures
+struct libCC907F2F_gs_Information {
+    string lv_rROption_1D098D0BCD0B8D0BDD0B5D180D0B0D0BBD18BD0B8D0B3D0B0D0B7;
+    string lv_rROption_1D0A2D0BED0BBD18CD0BAD0BED0BCD0B8D0BDD0B5D180D0B0D0BBD18B;
+    string lv_rROption_1D0A2D0BED0BBD18CD0BAD0BED0B3D0B0D0B7D0B8D0BBD0BAD0B8;
+    string lv_rROption_2D097D0B0D0BCD0B5D0BDD0B8D182D18CD0BDD0B0D0B7D0BED0BBD0BED182D18BD0B5;
+    string lv_rROption_2D09DD0B5D182;
+};
+
+// Variable Declarations
+libCC907F2F_gs_Information libCC907F2F_gv_modInformation;
+bool libCC907F2F_gv_rRis_Rich_Mineral;
+bool libCC907F2F_gv_rRis_Rich_Vespen;
+bool libCC907F2F_gv_rRis_Replace_Small_Resources;
+
+// Function Declarations
+void libCC907F2F_gf_SetupInformation (int lp_modIndex);
+void libCC907F2F_gf_GetOptions ();
+void libCC907F2F_gf_TriggersTurnOn ();
+void libCC907F2F_gf_RRGetInfoForPlayer ();
+void libCC907F2F_gf_RRPickEachResources ();
+bool libCC907F2F_gf_RRis_ReplaceSmallResource (unit lp_unit);
+void libCC907F2F_gf_RRReplaceMineral1800 (unit lp_unit);
+void libCC907F2F_gf_RRReplaceMineral900 (unit lp_unit);
+void libCC907F2F_gf_RRReplaceVespenGeyser (unit lp_unit);
+
+// Trigger Declarations
+trigger libCC907F2F_gt_Launch;
+
+// Library Initialization
+void libCC907F2F_InitVariables ();
+

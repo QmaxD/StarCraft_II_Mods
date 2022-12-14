@@ -1,0 +1,190 @@
+include "TriggerLibs/NativeLib"
+include "Lib39D1ECFB_h"
+include "Lib36280BFF_h"
+
+include "Lib3BFC9D7F_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: 02 No vespen gas | NVG
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void lib3BFC9D7F_InitLibraries () {
+    libNtve_InitVariables();
+    lib39D1ECFB_InitVariables();
+    lib36280BFF_InitVariables();
+}
+
+// Variable Initialization
+bool lib3BFC9D7F_InitVariables_completed = false;
+
+void lib3BFC9D7F_InitVariables () {
+    if (lib3BFC9D7F_InitVariables_completed) {
+        return;
+    }
+
+    lib3BFC9D7F_InitVariables_completed = true;
+
+    lib3BFC9D7F_gv_modInformation.lv_nVGOption_1 = "Удалить веспеновые газилки с карты";
+    lib3BFC9D7F_gv_modInformation.lv_nVGOption_1D09DD0B5D183D187D0B8D182D18BD0B2D0B0D182D18CD0B2D0B5D181D0BFD0B5D0BDD0B3D0B0D0B7D0BFD180D0B8D181D182D180D0BED0B8D182D0B5D0BBD18CD181D182D0B2D0B5D18ED0BDD0B8D182D0BED0B2 = "Не учитывать веспен газ при строительстве юнитов";
+    lib3BFC9D7F_gv_nVGis_useVespenWhenOrderUnit = true;
+}
+
+// Functions
+void lib3BFC9D7F_gf_SetupInformation (int lp_modIndex) {
+    // Variable Declarations
+    int lv__optionIndex;
+    int lv__optionValueIndex;
+    int lv__default_Option_1;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv__default_Option_1 = 1;
+
+    // Implementation
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_name = StringExternal("Param/Value/lib_3BFC9D7F_ABBF5274");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_fullName = StringExternal("Param/Value/lib_3BFC9D7F_C3E90D5A");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_description = StringExternal("Param/Value/lib_3BFC9D7F_9D816297");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_icon_Path = "Assets\\Textures\\btn-doodad-vespenegeyser.dds";
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_is_Included = true;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_saturation = 1;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_3BFC9D7F_255D2C51");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_3BFC9D7F_81CC1B42");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3BFC9D7F_gv_modInformation.lv_nVGOption_1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3BFC9D7F_36D69524");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib3BFC9D7F_gv_modInformation.lv_nVGOption_1D09DD0B5D183D187D0B8D182D18BD0B2D0B0D182D18CD0B2D0B5D181D0BFD0B5D0BDD0B3D0B0D0B7D0BFD180D0B8D181D182D180D0BED0B8D182D0B5D0BBD18CD181D182D0B2D0B5D18ED0BDD0B8D182D0BED0B2;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_3BFC9D7F_F2FF0242");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_1].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_number_Game_Options = lv__optionIndex;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_start_Trigger = lib3BFC9D7F_gt_Launch;
+}
+
+void lib3BFC9D7F_gf_GetOptions () {
+    // Automatic Variable Declarations
+    string autoCA0102AD_val;
+
+    // Implementation
+    autoCA0102AD_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[1].lv_values[0].lv_valueString;
+    if (autoCA0102AD_val == lib3BFC9D7F_gv_modInformation.lv_nVGOption_1) {
+        lib3BFC9D7F_gv_nVGis_removeVespenFromMap = true;
+    }
+    else if (autoCA0102AD_val == lib3BFC9D7F_gv_modInformation.lv_nVGOption_1D09DD0B5D183D187D0B8D182D18BD0B2D0B0D182D18CD0B2D0B5D181D0BFD0B5D0BDD0B3D0B0D0B7D0BFD180D0B8D181D182D180D0BED0B8D182D0B5D0BBD18CD181D182D0B2D0B5D18ED0BDD0B8D182D0BED0B2) {
+        lib3BFC9D7F_gv_nVGis_removeVespenFromMap = true;
+        lib3BFC9D7F_gv_nVGis_useVespenWhenOrderUnit = false;
+    }
+    else {
+    }
+}
+
+void lib3BFC9D7F_gf_TriggersTurnOn () {
+    // Automatic Variable Declarations
+}
+
+void lib3BFC9D7F_gf_NVGGetInfoForPlayer () {
+    // Variable Declarations
+    text lv__description;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Implementation
+    if ((lib3BFC9D7F_gv_nVGis_removeVespenFromMap == true)) {
+        lv__description = (lv__description + StringExternal("Param/Value/lib_3BFC9D7F_A27F2A98"));
+    }
+
+    if ((lib3BFC9D7F_gv_nVGis_useVespenWhenOrderUnit == false)) {
+        lv__description = (lv__description + StringExternal("Param/Value/lib_3BFC9D7F_0378FBF7"));
+    }
+
+    lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = lv__description;
+    lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat = StringToText("");
+}
+
+void lib3BFC9D7F_gf_NVGStart () {
+    // Automatic Variable Declarations
+    unitgroup auto8737A8CB_g;
+    int auto8737A8CB_u;
+    unit auto8737A8CB_var;
+    playergroup auto1F654036_g;
+    int auto1F654036_var;
+
+    // Implementation
+    if ((lib3BFC9D7F_gv_nVGis_removeVespenFromMap == true)) {
+        auto8737A8CB_g = UnitGroup(null, 0, RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterAlly) | (1 << c_targetFilterEnemy) | (1 << c_targetFilterMissile) | (1 << c_targetFilterDestructible), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+        auto8737A8CB_u = UnitGroupCount(auto8737A8CB_g, c_unitCountAll);
+        for (;; auto8737A8CB_u -= 1) {
+            auto8737A8CB_var = UnitGroupUnitFromEnd(auto8737A8CB_g, auto8737A8CB_u);
+            if (auto8737A8CB_var == null) { break; }
+            if ((lib36280BFF_gf_Commonis_Vespene_2250(auto8737A8CB_var) == true)) {
+                UnitRemove(auto8737A8CB_var);
+            }
+
+        }
+    }
+
+    if ((lib3BFC9D7F_gv_nVGis_useVespenWhenOrderUnit == false)) {
+        auto1F654036_g = lib36280BFF_gv_commonplayers_Active_Group;
+        auto1F654036_var = -1;
+        while (true) {
+            auto1F654036_var = PlayerGroupNextPlayer(auto1F654036_g, auto1F654036_var);
+            if (auto1F654036_var < 0) { break; }
+            PlayerSetState(auto1F654036_var, c_playerStateVespeneCostIgnored, true);
+        }
+    }
+
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: Launch
+//--------------------------------------------------------------------------------------------------
+bool lib3BFC9D7F_gt_Launch_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lib3BFC9D7F_gf_GetOptions();
+    lib3BFC9D7F_gf_NVGGetInfoForPlayer();
+    TextExpressionSetToken("Param/Expression/lib_3BFC9D7F_2B1281D4", "FulName", lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_fullName);
+    HelpPanelAddTip(PlayerGroupAll(), libNtve_gf_FormatTipTitle(TextExpressionAssemble("Param/Expression/lib_3BFC9D7F_2B1281D4"), libNtve_ge_TipType_NormalTip), lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_name, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_icon_Path);
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat);
+    lib3BFC9D7F_gf_NVGStart();
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib3BFC9D7F_gt_Launch_Init () {
+    lib3BFC9D7F_gt_Launch = TriggerCreate("lib3BFC9D7F_gt_Launch_Func");
+}
+
+void lib3BFC9D7F_InitTriggers () {
+    lib3BFC9D7F_gt_Launch_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool lib3BFC9D7F_InitLib_completed = false;
+
+void lib3BFC9D7F_InitLib () {
+    if (lib3BFC9D7F_InitLib_completed) {
+        return;
+    }
+
+    lib3BFC9D7F_InitLib_completed = true;
+
+    lib3BFC9D7F_InitLibraries();
+    lib3BFC9D7F_InitVariables();
+    lib3BFC9D7F_InitTriggers();
+}
+
+include "Lib39D1ECFB"
+include "Lib36280BFF"
+

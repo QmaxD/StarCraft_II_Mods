@@ -1,0 +1,663 @@
+include "TriggerLibs/NativeLib"
+include "Lib39D1ECFB_h"
+include "Lib36280BFF_h"
+
+include "LibCBA2262F_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: 12 Blocking units attack | BUA
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void libCBA2262F_InitLibraries () {
+    libNtve_InitVariables();
+    lib39D1ECFB_InitVariables();
+    lib36280BFF_InitVariables();
+}
+
+// Variable Initialization
+bool libCBA2262F_InitVariables_completed = false;
+
+void libCBA2262F_InitVariables () {
+    if (libCBA2262F_InitVariables_completed) {
+        return;
+    }
+
+    libCBA2262F_InitVariables_completed = true;
+
+    libCBA2262F_gv_modInformation.lv_bUAOption_1D097D0B0D0B1D0BBD0BED0BAD0B8D180D0BED0B2D0B0D182D18CD0B0D182D0B0D0BAD183D183D0B2D0BED0B7D0B4D183D188D0BDD18BD185D18ED0BDD0B8D182D0BED0B2 = "Заблокировать атаку у воздушных юнитов";
+    libCBA2262F_gv_modInformation.lv_bUAOption_1D097D0B0D0B1D0BBD0BED0BAD0B8D180D0BED0B2D0B0D182D18CD0B0D182D0B0D0BAD183D183D0BDD0B0D0B7D0B5D0BCD0BDD18BD185D18ED0BDD0B8D182D0BED0B2 = "Заблокировать атаку у наземных юнитов";
+    libCBA2262F_gv_modInformation.lv_bUAOption_2D09CD0BED0B3D183D182D0B0D182D0B0D0BAD0BED0B2D0B0D182D18C = "Могут атаковать";
+    libCBA2262F_gv_modInformation.lv_bUAOption_2D097D0B4D0B0D0BDD0B8D18FD0BED0B1D0BED180D0BED0BDD18BD0BDD0B5D0BCD0BED0B3D183D182D0B0D182D0B0D0BAD0BED0B2D0B0D182D18C = "Здания обороны не могут атаковать";
+    libCBA2262F_gv_modInformation.lv_bUAOption_3D09CD0BED0B3D183D182D0B0D182D0B0D0BAD0BED0B2D0B0D182D18C = "Могут атаковать";
+    libCBA2262F_gv_modInformation.lv_bUAOption_3D0A0D0B0D0B1D0BED187D0B8D0B5D0BDD0B5D0BCD0BED0B3D183D182D0B0D182D0B0D0BAD0BED0B2D0B0D182D18C = "Рабочие не могут атаковать";
+}
+
+// Functions
+void libCBA2262F_gf_SetupInformation (int lp_modIndex) {
+    // Variable Declarations
+    int lv__optionIndex;
+    int lv__optionValueIndex;
+    int lv__default_Option_1;
+    int lv__default_Option_2;
+    int lv__default_Option_3;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv__default_Option_1 = 1;
+    lv__default_Option_2 = 1;
+    lv__default_Option_3 = 1;
+
+    // Implementation
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_name = StringExternal("Param/Value/lib_CBA2262F_29044BD7");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_fullName = StringExternal("Param/Value/lib_CBA2262F_AA4D0BFE");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_description = StringExternal("Param/Value/lib_CBA2262F_8BBAF870");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_icon_Path = "Assets\\Textures\\ui_story_attackmode_targeticon_red.dds";
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_is_Included = true;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_saturation = 2;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_CBA2262F_CBF09F60");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_CBA2262F_2CDF6315");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libCBA2262F_gv_modInformation.lv_bUAOption_1D097D0B0D0B1D0BBD0BED0BAD0B8D180D0BED0B2D0B0D182D18CD0B0D182D0B0D0BAD183D183D0B2D0BED0B7D0B4D183D188D0BDD18BD185D18ED0BDD0B8D182D0BED0B2;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_CBA2262F_AA164338");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libCBA2262F_gv_modInformation.lv_bUAOption_1D097D0B0D0B1D0BBD0BED0BAD0B8D180D0BED0B2D0B0D182D18CD0B0D182D0B0D0BAD183D183D0BDD0B0D0B7D0B5D0BCD0BDD18BD185D18ED0BDD0B8D182D0BED0B2;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_CBA2262F_EDF0FDF8");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_1].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_CBA2262F_12A386F3");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_CBA2262F_37F8790E");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libCBA2262F_gv_modInformation.lv_bUAOption_2D09CD0BED0B3D183D182D0B0D182D0B0D0BAD0BED0B2D0B0D182D18C;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_CBA2262F_B5E2CF1A");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libCBA2262F_gv_modInformation.lv_bUAOption_2D097D0B4D0B0D0BDD0B8D18FD0BED0B1D0BED180D0BED0BDD18BD0BDD0B5D0BCD0BED0B3D183D182D0B0D182D0B0D0BAD0BED0B2D0B0D182D18C;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_CBA2262F_8E476792");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_2;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_2].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_CBA2262F_6E93E8D1");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_CBA2262F_E1F9E7BD");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libCBA2262F_gv_modInformation.lv_bUAOption_3D09CD0BED0B3D183D182D0B0D182D0B0D0BAD0BED0B2D0B0D182D18C;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_CBA2262F_A22872E5");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libCBA2262F_gv_modInformation.lv_bUAOption_3D0A0D0B0D0B1D0BED187D0B8D0B5D0BDD0B5D0BCD0BED0B3D183D182D0B0D182D0B0D0BAD0BED0B2D0B0D182D18C;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_CBA2262F_AE4121A8");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_3;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_3].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_number_Game_Options = lv__optionIndex;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_start_Trigger = libCBA2262F_gt_Launch;
+}
+
+void libCBA2262F_gf_GetOptions () {
+    // Automatic Variable Declarations
+    string auto473C178F_val;
+
+    // Implementation
+    auto473C178F_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[1].lv_values[0].lv_valueString;
+    if (auto473C178F_val == libCBA2262F_gv_modInformation.lv_bUAOption_1D097D0B0D0B1D0BBD0BED0BAD0B8D180D0BED0B2D0B0D182D18CD0B0D182D0B0D0BAD183D183D0B2D0BED0B7D0B4D183D188D0BDD18BD185D18ED0BDD0B8D182D0BED0B2) {
+        libCBA2262F_gv_isBlockingAirUnitAttack = true;
+    }
+    else if (auto473C178F_val == libCBA2262F_gv_modInformation.lv_bUAOption_1D097D0B0D0B1D0BBD0BED0BAD0B8D180D0BED0B2D0B0D182D18CD0B0D182D0B0D0BAD183D183D0BDD0B0D0B7D0B5D0BCD0BDD18BD185D18ED0BDD0B8D182D0BED0B2) {
+        libCBA2262F_gv_isBlockingGroundUnitAttack = true;
+    }
+    else {
+    }
+    if ((lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[2].lv_values[0].lv_valueString == libCBA2262F_gv_modInformation.lv_bUAOption_2D097D0B4D0B0D0BDD0B8D18FD0BED0B1D0BED180D0BED0BDD18BD0BDD0B5D0BCD0BED0B3D183D182D0B0D182D0B0D0BAD0BED0B2D0B0D182D18C)) {
+        libCBA2262F_gv_isBlockingStructuresAttack = true;
+    }
+
+    if ((lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[3].lv_values[0].lv_valueString == libCBA2262F_gv_modInformation.lv_bUAOption_3D0A0D0B0D0B1D0BED187D0B8D0B5D0BDD0B5D0BCD0BED0B3D183D182D0B0D182D0B0D0BAD0BED0B2D0B0D182D18C)) {
+        libCBA2262F_gv_isBlockingWorkerAttack = true;
+    }
+
+}
+
+void libCBA2262F_gf_TriggersTurnOn () {
+    // Automatic Variable Declarations
+    // Implementation
+    TriggerEnable(libCBA2262F_gt_BUAVikingTransformAG, true);
+    TriggerEnable(libCBA2262F_gt_BUAVikingTransformGA, true);
+    if ((libCBA2262F_gv_isBlockingAirUnitAttack == true)) {
+        TriggerEnable(libCBA2262F_gt_BUADisableAirUnitAttack, true);
+    }
+
+    if ((libCBA2262F_gv_isBlockingGroundUnitAttack == true)) {
+        TriggerEnable(libCBA2262F_gt_BUADisableGroundUnitAttack, true);
+    }
+
+    if ((libCBA2262F_gv_isBlockingStructuresAttack == true)) {
+        TriggerEnable(libCBA2262F_gt_BUADisableStructuresAttack, true);
+    }
+
+    if ((libCBA2262F_gv_isBlockingWorkerAttack == true)) {
+    }
+
+}
+
+void libCBA2262F_gf_BUAGetInfoForPlayer () {
+    // Variable Declarations
+    text lv__description;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Implementation
+    lv__description = StringExternal("Param/Value/lib_CBA2262F_878BDE1C");
+    if ((libCBA2262F_gv_isBlockingAirUnitAttack == true)) {
+        lv__description = (lv__description + StringExternal("Param/Value/lib_CBA2262F_FF7F449C"));
+    }
+
+    if ((libCBA2262F_gv_isBlockingGroundUnitAttack == true)) {
+        lv__description = (lv__description + StringExternal("Param/Value/lib_CBA2262F_0128870B"));
+    }
+
+    if ((libCBA2262F_gv_isBlockingStructuresAttack == true)) {
+        lv__description = (lv__description + StringExternal("Param/Value/lib_CBA2262F_B6BDFC22"));
+    }
+
+    if ((libCBA2262F_gv_isBlockingWorkerAttack == true)) {
+        lv__description = (lv__description + StringExternal("Param/Value/lib_CBA2262F_36B34295"));
+    }
+
+    lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = lv__description;
+    lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat = StringToText("");
+}
+
+void libCBA2262F_gf_BUAStart () {
+    // Automatic Variable Declarations
+    // Implementation
+    if ((libCBA2262F_gv_isBlockingWorkerAttack == true)) {
+        libCBA2262F_gf_BUADisallowWorkerWeapon();
+    }
+
+    if ((libCBA2262F_gv_isBlockingAirUnitAttack == true)) {
+        libCBA2262F_gf_BUADisallowAirUpgrades();
+    }
+
+    if ((libCBA2262F_gv_isBlockingGroundUnitAttack == true)) {
+        libCBA2262F_gf_BUADisallowGroundUpgrades();
+    }
+
+    if ((libCBA2262F_gv_isBlockingStructuresAttack == true)) {
+        libCBA2262F_gf_BUADisallowStructuresUpgrades();
+    }
+
+}
+
+trigger auto_libCBA2262F_gf_BUADisallowAirUpgrades_Trigger = null;
+
+void libCBA2262F_gf_BUADisallowAirUpgrades () {
+    if (auto_libCBA2262F_gf_BUADisallowAirUpgrades_Trigger == null) {
+        auto_libCBA2262F_gf_BUADisallowAirUpgrades_Trigger = TriggerCreate("auto_libCBA2262F_gf_BUADisallowAirUpgrades_TriggerFunc");
+    }
+
+    TriggerExecute(auto_libCBA2262F_gf_BUADisallowAirUpgrades_Trigger, false, false);
+}
+
+bool auto_libCBA2262F_gf_BUADisallowAirUpgrades_TriggerFunc (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    playergroup auto268E8C9D_g;
+    int auto268E8C9D_var;
+
+    // Implementation
+    auto268E8C9D_g = lib36280BFF_gv_commonplayers_Active_Group;
+    auto268E8C9D_var = -1;
+    while (true) {
+        auto268E8C9D_var = PlayerGroupNextPlayer(auto268E8C9D_g, auto268E8C9D_var);
+        if (auto268E8C9D_var < 0) { break; }
+        TechTreeUpgradeAllow(auto268E8C9D_var, "ProtossAirWeaponsLevel1", false);
+        TechTreeUpgradeAllow(auto268E8C9D_var, "ProtossAirWeaponsLevel2", false);
+        TechTreeUpgradeAllow(auto268E8C9D_var, "ProtossAirWeaponsLevel3", false);
+        TechTreeUpgradeAllow(auto268E8C9D_var, "ProtossAirArmorsLevel1", false);
+        TechTreeUpgradeAllow(auto268E8C9D_var, "ProtossAirArmorsLevel2", false);
+        TechTreeUpgradeAllow(auto268E8C9D_var, "ProtossAirArmorsLevel3", false);
+        TechTreeUpgradeAllow(auto268E8C9D_var, "PhoenixRangeUpgrade", false);
+        TechTreeUpgradeAllow(auto268E8C9D_var, "CarrierLaunchSpeedUpgrade", false);
+        TechTreeUpgradeAllow(auto268E8C9D_var, "VoidRaySpeedUpgrade", false);
+        TechTreeUpgradeAllow(auto268E8C9D_var, "TempestGroundAttackUpgrade", false);
+        TechTreeUpgradeAllow(auto268E8C9D_var, "TerranShipWeaponsLevel1", false);
+        TechTreeUpgradeAllow(auto268E8C9D_var, "TerranShipWeaponsLevel2", false);
+        TechTreeUpgradeAllow(auto268E8C9D_var, "TerranShipWeaponsLevel3", false);
+        TechTreeUpgradeAllow(auto268E8C9D_var, "BattlecruiserEnableSpecializations", false);
+        TechTreeAbilityAllow(auto268E8C9D_var, AbilityCommand("Yamato", 0), false);
+        TechTreeUpgradeAllow(auto268E8C9D_var, "LiberatorAGRangeUpgrade", false);
+        TechTreeUpgradeAllow(auto268E8C9D_var, "ZergFlyerWeaponsLevel1", false);
+        TechTreeUpgradeAllow(auto268E8C9D_var, "ZergFlyerWeaponsLevel2", false);
+        TechTreeUpgradeAllow(auto268E8C9D_var, "ZergFlyerWeaponsLevel3", false);
+        TechTreeUpgradeAllow(auto268E8C9D_var, "ZergFlyerArmorsLevel1", false);
+        TechTreeUpgradeAllow(auto268E8C9D_var, "ZergFlyerArmorsLevel2", false);
+        TechTreeUpgradeAllow(auto268E8C9D_var, "ZergFlyerArmorsLevel3", false);
+        TechTreeAbilityAllow(auto268E8C9D_var, AbilityCommand("MorphToBroodLord", 0), false);
+    }
+    return true;
+}
+
+trigger auto_libCBA2262F_gf_BUADisallowGroundUpgrades_Trigger = null;
+
+void libCBA2262F_gf_BUADisallowGroundUpgrades () {
+    if (auto_libCBA2262F_gf_BUADisallowGroundUpgrades_Trigger == null) {
+        auto_libCBA2262F_gf_BUADisallowGroundUpgrades_Trigger = TriggerCreate("auto_libCBA2262F_gf_BUADisallowGroundUpgrades_TriggerFunc");
+    }
+
+    TriggerExecute(auto_libCBA2262F_gf_BUADisallowGroundUpgrades_Trigger, false, false);
+}
+
+bool auto_libCBA2262F_gf_BUADisallowGroundUpgrades_TriggerFunc (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    playergroup auto83D144AB_g;
+    int auto83D144AB_var;
+
+    // Implementation
+    auto83D144AB_g = lib36280BFF_gv_commonplayers_Active_Group;
+    auto83D144AB_var = -1;
+    while (true) {
+        auto83D144AB_var = PlayerGroupNextPlayer(auto83D144AB_g, auto83D144AB_var);
+        if (auto83D144AB_var < 0) { break; }
+        TechTreeUpgradeAllow(auto83D144AB_var, "ProtossGroundWeaponsLevel1", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "ProtossGroundWeaponsLevel2", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "ProtossGroundWeaponsLevel3", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "ProtossGroundArmorsLevel1", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "ProtossGroundArmorsLevel2", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "ProtossGroundArmorsLevel3", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "AdeptPiercingAttack", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "ExtendedThermalLance", false);
+        TechTreeAbilityAllow(auto83D144AB_var, AbilityCommand("PurificationNova", 0), false);
+        TechTreeAbilityAllow(auto83D144AB_var, AbilityCommand("PurificationNovaTargeted", 0), false);
+        TechTreeAbilityAllow(auto83D144AB_var, AbilityCommand("PurificationNovaMorph", 0), false);
+        TechTreeAbilityAllow(auto83D144AB_var, AbilityCommand("PurificationNovaMorphBack", 0), false);
+        TechTreeAbilityAllow(auto83D144AB_var, AbilityCommand("PurificationNovaTargeted", 0), false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "TerranInfantryWeaponsLevel1", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "TerranInfantryWeaponsLevel2", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "TerranInfantryWeaponsLevel3", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "TerranInfantryArmorsLevel1", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "TerranInfantryArmorsLevel2", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "TerranInfantryArmorsLevel3", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "TerranVehicleWeaponsLevel1", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "TerranVehicleWeaponsLevel2", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "TerranVehicleWeaponsLevel3", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "ShieldWall", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "PunisherGrenades", false);
+        TechTreeAbilityAllow(auto83D144AB_var, AbilityCommand("KD8Charge", 0), false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "TransformationServos", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "CycloneAirUpgrade", false);
+        TechTreeAbilityAllow(auto83D144AB_var, AbilityCommand("LockOn", 0), false);
+        TechTreeAbilityAllow(auto83D144AB_var, AbilityCommand("LockOnAir", 0), false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "StrikeCannons", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "ThorSkin", false);
+        TechTreeAbilityAllow(auto83D144AB_var, AbilityCommand("250mmStrikeCannons", 0), false);
+        TechTreeAbilityAllow(auto83D144AB_var, AbilityCommand("ThorNormalMode", 0), false);
+        TechTreeAbilityAllow(auto83D144AB_var, AbilityCommand("ThorNormalMode", 0), false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "ZergMeleeWeaponsLevel1", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "ZergMeleeWeaponsLevel2", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "ZergMeleeWeaponsLevel3", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "ZergMissileWeaponsLevel1", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "ZergMissileWeaponsLevel2", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "ZergMissileWeaponsLevel3", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "ZergGroundArmorsLevel1", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "ZergGroundArmorsLevel2", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "ZergGroundArmorsLevel3", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "zerglingattackspeed", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "CentrificalHooks", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "EvolveGroovedSpines", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "DiggingClaws", false);
+        TechTreeUpgradeAllow(auto83D144AB_var, "LurkerRange", false);
+        TechTreeAbilityAllow(auto83D144AB_var, AbilityCommand("MorphZerglingToBaneling", 0), false);
+        TechTreeAbilityAllow(auto83D144AB_var, AbilityCommand("MorphToRavager", 0), false);
+        TechTreeAbilityAllow(auto83D144AB_var, AbilityCommand("MorphToLurker", 0), false);
+        TechTreeAbilityAllow(auto83D144AB_var, AbilityCommand("SwarmHostSpawnLocusts", 0), false);
+    }
+    return true;
+}
+
+trigger auto_libCBA2262F_gf_BUADisallowStructuresUpgrades_Trigger = null;
+
+void libCBA2262F_gf_BUADisallowStructuresUpgrades () {
+    if (auto_libCBA2262F_gf_BUADisallowStructuresUpgrades_Trigger == null) {
+        auto_libCBA2262F_gf_BUADisallowStructuresUpgrades_Trigger = TriggerCreate("auto_libCBA2262F_gf_BUADisallowStructuresUpgrades_TriggerFunc");
+    }
+
+    TriggerExecute(auto_libCBA2262F_gf_BUADisallowStructuresUpgrades_Trigger, false, false);
+}
+
+bool auto_libCBA2262F_gf_BUADisallowStructuresUpgrades_TriggerFunc (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv__weaponTargetFilters;
+
+    // Automatic Variable Declarations
+    playergroup auto38AF2875_g;
+    int auto38AF2875_var;
+
+    // Variable Initialization
+    lv__weaponTargetFilters = "Visible;Air,Ground,Missile,Stasis,Dead,Hidden,Invulnerable";
+
+    // Implementation
+    auto38AF2875_g = lib36280BFF_gv_commonplayers_Active_Group;
+    auto38AF2875_var = -1;
+    while (true) {
+        auto38AF2875_var = PlayerGroupNextPlayer(auto38AF2875_g, auto38AF2875_var);
+        if (auto38AF2875_var < 0) { break; }
+        TechTreeAbilityAllow(auto38AF2875_var, AbilityCommand("UpgradeToPlanetaryFortress", 0), false);
+    }
+    return true;
+}
+
+trigger auto_libCBA2262F_gf_BUADisallowWorkerWeapon_Trigger = null;
+
+void libCBA2262F_gf_BUADisallowWorkerWeapon () {
+    if (auto_libCBA2262F_gf_BUADisallowWorkerWeapon_Trigger == null) {
+        auto_libCBA2262F_gf_BUADisallowWorkerWeapon_Trigger = TriggerCreate("auto_libCBA2262F_gf_BUADisallowWorkerWeapon_TriggerFunc");
+    }
+
+    TriggerExecute(auto_libCBA2262F_gf_BUADisallowWorkerWeapon_Trigger, false, false);
+}
+
+bool auto_libCBA2262F_gf_BUADisallowWorkerWeapon_TriggerFunc (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv__weaponTargetFilters;
+
+    // Automatic Variable Declarations
+    playergroup autoBE386EE8_g;
+    int autoBE386EE8_var;
+
+    // Variable Initialization
+    lv__weaponTargetFilters = "Visible;Air,Ground,Missile,Stasis,Dead,Hidden,Invulnerable";
+
+    // Implementation
+    autoBE386EE8_g = lib36280BFF_gv_commonplayers_Active_Group;
+    autoBE386EE8_var = -1;
+    while (true) {
+        autoBE386EE8_var = PlayerGroupNextPlayer(autoBE386EE8_g, autoBE386EE8_var);
+        if (autoBE386EE8_var < 0) { break; }
+        CatalogFieldValueSet(c_gameCatalogWeapon, "ParticleBeam", "TargetFilters", autoBE386EE8_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "Spines", "TargetFilters", autoBE386EE8_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "FusionCutter", "TargetFilters", autoBE386EE8_var, lv__weaponTargetFilters);
+    }
+    return true;
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: Launch
+//--------------------------------------------------------------------------------------------------
+bool libCBA2262F_gt_Launch_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libCBA2262F_gf_GetOptions();
+    libCBA2262F_gf_BUAGetInfoForPlayer();
+    TextExpressionSetToken("Param/Expression/lib_CBA2262F_2E8488A3", "FulName", lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_fullName);
+    HelpPanelAddTip(PlayerGroupAll(), libNtve_gf_FormatTipTitle(TextExpressionAssemble("Param/Expression/lib_CBA2262F_2E8488A3"), libNtve_ge_TipType_NormalTip), lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_name, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_icon_Path);
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat);
+    libCBA2262F_gf_BUAStart();
+    libCBA2262F_gf_TriggersTurnOn();
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libCBA2262F_gt_Launch_Init () {
+    libCBA2262F_gt_Launch = TriggerCreate("libCBA2262F_gt_Launch_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: BUA | VikingTransformA-G
+//--------------------------------------------------------------------------------------------------
+bool libCBA2262F_gt_BUAVikingTransformAG_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!(((libCBA2262F_gv_isBlockingAirUnitAttack == true) || (libCBA2262F_gv_isBlockingGroundUnitAttack == true)))) {
+            return false;
+        }
+
+        if (!((lib36280BFF_gf_Commonis_UnitOwnerActivePlayer(EventUnit()) == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((libCBA2262F_gv_isBlockingAirUnitAttack == true)) {
+        UnitAbilityEnable(EventUnit(), "attack", true);
+    }
+
+    if ((libCBA2262F_gv_isBlockingGroundUnitAttack == true)) {
+        UnitAbilityEnable(EventUnit(), "attack", false);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libCBA2262F_gt_BUAVikingTransformAG_Init () {
+    libCBA2262F_gt_BUAVikingTransformAG = TriggerCreate("libCBA2262F_gt_BUAVikingTransformAG_Func");
+    TriggerEnable(libCBA2262F_gt_BUAVikingTransformAG, false);
+    TriggerAddEventUnitAbility(libCBA2262F_gt_BUAVikingTransformAG, null, AbilityCommand("AssaultMode", 0), c_unitAbilStageAll, false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: BUA | VikingTransformG-A
+//--------------------------------------------------------------------------------------------------
+bool libCBA2262F_gt_BUAVikingTransformGA_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!(((libCBA2262F_gv_isBlockingAirUnitAttack == true) || (libCBA2262F_gv_isBlockingGroundUnitAttack == true)))) {
+            return false;
+        }
+
+        if (!((lib36280BFF_gf_Commonis_UnitOwnerActivePlayer(EventUnit()) == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((libCBA2262F_gv_isBlockingAirUnitAttack == true)) {
+        UnitAbilityEnable(EventUnit(), "attack", false);
+    }
+
+    if ((libCBA2262F_gv_isBlockingGroundUnitAttack == true)) {
+        UnitAbilityEnable(EventUnit(), "attack", true);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libCBA2262F_gt_BUAVikingTransformGA_Init () {
+    libCBA2262F_gt_BUAVikingTransformGA = TriggerCreate("libCBA2262F_gt_BUAVikingTransformGA_Func");
+    TriggerEnable(libCBA2262F_gt_BUAVikingTransformGA, false);
+    TriggerAddEventUnitAbility(libCBA2262F_gt_BUAVikingTransformGA, null, AbilityCommand("FighterMode", 0), c_unitAbilStageAll, false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: BUA | Disable Air Unit Attack
+//--------------------------------------------------------------------------------------------------
+bool libCBA2262F_gt_BUADisableAirUnitAttack_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    string auto75B6A0AF_val;
+
+    // Conditions
+    if (testConds) {
+        if (!((libCBA2262F_gv_isBlockingAirUnitAttack == true))) {
+            return false;
+        }
+
+        if (!((lib36280BFF_gf_Commonis_UnitOwnerActivePlayer(EventUnit()) == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((UnitGetType(EventUnit()) != "Colossus") && (UnitFilterMatch(EventUnit(), EventPlayer(), UnitFilter((1 << c_targetFilterAir), 0, (1 << c_targetFilterNeutral), 0)) == true)) {
+        auto75B6A0AF_val = UnitGetType(EventUnit());
+        if (auto75B6A0AF_val == "Oracle") {
+            UnitAbilityEnable(EventUnit(), "OracleWeapon", false);
+        }
+        else if (auto75B6A0AF_val == "Battlecruiser") {
+            UnitAbilityEnable(EventUnit(), "BattlecruiserAttack", false);
+            UnitAbilityEnable(EventUnit(), "BattlecruiserAttackEvaluator", false);
+            UnitAbilityEnable(EventUnit(), "Yamato", false);
+        }
+        else if (auto75B6A0AF_val == "Corruptor") {
+            UnitAbilityEnable(EventUnit(), "CausticSpray", false);
+        }
+        else if (auto75B6A0AF_val == "Raven") {
+            UnitAbilityEnable(EventUnit(), "BuildAutoTurret", false);
+        }
+        else {
+            UnitAbilityEnable(EventUnit(), "attack", false);
+        }
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libCBA2262F_gt_BUADisableAirUnitAttack_Init () {
+    libCBA2262F_gt_BUADisableAirUnitAttack = TriggerCreate("libCBA2262F_gt_BUADisableAirUnitAttack_Func");
+    TriggerEnable(libCBA2262F_gt_BUADisableAirUnitAttack, false);
+    TriggerAddEventUnitRegion(libCBA2262F_gt_BUADisableAirUnitAttack, null, RegionEntireMap(), true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: BUA | Disable Ground Unit Attack
+//--------------------------------------------------------------------------------------------------
+bool libCBA2262F_gt_BUADisableGroundUnitAttack_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    string autoE465ABF1_val;
+
+    // Conditions
+    if (testConds) {
+        if (!((libCBA2262F_gv_isBlockingGroundUnitAttack == true))) {
+            return false;
+        }
+
+        if (!((lib36280BFF_gf_Commonis_UnitOwnerActivePlayer(EventUnit()) == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if (((UnitGetType(EventUnit()) == "LocustMP") || (UnitGetType(EventUnit()) == "LocustMPFlying") || (UnitFilterMatch(EventUnit(), EventPlayer(), UnitFilter((1 << c_targetFilterGround), 0, (1 << c_targetFilterNeutral) | (1 << c_targetFilterStructure) | (1 << c_targetFilterWorker), 0)) == true))) {
+        autoE465ABF1_val = UnitGetType(EventUnit());
+        if (autoE465ABF1_val == "WidowMine") {
+            UnitAbilityEnable(EventUnit(), "WidowMineAttack", false);
+            UnitAbilityEnable(EventUnit(), "attack", false);
+        }
+        else if (autoE465ABF1_val == "Ravager") {
+            UnitAbilityEnable(EventUnit(), "RavagerCorrosiveBile", false);
+            UnitAbilityEnable(EventUnit(), "attack", false);
+        }
+        else if (autoE465ABF1_val == "Cyclone") {
+            UnitAbilityEnable(EventUnit(), "LockOn", false);
+            UnitAbilityEnable(EventUnit(), "LockOnAir", false);
+        }
+        else if (autoE465ABF1_val == "Reaper") {
+            UnitAbilityEnable(EventUnit(), "KD8Charge", false);
+        }
+        else {
+            UnitAbilityEnable(EventUnit(), "attack", false);
+        }
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libCBA2262F_gt_BUADisableGroundUnitAttack_Init () {
+    libCBA2262F_gt_BUADisableGroundUnitAttack = TriggerCreate("libCBA2262F_gt_BUADisableGroundUnitAttack_Func");
+    TriggerEnable(libCBA2262F_gt_BUADisableGroundUnitAttack, false);
+    TriggerAddEventUnitRegion(libCBA2262F_gt_BUADisableGroundUnitAttack, null, RegionEntireMap(), true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: BUA | Disable Structures Attack
+//--------------------------------------------------------------------------------------------------
+bool libCBA2262F_gt_BUADisableStructuresAttack_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libCBA2262F_gv_isBlockingStructuresAttack == true))) {
+            return false;
+        }
+
+        if (!((lib36280BFF_gf_Commonis_UnitOwnerActivePlayer(EventUnit()) == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if (((UnitGetType(EventUnit()) == "PhotonCannon") || (UnitGetType(EventUnit()) == "MissileTurret") || (UnitGetType(EventUnit()) == "PlanetaryFortress") || (UnitGetType(EventUnit()) == "SporeCrawler") || (UnitGetType(EventUnit()) == "SpineCrawler"))) {
+        UnitAbilityEnable(EventUnit(), "attack", false);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libCBA2262F_gt_BUADisableStructuresAttack_Init () {
+    libCBA2262F_gt_BUADisableStructuresAttack = TriggerCreate("libCBA2262F_gt_BUADisableStructuresAttack_Func");
+    TriggerEnable(libCBA2262F_gt_BUADisableStructuresAttack, false);
+    TriggerAddEventUnitRegion(libCBA2262F_gt_BUADisableStructuresAttack, null, RegionEntireMap(), true);
+}
+
+void libCBA2262F_InitTriggers () {
+    libCBA2262F_gt_Launch_Init();
+    libCBA2262F_gt_BUAVikingTransformAG_Init();
+    libCBA2262F_gt_BUAVikingTransformGA_Init();
+    libCBA2262F_gt_BUADisableAirUnitAttack_Init();
+    libCBA2262F_gt_BUADisableGroundUnitAttack_Init();
+    libCBA2262F_gt_BUADisableStructuresAttack_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool libCBA2262F_InitLib_completed = false;
+
+void libCBA2262F_InitLib () {
+    if (libCBA2262F_InitLib_completed) {
+        return;
+    }
+
+    libCBA2262F_InitLib_completed = true;
+
+    libCBA2262F_InitLibraries();
+    libCBA2262F_InitVariables();
+    libCBA2262F_InitTriggers();
+}
+
+include "Lib39D1ECFB"
+include "Lib36280BFF"
+

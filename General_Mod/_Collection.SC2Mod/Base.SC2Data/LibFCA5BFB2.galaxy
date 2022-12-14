@@ -1,0 +1,124 @@
+include "TriggerLibs/NativeLib"
+include "Lib39D1ECFB_h"
+include "Lib1F00594A_h"
+
+include "LibFCA5BFB2_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Example
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void libFCA5BFB2_InitLibraries () {
+    libNtve_InitVariables();
+    lib39D1ECFB_InitVariables();
+    lib1F00594A_InitVariables();
+}
+
+// Variable Initialization
+bool libFCA5BFB2_InitVariables_completed = false;
+
+void libFCA5BFB2_InitVariables () {
+    if (libFCA5BFB2_InitVariables_completed) {
+        return;
+    }
+
+    libFCA5BFB2_InitVariables_completed = true;
+
+    libFCA5BFB2_gv_modInformation.lv_exampleOption_1 = "";
+}
+
+// Functions
+void libFCA5BFB2_gf_SetupInformation (int lp_modIndex) {
+    // Variable Declarations
+    int lv__optionIndex;
+    int lv__optionValueIndex;
+    int lv__default_Option_1;
+    int lv__default_Option_2;
+    int lv__default_Option_3;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Implementation
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_name = StringExternal("Param/Value/lib_FCA5BFB2_127911CE");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_fullName = StringExternal("Param/Value/lib_FCA5BFB2_81F469DB");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_description = StringExternal("Param/Value/lib_FCA5BFB2_C58AF585");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_icon_Path = "Assets\\Textures\\btn-tips-sellprotossartifacts.dds";
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_is_Included = false;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_saturation = 0;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_FCA5BFB2_DE4C1800");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_FCA5BFB2_608A54E7");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib1F00594A_gv_modInformation.lv_sLOption_1050;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FCA5BFB2_F717D181");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib1F00594A_gv_modInformation.lv_sLOption_1D092D0B2D0B5D181D182D0B8D0B7D0BDD0B0D187D0B5D0BDD0B8D0B5;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FCA5BFB2_CA702DD5");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_is_ValueType_EditBox = true;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_1].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_number_Game_Options = lv__optionIndex;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_start_Trigger = lib1F00594A_gt_Launch;
+}
+
+void libFCA5BFB2_gf_TriggersTurnOn () {
+    // Automatic Variable Declarations
+    // Implementation
+    TriggerEnable(TriggerGetCurrent(), true);
+}
+
+void libFCA5BFB2_gf_GetOptions () {
+    // Automatic Variable Declarations
+}
+
+void libFCA5BFB2_gf_GetInfoForPlayer () {
+    // Variable Declarations
+    text lv__description;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Implementation
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: Launch
+//--------------------------------------------------------------------------------------------------
+bool libFCA5BFB2_gt_Launch_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFCA5BFB2_gt_Launch_Init () {
+    libFCA5BFB2_gt_Launch = TriggerCreate("libFCA5BFB2_gt_Launch_Func");
+}
+
+void libFCA5BFB2_InitTriggers () {
+    libFCA5BFB2_gt_Launch_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool libFCA5BFB2_InitLib_completed = false;
+
+void libFCA5BFB2_InitLib () {
+    if (libFCA5BFB2_InitLib_completed) {
+        return;
+    }
+
+    libFCA5BFB2_InitLib_completed = true;
+
+    libFCA5BFB2_InitLibraries();
+    libFCA5BFB2_InitVariables();
+    libFCA5BFB2_InitTriggers();
+}
+
+include "Lib39D1ECFB"
+include "Lib1F00594A"
+

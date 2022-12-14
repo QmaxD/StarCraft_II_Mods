@@ -1,5 +1,0 @@
-﻿Library/Name/D3E83EF3=BonusUnit
-Trigger/Name/lib_D3E83EF3_D9D900A6=UnitBuff
-Variable/Name/lib_D3E83EF3_1499C5A0=Kills
-Variable/Name/lib_D3E83EF3_69E98FD5=SizePpowed
-Variable/Name/lib_D3E83EF3_B114DC78=SizeP

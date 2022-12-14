@@ -1,5 +1,0 @@
-﻿Behavior/Name/GroundAirID=Ground and Air Attack
-DocInfo/DescLong=Разрешает любому юниту атаковать и по земле и по воздуху.<n/><n/>Создатели: GelioS, ShadowDragon, Qmax
-DocInfo/Name=[ ZERGTV ] 13. Все юниты стреляют по всем
-DocInfo/Website=http://ZERGTV.tv
-Param/Value/lib_CB611753_6954E776=Это будет интересно!

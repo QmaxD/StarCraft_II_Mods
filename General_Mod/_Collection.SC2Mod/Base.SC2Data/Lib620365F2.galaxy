@@ -1,0 +1,752 @@
+include "TriggerLibs/NativeLib"
+include "Lib39D1ECFB_h"
+include "Lib36280BFF_h"
+
+include "Lib620365F2_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: 08 Worker limit | WL
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void lib620365F2_InitLibraries () {
+    libNtve_InitVariables();
+    lib39D1ECFB_InitVariables();
+    lib36280BFF_InitVariables();
+}
+
+// Variable Initialization
+bool lib620365F2_InitVariables_completed = false;
+
+void lib620365F2_InitVariables () {
+    int init_i;
+
+    if (lib620365F2_InitVariables_completed) {
+        return;
+    }
+
+    lib620365F2_InitVariables_completed = true;
+
+    lib620365F2_gv_modInformation.lv_wLOption_1D091D0B5D0B7D0BBD0B8D0BCD0B8D182D0B0D180D0B0D0B1D0BED187D0B8D185 = "Без лимита рабочих";
+    lib620365F2_gv_modInformation.lv_wLOption_1D097D0B0D0BFD180D0B5D182D0B8D182D18CD181D182D180D0BED0B8D182D18CD180D0B0D0B1D0BED187D0B8D185 = "Запретить строить рабочих";
+    lib620365F2_gv_modInformation.lv_wLOption_112 = "12";
+    lib620365F2_gv_modInformation.lv_wLOption_116 = "16";
+    lib620365F2_gv_modInformation.lv_wLOption_122 = "22";
+    lib620365F2_gv_modInformation.lv_wLOption_124 = "24";
+    lib620365F2_gv_modInformation.lv_wLOption_130 = "30";
+    lib620365F2_gv_modInformation.lv_wLOption_132 = "32";
+    lib620365F2_gv_modInformation.lv_wLOption_140 = "40";
+    lib620365F2_gv_modInformation.lv_wLOption_144 = "44";
+    lib620365F2_gv_modInformation.lv_wLOption_150 = "50";
+    lib620365F2_gv_modInformation.lv_wLOption_156 = "56";
+    lib620365F2_gv_modInformation.lv_wLOption_160 = "60";
+    lib620365F2_gv_modInformation.lv_wLOption_166 = "66";
+    lib620365F2_gv_modInformation.lv_wLOption_170 = "70";
+    lib620365F2_gv_modInformation.lv_wLOption_172 = "72";
+    lib620365F2_gv_modInformation.lv_wLOption_176 = "76";
+    lib620365F2_gv_modInformation.lv_wLOption_180 = "80";
+    lib620365F2_gv_modInformation.lv_wLOption_188 = "88";
+    lib620365F2_gv_modInformation.lv_wLOption_1D092D0B2D0B5D181D182D0B8D0B7D0BDD0B0D187D0B5D0BDD0B8D0B5 = "Ввести значение";
+    lib620365F2_gv_modInformation.lv_wLOption_2D0A3D0BDD0B8D187D182D0BED0B6D0B8D182D18CD180D0B0D0B1D0BED187D0B8D185 = "Уничтожить рабочих";
+    lib620365F2_gv_modInformation.lv_wLOption_202 = "2";
+    lib620365F2_gv_modInformation.lv_wLOption_204 = "4";
+    lib620365F2_gv_modInformation.lv_wLOption_206 = "6";
+    lib620365F2_gv_modInformation.lv_wLOption_208 = "8";
+    lib620365F2_gv_modInformation.lv_wLOption_210 = "10";
+    lib620365F2_gv_modInformation.lv_wLOption_2D09DD0B5D182 = "Нет. Оставить стандартные 12";
+    lib620365F2_gv_modInformation.lv_wLOption_216 = "16";
+    lib620365F2_gv_modInformation.lv_wLOption_222 = "22";
+    lib620365F2_gv_modInformation.lv_wLOption_224 = "24";
+    lib620365F2_gv_modInformation.lv_wLOption_230 = "30";
+    lib620365F2_gv_modInformation.lv_wLOption_232 = "32";
+    lib620365F2_gv_modInformation.lv_wLOption_240 = "40";
+    lib620365F2_gv_modInformation.lv_wLOption_244 = "44";
+    lib620365F2_gv_modInformation.lv_wLOption_250 = "50";
+    lib620365F2_gv_modInformation.lv_wLOption_256 = "56";
+    lib620365F2_gv_modInformation.lv_wLOption_260 = "60";
+    lib620365F2_gv_modInformation.lv_wLOption_266 = "66";
+    lib620365F2_gv_modInformation.lv_wLOption_270 = "70";
+    lib620365F2_gv_modInformation.lv_wLOption_272 = "72";
+    lib620365F2_gv_modInformation.lv_wLOption_276 = "76";
+    lib620365F2_gv_modInformation.lv_wLOption_280 = "80";
+    lib620365F2_gv_modInformation.lv_wLOption_2D092D18BD0B4D0B0D182D18CD0BBD0B8D0BCD0B8D182D180D0B0D0B1D0BED187D0B8D185 = "Выдать лимит рабочих";
+    lib620365F2_gv_modInformation.lv_wLOption_2D092D0B2D0B5D181D182D0B8D0B7D0BDD0B0D187D0B5D0BDD0B8D0B5 = "Ввести значение";
+    for (init_i = 0; init_i <= lib36280BFF_gv_commonamount_Players_InGame; init_i += 1) {
+        lib620365F2_gv_wLget_WorkerLimit[init_i] = 12;
+    }
+    for (init_i = 0; init_i <= lib36280BFF_gv_commonamount_Players_InGame; init_i += 1) {
+        lib620365F2_gv_wLgive_WorkersInStart[init_i] = 12;
+    }
+    lib620365F2_gv_wLis_Start = true;
+}
+
+// Functions
+void lib620365F2_gf_SetupInformation (int lp_modIndex) {
+    // Variable Declarations
+    int lv__optionIndex;
+    int lv__optionValueIndex;
+    int lv__default_Option_1;
+    int lv__default_Option_2;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv__default_Option_1 = 10;
+    lv__default_Option_2 = 8;
+
+    // Implementation
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_name = StringExternal("Param/Value/lib_620365F2_4B24AE39");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_fullName = StringExternal("Param/Value/lib_620365F2_E7EC5CCE");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_description = StringExternal("Param/Value/lib_620365F2_57BA0176");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_icon_Path = "Assets\\Textures\\btn-ability-zerg-setworkerrallypoint.dds";
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_is_Included = true;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_saturation = 2;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_620365F2_473809B0");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_620365F2_946CDE33");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_1D091D0B5D0B7D0BBD0B8D0BCD0B8D182D0B0D180D0B0D0B1D0BED187D0B8D185;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_56474956");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_1D097D0B0D0BFD180D0B5D182D0B8D182D18CD181D182D180D0BED0B8D182D18CD180D0B0D0B1D0BED187D0B8D185;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_ABFBFE03");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_112;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_5496237E");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_116;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_AEFE7606");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_122;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_54B4F7AC");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_124;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_611DE3C4");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_130;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_B9C414BD");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_132;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_E0C5DD41");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_140;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_8ECA2083");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_144;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_B7F48EF1");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_150;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_0AB4DF51");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_156;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_25DFD8A2");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_160;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_056F3EBA");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_166;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_C3BC60C9");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_170;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_2BC1CD50");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_172;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_0237FA11");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_176;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_04680EB3");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_180;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_97C831C7");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_188;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_B1E67366");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_1D092D0B2D0B5D181D182D0B8D0B7D0BDD0B0D187D0B5D0BDD0B8D0B5;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_77CF2BF0");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_is_ValueType_EditBox = true;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_1].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_620365F2_A4E3228E");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_620365F2_EC52EEF7");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_2D092D18BD0B4D0B0D182D18CD0BBD0B8D0BCD0B8D182D180D0B0D0B1D0BED187D0B8D185;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_2CFEA20F");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_2D0A3D0BDD0B8D187D182D0BED0B6D0B8D182D18CD180D0B0D0B1D0BED187D0B8D185;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_C1D18084");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_202;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_7639EA72");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_204;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_25A2D180");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_206;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_342FFB63");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_208;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_BA956CEE");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_210;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_F723B1A8");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_2D09DD0B5D182;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_803C18D4");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_216;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_79AF68E0");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_222;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_4D014041");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_224;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_2C16FABA");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_230;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_E820F044");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_232;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_2B9B27DF");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_240;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_326AE631");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_244;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_CF232BBA");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_250;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_6841D75B");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_256;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_4935659E");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_260;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_2B6B2F6A");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_266;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_B6036C55");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_270;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_5EE2578D");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_272;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_9F9DDCDD");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_276;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_932D14C2");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_280;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_E075ED1E");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib620365F2_gv_modInformation.lv_wLOption_2D092D0B2D0B5D181D182D0B8D0B7D0BDD0B0D187D0B5D0BDD0B8D0B5;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_620365F2_3B9923B4");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_is_ValueType_EditBox = true;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_2;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_2].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_number_Game_Options = lv__optionIndex;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_start_Trigger = lib620365F2_gt_Launch;
+}
+
+void lib620365F2_gf_GetOptions () {
+    // Variable Declarations
+    int lv__number_Player;
+
+    // Automatic Variable Declarations
+    playergroup auto8B41012E_g;
+    string autoD2251C07_val;
+    string auto5039890F_val;
+
+    // Variable Initialization
+
+    // Implementation
+    auto8B41012E_g = PlayerGroupActive();
+    lv__number_Player = -1;
+    while (true) {
+        lv__number_Player = PlayerGroupNextPlayer(auto8B41012E_g, lv__number_Player);
+        if (lv__number_Player < 0) { break; }
+        autoD2251C07_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[1].lv_values[0].lv_valueString;
+        if (autoD2251C07_val == lib620365F2_gv_modInformation.lv_wLOption_1D091D0B5D0B7D0BBD0B8D0BCD0B8D182D0B0D180D0B0D0B1D0BED187D0B8D185) {
+            lib620365F2_gv_wLis_Start = false;
+            TriggerEnable(lib620365F2_gt_WLLookAfter_WorkerLimit, false);
+            TriggerStop(lib620365F2_gt_WLLookAfter_WorkerLimit);
+        }
+        else if (autoD2251C07_val == lib620365F2_gv_modInformation.lv_wLOption_1D097D0B0D0BFD180D0B5D182D0B8D182D18CD181D182D180D0BED0B8D182D18CD180D0B0D0B1D0BED187D0B8D185) {
+            lib620365F2_gv_wLis_Worker_BuildingBan_Permanently[lv__number_Player] = true;
+        }
+        else {
+            lib620365F2_gv_wLget_WorkerLimit[lv__number_Player] = StringToInt(lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[1].lv_values[0].lv_valueString);
+            lib620365F2_gv_wLis_LookAfter_WorkerLimit[lv__number_Player] = true;
+        }
+        auto5039890F_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[2].lv_values[0].lv_valueString;
+        if (auto5039890F_val == lib620365F2_gv_modInformation.lv_wLOption_2D0A3D0BDD0B8D187D182D0BED0B6D0B8D182D18CD180D0B0D0B1D0BED187D0B8D185) {
+            lib620365F2_gv_wLgive_WorkersInStart[lv__number_Player] = 0;
+        }
+        else if (auto5039890F_val == lib620365F2_gv_modInformation.lv_wLOption_2D09DD0B5D182) {
+        }
+        else if (auto5039890F_val == lib620365F2_gv_modInformation.lv_wLOption_2D092D18BD0B4D0B0D182D18CD0BBD0B8D0BCD0B8D182D180D0B0D0B1D0BED187D0B8D185) {
+            lib620365F2_gv_wLgive_WorkersInStart[lv__number_Player] = lib620365F2_gv_wLget_WorkerLimit[lv__number_Player];
+        }
+        else {
+            lib620365F2_gv_wLgive_WorkersInStart[lv__number_Player] = StringToInt(lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[2].lv_values[0].lv_valueString);
+        }
+    }
+}
+
+void lib620365F2_gf_TriggersTurnOn () {
+    // Automatic Variable Declarations
+}
+
+void lib620365F2_gf_WLGetInfoForPlayer () {
+    // Variable Declarations
+    int lv__number_Player;
+    text lv__description;
+
+    // Automatic Variable Declarations
+    playergroup auto636D2388_g;
+
+    // Variable Initialization
+
+    // Implementation
+    lv__description = StringExternal("Param/Value/lib_620365F2_76C947B8");
+    auto636D2388_g = PlayerGroupActive();
+    lv__number_Player = -1;
+    while (true) {
+        lv__number_Player = PlayerGroupNextPlayer(auto636D2388_g, lv__number_Player);
+        if (lv__number_Player < 0) { break; }
+        TextExpressionSetToken("Param/Expression/lib_620365F2_FEEA61B0", "NumberPlayer", IntToText(lv__number_Player));
+        TextExpressionSetToken("Param/Expression/lib_620365F2_FEEA61B0", "NamePlayer", TextWithColor(PlayerName(lv__number_Player), libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(lv__number_Player, false))));
+        lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_620365F2_FEEA61B0"));
+        if ((lib620365F2_gv_wLis_Worker_BuildingBan_Permanently[lv__number_Player] == true)) {
+            lv__description = (lv__description + StringExternal("Param/Value/lib_620365F2_696E65B8"));
+        }
+        else {
+            if ((lib620365F2_gv_wLis_Start == false)) {
+                lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_620365F2_B6F21FE8"));
+            }
+            else {
+                TextExpressionSetToken("Param/Expression/lib_620365F2_97B4FC90", "WorkerLimit", IntToText(lib620365F2_gv_wLget_WorkerLimit[lv__number_Player]));
+                lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_620365F2_97B4FC90"));
+            }
+        }
+        if ((lib620365F2_gv_wLgive_WorkersInStart[lv__number_Player] < 12)) {
+            TextExpressionSetToken("Param/Expression/lib_620365F2_3E487991", "AmountWorkers", IntToText(lib620365F2_gv_wLgive_WorkersInStart[lv__number_Player]));
+            lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_620365F2_3E487991"));
+        }
+        else if ((lib620365F2_gv_wLgive_WorkersInStart[lv__number_Player] == 12)) {
+        }
+        else if ((lib620365F2_gv_wLgive_WorkersInStart[lv__number_Player] > 12)) {
+            TextExpressionSetToken("Param/Expression/lib_620365F2_0F5D2D12", "AmountWorkers", IntToText(lib620365F2_gv_wLgive_WorkersInStart[lv__number_Player]));
+            lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_620365F2_0F5D2D12"));
+        }
+    }
+    lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = lv__description;
+}
+
+void lib620365F2_gf_WLStart () {
+    // Variable Declarations
+    int lv__number_Player;
+
+    // Automatic Variable Declarations
+    playergroup autoCC036371_g;
+
+    // Variable Initialization
+
+    // Implementation
+    autoCC036371_g = lib36280BFF_gv_commonplayers_Active_Group;
+    lv__number_Player = -1;
+    while (true) {
+        lv__number_Player = PlayerGroupNextPlayer(autoCC036371_g, lv__number_Player);
+        if (lv__number_Player < 0) { break; }
+        if ((lib620365F2_gv_wLgive_WorkersInStart[lv__number_Player] != 12)) {
+            if ((lib620365F2_gv_wLgive_WorkersInStart[lv__number_Player] == lib620365F2_gv_wLget_WorkerLimit[lv__number_Player])) {
+                lib620365F2_gf_WLDisableWorkersForPlayer(lv__number_Player);
+                lib620365F2_gf_WLGiveAmountWorkersForCreate(lv__number_Player);
+            }
+            else {
+                lib620365F2_gf_WLGiveAmountWorkersForCreate(lv__number_Player);
+            }
+        }
+
+        if ((lib620365F2_gv_wLis_Worker_BuildingBan_Permanently[lv__number_Player] == true)) {
+            lib620365F2_gf_WLDisableWorkersForPlayer(lv__number_Player);
+            lib620365F2_gv_wLis_Start = false;
+        }
+        else {
+            if ((lib620365F2_gv_wLis_Start == false)) {
+            }
+            else {
+                lib620365F2_gv_wLis_LookAfter_WorkerLimit[lv__number_Player] = true;
+            }
+        }
+    }
+    if ((lib620365F2_gv_wLis_Start == true)) {
+        TriggerExecute(lib620365F2_gt_WLLookAfter_WorkerLimit, true, false);
+    }
+    else {
+        TriggerEnable(lib620365F2_gt_WLLookAfter_WorkerLimit, false);
+        TriggerStop(lib620365F2_gt_WLLookAfter_WorkerLimit);
+    }
+}
+
+trigger auto_lib620365F2_gf_WLGiveAmountWorkersForCreate_Trigger = null;
+int auto_lib620365F2_gf_WLGiveAmountWorkersForCreate_lp_numberPlayer;
+
+void lib620365F2_gf_WLGiveAmountWorkersForCreate (int lp_numberPlayer) {
+    auto_lib620365F2_gf_WLGiveAmountWorkersForCreate_lp_numberPlayer = lp_numberPlayer;
+
+    if (auto_lib620365F2_gf_WLGiveAmountWorkersForCreate_Trigger == null) {
+        auto_lib620365F2_gf_WLGiveAmountWorkersForCreate_Trigger = TriggerCreate("auto_lib620365F2_gf_WLGiveAmountWorkersForCreate_TriggerFunc");
+    }
+
+    TriggerExecute(auto_lib620365F2_gf_WLGiveAmountWorkersForCreate_Trigger, false, false);
+}
+
+bool auto_lib620365F2_gf_WLGiveAmountWorkersForCreate_TriggerFunc (bool testConds, bool runActions) {
+    int lp_numberPlayer = auto_lib620365F2_gf_WLGiveAmountWorkersForCreate_lp_numberPlayer;
+
+    // Variable Declarations
+    const int lv__workers_InStartGame = 12;
+    int lv__workers_Create;
+    string lv__unit_Type;
+    string lv__abilityCommand;
+    string lv__race_Of_Player;
+    const fixed lv__radiusGetWorkers = 8.0;
+    const fixed lv__radiusCreateWorkers = 5.0;
+
+    // Automatic Variable Declarations
+    string autoBFD6508E_val;
+
+    // Variable Initialization
+    lv__abilityCommand = "";
+
+    // Implementation
+    autoBFD6508E_val = PlayerRace(lp_numberPlayer);
+    if (autoBFD6508E_val == "Prot") {
+        lv__unit_Type = "Probe";
+        lv__abilityCommand = "Gather (Probe)";
+        lv__race_Of_Player = "Prot";
+    }
+    else if (autoBFD6508E_val == "Terr") {
+        lv__unit_Type = "SCV";
+        lv__abilityCommand = "Gather (SCV)";
+        lv__race_Of_Player = "Terr";
+    }
+    else if (autoBFD6508E_val == "Zerg") {
+        lv__unit_Type = "Drone";
+        lv__abilityCommand = "Gather (Drone)";
+        lv__race_Of_Player = "Zerg";
+    }
+    else {
+    }
+    lv__workers_Create = (lib620365F2_gv_wLgive_WorkersInStart[lp_numberPlayer] - lv__workers_InStartGame);
+    if ((lv__workers_Create < 0)) {
+        lib620365F2_gf_WLRemoveWorker((lv__workers_Create * -1), lv__unit_Type, lp_numberPlayer, lv__race_Of_Player);
+    }
+    else {
+        lib620365F2_gf_WLCreateWorkersandOrderToMineral(lv__workers_Create, lv__unit_Type, lv__abilityCommand, lp_numberPlayer, lv__race_Of_Player, lv__radiusCreateWorkers, lv__radiusGetWorkers);
+    }
+    return true;
+}
+
+trigger auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_Trigger = null;
+int auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_amountWokersCreate;
+string auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_unitType;
+string auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_command;
+int auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_numberPlayer;
+string auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_raceOfPlayer;
+fixed auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_radiusCreate;
+fixed auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_radiusResources;
+
+void lib620365F2_gf_WLCreateWorkersandOrderToMineral (int lp_amountWokersCreate, string lp_unitType, string lp_command, int lp_numberPlayer, string lp_raceOfPlayer, fixed lp_radiusCreate, fixed lp_radiusResources) {
+    auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_amountWokersCreate = lp_amountWokersCreate;
+    auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_unitType = lp_unitType;
+    auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_command = lp_command;
+    auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_numberPlayer = lp_numberPlayer;
+    auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_raceOfPlayer = lp_raceOfPlayer;
+    auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_radiusCreate = lp_radiusCreate;
+    auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_radiusResources = lp_radiusResources;
+
+    if (auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_Trigger == null) {
+        auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_Trigger = TriggerCreate("auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_TriggerFunc");
+    }
+
+    TriggerExecute(auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_Trigger, false, false);
+}
+
+bool auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_TriggerFunc (bool testConds, bool runActions) {
+    int lp_amountWokersCreate = auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_amountWokersCreate;
+    string lp_unitType = auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_unitType;
+    string lp_command = auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_command;
+    int lp_numberPlayer = auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_numberPlayer;
+    string lp_raceOfPlayer = auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_raceOfPlayer;
+    fixed lp_radiusCreate = auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_radiusCreate;
+    fixed lp_radiusResources = auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_radiusResources;
+
+    // Automatic Variable Declarations
+    unitgroup auto19791AEF_g;
+    int auto19791AEF_u;
+    unit auto19791AEF_var;
+
+    // Implementation
+    Wait(5.0, c_timeReal);
+    libNtve_gf_CreateUnitsAtPoint2(lp_amountWokersCreate, lp_unitType, 0, lp_numberPlayer, RegionRandomPoint(RegionCircle(PlayerStartLocation(lp_numberPlayer), lp_radiusCreate)));
+    auto19791AEF_g = UnitGroup(lp_unitType, lp_numberPlayer, RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+    auto19791AEF_u = UnitGroupCount(auto19791AEF_g, c_unitCountAll);
+    for (;; auto19791AEF_u -= 1) {
+        auto19791AEF_var = UnitGroupUnitFromEnd(auto19791AEF_g, auto19791AEF_u);
+        if (auto19791AEF_var == null) { break; }
+        UnitIssueOrder(auto19791AEF_var, OrderTargetingUnit(StringToAbilCmd(lp_command), UnitGroupClosestToPoint(UnitGroup(lib36280BFF_gf_CommonGetRandomResourceTypeFromRegion(lp_numberPlayer, lp_radiusResources), c_playerAny, RegionCircle(PlayerStartLocation(lp_numberPlayer), lp_radiusResources), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0), UnitGetPosition(auto19791AEF_var))), c_orderQueueReplace);
+    }
+    return true;
+}
+
+trigger auto_lib620365F2_gf_WLRemoveWorker_Trigger = null;
+int auto_lib620365F2_gf_WLRemoveWorker_lp_amountWokersKill;
+string auto_lib620365F2_gf_WLRemoveWorker_lp_unitType;
+int auto_lib620365F2_gf_WLRemoveWorker_lp_numberPlayer;
+string auto_lib620365F2_gf_WLRemoveWorker_lp_raceOfPlayer;
+
+void lib620365F2_gf_WLRemoveWorker (int lp_amountWokersKill, string lp_unitType, int lp_numberPlayer, string lp_raceOfPlayer) {
+    auto_lib620365F2_gf_WLRemoveWorker_lp_amountWokersKill = lp_amountWokersKill;
+    auto_lib620365F2_gf_WLRemoveWorker_lp_unitType = lp_unitType;
+    auto_lib620365F2_gf_WLRemoveWorker_lp_numberPlayer = lp_numberPlayer;
+    auto_lib620365F2_gf_WLRemoveWorker_lp_raceOfPlayer = lp_raceOfPlayer;
+
+    if (auto_lib620365F2_gf_WLRemoveWorker_Trigger == null) {
+        auto_lib620365F2_gf_WLRemoveWorker_Trigger = TriggerCreate("auto_lib620365F2_gf_WLRemoveWorker_TriggerFunc");
+    }
+
+    TriggerExecute(auto_lib620365F2_gf_WLRemoveWorker_Trigger, false, false);
+}
+
+bool auto_lib620365F2_gf_WLRemoveWorker_TriggerFunc (bool testConds, bool runActions) {
+    int lp_amountWokersKill = auto_lib620365F2_gf_WLRemoveWorker_lp_amountWokersKill;
+    string lp_unitType = auto_lib620365F2_gf_WLRemoveWorker_lp_unitType;
+    int lp_numberPlayer = auto_lib620365F2_gf_WLRemoveWorker_lp_numberPlayer;
+    string lp_raceOfPlayer = auto_lib620365F2_gf_WLRemoveWorker_lp_raceOfPlayer;
+
+    // Variable Declarations
+    unitgroup lv__unitGroup;
+
+    // Automatic Variable Declarations
+    int autoDDAE3878_n;
+    int autoDDAE3878_i;
+
+    // Variable Initialization
+    lv__unitGroup = UnitGroupEmpty();
+
+    // Implementation
+    lv__unitGroup = UnitGroup(lp_unitType, lp_numberPlayer, RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+    autoDDAE3878_n = lp_amountWokersKill;
+    for (autoDDAE3878_i = 1; autoDDAE3878_i <= autoDDAE3878_n; autoDDAE3878_i += 1) {
+        UnitKill(UnitGroupRandomUnit(lv__unitGroup, c_unitCountAlive));
+    }
+    return true;
+}
+
+trigger auto_lib620365F2_gf_WLDisableWorkersForPlayer_Trigger = null;
+int auto_lib620365F2_gf_WLDisableWorkersForPlayer_lp_numberPlayer;
+
+void lib620365F2_gf_WLDisableWorkersForPlayer (int lp_numberPlayer) {
+    auto_lib620365F2_gf_WLDisableWorkersForPlayer_lp_numberPlayer = lp_numberPlayer;
+
+    if (auto_lib620365F2_gf_WLDisableWorkersForPlayer_Trigger == null) {
+        auto_lib620365F2_gf_WLDisableWorkersForPlayer_Trigger = TriggerCreate("auto_lib620365F2_gf_WLDisableWorkersForPlayer_TriggerFunc");
+    }
+
+    TriggerExecute(auto_lib620365F2_gf_WLDisableWorkersForPlayer_Trigger, false, false);
+}
+
+bool auto_lib620365F2_gf_WLDisableWorkersForPlayer_TriggerFunc (bool testConds, bool runActions) {
+    int lp_numberPlayer = auto_lib620365F2_gf_WLDisableWorkersForPlayer_lp_numberPlayer;
+
+    // Variable Declarations
+    string lv__raceOfPlayer;
+
+    // Automatic Variable Declarations
+    string auto6CA5132B_val;
+
+    // Variable Initialization
+    lv__raceOfPlayer = PlayerRace(lp_numberPlayer);
+
+    // Implementation
+    lv__raceOfPlayer = PlayerRace(lp_numberPlayer);
+    auto6CA5132B_val = lv__raceOfPlayer;
+    if (auto6CA5132B_val == "Prot") {
+        TechTreeUnitAllow(lp_numberPlayer, "Probe", false);
+    }
+    else if (auto6CA5132B_val == "Terr") {
+        TechTreeUnitAllow(lp_numberPlayer, "SCV", false);
+    }
+    else if (auto6CA5132B_val == "Zerg") {
+        TechTreeUnitAllow(lp_numberPlayer, "Drone", false);
+    }
+    else {
+        TechTreeUnitAllow(lp_numberPlayer, "Probe", false);
+        TechTreeUnitAllow(lp_numberPlayer, "SCV", false);
+        TechTreeUnitAllow(lp_numberPlayer, "Drone", false);
+    }
+    return true;
+}
+
+trigger auto_lib620365F2_gf_WLEnableWorkersForPlayer_Trigger = null;
+int auto_lib620365F2_gf_WLEnableWorkersForPlayer_lp_numberPlayer;
+
+void lib620365F2_gf_WLEnableWorkersForPlayer (int lp_numberPlayer) {
+    auto_lib620365F2_gf_WLEnableWorkersForPlayer_lp_numberPlayer = lp_numberPlayer;
+
+    if (auto_lib620365F2_gf_WLEnableWorkersForPlayer_Trigger == null) {
+        auto_lib620365F2_gf_WLEnableWorkersForPlayer_Trigger = TriggerCreate("auto_lib620365F2_gf_WLEnableWorkersForPlayer_TriggerFunc");
+    }
+
+    TriggerExecute(auto_lib620365F2_gf_WLEnableWorkersForPlayer_Trigger, false, false);
+}
+
+bool auto_lib620365F2_gf_WLEnableWorkersForPlayer_TriggerFunc (bool testConds, bool runActions) {
+    int lp_numberPlayer = auto_lib620365F2_gf_WLEnableWorkersForPlayer_lp_numberPlayer;
+
+    // Variable Declarations
+    string lv__raceOfPlayer;
+
+    // Automatic Variable Declarations
+    string autoBAF3B582_val;
+
+    // Variable Initialization
+    lv__raceOfPlayer = PlayerRace(lp_numberPlayer);
+
+    // Implementation
+    lv__raceOfPlayer = PlayerRace(lp_numberPlayer);
+    autoBAF3B582_val = lv__raceOfPlayer;
+    if (autoBAF3B582_val == "Prot") {
+        TechTreeUnitAllow(lp_numberPlayer, "Probe", true);
+    }
+    else if (autoBAF3B582_val == "Terr") {
+        TechTreeUnitAllow(lp_numberPlayer, "SCV", true);
+    }
+    else if (autoBAF3B582_val == "Zerg") {
+        TechTreeUnitAllow(lp_numberPlayer, "Drone", true);
+    }
+    else {
+        TechTreeUnitAllow(lp_numberPlayer, "Probe", true);
+        TechTreeUnitAllow(lp_numberPlayer, "SCV", true);
+        TechTreeUnitAllow(lp_numberPlayer, "Drone", true);
+    }
+    return true;
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: Launch
+//--------------------------------------------------------------------------------------------------
+bool lib620365F2_gt_Launch_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lib620365F2_gf_GetOptions();
+    lib620365F2_gf_WLGetInfoForPlayer();
+    TextExpressionSetToken("Param/Expression/lib_620365F2_B3B5B58A", "FulName", lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_fullName);
+    HelpPanelAddTip(PlayerGroupAll(), libNtve_gf_FormatTipTitle(TextExpressionAssemble("Param/Expression/lib_620365F2_B3B5B58A"), libNtve_ge_TipType_NormalTip), lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_name, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_icon_Path);
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat);
+    lib620365F2_gf_WLStart();
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib620365F2_gt_Launch_Init () {
+    lib620365F2_gt_Launch = TriggerCreate("lib620365F2_gt_Launch_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: WL | LookAfter_WorkerLimit
+//--------------------------------------------------------------------------------------------------
+bool lib620365F2_gt_WLLookAfter_WorkerLimit_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__countWorkers;
+
+    // Automatic Variable Declarations
+    playergroup autoC44A708A_g;
+    int autoC44A708A_var;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((lib620365F2_gv_wLis_Start == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    autoC44A708A_g = lib36280BFF_gv_commonplayers_Active_Group;
+    autoC44A708A_var = -1;
+    while (true) {
+        autoC44A708A_var = PlayerGroupNextPlayer(autoC44A708A_g, autoC44A708A_var);
+        if (autoC44A708A_var < 0) { break; }
+        lv__countWorkers = UnitCount(null, autoC44A708A_var, RegionEntireMap(), UnitFilter((1 << c_targetFilterWorker), 0, (1 << c_targetFilterAlly) | (1 << c_targetFilterNeutral) | (1 << c_targetFilterEnemy) | (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32))), 0);
+        if ((lib620365F2_gv_wLis_Worker_BuildingBan[autoC44A708A_var] == true)) {
+        }
+        else {
+            if ((lv__countWorkers > lib620365F2_gv_wLget_WorkerLimit[autoC44A708A_var])) {
+                lib620365F2_gf_WLDisableWorkersForPlayer(autoC44A708A_var);
+                if ((PlayerRace(autoC44A708A_var) == "Terr")) {
+                    UnitKill(UnitGroupRandomUnit(UnitGroup("SCV", autoC44A708A_var, RegionEntireMap(), UnitFilter((1 << c_targetFilterWorker), 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0), c_unitCountAlive));
+                }
+                else {
+                    UnitKill(UnitGroupRandomUnit(UnitGroup(null, autoC44A708A_var, RegionEntireMap(), UnitFilter((1 << c_targetFilterWorker), 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0), c_unitCountAlive));
+                }
+            }
+            else if ((lv__countWorkers == lib620365F2_gv_wLget_WorkerLimit[autoC44A708A_var])) {
+                lib620365F2_gf_WLDisableWorkersForPlayer(autoC44A708A_var);
+            }
+            else if ((lv__countWorkers < lib620365F2_gv_wLget_WorkerLimit[autoC44A708A_var])) {
+                lib620365F2_gf_WLEnableWorkersForPlayer(autoC44A708A_var);
+            }
+        }
+    }
+    Wait(1.0, c_timeGame);
+    TriggerExecute(lib620365F2_gt_WLLookAfter_WorkerLimit, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib620365F2_gt_WLLookAfter_WorkerLimit_Init () {
+    lib620365F2_gt_WLLookAfter_WorkerLimit = TriggerCreate("lib620365F2_gt_WLLookAfter_WorkerLimit_Func");
+    TriggerEnable(lib620365F2_gt_WLLookAfter_WorkerLimit, false);
+}
+
+void lib620365F2_InitTriggers () {
+    lib620365F2_gt_Launch_Init();
+    lib620365F2_gt_WLLookAfter_WorkerLimit_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool lib620365F2_InitLib_completed = false;
+
+void lib620365F2_InitLib () {
+    if (lib620365F2_InitLib_completed) {
+        return;
+    }
+
+    lib620365F2_InitLib_completed = true;
+
+    lib620365F2_InitLibraries();
+    lib620365F2_InitVariables();
+    lib620365F2_InitTriggers();
+}
+
+include "Lib39D1ECFB"
+include "Lib36280BFF"
+

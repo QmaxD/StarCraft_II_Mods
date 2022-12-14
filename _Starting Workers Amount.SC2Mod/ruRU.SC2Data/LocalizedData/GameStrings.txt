@@ -1,4 +1,0 @@
-﻿DocInfo/DescLong=Completely devoid of any description whatsoever.
-DocInfo/DescShort=Any
-DocInfo/Name=[ ZERGTV ] Количество рабочих в начале
-DocInfo/Website=zergtv.tv/gg

@@ -1,4 +1,0 @@
-﻿DocInfo/DescLong=Игра без газа - нет веспеновых гейзеров.<n/>Только минералы.
-DocInfo/DescShort=без газа
-DocInfo/Name=[ ZERGTV ] Без газа
-DocInfo/Website=zergtv.tv/gg

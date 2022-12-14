@@ -1,0 +1,37 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Resource mining | RM
+//--------------------------------------------------------------------------------------------------
+// Structures
+struct lib63FEFBFB_gs_Information {
+    string lv_exampleOption_1D09ED0B1D18BD187D0BDD18BD0B55D0B8D0B7D0BED0BBD0BED182D18BD0B57;
+    string lv_exampleOption_1D09ED0B1D18BD187D0BDD18BD0B57D0B8D0B7D0BED0BBD0BED182D18BD0B59;
+    string lv_exampleOption_1D09ED0B1D18BD187D0BDD18BD0B59D0B8D0B7D0BED0BBD0BED182D18BD0B512;
+    string lv_exampleOption_1D09ED0B1D18BD187D0BDD18BD0B512D0B8D0B7D0BED0BBD0BED182D18BD0B515;
+    string lv_exampleOption_1D09ED0B1D18BD187D0BDD18BD0B515D0B8D0B7D0BED0BBD0BED182D18BD0B520;
+    string lv_exampleOption_2D09ED0B1D18BD187D0BDD0B0D18F4D0B8D0B1D0BED0B3D0B0D182D0B0D18F8;
+    string lv_exampleOption_2D09ED0B1D18BD187D0BDD0B0D18F6D0B8D0B1D0BED0B3D0B0D182D0B0D18F12;
+    string lv_exampleOption_2D09ED0B1D18BD187D0BDD0B0D18F8D0B8D0B1D0BED0B3D0B0D182D0B0D18F16;
+    string lv_exampleOption_2D09ED0B1D18BD187D0BDD0B0D18F10D0B8D0B1D0BED0B3D0B0D182D0B0D18F20;
+    string lv_exampleOption_2D09ED0B1D18BD187D0BDD0B0D18F15D0B8D0B1D0BED0B3D0B0D182D0B0D18F30;
+};
+
+// Variable Declarations
+lib63FEFBFB_gs_Information lib63FEFBFB_gv_modInformation;
+int lib63FEFBFB_gv_rMget_MiningMinerals;
+int lib63FEFBFB_gv_rMget_MiningVespenGas;
+
+// Function Declarations
+void lib63FEFBFB_gf_SetupInformation (int lp_modIndex);
+void lib63FEFBFB_gf_GetOptions ();
+void lib63FEFBFB_gf_TriggersTurnOn ();
+void lib63FEFBFB_gf_RMGetInfoForPlayer ();
+void lib63FEFBFB_gf_RMChangeMining ();
+
+// Trigger Declarations
+trigger lib63FEFBFB_gt_Launch;
+
+// Library Initialization
+void lib63FEFBFB_InitVariables ();
+

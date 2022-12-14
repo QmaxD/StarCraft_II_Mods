@@ -1,0 +1,99 @@
+include "TriggerLibs/NativeLib"
+include "Lib39D1ECFB_h"
+include "Lib3A730930_h"
+
+include "Lib0D5719D7_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: ++05 Hide UI | HUI
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void lib0D5719D7_InitLibraries () {
+    libNtve_InitVariables();
+    lib39D1ECFB_InitVariables();
+    lib3A730930_InitVariables();
+}
+
+// Variable Initialization
+bool lib0D5719D7_InitVariables_completed = false;
+
+void lib0D5719D7_InitVariables () {
+    if (lib0D5719D7_InitVariables_completed) {
+        return;
+    }
+
+    lib0D5719D7_InitVariables_completed = true;
+
+    lib0D5719D7_gv_modInformation.lv_gSOption_1 = "";
+}
+
+// Functions
+void lib0D5719D7_gf_SetupInformation (int lp_modIndex) {
+    // Automatic Variable Declarations
+    // Implementation
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_name = StringExternal("Param/Value/lib_0D5719D7_6F23C5AF");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_fullName = StringExternal("Param/Value/lib_0D5719D7_4B411851");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_description = StringExternal("Param/Value/lib_0D5719D7_EAA5E31C");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_icon_Path = "Assets\\Textures\\btn-ability-protoss-envision.dds";
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_is_Included = false;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_saturation = 1;
+}
+
+void lib0D5719D7_gf_GetOptions () {
+    // Automatic Variable Declarations
+}
+
+void lib0D5719D7_gf_TriggersTurnOn () {
+    // Automatic Variable Declarations
+    // Implementation
+    TriggerEnable(lib3A730930_gt_UntitledTrigger002, true);
+}
+
+void lib0D5719D7_gf_GetInfoForPlayer () {
+    // Automatic Variable Declarations
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: Launch
+//--------------------------------------------------------------------------------------------------
+bool lib0D5719D7_gt_Launch_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lib0D5719D7_gf_TriggersTurnOn();
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib0D5719D7_gt_Launch_Init () {
+    lib0D5719D7_gt_Launch = TriggerCreate("lib0D5719D7_gt_Launch_Func");
+}
+
+void lib0D5719D7_InitTriggers () {
+    lib0D5719D7_gt_Launch_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool lib0D5719D7_InitLib_completed = false;
+
+void lib0D5719D7_InitLib () {
+    if (lib0D5719D7_InitLib_completed) {
+        return;
+    }
+
+    lib0D5719D7_InitLib_completed = true;
+
+    lib0D5719D7_InitLibraries();
+    lib0D5719D7_InitVariables();
+    lib0D5719D7_InitTriggers();
+}
+
+include "Lib39D1ECFB"
+include "Lib3A730930"
+

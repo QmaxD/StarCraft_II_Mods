@@ -1,0 +1,533 @@
+include "TriggerLibs/NativeLib"
+include "Lib39D1ECFB_h"
+
+include "Lib36280BFF_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Core
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void lib36280BFF_InitLibraries () {
+    libNtve_InitVariables();
+    lib39D1ECFB_InitVariables();
+}
+
+// Variable Initialization
+bool lib36280BFF_InitVariables_completed = false;
+
+void lib36280BFF_InitVariables () {
+    if (lib36280BFF_InitVariables_completed) {
+        return;
+    }
+
+    lib36280BFF_InitVariables_completed = true;
+
+    lib36280BFF_gv_commonplayers_Active_Group = PlayerGroupEmpty();
+    lib36280BFF_gv_commonresourcesGroup = UnitGroupEmpty();
+}
+
+// Functions
+void lib36280BFF_gf_CommonAddPlayerInActiveGroup () {
+    // Automatic Variable Declarations
+    const int auto91A0640B_ae = 12;
+    int auto91A0640B_var;
+
+    // Implementation
+    auto91A0640B_var = 1;
+    for ( ; auto91A0640B_var <= auto91A0640B_ae; auto91A0640B_var += 1 ) {
+        if ((PlayerStatus(auto91A0640B_var) == c_playerStatusActive)) {
+            PlayerGroupAdd(lib36280BFF_gv_commonplayers_Active_Group, auto91A0640B_var);
+            PlayerGroupAdd(lib39D1ECFB_gv_players_Group_UI, auto91A0640B_var);
+        }
+
+    }
+}
+
+bool lib36280BFF_gf_Commonis_Mineral_1800 (unit lp_unit) {
+    // Automatic Variable Declarations
+    // Implementation
+    if (((UnitGetType(lp_unit) == "MineralField") || (UnitGetType(lp_unit) == "LabMineralField") || (UnitGetType(lp_unit) == "BattleStationMineralField") || (UnitGetType(lp_unit) == "PurifierMineralField") || (UnitGetType(lp_unit) == "MineralFieldOpaque"))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool lib36280BFF_gf_Commonis_Mineral_900 (unit lp_unit) {
+    // Automatic Variable Declarations
+    // Implementation
+    if (((UnitGetType(lp_unit) == "MineralField750") || (UnitGetType(lp_unit) == "LabMineralField750") || (UnitGetType(lp_unit) == "BattleStationMineralField750") || (UnitGetType(lp_unit) == "PurifierMineralField750") || (UnitGetType(lp_unit) == "MineralFieldOpaque900") || (UnitGetType(lp_unit) == "MineralField450"))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool lib36280BFF_gf_Commonis_RichMineral_1800 (unit lp_unit) {
+    // Automatic Variable Declarations
+    // Implementation
+    if (((UnitGetType(lp_unit) == "RichMineralField") || (UnitGetType(lp_unit) == "PurifierRichMineralField"))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool lib36280BFF_gf_Commonis_RichMineral_900 (unit lp_unit) {
+    // Automatic Variable Declarations
+    // Implementation
+    if (((UnitGetType(lp_unit) == "RichMineralField750") || (UnitGetType(lp_unit) == "PurifierRichMineralField750"))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool lib36280BFF_gf_Commonis_Vespene_2250 (unit lp_unit) {
+    // Automatic Variable Declarations
+    // Implementation
+    if (((UnitGetType(lp_unit) == "VespeneGeyser") || (UnitGetType(lp_unit) == "SpacePlatformGeyser") || (UnitGetType(lp_unit) == "ProtossVespeneGeyser") || (UnitGetType(lp_unit) == "PurifierVespeneGeyser") || (UnitGetType(lp_unit) == "ShakurasVespeneGeyser"))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool lib36280BFF_gf_Commonis_RichVespene_2250 (unit lp_unit) {
+    // Automatic Variable Declarations
+    // Implementation
+    if (((UnitGetType(lp_unit) == "RichVespeneGeyser"))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool lib36280BFF_gf_Commonis_VespeneUnit (unit lp_unit) {
+    // Automatic Variable Declarations
+    // Implementation
+    if (((UnitGetType(lp_unit) == "Assimilator") || (UnitGetType(lp_unit) == "AssimilatorRich") || (UnitGetType(lp_unit) == "Refinery") || (UnitGetType(lp_unit) == "RefineryRich") || (UnitGetType(lp_unit) == "Extractor") || (UnitGetType(lp_unit) == "ExtractorRich"))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool lib36280BFF_gf_Commonis_UnitType_Have_Energy (string lp_unitType) {
+    // Automatic Variable Declarations
+    // Implementation
+    if (((lp_unitType == "Sentry") || (lp_unitType == "HighTemplar") || (lp_unitType == "Phoenix") || (lp_unitType == "Oracle") || (lp_unitType == "Mothership") || (lp_unitType == "ShieldBattery") || (lp_unitType == "Nexus") || (lp_unitType == "Ghost") || (lp_unitType == "Medivac") || (lp_unitType == "Raven") || (lp_unitType == "Banshee") || (lp_unitType == "OrbitalCommand") || (lp_unitType == "Viper") || (lp_unitType == "Infestor") || (lp_unitType == "Overseer") || (lp_unitType == "Queen"))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool lib36280BFF_gf_Commonis_UnitType_Worker (unit lp_unit) {
+    // Variable Declarations
+    string lv__unitType;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv__unitType = UnitGetType(lp_unit);
+
+    // Implementation
+    lv__unitType = UnitGetType(lp_unit);
+    if (((lv__unitType == "Probe") || (lv__unitType == "Drone") || (lv__unitType == "DroneBurrowed") || (lv__unitType == "SCV") || (UnitTypeTestFlag(lv__unitType, c_unitFlagWorker) == true))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool lib36280BFF_gf_Commonis_UnitTypeFlag_Worker (unit lp_unit) {
+    // Variable Declarations
+    string lv__unitType;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv__unitType = UnitGetType(lp_unit);
+
+    // Implementation
+    lv__unitType = UnitGetType(lp_unit);
+    if ((UnitTypeTestFlag(lv__unitType, c_unitFlagWorker) == true)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+string lib36280BFF_gf_CommonGetRandomResourceTypeFromRegion (int lp_player, fixed lp_radius) {
+    // Variable Declarations
+    unitgroup lv__resources;
+
+    // Automatic Variable Declarations
+    unitgroup autoB9BF1546_g;
+    int autoB9BF1546_u;
+    unit autoB9BF1546_var;
+
+    // Variable Initialization
+    lv__resources = UnitGroupEmpty();
+
+    // Implementation
+    autoB9BF1546_g = UnitGroup(null, 0, RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+    autoB9BF1546_u = UnitGroupCount(autoB9BF1546_g, c_unitCountAll);
+    for (;; autoB9BF1546_u -= 1) {
+        autoB9BF1546_var = UnitGroupUnitFromEnd(autoB9BF1546_g, autoB9BF1546_u);
+        if (autoB9BF1546_var == null) { break; }
+        if (((RegionContainsPoint(RegionCircle(PlayerStartLocation(lp_player), lp_radius), UnitGetPosition(autoB9BF1546_var)) == true) && ((UnitGetType(autoB9BF1546_var) == "MineralField") || (UnitGetType(autoB9BF1546_var) == "MineralField750") || (UnitGetType(autoB9BF1546_var) == "MineralField450") || (UnitGetType(autoB9BF1546_var) == "MineralFieldOpaque") || (UnitGetType(autoB9BF1546_var) == "MineralFieldOpaque900") || (UnitGetType(autoB9BF1546_var) == "BattleStationMineralField") || (UnitGetType(autoB9BF1546_var) == "BattleStationMineralField750") || (UnitGetType(autoB9BF1546_var) == "LabMineralField") || (UnitGetType(autoB9BF1546_var) == "LabMineralField750") || (UnitGetType(autoB9BF1546_var) == "PurifierMineralField") || (UnitGetType(autoB9BF1546_var) == "PurifierMineralField750") || (UnitGetType(autoB9BF1546_var) == "PurifierRichMineralField") || (UnitGetType(autoB9BF1546_var) == "PurifierRichMineralField750") || (UnitGetType(autoB9BF1546_var) == "RichMineralField") || (UnitGetType(autoB9BF1546_var) == "RichMineralField750")))) {
+            UnitGroupAdd(lv__resources, autoB9BF1546_var);
+        }
+
+    }
+    return UnitGetType(UnitGroupRandomUnit(lv__resources, c_unitCountAll));
+}
+
+bool lib36280BFF_gf_Commonis_Hallucination (unit lp_unit) {
+    // Automatic Variable Declarations
+    // Implementation
+    if (((UnitOrderHasAbil(lp_unit, "HallucinationOracle") == true) || (UnitOrderHasAbil(lp_unit, "HallucinationAdept") == true) || (UnitOrderHasAbil(lp_unit, "HallucinationArchon") == true) || (UnitOrderHasAbil(lp_unit, "HallucinationColossus") == true) || (UnitOrderHasAbil(lp_unit, "HallucinationDisruptor") == true) || (UnitOrderHasAbil(lp_unit, "HallucinationHighTemplar") == true) || (UnitOrderHasAbil(lp_unit, "HallucinationImmortal") == true) || (UnitOrderHasAbil(lp_unit, "HallucinationPhoenix") == true) || (UnitOrderHasAbil(lp_unit, "HallucinationProbe") == true) || (UnitOrderHasAbil(lp_unit, "HallucinationStalker") == true) || (UnitOrderHasAbil(lp_unit, "HallucinationVoidRay") == true) || (UnitOrderHasAbil(lp_unit, "HallucinationWarpPrism") == true) || (UnitOrderHasAbil(lp_unit, "HallucinationZealot") == true))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool lib36280BFF_gf_Commonis_UnitInMorphGroup (unit lp_unit) {
+    // Variable Declarations
+    string lv__unitType;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv__unitType = UnitGetType(lp_unit);
+
+    // Implementation
+    lv__unitType = UnitGetType(lp_unit);
+    if (((lv__unitType == "Baneling") || (lv__unitType == "Ravager") || (lv__unitType == "LurkerMP") || (lv__unitType == "OverlordTransport") || (lv__unitType == "Overseer") || (lv__unitType == "BroodLord"))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool lib36280BFF_gf_Commonis_UnitOwnerActivePlayer (unit lp_unit) {
+    // Automatic Variable Declarations
+    playergroup auto93765D06_g;
+    int auto93765D06_var;
+
+    // Implementation
+    auto93765D06_g = lib36280BFF_gv_commonplayers_Active_Group;
+    auto93765D06_var = -1;
+    while (true) {
+        auto93765D06_var = PlayerGroupNextPlayer(auto93765D06_g, auto93765D06_var);
+        if (auto93765D06_var < 0) { break; }
+        if ((UnitGetOwner(lp_unit) == auto93765D06_var)) {
+            return true;
+        }
+
+    }
+    return false;
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: Debug_GetAllUnits
+//--------------------------------------------------------------------------------------------------
+bool lib36280BFF_gt_Debug_GetAllUnits_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Probe", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Zealot", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Sentry", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Stalker", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Adept", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "HighTemplar", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "DarkTemplar", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Archon", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Observer", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "WarpPrism", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Immortal", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Colossus", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Disruptor", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Phoenix", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Oracle", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "VoidRay", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Tempest", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Carrier", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Mothership", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "PhotonCannon", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "SCV", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Marine", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Reaper", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Marauder", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Ghost", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "WidowMine", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Hellion", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "SiegeTankSieged", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Cyclone", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "ThorAP", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Liberator", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Medivac", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "VikingFighter", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Banshee", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Battlecruiser", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Raven", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "MissileTurret", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "PlanetaryFortress", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Drone", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Queen", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Zergling", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Baneling", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Roach", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Ravager", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Hydralisk", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "LurkerMP", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Infestor", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "SwarmHostMP", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Ultralisk", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Mutalisk", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Corruptor", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "BroodLord", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Viper", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Overlord", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "OverlordTransport", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Overseer", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "SporeCrawler", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "SpineCrawler", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib36280BFF_gt_Debug_GetAllUnits_Init () {
+    lib36280BFF_gt_Debug_GetAllUnits = TriggerCreate("lib36280BFF_gt_Debug_GetAllUnits_Func");
+    TriggerAddEventChatMessage(lib36280BFF_gt_Debug_GetAllUnits, c_playerAny, "-get units", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Debug_GetProtossUnits
+//--------------------------------------------------------------------------------------------------
+bool lib36280BFF_gt_Debug_GetProtossUnits_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Probe", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Zealot", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Sentry", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Stalker", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Adept", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "HighTemplar", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "DarkTemplar", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Archon", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Observer", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "WarpPrism", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Immortal", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Colossus", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Disruptor", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Phoenix", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Oracle", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "VoidRay", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Tempest", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Carrier", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Mothership", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "PhotonCannon", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib36280BFF_gt_Debug_GetProtossUnits_Init () {
+    lib36280BFF_gt_Debug_GetProtossUnits = TriggerCreate("lib36280BFF_gt_Debug_GetProtossUnits_Func");
+    TriggerAddEventChatMessage(lib36280BFF_gt_Debug_GetProtossUnits, c_playerAny, "-get p units", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Debug_GetTerranUnits
+//--------------------------------------------------------------------------------------------------
+bool lib36280BFF_gt_Debug_GetTerranUnits_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "SCV", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Marine", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Reaper", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Marauder", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Ghost", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "WidowMine", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Hellion", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "HellionTank", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "SiegeTankSieged", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Cyclone", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "ThorAP", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Liberator", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Medivac", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "VikingFighter", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Banshee", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Battlecruiser", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Raven", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "MissileTurret", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "PlanetaryFortress", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib36280BFF_gt_Debug_GetTerranUnits_Init () {
+    lib36280BFF_gt_Debug_GetTerranUnits = TriggerCreate("lib36280BFF_gt_Debug_GetTerranUnits_Func");
+    TriggerAddEventChatMessage(lib36280BFF_gt_Debug_GetTerranUnits, c_playerAny, "-get t units", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Debug_GetZergUnits
+//--------------------------------------------------------------------------------------------------
+bool lib36280BFF_gt_Debug_GetZergUnits_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Drone", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Queen", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Zergling", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Baneling", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Roach", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Ravager", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Hydralisk", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "LurkerMP", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Infestor", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "SwarmHostMP", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Ultralisk", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Mutalisk", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Corruptor", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "BroodLord", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Viper", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Overlord", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "OverlordTransport", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Overseer", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "SporeCrawler", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "SpineCrawler", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib36280BFF_gt_Debug_GetZergUnits_Init () {
+    lib36280BFF_gt_Debug_GetZergUnits = TriggerCreate("lib36280BFF_gt_Debug_GetZergUnits_Func");
+    TriggerAddEventChatMessage(lib36280BFF_gt_Debug_GetZergUnits, c_playerAny, "-get z units", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Debug_IgnoreResources
+//--------------------------------------------------------------------------------------------------
+bool lib36280BFF_gt_Debug_IgnoreResources_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    TriggerDebugOutput(1, StringExternal("Param/Value/lib_36280BFF_55A7E3D5"), true);
+    Wait(1.0, c_timeGame);
+    PlayerSetState(EventPlayer(), c_playerStateMineralCostIgnored, true);
+    PlayerSetState(EventPlayer(), c_playerStateVespeneCostIgnored, true);
+    PlayerSetState(EventPlayer(), c_playerStateFoodIgnored, true);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib36280BFF_gt_Debug_IgnoreResources_Init () {
+    lib36280BFF_gt_Debug_IgnoreResources = TriggerCreate("lib36280BFF_gt_Debug_IgnoreResources_Func");
+    TriggerAddEventChatMessage(lib36280BFF_gt_Debug_IgnoreResources, c_playerAny, "-flag off", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Debug_SpeedGame1.5
+//--------------------------------------------------------------------------------------------------
+bool lib36280BFF_gt_Debug_SpeedGame15_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    TriggerDebugOutput(1, StringExternal("Param/Value/lib_36280BFF_5548F766"), true);
+    Wait(1.0, c_timeGame);
+    GameSetGlobalTimeScale(1.5);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib36280BFF_gt_Debug_SpeedGame15_Init () {
+    lib36280BFF_gt_Debug_SpeedGame15 = TriggerCreate("lib36280BFF_gt_Debug_SpeedGame15_Func");
+    TriggerAddEventChatMessage(lib36280BFF_gt_Debug_SpeedGame15, c_playerAny, "-speed", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Common | PlayerLeaveFromGame
+//--------------------------------------------------------------------------------------------------
+bool lib36280BFF_gt_CommonPlayerLeaveFromGame_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    PlayerGroupRemove(lib36280BFF_gv_commonplayers_Active_Group, EventPlayer());
+    PlayerGroupRemove(lib39D1ECFB_gv_players_Group_UI, EventPlayer());
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib36280BFF_gt_CommonPlayerLeaveFromGame_Init () {
+    lib36280BFF_gt_CommonPlayerLeaveFromGame = TriggerCreate("lib36280BFF_gt_CommonPlayerLeaveFromGame_Func");
+    TriggerAddEventPlayerLeft(lib36280BFF_gt_CommonPlayerLeaveFromGame, c_playerAny, c_gameResultUndecided);
+}
+
+void lib36280BFF_InitTriggers () {
+    lib36280BFF_gt_Debug_GetAllUnits_Init();
+    lib36280BFF_gt_Debug_GetProtossUnits_Init();
+    lib36280BFF_gt_Debug_GetTerranUnits_Init();
+    lib36280BFF_gt_Debug_GetZergUnits_Init();
+    lib36280BFF_gt_Debug_IgnoreResources_Init();
+    lib36280BFF_gt_Debug_SpeedGame15_Init();
+    lib36280BFF_gt_CommonPlayerLeaveFromGame_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool lib36280BFF_InitLib_completed = false;
+
+void lib36280BFF_InitLib () {
+    if (lib36280BFF_InitLib_completed) {
+        return;
+    }
+
+    lib36280BFF_InitLib_completed = true;
+
+    lib36280BFF_InitLibraries();
+    lib36280BFF_InitVariables();
+    lib36280BFF_InitTriggers();
+}
+
+include "Lib39D1ECFB"
+

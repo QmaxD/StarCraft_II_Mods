@@ -1,2 +1,0 @@
-﻿DocInfo/DescShort=Любой
-DocInfo/Name=[ ZERGTV ] Дамаг по ресурсам

@@ -1,0 +1,41 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: 09 Supplies limit | SL
+//--------------------------------------------------------------------------------------------------
+// Structures
+struct lib1F00594A_gs_Information {
+    string lv_sLOption_1050;
+    string lv_sLOption_1075;
+    string lv_sLOption_1100;
+    string lv_sLOption_1125;
+    string lv_sLOption_1150;
+    string lv_sLOption_1175;
+    string lv_sLOption_1200;
+    string lv_sLOption_1250;
+    string lv_sLOption_1300;
+    string lv_sLOption_1400;
+    string lv_sLOption_1500;
+    string lv_sLOption_1D092D0B2D0B5D181D182D0B8D0B7D0BDD0B0D187D0B5D0BDD0B8D0B5;
+    string lv_sLOption_2D0A3D0B1D180D0B0D182D18CD181D0B0D0BFD0BBD0B0D0B9D0B1D0BBD0BED0BA;
+    string lv_sLOption_2D0A1D182D0B0D0BDD0B4D0B0D180D182D0BDD0BE;
+};
+
+// Variable Declarations
+lib1F00594A_gs_Information lib1F00594A_gv_modInformation;
+int lib1F00594A_gv_sLgetSupplyLimit;
+bool lib1F00594A_gv_sLis_NoSupplyBlock;
+
+// Function Declarations
+void lib1F00594A_gf_SetupInformation (int lp_modIndex);
+void lib1F00594A_gf_GetOptions ();
+void lib1F00594A_gf_TriggersTurnOn ();
+void lib1F00594A_gf_SLGetInfoForPlayer ();
+void lib1F00594A_gf_SLGiveSupplyLimit ();
+
+// Trigger Declarations
+trigger lib1F00594A_gt_Launch;
+
+// Library Initialization
+void lib1F00594A_InitVariables ();
+

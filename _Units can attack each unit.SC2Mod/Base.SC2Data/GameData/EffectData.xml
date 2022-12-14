@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Catalog>
-    <CEffectEnumArea id="LiberatorTargetMorphSearchArea">
-        <SearchFilters value="Visible;Structure,Missile,Stasis,Dead,Hidden,Invulnerable"/>
-    </CEffectEnumArea>
-    <CEffectEnumArea id="PurificationNovaTargettedSearch">
-        <SearchFilters value="-;Self,Missile,Item,Dead,Hidden,Invulnerable"/>
-    </CEffectEnumArea>
-</Catalog>

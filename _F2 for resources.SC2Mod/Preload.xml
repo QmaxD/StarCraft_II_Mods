@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Preload>
-<Asset path="assets\textures\ui_glues_helpmenu_armybuttonicon.dds" Type="Image"/>
-<Actor id="SYSTEM_ActorConfig"/>
-<Unit id="Stalker"/>
-<Unit id="VoidRay"/>
-<Unit id="Immortal"/>
-</Preload>

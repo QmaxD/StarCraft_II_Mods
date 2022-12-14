@@ -1,0 +1,162 @@
+include "TriggerLibs/NativeLib"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Navigation
+//--------------------------------------------------------------------------------------------------
+// Constants
+const int lib39D1ECFB_gv_countForStart = 5;
+const string lib39D1ECFB_gv_dIALOG_IMAGE = "Resources\\DialogBorder\\my_dialog_10.dds";
+const color lib39D1ECFB_gv_dIALOG_COLOR = Color(100,100,100);
+
+// Structures
+struct lib39D1ECFB_gs_Mod_Game_Option_Values {
+    string lv_valueString;
+    text lv_valueText;
+    text lv_valueComment;
+    bool lv_is_ValueType_EditBox;
+    bool lv_is_ValueType_Slider;
+};
+
+struct lib39D1ECFB_gs_Mod_Game_Options {
+    text lv_optionName;
+    text lv_optionComment;
+    int lv_valuesNumber;
+    lib39D1ECFB_gs_Mod_Game_Option_Values[51] lv_values;
+    int lv_listBox_Label;
+    int lv_listBox_Pulldown;
+    int lv_defaultIndex;
+    int lv_editBox_Input;
+    int lv_editBox_Label;
+};
+
+struct lib39D1ECFB_gs_Mod {
+    bool lv_is_Included;
+    text lv_name;
+    text lv_fullName;
+    text lv_description;
+    string lv_icon_Path;
+    int lv_saturation;
+    lib39D1ECFB_gs_Mod_Game_Options[21] lv_game_Options;
+    int lv_number_Game_Options;
+    int lv_modDescriptionDialog;
+    int lv_modSettingsDialog;
+    int lv_item_Button_ModSettings;
+    int lv_item_Label_ModSettings_SettingsType;
+    int lv_item_CheckBox_ModSettings_Players;
+    bool lv_is_Settings_For_Each_Player;
+    text lv_tip_Description;
+    text lv_message_Chat;
+    bool lv_is_Enable;
+    trigger lv_start_Trigger;
+};
+
+// Variable Declarations
+int lib39D1ECFB_gv_amount_Mods;
+lib39D1ECFB_gs_Mod[32] lib39D1ECFB_gv_mods;
+bool lib39D1ECFB_gv_is_First_Create;
+playergroup lib39D1ECFB_gv_players_Group_UI;
+int lib39D1ECFB_gv_selected_Mod;
+int lib39D1ECFB_gv_amount_EnabledMod;
+int lib39D1ECFB_gv_first_Mod_In_Navigation;
+int lib39D1ECFB_gv_dialog_Nav;
+int lib39D1ECFB_gv_item_CheckBox_Common;
+int lib39D1ECFB_gv_item_Button_Nav_Up;
+int lib39D1ECFB_gv_item_Button_Nav_Down;
+int lib39D1ECFB_gv_dialog_ModsList;
+int[26] lib39D1ECFB_gv_item_CheckBox_ModsList;
+int[26] lib39D1ECFB_gv_item_Button_ModsList;
+bool lib39D1ECFB_gv_is_cursor_in_ModsList;
+int lib39D1ECFB_gv_dialog_ModBottom;
+int lib39D1ECFB_gv_item_Button_ModBottom_Start;
+color lib39D1ECFB_gv_item_Button_Nav_Color_On;
+color lib39D1ECFB_gv_item_Button_Nav_Color_Off;
+color lib39D1ECFB_gv_item_Button_Nav_Text_Color;
+color lib39D1ECFB_gv_item_Button_Mod_Color_On;
+color lib39D1ECFB_gv_item_Button_Mod_Color_Off;
+color lib39D1ECFB_gv_item_Button_Mod_Color_Enable;
+color lib39D1ECFB_gv_item_Button_Mod_Text_Color_On;
+color lib39D1ECFB_gv_item_Button_Mod_Text_Color_Off;
+color lib39D1ECFB_gv_item_Button_Mod_Text_Color_Enable;
+color lib39D1ECFB_gv_item_Name_ModDescription_Color;
+color lib39D1ECFB_gv_item_Description_ModDescription_Color;
+color lib39D1ECFB_gv_item_Button_ModSettings_Color_Enable;
+color lib39D1ECFB_gv_item_Button_ModSettings_Color_Disable;
+color lib39D1ECFB_gv_item_Button_ModSettings_Color_Header;
+color lib39D1ECFB_gv_item_Button_ModSettings_Color_Pulldown;
+color lib39D1ECFB_gv_item_Button_ModBottom_Start_Color_Enable;
+color lib39D1ECFB_gv_item_Button_ModBottom_Start_Color_Disable;
+text lib39D1ECFB_gv_item_Button_Mod_Enable_Text;
+text lib39D1ECFB_gv_item_Button_Mod_Disable_Text;
+text lib39D1ECFB_gv_item_Button_ModBottom_Random_Text;
+text lib39D1ECFB_gv_item_Button_ModBottom_Start_Text;
+int lib39D1ECFB_gv_dialog_Mods_Width;
+int lib39D1ECFB_gv_dialog_Mods_Height;
+int lib39D1ECFB_gv_item_Button_Nav_Width;
+int lib39D1ECFB_gv_item_Button_Nav_Height;
+int lib39D1ECFB_gv_item_Button_Standard_Width;
+int lib39D1ECFB_gv_item_Button_Standard_Height;
+int lib39D1ECFB_gv_dialog_ModsList_Height;
+int lib39D1ECFB_gv_item_CheckBox_Width;
+int lib39D1ECFB_gv_item_CheckBox_Height;
+int lib39D1ECFB_gv_item_Button_Mod_Width;
+int lib39D1ECFB_gv_item_Button_Mod_Height;
+int lib39D1ECFB_gv_dialog_ModDescription_Height;
+int lib39D1ECFB_gv_dialog_ModSettings_Width;
+int lib39D1ECFB_gv_dialog_ModSettings_Height;
+int lib39D1ECFB_gv_dialog_ModBottom_Width;
+int lib39D1ECFB_gv_dialog_ModBottom_Height;
+int lib39D1ECFB_gv_dialog_Mods_OffsetX;
+int lib39D1ECFB_gv_dialog_Mods_OffsetY;
+int lib39D1ECFB_gv_item_CheckBox_OffsetX;
+int lib39D1ECFB_gv_item_ModsList_OffsetY;
+int lib39D1ECFB_gv_item_ModsList_OffsetY_Shift;
+int lib39D1ECFB_gv_dialog_ModDescription_OffsetY;
+int lib39D1ECFB_gv_dialog_ModSettings_OffsetX;
+int lib39D1ECFB_gv_dialog_ModSettings_OffsetY;
+int lib39D1ECFB_gv_dialog_ModBottom_OffsetX;
+int lib39D1ECFB_gv_dialog_ModBottom_OffsetY;
+int lib39D1ECFB_gv_dialog;
+int lib39D1ECFB_gv_dialogpanel;
+int lib39D1ECFB_gv_dialogbutton;
+int lib39D1ECFB_gv_dialogbutton2;
+int lib39D1ECFB_gv_dialogcheck;
+int lib39D1ECFB_gv_dialogimage;
+
+// Function Declarations
+void lib39D1ECFB_gf_GetWriteMods ();
+void lib39D1ECFB_gf_GetValueTextFromValueString ();
+void lib39D1ECFB_gf_GetPlayersGroup ();
+void lib39D1ECFB_gf_PauseGame ();
+void lib39D1ECFB_gf_UnpauseGame ();
+void lib39D1ECFB_gf_StartMods ();
+void lib39D1ECFB_gf_GetCount ();
+void lib39D1ECFB_gf_CreateDialogs ();
+void lib39D1ECFB_gf_CreateNavigationDialog ();
+void lib39D1ECFB_gf_CreateModsListDialog ();
+void lib39D1ECFB_gf_CreateModDescriptionDialogs ();
+void lib39D1ECFB_gf_CreateModSettingsDialogs ();
+void lib39D1ECFB_gf_CreateModBottomDialogs ();
+void lib39D1ECFB_gf_WriteModsList (int lp_firstMod);
+void lib39D1ECFB_gf_CreateButtonForNav (int lp_firstMod);
+void lib39D1ECFB_gf_CreateButtonForSettings ();
+void lib39D1ECFB_gf_UIPlayerElements (bool lp_status);
+void lib39D1ECFB_gf_CheckedUncheckedMod (int lp_modNumber);
+void lib39D1ECFB_gf_ChangeStartButton ();
+
+// Trigger Declarations
+trigger lib39D1ECFB_gt_Launch;
+trigger lib39D1ECFB_gt_clickedNavigateButton;
+trigger lib39D1ECFB_gt_clickedModButton;
+trigger lib39D1ECFB_gt_clickedSettingsButton;
+trigger lib39D1ECFB_gt_clickedStartButton;
+trigger lib39D1ECFB_gt_checkedCheckBox;
+trigger lib39D1ECFB_gt_checkedCheckBoxCommon;
+trigger lib39D1ECFB_gt_checkedCheckBoxPlayers;
+trigger lib39D1ECFB_gt_scrolledMouse;
+trigger lib39D1ECFB_gt_selectedOptionPulldown;
+trigger lib39D1ECFB_gt_changedEditBoxInput;
+trigger lib39D1ECFB_gt_playerLeaveFromGame;
+
+// Library Initialization
+void lib39D1ECFB_InitVariables ();
+

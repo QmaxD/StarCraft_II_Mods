@@ -1,6 +1,0 @@
-﻿Library/Name/B88C07C7=Flyings Dont Attack
-Trigger/Name/lib_B88C07C7_7E2C5B56=Forbid Making Air Grades
-Trigger/Name/lib_B88C07C7_9EFDDD5F=Just For Viking Transform G-A
-Trigger/Name/lib_B88C07C7_AC753B31=Just For Viking Transform A-G
-Trigger/Name/lib_B88C07C7_DDD92456=ForbidAttackFlyingUnits
-Trigger/Name/lib_B88C07C7_F3E1F3D5=Create All Flying units For Test

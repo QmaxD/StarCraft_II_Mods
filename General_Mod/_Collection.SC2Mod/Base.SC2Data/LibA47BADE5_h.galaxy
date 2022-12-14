@@ -1,0 +1,33 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Resources damage | RD
+//--------------------------------------------------------------------------------------------------
+// Constants
+const fixed libA47BADE5_gv_rDMinResToLife = 0.25;
+const fixed libA47BADE5_gv_rDGasResToLife = 0.33;
+
+// Structures
+struct libA47BADE5_gs_Information {
+    string lv_exampleOption_1;
+};
+
+// Variable Declarations
+libA47BADE5_gs_Information libA47BADE5_gv_modInformation;
+bool libA47BADE5_gv_rDis_Enable;
+
+// Function Declarations
+void libA47BADE5_gf_SetupInformation (int lp_modIndex);
+void libA47BADE5_gf_GetOptions ();
+void libA47BADE5_gf_TriggersTurnOn ();
+void libA47BADE5_gf_RDGetInfoForPlayer ();
+void libA47BADE5_gf_RDMakeResourcesVulnerable ();
+
+// Trigger Declarations
+trigger libA47BADE5_gt_Launch;
+trigger libA47BADE5_gt_InitHighMineral6;
+trigger libA47BADE5_gt_InitHighMineral7;
+
+// Library Initialization
+void libA47BADE5_InitVariables ();
+

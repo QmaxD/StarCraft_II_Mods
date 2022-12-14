@@ -1,0 +1,81 @@
+include "Lib36280BFF_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: 08 Worker limit | WL
+//--------------------------------------------------------------------------------------------------
+// Structures
+struct lib620365F2_gs_Information {
+    string lv_wLOption_1D091D0B5D0B7D0BBD0B8D0BCD0B8D182D0B0D180D0B0D0B1D0BED187D0B8D185;
+    string lv_wLOption_1D097D0B0D0BFD180D0B5D182D0B8D182D18CD181D182D180D0BED0B8D182D18CD180D0B0D0B1D0BED187D0B8D185;
+    string lv_wLOption_112;
+    string lv_wLOption_116;
+    string lv_wLOption_122;
+    string lv_wLOption_124;
+    string lv_wLOption_130;
+    string lv_wLOption_132;
+    string lv_wLOption_140;
+    string lv_wLOption_144;
+    string lv_wLOption_150;
+    string lv_wLOption_156;
+    string lv_wLOption_160;
+    string lv_wLOption_166;
+    string lv_wLOption_170;
+    string lv_wLOption_172;
+    string lv_wLOption_176;
+    string lv_wLOption_180;
+    string lv_wLOption_188;
+    string lv_wLOption_1D092D0B2D0B5D181D182D0B8D0B7D0BDD0B0D187D0B5D0BDD0B8D0B5;
+    string lv_wLOption_2D0A3D0BDD0B8D187D182D0BED0B6D0B8D182D18CD180D0B0D0B1D0BED187D0B8D185;
+    string lv_wLOption_202;
+    string lv_wLOption_204;
+    string lv_wLOption_206;
+    string lv_wLOption_208;
+    string lv_wLOption_210;
+    string lv_wLOption_2D09DD0B5D182;
+    string lv_wLOption_216;
+    string lv_wLOption_222;
+    string lv_wLOption_224;
+    string lv_wLOption_230;
+    string lv_wLOption_232;
+    string lv_wLOption_240;
+    string lv_wLOption_244;
+    string lv_wLOption_250;
+    string lv_wLOption_256;
+    string lv_wLOption_260;
+    string lv_wLOption_266;
+    string lv_wLOption_270;
+    string lv_wLOption_272;
+    string lv_wLOption_276;
+    string lv_wLOption_280;
+    string lv_wLOption_2D092D18BD0B4D0B0D182D18CD0BBD0B8D0BCD0B8D182D180D0B0D0B1D0BED187D0B8D185;
+    string lv_wLOption_2D092D0B2D0B5D181D182D0B8D0B7D0BDD0B0D187D0B5D0BDD0B8D0B5;
+};
+
+// Variable Declarations
+lib620365F2_gs_Information lib620365F2_gv_modInformation;
+bool[lib36280BFF_gv_commonamount_Players_InGame + 1] lib620365F2_gv_wLis_LookAfter_WorkerLimit;
+bool[lib36280BFF_gv_commonamount_Players_InGame + 1] lib620365F2_gv_wLis_Worker_BuildingBan_Permanently;
+int[lib36280BFF_gv_commonamount_Players_InGame + 1] lib620365F2_gv_wLget_WorkerLimit;
+int[lib36280BFF_gv_commonamount_Players_InGame + 1] lib620365F2_gv_wLgive_WorkersInStart;
+bool lib620365F2_gv_wLis_Start;
+bool[lib36280BFF_gv_commonamount_Players_InGame + 1] lib620365F2_gv_wLis_Worker_BuildingBan;
+
+// Function Declarations
+void lib620365F2_gf_SetupInformation (int lp_modIndex);
+void lib620365F2_gf_GetOptions ();
+void lib620365F2_gf_TriggersTurnOn ();
+void lib620365F2_gf_WLGetInfoForPlayer ();
+void lib620365F2_gf_WLStart ();
+void lib620365F2_gf_WLGiveAmountWorkersForCreate (int lp_numberPlayer);
+void lib620365F2_gf_WLCreateWorkersandOrderToMineral (int lp_amountWokersCreate, string lp_unitType, string lp_command, int lp_numberPlayer, string lp_raceOfPlayer, fixed lp_radiusCreate, fixed lp_radiusResources);
+void lib620365F2_gf_WLRemoveWorker (int lp_amountWokersKill, string lp_unitType, int lp_numberPlayer, string lp_raceOfPlayer);
+void lib620365F2_gf_WLDisableWorkersForPlayer (int lp_numberPlayer);
+void lib620365F2_gf_WLEnableWorkersForPlayer (int lp_numberPlayer);
+
+// Trigger Declarations
+trigger lib620365F2_gt_Launch;
+trigger lib620365F2_gt_WLLookAfter_WorkerLimit;
+
+// Library Initialization
+void lib620365F2_InitVariables ();
+

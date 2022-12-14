@@ -1,0 +1,42 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Core
+//--------------------------------------------------------------------------------------------------
+// Constants
+const int lib36280BFF_gv_commonamount_Players_InGame = 13;
+const int lib36280BFF_gv_commonsmallMineralResource = 50;
+
+// Variable Declarations
+playergroup lib36280BFF_gv_commonplayers_Active_Group;
+unitgroup lib36280BFF_gv_commonresourcesGroup;
+
+// Function Declarations
+void lib36280BFF_gf_CommonAddPlayerInActiveGroup ();
+bool lib36280BFF_gf_Commonis_Mineral_1800 (unit lp_unit);
+bool lib36280BFF_gf_Commonis_Mineral_900 (unit lp_unit);
+bool lib36280BFF_gf_Commonis_RichMineral_1800 (unit lp_unit);
+bool lib36280BFF_gf_Commonis_RichMineral_900 (unit lp_unit);
+bool lib36280BFF_gf_Commonis_Vespene_2250 (unit lp_unit);
+bool lib36280BFF_gf_Commonis_RichVespene_2250 (unit lp_unit);
+bool lib36280BFF_gf_Commonis_VespeneUnit (unit lp_unit);
+bool lib36280BFF_gf_Commonis_UnitType_Have_Energy (string lp_unitType);
+bool lib36280BFF_gf_Commonis_UnitType_Worker (unit lp_unit);
+bool lib36280BFF_gf_Commonis_UnitTypeFlag_Worker (unit lp_unit);
+string lib36280BFF_gf_CommonGetRandomResourceTypeFromRegion (int lp_player, fixed lp_radius);
+bool lib36280BFF_gf_Commonis_Hallucination (unit lp_unit);
+bool lib36280BFF_gf_Commonis_UnitInMorphGroup (unit lp_unit);
+bool lib36280BFF_gf_Commonis_UnitOwnerActivePlayer (unit lp_unit);
+
+// Trigger Declarations
+trigger lib36280BFF_gt_Debug_GetAllUnits;
+trigger lib36280BFF_gt_Debug_GetProtossUnits;
+trigger lib36280BFF_gt_Debug_GetTerranUnits;
+trigger lib36280BFF_gt_Debug_GetZergUnits;
+trigger lib36280BFF_gt_Debug_IgnoreResources;
+trigger lib36280BFF_gt_Debug_SpeedGame15;
+trigger lib36280BFF_gt_CommonPlayerLeaveFromGame;
+
+// Library Initialization
+void lib36280BFF_InitVariables ();
+

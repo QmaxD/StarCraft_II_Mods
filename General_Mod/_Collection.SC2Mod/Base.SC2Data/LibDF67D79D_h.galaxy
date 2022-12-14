@@ -1,0 +1,25 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: ++15 Opponent visibility and minimap | OVM
+//--------------------------------------------------------------------------------------------------
+// Structures
+struct libDF67D79D_gs_Information {
+    string lv_gSOption_1;
+};
+
+// Variable Declarations
+libDF67D79D_gs_Information libDF67D79D_gv_modInformation;
+
+// Function Declarations
+void libDF67D79D_gf_SetupInformation (int lp_modIndex);
+void libDF67D79D_gf_GetOptions ();
+void libDF67D79D_gf_TriggersTurnOn ();
+void libDF67D79D_gf_GetInfoForPlayer ();
+
+// Trigger Declarations
+trigger libDF67D79D_gt_Launch;
+
+// Library Initialization
+void libDF67D79D_InitVariables ();
+

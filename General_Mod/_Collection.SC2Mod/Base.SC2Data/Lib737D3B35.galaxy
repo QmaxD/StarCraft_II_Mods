@@ -1,0 +1,719 @@
+include "TriggerLibs/NativeLib"
+include "Lib39D1ECFB_h"
+include "Lib36280BFF_h"
+
+include "Lib737D3B35_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: 07 One base game | OBG
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void lib737D3B35_InitLibraries () {
+    libNtve_InitVariables();
+    lib39D1ECFB_InitVariables();
+    lib36280BFF_InitVariables();
+}
+
+// Variable Initialization
+bool lib737D3B35_InitVariables_completed = false;
+
+void lib737D3B35_InitVariables () {
+    if (lib737D3B35_InitVariables_completed) {
+        return;
+    }
+
+    lib737D3B35_InitVariables_completed = true;
+
+    lib737D3B35_gv_modInformation.lv_oBGOption_1D09DD0B8D187D0B5D0B3D0BED0BDD0B5D0B4D0B5D0BBD0B0D182D18C = "Ничего не делать";
+    lib737D3B35_gv_modInformation.lv_oBGOption_1D0A2D0BED0BBD18CD0BAD0BED0BDD0B0D0BCD0B5D0B9D0BDD0B0D185 = "Только на мейнах";
+    lib737D3B35_gv_modInformation.lv_oBGOption_1D0A2D0BED0BBD18CD0BAD0BED0BDD0B0D0BCD0B5D0B9D0BDD0B0D185D181D180D0B5D0B7D0B0D182D18CD180D0B5D181D183D180D181D18BD0BDD0B0D0BAD0B0D180D182D0B5D0BED187D0B5D0BDD18CD0B1D18BD181D182D180D18BD0B9D180D0BED181D182 = "Только на мейнах + срезать ресурсы на карте, очень быстрый рост";
+    lib737D3B35_gv_modInformation.lv_oBGOption_1D0A2D0BED0BBD18CD0BAD0BED0BDD0B0D0BCD0B5D0B9D0BDD0B0D185D181D180D0B5D0B7D0B0D182D18CD180D0B5D181D183D180D181D18BD0BDD0B0D0BAD0B0D180D182D0B5D0B1D18BD181D182D180D18BD0B9D180D0BED181D182 = "Только на мейнах + срезать ресурсы на карте, быстрый рост";
+    lib737D3B35_gv_modInformation.lv_oBGOption_1D0A2D0BED0BBD18CD0BAD0BED0BDD0B0D0BCD0B5D0B9D0BDD0B0D185D181D180D0B5D0B7D0B0D182D18CD180D0B5D181D183D180D181D18BD0BDD0B0D0BAD0B0D180D182D0B5D181D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0B9D180D0BED181D182 = "Только на мейнах + срезать ресурсы на карте, стандартный рост";
+    lib737D3B35_gv_modInformation.lv_oBGOption_1D0A2D0BED0BBD18CD0BAD0BED0BDD0B0D0BCD0B5D0B9D0BDD0B0D185D181D180D0B5D0B7D0B0D182D18CD180D0B5D181D183D180D181D18BD0BDD0B0D0BAD0B0D180D182D0B5D0BCD0B5D0B4D0BBD0B5D0BDD0BDD18BD0B9D180D0BED181D182 = "Только на мейнах + срезать ресурсы на карте, медленный рост";
+    lib737D3B35_gv_modInformation.lv_oBGOption_1D0A2D0BED0BBD18CD0BAD0BED0BDD0B0D0BCD0B5D0B9D0BDD0B0D185D181D180D0B5D0B7D0B0D182D18CD180D0B5D181D183D180D181D18BD0BDD0B0D0BAD0B0D180D182D0B5D0BED187D0B5D0BDD18CD0BCD0B5D0B4D0BBD0B5D0BDD0BDD18BD0B9D180D0BED181D182 = "Только на мейнах + срезать ресурсы на карте, очень медленный рост";
+    lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD181D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0BCD0B8D0B8D183D0BCD0B5D0BDD18CD188D0B8D182D18CD0B22D180D0B0D0B7D0B0 = "Сделать стандартными и уменьшить в 2 раза";
+    lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD181D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0BCD0B8 = "Сделать стандартными";
+    lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD181D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B22D180D0B0D0B7D0B0 = "Сделать стандартными и увеличить в 2 раза";
+    lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD181D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B23D180D0B0D0B7D0B0 = "Сделать стандартными и увеличить в 3 раза";
+    lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD181D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B24D180D0B0D0B7D0B0 = "Сделать стандартными и увеличить в 4 раза";
+    lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD181D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B25D180D0B0D0B7 = "Сделать стандартными и увеличить в 5 раз";
+    lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD0B1D0BED0B3D0B0D182D18BD0BCD0B8D0B8D183D0BCD0B5D0BDD18CD188D0B8D182D18CD0B22D180D0B0D0B7D0B0 = "Сделать богатыми и уменьшить в 2 раза";
+    lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD0B1D0BED0B3D0B0D182D18BD0BCD0B8 = "Сделать богатыми";
+    lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD0B1D0BED0B3D0B0D182D18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B22D180D0B0D0B7D0B0 = "Сделать богатыми и увеличить в 2 раза";
+    lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD0B1D0BED0B3D0B0D182D18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B23D180D0B0D0B7D0B0 = "Сделать богатыми и увеличить в 3 раза";
+    lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD0B1D0BED0B3D0B0D182D18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B24D180D0B0D0B7D0B0 = "Сделать богатыми и увеличить в 4 раза";
+    lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD0B1D0BED0B3D0B0D182D18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B25D180D0B0D0B7 = "Сделать богатыми и увеличить в 5 раз";
+    lib737D3B35_gv_oBGoption_2_resize_Resources = 1.0;
+    lib737D3B35_gv_oBGneutralUnitsMap = UnitGroupEmpty();
+    lib737D3B35_gv_oBGregionMains = RegionEmpty();
+    lib737D3B35_gv_oBGgroupVespeneUnit = UnitGroupEmpty();
+    lib737D3B35_gv_oBGcountRepeat = 90;
+    lib737D3B35_gv_oBGtimer = TimerCreate();
+}
+
+// Functions
+void lib737D3B35_gf_SetupInformation (int lp_modIndex) {
+    // Variable Declarations
+    int lv__optionIndex;
+    int lv__optionValueIndex;
+    int lv__default_Option_1;
+    int lv__default_Option_2;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv__default_Option_1 = 2;
+    lv__default_Option_2 = 2;
+
+    // Implementation
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_name = StringExternal("Param/Value/lib_737D3B35_7F7D9ECB");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_fullName = StringExternal("Param/Value/lib_737D3B35_E567F5D2");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_description = StringExternal("Param/Value/lib_737D3B35_518A79DC");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_icon_Path = "Assets\\Textures\\btn-building-hornerhan-commandcenter.dds";
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_is_Included = true;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_saturation = 2;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_737D3B35_C52B0885");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_737D3B35_8DB2EA21");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib737D3B35_gv_modInformation.lv_oBGOption_1D09DD0B8D187D0B5D0B3D0BED0BDD0B5D0B4D0B5D0BBD0B0D182D18C;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_737D3B35_BE8059F9");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib737D3B35_gv_modInformation.lv_oBGOption_1D0A2D0BED0BBD18CD0BAD0BED0BDD0B0D0BCD0B5D0B9D0BDD0B0D185;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_737D3B35_BD2BF428");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib737D3B35_gv_modInformation.lv_oBGOption_1D0A2D0BED0BBD18CD0BAD0BED0BDD0B0D0BCD0B5D0B9D0BDD0B0D185D181D180D0B5D0B7D0B0D182D18CD180D0B5D181D183D180D181D18BD0BDD0B0D0BAD0B0D180D182D0B5D0BED187D0B5D0BDD18CD0B1D18BD181D182D180D18BD0B9D180D0BED181D182;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_737D3B35_628C7C65");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib737D3B35_gv_modInformation.lv_oBGOption_1D0A2D0BED0BBD18CD0BAD0BED0BDD0B0D0BCD0B5D0B9D0BDD0B0D185D181D180D0B5D0B7D0B0D182D18CD180D0B5D181D183D180D181D18BD0BDD0B0D0BAD0B0D180D182D0B5D0B1D18BD181D182D180D18BD0B9D180D0BED181D182;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_737D3B35_BC163ABE");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib737D3B35_gv_modInformation.lv_oBGOption_1D0A2D0BED0BBD18CD0BAD0BED0BDD0B0D0BCD0B5D0B9D0BDD0B0D185D181D180D0B5D0B7D0B0D182D18CD180D0B5D181D183D180D181D18BD0BDD0B0D0BAD0B0D180D182D0B5D181D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0B9D180D0BED181D182;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_737D3B35_A78967D4");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib737D3B35_gv_modInformation.lv_oBGOption_1D0A2D0BED0BBD18CD0BAD0BED0BDD0B0D0BCD0B5D0B9D0BDD0B0D185D181D180D0B5D0B7D0B0D182D18CD180D0B5D181D183D180D181D18BD0BDD0B0D0BAD0B0D180D182D0B5D0BCD0B5D0B4D0BBD0B5D0BDD0BDD18BD0B9D180D0BED181D182;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_737D3B35_433891AE");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib737D3B35_gv_modInformation.lv_oBGOption_1D0A2D0BED0BBD18CD0BAD0BED0BDD0B0D0BCD0B5D0B9D0BDD0B0D185D181D180D0B5D0B7D0B0D182D18CD180D0B5D181D183D180D181D18BD0BDD0B0D0BAD0B0D180D182D0B5D0BED187D0B5D0BDD18CD0BCD0B5D0B4D0BBD0B5D0BDD0BDD18BD0B9D180D0BED181D182;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_737D3B35_66D8DEBD");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_1].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_737D3B35_CE31EA2F");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_737D3B35_B2F3B03E");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD181D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0BCD0B8D0B8D183D0BCD0B5D0BDD18CD188D0B8D182D18CD0B22D180D0B0D0B7D0B0;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_737D3B35_1DC3B0ED");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD181D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0BCD0B8;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_737D3B35_A05C1141");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD181D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B22D180D0B0D0B7D0B0;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_737D3B35_F261E12D");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD181D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B23D180D0B0D0B7D0B0;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_737D3B35_3F66F950");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD181D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B24D180D0B0D0B7D0B0;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_737D3B35_4EE8AF26");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD181D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B25D180D0B0D0B7;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_737D3B35_20BF6AD1");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD0B1D0BED0B3D0B0D182D18BD0BCD0B8D0B8D183D0BCD0B5D0BDD18CD188D0B8D182D18CD0B22D180D0B0D0B7D0B0;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_737D3B35_B522362A");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD0B1D0BED0B3D0B0D182D18BD0BCD0B8;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_737D3B35_752D90BA");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD0B1D0BED0B3D0B0D182D18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B22D180D0B0D0B7D0B0;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_737D3B35_964674A0");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD0B1D0BED0B3D0B0D182D18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B23D180D0B0D0B7D0B0;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_737D3B35_C5B421FE");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD0B1D0BED0B3D0B0D182D18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B24D180D0B0D0B7D0B0;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_737D3B35_70CE2439");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD0B1D0BED0B3D0B0D182D18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B25D180D0B0D0B7;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_737D3B35_84829856");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_2;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_2].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_number_Game_Options = lv__optionIndex;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_start_Trigger = lib737D3B35_gt_Launch;
+}
+
+void lib737D3B35_gf_GetOptions () {
+    // Automatic Variable Declarations
+    string auto86E13B42_val;
+    string autoD6A390E4_val;
+
+    // Implementation
+    auto86E13B42_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[1].lv_values[0].lv_valueString;
+    if (auto86E13B42_val == lib737D3B35_gv_modInformation.lv_oBGOption_1D09DD0B8D187D0B5D0B3D0BED0BDD0B5D0B4D0B5D0BBD0B0D182D18C) {
+    }
+    else if (auto86E13B42_val == lib737D3B35_gv_modInformation.lv_oBGOption_1D0A2D0BED0BBD18CD0BAD0BED0BDD0B0D0BCD0B5D0B9D0BDD0B0D185) {
+        lib737D3B35_gv_oBGoption_1_only_Main = true;
+    }
+    else if (auto86E13B42_val == lib737D3B35_gv_modInformation.lv_oBGOption_1D0A2D0BED0BBD18CD0BAD0BED0BDD0B0D0BCD0B5D0B9D0BDD0B0D185D181D180D0B5D0B7D0B0D182D18CD180D0B5D181D183D180D181D18BD0BDD0B0D0BAD0B0D180D182D0B5D0BED187D0B5D0BDD18CD0B1D18BD181D182D180D18BD0B9D180D0BED181D182) {
+        lib737D3B35_gv_oBGoption_1_only_Main = true;
+        lib737D3B35_gv_oBGoption_1_start_Cut_Resources = true;
+        lib737D3B35_gv_oBGtime = 10;
+    }
+    else if (auto86E13B42_val == lib737D3B35_gv_modInformation.lv_oBGOption_1D0A2D0BED0BBD18CD0BAD0BED0BDD0B0D0BCD0B5D0B9D0BDD0B0D185D181D180D0B5D0B7D0B0D182D18CD180D0B5D181D183D180D181D18BD0BDD0B0D0BAD0B0D180D182D0B5D0B1D18BD181D182D180D18BD0B9D180D0BED181D182) {
+        lib737D3B35_gv_oBGoption_1_only_Main = true;
+        lib737D3B35_gv_oBGoption_1_start_Cut_Resources = true;
+        lib737D3B35_gv_oBGtime = 15;
+    }
+    else if (auto86E13B42_val == lib737D3B35_gv_modInformation.lv_oBGOption_1D0A2D0BED0BBD18CD0BAD0BED0BDD0B0D0BCD0B5D0B9D0BDD0B0D185D181D180D0B5D0B7D0B0D182D18CD180D0B5D181D183D180D181D18BD0BDD0B0D0BAD0B0D180D182D0B5D181D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0B9D180D0BED181D182) {
+        lib737D3B35_gv_oBGoption_1_only_Main = true;
+        lib737D3B35_gv_oBGoption_1_start_Cut_Resources = true;
+        lib737D3B35_gv_oBGtime = 20;
+    }
+    else if (auto86E13B42_val == lib737D3B35_gv_modInformation.lv_oBGOption_1D0A2D0BED0BBD18CD0BAD0BED0BDD0B0D0BCD0B5D0B9D0BDD0B0D185D181D180D0B5D0B7D0B0D182D18CD180D0B5D181D183D180D181D18BD0BDD0B0D0BAD0B0D180D182D0B5D0BCD0B5D0B4D0BBD0B5D0BDD0BDD18BD0B9D180D0BED181D182) {
+        lib737D3B35_gv_oBGoption_1_only_Main = true;
+        lib737D3B35_gv_oBGoption_1_start_Cut_Resources = true;
+        lib737D3B35_gv_oBGtime = 30;
+    }
+    else if (auto86E13B42_val == lib737D3B35_gv_modInformation.lv_oBGOption_1D0A2D0BED0BBD18CD0BAD0BED0BDD0B0D0BCD0B5D0B9D0BDD0B0D185D181D180D0B5D0B7D0B0D182D18CD180D0B5D181D183D180D181D18BD0BDD0B0D0BAD0B0D180D182D0B5D0BED187D0B5D0BDD18CD0BCD0B5D0B4D0BBD0B5D0BDD0BDD18BD0B9D180D0BED181D182) {
+        lib737D3B35_gv_oBGoption_1_only_Main = true;
+        lib737D3B35_gv_oBGoption_1_start_Cut_Resources = true;
+        lib737D3B35_gv_oBGtime = 60;
+    }
+    else {
+    }
+    autoD6A390E4_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[2].lv_values[0].lv_valueString;
+    if (autoD6A390E4_val == lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD181D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0BCD0B8D0B8D183D0BCD0B5D0BDD18CD188D0B8D182D18CD0B22D180D0B0D0B7D0B0) {
+        lib737D3B35_gv_oBGoption_2_resize_Resources = 0.5;
+    }
+    else if (autoD6A390E4_val == lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD181D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0BCD0B8) {
+        lib737D3B35_gv_oBGoption_2_resize_Resources = 1.0;
+    }
+    else if (autoD6A390E4_val == lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD181D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B22D180D0B0D0B7D0B0) {
+        lib737D3B35_gv_oBGoption_2_resize_Resources = 2.0;
+    }
+    else if (autoD6A390E4_val == lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD181D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B23D180D0B0D0B7D0B0) {
+        lib737D3B35_gv_oBGoption_2_resize_Resources = 3.0;
+    }
+    else if (autoD6A390E4_val == lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD181D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B24D180D0B0D0B7D0B0) {
+        lib737D3B35_gv_oBGoption_2_resize_Resources = 4.0;
+    }
+    else if (autoD6A390E4_val == lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD181D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B25D180D0B0D0B7) {
+        lib737D3B35_gv_oBGoption_2_resize_Resources = 5.0;
+    }
+    else if (autoD6A390E4_val == lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD0B1D0BED0B3D0B0D182D18BD0BCD0B8D0B8D183D0BCD0B5D0BDD18CD188D0B8D182D18CD0B22D180D0B0D0B7D0B0) {
+        lib737D3B35_gv_oBGoption_2_resize_Resources = 0.5;
+        lib737D3B35_gv_oBGoption_2_rich_Resources = true;
+    }
+    else if (autoD6A390E4_val == lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD0B1D0BED0B3D0B0D182D18BD0BCD0B8) {
+        lib737D3B35_gv_oBGoption_2_resize_Resources = 1.0;
+        lib737D3B35_gv_oBGoption_2_rich_Resources = true;
+    }
+    else if (autoD6A390E4_val == lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD0B1D0BED0B3D0B0D182D18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B22D180D0B0D0B7D0B0) {
+        lib737D3B35_gv_oBGoption_2_resize_Resources = 2.0;
+        lib737D3B35_gv_oBGoption_2_rich_Resources = true;
+    }
+    else if (autoD6A390E4_val == lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD0B1D0BED0B3D0B0D182D18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B23D180D0B0D0B7D0B0) {
+        lib737D3B35_gv_oBGoption_2_resize_Resources = 3.0;
+        lib737D3B35_gv_oBGoption_2_rich_Resources = true;
+    }
+    else if (autoD6A390E4_val == lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD0B1D0BED0B3D0B0D182D18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B24D180D0B0D0B7D0B0) {
+        lib737D3B35_gv_oBGoption_2_resize_Resources = 4.0;
+        lib737D3B35_gv_oBGoption_2_rich_Resources = true;
+    }
+    else if (autoD6A390E4_val == lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD0B1D0BED0B3D0B0D182D18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B25D180D0B0D0B7) {
+        lib737D3B35_gv_oBGoption_2_resize_Resources = 5.0;
+        lib737D3B35_gv_oBGoption_2_rich_Resources = true;
+    }
+    else {
+    }
+}
+
+void lib737D3B35_gf_TriggersTurnOn () {
+    // Automatic Variable Declarations
+    // Implementation
+    TriggerEnable(lib737D3B35_gt_InitHighMineral8, true);
+    TriggerEnable(lib737D3B35_gt_OBGBirthVespeneUnit, true);
+    TriggerEnable(lib737D3B35_gt_OBGDiedVespeneUnit, true);
+}
+
+void lib737D3B35_gf_OBGGetInfoForPlayer () {
+    // Automatic Variable Declarations
+    string auto1DABC2A8_val;
+
+    // Implementation
+    if ((lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[1].lv_values[0].lv_valueString == lib737D3B35_gv_modInformation.lv_oBGOption_1D09DD0B8D187D0B5D0B3D0BED0BDD0B5D0B4D0B5D0BBD0B0D182D18C)) {
+        lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = (lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description + StringExternal("Param/Value/lib_737D3B35_0B12F8E0"));
+    }
+
+    if ((lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[1].lv_values[0].lv_valueString == lib737D3B35_gv_modInformation.lv_oBGOption_1D0A2D0BED0BBD18CD0BAD0BED0BDD0B0D0BCD0B5D0B9D0BDD0B0D185)) {
+        lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = (lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description + StringExternal("Param/Value/lib_737D3B35_CB44ADF5"));
+    }
+
+    if (((lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[1].lv_values[0].lv_valueString == lib737D3B35_gv_modInformation.lv_oBGOption_1D0A2D0BED0BBD18CD0BAD0BED0BDD0B0D0BCD0B5D0B9D0BDD0B0D185D181D180D0B5D0B7D0B0D182D18CD180D0B5D181D183D180D181D18BD0BDD0B0D0BAD0B0D180D182D0B5D0BED187D0B5D0BDD18CD0B1D18BD181D182D180D18BD0B9D180D0BED181D182) || (lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[1].lv_values[0].lv_valueString == lib737D3B35_gv_modInformation.lv_oBGOption_1D0A2D0BED0BBD18CD0BAD0BED0BDD0B0D0BCD0B5D0B9D0BDD0B0D185D181D180D0B5D0B7D0B0D182D18CD180D0B5D181D183D180D181D18BD0BDD0B0D0BAD0B0D180D182D0B5D0B1D18BD181D182D180D18BD0B9D180D0BED181D182) || (lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[1].lv_values[0].lv_valueString == lib737D3B35_gv_modInformation.lv_oBGOption_1D0A2D0BED0BBD18CD0BAD0BED0BDD0B0D0BCD0B5D0B9D0BDD0B0D185D181D180D0B5D0B7D0B0D182D18CD180D0B5D181D183D180D181D18BD0BDD0B0D0BAD0B0D180D182D0B5D181D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0B9D180D0BED181D182) || (lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[1].lv_values[0].lv_valueString == lib737D3B35_gv_modInformation.lv_oBGOption_1D0A2D0BED0BBD18CD0BAD0BED0BDD0B0D0BCD0B5D0B9D0BDD0B0D185D181D180D0B5D0B7D0B0D182D18CD180D0B5D181D183D180D181D18BD0BDD0B0D0BAD0B0D180D182D0B5D0BCD0B5D0B4D0BBD0B5D0BDD0BDD18BD0B9D180D0BED181D182) || (lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[1].lv_values[0].lv_valueString == lib737D3B35_gv_modInformation.lv_oBGOption_1D0A2D0BED0BBD18CD0BAD0BED0BDD0B0D0BCD0B5D0B9D0BDD0B0D185D181D180D0B5D0B7D0B0D182D18CD180D0B5D181D183D180D181D18BD0BDD0B0D0BAD0B0D180D182D0B5D0BED187D0B5D0BDD18CD0BCD0B5D0B4D0BBD0B5D0BDD0BDD18BD0B9D180D0BED181D182))) {
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_CAB3A04B", "TimePeriod", IntToText(lib737D3B35_gv_oBGtime));
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_CAB3A04B", "Minerals1800", IntToText(lib737D3B35_gv_oBGGROW_MINERAL_1800));
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_CAB3A04B", "Minerals900", IntToText(lib737D3B35_gv_oBGGROW_MINERAL_900));
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_CAB3A04B", "VespenGas", IntToText(lib737D3B35_gv_oBGGROW_VESPENE_2250));
+        lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = (lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description + TextExpressionAssemble("Param/Expression/lib_737D3B35_CAB3A04B"));
+    }
+
+    if ((lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[2].lv_values[0].lv_valueString == lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD181D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0BCD0B8)) {
+        lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = (lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description + StringExternal("Param/Value/lib_737D3B35_87E3A5A2"));
+    }
+
+    auto1DABC2A8_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[2].lv_values[0].lv_valueString;
+    if (auto1DABC2A8_val == lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD181D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0BCD0B8D0B8D183D0BCD0B5D0BDD18CD188D0B8D182D18CD0B22D180D0B0D0B7D0B0) {
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_D768927E", "Minerals1800", FixedToText((1800.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_D768927E", "Minerals900", FixedToText((900.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_D768927E", "Vespen2250", FixedToText((2250.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = (lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description + TextExpressionAssemble("Param/Expression/lib_737D3B35_D768927E"));
+    }
+    else if (auto1DABC2A8_val == lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD181D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B22D180D0B0D0B7D0B0) {
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_F720E5CC", "Minerals1800", FixedToText((1800.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_F720E5CC", "Minerals900", FixedToText((900.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_F720E5CC", "Vespen2250", FixedToText((2250.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = (lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description + TextExpressionAssemble("Param/Expression/lib_737D3B35_F720E5CC"));
+    }
+    else if (auto1DABC2A8_val == lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD181D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B23D180D0B0D0B7D0B0) {
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_D24B3FC0", "Minerals1800", FixedToText((1800.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_D24B3FC0", "Minerals900", FixedToText((900.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_D24B3FC0", "Vespen2250", FixedToText((2250.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = (lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description + TextExpressionAssemble("Param/Expression/lib_737D3B35_D24B3FC0"));
+    }
+    else if (auto1DABC2A8_val == lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD181D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B24D180D0B0D0B7D0B0) {
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_418C5682", "Minerals1800", FixedToText((1800.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_418C5682", "Minerals900", FixedToText((900.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_418C5682", "Vespen2250", FixedToText((2250.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = (lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description + TextExpressionAssemble("Param/Expression/lib_737D3B35_418C5682"));
+    }
+    else if (auto1DABC2A8_val == lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD181D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B25D180D0B0D0B7) {
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_1F97B847", "Minerals1800", FixedToText((1800.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_1F97B847", "Minerals900", FixedToText((900.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_1F97B847", "Vespen2250", FixedToText((2250.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = (lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description + TextExpressionAssemble("Param/Expression/lib_737D3B35_1F97B847"));
+    }
+    else if (auto1DABC2A8_val == lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD0B1D0BED0B3D0B0D182D18BD0BCD0B8D0B8D183D0BCD0B5D0BDD18CD188D0B8D182D18CD0B22D180D0B0D0B7D0B0) {
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_2F2C95EC", "Minerals1800", FixedToText((1800.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_2F2C95EC", "Minerals900", FixedToText((900.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_2F2C95EC", "Vespen2250", FixedToText((2250.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = (lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description + TextExpressionAssemble("Param/Expression/lib_737D3B35_2F2C95EC"));
+    }
+    else if (auto1DABC2A8_val == lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD0B1D0BED0B3D0B0D182D18BD0BCD0B8) {
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_174C0F2E", "Minerals1800", FixedToText((1800.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_174C0F2E", "Minerals900", FixedToText((900.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_174C0F2E", "Vespen2250", FixedToText((2250.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = (lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description + TextExpressionAssemble("Param/Expression/lib_737D3B35_174C0F2E"));
+    }
+    else if (auto1DABC2A8_val == lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD0B1D0BED0B3D0B0D182D18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B22D180D0B0D0B7D0B0) {
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_81445062", "Minerals1800", FixedToText((1800.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_81445062", "Minerals900", FixedToText((900.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_81445062", "Vespen2250", FixedToText((2250.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = (lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description + TextExpressionAssemble("Param/Expression/lib_737D3B35_81445062"));
+    }
+    else if (auto1DABC2A8_val == lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD0B1D0BED0B3D0B0D182D18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B23D180D0B0D0B7D0B0) {
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_5549EC3B", "Minerals1800", FixedToText((1800.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_5549EC3B", "Minerals900", FixedToText((900.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_5549EC3B", "Vespen2250", FixedToText((2250.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = (lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description + TextExpressionAssemble("Param/Expression/lib_737D3B35_5549EC3B"));
+    }
+    else if (auto1DABC2A8_val == lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD0B1D0BED0B3D0B0D182D18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B24D180D0B0D0B7D0B0) {
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_18D46AFB", "Minerals1800", FixedToText((1800.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_18D46AFB", "Minerals900", FixedToText((900.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_18D46AFB", "Vespen2250", FixedToText((2250.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = (lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description + TextExpressionAssemble("Param/Expression/lib_737D3B35_18D46AFB"));
+    }
+    else if (auto1DABC2A8_val == lib737D3B35_gv_modInformation.lv_oBGOption_2D0A1D0B4D0B5D0BBD0B0D182D18CD0B1D0BED0B3D0B0D182D18BD0BCD0B8D0B8D183D0B2D0B5D0BBD0B8D187D0B8D182D18CD0B25D180D0B0D0B7) {
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_D9AA590C", "Minerals1800", FixedToText((1800.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_D9AA590C", "Minerals900", FixedToText((900.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        TextExpressionSetToken("Param/Expression/lib_737D3B35_D9AA590C", "Vespen2250", FixedToText((2250.0 * lib737D3B35_gv_oBGoption_2_resize_Resources), c_fixedPrecisionAny));
+        lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = (lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description + TextExpressionAssemble("Param/Expression/lib_737D3B35_D9AA590C"));
+    }
+    else {
+    }
+    lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat = StringToText("");
+}
+
+void lib737D3B35_gf_OBGStart () {
+    // Variable Declarations
+    fixed lv__radius;
+    unitgroup lv_MineralGroup;
+    unitgroup lv_MineralGroupPlayer;
+    int lv_Quant;
+    point lv_Point2;
+    unit lv_Druza;
+
+    // Automatic Variable Declarations
+    playergroup auto2A6943B6_g;
+    int auto2A6943B6_var;
+    unitgroup autoF09C7C7F_g;
+    int autoF09C7C7F_u;
+    unit autoF09C7C7F_var;
+    unitgroup auto00682BA7_g;
+    int auto00682BA7_u;
+    unit auto00682BA7_var;
+    unitgroup auto0C1622B3_g;
+    int auto0C1622B3_u;
+    unit auto0C1622B3_var;
+
+    // Variable Initialization
+    lv__radius = 10.0;
+    lv_MineralGroup = UnitGroupEmpty();
+    lv_MineralGroupPlayer = UnitGroupEmpty();
+
+    // Implementation
+    lv_MineralGroup = UnitGroup(null, 0, RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterPlayer) | (1 << c_targetFilterAlly) | (1 << c_targetFilterEnemy) | (1 << c_targetFilterMissile) | (1 << c_targetFilterDestructible), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+    auto2A6943B6_g = lib36280BFF_gv_commonplayers_Active_Group;
+    auto2A6943B6_var = -1;
+    while (true) {
+        auto2A6943B6_var = PlayerGroupNextPlayer(auto2A6943B6_g, auto2A6943B6_var);
+        if (auto2A6943B6_var < 0) { break; }
+        RegionAddRegion(lib737D3B35_gv_oBGregionMains, RegionCircle(PlayerStartLocation(auto2A6943B6_var), lv__radius));
+        lv_MineralGroupPlayer = UnitGroup(null, 0, RegionCircle(PlayerStartLocation(auto2A6943B6_var), lv__radius), UnitFilter(0, 0, (1 << c_targetFilterPlayer) | (1 << c_targetFilterAlly) | (1 << c_targetFilterEnemy) | (1 << c_targetFilterMissile) | (1 << c_targetFilterDestructible), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+        autoF09C7C7F_g = lv_MineralGroupPlayer;
+        autoF09C7C7F_u = UnitGroupCount(autoF09C7C7F_g, c_unitCountAll);
+        for (;; autoF09C7C7F_u -= 1) {
+            autoF09C7C7F_var = UnitGroupUnitFromEnd(autoF09C7C7F_g, autoF09C7C7F_u);
+            if (autoF09C7C7F_var == null) { break; }
+            UnitGroupRemove(lv_MineralGroup, autoF09C7C7F_var);
+            lv_Quant = libNtve_gf_UnitGetPropertyResources(autoF09C7C7F_var, c_unitPropCurrent);
+            lv_Quant = FixedToInt((lv_Quant * lib737D3B35_gv_oBGoption_2_resize_Resources));
+            if (((lib737D3B35_gv_oBGoption_2_rich_Resources == false) && ((lib737D3B35_gv_oBGoption_2_resize_Resources > 1.0) || (lib737D3B35_gv_oBGoption_2_resize_Resources < 1.0)))) {
+                if (((lib36280BFF_gf_Commonis_Mineral_1800(autoF09C7C7F_var) == true) || (lib36280BFF_gf_Commonis_Mineral_900(autoF09C7C7F_var) == true) || (lib36280BFF_gf_Commonis_Vespene_2250(autoF09C7C7F_var) == true))) {
+                    UnitSetPropertyFixed(autoF09C7C7F_var, c_unitPropResources, lv_Quant);
+                }
+                else if ((lib36280BFF_gf_Commonis_RichMineral_1800(autoF09C7C7F_var) == true)) {
+                    lv_Point2 = UnitGetPosition(autoF09C7C7F_var);
+                    UnitRemove(autoF09C7C7F_var);
+                    libNtve_gf_CreateUnitsAtPoint2(1, "MineralField", c_unitCreateIgnorePlacement, 0, lv_Point2);
+                    lv_Druza = UnitLastCreated();
+                    UnitSetPropertyFixed(lv_Druza, c_unitPropResources, lv_Quant);
+                }
+                else if ((lib36280BFF_gf_Commonis_RichMineral_900(autoF09C7C7F_var) == true)) {
+                    lv_Point2 = UnitGetPosition(autoF09C7C7F_var);
+                    UnitRemove(autoF09C7C7F_var);
+                    libNtve_gf_CreateUnitsAtPoint2(1, "MineralField750", c_unitCreateIgnorePlacement, 0, lv_Point2);
+                    lv_Druza = UnitLastCreated();
+                    UnitSetPropertyFixed(lv_Druza, c_unitPropResources, lv_Quant);
+                }
+                else if ((lib36280BFF_gf_Commonis_RichVespene_2250(autoF09C7C7F_var) == true)) {
+                    lv_Point2 = UnitGetPosition(autoF09C7C7F_var);
+                    UnitRemove(autoF09C7C7F_var);
+                    libNtve_gf_CreateUnitsAtPoint2(1, "VespeneGeyser", c_unitCreateIgnorePlacement, 0, lv_Point2);
+                    lv_Druza = UnitLastCreated();
+                    UnitSetPropertyFixed(lv_Druza, c_unitPropResources, lv_Quant);
+                }
+            }
+            else if (((lib737D3B35_gv_oBGoption_2_rich_Resources == true) && ((lib737D3B35_gv_oBGoption_2_resize_Resources > 1.0) || (lib737D3B35_gv_oBGoption_2_resize_Resources < 1.0)))) {
+                if (((lib36280BFF_gf_Commonis_RichMineral_1800(autoF09C7C7F_var) == true) || (lib36280BFF_gf_Commonis_RichMineral_900(autoF09C7C7F_var) == true) || (lib36280BFF_gf_Commonis_RichVespene_2250(autoF09C7C7F_var) == true))) {
+                    UnitSetPropertyFixed(autoF09C7C7F_var, c_unitPropResources, lv_Quant);
+                }
+                else if ((lib36280BFF_gf_Commonis_Mineral_1800(autoF09C7C7F_var) == true)) {
+                    lv_Point2 = UnitGetPosition(autoF09C7C7F_var);
+                    UnitRemove(autoF09C7C7F_var);
+                    libNtve_gf_CreateUnitsAtPoint2(1, "RichMineralField", c_unitCreateIgnorePlacement, 0, lv_Point2);
+                    lv_Druza = UnitLastCreated();
+                    UnitSetPropertyFixed(lv_Druza, c_unitPropResources, lv_Quant);
+                }
+                else if ((lib36280BFF_gf_Commonis_Mineral_900(autoF09C7C7F_var) == true)) {
+                    lv_Point2 = UnitGetPosition(autoF09C7C7F_var);
+                    UnitRemove(autoF09C7C7F_var);
+                    libNtve_gf_CreateUnitsAtPoint2(1, "RichMineralField750", c_unitCreateIgnorePlacement, 0, lv_Point2);
+                    lv_Druza = UnitLastCreated();
+                    UnitSetPropertyFixed(lv_Druza, c_unitPropResources, lv_Quant);
+                }
+                else if ((lib36280BFF_gf_Commonis_Vespene_2250(autoF09C7C7F_var) == true)) {
+                    lv_Point2 = UnitGetPosition(autoF09C7C7F_var);
+                    UnitRemove(autoF09C7C7F_var);
+                    libNtve_gf_CreateUnitsAtPoint2(1, "RichVespeneGeyser", c_unitCreateIgnorePlacement, 0, lv_Point2);
+                    lv_Druza = UnitLastCreated();
+                    UnitSetPropertyFixed(lv_Druza, c_unitPropResources, lv_Quant);
+                }
+            }
+        }
+    }
+    auto00682BA7_g = lv_MineralGroup;
+    auto00682BA7_u = UnitGroupCount(auto00682BA7_g, c_unitCountAll);
+    for (;; auto00682BA7_u -= 1) {
+        auto00682BA7_var = UnitGroupUnitFromEnd(auto00682BA7_g, auto00682BA7_u);
+        if (auto00682BA7_var == null) { break; }
+        if ((libNtve_gf_UnitGetPropertyResources(auto00682BA7_var, c_unitPropCurrent) <= lib36280BFF_gv_commonsmallMineralResource)) {
+            UnitGroupRemove(lv_MineralGroup, auto00682BA7_var);
+        }
+
+    }
+    if ((lib737D3B35_gv_oBGoption_1_only_Main == true) && (lib737D3B35_gv_oBGoption_1_start_Cut_Resources == false)) {
+        auto0C1622B3_g = lv_MineralGroup;
+        auto0C1622B3_u = UnitGroupCount(auto0C1622B3_g, c_unitCountAll);
+        for (;; auto0C1622B3_u -= 1) {
+            auto0C1622B3_var = UnitGroupUnitFromEnd(auto0C1622B3_g, auto0C1622B3_u);
+            if (auto0C1622B3_var == null) { break; }
+            if (((lib36280BFF_gf_Commonis_Mineral_1800(auto0C1622B3_var) == true) || (lib36280BFF_gf_Commonis_Mineral_900(auto0C1622B3_var) == true) || (lib36280BFF_gf_Commonis_Vespene_2250(auto0C1622B3_var) == true) || (lib36280BFF_gf_Commonis_RichMineral_1800(auto0C1622B3_var) == true) || (lib36280BFF_gf_Commonis_RichMineral_900(auto0C1622B3_var) == true) || (lib36280BFF_gf_Commonis_RichVespene_2250(auto0C1622B3_var) == true))) {
+                UnitRemove(auto0C1622B3_var);
+            }
+
+            UnitGroupRemove(lv_MineralGroup, auto0C1622B3_var);
+        }
+    }
+
+    if ((lib737D3B35_gv_oBGoption_1_only_Main == true) && (lib737D3B35_gv_oBGoption_1_start_Cut_Resources == true)) {
+        lib737D3B35_gv_oBGneutralUnitsMap = lv_MineralGroup;
+        lib737D3B35_gf_OBGCutResources();
+    }
+
+}
+
+void lib737D3B35_gf_OBGCutResources () {
+    // Automatic Variable Declarations
+    unitgroup autoF2698294_g;
+    int autoF2698294_u;
+    unit autoF2698294_var;
+
+    // Implementation
+    autoF2698294_g = lib737D3B35_gv_oBGneutralUnitsMap;
+    autoF2698294_u = UnitGroupCount(autoF2698294_g, c_unitCountAll);
+    for (;; autoF2698294_u -= 1) {
+        autoF2698294_var = UnitGroupUnitFromEnd(autoF2698294_g, autoF2698294_u);
+        if (autoF2698294_var == null) { break; }
+        if (((lib36280BFF_gf_Commonis_Mineral_1800(autoF2698294_var) == true) || (lib36280BFF_gf_Commonis_RichMineral_1800(autoF2698294_var) == true))) {
+            UnitSetPropertyFixed(autoF2698294_var, c_unitPropResources, lib737D3B35_gv_oBGGROW_MINERAL_1800);
+        }
+
+        if (((lib36280BFF_gf_Commonis_Mineral_900(autoF2698294_var) == true) || (lib36280BFF_gf_Commonis_RichMineral_900(autoF2698294_var) == true))) {
+            UnitSetPropertyFixed(autoF2698294_var, c_unitPropResources, lib737D3B35_gv_oBGGROW_MINERAL_900);
+        }
+
+        if (((lib36280BFF_gf_Commonis_Vespene_2250(autoF2698294_var) == true) || (lib36280BFF_gf_Commonis_RichVespene_2250(autoF2698294_var) == true))) {
+            UnitSetPropertyFixed(autoF2698294_var, c_unitPropResources, lib737D3B35_gv_oBGGROW_VESPENE_2250);
+        }
+
+    }
+    Wait(5.0, c_timeReal);
+    TimerStart(lib737D3B35_gv_oBGtimer, lib737D3B35_gv_oBGtime, true, c_timeReal);
+}
+
+trigger auto_lib737D3B35_gf_OBGGrowResources_Trigger = null;
+
+void lib737D3B35_gf_OBGGrowResources () {
+    if (auto_lib737D3B35_gf_OBGGrowResources_Trigger == null) {
+        auto_lib737D3B35_gf_OBGGrowResources_Trigger = TriggerCreate("auto_lib737D3B35_gf_OBGGrowResources_TriggerFunc");
+    }
+
+    TriggerExecute(auto_lib737D3B35_gf_OBGGrowResources_Trigger, false, false);
+}
+
+bool auto_lib737D3B35_gf_OBGGrowResources_TriggerFunc (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    unitgroup autoBADBDDEC_g;
+    int autoBADBDDEC_u;
+    unit autoBADBDDEC_var;
+
+    // Implementation
+    autoBADBDDEC_g = lib737D3B35_gv_oBGneutralUnitsMap;
+    autoBADBDDEC_u = UnitGroupCount(autoBADBDDEC_g, c_unitCountAll);
+    for (;; autoBADBDDEC_u -= 1) {
+        autoBADBDDEC_var = UnitGroupUnitFromEnd(autoBADBDDEC_g, autoBADBDDEC_u);
+        if (autoBADBDDEC_var == null) { break; }
+        if (((lib36280BFF_gf_Commonis_Mineral_1800(autoBADBDDEC_var) == true) || (lib36280BFF_gf_Commonis_RichMineral_1800(autoBADBDDEC_var) == true))) {
+            UnitSetPropertyFixed(autoBADBDDEC_var, c_unitPropResources, (libNtve_gf_UnitGetPropertyResources(autoBADBDDEC_var, c_unitPropCurrent) + lib737D3B35_gv_oBGGROW_MINERAL_1800));
+        }
+
+        if (((lib36280BFF_gf_Commonis_Mineral_900(autoBADBDDEC_var) == true) || (lib36280BFF_gf_Commonis_RichMineral_900(autoBADBDDEC_var) == true))) {
+            UnitSetPropertyFixed(autoBADBDDEC_var, c_unitPropResources, (libNtve_gf_UnitGetPropertyResources(autoBADBDDEC_var, c_unitPropCurrent) + lib737D3B35_gv_oBGGROW_MINERAL_900));
+        }
+
+        if (((lib36280BFF_gf_Commonis_Vespene_2250(autoBADBDDEC_var) == true) || (lib36280BFF_gf_Commonis_RichVespene_2250(autoBADBDDEC_var) == true))) {
+            if ((libNtve_gf_UnitGetPropertyResources(autoBADBDDEC_var, c_unitPropCurrent) == 0)) {
+                UnitGroupRemove(lib737D3B35_gv_oBGneutralUnitsMap, autoBADBDDEC_var);
+            }
+            else {
+                UnitSetPropertyFixed(autoBADBDDEC_var, c_unitPropResources, (libNtve_gf_UnitGetPropertyResources(autoBADBDDEC_var, c_unitPropCurrent) + lib737D3B35_gv_oBGGROW_VESPENE_2250));
+            }
+        }
+
+    }
+    return true;
+}
+
+trigger auto_lib737D3B35_gf_OBGGrowVespeneUnit_Trigger = null;
+
+void lib737D3B35_gf_OBGGrowVespeneUnit () {
+    if (auto_lib737D3B35_gf_OBGGrowVespeneUnit_Trigger == null) {
+        auto_lib737D3B35_gf_OBGGrowVespeneUnit_Trigger = TriggerCreate("auto_lib737D3B35_gf_OBGGrowVespeneUnit_TriggerFunc");
+    }
+
+    TriggerExecute(auto_lib737D3B35_gf_OBGGrowVespeneUnit_Trigger, false, false);
+}
+
+bool auto_lib737D3B35_gf_OBGGrowVespeneUnit_TriggerFunc (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    unitgroup autoCB046937_g;
+    int autoCB046937_u;
+    unit autoCB046937_var;
+
+    // Implementation
+    autoCB046937_g = lib737D3B35_gv_oBGgroupVespeneUnit;
+    autoCB046937_u = UnitGroupCount(autoCB046937_g, c_unitCountAll);
+    for (;; autoCB046937_u -= 1) {
+        autoCB046937_var = UnitGroupUnitFromEnd(autoCB046937_g, autoCB046937_u);
+        if (autoCB046937_var == null) { break; }
+        if ((libNtve_gf_UnitGetPropertyResources(autoCB046937_var, c_unitPropCurrent) == 0)) {
+            UnitGroupRemove(lib737D3B35_gv_oBGgroupVespeneUnit, autoCB046937_var);
+        }
+        else {
+            UnitSetPropertyFixed(autoCB046937_var, c_unitPropResources, (libNtve_gf_UnitGetPropertyResources(autoCB046937_var, c_unitPropCurrent) + lib737D3B35_gv_oBGGROW_VESPENE_2250));
+        }
+    }
+    return true;
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: Launch
+//--------------------------------------------------------------------------------------------------
+bool lib737D3B35_gt_Launch_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lib737D3B35_gf_GetOptions();
+    lib737D3B35_gf_OBGGetInfoForPlayer();
+    TextExpressionSetToken("Param/Expression/lib_737D3B35_47994BFC", "FulName", lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_fullName);
+    HelpPanelAddTip(PlayerGroupAll(), libNtve_gf_FormatTipTitle(TextExpressionAssemble("Param/Expression/lib_737D3B35_47994BFC"), libNtve_ge_TipType_NormalTip), lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_name, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_icon_Path);
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat);
+    lib737D3B35_gf_OBGStart();
+    lib737D3B35_gf_TriggersTurnOn();
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib737D3B35_gt_Launch_Init () {
+    lib737D3B35_gt_Launch = TriggerCreate("lib737D3B35_gt_Launch_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: OBG | BirthVespeneUnit
+//--------------------------------------------------------------------------------------------------
+bool lib737D3B35_gt_OBGBirthVespeneUnit_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((lib36280BFF_gf_Commonis_UnitOwnerActivePlayer(EventUnit()) == true))) {
+            return false;
+        }
+
+        if (!(((lib737D3B35_gv_oBGgrowVespeneUnit == true) && (lib36280BFF_gf_Commonis_VespeneUnit(EventUnit()) == true) && (libNtve_gf_UnitInRegion(EventUnit(), lib737D3B35_gv_oBGregionMains) != true)))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UnitGroupAdd(lib737D3B35_gv_oBGgroupVespeneUnit, EventUnit());
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib737D3B35_gt_OBGBirthVespeneUnit_Init () {
+    lib737D3B35_gt_OBGBirthVespeneUnit = TriggerCreate("lib737D3B35_gt_OBGBirthVespeneUnit_Func");
+    TriggerEnable(lib737D3B35_gt_OBGBirthVespeneUnit, false);
+    TriggerAddEventUnitRegion(lib737D3B35_gt_OBGBirthVespeneUnit, null, RegionPlayableMap(), true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: OBG | DiedVespeneUnit
+//--------------------------------------------------------------------------------------------------
+bool lib737D3B35_gt_OBGDiedVespeneUnit_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((UnitGroupHasUnit(lib737D3B35_gv_oBGgroupVespeneUnit, EventUnit()) == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UnitGroupRemove(lib737D3B35_gv_oBGgroupVespeneUnit, EventUnit());
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib737D3B35_gt_OBGDiedVespeneUnit_Init () {
+    lib737D3B35_gt_OBGDiedVespeneUnit = TriggerCreate("lib737D3B35_gt_OBGDiedVespeneUnit_Func");
+    TriggerEnable(lib737D3B35_gt_OBGDiedVespeneUnit, false);
+    TriggerAddEventUnitDied(lib737D3B35_gt_OBGDiedVespeneUnit, null);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: OBG | TimerExpires
+//--------------------------------------------------------------------------------------------------
+bool lib737D3B35_gt_InitHighMineral8_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((lib737D3B35_gv_oBGcountRepeat > 1))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lib737D3B35_gf_OBGGrowResources();
+    lib737D3B35_gf_OBGGrowVespeneUnit();
+    lib737D3B35_gv_oBGcountRepeat = (lib737D3B35_gv_oBGcountRepeat - 1);
+    if ((lib737D3B35_gv_oBGcountRepeat == 1)) {
+        libNtve_gf_StopTimer(lib737D3B35_gv_oBGtimer);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib737D3B35_gt_InitHighMineral8_Init () {
+    lib737D3B35_gt_InitHighMineral8 = TriggerCreate("lib737D3B35_gt_InitHighMineral8_Func");
+    TriggerEnable(lib737D3B35_gt_InitHighMineral8, false);
+    TriggerAddEventTimer(lib737D3B35_gt_InitHighMineral8, lib737D3B35_gv_oBGtimer);
+}
+
+void lib737D3B35_InitTriggers () {
+    lib737D3B35_gt_Launch_Init();
+    lib737D3B35_gt_OBGBirthVespeneUnit_Init();
+    lib737D3B35_gt_OBGDiedVespeneUnit_Init();
+    lib737D3B35_gt_InitHighMineral8_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool lib737D3B35_InitLib_completed = false;
+
+void lib737D3B35_InitLib () {
+    if (lib737D3B35_InitLib_completed) {
+        return;
+    }
+
+    lib737D3B35_InitLib_completed = true;
+
+    lib737D3B35_InitLibraries();
+    lib737D3B35_InitVariables();
+    lib737D3B35_InitTriggers();
+}
+
+include "Lib39D1ECFB"
+include "Lib36280BFF"
+

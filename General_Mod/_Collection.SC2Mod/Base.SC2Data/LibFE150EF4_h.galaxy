@@ -1,0 +1,25 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: ++11 Nukes | NN
+//--------------------------------------------------------------------------------------------------
+// Structures
+struct libFE150EF4_gs_Information {
+    string lv_gSOption_1;
+};
+
+// Variable Declarations
+libFE150EF4_gs_Information libFE150EF4_gv_modInformation;
+
+// Function Declarations
+void libFE150EF4_gf_SetupInformation (int lp_modIndex);
+void libFE150EF4_gf_GetOptions ();
+void libFE150EF4_gf_TriggersTurnOn ();
+void libFE150EF4_gf_GetInfoForPlayer ();
+
+// Trigger Declarations
+trigger libFE150EF4_gt_Launch;
+
+// Library Initialization
+void libFE150EF4_InitVariables ();
+
