@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Preload>
+<Asset path="assets\textures\icon-mineral-protoss.dds" Type="Image"/>
+<Asset path="assets\textures\icon-mineral-zerg.dds" Type="Image"/>
+<Asset path="assets\textures\icon-supply-terran.dds" Type="Image"/>
+<Asset path="assets\textures\icon-gas-terran.dds" Type="Image"/>
+<Asset path="assets\textures\icon-mineral-terran.dds" Type="Image"/>
+<Asset path="assets\textures\icon-supply-protoss.dds" Type="Image"/>
+<Asset path="assets\textures\icon-supply-zerg.dds" Type="Image"/>
+<Asset path="assets\textures\icon-gas-protoss.dds" Type="Image"/>
+<Asset path="assets\textures\icon-gas-zerg.dds" Type="Image"/>
+<Asset path="assets\textures\icon-gas-protoss-nobg.dds" Type="Image"/>
+<Asset path="assets\textures\icon-supply-protoss_nobg.dds" Type="Image"/>
+<Asset path="assets\textures\icon-mineral-nobg.dds" Type="Image"/>
+<Actor id="SYSTEM_ActorConfig"/>
+</Preload>

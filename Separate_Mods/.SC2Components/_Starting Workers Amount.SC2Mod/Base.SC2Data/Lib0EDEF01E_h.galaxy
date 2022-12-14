@@ -1,0 +1,18 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// Constants
+const int lib0EDEF01E_gv_sWAWORKERS_STANDART = 12;
+
+// Function Declarations
+void lib0EDEF01E_gf_SWADisableWorkersForPlayer (int lp_player, string lp_raceOfPlayer);
+string lib0EDEF01E_gf_SWAGetResourceType (int lp_player, fixed lp_radius);
+
+// Trigger Declarations
+trigger lib0EDEF01E_gt_SWALaunch;
+
+// Library Initialization
+void lib0EDEF01E_InitVariables ();
+

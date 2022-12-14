@@ -1,0 +1,273 @@
+include "TriggerLibs/NativeLib"
+
+include "Lib53355882_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Llibrary
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void lib53355882_InitLibraries () {
+    libNtve_InitVariables();
+}
+
+// Variable Initialization
+bool lib53355882_InitVariables_completed = false;
+
+void lib53355882_InitVariables () {
+    if (lib53355882_InitVariables_completed) {
+        return;
+    }
+
+    lib53355882_InitVariables_completed = true;
+
+}
+
+// Functions
+bool lib53355882_gf_Commonis_Mineral_1800 (unit lp_unit) {
+    // Automatic Variable Declarations
+    // Implementation
+    if (((UnitGetType(lp_unit) == "MineralField") || (UnitGetType(lp_unit) == "LabMineralField") || (UnitGetType(lp_unit) == "BattleStationMineralField") || (UnitGetType(lp_unit) == "PurifierMineralField") || (UnitGetType(lp_unit) == "MineralFieldOpaque"))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool lib53355882_gf_Commonis_Mineral_900 (unit lp_unit) {
+    // Automatic Variable Declarations
+    // Implementation
+    if (((UnitGetType(lp_unit) == "MineralField750") || (UnitGetType(lp_unit) == "LabMineralField750") || (UnitGetType(lp_unit) == "BattleStationMineralField750") || (UnitGetType(lp_unit) == "PurifierMineralField750") || (UnitGetType(lp_unit) == "MineralFieldOpaque900"))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool lib53355882_gf_Commonis_Mineral_450 (unit lp_unit) {
+    // Automatic Variable Declarations
+    // Implementation
+    if ((UnitGetType(lp_unit) == "MineralField450")) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool lib53355882_gf_Commonis_Vespene_2250 (unit lp_unit) {
+    // Automatic Variable Declarations
+    // Implementation
+    if (((UnitGetType(lp_unit) == "VespeneGeyser") || (UnitGetType(lp_unit) == "SpacePlatformGeyser") || (UnitGetType(lp_unit) == "ProtossVespeneGeyser") || (UnitGetType(lp_unit) == "PurifierVespeneGeyser") || (UnitGetType(lp_unit) == "ShakurasVespeneGeyser"))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool lib53355882_gf_is_Replace (unit lp_unit) {
+    // Automatic Variable Declarations
+    // Implementation
+    if ((libNtve_gf_UnitGetPropertyResources(lp_unit, c_unitPropCurrent) > lib53355882_gv_amountMineralsInSmallResource)) {
+        return true;
+    }
+    else {
+        if ((lib53355882_gv_is_Replace_Small_Resources == true)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+}
+
+void lib53355882_gf_PickEachResource () {
+    // Variable Declarations
+    unitgroup lv_MineralGroup;
+
+    // Automatic Variable Declarations
+    unitgroup auto3CC357D7_g;
+    int auto3CC357D7_u;
+    unit auto3CC357D7_var;
+
+    // Variable Initialization
+    lv_MineralGroup = UnitGroupEmpty();
+
+    // Implementation
+    lv_MineralGroup = UnitGroup(null, 0, RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterAlly) | (1 << c_targetFilterEnemy) | (1 << c_targetFilterMissile) | (1 << c_targetFilterDestructible), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+    auto3CC357D7_g = lv_MineralGroup;
+    auto3CC357D7_u = UnitGroupCount(auto3CC357D7_g, c_unitCountAll);
+    for (;; auto3CC357D7_u -= 1) {
+        auto3CC357D7_var = UnitGroupUnitFromEnd(auto3CC357D7_g, auto3CC357D7_u);
+        if (auto3CC357D7_var == null) { break; }
+        if ((lib53355882_gv_is_Rich_Mineral == true) && (lib53355882_gf_Commonis_Mineral_1800(auto3CC357D7_var) == true)) {
+            if ((lib53355882_gf_is_Replace(auto3CC357D7_var) == true)) {
+                lib53355882_gf_ReplaceMineral1800(auto3CC357D7_var);
+            }
+
+        }
+        else if ((lib53355882_gv_is_Rich_Mineral == true) && (lib53355882_gf_Commonis_Mineral_900(auto3CC357D7_var) == true)) {
+            if ((lib53355882_gf_is_Replace(auto3CC357D7_var) == true)) {
+                lib53355882_gf_ReplaceMineral900(auto3CC357D7_var);
+            }
+
+        }
+        else if ((lib53355882_gv_is_Rich_Mineral == true) && (lib53355882_gf_Commonis_Mineral_450(auto3CC357D7_var) == true)) {
+            if ((lib53355882_gf_is_Replace(auto3CC357D7_var) == true)) {
+                lib53355882_gf_ReplaceMineral450(auto3CC357D7_var);
+            }
+
+        }
+        else if ((lib53355882_gv_is_Rich_Vespen == true) && (lib53355882_gf_Commonis_Vespene_2250(auto3CC357D7_var) == true)) {
+            if ((lib53355882_gf_is_Replace(auto3CC357D7_var) == true)) {
+                lib53355882_gf_ReplaceVespenGeyser(auto3CC357D7_var);
+            }
+
+        }
+    }
+}
+
+void lib53355882_gf_ReplaceMineral1800 (unit lp_unit) {
+    // Variable Declarations
+    point lv_Point;
+    int lv_Quant;
+    unit lv_Druza;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Implementation
+    lv_Point = UnitGetPosition(lp_unit);
+    lv_Quant = libNtve_gf_UnitGetPropertyResources(lp_unit, c_unitPropCurrent);
+    UnitRemove(lp_unit);
+    libNtve_gf_CreateUnitsAtPoint2(1, "RichMineralField", c_unitCreateIgnorePlacement, 0, lv_Point);
+    lv_Druza = UnitLastCreated();
+    UnitSetPropertyFixed(lv_Druza, c_unitPropResources, lv_Quant);
+}
+
+void lib53355882_gf_ReplaceMineral900 (unit lp_unit) {
+    // Variable Declarations
+    point lv_Point;
+    int lv_Quant;
+    unit lv_Druza;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Implementation
+    lv_Point = UnitGetPosition(lp_unit);
+    lv_Quant = libNtve_gf_UnitGetPropertyResources(lp_unit, c_unitPropCurrent);
+    UnitRemove(lp_unit);
+    libNtve_gf_CreateUnitsAtPoint2(1, "RichMineralField750", c_unitCreateIgnorePlacement, 0, lv_Point);
+    lv_Druza = UnitLastCreated();
+    UnitSetPropertyFixed(lv_Druza, c_unitPropResources, lv_Quant);
+}
+
+void lib53355882_gf_ReplaceMineral450 (unit lp_unit) {
+    // Variable Declarations
+    point lv_Point;
+    int lv_Quant;
+    unit lv_Druza;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Implementation
+    lv_Point = UnitGetPosition(lp_unit);
+    lv_Quant = libNtve_gf_UnitGetPropertyResources(lp_unit, c_unitPropCurrent);
+    UnitRemove(lp_unit);
+    libNtve_gf_CreateUnitsAtPoint2(1, "RichMineralField750", c_unitCreateIgnorePlacement, 0, lv_Point);
+    lv_Druza = UnitLastCreated();
+    UnitSetPropertyFixed(lv_Druza, c_unitPropResources, lv_Quant);
+}
+
+void lib53355882_gf_ReplaceVespenGeyser (unit lp_unit) {
+    // Variable Declarations
+    point lv_Point;
+    int lv_Quant;
+    unit lv_Druza;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Implementation
+    lv_Point = UnitGetPosition(lp_unit);
+    lv_Quant = libNtve_gf_UnitGetPropertyResources(lp_unit, c_unitPropCurrent);
+    UnitRemove(lp_unit);
+    libNtve_gf_CreateUnitsAtPoint2(1, "RichVespeneGeyser", 0, 0, lv_Point);
+    lv_Druza = UnitLastCreated();
+    UnitSetPropertyFixed(lv_Druza, c_unitPropResources, lv_Quant);
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: Launch
+//--------------------------------------------------------------------------------------------------
+bool lib53355882_gt_InitHighMineral_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv__up;
+
+    // Automatic Variable Declarations
+    string auto084961AA_val;
+
+    // Variable Initialization
+    lv__up = "1.4";
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto084961AA_val = GameAttributeGameValue("1");
+    if (auto084961AA_val == "0001") {
+        lib53355882_gv_is_Rich_Mineral = true;
+        lib53355882_gv_is_Rich_Vespen = true;
+        CatalogFieldValueSet(c_gameCatalogAbil, "MULEGather", "ResourceAmountMultiplier[" + IntToString(0) + "]", EventPlayer(), lv__up);
+    }
+    else if (auto084961AA_val == "0002") {
+        lib53355882_gv_is_Rich_Mineral = true;
+        CatalogFieldValueSet(c_gameCatalogAbil, "MULEGather", "ResourceAmountMultiplier[" + IntToString(0) + "]", EventPlayer(), lv__up);
+    }
+    else if (auto084961AA_val == "0003") {
+        lib53355882_gv_is_Rich_Vespen = true;
+    }
+    else {
+    }
+    if ((GameAttributeGameValue("2") == "0001")) {
+        lib53355882_gv_is_Replace_Small_Resources = true;
+    }
+
+    lib53355882_gf_PickEachResource();
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Param/Value/lib_53355882_98AEA4C2"));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib53355882_gt_InitHighMineral_Init () {
+    lib53355882_gt_InitHighMineral = TriggerCreate("lib53355882_gt_InitHighMineral_Func");
+    TriggerAddEventMapInit(lib53355882_gt_InitHighMineral);
+}
+
+void lib53355882_InitTriggers () {
+    lib53355882_gt_InitHighMineral_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool lib53355882_InitLib_completed = false;
+
+void lib53355882_InitLib () {
+    if (lib53355882_InitLib_completed) {
+        return;
+    }
+
+    lib53355882_InitLib_completed = true;
+
+    lib53355882_InitLibraries();
+    lib53355882_InitVariables();
+    lib53355882_InitTriggers();
+}
+

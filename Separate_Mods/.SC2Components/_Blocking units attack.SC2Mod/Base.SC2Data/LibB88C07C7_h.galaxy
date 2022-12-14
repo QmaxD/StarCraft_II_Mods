@@ -1,0 +1,32 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// Variable Declarations
+bool libB88C07C7_gv_isBlockingWorkerAttack;
+bool libB88C07C7_gv_isBlockingAirUnitAttack;
+bool libB88C07C7_gv_isBlockingGroundUnitAttack;
+bool libB88C07C7_gv_isBlockingStructuresAttack;
+
+// Function Declarations
+void libB88C07C7_gf_DisallowAirUpgrades ();
+void libB88C07C7_gf_DisallowGroundUpgrades ();
+void libB88C07C7_gf_DisallowStructuresWeaponUpgrades ();
+void libB88C07C7_gf_DisallowGroundWeapon ();
+void libB88C07C7_gf_DisallowWorkerWeapon ();
+
+// Trigger Declarations
+trigger libB88C07C7_gt_Launch;
+trigger libB88C07C7_gt_VikingTransformAG;
+trigger libB88C07C7_gt_VikingTransformGA;
+trigger libB88C07C7_gt_HellionTransform;
+trigger libB88C07C7_gt_HellbatTransform;
+trigger libB88C07C7_gt_DisableWorkerAttack;
+trigger libB88C07C7_gt_DisableAirUnitAttack;
+trigger libB88C07C7_gt_DisableGroundUnitAttack;
+trigger libB88C07C7_gt_DisableStructuresAttack;
+
+// Library Initialization
+void libB88C07C7_InitVariables ();
+

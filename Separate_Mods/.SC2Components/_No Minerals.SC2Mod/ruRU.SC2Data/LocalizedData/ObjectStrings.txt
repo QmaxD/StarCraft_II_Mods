@@ -1,0 +1,2 @@
+﻿Sound/Name/money1=money1
+Sound/Name/money2=money2

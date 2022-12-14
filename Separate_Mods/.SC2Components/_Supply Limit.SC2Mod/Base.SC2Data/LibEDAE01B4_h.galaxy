@@ -1,0 +1,16 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// Variable Declarations
+int libEDAE01B4_gv_getsupplieslimit;
+
+// Trigger Declarations
+trigger libEDAE01B4_gt_SLLaunch;
+trigger libEDAE01B4_gt_SLGive_Limit_Supply;
+trigger libEDAE01B4_gt_SLNoSupplyBlock;
+
+// Library Initialization
+void libEDAE01B4_InitVariables ();
+

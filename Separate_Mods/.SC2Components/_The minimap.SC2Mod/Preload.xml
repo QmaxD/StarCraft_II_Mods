@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Preload>
+<Asset path="library\cover_2g2bb.tga" Type="Image"/>
+<Abil id="OracleCloakField"/>
+<Actor id="SYSTEM_ActorConfig"/>
+</Preload>

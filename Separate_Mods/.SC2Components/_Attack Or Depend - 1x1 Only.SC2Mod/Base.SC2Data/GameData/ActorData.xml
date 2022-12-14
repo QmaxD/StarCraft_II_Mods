@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CActorRange id="DefendRegion80">
+        <VisibleTo index="Self" value="1"/>
+        <VisibleTo index="Ally" value="1"/>
+        <Inherits index="LocalTintColor" value="1"/>
+        <Inherits index="TeamColor" value="1"/>
+        <Inherits index="TintColor" value="1"/>
+        <Inherits index="Visibility" value="0"/>
+        <FogVisibility value="Visible"/>
+        <On Terms="Behavior.DefendRegion80.On" Send="Create"/>
+        <On Terms="Behavior.DefendRegion80.Off" Send="Destroy"/>
+        <Range value="79.500000"/>
+        <Icon value="Assets\Textures\radaricon2.dds"/>
+        <IconArcLength value="0.500000"/>
+        <RangeFlags index="Minimap" value="1"/>
+    </CActorRange>
+    <CActorRange id="DefendRegion603">
+        <VisibleTo index="Self" value="1"/>
+        <VisibleTo index="Ally" value="1"/>
+        <Inherits index="LocalTintColor" value="1"/>
+        <Inherits index="TeamColor" value="1"/>
+        <Inherits index="TintColor" value="1"/>
+        <Inherits index="Visibility" value="0"/>
+        <FogVisibility value="Visible"/>
+        <On Terms="Behavior.DefendRegion90.On" Send="Create"/>
+        <On Terms="Behavior.DefendRegion90.Off" Send="Destroy"/>
+        <Range value="89.500000"/>
+        <Icon value="Assets\Textures\radaricon2.dds"/>
+        <IconArcLength value="0.500000"/>
+        <RangeFlags index="Minimap" value="1"/>
+    </CActorRange>
+    <CActorRange id="DefendRegion100">
+        <VisibleTo index="Self" value="1"/>
+        <VisibleTo index="Ally" value="1"/>
+        <Inherits index="LocalTintColor" value="1"/>
+        <Inherits index="TeamColor" value="1"/>
+        <Inherits index="TintColor" value="1"/>
+        <Inherits index="Visibility" value="0"/>
+        <FogVisibility value="Visible"/>
+        <On Terms="Behavior.DefendRegion100.On" Send="Create"/>
+        <On Terms="Behavior.DefendRegion100.Off" Send="Destroy"/>
+        <Range value="99.500000"/>
+        <Icon value="Assets\Textures\radaricon2.dds"/>
+        <IconArcLength value="0.500000"/>
+        <RangeFlags index="Minimap" value="1"/>
+    </CActorRange>
+    <CActorUnit id="NovaPack03SearchNode2" parent="GenericUnitStandardNoAutoSoundLinks" unitName="NovaPack03SearchNode2">
+        <On Terms="ActorCreation" Send="AnimSetPausedAll"/>
+        <On Terms="AssetPreInit; IsInEditor" Send="ModelLinkCustomize NovaPack03SearchNode"/>
+        <Model value="Invisible"/>
+        <ModelFlags index="AutomateGlobalLoops" value="0"/>
+        <WalkAnimMoveSpeed value="0"/>
+        <StatusBarFlags index="Shields" value="0"/>
+        <StatusBarFlags index="Life" value="0"/>
+        <StatusBarFlags index="Energy" value="0"/>
+        <StatusBarFlags index="Cargo" value="0"/>
+        <StatusBarFlags index="Progress" value="0"/>
+        <StatusBarFlags index="Duration" value="0"/>
+        <UnitFlags index="ShowBlobShadow" value="0"/>
+    </CActorUnit>
+    <CActorRange id="DefendRegion20">
+        <VisibleTo index="Self" value="1"/>
+        <VisibleTo index="Ally" value="1"/>
+        <Inherits index="LocalTintColor" value="1"/>
+        <Inherits index="TeamColor" value="1"/>
+        <Inherits index="TintColor" value="1"/>
+        <Inherits index="Visibility" value="0"/>
+        <FogVisibility value="Visible"/>
+        <On Terms="Behavior.DefendRegion20.On" Send="Create"/>
+        <On Terms="Behavior.DefendRegion20.Off" Send="Destroy"/>
+        <Range value="19.500000"/>
+        <Icon value="Assets\Textures\radaricon2.dds"/>
+        <IconArcLength value="0.500000"/>
+        <RangeFlags index="Minimap" value="1"/>
+    </CActorRange>
+    <CActorRange id="DefendRegion25">
+        <VisibleTo index="Self" value="1"/>
+        <VisibleTo index="Ally" value="1"/>
+        <Inherits index="LocalTintColor" value="1"/>
+        <Inherits index="TeamColor" value="1"/>
+        <Inherits index="TintColor" value="1"/>
+        <Inherits index="Visibility" value="0"/>
+        <FogVisibility value="Visible"/>
+        <On Terms="Behavior.DefendRegion25.On" Send="Create"/>
+        <On Terms="Behavior.DefendRegion25.Off" Send="Destroy"/>
+        <Range value="24.500000"/>
+        <Icon value="Assets\Textures\radaricon2.dds"/>
+        <IconArcLength value="0.500000"/>
+        <RangeFlags index="Minimap" value="1"/>
+    </CActorRange>
+    <CActorRange id="DefendRegion30">
+        <VisibleTo index="Self" value="1"/>
+        <VisibleTo index="Ally" value="1"/>
+        <Inherits index="LocalTintColor" value="1"/>
+        <Inherits index="TeamColor" value="1"/>
+        <Inherits index="TintColor" value="1"/>
+        <Inherits index="Visibility" value="0"/>
+        <FogVisibility value="Visible"/>
+        <On Terms="Behavior.DefendRegion30.On" Send="Create"/>
+        <On Terms="Behavior.DefendRegion30.Off" Send="Destroy"/>
+        <Range value="29.500000"/>
+        <Icon value="Assets\Textures\radaricon2.dds"/>
+        <IconArcLength value="0.500000"/>
+        <RangeFlags index="Minimap" value="1"/>
+    </CActorRange>
+    <CActorRange id="DefendRegion35">
+        <VisibleTo index="Self" value="1"/>
+        <VisibleTo index="Ally" value="1"/>
+        <Inherits index="LocalTintColor" value="1"/>
+        <Inherits index="TeamColor" value="1"/>
+        <Inherits index="TintColor" value="1"/>
+        <Inherits index="Visibility" value="0"/>
+        <FogVisibility value="Visible"/>
+        <On Terms="Behavior.DefendRegion35.On" Send="Create"/>
+        <On Terms="Behavior.DefendRegion35.Off" Send="Destroy"/>
+        <Range value="34.500000"/>
+        <Icon value="Assets\Textures\radaricon2.dds"/>
+        <IconArcLength value="0.500000"/>
+        <RangeFlags index="Minimap" value="1"/>
+    </CActorRange>
+    <CActorRange id="DefendRegion40">
+        <VisibleTo index="Self" value="1"/>
+        <VisibleTo index="Ally" value="1"/>
+        <Inherits index="LocalTintColor" value="1"/>
+        <Inherits index="TeamColor" value="1"/>
+        <Inherits index="TintColor" value="1"/>
+        <Inherits index="Visibility" value="0"/>
+        <FogVisibility value="Visible"/>
+        <On Terms="Behavior.DefendRegion40.On" Send="Create"/>
+        <On Terms="Behavior.DefendRegion40.Off" Send="Destroy"/>
+        <Range value="39.500000"/>
+        <Icon value="Assets\Textures\radaricon2.dds"/>
+        <IconArcLength value="0.500000"/>
+        <RangeFlags index="Minimap" value="1"/>
+    </CActorRange>
+    <CActorRange id="DefendRegion45">
+        <VisibleTo index="Self" value="1"/>
+        <VisibleTo index="Ally" value="1"/>
+        <Inherits index="LocalTintColor" value="1"/>
+        <Inherits index="TeamColor" value="1"/>
+        <Inherits index="TintColor" value="1"/>
+        <Inherits index="Visibility" value="0"/>
+        <FogVisibility value="Visible"/>
+        <On Terms="Behavior.DefendRegion45.On" Send="Create"/>
+        <On Terms="Behavior.DefendRegion45.Off" Send="Destroy"/>
+        <Range value="44.500000"/>
+        <Icon value="Assets\Textures\radaricon2.dds"/>
+        <IconArcLength value="0.500000"/>
+        <RangeFlags index="Minimap" value="1"/>
+    </CActorRange>
+    <CActorRange id="DefendRegion50">
+        <VisibleTo index="Self" value="1"/>
+        <VisibleTo index="Ally" value="1"/>
+        <Inherits index="LocalTintColor" value="1"/>
+        <Inherits index="TeamColor" value="1"/>
+        <Inherits index="TintColor" value="1"/>
+        <Inherits index="Visibility" value="0"/>
+        <FogVisibility value="Visible"/>
+        <On Terms="Behavior.DefendRegion50.On" Send="Create"/>
+        <On Terms="Behavior.DefendRegion50.Off" Send="Destroy"/>
+        <Range value="49.500000"/>
+        <Icon value="Assets\Textures\radaricon2.dds"/>
+        <IconArcLength value="0.500000"/>
+        <RangeFlags index="Minimap" value="1"/>
+    </CActorRange>
+    <CActorRange id="DefendRegion60">
+        <VisibleTo index="Self" value="1"/>
+        <VisibleTo index="Ally" value="1"/>
+        <Inherits index="LocalTintColor" value="1"/>
+        <Inherits index="TeamColor" value="1"/>
+        <Inherits index="TintColor" value="1"/>
+        <Inherits index="Visibility" value="0"/>
+        <FogVisibility value="Visible"/>
+        <On Terms="Behavior.DefendRegion60.On" Send="Create"/>
+        <On Terms="Behavior.DefendRegion60.Off" Send="Destroy"/>
+        <Range value="59.500000"/>
+        <Icon value="Assets\Textures\radaricon2.dds"/>
+        <IconArcLength value="0.500000"/>
+        <RangeFlags index="Minimap" value="1"/>
+    </CActorRange>
+    <CActorRange id="DefendRegion70">
+        <VisibleTo index="Self" value="1"/>
+        <VisibleTo index="Ally" value="1"/>
+        <Inherits index="LocalTintColor" value="1"/>
+        <Inherits index="TeamColor" value="1"/>
+        <Inherits index="TintColor" value="1"/>
+        <Inherits index="Visibility" value="0"/>
+        <FogVisibility value="Visible"/>
+        <On Terms="Behavior.DefendRegion70.On" Send="Create"/>
+        <On Terms="Behavior.DefendRegion70.Off" Send="Destroy"/>
+        <Range value="69.500000"/>
+        <Icon value="Assets\Textures\radaricon2.dds"/>
+        <IconArcLength value="0.500000"/>
+        <RangeFlags index="Minimap" value="1"/>
+    </CActorRange>
+</Catalog>

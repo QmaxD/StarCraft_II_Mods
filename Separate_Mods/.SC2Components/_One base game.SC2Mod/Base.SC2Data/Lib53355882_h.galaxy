@@ -1,0 +1,38 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// Constants
+const int lib53355882_gv_oMGROW_MINERAL_1800 = 20;
+const int lib53355882_gv_oMGROW_MINERAL_900 = 10;
+const int lib53355882_gv_oMGROW_VESPENE_2250 = 25;
+
+// Variable Declarations
+unitgroup lib53355882_gv_oMneutralUnitsMap;
+region lib53355882_gv_oMregionMains;
+unitgroup lib53355882_gv_oMgroupVespeneUnit;
+bool lib53355882_gv_oMstartGrow;
+bool lib53355882_gv_oMgrowVespeneUnit;
+int lib53355882_gv_oMcountRepeat;
+int lib53355882_gv_oMminimumRate;
+int lib53355882_gv_oMtime;
+timer lib53355882_gv_oMtimer;
+
+// Function Declarations
+bool lib53355882_gf_OMisMineral_1800 (unit lp_unit);
+bool lib53355882_gf_OMisMineral_900 (unit lp_unit);
+bool lib53355882_gf_OMisVespene_2250 (unit lp_unit);
+bool lib53355882_gf_OMisVespeneUnit (unit lp_unit);
+
+// Trigger Declarations
+trigger lib53355882_gt_OMdebugMessages;
+trigger lib53355882_gt_InitOnlymain2;
+trigger lib53355882_gt_InitHighMineral7;
+trigger lib53355882_gt_InitHighMineral8;
+trigger lib53355882_gt_OMbirthVespeneUnit;
+trigger lib53355882_gt_OMdiedVespeneUnit;
+
+// Library Initialization
+void lib53355882_InitVariables ();
+

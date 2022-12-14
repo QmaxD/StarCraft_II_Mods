@@ -1,0 +1,16 @@
+﻿Attribute001/Desc=Что делаем богатыми на карте?
+Attribute001/Name=Сделать богатыми
+Attribute001/Value001/Name=И минералы и газ
+Attribute001/Value002/Name=Только минералы
+Attribute001/Value003/Name=Только газ
+Attribute002/Desc=Мелкие ресурсы: друзы, в которых мало минералов (обычно менее 50 ед.). Они заменяться на золотые, но с тем же количеством минералов.
+Attribute002/Name=Заменить мелкие ресурсы?
+Attribute002/Value001/Desc=Мелкие друзы со стандартных заменяться на золотые. Количество минералов в них останется таким же.
+Attribute002/Value001/Name=Заменить на золотые
+Attribute002/Value002/Desc=Мелкие ресурсы будут проигнорированы.
+Attribute002/Value002/Name=Нет
+DocInfo/DescLong=Заменяет обычные минералы и газ на богатые.<n/><n/>Создатели: Adollor, Swarm, Qmax.
+DocInfo/DescShort=Any
+DocInfo/Name=[ ZERGTV ] 3. Богатые ресурсы
+DocInfo/Website=http://ZERGTV.tv
+Param/Value/lib_53355882_98AEA4C2=Ну, гуляем!

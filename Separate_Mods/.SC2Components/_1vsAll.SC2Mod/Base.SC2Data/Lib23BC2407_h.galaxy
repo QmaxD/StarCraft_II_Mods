@@ -1,0 +1,26 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// Variable Declarations
+int[10] lib23BC2407_gv_oAAplayerAtStartingLocation;
+point[10] lib23BC2407_gv_oAApointAtStartingLocation;
+bool[10] lib23BC2407_gv_oAAbusyStartingLocation;
+int lib23BC2407_gv_oAAmaxNumberOfStartLocation;
+
+// Function Declarations
+bool lib23BC2407_gf_OAAisStartMod ();
+int lib23BC2407_gf_OAAGetSinglePlayer ();
+playergroup lib23BC2407_gf_OAAGetGroupOfEnemies ();
+void lib23BC2407_gf_OAASearchAndRecordStartLocations (int lp_numberOfEnemies);
+text lib23BC2407_gf_OAAGiveUnitsToSinglePlayer (int lp_singlePlayer, int lp_numberOfEnemies);
+string lib23BC2407_gf_OAAGetResourceType (int lp_player, fixed lp_radius);
+void lib23BC2407_gf_OAAInfo (int lp_singlePlayer, playergroup lp_groupOfEnemies, int lp_numberOfEnemies, text lp_descriptionAboutSinglePlayer);
+
+// Trigger Declarations
+trigger lib23BC2407_gt_OAALaunch;
+
+// Library Initialization
+void lib23BC2407_InitVariables ();
+

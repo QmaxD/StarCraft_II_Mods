@@ -1,0 +1,42 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// Structures
+struct lib8BF4D44F_gs_Nukesoptions {
+    int lv_nukesperiodWaves;
+    int lv_nukesnukesNumber;
+    int lv_nukessafeDistance;
+    string lv_nukesBehaviourForBlob;
+    string lv_nukesBehaviourForLine;
+    int lv_nukestimeNukeAttack;
+    bool lv_nukesisOnlyMainsSafeZone;
+    bool lv_nukesisDisplaySafeZoneField;
+    bool lv_nukesisDisplaySafeZoneLine;
+    int lv_nukesnukeDamage;
+    text lv_nukesnukeRadius;
+    string lv_nukespingModel;
+};
+
+// Variable Declarations
+lib8BF4D44F_gs_Nukesoptions lib8BF4D44F_gv_nukesplayerOptions;
+region lib8BF4D44F_gv_nukessafeZone;
+timer lib8BF4D44F_gv_nukestimer;
+
+// Function Declarations
+void lib8BF4D44F_gf_NukesSpawnNuke ();
+string lib8BF4D44F_gf_NukesGetRightBehaviourForBlob ();
+string lib8BF4D44F_gf_NukesGetRightBehaviourForLine ();
+
+// Trigger Declarations
+trigger lib8BF4D44F_gt_NukesLaunch;
+trigger lib8BF4D44F_gt_NukesStartSafeZoneAndTimer;
+trigger lib8BF4D44F_gt_NukesSpawnNukes;
+trigger lib8BF4D44F_gt_NukesSetNewBasesCircle;
+trigger lib8BF4D44F_gt_NukesTerransInTheAir;
+trigger lib8BF4D44F_gt_NukesTerransOnTheGround;
+
+// Library Initialization
+void lib8BF4D44F_InitVariables ();
+

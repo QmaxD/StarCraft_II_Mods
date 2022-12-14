@@ -1,0 +1,352 @@
+include "TriggerLibs/NativeLib"
+
+include "LibCE7F32F1_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void libCE7F32F1_InitLibraries () {
+    libNtve_InitVariables();
+}
+
+// Variable Initialization
+bool libCE7F32F1_InitVariables_completed = false;
+
+void libCE7F32F1_InitVariables () {
+    if (libCE7F32F1_InitVariables_completed) {
+        return;
+    }
+
+    libCE7F32F1_InitVariables_completed = true;
+
+}
+
+// Functions
+bool libCE7F32F1_gf_isNoAgingGroup (string lp_unit_Type) {
+    // Automatic Variable Declarations
+    // Implementation
+    if (((UnitOrderHasAbil(EventUnit(), "HallucinationOracle") == true) || (UnitOrderHasAbil(EventUnit(), "HallucinationAdept") == true) || (UnitOrderHasAbil(EventUnit(), "HallucinationArchon") == true) || (UnitOrderHasAbil(EventUnit(), "HallucinationColossus") == true) || (UnitOrderHasAbil(EventUnit(), "HallucinationDisruptor") == true) || (UnitOrderHasAbil(EventUnit(), "HallucinationHighTemplar") == true) || (UnitOrderHasAbil(EventUnit(), "HallucinationImmortal") == true) || (UnitOrderHasAbil(EventUnit(), "HallucinationPhoenix") == true) || (UnitOrderHasAbil(EventUnit(), "HallucinationProbe") == true) || (UnitOrderHasAbil(EventUnit(), "HallucinationStalker") == true) || (UnitOrderHasAbil(EventUnit(), "HallucinationVoidRay") == true) || (UnitOrderHasAbil(EventUnit(), "HallucinationWarpPrism") == true) || (UnitOrderHasAbil(EventUnit(), "HallucinationZealot") == true))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+fixed libCE7F32F1_gf_GetTimeExistingOfUnitType (string lp_unit_Type) {
+    // Automatic Variable Declarations
+    // Implementation
+    if (((UnitTypeTestAttribute(lp_unit_Type, c_unitAttributeStructure) == true) || (UnitTypeTestAttribute(lp_unit_Type, c_unitAttributeSummoned) == true) || (UnitTypeTestFlag(UnitGetType(EventUnit()), c_unitFlagMissile) == true) || (UnitTypeTestFlag(UnitGetType(EventUnit()), c_unitFlagAILifetime) == true))) {
+        return -1.0;
+    }
+    else {
+        if ((libCE7F32F1_gf_isWorkerUnit(lp_unit_Type) == true)) {
+            return libCE7F32F1_gf_GetTimeForWorker();
+        }
+        else {
+            if (((lp_unit_Type == "Overlord") || (UnitGetType(EventUnit()) == "AdeptPhaseShift"))) {
+                return -1.0;
+            }
+            else {
+                return libCE7F32F1_gf_GetTimeForUnit(lp_unit_Type, PlayerRace(EventPlayer()));
+            }
+        }
+    }
+}
+
+fixed libCE7F32F1_gf_GetTimeForUnit (string lp_unit_Type, string lp_race_Player) {
+    // Automatic Variable Declarations
+    string autoC630C228_val;
+    string auto90CA8BB7_val;
+    string autoE05380DE_val;
+
+    // Implementation
+    autoC630C228_val = GameAttributeGameValue("1");
+    if (autoC630C228_val == "0002") {
+        return (UnitTypeGetCost(lp_unit_Type, c_unitCostSumMineralsVespene) + 60.0);
+    }
+    else if (autoC630C228_val == "0003") {
+        auto90CA8BB7_val = lp_race_Player;
+        if (auto90CA8BB7_val == "Prot") {
+            return (UnitTypeGetCost(lp_unit_Type, c_unitCostSumMineralsVespene) + (60.0 * 1.0));
+        }
+        else if (auto90CA8BB7_val == "Terr") {
+            return (UnitTypeGetCost(lp_unit_Type, c_unitCostSumMineralsVespene) + (60.0 * 1.15));
+        }
+        else if (auto90CA8BB7_val == "Zerg") {
+            return (UnitTypeGetCost(lp_unit_Type, c_unitCostSumMineralsVespene) + (60.0 * 1.25));
+        }
+        else {
+            return -1.0;
+        }
+    }
+    else if (autoC630C228_val == "0004") {
+        return ((UnitTypeGetCost(lp_unit_Type, c_unitCostMinerals) + (UnitTypeGetCost(lp_unit_Type, c_unitCostVespene) * 1.5)) + 60.0);
+    }
+    else if (autoC630C228_val == "0005") {
+        autoE05380DE_val = lp_race_Player;
+        if (autoE05380DE_val == "Prot") {
+            return ((UnitTypeGetCost(lp_unit_Type, c_unitCostMinerals) + (UnitTypeGetCost(lp_unit_Type, c_unitCostVespene) * 1.5)) + (60.0 * 1.0));
+        }
+        else if (autoE05380DE_val == "Terr") {
+            return ((UnitTypeGetCost(lp_unit_Type, c_unitCostMinerals) + (UnitTypeGetCost(lp_unit_Type, c_unitCostVespene) * 1.5)) + (60.0 * 1.15));
+        }
+        else if (autoE05380DE_val == "Zerg") {
+            return ((UnitTypeGetCost(lp_unit_Type, c_unitCostMinerals) + (UnitTypeGetCost(lp_unit_Type, c_unitCostVespene) * 1.5)) + (60.0 * 1.25));
+        }
+        else {
+            return -1.0;
+        }
+    }
+    else {
+        return -1.0;
+    }
+}
+
+bool libCE7F32F1_gf_isMorphGrup (string lp_unit_Type) {
+    // Automatic Variable Declarations
+    // Implementation
+    if (((lp_unit_Type == "Ravager") || (lp_unit_Type == "LurkerMP") || (lp_unit_Type == "Overlord") || (lp_unit_Type == "OverlordTransport") || (lp_unit_Type == "Overseer") || (lp_unit_Type == "BroodLord"))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+fixed libCE7F32F1_gf_GetTimeForMorphGroup (string lp_unit_Type, abilcmd lp_used_Ability) {
+    // Variable Declarations
+    int lv__mineral;
+    int lv__vespen;
+    bool lv__over;
+
+    // Automatic Variable Declarations
+    abilcmd autoF5876391_val;
+    string auto10DC678D_val;
+
+    // Variable Initialization
+
+    // Implementation
+    if (((lp_unit_Type == "Overlord") || (lp_unit_Type == "OverlordTransport") || (lp_unit_Type == "Overseer"))) {
+        autoF5876391_val = lp_used_Ability;
+        if (autoF5876391_val == AbilityCommand("MorphToTransportOverlord", 0)) {
+            lv__mineral = 125;
+            lv__vespen = 25;
+            lv__over = true;
+        }
+        else if (autoF5876391_val == AbilityCommand("MorphToOverseer", 0)) {
+            lv__mineral = 150;
+            lv__vespen = 50;
+            lv__over = true;
+        }
+        else {
+            return -1.0;
+        }
+    }
+
+    auto10DC678D_val = GameAttributeGameValue("1");
+    if (auto10DC678D_val == "0002") {
+        if ((lv__over == true)) {
+            return ((lv__mineral + lv__vespen) + 60.0);
+        }
+        else {
+            return (UnitTypeGetCost(lp_unit_Type, c_unitCostSumMineralsVespene) + 60.0);
+        }
+    }
+    else if (auto10DC678D_val == "0003") {
+        if ((lv__over == true)) {
+            return ((lv__mineral + lv__vespen) + (60.0 * 1.25));
+        }
+        else {
+            return (UnitTypeGetCost(lp_unit_Type, c_unitCostSumMineralsVespene) + (60.0 * 1.25));
+        }
+    }
+    else if (auto10DC678D_val == "0004") {
+        if ((lv__over == true)) {
+            return ((lv__mineral + (lv__vespen * 1.5)) + 60.0);
+        }
+        else {
+            return ((UnitTypeGetCost(lp_unit_Type, c_unitCostMinerals) + (UnitTypeGetCost(lp_unit_Type, c_unitCostVespene) * 1.5)) + 60.0);
+        }
+    }
+    else if (auto10DC678D_val == "0005") {
+        if ((lv__over == true)) {
+            return ((lv__mineral + (lv__vespen * 1.5)) + (60.0 * 1.25));
+        }
+        else {
+            return ((UnitTypeGetCost(lp_unit_Type, c_unitCostMinerals) + (UnitTypeGetCost(lp_unit_Type, c_unitCostVespene) * 1.5)) + (60.0 * 1.25));
+        }
+    }
+    else {
+        return -1.0;
+    }
+}
+
+bool libCE7F32F1_gf_isWorkerUnit (string lp_unit_Type) {
+    // Automatic Variable Declarations
+    // Implementation
+    if ((UnitTypeTestFlag(lp_unit_Type, c_unitFlagWorker) == true)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+fixed libCE7F32F1_gf_GetTimeForWorker () {
+    // Automatic Variable Declarations
+    string autoDFBCCE02_val;
+
+    // Implementation
+    autoDFBCCE02_val = GameAttributeGameValue("2");
+    if (autoDFBCCE02_val == "0001") {
+        return 300.0;
+    }
+    else if (autoDFBCCE02_val == "0004") {
+        return 600.0;
+    }
+    else if (autoDFBCCE02_val == "0003") {
+        return 900.0;
+    }
+    else {
+        return -1.0;
+    }
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: Aging Start
+//--------------------------------------------------------------------------------------------------
+bool libCE7F32F1_gt_AgingStart_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    fixed lv__DefinedTime;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv__DefinedTime = libCE7F32F1_gf_GetTimeExistingOfUnitType(UnitGetType(EventUnit()));
+    if ((lv__DefinedTime == -1.0)) {
+    }
+    else {
+        UnitBehaviorAdd(EventUnit(), "idAgingBehaviour", EventUnit(), 1);
+        UnitBehaviorSetDuration(EventUnit(), "idAgingBehaviour", (lv__DefinedTime * GameGetSpeed()));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libCE7F32F1_gt_AgingStart_Init () {
+    libCE7F32F1_gt_AgingStart = TriggerCreate("libCE7F32F1_gt_AgingStart_Func");
+    TriggerAddEventUnitRegion(libCE7F32F1_gt_AgingStart, null, RegionEntireMap(), true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Morph Start
+//--------------------------------------------------------------------------------------------------
+bool libCE7F32F1_gt_MorphStart_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    fixed lv__DefinedTime;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((libCE7F32F1_gf_isMorphGrup(UnitGetType(EventUnit())) == true)) {
+        lv__DefinedTime = libCE7F32F1_gf_GetTimeForMorphGroup(UnitGetType(EventUnit()), EventUnitAbility());
+        if (((UnitGetType(EventUnit()) == "Overlord") || (UnitGetType(EventUnit()) == "OverlordTransport") || (UnitGetType(EventUnit()) == "Overseer"))) {
+            UnitBehaviorAdd(EventUnit(), "idAgingBehaviour", EventUnit(), 1);
+        }
+
+        UnitBehaviorSetDuration(EventUnit(), "idAgingBehaviour", (lv__DefinedTime * GameGetSpeed()));
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libCE7F32F1_gt_MorphStart_Init () {
+    libCE7F32F1_gt_MorphStart = TriggerCreate("libCE7F32F1_gt_MorphStart_Func");
+    TriggerAddEventUnitAbility(libCE7F32F1_gt_MorphStart, null, AbilityCommand("MorphToRavager", 0), c_abilMorphStageAbilsEnd, false);
+    TriggerAddEventUnitAbility(libCE7F32F1_gt_MorphStart, null, AbilityCommand("MorphToLurker", 0), c_abilMorphStageAbilsEnd, false);
+    TriggerAddEventUnitAbility(libCE7F32F1_gt_MorphStart, null, AbilityCommand("MorphToTransportOverlord", 0), c_abilMorphStageAbilsEnd, false);
+    TriggerAddEventUnitAbility(libCE7F32F1_gt_MorphStart, null, AbilityCommand("MorphToOverseer", 0), c_abilMorphStageAbilsEnd, false);
+    TriggerAddEventUnitAbility(libCE7F32F1_gt_MorphStart, null, AbilityCommand("MorphToBroodLord", 0), c_abilMorphStageAbilsEnd, false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Hallucination
+//--------------------------------------------------------------------------------------------------
+bool libCE7F32F1_gt_Hallucination_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if (((UnitGetType(EventUnit()) == "Immortal") && ((UnitFilterGetState(UnitFilter(0, 0, 0, 0), c_targetFilterHallucination) == c_unitFilterAllowed) || (UnitGetTag(EventUnit()) == c_targetFilterHallucination) || (UnitGetTag(EventUnit()) == c_unitStateHallucination) || (UnitGetOriginalCaster(EventUnit()) == EventUnitCreatedUnit()) || (UnitHasBehavior2(EventUnit(), "HallucinationTimedLife") == true) || (UnitHasBehavior2(EventUnit(), "Hallucination") == true) || (UnitAbilityCheck(EventUnit(), "HallucinationImmortal", true) == true) || (libNtve_gf_UnitCanCreateEffectOnUnit(EventUnit(), "HallucinationCreateImmortal", EventUnit()) == true) || (UnitBehaviorEnabled(EventUnit(), "Hallucination") == true) || (UnitTestState(EventUnit(), c_unitStateHallucination) == true)))) {
+        TriggerDebugOutput(1, UnitTypeGetName(UnitGetType(EventUnit())), true);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libCE7F32F1_gt_Hallucination_Init () {
+    libCE7F32F1_gt_Hallucination = TriggerCreate("libCE7F32F1_gt_Hallucination_Func");
+    TriggerAddEventUnitRegion(libCE7F32F1_gt_Hallucination, null, RegionEntireMap(), true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: You Are Too Old
+//--------------------------------------------------------------------------------------------------
+bool libCE7F32F1_gt_YouAreTooOld_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UnitKill(EventUnit());
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libCE7F32F1_gt_YouAreTooOld_Init () {
+    libCE7F32F1_gt_YouAreTooOld = TriggerCreate("libCE7F32F1_gt_YouAreTooOld_Func");
+    TriggerAddEventUnitBehaviorChange(libCE7F32F1_gt_YouAreTooOld, null, "idAgingBehaviour", c_unitBehaviorChangeDestroy);
+}
+
+void libCE7F32F1_InitTriggers () {
+    libCE7F32F1_gt_AgingStart_Init();
+    libCE7F32F1_gt_MorphStart_Init();
+    libCE7F32F1_gt_Hallucination_Init();
+    libCE7F32F1_gt_YouAreTooOld_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool libCE7F32F1_InitLib_completed = false;
+
+void libCE7F32F1_InitLib () {
+    if (libCE7F32F1_InitLib_completed) {
+        return;
+    }
+
+    libCE7F32F1_InitLib_completed = true;
+
+    libCE7F32F1_InitLibraries();
+    libCE7F32F1_InitVariables();
+    libCE7F32F1_InitTriggers();
+}
+

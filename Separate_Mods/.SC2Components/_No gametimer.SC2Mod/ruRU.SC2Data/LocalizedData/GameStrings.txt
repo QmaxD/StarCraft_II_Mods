@@ -1,0 +1,2 @@
+﻿DocInfo/DescLong=Скрывает игровой таймер<n/><n/>Создатель: Qmax
+DocInfo/Name=[ ZERGTV ] Без таймера игры

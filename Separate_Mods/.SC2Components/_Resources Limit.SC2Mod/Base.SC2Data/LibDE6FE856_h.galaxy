@@ -1,0 +1,38 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Resources Limit | RL
+//--------------------------------------------------------------------------------------------------
+// Variable Declarations
+bool libDE6FE856_gv_isCheck;
+int[16] libDE6FE856_gv_dialogCheck;
+int[16] libDE6FE856_gv_dialogItemCheckValue;
+int[16] libDE6FE856_gv_dialogItemCheckText;
+int[16] libDE6FE856_gv_dialogLostResources;
+int[16] libDE6FE856_gv_dialogItemMineralsLost;
+int[16] libDE6FE856_gv_dialogItemMineralsCollected;
+int[16] libDE6FE856_gv_dialogItemVespenLost;
+int[16] libDE6FE856_gv_dialogItemVespenCollected;
+int libDE6FE856_gv_rLeventOption;
+bool libDE6FE856_gv_rLwriteOffResources;
+int libDE6FE856_gv_rLlimitMinerals;
+int libDE6FE856_gv_rLlimitVespene;
+bool libDE6FE856_gv_rLmodifyMinerals;
+bool libDE6FE856_gv_rLmodifyVespene;
+int[16] libDE6FE856_gv_rLlostMinerals;
+int[16] libDE6FE856_gv_rLlostVespene;
+
+// Trigger Declarations
+trigger libDE6FE856_gt_RLLaunch;
+trigger libDE6FE856_gt_RLCreateDialog;
+trigger libDE6FE856_gt_RLPeriodicModifyMinerals;
+trigger libDE6FE856_gt_RLPeriodicModifyVespene;
+trigger libDE6FE856_gt_RLPlayerModifyMinerals;
+trigger libDE6FE856_gt_RLPlayerModifyVespene;
+trigger libDE6FE856_gt_RLChangeItemCheck;
+trigger libDE6FE856_gt_RLEnterTextBox;
+trigger libDE6FE856_gt_RLExitTextBox;
+
+// Library Initialization
+void libDE6FE856_InitVariables ();
+

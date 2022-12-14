@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Preload>
+<Actor id="SYSTEM_ActorConfig"/>
+<Behavior id="CantAttackBattlBehavior"/>
+<Behavior id="CantAttackBehavior"/>
+<Behavior id="CantAttackBehavior2"/>
+<Behavior id="CantAttackBehavior22"/>
+<Behavior id="CantAttackBehavior222"/>
+<Behavior id="CantAttackBehavior23"/>
+<Behavior id="CantAttackBehavior232"/>
+<Behavior id="CantAttackBehavior3"/>
+<Behavior id="CantAttackBehavior4"/>
+<Behavior id="DisableOracleBehavior"/>
+</Preload>

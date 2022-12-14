@@ -1,0 +1,668 @@
+include "TriggerLibs/NativeLib"
+
+include "LibB88C07C7_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void libB88C07C7_InitLibraries () {
+    libNtve_InitVariables();
+}
+
+// Variable Initialization
+bool libB88C07C7_InitVariables_completed = false;
+
+void libB88C07C7_InitVariables () {
+    if (libB88C07C7_InitVariables_completed) {
+        return;
+    }
+
+    libB88C07C7_InitVariables_completed = true;
+
+}
+
+// Functions
+trigger auto_libB88C07C7_gf_DisallowAirUpgrades_Trigger = null;
+
+void libB88C07C7_gf_DisallowAirUpgrades () {
+    if (auto_libB88C07C7_gf_DisallowAirUpgrades_Trigger == null) {
+        auto_libB88C07C7_gf_DisallowAirUpgrades_Trigger = TriggerCreate("auto_libB88C07C7_gf_DisallowAirUpgrades_TriggerFunc");
+    }
+
+    TriggerExecute(auto_libB88C07C7_gf_DisallowAirUpgrades_Trigger, false, false);
+}
+
+bool auto_libB88C07C7_gf_DisallowAirUpgrades_TriggerFunc (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    playergroup autoA0677F5D_g;
+    int autoA0677F5D_var;
+
+    // Implementation
+    autoA0677F5D_g = PlayerGroupActive();
+    autoA0677F5D_var = -1;
+    while (true) {
+        autoA0677F5D_var = PlayerGroupNextPlayer(autoA0677F5D_g, autoA0677F5D_var);
+        if (autoA0677F5D_var < 0) { break; }
+        TechTreeUpgradeAllow(autoA0677F5D_var, "ProtossAirWeaponsLevel1", false);
+        TechTreeUpgradeAllow(autoA0677F5D_var, "ProtossAirWeaponsLevel2", false);
+        TechTreeUpgradeAllow(autoA0677F5D_var, "ProtossAirWeaponsLevel3", false);
+        TechTreeUpgradeAllow(autoA0677F5D_var, "ProtossAirArmorsLevel1", false);
+        TechTreeUpgradeAllow(autoA0677F5D_var, "ProtossAirArmorsLevel2", false);
+        TechTreeUpgradeAllow(autoA0677F5D_var, "ProtossAirArmorsLevel3", false);
+        TechTreeUpgradeAllow(autoA0677F5D_var, "PhoenixRangeUpgrade", false);
+        TechTreeUpgradeAllow(autoA0677F5D_var, "CarrierLaunchSpeedUpgrade", false);
+        TechTreeUpgradeAllow(autoA0677F5D_var, "VoidRaySpeedUpgrade", false);
+        TechTreeUpgradeAllow(autoA0677F5D_var, "TempestGroundAttackUpgrade", false);
+        TechTreeUpgradeAllow(autoA0677F5D_var, "TerranShipWeaponsLevel1", false);
+        TechTreeUpgradeAllow(autoA0677F5D_var, "TerranShipWeaponsLevel2", false);
+        TechTreeUpgradeAllow(autoA0677F5D_var, "TerranShipWeaponsLevel3", false);
+        TechTreeUpgradeAllow(autoA0677F5D_var, "BattlecruiserEnableSpecializations", false);
+        TechTreeAbilityAllow(autoA0677F5D_var, AbilityCommand("Yamato", 0), false);
+        TechTreeUpgradeAllow(autoA0677F5D_var, "LiberatorAGRangeUpgrade", false);
+        TechTreeUpgradeAllow(autoA0677F5D_var, "ZergFlyerWeaponsLevel1", false);
+        TechTreeUpgradeAllow(autoA0677F5D_var, "ZergFlyerWeaponsLevel2", false);
+        TechTreeUpgradeAllow(autoA0677F5D_var, "ZergFlyerWeaponsLevel3", false);
+        TechTreeUpgradeAllow(autoA0677F5D_var, "ZergFlyerArmorsLevel1", false);
+        TechTreeUpgradeAllow(autoA0677F5D_var, "ZergFlyerArmorsLevel2", false);
+        TechTreeUpgradeAllow(autoA0677F5D_var, "ZergFlyerArmorsLevel3", false);
+        TechTreeAbilityAllow(autoA0677F5D_var, AbilityCommand("MorphToBroodLord", 0), false);
+    }
+    return true;
+}
+
+trigger auto_libB88C07C7_gf_DisallowGroundUpgrades_Trigger = null;
+
+void libB88C07C7_gf_DisallowGroundUpgrades () {
+    if (auto_libB88C07C7_gf_DisallowGroundUpgrades_Trigger == null) {
+        auto_libB88C07C7_gf_DisallowGroundUpgrades_Trigger = TriggerCreate("auto_libB88C07C7_gf_DisallowGroundUpgrades_TriggerFunc");
+    }
+
+    TriggerExecute(auto_libB88C07C7_gf_DisallowGroundUpgrades_Trigger, false, false);
+}
+
+bool auto_libB88C07C7_gf_DisallowGroundUpgrades_TriggerFunc (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    playergroup auto84316151_g;
+    int auto84316151_var;
+
+    // Implementation
+    auto84316151_g = PlayerGroupActive();
+    auto84316151_var = -1;
+    while (true) {
+        auto84316151_var = PlayerGroupNextPlayer(auto84316151_g, auto84316151_var);
+        if (auto84316151_var < 0) { break; }
+        TechTreeUpgradeAllow(auto84316151_var, "ProtossGroundWeaponsLevel1", false);
+        TechTreeUpgradeAllow(auto84316151_var, "ProtossGroundWeaponsLevel2", false);
+        TechTreeUpgradeAllow(auto84316151_var, "ProtossGroundWeaponsLevel3", false);
+        TechTreeUpgradeAllow(auto84316151_var, "ProtossGroundArmorsLevel1", false);
+        TechTreeUpgradeAllow(auto84316151_var, "ProtossGroundArmorsLevel2", false);
+        TechTreeUpgradeAllow(auto84316151_var, "ProtossGroundArmorsLevel3", false);
+        TechTreeUpgradeAllow(auto84316151_var, "AdeptPiercingAttack", false);
+        TechTreeUpgradeAllow(auto84316151_var, "ExtendedThermalLance", false);
+        TechTreeAbilityAllow(auto84316151_var, AbilityCommand("PurificationNova", 0), false);
+        TechTreeAbilityAllow(auto84316151_var, AbilityCommand("PurificationNovaTargeted", 0), false);
+        TechTreeAbilityAllow(auto84316151_var, AbilityCommand("PurificationNovaMorph", 0), false);
+        TechTreeAbilityAllow(auto84316151_var, AbilityCommand("PurificationNovaMorphBack", 0), false);
+        TechTreeAbilityAllow(auto84316151_var, AbilityCommand("PurificationNovaTargeted", 0), false);
+        TechTreeUpgradeAllow(auto84316151_var, "TerranInfantryWeaponsLevel1", false);
+        TechTreeUpgradeAllow(auto84316151_var, "TerranInfantryWeaponsLevel2", false);
+        TechTreeUpgradeAllow(auto84316151_var, "TerranInfantryWeaponsLevel3", false);
+        TechTreeUpgradeAllow(auto84316151_var, "TerranInfantryArmorsLevel1", false);
+        TechTreeUpgradeAllow(auto84316151_var, "TerranInfantryArmorsLevel2", false);
+        TechTreeUpgradeAllow(auto84316151_var, "TerranInfantryArmorsLevel3", false);
+        TechTreeUpgradeAllow(auto84316151_var, "TerranVehicleWeaponsLevel1", false);
+        TechTreeUpgradeAllow(auto84316151_var, "TerranVehicleWeaponsLevel2", false);
+        TechTreeUpgradeAllow(auto84316151_var, "TerranVehicleWeaponsLevel3", false);
+        TechTreeUpgradeAllow(auto84316151_var, "ShieldWall", false);
+        TechTreeUpgradeAllow(auto84316151_var, "PunisherGrenades", false);
+        TechTreeAbilityAllow(auto84316151_var, AbilityCommand("KD8Charge", 0), false);
+        TechTreeUpgradeAllow(auto84316151_var, "TransformationServos", false);
+        TechTreeUpgradeAllow(auto84316151_var, "CycloneAirUpgrade", false);
+        TechTreeAbilityAllow(auto84316151_var, AbilityCommand("LockOn", 0), false);
+        TechTreeAbilityAllow(auto84316151_var, AbilityCommand("LockOnAir", 0), false);
+        TechTreeUpgradeAllow(auto84316151_var, "StrikeCannons", false);
+        TechTreeUpgradeAllow(auto84316151_var, "ThorSkin", false);
+        TechTreeAbilityAllow(auto84316151_var, AbilityCommand("250mmStrikeCannons", 0), false);
+        TechTreeAbilityAllow(auto84316151_var, AbilityCommand("ThorNormalMode", 0), false);
+        TechTreeAbilityAllow(auto84316151_var, AbilityCommand("ThorNormalMode", 0), false);
+        TechTreeUpgradeAllow(auto84316151_var, "ZergMeleeWeaponsLevel1", false);
+        TechTreeUpgradeAllow(auto84316151_var, "ZergMeleeWeaponsLevel2", false);
+        TechTreeUpgradeAllow(auto84316151_var, "ZergMeleeWeaponsLevel3", false);
+        TechTreeUpgradeAllow(auto84316151_var, "ZergMissileWeaponsLevel1", false);
+        TechTreeUpgradeAllow(auto84316151_var, "ZergMissileWeaponsLevel2", false);
+        TechTreeUpgradeAllow(auto84316151_var, "ZergMissileWeaponsLevel3", false);
+        TechTreeUpgradeAllow(auto84316151_var, "ZergGroundArmorsLevel1", false);
+        TechTreeUpgradeAllow(auto84316151_var, "ZergGroundArmorsLevel2", false);
+        TechTreeUpgradeAllow(auto84316151_var, "ZergGroundArmorsLevel3", false);
+        TechTreeUpgradeAllow(auto84316151_var, "zerglingattackspeed", false);
+        TechTreeUpgradeAllow(auto84316151_var, "CentrificalHooks", false);
+        TechTreeUpgradeAllow(auto84316151_var, "EvolveGroovedSpines", false);
+        TechTreeUpgradeAllow(auto84316151_var, "DiggingClaws", false);
+        TechTreeUpgradeAllow(auto84316151_var, "LurkerRange", false);
+        TechTreeAbilityAllow(auto84316151_var, AbilityCommand("MorphZerglingToBaneling", 0), false);
+        TechTreeAbilityAllow(auto84316151_var, AbilityCommand("MorphToRavager", 0), false);
+        TechTreeAbilityAllow(auto84316151_var, AbilityCommand("MorphToLurker", 0), false);
+        TechTreeAbilityAllow(auto84316151_var, AbilityCommand("SwarmHostSpawnLocusts", 0), false);
+    }
+    return true;
+}
+
+trigger auto_libB88C07C7_gf_DisallowStructuresWeaponUpgrades_Trigger = null;
+
+void libB88C07C7_gf_DisallowStructuresWeaponUpgrades () {
+    if (auto_libB88C07C7_gf_DisallowStructuresWeaponUpgrades_Trigger == null) {
+        auto_libB88C07C7_gf_DisallowStructuresWeaponUpgrades_Trigger = TriggerCreate("auto_libB88C07C7_gf_DisallowStructuresWeaponUpgrades_TriggerFunc");
+    }
+
+    TriggerExecute(auto_libB88C07C7_gf_DisallowStructuresWeaponUpgrades_Trigger, false, false);
+}
+
+bool auto_libB88C07C7_gf_DisallowStructuresWeaponUpgrades_TriggerFunc (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv__weaponTargetFilters;
+
+    // Automatic Variable Declarations
+    playergroup auto8FA5DB90_g;
+    int auto8FA5DB90_var;
+
+    // Variable Initialization
+    lv__weaponTargetFilters = "Visible;Air,Ground,Missile,Stasis,Dead,Hidden,Invulnerable";
+
+    // Implementation
+    auto8FA5DB90_g = PlayerGroupActive();
+    auto8FA5DB90_var = -1;
+    while (true) {
+        auto8FA5DB90_var = PlayerGroupNextPlayer(auto8FA5DB90_g, auto8FA5DB90_var);
+        if (auto8FA5DB90_var < 0) { break; }
+        CatalogFieldValueSet(c_gameCatalogWeapon, "PhotonCannon", "TargetFilters", auto8FA5DB90_var, lv__weaponTargetFilters);
+        TechTreeAbilityAllow(auto8FA5DB90_var, AbilityCommand("UpgradeToPlanetaryFortress", 0), false);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "TwinIbiksCannon", "TargetFilters", auto8FA5DB90_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "LongboltMissile", "TargetFilters", auto8FA5DB90_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "ImpalerTentacle", "TargetFilters", auto8FA5DB90_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "AcidSpew", "TargetFilters", auto8FA5DB90_var, lv__weaponTargetFilters);
+    }
+    return true;
+}
+
+trigger auto_libB88C07C7_gf_DisallowGroundWeapon_Trigger = null;
+
+void libB88C07C7_gf_DisallowGroundWeapon () {
+    if (auto_libB88C07C7_gf_DisallowGroundWeapon_Trigger == null) {
+        auto_libB88C07C7_gf_DisallowGroundWeapon_Trigger = TriggerCreate("auto_libB88C07C7_gf_DisallowGroundWeapon_TriggerFunc");
+    }
+
+    TriggerExecute(auto_libB88C07C7_gf_DisallowGroundWeapon_Trigger, false, false);
+}
+
+bool auto_libB88C07C7_gf_DisallowGroundWeapon_TriggerFunc (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv__weaponTargetFilters;
+
+    // Automatic Variable Declarations
+    playergroup auto48F4EEC0_g;
+    int auto48F4EEC0_var;
+
+    // Variable Initialization
+    lv__weaponTargetFilters = "Visible;Air,Ground,Missile,Stasis,Dead,Hidden,Invulnerable";
+
+    // Implementation
+    auto48F4EEC0_g = PlayerGroupActive();
+    auto48F4EEC0_var = -1;
+    while (true) {
+        auto48F4EEC0_var = PlayerGroupNextPlayer(auto48F4EEC0_g, auto48F4EEC0_var);
+        if (auto48F4EEC0_var < 0) { break; }
+        CatalogFieldValueSet(c_gameCatalogWeapon, "PsiBlades", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "DisruptionBeam", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "DisruptionBeamDisplayDummy", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "ParticleDisruptors", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "Adept", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "WarpBlades", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "HighTemplarWeapon", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "PhaseDisruptors", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "ThermalLances", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "Claws", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "AcidSaliva", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "RoachMelee", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "RavagerWeapon", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "VolatileBurst", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "VolatileBurstDummy", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "VolatileBurstBuilding", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "HydraliskMelee", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "NeedleSpines", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "LurkerMP", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "LocustMPMelee", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "LocustMPFlyingSwoopWeapon", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "KaiserBlades", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "AcidSpines", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "Talons", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "GuassRifle", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "PunisherGrenades", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "P38ScytheGuassPistol", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "C10CanisterRifle", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "90mmCannons", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "CrucioShockCannon", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "InfernalFlameThrower", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "HellionTank", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "TyphoonMissilePod", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "CycloneLockOnDummy", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "CycloneFakeWeapon", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "TwinGatlingCannon", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "ThorsHammer", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "JavelinMissileLaunchers", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "LanceMissileLaunchers", "TargetFilters", auto48F4EEC0_var, lv__weaponTargetFilters);
+    }
+    return true;
+}
+
+trigger auto_libB88C07C7_gf_DisallowWorkerWeapon_Trigger = null;
+
+void libB88C07C7_gf_DisallowWorkerWeapon () {
+    if (auto_libB88C07C7_gf_DisallowWorkerWeapon_Trigger == null) {
+        auto_libB88C07C7_gf_DisallowWorkerWeapon_Trigger = TriggerCreate("auto_libB88C07C7_gf_DisallowWorkerWeapon_TriggerFunc");
+    }
+
+    TriggerExecute(auto_libB88C07C7_gf_DisallowWorkerWeapon_Trigger, false, false);
+}
+
+bool auto_libB88C07C7_gf_DisallowWorkerWeapon_TriggerFunc (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv__weaponTargetFilters;
+
+    // Automatic Variable Declarations
+    playergroup auto09CC0FF1_g;
+    int auto09CC0FF1_var;
+
+    // Variable Initialization
+    lv__weaponTargetFilters = "Visible;Air,Ground,Missile,Stasis,Dead,Hidden,Invulnerable";
+
+    // Implementation
+    auto09CC0FF1_g = PlayerGroupActive();
+    auto09CC0FF1_var = -1;
+    while (true) {
+        auto09CC0FF1_var = PlayerGroupNextPlayer(auto09CC0FF1_g, auto09CC0FF1_var);
+        if (auto09CC0FF1_var < 0) { break; }
+        CatalogFieldValueSet(c_gameCatalogWeapon, "ParticleBeam", "TargetFilters", auto09CC0FF1_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "Spines", "TargetFilters", auto09CC0FF1_var, lv__weaponTargetFilters);
+        CatalogFieldValueSet(c_gameCatalogWeapon, "FusionCutter", "TargetFilters", auto09CC0FF1_var, lv__weaponTargetFilters);
+    }
+    return true;
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: Launch
+//--------------------------------------------------------------------------------------------------
+bool libB88C07C7_gt_Launch_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((GameAttributeGameValue("3") == "0001")) {
+        libB88C07C7_gv_isBlockingWorkerAttack = true;
+        libB88C07C7_gf_DisallowWorkerWeapon();
+    }
+
+    if ((GameAttributeGameValue("1") == "0001")) {
+        libB88C07C7_gv_isBlockingAirUnitAttack = true;
+        libB88C07C7_gf_DisallowAirUpgrades();
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Param/Value/lib_B88C07C7_5E698B79"));
+    }
+
+    if ((GameAttributeGameValue("1") == "0002")) {
+        libB88C07C7_gv_isBlockingGroundUnitAttack = true;
+        libB88C07C7_gf_DisallowGroundUpgrades();
+        libB88C07C7_gf_DisallowGroundWeapon();
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Param/Value/lib_B88C07C7_BB527DBA"));
+    }
+
+    if ((GameAttributeGameValue("2") == "0001")) {
+        libB88C07C7_gv_isBlockingStructuresAttack = true;
+        libB88C07C7_gf_DisallowStructuresWeaponUpgrades();
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libB88C07C7_gt_Launch_Init () {
+    libB88C07C7_gt_Launch = TriggerCreate("libB88C07C7_gt_Launch_Func");
+    TriggerAddEventMapInit(libB88C07C7_gt_Launch);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: VikingTransformA-G
+//--------------------------------------------------------------------------------------------------
+bool libB88C07C7_gt_VikingTransformAG_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!(((libB88C07C7_gv_isBlockingAirUnitAttack == true) || (libB88C07C7_gv_isBlockingGroundUnitAttack == true)))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((libB88C07C7_gv_isBlockingAirUnitAttack == true)) {
+        UnitBehaviorRemove(EventUnit(), "CantAttackBehavior3", 1);
+    }
+
+    if ((libB88C07C7_gv_isBlockingGroundUnitAttack == true)) {
+        UnitBehaviorAdd(EventUnit(), "CantAttackBehavior22", EventUnit(), 1);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libB88C07C7_gt_VikingTransformAG_Init () {
+    libB88C07C7_gt_VikingTransformAG = TriggerCreate("libB88C07C7_gt_VikingTransformAG_Func");
+    TriggerAddEventUnitAbility(libB88C07C7_gt_VikingTransformAG, null, AbilityCommand("AssaultMode", 0), c_unitAbilStageAll, false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: VikingTransformG-A
+//--------------------------------------------------------------------------------------------------
+bool libB88C07C7_gt_VikingTransformGA_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!(((libB88C07C7_gv_isBlockingAirUnitAttack == true) || (libB88C07C7_gv_isBlockingGroundUnitAttack == true)))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((libB88C07C7_gv_isBlockingAirUnitAttack == true)) {
+        UnitBehaviorAdd(EventUnit(), "CantAttackBehavior3", EventUnit(), 1);
+    }
+
+    if ((libB88C07C7_gv_isBlockingGroundUnitAttack == true)) {
+        UnitBehaviorRemove(EventUnit(), "CantAttackBehavior22", 1);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libB88C07C7_gt_VikingTransformGA_Init () {
+    libB88C07C7_gt_VikingTransformGA = TriggerCreate("libB88C07C7_gt_VikingTransformGA_Func");
+    TriggerAddEventUnitAbility(libB88C07C7_gt_VikingTransformGA, null, AbilityCommand("FighterMode", 0), c_unitAbilStageAll, false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: HellionTransform
+//--------------------------------------------------------------------------------------------------
+bool libB88C07C7_gt_HellionTransform_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libB88C07C7_gv_isBlockingGroundUnitAttack == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UnitBehaviorRemove(EventUnit(), "CantAttackBehavior22", 1);
+    UnitBehaviorAdd(EventUnit(), "CantAttackBehavior22", EventUnit(), 1);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libB88C07C7_gt_HellionTransform_Init () {
+    libB88C07C7_gt_HellionTransform = TriggerCreate("libB88C07C7_gt_HellionTransform_Func");
+    TriggerAddEventUnitAbility(libB88C07C7_gt_HellionTransform, null, AbilityCommand("MorphToHellionTank", 0), c_unitAbilStageAll, false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: HellbatTransform
+//--------------------------------------------------------------------------------------------------
+bool libB88C07C7_gt_HellbatTransform_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libB88C07C7_gv_isBlockingGroundUnitAttack == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UnitBehaviorRemove(EventUnit(), "CantAttackBehavior22", 1);
+    UnitBehaviorAdd(EventUnit(), "CantAttackBehavior22", EventUnit(), 1);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libB88C07C7_gt_HellbatTransform_Init () {
+    libB88C07C7_gt_HellbatTransform = TriggerCreate("libB88C07C7_gt_HellbatTransform_Func");
+    TriggerAddEventUnitAbility(libB88C07C7_gt_HellbatTransform, null, AbilityCommand("MorphToHellion", 0), c_unitAbilStageAll, false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Disable Worker Attack
+//--------------------------------------------------------------------------------------------------
+bool libB88C07C7_gt_DisableWorkerAttack_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv__weaponTargetFilters;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv__weaponTargetFilters = "Visible;Air,Ground,Missile,Stasis,Dead,Hidden,Invulnerable";
+
+    // Conditions
+    if (testConds) {
+        if (!((libB88C07C7_gv_isBlockingWorkerAttack == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if (((UnitGetType(EventUnit()) == "Probe") || (UnitGetType(EventUnit()) == "SCV") || (UnitGetType(EventUnit()) == "Drone"))) {
+        UnitBehaviorAdd(EventUnit(), "CantAttackBehavior232", EventUnit(), 1);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libB88C07C7_gt_DisableWorkerAttack_Init () {
+    libB88C07C7_gt_DisableWorkerAttack = TriggerCreate("libB88C07C7_gt_DisableWorkerAttack_Func");
+    TriggerAddEventUnitRegion(libB88C07C7_gt_DisableWorkerAttack, null, RegionEntireMap(), true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Disable Air Unit Attack
+//--------------------------------------------------------------------------------------------------
+bool libB88C07C7_gt_DisableAirUnitAttack_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    string autoF2AECB7C_val;
+
+    // Conditions
+    if (testConds) {
+        if (!((libB88C07C7_gv_isBlockingAirUnitAttack == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((UnitFilterMatch(EventUnit(), EventPlayer(), UnitFilter((1 << c_targetFilterAir), 0, (1 << c_targetFilterNeutral), 0)) == true)) {
+        autoF2AECB7C_val = PlayerRace(EventPlayer());
+        if (autoF2AECB7C_val == "Prot") {
+            if (((UnitGetType(EventUnit()) != "WarpPrism") && (UnitGetType(EventUnit()) != "WarpPrismSkinPreview") && (UnitGetType(EventUnit()) != "Observer"))) {
+                if ((UnitGetType(EventUnit()) == "Oracle")) {
+                    UnitBehaviorAdd(EventUnit(), "DisableOracleBehavior", EventUnit(), 1);
+                }
+                else {
+                    UnitBehaviorAdd(EventUnit(), "CantAttackBehavior", EventUnit(), 1);
+                }
+            }
+
+        }
+        else if (autoF2AECB7C_val == "Terr") {
+            if (((UnitGetType(EventUnit()) != "Medivac") && (UnitGetType(EventUnit()) != "Raven"))) {
+                if ((UnitGetType(EventUnit()) == "Battlecruiser")) {
+                    UnitBehaviorAdd(EventUnit(), "CantAttackBattlBehavior", EventUnit(), 1);
+                    UnitBehaviorAdd(EventUnit(), "CantAttackBattlBehavior", EventUnit(), 1);
+                }
+                else {
+                    UnitBehaviorAdd(EventUnit(), "CantAttackBehavior3", EventUnit(), 1);
+                }
+            }
+
+        }
+        else if (autoF2AECB7C_val == "Zerg") {
+            if (((UnitGetType(EventUnit()) != "LocustMPFlying") && (UnitGetType(EventUnit()) != "Viper") && (UnitGetType(EventUnit()) != "Overlord") && (UnitGetType(EventUnit()) != "OverlordTransport") && (UnitGetType(EventUnit()) != "Overseer"))) {
+                UnitBehaviorAdd(EventUnit(), "CantAttackBehavior4", EventUnit(), 1);
+            }
+
+        }
+        else {
+        }
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libB88C07C7_gt_DisableAirUnitAttack_Init () {
+    libB88C07C7_gt_DisableAirUnitAttack = TriggerCreate("libB88C07C7_gt_DisableAirUnitAttack_Func");
+    TriggerAddEventUnitRegion(libB88C07C7_gt_DisableAirUnitAttack, null, RegionEntireMap(), true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Disable Ground Unit Attack
+//--------------------------------------------------------------------------------------------------
+bool libB88C07C7_gt_DisableGroundUnitAttack_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    string auto594C49E6_val;
+
+    // Conditions
+    if (testConds) {
+        if (!((libB88C07C7_gv_isBlockingGroundUnitAttack == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if (((UnitGetType(EventUnit()) == "LocustMP") || (UnitGetType(EventUnit()) == "LocustMPFlying"))) {
+        UnitBehaviorAdd(EventUnit(), "CantAttackBehavior222", EventUnit(), 1);
+    }
+
+    if (((UnitGetType(EventUnit()) == "WidowMine") || (UnitGetType(EventUnit()) == "WidowMineBurrowed"))) {
+        UnitAbilityEnable(EventUnit(), "WidowMineAttack", false);
+        UnitBehaviorAdd(EventUnit(), "CantAttackBehavior22", EventUnit(), 1);
+    }
+
+    if ((UnitFilterMatch(EventUnit(), EventPlayer(), UnitFilter((1 << c_targetFilterGround), 0, (1 << c_targetFilterNeutral) | (1 << c_targetFilterStructure) | (1 << c_targetFilterWorker), 0)) == true)) {
+        auto594C49E6_val = PlayerRace(EventPlayer());
+        if (auto594C49E6_val == "Prot") {
+            UnitBehaviorAdd(EventUnit(), "CantAttackBehavior2", EventUnit(), 1);
+        }
+        else if (auto594C49E6_val == "Terr") {
+            UnitBehaviorAdd(EventUnit(), "CantAttackBehavior22", EventUnit(), 1);
+        }
+        else if (auto594C49E6_val == "Zerg") {
+            UnitBehaviorAdd(EventUnit(), "CantAttackBehavior222", EventUnit(), 1);
+        }
+        else {
+        }
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libB88C07C7_gt_DisableGroundUnitAttack_Init () {
+    libB88C07C7_gt_DisableGroundUnitAttack = TriggerCreate("libB88C07C7_gt_DisableGroundUnitAttack_Func");
+    TriggerAddEventUnitRegion(libB88C07C7_gt_DisableGroundUnitAttack, null, RegionEntireMap(), true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Disable Structures Attack
+//--------------------------------------------------------------------------------------------------
+bool libB88C07C7_gt_DisableStructuresAttack_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libB88C07C7_gv_isBlockingStructuresAttack == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if (((UnitGetType(EventUnit()) == "PhotonCannon") || (UnitGetType(EventUnit()) == "MissileTurret") || (UnitGetType(EventUnit()) == "PlanetaryFortress") || (UnitGetType(EventUnit()) == "SporeCrawler") || (UnitGetType(EventUnit()) == "SpineCrawler"))) {
+        UnitBehaviorAdd(EventUnit(), "CantAttackBehavior23", EventUnit(), 1);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libB88C07C7_gt_DisableStructuresAttack_Init () {
+    libB88C07C7_gt_DisableStructuresAttack = TriggerCreate("libB88C07C7_gt_DisableStructuresAttack_Func");
+    TriggerAddEventUnitRegion(libB88C07C7_gt_DisableStructuresAttack, null, RegionEntireMap(), true);
+}
+
+void libB88C07C7_InitTriggers () {
+    libB88C07C7_gt_Launch_Init();
+    libB88C07C7_gt_VikingTransformAG_Init();
+    libB88C07C7_gt_VikingTransformGA_Init();
+    libB88C07C7_gt_HellionTransform_Init();
+    libB88C07C7_gt_HellbatTransform_Init();
+    libB88C07C7_gt_DisableWorkerAttack_Init();
+    libB88C07C7_gt_DisableAirUnitAttack_Init();
+    libB88C07C7_gt_DisableGroundUnitAttack_Init();
+    libB88C07C7_gt_DisableStructuresAttack_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool libB88C07C7_InitLib_completed = false;
+
+void libB88C07C7_InitLib () {
+    if (libB88C07C7_InitLib_completed) {
+        return;
+    }
+
+    libB88C07C7_InitLib_completed = true;
+
+    libB88C07C7_InitLibraries();
+    libB88C07C7_InitVariables();
+    libB88C07C7_InitTriggers();
+}
+

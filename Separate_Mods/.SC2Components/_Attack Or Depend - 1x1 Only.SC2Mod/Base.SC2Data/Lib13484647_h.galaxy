@@ -1,0 +1,32 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// Variable Declarations
+int lib13484647_gv_aDDefendTimer_Window;
+int lib13484647_gv_aDget_DefendTimer_Window;
+timer lib13484647_gv_aDDefendTimer_Countdown;
+int lib13484647_gv_aDget_DefendTime;
+int lib13484647_gv_aDget_Radius_Of_DefendRegion;
+region lib13484647_gv_aDget_DefendRegion;
+point lib13484647_gv_aDget_Point_DefendPlayer;
+int lib13484647_gv_aDAttackPlayer;
+int lib13484647_gv_aDDefendPlayer;
+unitgroup lib13484647_gv_aDUnits_Of_DefenderPlayer;
+unit lib13484647_gv_searchNodeCopy;
+bool lib13484647_gv_aDStart_LeaveEnterDefendRegion;
+bool lib13484647_gv_aDVictory_For_Time;
+
+// Function Declarations
+string lib13484647_gf_ADGetRightBehaviour ();
+
+// Trigger Declarations
+trigger lib13484647_gt_ADLaunch;
+trigger lib13484647_gt_ADUnitLeaveFromEntersToDefendRegion;
+trigger lib13484647_gt_ADUnitEntersDiesinGame;
+trigger lib13484647_gt_ADEndGame;
+
+// Library Initialization
+void lib13484647_InitVariables ();
+

@@ -1,0 +1,26 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// Variable Declarations
+bool libCE7F32F1_gv_useDebugMess;
+
+// Function Declarations
+bool libCE7F32F1_gf_isNoAgingGroup (string lp_unit_Type);
+fixed libCE7F32F1_gf_GetTimeExistingOfUnitType (string lp_unit_Type);
+fixed libCE7F32F1_gf_GetTimeForUnit (string lp_unit_Type, string lp_race_Player);
+bool libCE7F32F1_gf_isMorphGrup (string lp_unit_Type);
+fixed libCE7F32F1_gf_GetTimeForMorphGroup (string lp_unit_Type, abilcmd lp_used_Ability);
+bool libCE7F32F1_gf_isWorkerUnit (string lp_unit_Type);
+fixed libCE7F32F1_gf_GetTimeForWorker ();
+
+// Trigger Declarations
+trigger libCE7F32F1_gt_AgingStart;
+trigger libCE7F32F1_gt_MorphStart;
+trigger libCE7F32F1_gt_Hallucination;
+trigger libCE7F32F1_gt_YouAreTooOld;
+
+// Library Initialization
+void libCE7F32F1_InitVariables ();
+

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CSound id="Destructible_KorhalFlagDeath" parent="Terran_ExplosionSmall">
+        <EditorCategories value="Race:Neutral"/>
+        <DupeMaximumMethod value="Prevent"/>
+    </CSound>
+</Catalog>

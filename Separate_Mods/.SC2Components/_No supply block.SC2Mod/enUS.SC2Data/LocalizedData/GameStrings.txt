@@ -1,0 +1,3 @@
+﻿DocInfo/DescLong=С самого начала игры лимит саплаев равнен 200, вместо обычных 14/15<n/><n/>Создатели: Swarm, Qmax
+DocInfo/DescShort=Any
+DocInfo/Name=[ ZERGTV ] No supply block

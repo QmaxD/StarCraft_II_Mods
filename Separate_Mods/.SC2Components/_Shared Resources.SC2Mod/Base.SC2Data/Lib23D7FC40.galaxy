@@ -1,0 +1,1172 @@
+include "TriggerLibs/NativeLib"
+
+include "Lib23D7FC40_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void lib23D7FC40_InitLibraries () {
+    libNtve_InitVariables();
+}
+
+// Variable Initialization
+bool lib23D7FC40_InitVariables_completed = false;
+
+void lib23D7FC40_InitVariables () {
+    int init_i;
+    int init_j;
+
+    if (lib23D7FC40_InitVariables_completed) {
+        return;
+    }
+
+    lib23D7FC40_InitVariables_completed = true;
+
+    lib23D7FC40_gv_sRAlliance_1 = PlayerGroupEmpty();
+    lib23D7FC40_gv_sRAlliance_2 = PlayerGroupEmpty();
+    lib23D7FC40_gv_sRAlliance_3 = PlayerGroupEmpty();
+    lib23D7FC40_gv_sRAlliance_4 = PlayerGroupEmpty();
+    lib23D7FC40_gv_sRNo_Alliance = PlayerGroupEmpty();
+    lib23D7FC40_gv_sRAlliance_Enemy = PlayerGroupEmpty();
+    for (init_i = 0; init_i <= 15; init_i += 1) {
+        for (init_j = 0; init_j <= 2; init_j += 1) {
+            lib23D7FC40_gv_sRResourceDialog_Players[init_i][init_j] = c_invalidDialogId;
+        }
+    }
+    for (init_i = 0; init_i <= 15; init_i += 1) {
+        lib23D7FC40_gv_sRMinerals_image[init_i] = c_invalidDialogControlId;
+    }
+    for (init_i = 0; init_i <= 15; init_i += 1) {
+        lib23D7FC40_gv_sRGas_image[init_i] = c_invalidDialogControlId;
+    }
+    for (init_i = 0; init_i <= 15; init_i += 1) {
+        lib23D7FC40_gv_sRSupply_image[init_i] = c_invalidDialogControlId;
+    }
+    lib23D7FC40_gv_sRDialog_Width = 450;
+    lib23D7FC40_gv_sRDialog_Height = 50;
+    lib23D7FC40_gv_sRDialog_OffsetX = 35;
+    lib23D7FC40_gv_sRDialog_OffsetY = 37;
+    lib23D7FC40_gv_sRIcon = 32;
+    lib23D7FC40_gv_sRImage_1_OffsetX = 8;
+    lib23D7FC40_gv_sRImage_2_OffsetX = 145;
+    lib23D7FC40_gv_sRImage_3_OffsetX = 282;
+    lib23D7FC40_gv_sRData_Width = 125;
+    lib23D7FC40_gv_sRData_Height = 50;
+    lib23D7FC40_gv_sRData_1_OffsetX = 45;
+    lib23D7FC40_gv_sRData_2_OffsetX = 182;
+    lib23D7FC40_gv_sRData_3_OffsetX_text = 280;
+    lib23D7FC40_gv_sRData_3_OffsetX_supply = 318;
+    lib23D7FC40_gv_sRData_OffsetY = 1;
+    lib23D7FC40_gv_sRObserver = 14;
+    lib23D7FC40_gv_sRCommon_text = StringExternal("Param/Value/lib_23D7FC40_D3D26D49");
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: SR | max_count
+//--------------------------------------------------------------------------------------------------
+bool lib23D7FC40_gt_SRmax_count_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__count;
+    int lv__countOf_Players_inGame_Now;
+
+    // Automatic Variable Declarations
+    const int autoCFAF5D06_ae = 13;
+    const int autoCFAF5D06_ai = 1;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv__count = 1;
+    for ( ; ( (autoCFAF5D06_ai >= 0 && lv__count <= autoCFAF5D06_ae) || (autoCFAF5D06_ai < 0 && lv__count >= autoCFAF5D06_ae) ) ; lv__count += autoCFAF5D06_ai ) {
+        if ((PlayerStatus(lv__count) == c_playerStatusActive)) {
+            lv__countOf_Players_inGame_Now = (lv__countOf_Players_inGame_Now + 1);
+        }
+
+    }
+    if ((lv__countOf_Players_inGame_Now >= lib23D7FC40_gv_sRMAX_COUNT_PLAYER)) {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Param/Value/lib_23D7FC40_4F1ED8AB"));
+        TriggerStop(lib23D7FC40_gt_SRmax_count);
+        TriggerEnable(TriggerGetCurrent(), false);
+    }
+    else {
+        lib23D7FC40_gv_sRCount_Player = lv__countOf_Players_inGame_Now;
+        TriggerExecute(lib23D7FC40_gt_SRLaunch, true, false);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib23D7FC40_gt_SRmax_count_Init () {
+    lib23D7FC40_gt_SRmax_count = TriggerCreate("lib23D7FC40_gt_SRmax_count_Func");
+    TriggerAddEventMapInit(lib23D7FC40_gt_SRmax_count);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: SR | Launch
+//--------------------------------------------------------------------------------------------------
+bool lib23D7FC40_gt_SRLaunch_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__count;
+
+    // Automatic Variable Declarations
+    int auto6B33B3F7_ae;
+    const int auto6B33B3F7_ai = 1;
+    string autoFFDC50F0_val;
+    string auto3C6C5D07_val;
+    string auto1EDDD1D0_val;
+    string auto5320A4E0_val;
+    string auto284071F6_val;
+    playergroup autoE9793DEE_g;
+    int autoE9793DEE_var;
+    playergroup auto8E44B10F_g;
+    int auto8E44B10F_var;
+    playergroup auto963B26CF_g;
+    int auto963B26CF_var;
+    playergroup autoC4A4AD44_g;
+    int autoC4A4AD44_var;
+    int auto4069AB3A_ae;
+    const int auto4069AB3A_ai = 1;
+    string auto27C29C74_val;
+    playergroup auto5163B206_g;
+    int auto5163B206_var;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((GameAttributeGameValue("1") == "0001")) {
+        auto6B33B3F7_ae = lib23D7FC40_gv_sRCount_Player;
+        lv__count = 1;
+        for ( ; ( (auto6B33B3F7_ai >= 0 && lv__count <= auto6B33B3F7_ae) || (auto6B33B3F7_ai < 0 && lv__count >= auto6B33B3F7_ae) ) ; lv__count += auto6B33B3F7_ai ) {
+            autoFFDC50F0_val = GameAttributePlayerValue("4", lv__count);
+            if (autoFFDC50F0_val == "0001") {
+                PlayerGroupAdd(lib23D7FC40_gv_sRAlliance_1, lv__count);
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, (TextWithColor(PlayerName(lv__count), libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(lv__count, false))) + StringExternal("Param/Value/lib_23D7FC40_D03E27BF")));
+                lib23D7FC40_gv_sRwill_Work_Alliance_1 = true;
+            }
+            else if (autoFFDC50F0_val == "0002") {
+                PlayerGroupAdd(lib23D7FC40_gv_sRAlliance_2, lv__count);
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, (TextWithColor(PlayerName(lv__count), libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(lv__count, false))) + StringExternal("Param/Value/lib_23D7FC40_8C2DB6C7")));
+                lib23D7FC40_gv_sRwill_Work_Alliance_2 = true;
+            }
+            else if (autoFFDC50F0_val == "0003") {
+                PlayerGroupAdd(lib23D7FC40_gv_sRAlliance_3, lv__count);
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, (TextWithColor(PlayerName(lv__count), libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(lv__count, false))) + StringExternal("Param/Value/lib_23D7FC40_580C1DF7")));
+                lib23D7FC40_gv_sRwill_Work_Alliance_3 = true;
+            }
+            else if (autoFFDC50F0_val == "0004") {
+                PlayerGroupAdd(lib23D7FC40_gv_sRAlliance_4, lv__count);
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, (TextWithColor(PlayerName(lv__count), libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(lv__count, false))) + StringExternal("Param/Value/lib_23D7FC40_A60F6077")));
+                lib23D7FC40_gv_sRwill_Work_Alliance_4 = true;
+            }
+            else {
+                PlayerGroupAdd(lib23D7FC40_gv_sRNo_Alliance, lv__count);
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, (TextWithColor(PlayerName(lv__count), libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(lv__count, false))) + StringExternal("Param/Value/lib_23D7FC40_86622B26")));
+            }
+        }
+        if ((PlayerGroupCount(lib23D7FC40_gv_sRAlliance_1) >= 1)) {
+            lib23D7FC40_gv_sRCount_Team += 1;
+        }
+        else {
+            lib23D7FC40_gv_sRis_Alliance_1_Empty = true;
+        }
+        if ((PlayerGroupCount(lib23D7FC40_gv_sRAlliance_2) >= 1)) {
+            lib23D7FC40_gv_sRCount_Team += 1;
+        }
+        else {
+            lib23D7FC40_gv_sRis_Alliance_2_Empty = true;
+        }
+        if ((PlayerGroupCount(lib23D7FC40_gv_sRAlliance_3) >= 1)) {
+            lib23D7FC40_gv_sRCount_Team += 1;
+        }
+        else {
+            lib23D7FC40_gv_sRis_Alliance_3_Empty = true;
+        }
+        if ((PlayerGroupCount(lib23D7FC40_gv_sRAlliance_4) >= 1)) {
+            lib23D7FC40_gv_sRCount_Team += 1;
+        }
+        else {
+            lib23D7FC40_gv_sRis_Alliance_4_Empty = true;
+        }
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, (StringExternal("Param/Value/lib_23D7FC40_5DB1BAFB") + IntToText(lib23D7FC40_gv_sRCount_Team)));
+        if ((lib23D7FC40_gv_sRwill_Work_Alliance_1 == true)) {
+            auto3C6C5D07_val = GameAttributeGameValue("6");
+            if (auto3C6C5D07_val == "0001") {
+                libNtve_gf_SetPlayerGroupAlliance(lib23D7FC40_gv_sRAlliance_1, libNtve_ge_AllianceSetting_Ally);
+            }
+            else if (auto3C6C5D07_val == "0002") {
+                libNtve_gf_SetPlayerGroupAlliance(lib23D7FC40_gv_sRAlliance_1, libNtve_ge_AllianceSetting_AllyWithSharedVision);
+            }
+            else if (auto3C6C5D07_val == "0003") {
+                libNtve_gf_SetPlayerGroupAlliance(lib23D7FC40_gv_sRAlliance_1, libNtve_ge_AllianceSetting_AllyWithSharedVisionControlAndSpending);
+            }
+            else {
+            }
+        }
+
+        if ((lib23D7FC40_gv_sRwill_Work_Alliance_2 == true)) {
+            auto1EDDD1D0_val = GameAttributeGameValue("6");
+            if (auto1EDDD1D0_val == "0001") {
+                libNtve_gf_SetPlayerGroupAlliance(lib23D7FC40_gv_sRAlliance_2, libNtve_ge_AllianceSetting_Ally);
+            }
+            else if (auto1EDDD1D0_val == "0002") {
+                libNtve_gf_SetPlayerGroupAlliance(lib23D7FC40_gv_sRAlliance_2, libNtve_ge_AllianceSetting_AllyWithSharedVision);
+            }
+            else if (auto1EDDD1D0_val == "0003") {
+                libNtve_gf_SetPlayerGroupAlliance(lib23D7FC40_gv_sRAlliance_2, libNtve_ge_AllianceSetting_AllyWithSharedVisionControlAndSpending);
+            }
+            else {
+            }
+        }
+
+        if ((lib23D7FC40_gv_sRwill_Work_Alliance_3 == true)) {
+            auto5320A4E0_val = GameAttributeGameValue("6");
+            if (auto5320A4E0_val == "0001") {
+                libNtve_gf_SetPlayerGroupAlliance(lib23D7FC40_gv_sRAlliance_3, libNtve_ge_AllianceSetting_Ally);
+            }
+            else if (auto5320A4E0_val == "0002") {
+                libNtve_gf_SetPlayerGroupAlliance(lib23D7FC40_gv_sRAlliance_3, libNtve_ge_AllianceSetting_AllyWithSharedVision);
+            }
+            else if (auto5320A4E0_val == "0003") {
+                libNtve_gf_SetPlayerGroupAlliance(lib23D7FC40_gv_sRAlliance_3, libNtve_ge_AllianceSetting_AllyWithSharedVisionControlAndSpending);
+            }
+            else {
+            }
+        }
+
+        if ((lib23D7FC40_gv_sRwill_Work_Alliance_4 == true)) {
+            auto284071F6_val = GameAttributeGameValue("6");
+            if (auto284071F6_val == "0001") {
+                libNtve_gf_SetPlayerGroupAlliance(lib23D7FC40_gv_sRAlliance_4, libNtve_ge_AllianceSetting_Ally);
+            }
+            else if (auto284071F6_val == "0002") {
+                libNtve_gf_SetPlayerGroupAlliance(lib23D7FC40_gv_sRAlliance_4, libNtve_ge_AllianceSetting_AllyWithSharedVision);
+            }
+            else if (auto284071F6_val == "0003") {
+                libNtve_gf_SetPlayerGroupAlliance(lib23D7FC40_gv_sRAlliance_4, libNtve_ge_AllianceSetting_AllyWithSharedVisionControlAndSpending);
+            }
+            else {
+            }
+        }
+
+        if ((lib23D7FC40_gv_sRwill_Work_Alliance_1 == true)) {
+            PlayerGroupAdd(lib23D7FC40_gv_sRAlliance_1, lib23D7FC40_gv_sRCommonPlayer_Alliance_1);
+            autoE9793DEE_g = lib23D7FC40_gv_sRAlliance_1;
+            autoE9793DEE_var = -1;
+            while (true) {
+                autoE9793DEE_var = PlayerGroupNextPlayer(autoE9793DEE_g, autoE9793DEE_var);
+                if (autoE9793DEE_var < 0) { break; }
+                libNtve_gf_SetAllianceBetweenTwoPlayerGroups(PlayerGroupSingle(lib23D7FC40_gv_sRCommonPlayer_Alliance_1), PlayerGroupSingle(autoE9793DEE_var), libNtve_ge_AllianceSetting_AllyWithSharedVisionControlAndSpending);
+            }
+            UISetFrameVisible(lib23D7FC40_gv_sRAlliance_1, c_syncFrameTypeResourcePanel, false);
+        }
+
+        if ((lib23D7FC40_gv_sRwill_Work_Alliance_2 == true)) {
+            PlayerGroupAdd(lib23D7FC40_gv_sRAlliance_2, lib23D7FC40_gv_sRCommonPlayer_Alliance_2);
+            auto8E44B10F_g = lib23D7FC40_gv_sRAlliance_2;
+            auto8E44B10F_var = -1;
+            while (true) {
+                auto8E44B10F_var = PlayerGroupNextPlayer(auto8E44B10F_g, auto8E44B10F_var);
+                if (auto8E44B10F_var < 0) { break; }
+                libNtve_gf_SetAllianceBetweenTwoPlayerGroups(PlayerGroupSingle(lib23D7FC40_gv_sRCommonPlayer_Alliance_2), PlayerGroupSingle(auto8E44B10F_var), libNtve_ge_AllianceSetting_AllyWithSharedVisionControlAndSpending);
+            }
+            UISetFrameVisible(lib23D7FC40_gv_sRAlliance_2, c_syncFrameTypeResourcePanel, false);
+        }
+
+        if ((lib23D7FC40_gv_sRwill_Work_Alliance_3 == true)) {
+            PlayerGroupAdd(lib23D7FC40_gv_sRAlliance_3, lib23D7FC40_gv_sRCommonPlayer_Alliance_3);
+            auto963B26CF_g = lib23D7FC40_gv_sRAlliance_3;
+            auto963B26CF_var = -1;
+            while (true) {
+                auto963B26CF_var = PlayerGroupNextPlayer(auto963B26CF_g, auto963B26CF_var);
+                if (auto963B26CF_var < 0) { break; }
+                libNtve_gf_SetAllianceBetweenTwoPlayerGroups(PlayerGroupSingle(lib23D7FC40_gv_sRCommonPlayer_Alliance_3), PlayerGroupSingle(auto963B26CF_var), libNtve_ge_AllianceSetting_AllyWithSharedVisionControlAndSpending);
+            }
+            UISetFrameVisible(lib23D7FC40_gv_sRAlliance_3, c_syncFrameTypeResourcePanel, false);
+        }
+
+        if ((lib23D7FC40_gv_sRwill_Work_Alliance_4 == true)) {
+            PlayerGroupAdd(lib23D7FC40_gv_sRAlliance_4, lib23D7FC40_gv_sRCommonPlayer_Alliance_4);
+            autoC4A4AD44_g = lib23D7FC40_gv_sRAlliance_4;
+            autoC4A4AD44_var = -1;
+            while (true) {
+                autoC4A4AD44_var = PlayerGroupNextPlayer(autoC4A4AD44_g, autoC4A4AD44_var);
+                if (autoC4A4AD44_var < 0) { break; }
+                libNtve_gf_SetAllianceBetweenTwoPlayerGroups(PlayerGroupSingle(lib23D7FC40_gv_sRCommonPlayer_Alliance_4), PlayerGroupSingle(autoC4A4AD44_var), libNtve_ge_AllianceSetting_AllyWithSharedVisionControlAndSpending);
+            }
+            UISetFrameVisible(lib23D7FC40_gv_sRAlliance_4, c_syncFrameTypeResourcePanel, false);
+        }
+
+        TriggerExecute(lib23D7FC40_gt_SRObserver, true, false);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Param/Value/lib_23D7FC40_0EB78F92"));
+        TriggerExecute(lib23D7FC40_gt_SRCreateResourcesDialogForEveryPlayer, true, false);
+    }
+
+    if ((GameAttributeGameValue("1") == "0003")) {
+        auto4069AB3A_ae = lib23D7FC40_gv_sRCount_Player;
+        lv__count = 1;
+        for ( ; ( (auto4069AB3A_ai >= 0 && lv__count <= auto4069AB3A_ae) || (auto4069AB3A_ai < 0 && lv__count >= auto4069AB3A_ae) ) ; lv__count += auto4069AB3A_ai ) {
+            PlayerGroupAdd(lib23D7FC40_gv_sRAlliance_Enemy, lv__count);
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, (TextWithColor(PlayerName(lv__count), libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(lv__count, false))) + StringExternal("Param/Value/lib_23D7FC40_B74ACC14")));
+        }
+        auto27C29C74_val = GameAttributeGameValue("3");
+        if (auto27C29C74_val == "0001") {
+            libNtve_gf_SetPlayerGroupAlliance(lib23D7FC40_gv_sRAlliance_Enemy, libNtve_ge_AllianceSetting_Enemy);
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Param/Value/lib_23D7FC40_850485D3"));
+        }
+        else if (auto27C29C74_val == "0002") {
+            libNtve_gf_SetPlayerGroupAlliance(lib23D7FC40_gv_sRAlliance_Enemy, libNtve_ge_AllianceSetting_EnemyWithSharedVision);
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Param/Value/lib_23D7FC40_728A2568"));
+        }
+        else {
+        }
+        lib23D7FC40_gv_sRwill_Work_Alliance_Enemy = true;
+        PlayerGroupAdd(lib23D7FC40_gv_sRAlliance_Enemy, lib23D7FC40_gv_sRCommonPlayer_Alliance_Enemy);
+        auto5163B206_g = lib23D7FC40_gv_sRAlliance_Enemy;
+        auto5163B206_var = -1;
+        while (true) {
+            auto5163B206_var = PlayerGroupNextPlayer(auto5163B206_g, auto5163B206_var);
+            if (auto5163B206_var < 0) { break; }
+            libNtve_gf_SetAllianceBetweenTwoPlayerGroups(PlayerGroupSingle(lib23D7FC40_gv_sRCommonPlayer_Alliance_Enemy), PlayerGroupSingle(auto5163B206_var), libNtve_ge_AllianceSetting_AllyWithSharedVisionControlAndSpending);
+        }
+        TriggerExecute(lib23D7FC40_gt_SRObserver, true, false);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Param/Value/lib_23D7FC40_FB362AEB"));
+        TriggerExecute(lib23D7FC40_gt_SRCreateResourcesDialogForEnemy, true, false);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib23D7FC40_gt_SRLaunch_Init () {
+    lib23D7FC40_gt_SRLaunch = TriggerCreate("lib23D7FC40_gt_SRLaunch_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: SR | Observer
+//--------------------------------------------------------------------------------------------------
+bool lib23D7FC40_gt_SRObserver_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__observer;
+    int lv__count;
+
+    // Automatic Variable Declarations
+    const int auto493FA5B2_ae = 13;
+    const int auto493FA5B2_ai = 1;
+
+    // Variable Initialization
+    lv__observer = CatalogFieldValueGetAsInt(c_gameCatalogGameUI, "Dflt", "DefaultObservedPlayerId", c_playerAny);
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv__count = 1;
+    for ( ; ( (auto493FA5B2_ai >= 0 && lv__count <= auto493FA5B2_ae) || (auto493FA5B2_ai < 0 && lv__count >= auto493FA5B2_ae) ) ; lv__count += auto493FA5B2_ai ) {
+        libNtve_gf_SetAllianceOneWay(lv__observer, lv__count, libNtve_ge_AllianceSetting_Neutral);
+        PlayerSetAlliance(lv__count, c_allianceIdDefeat, lv__observer, true);
+        PlayerSetAlliance(lv__count, c_allianceIdPassive, lv__observer, true);
+        PlayerSetAlliance(lv__count, c_allianceIdControl, lv__observer, true);
+        PlayerSetAlliance(lv__count, c_allianceIdVision, lv__observer, true);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib23D7FC40_gt_SRObserver_Init () {
+    lib23D7FC40_gt_SRObserver = TriggerCreate("lib23D7FC40_gt_SRObserver_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: SR | Create Resources Dialog For Every Player
+//--------------------------------------------------------------------------------------------------
+bool lib23D7FC40_gt_SRCreateResourcesDialogForEveryPlayer_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__count;
+
+    // Automatic Variable Declarations
+    const int autoC94533C9_ae = 14;
+    const int autoC94533C9_ai = 1;
+    string auto2E8F62EF_val;
+    string auto231D5E4A_val;
+    string autoE4DCA3F2_val;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!(((lib23D7FC40_gv_sRwill_Work_Alliance_1 == true) || (lib23D7FC40_gv_sRwill_Work_Alliance_2 == true) || (lib23D7FC40_gv_sRwill_Work_Alliance_3 == true) || (lib23D7FC40_gv_sRwill_Work_Alliance_4 == true)))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv__count = 1;
+    for ( ; ( (autoC94533C9_ai >= 0 && lv__count <= autoC94533C9_ae) || (autoC94533C9_ai < 0 && lv__count >= autoC94533C9_ae) ) ; lv__count += autoC94533C9_ai ) {
+        if (((lv__count >= 9) && (lv__count <= 13))) {
+        }
+        else {
+            if (((PlayerStatus(lv__count) == c_playerStatusActive) && (lv__count != PlayerGroupPlayer(lib23D7FC40_gv_sRNo_Alliance, lv__count)) && (lv__count <= 8))) {
+                if ((lv__count == PlayerGroupPlayer(lib23D7FC40_gv_sRAlliance_1, lv__count))) {
+                    PlayerModifyPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_1, c_playerPropMinerals, c_playerPropOperAdd, (PlayerGetPropertyInt(lv__count, c_playerPropMinerals) - lib23D7FC40_gv_sRDuplicate_Minerals[lv__count]));
+                    lib23D7FC40_gv_sRDuplicate_Minerals[lv__count] = MinI(5, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_1, c_playerPropMinerals));
+                    PlayerModifyPropertyInt(lv__count, c_playerPropMinerals, c_playerPropOperSetTo, MinI(5, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_1, c_playerPropMinerals)));
+                    PlayerModifyPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_1, c_playerPropVespene, c_playerPropOperAdd, (PlayerGetPropertyInt(lv__count, c_playerPropVespene) - lib23D7FC40_gv_sRDuplicate_Vespen[lv__count]));
+                    lib23D7FC40_gv_sRDuplicate_Vespen[lv__count] = MinI(4, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_1, c_playerPropVespene));
+                    PlayerModifyPropertyInt(lv__count, c_playerPropVespene, c_playerPropOperSetTo, MinI(4, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_1, c_playerPropVespene)));
+                }
+
+                if ((lv__count == PlayerGroupPlayer(lib23D7FC40_gv_sRAlliance_2, lv__count))) {
+                    PlayerModifyPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_2, c_playerPropMinerals, c_playerPropOperAdd, (PlayerGetPropertyInt(lv__count, c_playerPropMinerals) - lib23D7FC40_gv_sRDuplicate_Minerals[lv__count]));
+                    lib23D7FC40_gv_sRDuplicate_Minerals[lv__count] = MinI(5, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_2, c_playerPropMinerals));
+                    PlayerModifyPropertyInt(lv__count, c_playerPropMinerals, c_playerPropOperSetTo, MinI(5, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_2, c_playerPropMinerals)));
+                    PlayerModifyPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_2, c_playerPropVespene, c_playerPropOperAdd, (PlayerGetPropertyInt(lv__count, c_playerPropVespene) - lib23D7FC40_gv_sRDuplicate_Vespen[lv__count]));
+                    lib23D7FC40_gv_sRDuplicate_Vespen[lv__count] = MinI(4, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_2, c_playerPropVespene));
+                    PlayerModifyPropertyInt(lv__count, c_playerPropVespene, c_playerPropOperSetTo, MinI(4, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_2, c_playerPropVespene)));
+                }
+
+                if ((lv__count == PlayerGroupPlayer(lib23D7FC40_gv_sRAlliance_3, lv__count))) {
+                    PlayerModifyPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_3, c_playerPropMinerals, c_playerPropOperAdd, (PlayerGetPropertyInt(lv__count, c_playerPropMinerals) - lib23D7FC40_gv_sRDuplicate_Minerals[lv__count]));
+                    lib23D7FC40_gv_sRDuplicate_Minerals[lv__count] = MinI(5, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_3, c_playerPropMinerals));
+                    PlayerModifyPropertyInt(lv__count, c_playerPropMinerals, c_playerPropOperSetTo, MinI(5, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_3, c_playerPropMinerals)));
+                    PlayerModifyPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_3, c_playerPropVespene, c_playerPropOperAdd, (PlayerGetPropertyInt(lv__count, c_playerPropVespene) - lib23D7FC40_gv_sRDuplicate_Vespen[lv__count]));
+                    lib23D7FC40_gv_sRDuplicate_Vespen[lv__count] = MinI(4, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_3, c_playerPropVespene));
+                    PlayerModifyPropertyInt(lv__count, c_playerPropVespene, c_playerPropOperSetTo, MinI(4, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_3, c_playerPropVespene)));
+                }
+
+                if ((lv__count == PlayerGroupPlayer(lib23D7FC40_gv_sRAlliance_4, lv__count))) {
+                    PlayerModifyPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_4, c_playerPropMinerals, c_playerPropOperAdd, (PlayerGetPropertyInt(lv__count, c_playerPropMinerals) - lib23D7FC40_gv_sRDuplicate_Minerals[lv__count]));
+                    lib23D7FC40_gv_sRDuplicate_Minerals[lv__count] = MinI(5, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_4, c_playerPropMinerals));
+                    PlayerModifyPropertyInt(lv__count, c_playerPropMinerals, c_playerPropOperSetTo, MinI(5, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_4, c_playerPropMinerals)));
+                    PlayerModifyPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_4, c_playerPropVespene, c_playerPropOperAdd, (PlayerGetPropertyInt(lv__count, c_playerPropVespene) - lib23D7FC40_gv_sRDuplicate_Vespen[lv__count]));
+                    lib23D7FC40_gv_sRDuplicate_Vespen[lv__count] = MinI(4, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_4, c_playerPropVespene));
+                    PlayerModifyPropertyInt(lv__count, c_playerPropVespene, c_playerPropOperSetTo, MinI(4, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_4, c_playerPropVespene)));
+                }
+
+                auto2E8F62EF_val = GameAttributeGameValue("2");
+                if (auto2E8F62EF_val == "0001") {
+                    DialogCreate(575, 40, c_anchorLeft, 0, 150, true);
+                }
+                else if (auto2E8F62EF_val == "0002") {
+                    DialogCreate(575, 40, c_anchorRight, 0, 150, true);
+                }
+                else if (auto2E8F62EF_val == "0003") {
+                    DialogCreate(575, 40, c_anchorTopRight, 0, 25, true);
+                }
+                else {
+                }
+                lib23D7FC40_gv_sRResourceDialog_Players[lv__count][1] = DialogLastCreated();
+                DialogSetImageVisible(DialogLastCreated(), false);
+                auto231D5E4A_val = PlayerRace(lv__count);
+                if (auto231D5E4A_val == "Prot") {
+                    libNtve_gf_CreateDialogItemImage(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][1], 32, 32, c_anchorLeft, 62, 0, StringExternal("Param/Value/lib_23D7FC40_941B7B70"), "Assets\\Textures\\icon-mineral-protoss.dds", c_triggerImageTypeNormal, false, Color(100,100,100), c_triggerBlendModeNormal);
+                    lib23D7FC40_gv_sRMinerals_image[lv__count] = DialogControlLastCreated();
+                    libNtve_gf_CreateDialogItemImage(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][1], 32, 32, c_anchorLeft, 198, 0, StringExternal("Param/Value/lib_23D7FC40_043049D8"), "Assets\\Textures\\icon-gas-protoss.dds", c_triggerImageTypeNormal, false, Color(100,100,100), c_triggerBlendModeNormal);
+                    lib23D7FC40_gv_sRGas_image[lv__count] = DialogControlLastCreated();
+                    libNtve_gf_CreateDialogItemImage(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][1], 32, 32, c_anchorLeft, 335, 0, StringExternal("Param/Value/lib_23D7FC40_43913580"), "Assets\\Textures\\icon-supply-protoss.dds", c_triggerImageTypeNormal, false, Color(100,100,100), c_triggerBlendModeNormal);
+                    lib23D7FC40_gv_sRSupply_image[lv__count] = DialogControlLastCreated();
+                }
+                else if (auto231D5E4A_val == "Terr") {
+                    libNtve_gf_CreateDialogItemImage(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][1], 32, 32, c_anchorLeft, 62, 0, StringExternal("Param/Value/lib_23D7FC40_C454F0F4"), "Assets\\Textures\\icon-mineral-terran.dds", c_triggerImageTypeNormal, false, Color(100,100,100), c_triggerBlendModeNormal);
+                    lib23D7FC40_gv_sRMinerals_image[lv__count] = DialogControlLastCreated();
+                    libNtve_gf_CreateDialogItemImage(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][1], 32, 32, c_anchorLeft, 198, 0, StringExternal("Param/Value/lib_23D7FC40_36AB4907"), "Assets\\Textures\\icon-gas-terran.dds", c_triggerImageTypeNormal, false, Color(100,100,100), c_triggerBlendModeNormal);
+                    lib23D7FC40_gv_sRGas_image[lv__count] = DialogControlLastCreated();
+                    libNtve_gf_CreateDialogItemImage(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][1], 32, 32, c_anchorLeft, 335, 0, StringExternal("Param/Value/lib_23D7FC40_EE2DC9F6"), "Assets\\Textures\\icon-supply-terran.dds", c_triggerImageTypeNormal, false, Color(100,100,100), c_triggerBlendModeNormal);
+                    lib23D7FC40_gv_sRSupply_image[lv__count] = DialogControlLastCreated();
+                }
+                else if (auto231D5E4A_val == "Zerg") {
+                    libNtve_gf_CreateDialogItemImage(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][1], 32, 32, c_anchorLeft, 62, 0, StringExternal("Param/Value/lib_23D7FC40_E6010F97"), "Assets\\Textures\\icon-mineral-zerg.dds", c_triggerImageTypeNormal, false, Color(100,100,100), c_triggerBlendModeNormal);
+                    lib23D7FC40_gv_sRMinerals_image[lv__count] = DialogControlLastCreated();
+                    libNtve_gf_CreateDialogItemImage(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][1], 32, 32, c_anchorLeft, 198, 0, StringExternal("Param/Value/lib_23D7FC40_FBCD45DE"), "Assets\\Textures\\icon-gas-zerg.dds", c_triggerImageTypeNormal, false, Color(100,100,100), c_triggerBlendModeNormal);
+                    lib23D7FC40_gv_sRGas_image[lv__count] = DialogControlLastCreated();
+                    libNtve_gf_CreateDialogItemImage(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][1], 32, 32, c_anchorLeft, 335, 0, StringExternal("Param/Value/lib_23D7FC40_83DD6E22"), "Assets\\Textures\\icon-supply-zerg.dds", c_triggerImageTypeNormal, false, Color(100,100,100), c_triggerBlendModeNormal);
+                    lib23D7FC40_gv_sRSupply_image[lv__count] = DialogControlLastCreated();
+                }
+                else {
+                }
+                autoE4DCA3F2_val = GameAttributeGameValue("2");
+                if (autoE4DCA3F2_val == "0001") {
+                    DialogCreate(575, 40, c_anchorLeft, 0, 150, true);
+                }
+                else if (autoE4DCA3F2_val == "0002") {
+                    DialogCreate(575, 40, c_anchorRight, 0, 150, true);
+                }
+                else if (autoE4DCA3F2_val == "0003") {
+                    DialogCreate(575, 40, c_anchorTopRight, 0, 25, true);
+                }
+                else {
+                }
+                lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2] = DialogLastCreated();
+                DialogSetImageVisible(DialogLastCreated(), false);
+                if ((lv__count == PlayerGroupPlayer(lib23D7FC40_gv_sRAlliance_1, lv__count))) {
+                    lib23D7FC40_gv_sRMinerals_text[1] = IntToText(PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_1, c_playerPropMinerals));
+                    lib23D7FC40_gv_sRGas_text[1] = IntToText(PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_1, c_playerPropVespene));
+                }
+
+                if ((lv__count == PlayerGroupPlayer(lib23D7FC40_gv_sRAlliance_2, lv__count))) {
+                    lib23D7FC40_gv_sRMinerals_text[2] = IntToText(PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_2, c_playerPropMinerals));
+                    lib23D7FC40_gv_sRGas_text[2] = IntToText(PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_2, c_playerPropVespene));
+                }
+
+                if ((lv__count == PlayerGroupPlayer(lib23D7FC40_gv_sRAlliance_3, lv__count))) {
+                    lib23D7FC40_gv_sRMinerals_text[3] = IntToText(PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_3, c_playerPropMinerals));
+                    lib23D7FC40_gv_sRGas_text[3] = IntToText(PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_3, c_playerPropVespene));
+                }
+
+                if ((lv__count == PlayerGroupPlayer(lib23D7FC40_gv_sRAlliance_4, lv__count))) {
+                    lib23D7FC40_gv_sRMinerals_text[4] = IntToText(PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_4, c_playerPropMinerals));
+                    lib23D7FC40_gv_sRGas_text[4] = IntToText(PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_4, c_playerPropVespene));
+                }
+
+                lib23D7FC40_gv_sRSupply_text[lv__count] = IntToText(PlayerGetPropertyInt(lv__count, c_playerPropSuppliesUsed));
+                lib23D7FC40_gv_sRTotal_Supply_text[lv__count] = IntToText(PlayerGetPropertyInt(lv__count, c_playerPropSuppliesMade));
+                if ((lv__count == PlayerGroupPlayer(lib23D7FC40_gv_sRAlliance_1, lv__count))) {
+                    libNtve_gf_CreateDialogItemLabel(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], 200, 50, c_anchorLeft, 98, 20, lib23D7FC40_gv_sRMinerals_text[1], Color(100,100,100), false, 2.0);
+                    libNtve_gf_CreateDialogItemLabel(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], 200, 50, c_anchorLeft, 234, 20, lib23D7FC40_gv_sRGas_text[1], Color(100,100,100), false, 2.0);
+                }
+
+                if ((lv__count == PlayerGroupPlayer(lib23D7FC40_gv_sRAlliance_2, lv__count))) {
+                    libNtve_gf_CreateDialogItemLabel(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], 200, 50, c_anchorLeft, 98, 20, lib23D7FC40_gv_sRMinerals_text[2], Color(100,100,100), false, 2.0);
+                    libNtve_gf_CreateDialogItemLabel(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], 200, 50, c_anchorLeft, 234, 20, lib23D7FC40_gv_sRGas_text[2], Color(100,100,100), false, 2.0);
+                }
+
+                if ((lv__count == PlayerGroupPlayer(lib23D7FC40_gv_sRAlliance_3, lv__count))) {
+                    libNtve_gf_CreateDialogItemLabel(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], 200, 50, c_anchorLeft, 98, 20, lib23D7FC40_gv_sRMinerals_text[3], Color(100,100,100), false, 2.0);
+                    libNtve_gf_CreateDialogItemLabel(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], 200, 50, c_anchorLeft, 234, 20, lib23D7FC40_gv_sRGas_text[3], Color(100,100,100), false, 2.0);
+                }
+
+                if ((lv__count == PlayerGroupPlayer(lib23D7FC40_gv_sRAlliance_4, lv__count))) {
+                    libNtve_gf_CreateDialogItemLabel(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], 200, 50, c_anchorLeft, 98, 20, lib23D7FC40_gv_sRMinerals_text[4], Color(100,100,100), false, 2.0);
+                    libNtve_gf_CreateDialogItemLabel(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], 200, 50, c_anchorLeft, 234, 20, lib23D7FC40_gv_sRGas_text[4], Color(100,100,100), false, 2.0);
+                }
+
+                libNtve_gf_CreateDialogItemLabel(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], 200, 50, c_anchorLeft, 371, 20, (lib23D7FC40_gv_sRSupply_text[lv__count] + (StringExternal("Param/Value/lib_23D7FC40_324CB7C5") + lib23D7FC40_gv_sRTotal_Supply_text[lv__count])), Color(100,100,100), false, 2.0);
+                DialogSetVisible(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][1], PlayerGroupSingle(lv__count), true);
+                DialogSetVisible(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], PlayerGroupSingle(lv__count), true);
+            }
+
+        }
+    }
+    TriggerExecute(lib23D7FC40_gt_SRChangeResourcesDialogForGroup1, true, false);
+    TriggerExecute(lib23D7FC40_gt_SRChangeResourcesDialogForGroup2, true, false);
+    TriggerExecute(lib23D7FC40_gt_SRChangeResourcesDialogForGroup3, true, false);
+    TriggerExecute(lib23D7FC40_gt_SRChangeResourcesDialogForGroup4, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib23D7FC40_gt_SRCreateResourcesDialogForEveryPlayer_Init () {
+    lib23D7FC40_gt_SRCreateResourcesDialogForEveryPlayer = TriggerCreate("lib23D7FC40_gt_SRCreateResourcesDialogForEveryPlayer_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: SR | Change Resources Dialog For Group 1
+//--------------------------------------------------------------------------------------------------
+bool lib23D7FC40_gt_SRChangeResourcesDialogForGroup1_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__count;
+
+    // Automatic Variable Declarations
+    int auto0A784695_ae;
+    const int auto0A784695_ai = 1;
+    string autoE4AA5931_val;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((lib23D7FC40_gv_sRwill_Work_Alliance_1 == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    while (true) {
+        auto0A784695_ae = lib23D7FC40_gv_sRCount_Player;
+        lv__count = 1;
+        for ( ; ( (auto0A784695_ai >= 0 && lv__count <= auto0A784695_ae) || (auto0A784695_ai < 0 && lv__count >= auto0A784695_ae) ) ; lv__count += auto0A784695_ai ) {
+            if (((PlayerStatus(lv__count) == c_playerStatusActive) && (lv__count == PlayerGroupPlayer(lib23D7FC40_gv_sRAlliance_1, lv__count)))) {
+                PlayerModifyPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_1, c_playerPropMinerals, c_playerPropOperAdd, (PlayerGetPropertyInt(lv__count, c_playerPropMinerals) - lib23D7FC40_gv_sRDuplicate_Minerals[lv__count]));
+                lib23D7FC40_gv_sRDuplicate_Minerals[lv__count] = MinI(5, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_1, c_playerPropMinerals));
+                PlayerModifyPropertyInt(lv__count, c_playerPropMinerals, c_playerPropOperSetTo, MinI(5, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_1, c_playerPropMinerals)));
+                PlayerModifyPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_1, c_playerPropVespene, c_playerPropOperAdd, (PlayerGetPropertyInt(lv__count, c_playerPropVespene) - lib23D7FC40_gv_sRDuplicate_Vespen[lv__count]));
+                lib23D7FC40_gv_sRDuplicate_Vespen[lv__count] = MinI(4, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_1, c_playerPropVespene));
+                PlayerModifyPropertyInt(lv__count, c_playerPropVespene, c_playerPropOperSetTo, MinI(4, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_1, c_playerPropVespene)));
+                DialogDestroy(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2]);
+                autoE4AA5931_val = GameAttributeGameValue("2");
+                if (autoE4AA5931_val == "0001") {
+                    DialogCreate(575, 40, c_anchorLeft, 0, 150, true);
+                }
+                else if (autoE4AA5931_val == "0002") {
+                    DialogCreate(575, 40, c_anchorRight, 0, 150, true);
+                }
+                else if (autoE4AA5931_val == "0003") {
+                    DialogCreate(575, 40, c_anchorTopRight, 0, 25, true);
+                }
+                else {
+                }
+                lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2] = DialogLastCreated();
+                DialogSetImageVisible(DialogLastCreated(), false);
+                lib23D7FC40_gv_sRMinerals_text[1] = IntToText(PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_1, c_playerPropMinerals));
+                lib23D7FC40_gv_sRGas_text[1] = IntToText(PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_1, c_playerPropVespene));
+                lib23D7FC40_gv_sRSupply_text[lv__count] = IntToText(PlayerGetPropertyInt(lv__count, c_playerPropSuppliesUsed));
+                if ((PlayerGetPropertyInt(lv__count, c_playerPropSuppliesMade) >= PlayerGetPropertyInt(lv__count, c_playerPropSuppliesLimit))) {
+                    lib23D7FC40_gv_sRTotal_Supply_text[lv__count] = IntToText(PlayerGetPropertyInt(lv__count, c_playerPropSuppliesLimit));
+                }
+                else {
+                    lib23D7FC40_gv_sRTotal_Supply_text[lv__count] = IntToText(PlayerGetPropertyInt(lv__count, c_playerPropSuppliesMade));
+                }
+                libNtve_gf_CreateDialogItemLabel(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], 200, 50, c_anchorLeft, 98, 20, lib23D7FC40_gv_sRMinerals_text[1], Color(100,100,100), false, 2.0);
+                libNtve_gf_CreateDialogItemLabel(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], 200, 50, c_anchorLeft, 234, 20, lib23D7FC40_gv_sRGas_text[1], Color(100,100,100), false, 2.0);
+                libNtve_gf_CreateDialogItemLabel(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], 200, 50, c_anchorLeft, 371, 20, (lib23D7FC40_gv_sRSupply_text[lv__count] + (StringExternal("Param/Value/lib_23D7FC40_467E64CF") + lib23D7FC40_gv_sRTotal_Supply_text[lv__count])), Color(100,100,100), false, 2.0);
+                DialogSetVisible(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], PlayerGroupSingle(lv__count), true);
+                Wait(0.1, c_timeGame);
+            }
+
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib23D7FC40_gt_SRChangeResourcesDialogForGroup1_Init () {
+    lib23D7FC40_gt_SRChangeResourcesDialogForGroup1 = TriggerCreate("lib23D7FC40_gt_SRChangeResourcesDialogForGroup1_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: SR | Change Resources Dialog For Group 2
+//--------------------------------------------------------------------------------------------------
+bool lib23D7FC40_gt_SRChangeResourcesDialogForGroup2_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__count;
+
+    // Automatic Variable Declarations
+    int autoFD9BDA87_ae;
+    const int autoFD9BDA87_ai = 1;
+    string auto1880C596_val;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((lib23D7FC40_gv_sRwill_Work_Alliance_2 == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    while (true) {
+        autoFD9BDA87_ae = lib23D7FC40_gv_sRCount_Player;
+        lv__count = 1;
+        for ( ; ( (autoFD9BDA87_ai >= 0 && lv__count <= autoFD9BDA87_ae) || (autoFD9BDA87_ai < 0 && lv__count >= autoFD9BDA87_ae) ) ; lv__count += autoFD9BDA87_ai ) {
+            if (((PlayerStatus(lv__count) == c_playerStatusActive) && (lv__count == PlayerGroupPlayer(lib23D7FC40_gv_sRAlliance_2, lv__count)))) {
+                PlayerModifyPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_2, c_playerPropMinerals, c_playerPropOperAdd, (PlayerGetPropertyInt(lv__count, c_playerPropMinerals) - lib23D7FC40_gv_sRDuplicate_Minerals[lv__count]));
+                lib23D7FC40_gv_sRDuplicate_Minerals[lv__count] = MinI(5, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_2, c_playerPropMinerals));
+                PlayerModifyPropertyInt(lv__count, c_playerPropMinerals, c_playerPropOperSetTo, MinI(5, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_2, c_playerPropMinerals)));
+                PlayerModifyPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_2, c_playerPropVespene, c_playerPropOperAdd, (PlayerGetPropertyInt(lv__count, c_playerPropVespene) - lib23D7FC40_gv_sRDuplicate_Vespen[lv__count]));
+                lib23D7FC40_gv_sRDuplicate_Vespen[lv__count] = MinI(4, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_2, c_playerPropVespene));
+                PlayerModifyPropertyInt(lv__count, c_playerPropVespene, c_playerPropOperSetTo, MinI(4, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_2, c_playerPropVespene)));
+                DialogDestroy(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2]);
+                auto1880C596_val = GameAttributeGameValue("2");
+                if (auto1880C596_val == "0001") {
+                    DialogCreate(575, 40, c_anchorLeft, 0, 150, true);
+                }
+                else if (auto1880C596_val == "0002") {
+                    DialogCreate(575, 40, c_anchorRight, 0, 150, true);
+                }
+                else if (auto1880C596_val == "0003") {
+                    DialogCreate(575, 40, c_anchorTopRight, 0, 25, true);
+                }
+                else {
+                }
+                lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2] = DialogLastCreated();
+                DialogSetImageVisible(DialogLastCreated(), false);
+                lib23D7FC40_gv_sRMinerals_text[2] = IntToText(PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_2, c_playerPropMinerals));
+                lib23D7FC40_gv_sRGas_text[2] = IntToText(PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_2, c_playerPropVespene));
+                lib23D7FC40_gv_sRSupply_text[lv__count] = IntToText(PlayerGetPropertyInt(lv__count, c_playerPropSuppliesUsed));
+                if ((PlayerGetPropertyInt(lv__count, c_playerPropSuppliesMade) >= PlayerGetPropertyInt(lv__count, c_playerPropSuppliesLimit))) {
+                    lib23D7FC40_gv_sRTotal_Supply_text[lv__count] = IntToText(PlayerGetPropertyInt(lv__count, c_playerPropSuppliesLimit));
+                }
+                else {
+                    lib23D7FC40_gv_sRTotal_Supply_text[lv__count] = IntToText(PlayerGetPropertyInt(lv__count, c_playerPropSuppliesMade));
+                }
+                libNtve_gf_CreateDialogItemLabel(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], 200, 50, c_anchorLeft, 98, 20, lib23D7FC40_gv_sRMinerals_text[2], Color(100,100,100), false, 2.0);
+                libNtve_gf_CreateDialogItemLabel(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], 200, 50, c_anchorLeft, 234, 20, lib23D7FC40_gv_sRGas_text[2], Color(100,100,100), false, 2.0);
+                libNtve_gf_CreateDialogItemLabel(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], 200, 50, c_anchorLeft, 371, 20, (lib23D7FC40_gv_sRSupply_text[lv__count] + (StringExternal("Param/Value/lib_23D7FC40_4216964F") + lib23D7FC40_gv_sRTotal_Supply_text[lv__count])), Color(100,100,100), false, 2.0);
+                DialogSetVisible(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], PlayerGroupSingle(lv__count), true);
+                Wait(0.1, c_timeGame);
+            }
+
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib23D7FC40_gt_SRChangeResourcesDialogForGroup2_Init () {
+    lib23D7FC40_gt_SRChangeResourcesDialogForGroup2 = TriggerCreate("lib23D7FC40_gt_SRChangeResourcesDialogForGroup2_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: SR | Change Resources Dialog For Group 3
+//--------------------------------------------------------------------------------------------------
+bool lib23D7FC40_gt_SRChangeResourcesDialogForGroup3_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__count;
+
+    // Automatic Variable Declarations
+    int auto20BE24E2_ae;
+    const int auto20BE24E2_ai = 1;
+    string autoD40C4B91_val;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((lib23D7FC40_gv_sRwill_Work_Alliance_3 == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    while (true) {
+        auto20BE24E2_ae = lib23D7FC40_gv_sRCount_Player;
+        lv__count = 1;
+        for ( ; ( (auto20BE24E2_ai >= 0 && lv__count <= auto20BE24E2_ae) || (auto20BE24E2_ai < 0 && lv__count >= auto20BE24E2_ae) ) ; lv__count += auto20BE24E2_ai ) {
+            if (((PlayerStatus(lv__count) == c_playerStatusActive) && (lv__count == PlayerGroupPlayer(lib23D7FC40_gv_sRAlliance_3, lv__count)))) {
+                PlayerModifyPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_3, c_playerPropMinerals, c_playerPropOperAdd, (PlayerGetPropertyInt(lv__count, c_playerPropMinerals) - lib23D7FC40_gv_sRDuplicate_Minerals[lv__count]));
+                lib23D7FC40_gv_sRDuplicate_Minerals[lv__count] = MinI(5, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_3, c_playerPropMinerals));
+                PlayerModifyPropertyInt(lv__count, c_playerPropMinerals, c_playerPropOperSetTo, MinI(5, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_3, c_playerPropMinerals)));
+                PlayerModifyPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_3, c_playerPropVespene, c_playerPropOperAdd, (PlayerGetPropertyInt(lv__count, c_playerPropVespene) - lib23D7FC40_gv_sRDuplicate_Vespen[lv__count]));
+                lib23D7FC40_gv_sRDuplicate_Vespen[lv__count] = MinI(4, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_3, c_playerPropVespene));
+                PlayerModifyPropertyInt(lv__count, c_playerPropVespene, c_playerPropOperSetTo, MinI(4, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_3, c_playerPropVespene)));
+                DialogDestroy(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2]);
+                autoD40C4B91_val = GameAttributeGameValue("2");
+                if (autoD40C4B91_val == "0001") {
+                    DialogCreate(575, 40, c_anchorLeft, 0, 150, true);
+                }
+                else if (autoD40C4B91_val == "0002") {
+                    DialogCreate(575, 40, c_anchorRight, 0, 150, true);
+                }
+                else if (autoD40C4B91_val == "0003") {
+                    DialogCreate(575, 40, c_anchorTopRight, 0, 25, true);
+                }
+                else {
+                }
+                lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2] = DialogLastCreated();
+                DialogSetImageVisible(DialogLastCreated(), false);
+                lib23D7FC40_gv_sRMinerals_text[3] = IntToText(PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_3, c_playerPropMinerals));
+                lib23D7FC40_gv_sRGas_text[3] = IntToText(PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_3, c_playerPropVespene));
+                lib23D7FC40_gv_sRSupply_text[lv__count] = IntToText(PlayerGetPropertyInt(lv__count, c_playerPropSuppliesUsed));
+                if ((PlayerGetPropertyInt(lv__count, c_playerPropSuppliesMade) >= PlayerGetPropertyInt(lv__count, c_playerPropSuppliesLimit))) {
+                    lib23D7FC40_gv_sRTotal_Supply_text[lv__count] = IntToText(PlayerGetPropertyInt(lv__count, c_playerPropSuppliesLimit));
+                }
+                else {
+                    lib23D7FC40_gv_sRTotal_Supply_text[lv__count] = IntToText(PlayerGetPropertyInt(lv__count, c_playerPropSuppliesMade));
+                }
+                libNtve_gf_CreateDialogItemLabel(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], 200, 50, c_anchorLeft, 98, 20, lib23D7FC40_gv_sRMinerals_text[3], Color(100,100,100), false, 2.0);
+                libNtve_gf_CreateDialogItemLabel(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], 200, 50, c_anchorLeft, 234, 20, lib23D7FC40_gv_sRGas_text[3], Color(100,100,100), false, 2.0);
+                libNtve_gf_CreateDialogItemLabel(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], 200, 50, c_anchorLeft, 371, 20, (lib23D7FC40_gv_sRSupply_text[lv__count] + (StringExternal("Param/Value/lib_23D7FC40_256F1207") + lib23D7FC40_gv_sRTotal_Supply_text[lv__count])), Color(100,100,100), false, 2.0);
+                DialogSetVisible(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], PlayerGroupSingle(lv__count), true);
+                Wait(0.1, c_timeGame);
+            }
+
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib23D7FC40_gt_SRChangeResourcesDialogForGroup3_Init () {
+    lib23D7FC40_gt_SRChangeResourcesDialogForGroup3 = TriggerCreate("lib23D7FC40_gt_SRChangeResourcesDialogForGroup3_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: SR | Change Resources Dialog For Group 4
+//--------------------------------------------------------------------------------------------------
+bool lib23D7FC40_gt_SRChangeResourcesDialogForGroup4_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__count;
+
+    // Automatic Variable Declarations
+    int auto92F6E61F_ae;
+    const int auto92F6E61F_ai = 1;
+    string autoC23028A5_val;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((lib23D7FC40_gv_sRwill_Work_Alliance_4 == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    while (true) {
+        auto92F6E61F_ae = lib23D7FC40_gv_sRCount_Player;
+        lv__count = 1;
+        for ( ; ( (auto92F6E61F_ai >= 0 && lv__count <= auto92F6E61F_ae) || (auto92F6E61F_ai < 0 && lv__count >= auto92F6E61F_ae) ) ; lv__count += auto92F6E61F_ai ) {
+            if (((PlayerStatus(lv__count) == c_playerStatusActive) && (lv__count == PlayerGroupPlayer(lib23D7FC40_gv_sRAlliance_4, lv__count)))) {
+                PlayerModifyPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_4, c_playerPropMinerals, c_playerPropOperAdd, (PlayerGetPropertyInt(lv__count, c_playerPropMinerals) - lib23D7FC40_gv_sRDuplicate_Minerals[lv__count]));
+                lib23D7FC40_gv_sRDuplicate_Minerals[lv__count] = MinI(5, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_4, c_playerPropMinerals));
+                PlayerModifyPropertyInt(lv__count, c_playerPropMinerals, c_playerPropOperSetTo, MinI(5, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_4, c_playerPropMinerals)));
+                PlayerModifyPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_4, c_playerPropVespene, c_playerPropOperAdd, (PlayerGetPropertyInt(lv__count, c_playerPropVespene) - lib23D7FC40_gv_sRDuplicate_Vespen[lv__count]));
+                lib23D7FC40_gv_sRDuplicate_Vespen[lv__count] = MinI(4, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_4, c_playerPropVespene));
+                PlayerModifyPropertyInt(lv__count, c_playerPropVespene, c_playerPropOperSetTo, MinI(4, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_4, c_playerPropVespene)));
+                DialogDestroy(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2]);
+                autoC23028A5_val = GameAttributeGameValue("2");
+                if (autoC23028A5_val == "0001") {
+                    DialogCreate(575, 40, c_anchorLeft, 0, 150, true);
+                }
+                else if (autoC23028A5_val == "0002") {
+                    DialogCreate(575, 40, c_anchorRight, 0, 150, true);
+                }
+                else if (autoC23028A5_val == "0003") {
+                    DialogCreate(575, 40, c_anchorTopRight, 0, 25, true);
+                }
+                else {
+                }
+                lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2] = DialogLastCreated();
+                DialogSetImageVisible(DialogLastCreated(), false);
+                lib23D7FC40_gv_sRMinerals_text[4] = IntToText(PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_4, c_playerPropMinerals));
+                lib23D7FC40_gv_sRGas_text[4] = IntToText(PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_4, c_playerPropVespene));
+                lib23D7FC40_gv_sRSupply_text[lv__count] = IntToText(PlayerGetPropertyInt(lv__count, c_playerPropSuppliesUsed));
+                if ((PlayerGetPropertyInt(lv__count, c_playerPropSuppliesMade) >= PlayerGetPropertyInt(lv__count, c_playerPropSuppliesLimit))) {
+                    lib23D7FC40_gv_sRTotal_Supply_text[lv__count] = IntToText(PlayerGetPropertyInt(lv__count, c_playerPropSuppliesLimit));
+                }
+                else {
+                    lib23D7FC40_gv_sRTotal_Supply_text[lv__count] = IntToText(PlayerGetPropertyInt(lv__count, c_playerPropSuppliesMade));
+                }
+                libNtve_gf_CreateDialogItemLabel(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], 200, 50, c_anchorLeft, 98, 20, lib23D7FC40_gv_sRMinerals_text[4], Color(100,100,100), false, 2.0);
+                libNtve_gf_CreateDialogItemLabel(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], 200, 50, c_anchorLeft, 234, 20, lib23D7FC40_gv_sRGas_text[4], Color(100,100,100), false, 2.0);
+                libNtve_gf_CreateDialogItemLabel(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], 200, 50, c_anchorLeft, 371, 20, (lib23D7FC40_gv_sRSupply_text[lv__count] + (StringExternal("Param/Value/lib_23D7FC40_BE47391A") + lib23D7FC40_gv_sRTotal_Supply_text[lv__count])), Color(100,100,100), false, 2.0);
+                DialogSetVisible(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], PlayerGroupSingle(lv__count), true);
+                Wait(0.1, c_timeGame);
+            }
+
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib23D7FC40_gt_SRChangeResourcesDialogForGroup4_Init () {
+    lib23D7FC40_gt_SRChangeResourcesDialogForGroup4 = TriggerCreate("lib23D7FC40_gt_SRChangeResourcesDialogForGroup4_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: SR | Create Resources Dialog For Enemy
+//--------------------------------------------------------------------------------------------------
+bool lib23D7FC40_gt_SRCreateResourcesDialogForEnemy_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__count;
+
+    // Automatic Variable Declarations
+    int autoB43309AE_ae;
+    const int autoB43309AE_ai = 1;
+    string autoF13BF5F8_val;
+    string autoCDE64B23_val;
+    string auto27FA96FE_val;
+    string autoF4CA26E5_val;
+    string autoDD891753_val;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((lib23D7FC40_gv_sRwill_Work_Alliance_Enemy == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    autoB43309AE_ae = lib23D7FC40_gv_sRCount_Player;
+    lv__count = 1;
+    for ( ; ( (autoB43309AE_ai >= 0 && lv__count <= autoB43309AE_ae) || (autoB43309AE_ai < 0 && lv__count >= autoB43309AE_ae) ) ; lv__count += autoB43309AE_ai ) {
+        if (((PlayerStatus(lv__count) == c_playerStatusActive) && (lv__count == PlayerGroupPlayer(lib23D7FC40_gv_sRAlliance_Enemy, lv__count)))) {
+            PlayerModifyPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_Enemy, c_playerPropMinerals, c_playerPropOperAdd, (PlayerGetPropertyInt(lv__count, c_playerPropMinerals) - lib23D7FC40_gv_sRDuplicate_Minerals[lv__count]));
+            lib23D7FC40_gv_sRDuplicate_Minerals[lv__count] = MinI(5, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_Enemy, c_playerPropMinerals));
+            PlayerModifyPropertyInt(lv__count, c_playerPropMinerals, c_playerPropOperSetTo, MinI(5, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_Enemy, c_playerPropMinerals)));
+            PlayerModifyPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_Enemy, c_playerPropVespene, c_playerPropOperAdd, (PlayerGetPropertyInt(lv__count, c_playerPropVespene) - lib23D7FC40_gv_sRDuplicate_Vespen[lv__count]));
+            lib23D7FC40_gv_sRDuplicate_Vespen[lv__count] = MinI(4, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_Enemy, c_playerPropVespene));
+            PlayerModifyPropertyInt(lv__count, c_playerPropVespene, c_playerPropOperSetTo, MinI(4, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_Enemy, c_playerPropVespene)));
+            autoF13BF5F8_val = GameAttributeGameValue("2");
+            if (autoF13BF5F8_val == "0001") {
+                DialogCreate(lib23D7FC40_gv_sRDialog_Width, lib23D7FC40_gv_sRDialog_Height, c_anchorLeft, 0, 150, true);
+            }
+            else if (autoF13BF5F8_val == "0002") {
+                DialogCreate(lib23D7FC40_gv_sRDialog_Width, lib23D7FC40_gv_sRDialog_Height, c_anchorRight, 0, 150, true);
+            }
+            else if (autoF13BF5F8_val == "0003") {
+                DialogCreate(lib23D7FC40_gv_sRDialog_Width, lib23D7FC40_gv_sRDialog_Height, c_anchorTopRight, lib23D7FC40_gv_sRDialog_OffsetX, lib23D7FC40_gv_sRDialog_OffsetY, true);
+            }
+            else {
+            }
+            lib23D7FC40_gv_sRResourceDialog_Players[lv__count][1] = DialogLastCreated();
+            DialogSetImageVisible(DialogLastCreated(), false);
+            autoCDE64B23_val = PlayerRace(lv__count);
+            if (autoCDE64B23_val == "Prot") {
+                libNtve_gf_CreateDialogItemImage(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][1], lib23D7FC40_gv_sRIcon, lib23D7FC40_gv_sRIcon, c_anchorLeft, lib23D7FC40_gv_sRImage_1_OffsetX, lib23D7FC40_gv_sRImage_OffsetY, StringExternal("Param/Value/lib_23D7FC40_9805892B"), "Assets\\Textures\\icon-mineral-nobg.dds", c_triggerImageTypeNormal, false, Color(100,100,100), c_triggerBlendModeNormal);
+                lib23D7FC40_gv_sRMinerals_image[lv__count] = DialogControlLastCreated();
+                libNtve_gf_CreateDialogItemImage(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][1], lib23D7FC40_gv_sRIcon, lib23D7FC40_gv_sRIcon, c_anchorLeft, lib23D7FC40_gv_sRImage_2_OffsetX, lib23D7FC40_gv_sRImage_OffsetY, StringExternal("Param/Value/lib_23D7FC40_A3D704B0"), "Assets\\Textures\\icon-gas-protoss-nobg.dds", c_triggerImageTypeNormal, false, Color(100,100,100), c_triggerBlendModeNormal);
+                lib23D7FC40_gv_sRGas_image[lv__count] = DialogControlLastCreated();
+            }
+            else if (autoCDE64B23_val == "Terr") {
+                libNtve_gf_CreateDialogItemImage(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][1], lib23D7FC40_gv_sRIcon, lib23D7FC40_gv_sRIcon, c_anchorLeft, lib23D7FC40_gv_sRImage_1_OffsetX, 0, StringExternal("Param/Value/lib_23D7FC40_3B24FC2E"), "Assets\\Textures\\icon-mineral-terran.dds", c_triggerImageTypeNormal, false, Color(100,100,100), c_triggerBlendModeNormal);
+                lib23D7FC40_gv_sRMinerals_image[lv__count] = DialogControlLastCreated();
+                libNtve_gf_CreateDialogItemImage(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][1], lib23D7FC40_gv_sRIcon, lib23D7FC40_gv_sRIcon, c_anchorLeft, lib23D7FC40_gv_sRImage_2_OffsetX, 0, StringExternal("Param/Value/lib_23D7FC40_227CD597"), "Assets\\Textures\\icon-gas-terran.dds", c_triggerImageTypeNormal, false, Color(100,100,100), c_triggerBlendModeNormal);
+                lib23D7FC40_gv_sRGas_image[lv__count] = DialogControlLastCreated();
+            }
+            else if (autoCDE64B23_val == "Zerg") {
+                libNtve_gf_CreateDialogItemImage(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][1], lib23D7FC40_gv_sRIcon, lib23D7FC40_gv_sRIcon, c_anchorLeft, lib23D7FC40_gv_sRImage_1_OffsetX, 0, StringExternal("Param/Value/lib_23D7FC40_8D7C998F"), "Assets\\Textures\\icon-mineral-zerg.dds", c_triggerImageTypeNormal, false, Color(100,100,100), c_triggerBlendModeNormal);
+                lib23D7FC40_gv_sRMinerals_image[lv__count] = DialogControlLastCreated();
+                libNtve_gf_CreateDialogItemImage(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][1], lib23D7FC40_gv_sRIcon, lib23D7FC40_gv_sRIcon, c_anchorLeft, lib23D7FC40_gv_sRImage_2_OffsetX, 0, StringExternal("Param/Value/lib_23D7FC40_AB10BE36"), "Assets\\Textures\\icon-gas-zerg.dds", c_triggerImageTypeNormal, false, Color(100,100,100), c_triggerBlendModeNormal);
+                lib23D7FC40_gv_sRGas_image[lv__count] = DialogControlLastCreated();
+            }
+            else {
+            }
+            auto27FA96FE_val = GameAttributeGameValue("2");
+            if (auto27FA96FE_val == "0001") {
+                DialogCreate(lib23D7FC40_gv_sRDialog_Width, lib23D7FC40_gv_sRDialog_Height, c_anchorLeft, 0, 150, true);
+            }
+            else if (auto27FA96FE_val == "0002") {
+                DialogCreate(lib23D7FC40_gv_sRDialog_Width, lib23D7FC40_gv_sRDialog_Height, c_anchorRight, 0, 150, true);
+            }
+            else if (auto27FA96FE_val == "0003") {
+                DialogCreate(lib23D7FC40_gv_sRDialog_Width, lib23D7FC40_gv_sRDialog_Height, c_anchorTopRight, lib23D7FC40_gv_sRDialog_OffsetX, lib23D7FC40_gv_sRDialog_OffsetY, true);
+            }
+            else {
+            }
+            lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2] = DialogLastCreated();
+            DialogSetImageVisible(DialogLastCreated(), false);
+            lib23D7FC40_gv_sRMinerals_text[0] = IntToText(PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_Enemy, c_playerPropMinerals));
+            lib23D7FC40_gv_sRGas_text[0] = IntToText(PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_Enemy, c_playerPropVespene));
+            lib23D7FC40_gv_sRSupply_text[lv__count] = IntToText(PlayerGetPropertyInt(lv__count, c_playerPropSuppliesUsed));
+            lib23D7FC40_gv_sRTotal_Supply_text[lv__count] = IntToText(PlayerGetPropertyInt(lv__count, c_playerPropSuppliesMade));
+            libNtve_gf_CreateDialogItemLabel(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], lib23D7FC40_gv_sRData_Width, lib23D7FC40_gv_sRData_Height, c_anchorLeft, lib23D7FC40_gv_sRData_1_OffsetX, lib23D7FC40_gv_sRData_OffsetY, lib23D7FC40_gv_sRMinerals_text[0], Color(100,100,100), false, 2.0);
+            libNtve_gf_SetDialogItemStyle(DialogControlLastCreated(), "ResourcePanel", PlayerGroupSingle(lv__count));
+            libNtve_gf_CreateDialogItemLabel(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], lib23D7FC40_gv_sRData_Width, lib23D7FC40_gv_sRData_Height, c_anchorLeft, lib23D7FC40_gv_sRData_2_OffsetX, lib23D7FC40_gv_sRData_OffsetY, lib23D7FC40_gv_sRGas_text[0], Color(100,100,100), false, 2.0);
+            libNtve_gf_SetDialogItemStyle(DialogControlLastCreated(), "ResourcePanel", PlayerGroupSingle(lv__count));
+            libNtve_gf_CreateDialogItemLabel(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], 200, lib23D7FC40_gv_sRData_Height, c_anchorLeft, lib23D7FC40_gv_sRData_3_OffsetX_text, lib23D7FC40_gv_sRData_OffsetY, lib23D7FC40_gv_sRCommon_text, Color(100,100,100), false, 2.0);
+            libNtve_gf_SetDialogItemStyle(DialogControlLastCreated(), "ResourcePanel", PlayerGroupSingle(lv__count));
+            DialogSetVisible(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][1], PlayerGroupSingle(lv__count), true);
+            DialogSetVisible(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], PlayerGroupSingle(lv__count), true);
+        }
+
+    }
+    autoF4CA26E5_val = GameAttributeGameValue("2");
+    if (autoF4CA26E5_val == "0001") {
+        DialogCreate(lib23D7FC40_gv_sRDialog_Width, lib23D7FC40_gv_sRDialog_Height, c_anchorLeft, 0, 150, true);
+    }
+    else if (autoF4CA26E5_val == "0002") {
+        DialogCreate(lib23D7FC40_gv_sRDialog_Width, lib23D7FC40_gv_sRDialog_Height, c_anchorRight, 0, 150, true);
+    }
+    else if (autoF4CA26E5_val == "0003") {
+        DialogCreate(lib23D7FC40_gv_sRDialog_Width, lib23D7FC40_gv_sRDialog_Height, c_anchorTopRight, lib23D7FC40_gv_sRDialog_OffsetX, lib23D7FC40_gv_sRDialog_OffsetY, true);
+    }
+    else {
+    }
+    lib23D7FC40_gv_sRResourceDialog_Players[lib23D7FC40_gv_sRObserver][1] = DialogLastCreated();
+    DialogSetImageVisible(DialogLastCreated(), false);
+    libNtve_gf_CreateDialogItemImage(lib23D7FC40_gv_sRResourceDialog_Players[lib23D7FC40_gv_sRObserver][1], lib23D7FC40_gv_sRIcon, lib23D7FC40_gv_sRIcon, c_anchorLeft, lib23D7FC40_gv_sRImage_1_OffsetX, lib23D7FC40_gv_sRImage_OffsetY, StringExternal("Param/Value/lib_23D7FC40_9B9C7FF1"), "Assets\\Textures\\icon-mineral-nobg.dds", c_triggerImageTypeNormal, false, Color(100,100,100), c_triggerBlendModeNormal);
+    lib23D7FC40_gv_sRMinerals_image[14] = DialogControlLastCreated();
+    libNtve_gf_CreateDialogItemImage(lib23D7FC40_gv_sRResourceDialog_Players[lib23D7FC40_gv_sRObserver][1], lib23D7FC40_gv_sRIcon, lib23D7FC40_gv_sRIcon, c_anchorLeft, lib23D7FC40_gv_sRImage_2_OffsetX, lib23D7FC40_gv_sRImage_OffsetY, StringExternal("Param/Value/lib_23D7FC40_07C55688"), "Assets\\Textures\\icon-gas-protoss-nobg.dds", c_triggerImageTypeNormal, false, Color(100,100,100), c_triggerBlendModeNormal);
+    lib23D7FC40_gv_sRGas_image[14] = DialogControlLastCreated();
+    libNtve_gf_CreateDialogItemImage(lib23D7FC40_gv_sRResourceDialog_Players[lib23D7FC40_gv_sRObserver][1], lib23D7FC40_gv_sRIcon, lib23D7FC40_gv_sRIcon, c_anchorLeft, lib23D7FC40_gv_sRImage_3_OffsetX, lib23D7FC40_gv_sRImage_OffsetY, StringExternal("Param/Value/lib_23D7FC40_63E69B4C"), "Assets\\Textures\\icon-supply-protoss_nobg.dds", c_triggerImageTypeNormal, false, Color(100,100,100), c_triggerBlendModeNormal);
+    lib23D7FC40_gv_sRSupply_image[14] = DialogControlLastCreated();
+    autoDD891753_val = GameAttributeGameValue("2");
+    if (autoDD891753_val == "0001") {
+        DialogCreate(lib23D7FC40_gv_sRDialog_Width, lib23D7FC40_gv_sRDialog_Height, c_anchorLeft, 0, 150, true);
+    }
+    else if (autoDD891753_val == "0002") {
+        DialogCreate(lib23D7FC40_gv_sRDialog_Width, lib23D7FC40_gv_sRDialog_Height, c_anchorRight, 0, 150, true);
+    }
+    else if (autoDD891753_val == "0003") {
+        DialogCreate(lib23D7FC40_gv_sRDialog_Width, lib23D7FC40_gv_sRDialog_Height, c_anchorTopRight, lib23D7FC40_gv_sRDialog_OffsetX, lib23D7FC40_gv_sRDialog_OffsetY, true);
+    }
+    else {
+    }
+    lib23D7FC40_gv_sRResourceDialog_Players[lib23D7FC40_gv_sRObserver][2] = DialogLastCreated();
+    DialogSetImageVisible(DialogLastCreated(), false);
+    libNtve_gf_CreateDialogItemLabel(lib23D7FC40_gv_sRResourceDialog_Players[lib23D7FC40_gv_sRObserver][2], lib23D7FC40_gv_sRData_Width, lib23D7FC40_gv_sRDialog_Height, c_anchorLeft, lib23D7FC40_gv_sRData_1_OffsetX, lib23D7FC40_gv_sRData_OffsetY, lib23D7FC40_gv_sRMinerals_text[0], Color(100,100,100), false, 2.0);
+    libNtve_gf_SetDialogItemStyle(DialogControlLastCreated(), "ResourcePanel", PlayerGroupSingle(lv__count));
+    libNtve_gf_CreateDialogItemLabel(lib23D7FC40_gv_sRResourceDialog_Players[lib23D7FC40_gv_sRObserver][2], lib23D7FC40_gv_sRData_Width, lib23D7FC40_gv_sRData_Height, c_anchorLeft, lib23D7FC40_gv_sRData_2_OffsetX, lib23D7FC40_gv_sRData_OffsetY, lib23D7FC40_gv_sRGas_text[0], Color(100,100,100), false, 2.0);
+    libNtve_gf_SetDialogItemStyle(DialogControlLastCreated(), "ResourcePanel", PlayerGroupSingle(lv__count));
+    DialogSetVisible(lib23D7FC40_gv_sRResourceDialog_Players[lib23D7FC40_gv_sRObserver][1], PlayerGroupSingle(lib23D7FC40_gv_sRObserver), true);
+    DialogSetVisible(lib23D7FC40_gv_sRResourceDialog_Players[lib23D7FC40_gv_sRObserver][2], PlayerGroupSingle(lib23D7FC40_gv_sRObserver), true);
+    TriggerExecute(lib23D7FC40_gt_SRChangeResourcesDialogForEnemy, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib23D7FC40_gt_SRCreateResourcesDialogForEnemy_Init () {
+    lib23D7FC40_gt_SRCreateResourcesDialogForEnemy = TriggerCreate("lib23D7FC40_gt_SRCreateResourcesDialogForEnemy_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: SR | Change Resources Dialog For Enemy
+//--------------------------------------------------------------------------------------------------
+bool lib23D7FC40_gt_SRChangeResourcesDialogForEnemy_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__count;
+
+    // Automatic Variable Declarations
+    int auto51B7F48B_ae;
+    const int auto51B7F48B_ai = 1;
+    string auto9073458D_val;
+    string auto7B3C1BEF_val;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((lib23D7FC40_gv_sRwill_Work_Alliance_Enemy == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    while (true) {
+        auto51B7F48B_ae = lib23D7FC40_gv_sRCount_Player;
+        lv__count = 1;
+        for ( ; ( (auto51B7F48B_ai >= 0 && lv__count <= auto51B7F48B_ae) || (auto51B7F48B_ai < 0 && lv__count >= auto51B7F48B_ae) ) ; lv__count += auto51B7F48B_ai ) {
+            if (((PlayerStatus(lv__count) == c_playerStatusActive) && (lv__count == PlayerGroupPlayer(lib23D7FC40_gv_sRAlliance_Enemy, lv__count)))) {
+                PlayerModifyPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_Enemy, c_playerPropMinerals, c_playerPropOperAdd, (PlayerGetPropertyInt(lv__count, c_playerPropMinerals) - lib23D7FC40_gv_sRDuplicate_Minerals[lv__count]));
+                lib23D7FC40_gv_sRDuplicate_Minerals[lv__count] = MinI(5, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_Enemy, c_playerPropMinerals));
+                PlayerModifyPropertyInt(lv__count, c_playerPropMinerals, c_playerPropOperSetTo, MinI(5, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_Enemy, c_playerPropMinerals)));
+                PlayerModifyPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_Enemy, c_playerPropVespene, c_playerPropOperAdd, (PlayerGetPropertyInt(lv__count, c_playerPropVespene) - lib23D7FC40_gv_sRDuplicate_Vespen[lv__count]));
+                lib23D7FC40_gv_sRDuplicate_Vespen[lv__count] = MinI(4, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_Enemy, c_playerPropVespene));
+                PlayerModifyPropertyInt(lv__count, c_playerPropVespene, c_playerPropOperSetTo, MinI(4, PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_Enemy, c_playerPropVespene)));
+                DialogDestroy(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2]);
+                auto9073458D_val = GameAttributeGameValue("2");
+                if (auto9073458D_val == "0001") {
+                    DialogCreate(lib23D7FC40_gv_sRDialog_Width, lib23D7FC40_gv_sRDialog_Height, c_anchorLeft, 0, 150, true);
+                }
+                else if (auto9073458D_val == "0002") {
+                    DialogCreate(lib23D7FC40_gv_sRDialog_Width, lib23D7FC40_gv_sRDialog_Height, c_anchorRight, 0, 150, true);
+                }
+                else if (auto9073458D_val == "0003") {
+                    DialogCreate(lib23D7FC40_gv_sRDialog_Width, lib23D7FC40_gv_sRDialog_Height, c_anchorTopRight, lib23D7FC40_gv_sRDialog_OffsetX, lib23D7FC40_gv_sRDialog_OffsetY, true);
+                }
+                else {
+                }
+                lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2] = DialogLastCreated();
+                DialogSetImageVisible(DialogLastCreated(), false);
+                lib23D7FC40_gv_sRMinerals_text[0] = IntToText(PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_Enemy, c_playerPropMinerals));
+                lib23D7FC40_gv_sRGas_text[0] = IntToText(PlayerGetPropertyInt(lib23D7FC40_gv_sRCommonPlayer_Alliance_Enemy, c_playerPropVespene));
+                lib23D7FC40_gv_sRSupply_text[lv__count] = IntToText(PlayerGetPropertyInt(lv__count, c_playerPropSuppliesUsed));
+                if ((PlayerGetPropertyInt(lv__count, c_playerPropSuppliesMade) >= PlayerGetPropertyInt(lv__count, c_playerPropSuppliesLimit))) {
+                    lib23D7FC40_gv_sRTotal_Supply_text[lv__count] = IntToText(PlayerGetPropertyInt(lv__count, c_playerPropSuppliesLimit));
+                }
+                else {
+                    lib23D7FC40_gv_sRTotal_Supply_text[lv__count] = IntToText(PlayerGetPropertyInt(lv__count, c_playerPropSuppliesMade));
+                }
+                libNtve_gf_CreateDialogItemLabel(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], lib23D7FC40_gv_sRData_Width, lib23D7FC40_gv_sRData_Height, c_anchorLeft, lib23D7FC40_gv_sRData_1_OffsetX, lib23D7FC40_gv_sRData_OffsetY, lib23D7FC40_gv_sRMinerals_text[0], Color(100,100,100), false, 2.0);
+                libNtve_gf_SetDialogItemStyle(DialogControlLastCreated(), "ResourcePanel", PlayerGroupSingle(lv__count));
+                libNtve_gf_CreateDialogItemLabel(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], lib23D7FC40_gv_sRData_Width, lib23D7FC40_gv_sRData_Height, c_anchorLeft, lib23D7FC40_gv_sRData_2_OffsetX, lib23D7FC40_gv_sRData_OffsetY, lib23D7FC40_gv_sRGas_text[0], Color(100,100,100), false, 2.0);
+                libNtve_gf_SetDialogItemStyle(DialogControlLastCreated(), "ResourcePanel", PlayerGroupSingle(lv__count));
+                libNtve_gf_CreateDialogItemLabel(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], 200, lib23D7FC40_gv_sRData_Height, c_anchorLeft, lib23D7FC40_gv_sRData_3_OffsetX_text, lib23D7FC40_gv_sRData_OffsetY, lib23D7FC40_gv_sRCommon_text, Color(100,100,100), false, 2.0);
+                libNtve_gf_SetDialogItemStyle(DialogControlLastCreated(), "ResourcePanel", PlayerGroupSingle(lv__count));
+                DialogSetVisible(lib23D7FC40_gv_sRResourceDialog_Players[lv__count][2], PlayerGroupSingle(lv__count), true);
+            }
+
+        }
+        DialogDestroy(lib23D7FC40_gv_sRResourceDialog_Players[lib23D7FC40_gv_sRObserver][2]);
+        auto7B3C1BEF_val = GameAttributeGameValue("2");
+        if (auto7B3C1BEF_val == "0001") {
+            DialogCreate(300, 40, c_anchorLeft, 0, 150, true);
+        }
+        else if (auto7B3C1BEF_val == "0002") {
+            DialogCreate(300, 40, c_anchorRight, 0, 150, true);
+        }
+        else if (auto7B3C1BEF_val == "0003") {
+            DialogCreate(lib23D7FC40_gv_sRDialog_Width, lib23D7FC40_gv_sRDialog_Height, c_anchorTopRight, lib23D7FC40_gv_sRDialog_OffsetX, lib23D7FC40_gv_sRDialog_OffsetY, true);
+        }
+        else {
+        }
+        lib23D7FC40_gv_sRResourceDialog_Players[lib23D7FC40_gv_sRObserver][2] = DialogLastCreated();
+        DialogSetImageVisible(DialogLastCreated(), false);
+        libNtve_gf_CreateDialogItemLabel(lib23D7FC40_gv_sRResourceDialog_Players[lib23D7FC40_gv_sRObserver][2], lib23D7FC40_gv_sRData_Width, lib23D7FC40_gv_sRData_Height, c_anchorLeft, lib23D7FC40_gv_sRData_1_OffsetX, lib23D7FC40_gv_sRData_OffsetY, lib23D7FC40_gv_sRMinerals_text[0], Color(100,100,100), false, 2.0);
+        libNtve_gf_SetDialogItemStyle(DialogControlLastCreated(), "ResourcePanel", PlayerGroupSingle(lv__count));
+        libNtve_gf_CreateDialogItemLabel(lib23D7FC40_gv_sRResourceDialog_Players[lib23D7FC40_gv_sRObserver][2], lib23D7FC40_gv_sRData_Width, lib23D7FC40_gv_sRData_Height, c_anchorLeft, lib23D7FC40_gv_sRData_2_OffsetX, lib23D7FC40_gv_sRData_OffsetY, lib23D7FC40_gv_sRGas_text[0], Color(100,100,100), false, 2.0);
+        libNtve_gf_SetDialogItemStyle(DialogControlLastCreated(), "ResourcePanel", PlayerGroupSingle(lv__count));
+        DialogSetVisible(lib23D7FC40_gv_sRResourceDialog_Players[lib23D7FC40_gv_sRObserver][2], PlayerGroupSingle(lib23D7FC40_gv_sRObserver), true);
+        Wait(0.1, c_timeGame);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib23D7FC40_gt_SRChangeResourcesDialogForEnemy_Init () {
+    lib23D7FC40_gt_SRChangeResourcesDialogForEnemy = TriggerCreate("lib23D7FC40_gt_SRChangeResourcesDialogForEnemy_Func");
+}
+
+void lib23D7FC40_InitTriggers () {
+    lib23D7FC40_gt_SRmax_count_Init();
+    lib23D7FC40_gt_SRLaunch_Init();
+    lib23D7FC40_gt_SRObserver_Init();
+    lib23D7FC40_gt_SRCreateResourcesDialogForEveryPlayer_Init();
+    lib23D7FC40_gt_SRChangeResourcesDialogForGroup1_Init();
+    lib23D7FC40_gt_SRChangeResourcesDialogForGroup2_Init();
+    lib23D7FC40_gt_SRChangeResourcesDialogForGroup3_Init();
+    lib23D7FC40_gt_SRChangeResourcesDialogForGroup4_Init();
+    lib23D7FC40_gt_SRCreateResourcesDialogForEnemy_Init();
+    lib23D7FC40_gt_SRChangeResourcesDialogForEnemy_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool lib23D7FC40_InitLib_completed = false;
+
+void lib23D7FC40_InitLib () {
+    if (lib23D7FC40_InitLib_completed) {
+        return;
+    }
+
+    lib23D7FC40_InitLib_completed = true;
+
+    lib23D7FC40_InitLibraries();
+    lib23D7FC40_InitVariables();
+    lib23D7FC40_InitTriggers();
+}
+

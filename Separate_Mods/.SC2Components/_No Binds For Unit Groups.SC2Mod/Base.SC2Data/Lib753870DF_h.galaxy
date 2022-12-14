@@ -1,0 +1,21 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: No Bind Unit Group
+//--------------------------------------------------------------------------------------------------
+// Variable Declarations
+playergroup lib753870DF_gv_group_BindOfUnit;
+playergroup lib753870DF_gv_group_LocationBind;
+playergroup lib753870DF_gv_group_F2;
+playergroup lib753870DF_gv_group_F1;
+playergroup lib753870DF_gv_group_WarpIn;
+playergroup lib753870DF_gv_group_CameraFollow;
+playergroup lib753870DF_gv_group_Other;
+
+// Trigger Declarations
+trigger lib753870DF_gt_create_Groups;
+trigger lib753870DF_gt_disable_Options;
+
+// Library Initialization
+void lib753870DF_InitVariables ();
+

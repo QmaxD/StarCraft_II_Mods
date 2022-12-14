@@ -1,0 +1,1199 @@
+include "TriggerLibs/NativeLib"
+
+include "Lib974E4208_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void lib974E4208_InitLibraries () {
+    libNtve_InitVariables();
+}
+
+// Variable Initialization
+bool lib974E4208_InitVariables_completed = false;
+
+void lib974E4208_InitVariables () {
+    int init_i;
+
+    if (lib974E4208_InitVariables_completed) {
+        return;
+    }
+
+    lib974E4208_InitVariables_completed = true;
+
+    lib974E4208_gv_uTBRScoreboard = c_invalidDialogId;
+    for (init_i = 0; init_i <= 15; init_i += 1) {
+        lib974E4208_gv_uTBRScoreboardScore[init_i] = c_invalidDialogControlId;
+    }
+    for (init_i = 0; init_i <= 15; init_i += 1) {
+        lib974E4208_gv_uTBRGet_PlayerTeam[init_i] = PlayerGroupEmpty();
+    }
+    lib974E4208_gv_uTBRGet_RadiusOf_DangerArea = 10.0;
+    for (init_i = 0; init_i <= 15; init_i += 1) {
+        lib974E4208_gv_uTBRGet_Danger_Area[init_i] = RegionEmpty();
+    }
+    lib974E4208_gv_uTBRGet_TimerFor_TheFirstCreateBomb = TimerCreate();
+    lib974E4208_gv_uTBRGet_TimerWindowFor_TheFirstCreateBomb = c_timerWindowNone;
+    lib974E4208_gv_uTBRGet_TimerFor_Game = TimerCreate();
+    lib974E4208_gv_uTBRGet_TimerWindowFor_Game = c_timerWindowNone;
+    lib974E4208_gv_uTBRGet_TimerFor_Round = TimerCreate();
+    lib974E4208_gv_uTBRGet_TimerWindowFor_Round = c_timerWindowNone;
+    lib974E4208_gv_uTBRGet_TimerFor_Wait = TimerCreate();
+    lib974E4208_gv_uTBRGet_TimerWindowFor_Wait = c_timerWindowNone;
+    lib974E4208_gv_uTBRGet_Wait_BetweenBomb = 30;
+    lib974E4208_gv_uTBRGet_Start_PositionOf_Bomb = RegionRandomPoint(lib974E4208_gf_UTBRGetRight_RegionIn_CenterOf_Map());
+    lib974E4208_gv_uTBRGet_Bomb_Area = RegionEmpty();
+}
+
+// Functions
+point lib974E4208_gf_UTBRGerRight_CenterOf_Map () {
+    // Variable Declarations
+    fixed lv_currentX;
+    fixed lv_currentY;
+    int lv_playersInGame;
+
+    // Automatic Variable Declarations
+    playergroup autoBD157CD7_g;
+    int autoBD157CD7_var;
+
+    // Variable Initialization
+
+    // Implementation
+    autoBD157CD7_g = PlayerGroupAll();
+    autoBD157CD7_var = -1;
+    while (true) {
+        autoBD157CD7_var = PlayerGroupNextPlayer(autoBD157CD7_g, autoBD157CD7_var);
+        if (autoBD157CD7_var < 0) { break; }
+        if ((PlayerStatus(autoBD157CD7_var) == c_playerStatusActive)) {
+            lv_currentX += PointGetX(PlayerStartLocation(autoBD157CD7_var));
+            lv_currentY += PointGetY(PlayerStartLocation(autoBD157CD7_var));
+            lv_playersInGame += 1;
+        }
+
+    }
+    return Point((lv_currentX / lv_playersInGame), (lv_currentY / lv_playersInGame));
+}
+
+region lib974E4208_gf_UTBRGetRight_RegionIn_CenterOf_Map () {
+    // Variable Declarations
+    fixed lv__radius;
+    region lv__region;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv__radius = 3.0;
+    lv__region = RegionEmpty();
+
+    // Implementation
+    lv__region = RegionCircle(lib974E4208_gf_UTBRGerRight_CenterOf_Map(), lv__radius);
+    return lv__region;
+}
+
+bool lib974E4208_gf_UTBRBa_Da_Boom (point lp_bombPosition, int lp_bombDamage, int lp_bombRadius) {
+    // Automatic Variable Declarations
+    unitgroup auto926987A4_g;
+    int auto926987A4_u;
+    unit auto926987A4_var;
+
+    // Implementation
+    auto926987A4_g = UnitGroup(null, c_playerAny, RegionCircle(lp_bombPosition, lp_bombRadius), UnitFilter(0, 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+    auto926987A4_u = UnitGroupCount(auto926987A4_g, c_unitCountAll);
+    for (;; auto926987A4_u -= 1) {
+        auto926987A4_var = UnitGroupUnitFromEnd(auto926987A4_g, auto926987A4_u);
+        if (auto926987A4_var == null) { break; }
+        UnitDamage(auto926987A4_var, "BurndownDamage", auto926987A4_var, lp_bombDamage);
+    }
+    return true;
+}
+
+void lib974E4208_gf_UTBRGetRight_NumberOf_Players_InGame () {
+    // Variable Declarations
+    int lv__countPlayer;
+
+    // Automatic Variable Declarations
+    const int autoD4413B0B_ae = 14;
+    const int autoD4413B0B_ai = 1;
+
+    // Variable Initialization
+
+    // Implementation
+    lv__countPlayer = 1;
+    for ( ; ( (autoD4413B0B_ai >= 0 && lv__countPlayer <= autoD4413B0B_ae) || (autoD4413B0B_ai < 0 && lv__countPlayer >= autoD4413B0B_ae) ) ; lv__countPlayer += autoD4413B0B_ai ) {
+        if ((PlayerStatus(lv__countPlayer) == c_playerStatusActive)) {
+            lib974E4208_gv_uTBRGet_NumberOf_Players_InGame += 1;
+            libNtve_gf_CreateUnitsAtPoint2(1, "NovaPack03SearchNode2", c_unitCreateIgnorePlacement, lv__countPlayer, PlayerStartLocation(lv__countPlayer));
+            UnitBehaviorAdd(UnitLastCreated(), "SafeZone1", UnitLastCreated(), 1);
+            UnitSetState(UnitLastCreated(), c_unitStateStoppable, true);
+            lib974E4208_gv_uTBRGet_Search_Node_Copy[lv__countPlayer] = UnitLastCreated();
+        }
+
+    }
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, (StringExternal("Param/Value/lib_974E4208_2A79E8C4") + (IntToText(lib974E4208_gv_uTBRGet_NumberOf_Players_InGame) + StringExternal("Param/Value/lib_974E4208_26255A6E"))));
+}
+
+void lib974E4208_gf_UTBRGetRight_NumberOf_Teams_InGame () {
+    // Variable Declarations
+    int lv__countTeam;
+    region lv__region;
+
+    // Automatic Variable Declarations
+    const int autoFE3742AC_ae = 14;
+    const int autoFE3742AC_ai = 1;
+    playergroup auto0F92590A_g;
+    int auto0F92590A_var;
+
+    // Variable Initialization
+
+    // Implementation
+    lv__countTeam = 1;
+    for ( ; ( (autoFE3742AC_ai >= 0 && lv__countTeam <= autoFE3742AC_ae) || (autoFE3742AC_ai < 0 && lv__countTeam >= autoFE3742AC_ae) ) ; lv__countTeam += autoFE3742AC_ai ) {
+        if ((PlayerGroupCount(GameAttributePlayersForTeam(lv__countTeam)) >= 1)) {
+            lib974E4208_gv_uTBRGet_NumberOf_Teams_InGame += 1;
+            auto0F92590A_g = GameAttributePlayersForTeam(lv__countTeam);
+            auto0F92590A_var = -1;
+            while (true) {
+                auto0F92590A_var = PlayerGroupNextPlayer(auto0F92590A_g, auto0F92590A_var);
+                if (auto0F92590A_var < 0) { break; }
+                if ((PlayerStatus(auto0F92590A_var) == c_playerStatusActive)) {
+                    PlayerGroupAdd(lib974E4208_gv_uTBRGet_PlayerTeam[lv__countTeam], auto0F92590A_var);
+                    lib974E4208_gv_uTBRGet_NumberOf_PlayerTeam[auto0F92590A_var] = lv__countTeam;
+                    lv__region = RegionEmpty();
+                    RegionAddCircle(lv__region, true, PlayerStartLocation(auto0F92590A_var), lib974E4208_gv_uTBRGet_RadiusOf_DangerArea);
+                    RegionAddRegion(lib974E4208_gv_uTBRGet_Danger_Area[lv__countTeam], lv__region);
+                    RegionAddRegion(lib974E4208_gv_uTBRGet_Danger_Area[0], lv__region);
+                }
+
+            }
+        }
+
+    }
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, (StringExternal("Param/Value/lib_974E4208_A4EFFC2F") + (IntToText(lib974E4208_gv_uTBRGet_NumberOf_Teams_InGame) + StringExternal("Param/Value/lib_974E4208_E527273A"))));
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: Debug
+//--------------------------------------------------------------------------------------------------
+bool lib974E4208_gt_Debug_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    Wait(1.0, c_timeReal);
+    PlayerSetState(EventPlayer(), c_playerStateMineralCostIgnored, true);
+    PlayerSetState(EventPlayer(), c_playerStateVespeneCostIgnored, true);
+    PlayerSetState(EventPlayer(), c_playerStateFoodIgnored, true);
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "WarpPrism", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "DarkTemplar", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(2, "Stalker", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "Colossus", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    libNtve_gf_CreateUnitsWithDefaultFacing(1, "VoidRay", 0, EventPlayer(), PlayerStartLocation(EventPlayer()));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib974E4208_gt_Debug_Init () {
+    lib974E4208_gt_Debug = TriggerCreate("lib974E4208_gt_Debug_Func");
+    TriggerAddEventChatMessage(lib974E4208_gt_Debug, c_playerAny, "-debug", true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: UTBR | Start_SafeZone_and_Timer
+//--------------------------------------------------------------------------------------------------
+bool lib974E4208_gt_UTBRStart_SafeZone_and_Timer_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    text lv_playersSettings;
+    unitgroup lv__Main;
+    point lv_Point;
+
+    // Automatic Variable Declarations
+    playergroup autoA34A7B1B_g;
+    int autoA34A7B1B_var;
+    unitgroup autoEC64C701_g;
+    int autoEC64C701_u;
+    unit autoEC64C701_var;
+    playergroup autoFCFCEA81_g;
+    int autoFCFCEA81_var;
+
+    // Variable Initialization
+    lv__Main = UnitGroupEmpty();
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    autoA34A7B1B_g = PlayerGroupActive();
+    autoA34A7B1B_var = -1;
+    while (true) {
+        autoA34A7B1B_var = PlayerGroupNextPlayer(autoA34A7B1B_g, autoA34A7B1B_var);
+        if (autoA34A7B1B_var < 0) { break; }
+        if ((PlayerStatus(autoA34A7B1B_var) == c_playerStatusActive)) {
+        }
+
+    }
+    if (true) {
+        lv__Main = UnitGroup(null, c_playerAny, RegionEntireMap(), UnitFilter((1 << c_targetFilterStructure), 0, (1 << c_targetFilterNeutral), 0), 0);
+        autoEC64C701_g = lv__Main;
+        autoEC64C701_u = UnitGroupCount(autoEC64C701_g, c_unitCountAll);
+        for (;; autoEC64C701_u -= 1) {
+            autoEC64C701_var = UnitGroupUnitFromEnd(autoEC64C701_g, autoEC64C701_u);
+            if (autoEC64C701_var == null) { break; }
+            if (((UnitGetType(autoEC64C701_var) == "Nexus") || (UnitGetType(autoEC64C701_var) == "CommandCenter") || (UnitGetType(autoEC64C701_var) == "OrbitalCommand") || (UnitGetType(autoEC64C701_var) == "PlanetaryFortress") || (UnitGetType(autoEC64C701_var) == "Hatchery") || (UnitGetType(autoEC64C701_var) == "Lair") || (UnitGetType(autoEC64C701_var) == "Hive"))) {
+                if ((GameAttributeGameValue("4") == "0001")) {
+                    lv_Point = UnitGetPosition(autoEC64C701_var);
+                    libNtve_gf_CreateUnitsAtPoint2(1, "NovaPack03SearchNode2", c_unitCreateIgnorePlacement, 0, lv_Point);
+                }
+
+            }
+
+        }
+    }
+
+    autoFCFCEA81_g = PlayerGroupActive();
+    autoFCFCEA81_var = -1;
+    while (true) {
+        autoFCFCEA81_var = PlayerGroupNextPlayer(autoFCFCEA81_g, autoFCFCEA81_var);
+        if (autoFCFCEA81_var < 0) { break; }
+        TextExpressionSetToken("Param/Expression/lib_974E4208_1F611358", "A", TextWithColor(PlayerName(autoFCFCEA81_var), libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(autoFCFCEA81_var, false))));
+        lv_playersSettings = (lv_playersSettings + TextExpressionAssemble("Param/Expression/lib_974E4208_1F611358"));
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib974E4208_gt_UTBRStart_SafeZone_and_Timer_Init () {
+    lib974E4208_gt_UTBRStart_SafeZone_and_Timer = TriggerCreate("lib974E4208_gt_UTBRStart_SafeZone_and_Timer_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: UTBR | Spawn
+//--------------------------------------------------------------------------------------------------
+bool lib974E4208_gt_UTBRSpawn_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unitgroup lv_MineralGroup;
+    point lv_Point;
+
+    // Automatic Variable Declarations
+    unitgroup auto1B54A8E2_g;
+    int auto1B54A8E2_u;
+    unit auto1B54A8E2_var;
+
+    // Variable Initialization
+    lv_MineralGroup = UnitGroupEmpty();
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if (true) {
+        lv_MineralGroup = UnitGroup(null, c_playerAny, RegionEntireMap(), UnitFilter((1 << c_targetFilterStructure), 0, (1 << c_targetFilterNeutral), 0), 0);
+        auto1B54A8E2_g = lv_MineralGroup;
+        auto1B54A8E2_u = UnitGroupCount(auto1B54A8E2_g, c_unitCountAll);
+        for (;; auto1B54A8E2_u -= 1) {
+            auto1B54A8E2_var = UnitGroupUnitFromEnd(auto1B54A8E2_g, auto1B54A8E2_u);
+            if (auto1B54A8E2_var == null) { break; }
+            if ((libNtve_gf_UnitIsUnderConstruction(auto1B54A8E2_var) == false)) {
+                if (((UnitGetType(auto1B54A8E2_var) == "Nexus") || (UnitGetType(auto1B54A8E2_var) == "CommandCenter") || (UnitGetType(auto1B54A8E2_var) == "OrbitalCommand") || (UnitGetType(auto1B54A8E2_var) == "PlanetaryFortress") || (UnitGetType(auto1B54A8E2_var) == "Hatchery") || (UnitGetType(auto1B54A8E2_var) == "Lair") || (UnitGetType(auto1B54A8E2_var) == "Hive"))) {
+                    lv_Point = UnitGetPosition(auto1B54A8E2_var);
+                }
+
+            }
+
+        }
+    }
+
+    if (((GameAttributeGameValue("1") == "0005") || (GameAttributeGameValue("1") == "0007") || (GameAttributeGameValue("1") == "0006"))) {
+        SoundPlayForPlayer(SoundLink("TUIWarningPing2", -1), c_maxPlayers, PlayerGroupActive(), 100.0, 0.0);
+    }
+    else {
+        if (((GameAttributeGameValue("1") == "0008") || (GameAttributeGameValue("1") == "0001") || (GameAttributeGameValue("1") == "0009"))) {
+            SoundPlayForPlayer(SoundLink("TUIWarningPing3", -1), c_maxPlayers, PlayerGroupActive(), 100.0, 0.0);
+        }
+        else {
+            if (((GameAttributeGameValue("1") == "0002") || (GameAttributeGameValue("1") == "0003") || (GameAttributeGameValue("1") == "0004"))) {
+                SoundPlayForPlayer(SoundLink("TUIWarningPing", -1), c_maxPlayers, PlayerGroupActive(), 100.0, 0.0);
+            }
+
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib974E4208_gt_UTBRSpawn_Init () {
+    lib974E4208_gt_UTBRSpawn = TriggerCreate("lib974E4208_gt_UTBRSpawn_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: UTBR | SetNewBasesCircle
+//--------------------------------------------------------------------------------------------------
+bool lib974E4208_gt_UTBRSetNewBasesCircle_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if (((UnitGetType(EventUnit()) == "Nexus") || (UnitGetType(EventUnit()) == "CommandCenter") || (UnitGetType(EventUnit()) == "OrbitalCommand") || (UnitGetType(EventUnit()) == "PlanetaryFortress") || (UnitGetType(EventUnit()) == "Hatchery") || (UnitGetType(EventUnit()) == "Lair") || (UnitGetType(EventUnit()) == "Hive"))) {
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib974E4208_gt_UTBRSetNewBasesCircle_Init () {
+    lib974E4208_gt_UTBRSetNewBasesCircle = TriggerCreate("lib974E4208_gt_UTBRSetNewBasesCircle_Func");
+    TriggerAddEventUnitRegion(lib974E4208_gt_UTBRSetNewBasesCircle, null, RegionEntireMap(), true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: UTBR | TerransInTheAir
+//--------------------------------------------------------------------------------------------------
+bool lib974E4208_gt_UTBRTerransInTheAir_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if (((UnitGetType(EventUnit()) == "CommandCenterFlying") || (UnitGetType(EventUnit()) == "OrbitalCommandFlying"))) {
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib974E4208_gt_UTBRTerransInTheAir_Init () {
+    lib974E4208_gt_UTBRTerransInTheAir = TriggerCreate("lib974E4208_gt_UTBRTerransInTheAir_Func");
+    TriggerAddEventUnitAbility(lib974E4208_gt_UTBRTerransInTheAir, null, AbilityCommand("CommandCenterLiftOff", 0), c_unitAbilStageAll, false);
+    TriggerAddEventUnitAbility(lib974E4208_gt_UTBRTerransInTheAir, null, AbilityCommand("OrbitalLiftOff", 0), c_unitAbilStageAll, false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: UTBR | TerransOnTheGround
+//--------------------------------------------------------------------------------------------------
+bool lib974E4208_gt_UTBRTerransOnTheGround_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if (((UnitGetType(EventUnit()) == "CommandCenterFlying") || (UnitGetType(EventUnit()) == "OrbitalCommandFlying"))) {
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib974E4208_gt_UTBRTerransOnTheGround_Init () {
+    lib974E4208_gt_UTBRTerransOnTheGround = TriggerCreate("lib974E4208_gt_UTBRTerransOnTheGround_Func");
+    TriggerAddEventUnitAbility(lib974E4208_gt_UTBRTerransOnTheGround, null, AbilityCommand("CommandCenterLand", 0), c_unitAbilStageAll, false);
+    TriggerAddEventUnitAbility(lib974E4208_gt_UTBRTerransOnTheGround, null, AbilityCommand("OrbitalCommandLand", 0), c_unitAbilStageAll, false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: UTBR | Launch
+//--------------------------------------------------------------------------------------------------
+bool lib974E4208_gt_UTBRLaunch_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    string autoE94C1B42_val;
+    string auto1CC4ECFA_val;
+    string autoB0715C3F_val;
+    string autoC1A7C49E_val;
+    string auto3D335FC8_val;
+    string autoE2CBB45A_val;
+    string auto5DF7F77D_val;
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    autoE94C1B42_val = GameAttributeGameValue("1");
+    if (autoE94C1B42_val == "0001") {
+        lib974E4208_gv_uTBRGet_TimeFor_StartBomb = 1;
+    }
+    else if (autoE94C1B42_val == "0002") {
+        lib974E4208_gv_uTBRGet_TimeFor_StartBomb = 15;
+    }
+    else if (autoE94C1B42_val == "0003") {
+        lib974E4208_gv_uTBRGet_TimeFor_StartBomb = 30;
+    }
+    else if (autoE94C1B42_val == "0004") {
+        lib974E4208_gv_uTBRGet_TimeFor_StartBomb = 60;
+    }
+    else if (autoE94C1B42_val == "0005") {
+        lib974E4208_gv_uTBRGet_TimeFor_StartBomb = 90;
+    }
+    else if (autoE94C1B42_val == "0006") {
+        lib974E4208_gv_uTBRGet_TimeFor_StartBomb = 120;
+    }
+    else if (autoE94C1B42_val == "0007") {
+        lib974E4208_gv_uTBRGet_TimeFor_StartBomb = 150;
+    }
+    else if (autoE94C1B42_val == "0008") {
+        lib974E4208_gv_uTBRGet_TimeFor_StartBomb = 180;
+    }
+    else if (autoE94C1B42_val == "0009") {
+        lib974E4208_gv_uTBRGet_TimeFor_StartBomb = 240;
+    }
+    else if (autoE94C1B42_val == "0010") {
+        lib974E4208_gv_uTBRGet_TimeFor_StartBomb = 300;
+    }
+    else {
+    }
+    auto1CC4ECFA_val = GameAttributeGameValue("2");
+    if (auto1CC4ECFA_val == "0001") {
+        lib974E4208_gv_uTBRGet_TimeFor_Round = 120;
+    }
+    else if (auto1CC4ECFA_val == "0002") {
+        lib974E4208_gv_uTBRGet_TimeFor_Round = 180;
+    }
+    else if (auto1CC4ECFA_val == "0003") {
+        lib974E4208_gv_uTBRGet_TimeFor_Round = 240;
+    }
+    else if (auto1CC4ECFA_val == "0004") {
+        lib974E4208_gv_uTBRGet_TimeFor_Round = 300;
+    }
+    else if (auto1CC4ECFA_val == "0005") {
+        lib974E4208_gv_uTBRGet_TimeFor_Round = 360;
+    }
+    else if (auto1CC4ECFA_val == "0006") {
+        lib974E4208_gv_uTBRGet_TimeFor_Round = 9999;
+    }
+    else {
+    }
+    autoB0715C3F_val = GameAttributeGameValue("3");
+    if (autoB0715C3F_val == "0001") {
+        lib974E4208_gv_uTBRGet_TypeOf_Victory = 1;
+        lib974E4208_gv_uTBRGet_TypeOf_Victory_ByScore_true = true;
+        autoC1A7C49E_val = GameAttributeGameValue("5");
+        if (autoC1A7C49E_val == "0001") {
+            lib974E4208_gv_uTBRGet_CountOf_Goal_max = 1;
+        }
+        else if (autoC1A7C49E_val == "0002") {
+            lib974E4208_gv_uTBRGet_CountOf_Goal_max = 2;
+        }
+        else if (autoC1A7C49E_val == "0003") {
+            lib974E4208_gv_uTBRGet_CountOf_Goal_max = 3;
+        }
+        else if (autoC1A7C49E_val == "0004") {
+            lib974E4208_gv_uTBRGet_CountOf_Goal_max = 4;
+        }
+        else if (autoC1A7C49E_val == "0005") {
+            lib974E4208_gv_uTBRGet_CountOf_Goal_max = 5;
+        }
+        else if (autoC1A7C49E_val == "0006") {
+            lib974E4208_gv_uTBRGet_CountOf_Goal_max = 10;
+        }
+        else {
+        }
+    }
+    else if (autoB0715C3F_val == "0002") {
+        lib974E4208_gv_uTBRGet_TypeOf_Victory = 2;
+        lib974E4208_gv_uTBRGet_TypeOf_Victory_MaxScoreOnTime_true = true;
+        auto3D335FC8_val = GameAttributeGameValue("4");
+        if (auto3D335FC8_val == "0001") {
+            lib974E4208_gv_uTBRGet_TimeOf_EndGame = 300;
+        }
+        else if (auto3D335FC8_val == "0002") {
+            lib974E4208_gv_uTBRGet_TimeOf_EndGame = 480;
+        }
+        else if (auto3D335FC8_val == "0003") {
+            lib974E4208_gv_uTBRGet_TimeOf_EndGame = 600;
+        }
+        else if (auto3D335FC8_val == "0004") {
+            lib974E4208_gv_uTBRGet_TimeOf_EndGame = 720;
+        }
+        else if (auto3D335FC8_val == "0005") {
+            lib974E4208_gv_uTBRGet_TimeOf_EndGame = 900;
+        }
+        else if (auto3D335FC8_val == "0006") {
+            lib974E4208_gv_uTBRGet_TimeOf_EndGame = 1200;
+        }
+        else if (auto3D335FC8_val == "0007") {
+            lib974E4208_gv_uTBRGet_TimeOf_EndGame = 1500;
+        }
+        else if (auto3D335FC8_val == "0008") {
+            lib974E4208_gv_uTBRGet_TimeOf_EndGame = 1800;
+        }
+        else if (auto3D335FC8_val == "0009") {
+            lib974E4208_gv_uTBRGet_TimeOf_EndGame = 2100;
+        }
+        else if (auto3D335FC8_val == "0010") {
+            lib974E4208_gv_uTBRGet_TimeOf_EndGame = 2400;
+        }
+        else if (auto3D335FC8_val == "0011") {
+            lib974E4208_gv_uTBRGet_TimeOf_EndGame = 2700;
+        }
+        else if (auto3D335FC8_val == "0012") {
+            lib974E4208_gv_uTBRGet_TimeOf_EndGame = 3000;
+        }
+        else if (auto3D335FC8_val == "0013") {
+            lib974E4208_gv_uTBRGet_TimeOf_EndGame = 3600;
+        }
+        else if (auto3D335FC8_val == "0014") {
+            lib974E4208_gv_uTBRGet_TimeOf_EndGame = 7200;
+        }
+        else {
+        }
+    }
+    else {
+    }
+    lib974E4208_gf_UTBRGetRight_NumberOf_Players_InGame();
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, (StringExternal("Param/Value/lib_974E4208_D691C015") + IntToText(lib974E4208_gv_uTBRGet_NumberOf_Players_InGame)));
+    lib974E4208_gf_UTBRGetRight_NumberOf_Teams_InGame();
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, (StringExternal("Param/Value/lib_974E4208_D68072CD") + IntToText(lib974E4208_gv_uTBRGet_NumberOf_Teams_InGame)));
+    if ((GameAttributeGameValue("7") == "0002")) {
+        lib974E4208_gv_uTBRGet_Bomb_IsBadaBoom_true = true;
+        autoE2CBB45A_val = GameAttributeGameValue("9");
+        if (autoE2CBB45A_val == "0005") {
+            lib974E4208_gv_uTBRGet_BoomRadius = 2;
+        }
+        else if (autoE2CBB45A_val == "0001") {
+            lib974E4208_gv_uTBRGet_BoomRadius = 5;
+        }
+        else if (autoE2CBB45A_val == "0002") {
+            lib974E4208_gv_uTBRGet_BoomRadius = 10;
+        }
+        else if (autoE2CBB45A_val == "0003") {
+            lib974E4208_gv_uTBRGet_BoomRadius = 15;
+        }
+        else if (autoE2CBB45A_val == "0004") {
+            lib974E4208_gv_uTBRGet_BoomRadius = 20;
+        }
+        else {
+        }
+        auto5DF7F77D_val = GameAttributeGameValue("8");
+        if (auto5DF7F77D_val == "0001") {
+            lib974E4208_gv_uTBRGet_BoomDamage = 50;
+        }
+        else if (auto5DF7F77D_val == "0002") {
+            lib974E4208_gv_uTBRGet_BoomDamage = 100;
+        }
+        else if (auto5DF7F77D_val == "0003") {
+            lib974E4208_gv_uTBRGet_BoomDamage = 150;
+        }
+        else if (auto5DF7F77D_val == "0004") {
+            lib974E4208_gv_uTBRGet_BoomDamage = 200;
+        }
+        else if (auto5DF7F77D_val == "0005") {
+            lib974E4208_gv_uTBRGet_BoomDamage = 300;
+        }
+        else if (auto5DF7F77D_val == "0006") {
+            lib974E4208_gv_uTBRGet_BoomDamage = 400;
+        }
+        else if (auto5DF7F77D_val == "0007") {
+            lib974E4208_gv_uTBRGet_BoomDamage = 500;
+        }
+        else if (auto5DF7F77D_val == "0008") {
+            lib974E4208_gv_uTBRGet_BoomDamage = 1000;
+        }
+        else {
+        }
+    }
+
+    TriggerExecute(lib974E4208_gt_UTBRScoreboard, true, false);
+    TriggerExecute(lib974E4208_gt_UTBRTheFirstStartingBombingRun, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib974E4208_gt_UTBRLaunch_Init () {
+    lib974E4208_gt_UTBRLaunch = TriggerCreate("lib974E4208_gt_UTBRLaunch_Func");
+    TriggerAddEventMapInit(lib974E4208_gt_UTBRLaunch);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: UTBR | Scoreboard
+//--------------------------------------------------------------------------------------------------
+bool lib974E4208_gt_UTBRScoreboard_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__countTeam;
+
+    // Automatic Variable Declarations
+    int auto6FF19995_ae;
+    const int auto6FF19995_ai = 1;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    DialogCreate(300, (90 + (lib974E4208_gv_uTBRGet_NumberOf_Teams_InGame * 40)), c_anchorTopLeft, 0, 50, true);
+    lib974E4208_gv_uTBRScoreboard = DialogLastCreated();
+    auto6FF19995_ae = lib974E4208_gv_uTBRGet_NumberOf_Teams_InGame;
+    lv__countTeam = 1;
+    for ( ; ( (auto6FF19995_ai >= 0 && lv__countTeam <= auto6FF19995_ae) || (auto6FF19995_ai < 0 && lv__countTeam >= auto6FF19995_ae) ) ; lv__countTeam += auto6FF19995_ai ) {
+        libNtve_gf_CreateDialogItemLabel(DialogLastCreated(), 250, 45, c_anchorTopLeft, 30, 35, (StringExternal("Param/Value/lib_974E4208_BF0E2E4F") + IntToText(lv__countTeam)), Color(100,100,100), false, 2.0);
+        libNtve_gf_CreateDialogItemLabel(DialogLastCreated(), 150, 40, c_anchorTopLeft, 30, (30 + (lv__countTeam * 40)), (StringExternal("Param/Value/lib_974E4208_09033C87") + IntToText(lv__countTeam)), Color(100,100,100), false, 2.0);
+        libNtve_gf_CreateDialogItemLabel(DialogLastCreated(), 110, 40, c_anchorTopLeft, 170, (30 + (lv__countTeam * 40)), (StringExternal("Param/Value/lib_974E4208_A5579D7A") + IntToText(lv__countTeam)), Color(100,100,100), false, 2.0);
+        lib974E4208_gv_uTBRScoreboardScore[lv__countTeam] = DialogControlLastCreated();
+    }
+    DialogSetVisible(DialogLastCreated(), PlayerGroupAll(), true);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib974E4208_gt_UTBRScoreboard_Init () {
+    lib974E4208_gt_UTBRScoreboard = TriggerCreate("lib974E4208_gt_UTBRScoreboard_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: UTBR | The First Starting Bombing Run
+//--------------------------------------------------------------------------------------------------
+bool lib974E4208_gt_UTBRTheFirstStartingBombingRun_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    TimerStart(lib974E4208_gv_uTBRGet_TimerFor_TheFirstCreateBomb, lib974E4208_gv_uTBRGet_TimeFor_StartBomb, false, c_timeReal);
+    lib974E4208_gv_uTBRGet_TimerFor_TheFirstCreateBomb = TimerLastStarted();
+    if ((GameAttributeGameValue("1") == "0001")) {
+    }
+    else {
+        TimerWindowCreate(lib974E4208_gv_uTBRGet_TimerFor_TheFirstCreateBomb, StringExternal("Param/Value/lib_974E4208_3ED0E3D3"), true, false);
+        lib974E4208_gv_uTBRGet_TimerWindowFor_TheFirstCreateBomb = TimerWindowLastCreated();
+        TimerWindowShowProgressBar(lib974E4208_gv_uTBRGet_TimerWindowFor_TheFirstCreateBomb, true);
+        TimerWindowSetFormat(lib974E4208_gv_uTBRGet_TimerWindowFor_TheFirstCreateBomb, StringToText("<mintotal/>:<sec2/>"));
+        TimerWindowSetAnchor(lib974E4208_gv_uTBRGet_TimerWindowFor_TheFirstCreateBomb, c_anchorBottom, 0, 0);
+    }
+    if ((GameAttributeGameValue("3") == "0002")) {
+        TimerStart(lib974E4208_gv_uTBRGet_TimerFor_Game, lib974E4208_gv_uTBRGet_TimeOf_EndGame, false, c_timeReal);
+        lib974E4208_gv_uTBRGet_TimerFor_Game = TimerLastStarted();
+        TimerWindowCreate(lib974E4208_gv_uTBRGet_TimerFor_Game, StringExternal("Param/Value/lib_974E4208_B4297770"), true, false);
+        lib974E4208_gv_uTBRGet_TimerWindowFor_Game = TimerWindowLastCreated();
+        TimerWindowShowProgressBar(lib974E4208_gv_uTBRGet_TimerWindowFor_Game, true);
+        TimerWindowSetFormat(lib974E4208_gv_uTBRGet_TimerWindowFor_Game, StringToText("<mintotal/>:<sec2/>"));
+        TimerWindowSetAnchor(lib974E4208_gv_uTBRGet_TimerWindowFor_Game, c_anchorTop, 0, 0);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib974E4208_gt_UTBRTheFirstStartingBombingRun_Init () {
+    lib974E4208_gt_UTBRTheFirstStartingBombingRun = TriggerCreate("lib974E4208_gt_UTBRTheFirstStartingBombingRun_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: UTBR | Starting Bombing Run
+//--------------------------------------------------------------------------------------------------
+bool lib974E4208_gt_UTBRStartingBombingRun_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    TimerWindowDestroy(lib974E4208_gv_uTBRGet_TimerWindowFor_Round);
+    TimerStart(lib974E4208_gv_uTBRGet_TimerFor_Wait, lib974E4208_gv_uTBRGet_TimeFor_StartBomb, false, c_timeReal);
+    lib974E4208_gv_uTBRGet_TimerFor_Wait = TimerLastStarted();
+    TimerWindowCreate(lib974E4208_gv_uTBRGet_TimerFor_Wait, StringExternal("Param/Value/lib_974E4208_84A3CA04"), true, false);
+    lib974E4208_gv_uTBRGet_TimerWindowFor_Wait = TimerWindowLastCreated();
+    TimerWindowShowProgressBar(lib974E4208_gv_uTBRGet_TimerWindowFor_Wait, true);
+    TimerWindowSetFormat(lib974E4208_gv_uTBRGet_TimerWindowFor_Wait, StringToText("<mintotal/>:<sec2/>"));
+    TimerWindowSetAnchor(lib974E4208_gv_uTBRGet_TimerWindowFor_Wait, c_anchorBottom, 0, 0);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib974E4208_gt_UTBRStartingBombingRun_Init () {
+    lib974E4208_gt_UTBRStartingBombingRun = TriggerCreate("lib974E4208_gt_UTBRStartingBombingRun_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: UTBR | Create The Bomb _ After First Start
+//--------------------------------------------------------------------------------------------------
+bool lib974E4208_gt_UTBRCreateTheBomb_AfterFirstStart_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    string auto7DE9172E_val;
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    TimerWindowDestroy(lib974E4208_gv_uTBRGet_TimerWindowFor_TheFirstCreateBomb);
+    lib974E4208_gv_uTBRGet_Bomb_Area = RegionEmpty();
+    auto7DE9172E_val = GameAttributeGameValue("6");
+    if (auto7DE9172E_val == "0001") {
+        libNtve_gf_CreateUnitsWithDefaultFacing(1, "SlaynElementalGrabAirUnit", 0, 0, lib974E4208_gv_uTBRGet_Start_PositionOf_Bomb);
+        UnitSetScale(UnitLastCreated(), 50.0, 50.0, 50.0);
+        UnitSetState(UnitLastCreated(), c_unitStateMoveSuppressed, true);
+        UnitSetState(UnitLastCreated(), c_unitStateInvulnerable, true);
+    }
+    else if (auto7DE9172E_val == "0002") {
+        libNtve_gf_CreateUnitsWithDefaultFacing(1, "Replicant", 0, 0, lib974E4208_gv_uTBRGet_Start_PositionOf_Bomb);
+        UnitSetState(UnitLastCreated(), c_unitStateInvulnerable, true);
+    }
+    else {
+    }
+    lib974E4208_gv_uTBRGet_Bomb = UnitLastCreated();
+    UnitBehaviorAdd(lib974E4208_gv_uTBRGet_Bomb, "BombBehavior", lib974E4208_gv_uTBRGet_Bomb, 1);
+    RegionAddCircle(lib974E4208_gv_uTBRGet_Bomb_Area, true, UnitGetPosition(lib974E4208_gv_uTBRGet_Bomb), 1.0);
+    lib974E4208_gv_uTBRGet_Bomb_IsReady_true = true;
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Param/Value/lib_974E4208_0B3BE4DC"));
+    MinimapPing(PlayerGroupAll(), UnitGetPosition(lib974E4208_gv_uTBRGet_Bomb), 2.0, Color(100.00, 0.00, 0.00));
+    TimerStart(lib974E4208_gv_uTBRGet_TimerFor_Round, lib974E4208_gv_uTBRGet_TimeFor_Round, false, c_timeReal);
+    lib974E4208_gv_uTBRGet_TimerFor_Round = TimerLastStarted();
+    if ((GameAttributeGameValue("2") == "0006")) {
+    }
+    else {
+        TimerWindowCreate(lib974E4208_gv_uTBRGet_TimerFor_Round, StringExternal("Param/Value/lib_974E4208_5C201C32"), true, false);
+        lib974E4208_gv_uTBRGet_TimerWindowFor_Round = TimerWindowLastCreated();
+        TimerWindowShowProgressBar(lib974E4208_gv_uTBRGet_TimerWindowFor_Round, true);
+        TimerWindowSetFormat(lib974E4208_gv_uTBRGet_TimerWindowFor_Round, StringToText("<mintotal/>:<sec2/>"));
+        TimerWindowSetAnchor(lib974E4208_gv_uTBRGet_TimerWindowFor_Round, c_anchorBottom, 0, 0);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib974E4208_gt_UTBRCreateTheBomb_AfterFirstStart_Init () {
+    lib974E4208_gt_UTBRCreateTheBomb_AfterFirstStart = TriggerCreate("lib974E4208_gt_UTBRCreateTheBomb_AfterFirstStart_Func");
+    TriggerAddEventTimer(lib974E4208_gt_UTBRCreateTheBomb_AfterFirstStart, lib974E4208_gv_uTBRGet_TimerFor_TheFirstCreateBomb);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: UTBR | Create The Bomb _ After Wait
+//--------------------------------------------------------------------------------------------------
+bool lib974E4208_gt_UTBRCreateTheBomb_AfterWait_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    string auto26AABDF9_val;
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    TimerWindowDestroy(lib974E4208_gv_uTBRGet_TimerWindowFor_Wait);
+    lib974E4208_gv_uTBRGet_Bomb_Area = RegionEmpty();
+    auto26AABDF9_val = GameAttributeGameValue("6");
+    if (auto26AABDF9_val == "0001") {
+        libNtve_gf_CreateUnitsWithDefaultFacing(1, "SlaynElementalGrabAirUnit", 0, 0, lib974E4208_gv_uTBRGet_Start_PositionOf_Bomb);
+        UnitSetScale(UnitLastCreated(), 50.0, 50.0, 50.0);
+        UnitSetState(UnitLastCreated(), c_unitStateMoveSuppressed, true);
+        UnitSetState(UnitLastCreated(), c_unitStateInvulnerable, true);
+        libNtve_gf_MakeUnitInvulnerable(lib974E4208_gv_uTBRGet_Bomb, true);
+    }
+    else if (auto26AABDF9_val == "0002") {
+        libNtve_gf_CreateUnitsWithDefaultFacing(1, "Replicant", 0, 0, lib974E4208_gv_uTBRGet_Start_PositionOf_Bomb);
+        UnitSetState(UnitLastCreated(), c_unitStateInvulnerable, true);
+    }
+    else {
+    }
+    lib974E4208_gv_uTBRGet_Bomb = UnitLastCreated();
+    UnitBehaviorAdd(lib974E4208_gv_uTBRGet_Bomb, "BombBehavior", lib974E4208_gv_uTBRGet_Bomb, 1);
+    RegionAddCircle(lib974E4208_gv_uTBRGet_Bomb_Area, true, UnitGetPosition(lib974E4208_gv_uTBRGet_Bomb), 1.0);
+    lib974E4208_gv_uTBRGet_Bomb_IsReady_true = true;
+    lib974E4208_gv_uTBRGet_Bomb_IsPickUp_true = false;
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Param/Value/lib_974E4208_90ECF85C"));
+    MinimapPing(PlayerGroupAll(), UnitGetPosition(lib974E4208_gv_uTBRGet_Bomb), 2.0, Color(100.00, 0.00, 0.00));
+    TimerStart(lib974E4208_gv_uTBRGet_TimerFor_Round, lib974E4208_gv_uTBRGet_TimeFor_Round, false, c_timeReal);
+    lib974E4208_gv_uTBRGet_TimerFor_Round = TimerLastStarted();
+    if ((GameAttributeGameValue("2") == "0006")) {
+    }
+    else {
+        TimerWindowCreate(lib974E4208_gv_uTBRGet_TimerFor_Round, StringExternal("Param/Value/lib_974E4208_8878500E"), true, false);
+        lib974E4208_gv_uTBRGet_TimerWindowFor_Round = TimerWindowLastCreated();
+        TimerWindowShowProgressBar(lib974E4208_gv_uTBRGet_TimerWindowFor_Round, true);
+        TimerWindowSetFormat(lib974E4208_gv_uTBRGet_TimerWindowFor_Round, StringToText("<mintotal/>:<sec2/>"));
+        TimerWindowSetAnchor(lib974E4208_gv_uTBRGet_TimerWindowFor_Round, c_anchorBottom, 0, 0);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib974E4208_gt_UTBRCreateTheBomb_AfterWait_Init () {
+    lib974E4208_gt_UTBRCreateTheBomb_AfterWait = TriggerCreate("lib974E4208_gt_UTBRCreateTheBomb_AfterWait_Func");
+    TriggerAddEventTimer(lib974E4208_gt_UTBRCreateTheBomb_AfterWait, lib974E4208_gv_uTBRGet_TimerFor_Wait);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: UTBR | Pick Up Bomb
+//--------------------------------------------------------------------------------------------------
+bool lib974E4208_gt_UTBRPickUpBomb_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__countTeam;
+
+    // Automatic Variable Declarations
+    unitgroup auto9FAB3ADB_g;
+    int auto9FAB3ADB_u;
+    unit auto9FAB3ADB_var;
+    const int autoB2948733_ae = 14;
+    const int autoB2948733_ai = 1;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!(((lib974E4208_gv_uTBRGet_Bomb_IsReady_true == true) && (lib974E4208_gv_uTBRGet_Bomb_IsPickUp_true == false)))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto9FAB3ADB_g = UnitGroup(null, c_playerAny, lib974E4208_gv_uTBRGet_Bomb_Area, UnitFilter((1 << c_targetFilterGround), 0, (1 << c_targetFilterNeutral) | (1 << c_targetFilterAir) | (1 << c_targetFilterStructure) | (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+    auto9FAB3ADB_u = UnitGroupCount(auto9FAB3ADB_g, c_unitCountAll);
+    for (;; auto9FAB3ADB_u -= 1) {
+        auto9FAB3ADB_var = UnitGroupUnitFromEnd(auto9FAB3ADB_g, auto9FAB3ADB_u);
+        if (auto9FAB3ADB_var == null) { break; }
+        if ((RegionContainsPoint(lib974E4208_gv_uTBRGet_Bomb_Area, UnitGetPosition(auto9FAB3ADB_var)) == true)) {
+            lib974E4208_gv_uTBRGet_Bomb_IsPickUp_true = true;
+            lib974E4208_gv_uTBRGet_Unit_ThatBombOwner = auto9FAB3ADB_var;
+            UnitSetPropertyFixed(auto9FAB3ADB_var, c_unitPropLifeRegen, (UnitTypeGetProperty(UnitGetType(lib974E4208_gv_uTBRGet_Unit_ThatBombOwner), c_unitPropLifeRegen) + 1.0));
+            UnitSetPropertyFixed(auto9FAB3ADB_var, c_unitPropMovementSpeed, (UnitTypeGetProperty(UnitGetType(lib974E4208_gv_uTBRGet_Unit_ThatBombOwner), c_unitPropMovementSpeed) + 1.0));
+            lib974E4208_gv_uTBRGet_Bomb_Area = RegionEmpty();
+            UnitSetTeamColorIndex(lib974E4208_gv_uTBRGet_Bomb, PlayerGetColorIndex(UnitGetOwner(lib974E4208_gv_uTBRGet_Unit_ThatBombOwner), false));
+            UnitBehaviorAdd(lib974E4208_gv_uTBRGet_Unit_ThatBombOwner, "BombCatcherBehavior", lib974E4208_gv_uTBRGet_Unit_ThatBombOwner, 1);
+            libNtve_gf_AttachModelToUnit(lib974E4208_gv_uTBRGet_Unit_ThatBombOwner, "SlaynElementalGrabAirUnit", "Ref_Head");
+            UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, ((StringExternal("Param/Value/lib_974E4208_D45E29FA") + PlayerName(UnitGetOwner(lib974E4208_gv_uTBRGet_Unit_ThatBombOwner))) + StringExternal("Param/Value/lib_974E4208_30732233")));
+            lib974E4208_gv_uTBRGet_Player_ThatBombOwner = UnitGetOwner(lib974E4208_gv_uTBRGet_Unit_ThatBombOwner);
+            lv__countTeam = 1;
+            for ( ; ( (autoB2948733_ai >= 0 && lv__countTeam <= autoB2948733_ae) || (autoB2948733_ai < 0 && lv__countTeam >= autoB2948733_ae) ) ; lv__countTeam += autoB2948733_ai ) {
+                if ((lv__countTeam == lib974E4208_gv_uTBRGet_NumberOf_PlayerTeam[lib974E4208_gv_uTBRGet_Player_ThatBombOwner])) {
+                    lib974E4208_gv_uTBRGet_TeamOf_Player_ThatBombOwner = lv__countTeam;
+                }
+
+            }
+        }
+
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib974E4208_gt_UTBRPickUpBomb_Init () {
+    lib974E4208_gt_UTBRPickUpBomb = TriggerCreate("lib974E4208_gt_UTBRPickUpBomb_Func");
+    TriggerAddEventTimePeriodic(lib974E4208_gt_UTBRPickUpBomb, 0.25, c_timeGame);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: UTBR | Drop Bomb
+//--------------------------------------------------------------------------------------------------
+bool lib974E4208_gt_UTBRDropBomb_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((lib974E4208_gv_uTBRGet_Bomb_IsReady_true == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lib974E4208_gv_uTBRGet_Unit_ThatBombOwner = null;
+    lib974E4208_gv_uTBRGet_Player_ThatBombOwner = 0;
+    lib974E4208_gv_uTBRGet_TeamOf_Player_ThatBombOwner = 0;
+    UnitSetTeamColorIndex(lib974E4208_gv_uTBRGet_Bomb, PlayerGetColorIndex(0, false));
+    UnitIssueOrder(lib974E4208_gv_uTBRGet_Bomb, Order(AbilityCommand("stop", 0)), c_orderQueueReplace);
+    RegionAddCircle(lib974E4208_gv_uTBRGet_Bomb_Area, true, UnitGetPosition(lib974E4208_gv_uTBRGet_Bomb), 1.0);
+    lib974E4208_gv_uTBRGet_Bomb_IsPickUp_true = false;
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Param/Value/lib_974E4208_8578181B"));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib974E4208_gt_UTBRDropBomb_Init () {
+    lib974E4208_gt_UTBRDropBomb = TriggerCreate("lib974E4208_gt_UTBRDropBomb_Func");
+    TriggerAddEventUnitDied(lib974E4208_gt_UTBRDropBomb, UnitRefFromVariable("lib974E4208_gv_uTBRGet_Unit_ThatBombOwner"));
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: UTBR | Bomb in Danger Area
+//--------------------------------------------------------------------------------------------------
+bool lib974E4208_gt_UTBRBombinDangerArea_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__DangeredTeam;
+    bool lv__tmp;
+    int lv__countTeam;
+    point lv__pointOf_Bomb;
+
+    // Automatic Variable Declarations
+    const int autoA9358FA2_ae = 14;
+    const int autoA9358FA2_ai = 1;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((lib974E4208_gv_uTBRGet_Bomb_IsReady_true == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((RegionContainsPoint(lib974E4208_gv_uTBRGet_Danger_Area[0], UnitGetPosition(lib974E4208_gv_uTBRGet_Bomb)) == true)) {
+        lv__countTeam = 1;
+        for ( ; ( (autoA9358FA2_ai >= 0 && lv__countTeam <= autoA9358FA2_ae) || (autoA9358FA2_ai < 0 && lv__countTeam >= autoA9358FA2_ae) ) ; lv__countTeam += autoA9358FA2_ai ) {
+            if ((RegionContainsPoint(lib974E4208_gv_uTBRGet_Danger_Area[lv__countTeam], UnitGetPosition(lib974E4208_gv_uTBRGet_Bomb)) == true)) {
+                lv__DangeredTeam = lv__countTeam;
+            }
+
+        }
+        if ((lib974E4208_gv_uTBRGet_TeamOf_Player_ThatBombOwner != lv__DangeredTeam)) {
+            libNtve_gf_StopTimer(lib974E4208_gv_uTBRGet_TimerFor_Round);
+            lib974E4208_gv_uTBRGet_Bomb_IsReady_true = false;
+            lib974E4208_gv_uTBRGet_CountOf_Goal_now[lib974E4208_gv_uTBRGet_TeamOf_Player_ThatBombOwner] += 1;
+            if ((lib974E4208_gv_uTBRGet_Bomb_IsBadaBoom_true == true)) {
+                lv__tmp = lib974E4208_gf_UTBRBa_Da_Boom(UnitGetPosition(lib974E4208_gv_uTBRGet_Bomb), lib974E4208_gv_uTBRGet_BoomDamage, lib974E4208_gv_uTBRGet_BoomRadius);
+                lv__pointOf_Bomb = UnitGetPosition(lib974E4208_gv_uTBRGet_Bomb);
+                PlayerCreateEffectPoint(15, "NukeDetonate", lv__pointOf_Bomb);
+                UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, (StringExternal("Param/Value/lib_974E4208_BE5AA098") + PlayerName(UnitGetOwner(lib974E4208_gv_uTBRGet_Unit_ThatBombOwner))));
+            }
+
+            UnitKill(lib974E4208_gv_uTBRGet_Bomb);
+            UnitKill(lib974E4208_gv_uTBRGet_Unit_ThatBombOwner);
+            lib974E4208_gv_uTBRGet_Bomb = null;
+            lib974E4208_gv_uTBRGet_Unit_ThatBombOwner = null;
+            lib974E4208_gv_uTBRGet_Player_ThatBombOwner = 0;
+            lib974E4208_gv_uTBRGet_TeamOf_Player_ThatBombOwner = 0;
+            lib974E4208_gv_uTBRGet_TimeFor_StartBomb = lib974E4208_gv_uTBRGet_Wait_BetweenBomb;
+            TriggerExecute(lib974E4208_gt_UTBRStartingBombingRun, true, false);
+        }
+
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib974E4208_gt_UTBRBombinDangerArea_Init () {
+    lib974E4208_gt_UTBRBombinDangerArea = TriggerCreate("lib974E4208_gt_UTBRBombinDangerArea_Func");
+    TriggerAddEventTimePeriodic(lib974E4208_gt_UTBRBombinDangerArea, 0.5, c_timeGame);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: UTBR | Who Score Points
+//--------------------------------------------------------------------------------------------------
+bool lib974E4208_gt_UTBRWhoScorePoints_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__countTeam_victory;
+    int lv__countTeam_defeat;
+
+    // Automatic Variable Declarations
+    const int auto56FF4DB8_ae = 14;
+    const int auto56FF4DB8_ai = 1;
+    playergroup auto4FD8C619_g;
+    int auto4FD8C619_var;
+    const int auto9D794D89_ae = 14;
+    const int auto9D794D89_ai = 1;
+    playergroup auto03BF931F_g;
+    int auto03BF931F_var;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((lib974E4208_gv_uTBRGet_TypeOf_Victory_ByScore_true == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv__countTeam_victory = 1;
+    for ( ; ( (auto56FF4DB8_ai >= 0 && lv__countTeam_victory <= auto56FF4DB8_ae) || (auto56FF4DB8_ai < 0 && lv__countTeam_victory >= auto56FF4DB8_ae) ) ; lv__countTeam_victory += auto56FF4DB8_ai ) {
+        if ((lib974E4208_gv_uTBRGet_CountOf_Goal_now[lv__countTeam_victory] == lib974E4208_gv_uTBRGet_CountOf_Goal_max)) {
+            auto4FD8C619_g = lib974E4208_gv_uTBRGet_PlayerTeam[lv__countTeam_victory];
+            auto4FD8C619_var = -1;
+            while (true) {
+                auto4FD8C619_var = PlayerGroupNextPlayer(auto4FD8C619_g, auto4FD8C619_var);
+                if (auto4FD8C619_var < 0) { break; }
+                GameOver(auto4FD8C619_var, c_gameOverVictory, true, true);
+            }
+            lv__countTeam_defeat = 1;
+            for ( ; ( (auto9D794D89_ai >= 0 && lv__countTeam_defeat <= auto9D794D89_ae) || (auto9D794D89_ai < 0 && lv__countTeam_defeat >= auto9D794D89_ae) ) ; lv__countTeam_defeat += auto9D794D89_ai ) {
+                if ((lib974E4208_gv_uTBRGet_CountOf_Goal_now[lv__countTeam_defeat] < lib974E4208_gv_uTBRGet_CountOf_Goal_max)) {
+                    auto03BF931F_g = lib974E4208_gv_uTBRGet_PlayerTeam[lv__countTeam_defeat];
+                    auto03BF931F_var = -1;
+                    while (true) {
+                        auto03BF931F_var = PlayerGroupNextPlayer(auto03BF931F_g, auto03BF931F_var);
+                        if (auto03BF931F_var < 0) { break; }
+                        GameOver(auto03BF931F_var, c_gameOverDefeat, true, true);
+                    }
+                }
+
+            }
+            lib974E4208_gv_uTBRGet_TypeOf_Victory_ByScore_true = false;
+        }
+
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib974E4208_gt_UTBRWhoScorePoints_Init () {
+    lib974E4208_gt_UTBRWhoScorePoints = TriggerCreate("lib974E4208_gt_UTBRWhoScorePoints_Func");
+    TriggerAddEventTimePeriodic(lib974E4208_gt_UTBRWhoScorePoints, 10.0, c_timeReal);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: UTBR | If Who Live Game
+//--------------------------------------------------------------------------------------------------
+bool lib974E4208_gt_UTBRIfWhoLiveGame_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__countPlayer;
+    int lv__countRegion;
+
+    // Automatic Variable Declarations
+    int auto5994A8BF_ae;
+    const int auto5994A8BF_ai = 1;
+    const int auto70B0A9AF_ae = 14;
+    const int auto70B0A9AF_ai = 1;
+    playergroup auto1D21E189_g;
+    int auto1D21E189_var;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto5994A8BF_ae = lib974E4208_gv_uTBRGet_NumberOf_Players_InGame;
+    lv__countPlayer = 1;
+    for ( ; ( (auto5994A8BF_ai >= 0 && lv__countPlayer <= auto5994A8BF_ae) || (auto5994A8BF_ai < 0 && lv__countPlayer >= auto5994A8BF_ae) ) ; lv__countPlayer += auto5994A8BF_ai ) {
+        if (((PlayerStatus(lv__countPlayer) == c_playerStatusLeft) || (PlayerStatus(lv__countPlayer) == c_playerStatusUnused))) {
+            UnitKill(lib974E4208_gv_uTBRGet_Search_Node_Copy[lv__countPlayer]);
+            GameOver(lv__countPlayer, c_gameOverDefeat, true, true);
+            lv__countRegion = 0;
+            for ( ; ( (auto70B0A9AF_ai >= 0 && lv__countRegion <= auto70B0A9AF_ae) || (auto70B0A9AF_ai < 0 && lv__countRegion >= auto70B0A9AF_ae) ) ; lv__countRegion += auto70B0A9AF_ai ) {
+                lib974E4208_gv_uTBRGet_Danger_Area[lv__countRegion] = RegionEmpty();
+            }
+            lib974E4208_gf_UTBRGetRight_NumberOf_Teams_InGame();
+        }
+
+    }
+    if ((PlayerGroupCount(PlayerGroupActive()) <= 1)) {
+        auto1D21E189_g = PlayerGroupActive();
+        auto1D21E189_var = -1;
+        while (true) {
+            auto1D21E189_var = PlayerGroupNextPlayer(auto1D21E189_g, auto1D21E189_var);
+            if (auto1D21E189_var < 0) { break; }
+            GameOver(auto1D21E189_var, c_gameOverVictory, true, true);
+        }
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib974E4208_gt_UTBRIfWhoLiveGame_Init () {
+    lib974E4208_gt_UTBRIfWhoLiveGame = TriggerCreate("lib974E4208_gt_UTBRIfWhoLiveGame_Func");
+    TriggerAddEventPlayerLeft(lib974E4208_gt_UTBRIfWhoLiveGame, c_playerAny, c_gameResultUndecided);
+    TriggerAddEventTimePeriodic(lib974E4208_gt_UTBRIfWhoLiveGame, 5.0, c_timeReal);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: UTBR | If RoundTime Is End
+//--------------------------------------------------------------------------------------------------
+bool lib974E4208_gt_UTBRIfRoundTimeIsEnd_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lib974E4208_gv_uTBRGet_Bomb_IsReady_true = false;
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Param/Value/lib_974E4208_967ADDA3"));
+    UnitKill(lib974E4208_gv_uTBRGet_Bomb);
+    UnitKill(lib974E4208_gv_uTBRGet_Unit_ThatBombOwner);
+    lib974E4208_gv_uTBRGet_Unit_ThatBombOwner = null;
+    lib974E4208_gv_uTBRGet_Player_ThatBombOwner = 0;
+    lib974E4208_gv_uTBRGet_TeamOf_Player_ThatBombOwner = 0;
+    lib974E4208_gv_uTBRGet_TimeFor_StartBomb = lib974E4208_gv_uTBRGet_Wait_BetweenBomb;
+    TriggerExecute(lib974E4208_gt_UTBRStartingBombingRun, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib974E4208_gt_UTBRIfRoundTimeIsEnd_Init () {
+    lib974E4208_gt_UTBRIfRoundTimeIsEnd = TriggerCreate("lib974E4208_gt_UTBRIfRoundTimeIsEnd_Func");
+    TriggerAddEventTimer(lib974E4208_gt_UTBRIfRoundTimeIsEnd, lib974E4208_gv_uTBRGet_TimerFor_Round);
+}
+
+void lib974E4208_InitTriggers () {
+    lib974E4208_gt_Debug_Init();
+    lib974E4208_gt_UTBRStart_SafeZone_and_Timer_Init();
+    lib974E4208_gt_UTBRSpawn_Init();
+    lib974E4208_gt_UTBRSetNewBasesCircle_Init();
+    lib974E4208_gt_UTBRTerransInTheAir_Init();
+    lib974E4208_gt_UTBRTerransOnTheGround_Init();
+    lib974E4208_gt_UTBRLaunch_Init();
+    lib974E4208_gt_UTBRScoreboard_Init();
+    lib974E4208_gt_UTBRTheFirstStartingBombingRun_Init();
+    lib974E4208_gt_UTBRStartingBombingRun_Init();
+    lib974E4208_gt_UTBRCreateTheBomb_AfterFirstStart_Init();
+    lib974E4208_gt_UTBRCreateTheBomb_AfterWait_Init();
+    lib974E4208_gt_UTBRPickUpBomb_Init();
+    lib974E4208_gt_UTBRDropBomb_Init();
+    lib974E4208_gt_UTBRBombinDangerArea_Init();
+    lib974E4208_gt_UTBRWhoScorePoints_Init();
+    lib974E4208_gt_UTBRIfWhoLiveGame_Init();
+    lib974E4208_gt_UTBRIfRoundTimeIsEnd_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool lib974E4208_InitLib_completed = false;
+
+void lib974E4208_InitLib () {
+    if (lib974E4208_InitLib_completed) {
+        return;
+    }
+
+    lib974E4208_InitLib_completed = true;
+
+    lib974E4208_InitLibraries();
+    lib974E4208_InitVariables();
+    lib974E4208_InitTriggers();
+}
+

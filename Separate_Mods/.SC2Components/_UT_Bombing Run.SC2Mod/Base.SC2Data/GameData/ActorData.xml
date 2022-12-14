@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CActorUnit id="NovaPack03SearchNode2" parent="GenericUnitStandardNoAutoSoundLinks" unitName="NovaPack03SearchNode2">
+        <On Terms="ActorCreation" Send="AnimSetPausedAll"/>
+        <On Terms="AssetPreInit; IsInEditor" Send="ModelLinkCustomize CValidatorUnitCompareChargeUsed"/>
+        <Model value=""/>
+        <ModelFlags index="AutomateGlobalLoops" value="0"/>
+        <EventDataFootprint index="0" Model="HasGrabbedBehavior"/>
+        <BuildModel value="CValidatorEffectCompareEvaded"/>
+        <DeathArray index="Normal" ModelLink="CValidatorEffectCompareEvaded" SoundLink="TargetIsVisible" VoiceLink="IsTerranUnit"/>
+        <PlacementModel value="CValidatorEffectCompareEvaded"/>
+        <WalkAnimMoveSpeed value="0"/>
+        <StatusBarFlags index="Shields" value="0"/>
+        <StatusBarFlags index="Life" value="0"/>
+        <StatusBarFlags index="Energy" value="0"/>
+        <StatusBarFlags index="Cargo" value="0"/>
+        <StatusBarFlags index="Progress" value="0"/>
+        <StatusBarFlags index="Duration" value="0"/>
+        <UnitFlags index="ShowBlobShadow" value="0"/>
+    </CActorUnit>
+    <CActorRange id="SafeZone1">
+        <VisibleTo index="Self" value="1"/>
+        <VisibleTo index="Ally" value="1"/>
+        <Inherits index="LocalTintColor" value="1"/>
+        <Inherits index="TeamColor" value="1"/>
+        <Inherits index="TintColor" value="1"/>
+        <Inherits index="Visibility" value="0"/>
+        <FogVisibility value="Visible"/>
+        <On Terms="Behavior.SafeZone1.On" Send="Create"/>
+        <On Terms="Behavior.SafeZone1.Off" Send="Destroy"/>
+        <Range value="9.500000"/>
+        <Icon value="Assets\Textures\radaricon2.dds"/>
+        <IconArcLength value="0.500000"/>
+        <RangeFlags index="Minimap" value="1"/>
+    </CActorRange>
+</Catalog>

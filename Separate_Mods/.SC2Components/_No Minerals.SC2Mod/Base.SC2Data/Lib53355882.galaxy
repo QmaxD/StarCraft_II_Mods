@@ -1,0 +1,944 @@
+include "TriggerLibs/NativeLib"
+
+include "Lib53355882_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void lib53355882_InitLibraries () {
+    libNtve_InitVariables();
+}
+
+// Variable Initialization
+bool lib53355882_InitVariables_completed = false;
+
+void lib53355882_InitVariables () {
+    if (lib53355882_InitVariables_completed) {
+        return;
+    }
+
+    lib53355882_InitVariables_completed = true;
+
+    lib53355882_gv_noMTimerWindow = c_timerWindowNone;
+    lib53355882_gv_sound = SoundLink("money2", -1);
+    lib53355882_gv_volume = 100.0;
+    lib53355882_gv_noMD186D0B8D0BAD0BB_1 = TimerCreate();
+    lib53355882_gv_noMD186D0B8D0BAD0BB_2 = TimerCreate();
+    lib53355882_gv_noMD186D0B8D0BAD0BB_3 = TimerCreate();
+    lib53355882_gv_noMD186D0B8D0BAD0BB_4 = TimerCreate();
+    lib53355882_gv_noMD186D0B8D0BAD0BB_5 = TimerCreate();
+    lib53355882_gv_noMchangeTimer_OfPeriod = TimerCreate();
+    lib53355882_gv_noMchangeTimer_IncreaseQuantity = TimerCreate();
+    lib53355882_gv_noMchangegetTime_IncreaseQuantity = 28800;
+    lib53355882_gv_noMchangegetCount_IncreaseQuantity = 1;
+}
+
+// Functions
+bool lib53355882_gf_IfUnitIsMineral1800 (unit lp_unit) {
+    // Automatic Variable Declarations
+    // Implementation
+    if (((UnitGetType(lp_unit) == "MineralField") || (UnitGetType(lp_unit) == "LabMineralField") || (UnitGetType(lp_unit) == "BattleStationMineralField") || (UnitGetType(lp_unit) == "PurifierMineralField") || (UnitGetType(lp_unit) == "RichMineralField") || (UnitGetType(lp_unit) == "PurifierRichMineralField") || (UnitGetType(lp_unit) == "MineralFieldOpaque"))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool lib53355882_gf_IfUnitIsMineral900 (unit lp_unit) {
+    // Automatic Variable Declarations
+    // Implementation
+    if (((UnitGetType(lp_unit) == "MineralField450") || (UnitGetType(lp_unit) == "MineralField750") || (UnitGetType(lp_unit) == "LabMineralField750") || (UnitGetType(lp_unit) == "BattleStationMineralField750") || (UnitGetType(lp_unit) == "PurifierMineralField750") || (UnitGetType(lp_unit) == "RichMineralField750") || (UnitGetType(lp_unit) == "PurifierRichMineralField750") || (UnitGetType(lp_unit) == "MineralFieldOpaque900"))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool lib53355882_gf_IfUnitIsGas2250 (unit lp_unit) {
+    // Automatic Variable Declarations
+    // Implementation
+    if (((UnitGetType(lp_unit) == "RichVespeneGeyser") || (UnitGetType(lp_unit) == "VespeneGeyser") || (UnitGetType(lp_unit) == "SpacePlatformGeyser") || (UnitGetType(lp_unit) == "ProtossVespeneGeyser") || (UnitGetType(lp_unit) == "PurifierVespeneGeyser") || (UnitGetType(lp_unit) == "ShakurasVespeneGeyser"))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: NoM | destroyMinerals
+//--------------------------------------------------------------------------------------------------
+bool lib53355882_gt_InitHighMineral3_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unitgroup lv_MineralGroup;
+    point lv_Point;
+
+    // Automatic Variable Declarations
+    unitgroup auto49069A43_g;
+    int auto49069A43_u;
+    unit auto49069A43_var;
+
+    // Variable Initialization
+    lv_MineralGroup = UnitGroupEmpty();
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((GameAttributeGameValue("8") == "0002")) {
+        lv_MineralGroup = UnitGroup(null, 0, RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterAlly) | (1 << c_targetFilterEnemy) | (1 << c_targetFilterMissile) | (1 << c_targetFilterDestructible), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+        auto49069A43_g = lv_MineralGroup;
+        auto49069A43_u = UnitGroupCount(auto49069A43_g, c_unitCountAll);
+        for (;; auto49069A43_u -= 1) {
+            auto49069A43_var = UnitGroupUnitFromEnd(auto49069A43_g, auto49069A43_u);
+            if (auto49069A43_var == null) { break; }
+            if (((lib53355882_gf_IfUnitIsMineral1800(auto49069A43_var) == true) || (lib53355882_gf_IfUnitIsMineral900(auto49069A43_var) == true))) {
+                lv_Point = UnitGetPosition(auto49069A43_var);
+                UnitRemove(auto49069A43_var);
+            }
+            else {
+                UnitGroupRemove(lv_MineralGroup, auto49069A43_var);
+            }
+        }
+    }
+
+    TriggerExecute(lib53355882_gt_InitHighMineral4, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib53355882_gt_InitHighMineral3_Init () {
+    lib53355882_gt_InitHighMineral3 = TriggerCreate("lib53355882_gt_InitHighMineral3_Func");
+    TriggerAddEventMapInit(lib53355882_gt_InitHighMineral3);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: NoM | Start
+//--------------------------------------------------------------------------------------------------
+bool lib53355882_gt_InitHighMineral4_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    string autoCD68D766_val;
+    string autoD7E210D3_val;
+    string auto74EFCCD1_val;
+    string auto3E4F5C78_val;
+    string autoAE43A526_val;
+    string autoE51485DB_val;
+    string auto64C9EF13_val;
+    int autoA2E2BEE9_val;
+    playergroup autoFF6CA89C_g;
+    int autoFF6CA89C_var;
+    int auto0AD1117D_val;
+    playergroup auto9E4793AD_g;
+    int auto9E4793AD_var;
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((GameAttributeGameValue("1") == "0004")) {
+    }
+    else {
+        autoCD68D766_val = GameAttributeGameValue("7");
+        if (autoCD68D766_val == "0003") {
+            lib53355882_gv_noMgetTimer_Window = 1;
+        }
+        else if (autoCD68D766_val == "0004") {
+            lib53355882_gv_noMgetTimer_Window = 2;
+        }
+        else if (autoCD68D766_val == "0005") {
+            lib53355882_gv_noMgetTimer_Window = 3;
+        }
+        else {
+        }
+    }
+    if ((GameAttributeGameValue("1") == "0003")) {
+        autoD7E210D3_val = GameAttributeGameValue("6");
+        if (autoD7E210D3_val == "0001") {
+            lib53355882_gv_noMchangegetMineral_InStart = 500;
+        }
+        else if (autoD7E210D3_val == "0002") {
+            lib53355882_gv_noMchangegetMineral_InStart = 1000;
+        }
+        else if (autoD7E210D3_val == "0003") {
+            lib53355882_gv_noMchangegetMineral_InStart = 1500;
+        }
+        else if (autoD7E210D3_val == "0004") {
+            lib53355882_gv_noMchangegetMineral_InStart = 2000;
+        }
+        else if (autoD7E210D3_val == "0005") {
+            lib53355882_gv_noMchangegetMineral_InStart = 2500;
+        }
+        else if (autoD7E210D3_val == "0006") {
+            lib53355882_gv_noMchangegetMineral_InStart = 3000;
+        }
+        else if (autoD7E210D3_val == "0007") {
+            lib53355882_gv_noMchangegetMineral_InStart = 4000;
+        }
+        else if (autoD7E210D3_val == "0008") {
+            lib53355882_gv_noMchangegetMineral_InStart = 5000;
+        }
+        else {
+        }
+        auto74EFCCD1_val = GameAttributeGameValue("2");
+        if (auto74EFCCD1_val == "0001") {
+            lib53355882_gv_noMchangegetMineral = 100;
+        }
+        else if (auto74EFCCD1_val == "0002") {
+            lib53355882_gv_noMchangegetMineral = 200;
+        }
+        else if (auto74EFCCD1_val == "0003") {
+            lib53355882_gv_noMchangegetMineral = 300;
+        }
+        else if (auto74EFCCD1_val == "0004") {
+            lib53355882_gv_noMchangegetMineral = 400;
+        }
+        else if (auto74EFCCD1_val == "0005") {
+            lib53355882_gv_noMchangegetMineral = 500;
+        }
+        else if (auto74EFCCD1_val == "0006") {
+            lib53355882_gv_noMchangegetMineral = 1000;
+        }
+        else if (auto74EFCCD1_val == "0007") {
+            lib53355882_gv_noMchangegetMineral = 1500;
+        }
+        else if (auto74EFCCD1_val == "0008") {
+            lib53355882_gv_noMchangegetMineral = 2000;
+        }
+        else if (auto74EFCCD1_val == "0009") {
+            lib53355882_gv_noMchangegetMineral = 2500;
+        }
+        else if (auto74EFCCD1_val == "0010") {
+            lib53355882_gv_noMchangegetMineral = 3000;
+        }
+        else if (auto74EFCCD1_val == "0011") {
+            lib53355882_gv_noMchangegetMineral = 4000;
+        }
+        else if (auto74EFCCD1_val == "0012") {
+            lib53355882_gv_noMchangegetMineral = 5000;
+        }
+        else {
+        }
+        auto3E4F5C78_val = GameAttributeGameValue("3");
+        if (auto3E4F5C78_val == "0010") {
+            lib53355882_gv_noMchangegetTime_OfPeriod = 5;
+        }
+        else if (auto3E4F5C78_val == "0001") {
+            lib53355882_gv_noMchangegetTime_OfPeriod = 10;
+        }
+        else if (auto3E4F5C78_val == "0002") {
+            lib53355882_gv_noMchangegetTime_OfPeriod = 15;
+        }
+        else if (auto3E4F5C78_val == "0003") {
+            lib53355882_gv_noMchangegetTime_OfPeriod = 20;
+        }
+        else if (auto3E4F5C78_val == "0004") {
+            lib53355882_gv_noMchangegetTime_OfPeriod = 30;
+        }
+        else if (auto3E4F5C78_val == "0012") {
+            lib53355882_gv_noMchangegetTime_OfPeriod = 45;
+        }
+        else if (auto3E4F5C78_val == "0005") {
+            lib53355882_gv_noMchangegetTime_OfPeriod = 60;
+        }
+        else if (auto3E4F5C78_val == "0006") {
+            lib53355882_gv_noMchangegetTime_OfPeriod = 90;
+        }
+        else if (auto3E4F5C78_val == "0007") {
+            lib53355882_gv_noMchangegetTime_OfPeriod = 120;
+        }
+        else if (auto3E4F5C78_val == "0008") {
+            lib53355882_gv_noMchangegetTime_OfPeriod = 150;
+        }
+        else if (auto3E4F5C78_val == "0009") {
+            lib53355882_gv_noMchangegetTime_OfPeriod = 180;
+        }
+        else {
+        }
+        autoAE43A526_val = GameAttributeGameValue("4");
+        if (autoAE43A526_val == "0003") {
+            lib53355882_gv_noMchangegetTime_IncreaseQuantity = 300;
+        }
+        else if (autoAE43A526_val == "0002") {
+            lib53355882_gv_noMchangegetTime_IncreaseQuantity = 600;
+        }
+        else if (autoAE43A526_val == "0004") {
+            lib53355882_gv_noMchangegetTime_IncreaseQuantity = 900;
+        }
+        else if (autoAE43A526_val == "0005") {
+            lib53355882_gv_noMchangegetTime_IncreaseQuantity = 1200;
+        }
+        else if (autoAE43A526_val == "0006") {
+            lib53355882_gv_noMchangegetTime_IncreaseQuantity = 1500;
+        }
+        else if (autoAE43A526_val == "0007") {
+            lib53355882_gv_noMchangegetTime_IncreaseQuantity = 1800;
+        }
+        else if (autoAE43A526_val == "0011") {
+            lib53355882_gv_noMchangegetTime_IncreaseQuantity = 2100;
+        }
+        else if (autoAE43A526_val == "0008") {
+            lib53355882_gv_noMchangegetTime_IncreaseQuantity = 2400;
+        }
+        else if (autoAE43A526_val == "0009") {
+            lib53355882_gv_noMchangegetTime_IncreaseQuantity = 2700;
+        }
+        else if (autoAE43A526_val == "0010") {
+            lib53355882_gv_noMchangegetTime_IncreaseQuantity = 3600;
+        }
+        else {
+        }
+        autoE51485DB_val = GameAttributeGameValue("5");
+        if (autoE51485DB_val == "0001") {
+            lib53355882_gv_noMchangegetCount_IncreaseQuantity = 2;
+        }
+        else if (autoE51485DB_val == "0002") {
+            lib53355882_gv_noMchangegetCount_IncreaseQuantity = 3;
+        }
+        else if (autoE51485DB_val == "0003") {
+            lib53355882_gv_noMchangegetCount_IncreaseQuantity = 4;
+        }
+        else if (autoE51485DB_val == "0004") {
+            lib53355882_gv_noMchangegetCount_IncreaseQuantity = 5;
+        }
+        else if (autoE51485DB_val == "0005") {
+            lib53355882_gv_noMchangegetCount_IncreaseQuantity = 10;
+        }
+        else {
+        }
+    }
+
+    auto64C9EF13_val = GameAttributeGameValue("1");
+    if (auto64C9EF13_val == "0001") {
+        lib53355882_gv_noMvar1 = true;
+    }
+    else if (auto64C9EF13_val == "0002") {
+        lib53355882_gv_noMvar2 = true;
+    }
+    else if (auto64C9EF13_val == "0003") {
+        lib53355882_gv_noMvarChange = true;
+    }
+    else if (auto64C9EF13_val == "0004") {
+        lib53355882_gv_noMvarNotUsed = true;
+    }
+    else {
+    }
+    if (((GameAttributeGameValue("1") == "0001") || (GameAttributeGameValue("1") == "0002"))) {
+        TimerStart(lib53355882_gv_noMD186D0B8D0BAD0BB_1, 1.0, false, c_timeReal);
+        lib53355882_gv_noMD186D0B8D0BAD0BB_1 = TimerLastStarted();
+        autoA2E2BEE9_val = lib53355882_gv_noMgetTimer_Window;
+        if (autoA2E2BEE9_val == 1) {
+            TimerWindowCreate(TimerLastStarted(), StringExternal("Param/Value/lib_53355882_C3A1B1D0"), true, false);
+            TimerWindowSetFormat(TimerWindowLastCreated(), StringToText("<mintotal/>:<sec2/>"));
+            TimerWindowSetAnchor(TimerWindowLastCreated(), c_anchorBottomLeft, 0, -45);
+            lib53355882_gv_noMTimerWindow = TimerWindowLastCreated();
+        }
+        else if (autoA2E2BEE9_val == 2) {
+            TimerWindowCreate(TimerLastStarted(), StringExternal("Param/Value/lib_53355882_08E5D774"), true, false);
+            TimerWindowSetFormat(TimerWindowLastCreated(), StringToText("<mintotal/>:<sec2/>"));
+            TimerWindowSetAnchor(TimerWindowLastCreated(), c_anchorBottomRight, 0, -45);
+            lib53355882_gv_noMTimerWindow = TimerWindowLastCreated();
+        }
+        else if (autoA2E2BEE9_val == 3) {
+            TimerWindowCreate(TimerLastStarted(), StringExternal("Param/Value/lib_53355882_08AD6BEB"), true, false);
+            TimerWindowSetFormat(TimerWindowLastCreated(), StringToText("<mintotal/>:<sec2/>"));
+            TimerWindowSetAnchor(TimerWindowLastCreated(), c_anchorTopRight, 0, 45);
+            lib53355882_gv_noMTimerWindow = TimerWindowLastCreated();
+        }
+        else {
+        }
+    }
+
+    if ((GameAttributeGameValue("1") == "0003")) {
+        TimerStart(lib53355882_gv_noMchangeTimer_IncreaseQuantity, lib53355882_gv_noMchangegetTime_IncreaseQuantity, false, c_timeReal);
+        lib53355882_gv_noMchangeTimer_IncreaseQuantity = TimerLastStarted();
+        Wait(1.0, c_timeReal);
+        autoFF6CA89C_g = PlayerGroupActive();
+        autoFF6CA89C_var = -1;
+        while (true) {
+            autoFF6CA89C_var = PlayerGroupNextPlayer(autoFF6CA89C_g, autoFF6CA89C_var);
+            if (autoFF6CA89C_var < 0) { break; }
+            PlayerModifyPropertyInt(autoFF6CA89C_var, c_playerPropMinerals, c_playerPropOperAdd, lib53355882_gv_noMchangegetMineral_InStart);
+        }
+        TimerStart(lib53355882_gv_noMchangeTimer_OfPeriod, lib53355882_gv_noMchangegetTime_OfPeriod, true, c_timeReal);
+        lib53355882_gv_noMchangeTimer_OfPeriod = TimerLastStarted();
+        auto0AD1117D_val = lib53355882_gv_noMgetTimer_Window;
+        if (auto0AD1117D_val == 1) {
+            TimerWindowCreate(TimerLastStarted(), StringExternal("Param/Value/lib_53355882_E60BDCAE"), true, false);
+            TimerWindowSetFormat(TimerWindowLastCreated(), StringToText("<mintotal/>:<sec2/>"));
+            TimerWindowSetAnchor(TimerWindowLastCreated(), c_anchorBottomLeft, 0, -45);
+            lib53355882_gv_noMTimerWindow = TimerWindowLastCreated();
+        }
+        else if (auto0AD1117D_val == 2) {
+            TimerWindowCreate(TimerLastStarted(), StringExternal("Param/Value/lib_53355882_839FE5B7"), true, false);
+            TimerWindowSetFormat(TimerWindowLastCreated(), StringToText("<mintotal/>:<sec2/>"));
+            TimerWindowSetAnchor(TimerWindowLastCreated(), c_anchorBottomRight, 0, -45);
+            lib53355882_gv_noMTimerWindow = TimerWindowLastCreated();
+        }
+        else if (auto0AD1117D_val == 3) {
+            TimerWindowCreate(TimerLastStarted(), StringExternal("Param/Value/lib_53355882_BB98749D"), true, false);
+            TimerWindowSetFormat(TimerWindowLastCreated(), StringToText("<mintotal/>:<sec2/>"));
+            TimerWindowSetAnchor(TimerWindowLastCreated(), c_anchorTopRight, 0, 45);
+            lib53355882_gv_noMTimerWindow = TimerWindowLastCreated();
+        }
+        else {
+        }
+    }
+
+    if ((GameAttributeGameValue("1") == "0004")) {
+        auto9E4793AD_g = PlayerGroupActive();
+        auto9E4793AD_var = -1;
+        while (true) {
+            auto9E4793AD_var = PlayerGroupNextPlayer(auto9E4793AD_g, auto9E4793AD_var);
+            if (auto9E4793AD_var < 0) { break; }
+            PlayerSetState(auto9E4793AD_var, c_playerStateMineralCostIgnored, true);
+        }
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib53355882_gt_InitHighMineral4_Init () {
+    lib53355882_gt_InitHighMineral4 = TriggerCreate("lib53355882_gt_InitHighMineral4_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: NoM | Change
+//--------------------------------------------------------------------------------------------------
+bool lib53355882_gt_NoMChange_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    playergroup auto10596973_g;
+    int auto10596973_var;
+    playergroup auto98D7DA91_g;
+    int auto98D7DA91_var;
+
+    // Conditions
+    if (testConds) {
+        if (!((lib53355882_gv_noMvarChange == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if (((GameAttributeGameValue("3") == "0005") || (GameAttributeGameValue("3") == "0006") || (GameAttributeGameValue("3") == "0007") || (GameAttributeGameValue("3") == "0008") || (GameAttributeGameValue("3") == "0009"))) {
+        SoundPlayForPlayer(lib53355882_gv_sound, c_maxPlayers, PlayerGroupActive(), lib53355882_gv_volume, 0.0);
+        auto10596973_g = PlayerGroupActive();
+        auto10596973_var = -1;
+        while (true) {
+            auto10596973_var = PlayerGroupNextPlayer(auto10596973_g, auto10596973_var);
+            if (auto10596973_var < 0) { break; }
+            CameraShakeStart(auto10596973_var, c_cameraPositionTarget, c_cameraDirectionXYZ, 0.05, 10.0, 100.0, 1.0);
+        }
+    }
+
+    auto98D7DA91_g = PlayerGroupActive();
+    auto98D7DA91_var = -1;
+    while (true) {
+        auto98D7DA91_var = PlayerGroupNextPlayer(auto98D7DA91_g, auto98D7DA91_var);
+        if (auto98D7DA91_var < 0) { break; }
+        PlayerModifyPropertyInt(auto98D7DA91_var, c_playerPropMinerals, c_playerPropOperAdd, lib53355882_gv_noMchangegetMineral);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib53355882_gt_NoMChange_Init () {
+    lib53355882_gt_NoMChange = TriggerCreate("lib53355882_gt_NoMChange_Func");
+    TriggerAddEventTimer(lib53355882_gt_NoMChange, lib53355882_gv_noMchangeTimer_OfPeriod);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: NoM | Change_Increase
+//--------------------------------------------------------------------------------------------------
+bool lib53355882_gt_NoMChange_Increase_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((lib53355882_gv_noMvarChange == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lib53355882_gv_noMchangegetMineral = (lib53355882_gv_noMchangegetMineral * lib53355882_gv_noMchangegetCount_IncreaseQuantity);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib53355882_gt_NoMChange_Increase_Init () {
+    lib53355882_gt_NoMChange_Increase = TriggerCreate("lib53355882_gt_NoMChange_Increase_Func");
+    TriggerAddEventTimer(lib53355882_gt_NoMChange_Increase, lib53355882_gv_noMchangeTimer_IncreaseQuantity);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: NoM | getMineral_??????.1_????????_1
+//--------------------------------------------------------------------------------------------------
+bool lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_1_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    playergroup autoB34ADC00_g;
+    int autoB34ADC00_var;
+    playergroup autoC92160BC_g;
+    int autoC92160BC_var;
+    int autoB3A207AA_val;
+
+    // Conditions
+    if (testConds) {
+        if (!((lib53355882_gv_noMvar1 == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((lib53355882_gv_noMgetTimer_Window == 0)) {
+    }
+    else {
+        TimerWindowDestroy(lib53355882_gv_noMTimerWindow);
+    }
+    SoundPlayForPlayer(lib53355882_gv_sound, c_maxPlayers, PlayerGroupActive(), lib53355882_gv_volume, 0.0);
+    UIDisplayMessage(PlayerGroupActive(), c_messageAreaSubtitle, StringExternal("Param/Value/lib_53355882_7CA0DF76"));
+    autoB34ADC00_g = PlayerGroupActive();
+    autoB34ADC00_var = -1;
+    while (true) {
+        autoB34ADC00_var = PlayerGroupNextPlayer(autoB34ADC00_g, autoB34ADC00_var);
+        if (autoB34ADC00_var < 0) { break; }
+        CameraShakeStart(autoB34ADC00_var, c_cameraPositionTarget, c_cameraDirectionXYZ, 0.05, 10.0, 100.0, 1.0);
+    }
+    autoC92160BC_g = PlayerGroupActive();
+    autoC92160BC_var = -1;
+    while (true) {
+        autoC92160BC_var = PlayerGroupNextPlayer(autoC92160BC_g, autoC92160BC_var);
+        if (autoC92160BC_var < 0) { break; }
+        PlayerModifyPropertyInt(autoC92160BC_var, c_playerPropMinerals, c_playerPropOperAdd, 500);
+    }
+    TimerStart(lib53355882_gv_noMD186D0B8D0BAD0BB_2, 25.0, false, c_timeReal);
+    lib53355882_gv_noMD186D0B8D0BAD0BB_2 = TimerLastStarted();
+    TimerWindowCreate(TimerLastStarted(), StringExternal("Param/Value/lib_53355882_73E49DE9"), true, false);
+    lib53355882_gv_noMTimerWindow = TimerWindowLastCreated();
+    autoB3A207AA_val = lib53355882_gv_noMgetTimer_Window;
+    if (autoB3A207AA_val == 1) {
+        TimerWindowCreate(TimerLastStarted(), StringExternal("Param/Value/lib_53355882_D5224DD7"), true, false);
+        TimerWindowSetFormat(TimerWindowLastCreated(), StringToText("<mintotal/>:<sec2/>"));
+        TimerWindowSetAnchor(TimerWindowLastCreated(), c_anchorBottomLeft, 0, -45);
+        lib53355882_gv_noMTimerWindow = TimerWindowLastCreated();
+    }
+    else if (autoB3A207AA_val == 2) {
+        TimerWindowCreate(TimerLastStarted(), StringExternal("Param/Value/lib_53355882_0C917259"), true, false);
+        TimerWindowSetFormat(TimerWindowLastCreated(), StringToText("<mintotal/>:<sec2/>"));
+        TimerWindowSetAnchor(TimerWindowLastCreated(), c_anchorBottomRight, 0, -45);
+        lib53355882_gv_noMTimerWindow = TimerWindowLastCreated();
+    }
+    else if (autoB3A207AA_val == 3) {
+        TimerWindowCreate(TimerLastStarted(), StringExternal("Param/Value/lib_53355882_21DDAE3E"), true, false);
+        TimerWindowSetFormat(TimerWindowLastCreated(), StringToText("<mintotal/>:<sec2/>"));
+        TimerWindowSetAnchor(TimerWindowLastCreated(), c_anchorTopRight, 0, 45);
+        lib53355882_gv_noMTimerWindow = TimerWindowLastCreated();
+    }
+    else {
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_1_Init () {
+    lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_1 = TriggerCreate("lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_1_Func");
+    TriggerAddEventTimer(lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_1, lib53355882_gv_noMD186D0B8D0BAD0BB_1);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: NoM | getMineral_??????.1_????????_2
+//--------------------------------------------------------------------------------------------------
+bool lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_2_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    playergroup auto4E9D0FE2_g;
+    int auto4E9D0FE2_var;
+    playergroup autoD6564837_g;
+    int autoD6564837_var;
+    int auto3E8547B9_val;
+
+    // Conditions
+    if (testConds) {
+        if (!((lib53355882_gv_noMvar1 == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((lib53355882_gv_noMgetTimer_Window == 0)) {
+    }
+    else {
+        TimerWindowDestroy(lib53355882_gv_noMTimerWindow);
+    }
+    SoundPlayForPlayer(lib53355882_gv_sound, c_maxPlayers, PlayerGroupActive(), lib53355882_gv_volume, 0.0);
+    UIDisplayMessage(PlayerGroupActive(), c_messageAreaSubtitle, StringExternal("Param/Value/lib_53355882_3FB4ECB8"));
+    auto4E9D0FE2_g = PlayerGroupActive();
+    auto4E9D0FE2_var = -1;
+    while (true) {
+        auto4E9D0FE2_var = PlayerGroupNextPlayer(auto4E9D0FE2_g, auto4E9D0FE2_var);
+        if (auto4E9D0FE2_var < 0) { break; }
+        CameraShakeStart(auto4E9D0FE2_var, c_cameraPositionTarget, c_cameraDirectionXYZ, 0.05, 10.0, 100.0, 1.0);
+    }
+    autoD6564837_g = PlayerGroupActive();
+    autoD6564837_var = -1;
+    while (true) {
+        autoD6564837_var = PlayerGroupNextPlayer(autoD6564837_g, autoD6564837_var);
+        if (autoD6564837_var < 0) { break; }
+        PlayerModifyPropertyInt(autoD6564837_var, c_playerPropMinerals, c_playerPropOperAdd, 1000);
+    }
+    TimerStart(lib53355882_gv_noMD186D0B8D0BAD0BB_3, 30.0, false, c_timeReal);
+    lib53355882_gv_noMD186D0B8D0BAD0BB_3 = TimerLastStarted();
+    TimerWindowCreate(TimerLastStarted(), StringExternal("Param/Value/lib_53355882_E445ED76"), true, false);
+    lib53355882_gv_noMTimerWindow = TimerWindowLastCreated();
+    auto3E8547B9_val = lib53355882_gv_noMgetTimer_Window;
+    if (auto3E8547B9_val == 1) {
+        TimerWindowCreate(TimerLastStarted(), StringExternal("Param/Value/lib_53355882_F1EF3935"), true, false);
+        TimerWindowSetFormat(TimerWindowLastCreated(), StringToText("<mintotal/>:<sec2/>"));
+        TimerWindowSetAnchor(TimerWindowLastCreated(), c_anchorBottomLeft, 0, -45);
+        lib53355882_gv_noMTimerWindow = TimerWindowLastCreated();
+    }
+    else if (auto3E8547B9_val == 2) {
+        TimerWindowCreate(TimerLastStarted(), StringExternal("Param/Value/lib_53355882_16490C4D"), true, false);
+        TimerWindowSetFormat(TimerWindowLastCreated(), StringToText("<mintotal/>:<sec2/>"));
+        TimerWindowSetAnchor(TimerWindowLastCreated(), c_anchorBottomRight, 0, -45);
+        lib53355882_gv_noMTimerWindow = TimerWindowLastCreated();
+    }
+    else if (auto3E8547B9_val == 3) {
+        TimerWindowCreate(TimerLastStarted(), StringExternal("Param/Value/lib_53355882_BA5306BE"), true, false);
+        TimerWindowSetFormat(TimerWindowLastCreated(), StringToText("<mintotal/>:<sec2/>"));
+        TimerWindowSetAnchor(TimerWindowLastCreated(), c_anchorTopRight, 0, 45);
+        lib53355882_gv_noMTimerWindow = TimerWindowLastCreated();
+    }
+    else {
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_2_Init () {
+    lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_2 = TriggerCreate("lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_2_Func");
+    TriggerAddEventTimer(lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_2, lib53355882_gv_noMD186D0B8D0BAD0BB_2);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: NoM | getMineral_??????.1_????????_3
+//--------------------------------------------------------------------------------------------------
+bool lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_3_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    playergroup autoF0AD20D7_g;
+    int autoF0AD20D7_var;
+    playergroup auto6036F52D_g;
+    int auto6036F52D_var;
+    int auto3BEF9BCD_val;
+
+    // Conditions
+    if (testConds) {
+        if (!((lib53355882_gv_noMvar1 == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((lib53355882_gv_noMgetTimer_Window == 0)) {
+    }
+    else {
+        TimerWindowDestroy(lib53355882_gv_noMTimerWindow);
+    }
+    SoundPlayForPlayer(lib53355882_gv_sound, c_maxPlayers, PlayerGroupActive(), lib53355882_gv_volume, 0.0);
+    UIDisplayMessage(PlayerGroupActive(), c_messageAreaSubtitle, StringExternal("Param/Value/lib_53355882_096B5998"));
+    autoF0AD20D7_g = PlayerGroupActive();
+    autoF0AD20D7_var = -1;
+    while (true) {
+        autoF0AD20D7_var = PlayerGroupNextPlayer(autoF0AD20D7_g, autoF0AD20D7_var);
+        if (autoF0AD20D7_var < 0) { break; }
+        CameraShakeStart(autoF0AD20D7_var, c_cameraPositionTarget, c_cameraDirectionXYZ, 0.05, 10.0, 100.0, 1.0);
+    }
+    auto6036F52D_g = PlayerGroupActive();
+    auto6036F52D_var = -1;
+    while (true) {
+        auto6036F52D_var = PlayerGroupNextPlayer(auto6036F52D_g, auto6036F52D_var);
+        if (auto6036F52D_var < 0) { break; }
+        PlayerModifyPropertyInt(auto6036F52D_var, c_playerPropMinerals, c_playerPropOperAdd, 2500);
+    }
+    TimerStart(lib53355882_gv_noMD186D0B8D0BAD0BB_4, 60.0, false, c_timeReal);
+    lib53355882_gv_noMD186D0B8D0BAD0BB_4 = TimerLastStarted();
+    TimerWindowCreate(TimerLastStarted(), StringExternal("Param/Value/lib_53355882_B1B97793"), true, false);
+    lib53355882_gv_noMTimerWindow = TimerWindowLastCreated();
+    auto3BEF9BCD_val = lib53355882_gv_noMgetTimer_Window;
+    if (auto3BEF9BCD_val == 1) {
+        TimerWindowCreate(TimerLastStarted(), StringExternal("Param/Value/lib_53355882_AED88EE9"), true, false);
+        TimerWindowSetFormat(TimerWindowLastCreated(), StringToText("<mintotal/>:<sec2/>"));
+        TimerWindowSetAnchor(TimerWindowLastCreated(), c_anchorBottomLeft, 0, -45);
+        lib53355882_gv_noMTimerWindow = TimerWindowLastCreated();
+    }
+    else if (auto3BEF9BCD_val == 2) {
+        TimerWindowCreate(TimerLastStarted(), StringExternal("Param/Value/lib_53355882_FBD4FC28"), true, false);
+        TimerWindowSetFormat(TimerWindowLastCreated(), StringToText("<mintotal/>:<sec2/>"));
+        TimerWindowSetAnchor(TimerWindowLastCreated(), c_anchorBottomRight, 0, -45);
+        lib53355882_gv_noMTimerWindow = TimerWindowLastCreated();
+    }
+    else if (auto3BEF9BCD_val == 3) {
+        TimerWindowCreate(TimerLastStarted(), StringExternal("Param/Value/lib_53355882_AB779282"), true, false);
+        TimerWindowSetFormat(TimerWindowLastCreated(), StringToText("<mintotal/>:<sec2/>"));
+        TimerWindowSetAnchor(TimerWindowLastCreated(), c_anchorTopRight, 0, 45);
+        lib53355882_gv_noMTimerWindow = TimerWindowLastCreated();
+    }
+    else {
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_3_Init () {
+    lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_3 = TriggerCreate("lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_3_Func");
+    TriggerAddEventTimer(lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_3, lib53355882_gv_noMD186D0B8D0BAD0BB_3);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: NoM | getMineral_??????.1_????????_4
+//--------------------------------------------------------------------------------------------------
+bool lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_4_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    playergroup auto8FA13115_g;
+    int auto8FA13115_var;
+    playergroup auto6BB38B5E_g;
+    int auto6BB38B5E_var;
+    int auto389F4B4C_val;
+
+    // Conditions
+    if (testConds) {
+        if (!((lib53355882_gv_noMvar1 == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((lib53355882_gv_noMgetTimer_Window == 0)) {
+    }
+    else {
+        TimerWindowDestroy(lib53355882_gv_noMTimerWindow);
+    }
+    SoundPlayForPlayer(lib53355882_gv_sound, c_maxPlayers, PlayerGroupActive(), lib53355882_gv_volume, 0.0);
+    UIDisplayMessage(PlayerGroupActive(), c_messageAreaSubtitle, StringExternal("Param/Value/lib_53355882_BBCD3ABD"));
+    auto8FA13115_g = PlayerGroupActive();
+    auto8FA13115_var = -1;
+    while (true) {
+        auto8FA13115_var = PlayerGroupNextPlayer(auto8FA13115_g, auto8FA13115_var);
+        if (auto8FA13115_var < 0) { break; }
+        CameraShakeStart(auto8FA13115_var, c_cameraPositionTarget, c_cameraDirectionXYZ, 0.05, 10.0, 100.0, 1.0);
+    }
+    auto6BB38B5E_g = PlayerGroupActive();
+    auto6BB38B5E_var = -1;
+    while (true) {
+        auto6BB38B5E_var = PlayerGroupNextPlayer(auto6BB38B5E_g, auto6BB38B5E_var);
+        if (auto6BB38B5E_var < 0) { break; }
+        PlayerModifyPropertyInt(auto6BB38B5E_var, c_playerPropMinerals, c_playerPropOperAdd, 5000);
+    }
+    TimerStart(lib53355882_gv_noMD186D0B8D0BAD0BB_5, 120.0, false, c_timeReal);
+    lib53355882_gv_noMD186D0B8D0BAD0BB_5 = TimerLastStarted();
+    TimerWindowCreate(TimerLastStarted(), StringExternal("Param/Value/lib_53355882_3B9C32D8"), true, false);
+    lib53355882_gv_noMTimerWindow = TimerWindowLastCreated();
+    auto389F4B4C_val = lib53355882_gv_noMgetTimer_Window;
+    if (auto389F4B4C_val == 1) {
+        TimerWindowCreate(TimerLastStarted(), StringExternal("Param/Value/lib_53355882_CC030CFE"), true, false);
+        TimerWindowSetFormat(TimerWindowLastCreated(), StringToText("<mintotal/>:<sec2/>"));
+        TimerWindowSetAnchor(TimerWindowLastCreated(), c_anchorBottomLeft, 0, -45);
+        lib53355882_gv_noMTimerWindow = TimerWindowLastCreated();
+    }
+    else if (auto389F4B4C_val == 2) {
+        TimerWindowCreate(TimerLastStarted(), StringExternal("Param/Value/lib_53355882_3D7C3690"), true, false);
+        TimerWindowSetFormat(TimerWindowLastCreated(), StringToText("<mintotal/>:<sec2/>"));
+        TimerWindowSetAnchor(TimerWindowLastCreated(), c_anchorBottomRight, 0, -45);
+        lib53355882_gv_noMTimerWindow = TimerWindowLastCreated();
+    }
+    else if (auto389F4B4C_val == 3) {
+        TimerWindowCreate(TimerLastStarted(), StringExternal("Param/Value/lib_53355882_4A9AAF89"), true, false);
+        TimerWindowSetFormat(TimerWindowLastCreated(), StringToText("<mintotal/>:<sec2/>"));
+        TimerWindowSetAnchor(TimerWindowLastCreated(), c_anchorTopRight, 0, 45);
+        lib53355882_gv_noMTimerWindow = TimerWindowLastCreated();
+    }
+    else {
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_4_Init () {
+    lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_4 = TriggerCreate("lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_4_Func");
+    TriggerAddEventTimer(lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_4, lib53355882_gv_noMD186D0B8D0BAD0BB_4);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: NoM | getMineral_??????.1_????????_5
+//--------------------------------------------------------------------------------------------------
+bool lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_5_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    playergroup auto8CE42A1B_g;
+    int auto8CE42A1B_var;
+    playergroup autoD789CB89_g;
+    int autoD789CB89_var;
+    int autoA41A6398_val;
+
+    // Conditions
+    if (testConds) {
+        if (!((lib53355882_gv_noMvar1 == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((lib53355882_gv_noMgetTimer_Window == 0)) {
+    }
+    else {
+        TimerWindowDestroy(lib53355882_gv_noMTimerWindow);
+    }
+    SoundPlayForPlayer(lib53355882_gv_sound, c_maxPlayers, PlayerGroupActive(), lib53355882_gv_volume, 0.0);
+    UIDisplayMessage(PlayerGroupActive(), c_messageAreaSubtitle, StringExternal("Param/Value/lib_53355882_5FF8C81C"));
+    auto8CE42A1B_g = PlayerGroupActive();
+    auto8CE42A1B_var = -1;
+    while (true) {
+        auto8CE42A1B_var = PlayerGroupNextPlayer(auto8CE42A1B_g, auto8CE42A1B_var);
+        if (auto8CE42A1B_var < 0) { break; }
+        CameraShakeStart(auto8CE42A1B_var, c_cameraPositionTarget, c_cameraDirectionXYZ, 0.05, 10.0, 100.0, 1.0);
+    }
+    autoD789CB89_g = PlayerGroupActive();
+    autoD789CB89_var = -1;
+    while (true) {
+        autoD789CB89_var = PlayerGroupNextPlayer(autoD789CB89_g, autoD789CB89_var);
+        if (autoD789CB89_var < 0) { break; }
+        PlayerModifyPropertyInt(autoD789CB89_var, c_playerPropMinerals, c_playerPropOperAdd, 5000);
+    }
+    TimerStart(lib53355882_gv_noMD186D0B8D0BAD0BB_4, 120.0, false, c_timeReal);
+    lib53355882_gv_noMD186D0B8D0BAD0BB_4 = TimerLastStarted();
+    TimerWindowCreate(TimerLastStarted(), StringExternal("Param/Value/lib_53355882_A4C1D39D"), true, false);
+    lib53355882_gv_noMTimerWindow = TimerWindowLastCreated();
+    autoA41A6398_val = lib53355882_gv_noMgetTimer_Window;
+    if (autoA41A6398_val == 1) {
+        TimerWindowCreate(TimerLastStarted(), StringExternal("Param/Value/lib_53355882_80D2A4A6"), true, false);
+        TimerWindowSetFormat(TimerWindowLastCreated(), StringToText("<mintotal/>:<sec2/>"));
+        TimerWindowSetAnchor(TimerWindowLastCreated(), c_anchorBottomLeft, 0, -45);
+        lib53355882_gv_noMTimerWindow = TimerWindowLastCreated();
+    }
+    else if (autoA41A6398_val == 2) {
+        TimerWindowCreate(TimerLastStarted(), StringExternal("Param/Value/lib_53355882_5BF6DD3C"), true, false);
+        TimerWindowSetFormat(TimerWindowLastCreated(), StringToText("<mintotal/>:<sec2/>"));
+        TimerWindowSetAnchor(TimerWindowLastCreated(), c_anchorBottomRight, 0, -45);
+        lib53355882_gv_noMTimerWindow = TimerWindowLastCreated();
+    }
+    else if (autoA41A6398_val == 3) {
+        TimerWindowCreate(TimerLastStarted(), StringExternal("Param/Value/lib_53355882_027B4B48"), true, false);
+        TimerWindowSetFormat(TimerWindowLastCreated(), StringToText("<mintotal/>:<sec2/>"));
+        TimerWindowSetAnchor(TimerWindowLastCreated(), c_anchorTopRight, 0, 45);
+        lib53355882_gv_noMTimerWindow = TimerWindowLastCreated();
+    }
+    else {
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_5_Init () {
+    lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_5 = TriggerCreate("lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_5_Func");
+    TriggerAddEventTimer(lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_5, lib53355882_gv_noMD186D0B8D0BAD0BB_5);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: NoM | getMineral_??????.2
+//--------------------------------------------------------------------------------------------------
+bool lib53355882_gt_NoMgetMineral_D0B2D0B0D1802_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    playergroup autoB6370ADB_g;
+    int autoB6370ADB_var;
+
+    // Conditions
+    if (testConds) {
+        if (!((lib53355882_gv_noMvar2 == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    autoB6370ADB_g = PlayerGroupActive();
+    autoB6370ADB_var = -1;
+    while (true) {
+        autoB6370ADB_var = PlayerGroupNextPlayer(autoB6370ADB_g, autoB6370ADB_var);
+        if (autoB6370ADB_var < 0) { break; }
+        PlayerModifyPropertyInt(autoB6370ADB_var, c_playerPropMinerals, c_playerPropOperAdd, 200);
+    }
+    TimerStart(lib53355882_gv_noMD186D0B8D0BAD0BB_1, 5.0, false, c_timeReal);
+    lib53355882_gv_noMD186D0B8D0BAD0BB_1 = TimerLastStarted();
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib53355882_gt_NoMgetMineral_D0B2D0B0D1802_Init () {
+    lib53355882_gt_NoMgetMineral_D0B2D0B0D1802 = TriggerCreate("lib53355882_gt_NoMgetMineral_D0B2D0B0D1802_Func");
+    TriggerAddEventTimer(lib53355882_gt_NoMgetMineral_D0B2D0B0D1802, lib53355882_gv_noMD186D0B8D0BAD0BB_1);
+}
+
+void lib53355882_InitTriggers () {
+    lib53355882_gt_InitHighMineral3_Init();
+    lib53355882_gt_InitHighMineral4_Init();
+    lib53355882_gt_NoMChange_Init();
+    lib53355882_gt_NoMChange_Increase_Init();
+    lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_1_Init();
+    lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_2_Init();
+    lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_3_Init();
+    lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_4_Init();
+    lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_5_Init();
+    lib53355882_gt_NoMgetMineral_D0B2D0B0D1802_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool lib53355882_InitLib_completed = false;
+
+void lib53355882_InitLib () {
+    if (lib53355882_InitLib_completed) {
+        return;
+    }
+
+    lib53355882_InitLib_completed = true;
+
+    lib53355882_InitLibraries();
+    lib53355882_InitVariables();
+    lib53355882_InitTriggers();
+}
+

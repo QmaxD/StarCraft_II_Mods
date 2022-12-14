@@ -1,0 +1,44 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// Variable Declarations
+int libAFDD5302_gv_get_NumberOf_Players_InGame;
+int libAFDD5302_gv_get_NumberOf_Teams_InGame;
+playergroup[16] libAFDD5302_gv_get_Teams;
+int libAFDD5302_gv_get_NumberOf_Towers;
+int libAFDD5302_gv_get_TypeOf_Towers;
+fixed libAFDD5302_gv_get_size;
+int libAFDD5302_gv_get_RadiusOf_TowerRegions;
+int[16] libAFDD5302_gv_get_Score;
+int libAFDD5302_gv_get_TypeOf_Score;
+int libAFDD5302_gv_get_NumberOf_Periods;
+unit[5] libAFDD5302_gv_get_Tower;
+region[5] libAFDD5302_gv_get_TowerRegions;
+unit[5] libAFDD5302_gv_get_Search_Node;
+int libAFDD5302_gv_scoreboard;
+int[16] libAFDD5302_gv_scoreboardScore;
+int[16] libAFDD5302_gv_get_NumberOf_Victory;
+bool libAFDD5302_gv_is_Start_positiveScore;
+bool libAFDD5302_gv_is_Start_negativeScore;
+
+// Function Declarations
+string libAFDD5302_gf_getRight_Behaviour ();
+point libAFDD5302_gf_getRight_PointOf_TowerFor_1 ();
+point libAFDD5302_gf_getRight_PointOf_TowerFor_23 (int lp_tower);
+void libAFDD5302_gf_getRight_NumberOf_Teams_InGame ();
+void libAFDD5302_gf_getRight_NumberOf_Players_InGame ();
+point libAFDD5302_gf_getRight_MiddleCentreOf_Map ();
+point libAFDD5302_gf_getRight_MiddlePointOf_Team_And_Center (int lp_teamNumber);
+point libAFDD5302_gf_getRight_MiddlePointOf_Players_InTeam (int lp_teamNumber);
+
+// Trigger Declarations
+trigger libAFDD5302_gt_Launch;
+trigger libAFDD5302_gt_CreateTowerDialog;
+trigger libAFDD5302_gt_Periodic_positiveScore;
+trigger libAFDD5302_gt_Periodic_negativeScore;
+
+// Library Initialization
+void libAFDD5302_InitVariables ();
+

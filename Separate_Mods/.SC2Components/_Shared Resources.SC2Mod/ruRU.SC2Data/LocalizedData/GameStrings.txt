@@ -1,0 +1,4 @@
+﻿DocInfo/DescLong=Completely devoid of any description whatsoever.
+DocInfo/DescShort=Any
+DocInfo/Name=[ ZERGTV ] Общие ресурсы
+DocInfo/Website=zergtv.tv/gg

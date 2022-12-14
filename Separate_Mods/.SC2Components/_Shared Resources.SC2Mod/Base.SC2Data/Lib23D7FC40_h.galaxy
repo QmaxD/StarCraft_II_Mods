@@ -1,0 +1,75 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// Constants
+const int lib23D7FC40_gv_sRMAX_COUNT_PLAYER = 9;
+const int lib23D7FC40_gv_sRCommonPlayer_Alliance_1 = 13;
+const int lib23D7FC40_gv_sRCommonPlayer_Alliance_2 = 12;
+const int lib23D7FC40_gv_sRCommonPlayer_Alliance_3 = 11;
+const int lib23D7FC40_gv_sRCommonPlayer_Alliance_4 = 10;
+const int lib23D7FC40_gv_sRCommonPlayer_Alliance_Enemy = 9;
+
+// Variable Declarations
+int lib23D7FC40_gv_sRCount_Team;
+int lib23D7FC40_gv_sRCount_Player;
+playergroup lib23D7FC40_gv_sRAlliance_1;
+playergroup lib23D7FC40_gv_sRAlliance_2;
+playergroup lib23D7FC40_gv_sRAlliance_3;
+playergroup lib23D7FC40_gv_sRAlliance_4;
+playergroup lib23D7FC40_gv_sRNo_Alliance;
+playergroup lib23D7FC40_gv_sRAlliance_Enemy;
+bool lib23D7FC40_gv_sRwill_Work_Alliance_1;
+bool lib23D7FC40_gv_sRwill_Work_Alliance_2;
+bool lib23D7FC40_gv_sRwill_Work_Alliance_3;
+bool lib23D7FC40_gv_sRwill_Work_Alliance_4;
+bool lib23D7FC40_gv_sRwill_Work_Alliance_Enemy;
+bool lib23D7FC40_gv_sRis_Alliance_1_Empty;
+bool lib23D7FC40_gv_sRis_Alliance_2_Empty;
+bool lib23D7FC40_gv_sRis_Alliance_3_Empty;
+bool lib23D7FC40_gv_sRis_Alliance_4_Empty;
+int[16][3] lib23D7FC40_gv_sRResourceDialog_Players;
+int[16] lib23D7FC40_gv_sRDuplicate_Minerals;
+int[16] lib23D7FC40_gv_sRDuplicate_Vespen;
+int[16] lib23D7FC40_gv_sRMinerals_image;
+int[16] lib23D7FC40_gv_sRGas_image;
+int[16] lib23D7FC40_gv_sRSupply_image;
+text[16] lib23D7FC40_gv_sRSupply_text;
+text[16] lib23D7FC40_gv_sRTotal_Supply_text;
+text[6] lib23D7FC40_gv_sRMinerals_text;
+text[6] lib23D7FC40_gv_sRGas_text;
+int lib23D7FC40_gv_sRDialog_Width;
+int lib23D7FC40_gv_sRDialog_Height;
+int lib23D7FC40_gv_sRDialog_OffsetX;
+int lib23D7FC40_gv_sRDialog_OffsetY;
+int lib23D7FC40_gv_sRIcon;
+int lib23D7FC40_gv_sRImage_1_OffsetX;
+int lib23D7FC40_gv_sRImage_2_OffsetX;
+int lib23D7FC40_gv_sRImage_3_OffsetX;
+int lib23D7FC40_gv_sRImage_OffsetY;
+int lib23D7FC40_gv_sRData_Width;
+int lib23D7FC40_gv_sRData_Height;
+int lib23D7FC40_gv_sRData_1_OffsetX;
+int lib23D7FC40_gv_sRData_2_OffsetX;
+int lib23D7FC40_gv_sRData_3_OffsetX_text;
+int lib23D7FC40_gv_sRData_3_OffsetX_supply;
+int lib23D7FC40_gv_sRData_OffsetY;
+int lib23D7FC40_gv_sRObserver;
+text lib23D7FC40_gv_sRCommon_text;
+
+// Trigger Declarations
+trigger lib23D7FC40_gt_SRmax_count;
+trigger lib23D7FC40_gt_SRLaunch;
+trigger lib23D7FC40_gt_SRObserver;
+trigger lib23D7FC40_gt_SRCreateResourcesDialogForEveryPlayer;
+trigger lib23D7FC40_gt_SRChangeResourcesDialogForGroup1;
+trigger lib23D7FC40_gt_SRChangeResourcesDialogForGroup2;
+trigger lib23D7FC40_gt_SRChangeResourcesDialogForGroup3;
+trigger lib23D7FC40_gt_SRChangeResourcesDialogForGroup4;
+trigger lib23D7FC40_gt_SRCreateResourcesDialogForEnemy;
+trigger lib23D7FC40_gt_SRChangeResourcesDialogForEnemy;
+
+// Library Initialization
+void lib23D7FC40_InitVariables ();
+

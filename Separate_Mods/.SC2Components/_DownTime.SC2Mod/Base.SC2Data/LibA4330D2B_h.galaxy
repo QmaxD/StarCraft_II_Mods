@@ -1,0 +1,48 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// Constants
+const int libA4330D2B_gv_dTMAX_PLAYER = 4;
+const int libA4330D2B_gv_dTLARVA = 3;
+
+// Variable Declarations
+int libA4330D2B_gv_dTCount_Players_inGame_Now;
+bool libA4330D2B_gv_dTGet_Dialog;
+unitgroup[6][5] libA4330D2B_gv_dTProduction_Structure_Group;
+int[6][5] libA4330D2B_gv_dTNumber_Of_Production_Structures_In_Group;
+int[6][5] libA4330D2B_gv_dTDownTime_Of_Production_Structure;
+int[6] libA4330D2B_gv_dTDownTime_Of_Production_Structure_Common;
+int[6][3] libA4330D2B_gv_dTDialog_DownTime;
+text libA4330D2B_gv_dTText_Common;
+int[6][5] libA4330D2B_gv_dTImage_Player;
+text[6][5] libA4330D2B_gv_dTText_Player_1;
+text[6][5] libA4330D2B_gv_dTText_Player_0;
+int libA4330D2B_gv_dTDialogD0A8D0B8D180D0B8D0BDD0B0;
+int libA4330D2B_gv_dTDialogD092D18BD181D0BED182D0B0;
+int libA4330D2B_gv_dTDialogD181D0B4D0B2D0B8D0B3D0BAD0B0D0B6D0B4D0BED0B3D0BED0B4D0B8D0B0D0BBD0BED0B3D0B0D0B2D0B5D180D182D0B8D0BAD0B0D0BB;
+int libA4330D2B_gv_dTIconD180D0B0D0B7D0BCD0B5D180D18BD0B8D0BAD0BED0BDD0BED0BA;
+int libA4330D2B_gv_dTIconD181D0B4D0B2D0B8D0B3;
+int libA4330D2B_gv_dTTextD188D0B8D180D0B8D0BDD0B0D182D0B5D0BAD181D182D0B0;
+int libA4330D2B_gv_dTTextD0B2D18BD181D0BED182D0B0D182D0B5D0BAD181D182D0B0;
+int libA4330D2B_gv_dTTextD188D0B8D180D0B8D0BDD0B0D0B2D180D0B5D0BCD0B5D0BDD0B8;
+int libA4330D2B_gv_dTTextD0B2D18BD181D0BED182D0B0D0B2D180D0B5D0BCD0B5D0BDD0B8;
+int libA4330D2B_gv_dTTextD0BED182D181D182D183D0BFD182D0B5D0BAD181D182D0B0D0B3D0BED180D0B8D0B7D0BED0BDD182;
+int libA4330D2B_gv_dTTextD0BED182D181D182D183D0BFD182D0B5D0BAD181D182D0B0D0B2D0B5D180D182D0B8D0BAD0B0D0BB;
+int libA4330D2B_gv_dTTextD181D0B4D0B2D0B8D0B3D0BAD0B0D0B6D0B4D0BED0B3D0BED0BFD180D0B5D0B4D0BBD0BED0B6D0B5D0BDD0B8D18F;
+
+// Function Declarations
+void libA4330D2B_gf_DTCount_Structures (int lp_player, int lp_group);
+void libA4330D2B_gf_DTCount_Larva (int lp_player, int lp_group);
+void libA4330D2B_gf_DTCount_DownTime (int lp_player, int lp_group);
+
+// Trigger Declarations
+trigger libA4330D2B_gt_DTMax_Player;
+trigger libA4330D2B_gt_DTinitObserver;
+trigger libA4330D2B_gt_DTDialog_Create;
+trigger libA4330D2B_gt_DTDialog_ChangeCount_DownTime;
+
+// Library Initialization
+void libA4330D2B_InitVariables ();
+

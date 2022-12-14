@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectEnumArea id="RepulserField6SearchArea"/>
+    <CEffectEnumArea id="RepulserField6SearchArea2">
+        <Marker Link="Effect/RepulserField6SearchArea"/>
+        <SearchFilters value="-;Player,Ally,Neutral,Missile,Dead"/>
+        <AreaArray Radius="4" Effect="RepulserFieldSet"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="RepulserField6SearchArea3">
+        <Marker Link="Effect/RepulserField6SearchArea"/>
+        <SearchFilters value="-;Player,Ally,Neutral,Missile,Dead"/>
+        <AreaArray Radius="2" Effect="RepulserFieldSet"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="RepulserField6SearchArea4">
+        <Marker Link="Effect/RepulserField6SearchArea"/>
+        <SearchFilters value="-;Player,Ally,Neutral,Missile,Dead"/>
+        <AreaArray Radius="8" Effect="RepulserFieldSet"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="RepulserField6SearchArea42">
+        <Marker Link="Effect/RepulserField6SearchArea"/>
+        <SearchFilters value="-;Player,Ally,Neutral,Missile,Dead"/>
+        <AreaArray Radius="10" Effect="RepulserFieldSet"/>
+    </CEffectEnumArea>
+    <CEffectApplyForce id="RepulserFieldApplyForce2">
+        <Marker Link="Effect/RepulserFieldApplyForce"/>
+        <Amount value="0.25"/>
+    </CEffectApplyForce>
+    <CEffectIssueOrder id="RepulserFieldIssueOrder2">
+        <Marker Link="Effect/RepulserFieldIssueOrder"/>
+        <Abil value="stop"/>
+    </CEffectIssueOrder>
+    <CEffectSet id="RepulserFieldSet2">
+        <Marker Link="Effect/RepulserFieldSet"/>
+        <EffectArray value="RepulserFieldIssueOrder"/>
+        <EffectArray value="RepulserFieldApplyForce"/>
+    </CEffectSet>
+</Catalog>

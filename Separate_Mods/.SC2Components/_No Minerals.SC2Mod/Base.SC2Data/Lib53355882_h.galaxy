@@ -1,0 +1,47 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// Variable Declarations
+bool lib53355882_gv_noMvar1;
+bool lib53355882_gv_noMvar2;
+bool lib53355882_gv_noMvarChange;
+bool lib53355882_gv_noMvarNotUsed;
+int lib53355882_gv_noMTimerWindow;
+int lib53355882_gv_noMgetTimer_Window;
+soundlink lib53355882_gv_sound;
+fixed lib53355882_gv_volume;
+timer lib53355882_gv_noMD186D0B8D0BAD0BB_1;
+timer lib53355882_gv_noMD186D0B8D0BAD0BB_2;
+timer lib53355882_gv_noMD186D0B8D0BAD0BB_3;
+timer lib53355882_gv_noMD186D0B8D0BAD0BB_4;
+timer lib53355882_gv_noMD186D0B8D0BAD0BB_5;
+timer lib53355882_gv_noMchangeTimer_OfPeriod;
+timer lib53355882_gv_noMchangeTimer_IncreaseQuantity;
+int lib53355882_gv_noMchangegetMineral_InStart;
+int lib53355882_gv_noMchangegetTime_OfPeriod;
+int lib53355882_gv_noMchangegetMineral;
+int lib53355882_gv_noMchangegetTime_IncreaseQuantity;
+int lib53355882_gv_noMchangegetCount_IncreaseQuantity;
+
+// Function Declarations
+bool lib53355882_gf_IfUnitIsMineral1800 (unit lp_unit);
+bool lib53355882_gf_IfUnitIsMineral900 (unit lp_unit);
+bool lib53355882_gf_IfUnitIsGas2250 (unit lp_unit);
+
+// Trigger Declarations
+trigger lib53355882_gt_InitHighMineral3;
+trigger lib53355882_gt_InitHighMineral4;
+trigger lib53355882_gt_NoMChange;
+trigger lib53355882_gt_NoMChange_Increase;
+trigger lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_1;
+trigger lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_2;
+trigger lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_3;
+trigger lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_4;
+trigger lib53355882_gt_NoMgetMineral_D0B2D0B0D1801_D186D0B8D0BAD0BB_5;
+trigger lib53355882_gt_NoMgetMineral_D0B2D0B0D1802;
+
+// Library Initialization
+void lib53355882_InitVariables ();
+

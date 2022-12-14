@@ -1,0 +1,33 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// Variable Declarations
+playergroup libB9A22550_gv_groupPlayers;
+playergroup libB9A22550_gv_groupNoMinimap;
+bool libB9A22550_gv_isSharedVision;
+bool libB9A22550_gv_isNoMap;
+bool libB9A22550_gv_isNoWarFog;
+bool libB9A22550_gv_isNoMinimap;
+bool libB9A22550_gv_isHiddenBuried;
+bool libB9A22550_gv_isZergBuried;
+bool libB9A22550_gv_isTerranBuried;
+bool libB9A22550_gv_isTerranHidden;
+bool libB9A22550_gv_isProtossHidden;
+bool libB9A22550_gv_isZergCreep;
+bool libB9A22550_gv_isProtossMother;
+int libB9A22550_gv_minimapdialog;
+int libB9A22550_gv_minimapimage;
+
+// Function Declarations
+bool libB9A22550_gf_filteringUnit (string lp_unitType);
+
+// Trigger Declarations
+trigger libB9A22550_gt_readingAttributes;
+trigger libB9A22550_gt_processingAttributes;
+trigger libB9A22550_gt_unitEnter;
+
+// Library Initialization
+void libB9A22550_InitVariables ();
+

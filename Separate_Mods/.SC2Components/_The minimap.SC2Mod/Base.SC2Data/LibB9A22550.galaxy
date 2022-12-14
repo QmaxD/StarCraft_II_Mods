@@ -1,0 +1,278 @@
+include "TriggerLibs/NativeLib"
+
+include "LibB9A22550_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void libB9A22550_InitLibraries () {
+    libNtve_InitVariables();
+}
+
+// Variable Initialization
+bool libB9A22550_InitVariables_completed = false;
+
+void libB9A22550_InitVariables () {
+    if (libB9A22550_InitVariables_completed) {
+        return;
+    }
+
+    libB9A22550_InitVariables_completed = true;
+
+    libB9A22550_gv_groupPlayers = PlayerGroupEmpty();
+    libB9A22550_gv_groupNoMinimap = PlayerGroupEmpty();
+    libB9A22550_gv_minimapdialog = c_invalidDialogId;
+    libB9A22550_gv_minimapimage = c_invalidDialogControlId;
+}
+
+// Functions
+bool libB9A22550_gf_filteringUnit (string lp_unitType) {
+    // Automatic Variable Declarations
+    // Implementation
+    if ((((libB9A22550_gv_isZergBuried == true) && ((lp_unitType == "Drone") || (lp_unitType == "Queen") || (lp_unitType == "Zergling") || (lp_unitType == "Baneling") || (lp_unitType == "Roach") || (lp_unitType == "Ravager") || (lp_unitType == "Hydralisk") || (lp_unitType == "LurkerMP") || (lp_unitType == "Infestor") || (lp_unitType == "SwarmHostMP") || (lp_unitType == "Ultralisk"))) || ((libB9A22550_gv_isTerranBuried == true) && (lp_unitType == "WidowMine")) || ((libB9A22550_gv_isTerranHidden == true) && ((lp_unitType == "Ghost") || (lp_unitType == "Banshee"))) || ((libB9A22550_gv_isProtossHidden == true) && ((lp_unitType == "DarkTemplar") || (lp_unitType == "Observer"))) || ((libB9A22550_gv_isZergCreep == true) && ((lp_unitType == "CreepTumor") || (lp_unitType == "CreepTumorQueen"))) || ((libB9A22550_gv_isProtossMother == true) && (lp_unitType == "Mothership")))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: readingAttributes
+//--------------------------------------------------------------------------------------------------
+bool libB9A22550_gt_readingAttributes_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__player;
+
+    // Automatic Variable Declarations
+    const int auto75E7D2CD_ae = 12;
+    const int auto75E7D2CD_ai = 1;
+    string autoB62B70A4_val;
+    string auto85C45D08_val;
+    string autoDAEB3BD3_val;
+    const int auto6EFC5CDC_ae = 12;
+    const int auto6EFC5CDC_ai = 1;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    Wait(0.1, c_timeGame);
+    lv__player = 1;
+    for ( ; ( (auto75E7D2CD_ai >= 0 && lv__player <= auto75E7D2CD_ae) || (auto75E7D2CD_ai < 0 && lv__player >= auto75E7D2CD_ae) ) ; lv__player += auto75E7D2CD_ai ) {
+        if ((PlayerStatus(lv__player) == c_playerStatusActive)) {
+            PlayerGroupAdd(libB9A22550_gv_groupPlayers, lv__player);
+        }
+
+    }
+    autoB62B70A4_val = GameAttributeGameValue("1");
+    if (autoB62B70A4_val == "0002") {
+        libB9A22550_gv_isSharedVision = true;
+        if ((GameAttributeGameValue("2") == "0002")) {
+            libB9A22550_gv_isNoMap = true;
+        }
+
+    }
+    else if (autoB62B70A4_val == "0004") {
+        libB9A22550_gv_isNoWarFog = true;
+        auto85C45D08_val = GameAttributeGameValue("4");
+        if (auto85C45D08_val == "0001") {
+            libB9A22550_gv_isHiddenBuried = true;
+            libB9A22550_gv_isZergBuried = true;
+            libB9A22550_gv_isTerranBuried = true;
+            libB9A22550_gv_isTerranHidden = true;
+            libB9A22550_gv_isProtossHidden = true;
+            libB9A22550_gv_isZergCreep = true;
+            libB9A22550_gv_isProtossMother = true;
+        }
+        else if (auto85C45D08_val == "0003") {
+            libB9A22550_gv_isHiddenBuried = true;
+            if ((GameAttributeGameValue("6") == "0002")) {
+                libB9A22550_gv_isZergBuried = true;
+            }
+
+            if ((GameAttributeGameValue("11") == "0002")) {
+                libB9A22550_gv_isTerranBuried = true;
+            }
+
+            if ((GameAttributeGameValue("10") == "0002")) {
+                libB9A22550_gv_isTerranHidden = true;
+            }
+
+            if ((GameAttributeGameValue("7") == "0002")) {
+                libB9A22550_gv_isProtossHidden = true;
+            }
+
+            if ((GameAttributeGameValue("8") == "0002")) {
+                libB9A22550_gv_isZergCreep = true;
+            }
+
+            if ((GameAttributeGameValue("9") == "0002")) {
+                libB9A22550_gv_isProtossMother = true;
+            }
+
+        }
+        else {
+        }
+    }
+    else {
+    }
+    autoDAEB3BD3_val = GameAttributeGameValue("5");
+    if (autoDAEB3BD3_val == "0002") {
+        libB9A22550_gv_isNoMinimap = true;
+        libB9A22550_gv_groupNoMinimap = libB9A22550_gv_groupPlayers;
+    }
+    else if (autoDAEB3BD3_val == "0003") {
+        libB9A22550_gv_isNoMinimap = true;
+        lv__player = 1;
+        for ( ; ( (auto6EFC5CDC_ai >= 0 && lv__player <= auto6EFC5CDC_ae) || (auto6EFC5CDC_ai < 0 && lv__player >= auto6EFC5CDC_ae) ) ; lv__player += auto6EFC5CDC_ai ) {
+            if ((GameAttributePlayerValue("3", lv__player) == "0002")) {
+                PlayerGroupAdd(libB9A22550_gv_groupNoMinimap, lv__player);
+            }
+
+        }
+    }
+    else {
+    }
+    TriggerExecute(libB9A22550_gt_processingAttributes, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libB9A22550_gt_readingAttributes_Init () {
+    libB9A22550_gt_readingAttributes = TriggerCreate("libB9A22550_gt_readingAttributes_Func");
+    TriggerAddEventMapInit(libB9A22550_gt_readingAttributes);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: processingAttributes
+//--------------------------------------------------------------------------------------------------
+bool libB9A22550_gt_processingAttributes_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    playergroup auto5F4248A7_g;
+    int auto5F4248A7_var;
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    Wait(0.1, c_timeGame);
+    if ((libB9A22550_gv_isSharedVision == true)) {
+        libNtve_gf_SetPlayerGroupAlliance(libB9A22550_gv_groupPlayers, libNtve_ge_AllianceSetting_EnemyWithSharedVision);
+        if ((libB9A22550_gv_isNoMap == true)) {
+            auto5F4248A7_g = libB9A22550_gv_groupPlayers;
+            auto5F4248A7_var = -1;
+            while (true) {
+                auto5F4248A7_var = PlayerGroupNextPlayer(auto5F4248A7_g, auto5F4248A7_var);
+                if (auto5F4248A7_var < 0) { break; }
+                VisFillArea(auto5F4248A7_var, RegionEntireMap(), c_fillTypeHidden, false);
+            }
+        }
+
+    }
+
+    if ((libB9A22550_gv_isNoWarFog == true)) {
+        VisEnable(c_visTypeFog, false);
+    }
+
+    if ((libB9A22550_gv_isNoMinimap == true)) {
+        DialogCreate(300, 295, c_anchorBottomLeft, 25, 10, true);
+        DialogSetImageVisible(DialogLastCreated(), false);
+        libB9A22550_gv_minimapdialog = DialogLastCreated();
+        libNtve_gf_CreateDialogItemImage(libB9A22550_gv_minimapdialog, 300, 295, c_anchorCenter, 0, 0, StringToText(""), "Library\\cover_2g2bb.tga", c_triggerImageTypeNormal, false, Color(0,0,0), c_triggerBlendModeNormal);
+        libB9A22550_gv_minimapimage = DialogControlLastCreated();
+        DialogSetVisible(libB9A22550_gv_minimapdialog, libB9A22550_gv_groupNoMinimap, true);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libB9A22550_gt_processingAttributes_Init () {
+    libB9A22550_gt_processingAttributes = TriggerCreate("libB9A22550_gt_processingAttributes_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: unitEnter
+//--------------------------------------------------------------------------------------------------
+bool libB9A22550_gt_unitEnter_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv__unitType;
+
+    // Automatic Variable Declarations
+    playergroup autoDD045AF7_g;
+    int autoDD045AF7_var;
+
+    // Variable Initialization
+    lv__unitType = UnitGetType(EventUnit());
+
+    // Conditions
+    if (testConds) {
+        if (!(((libB9A22550_gv_isNoWarFog == true) && (libB9A22550_gv_isHiddenBuried == true)))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if (((libB9A22550_gf_filteringUnit(lv__unitType) == true) && (EventPlayer() >= 1) && (EventPlayer() <= 12))) {
+        autoDD045AF7_g = libB9A22550_gv_groupPlayers;
+        autoDD045AF7_var = -1;
+        while (true) {
+            autoDD045AF7_var = PlayerGroupNextPlayer(autoDD045AF7_g, autoDD045AF7_var);
+            if (autoDD045AF7_var < 0) { break; }
+            if ((autoDD045AF7_var != EventPlayer())) {
+                if ((lv__unitType == "Mothership")) {
+                    UnitBehaviorRemove(EventUnit(), "CloakFieldEffect", 1);
+                    UnitBehaviorRemove(EventUnit(), "CloakField", 1);
+                    UnitAbilityRemove(EventUnit(), "OracleCloakField");
+                }
+                else {
+                    libNtve_gf_ShareVisionofUnit(EventUnit(), true, autoDD045AF7_var);
+                }
+            }
+
+        }
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libB9A22550_gt_unitEnter_Init () {
+    libB9A22550_gt_unitEnter = TriggerCreate("libB9A22550_gt_unitEnter_Func");
+    TriggerAddEventUnitRegion(libB9A22550_gt_unitEnter, null, RegionEntireMap(), true);
+}
+
+void libB9A22550_InitTriggers () {
+    libB9A22550_gt_readingAttributes_Init();
+    libB9A22550_gt_processingAttributes_Init();
+    libB9A22550_gt_unitEnter_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool libB9A22550_InitLib_completed = false;
+
+void libB9A22550_InitLib () {
+    if (libB9A22550_InitLib_completed) {
+        return;
+    }
+
+    libB9A22550_InitLib_completed = true;
+
+    libB9A22550_InitLibraries();
+    libB9A22550_InitVariables();
+    libB9A22550_InitTriggers();
+}
+

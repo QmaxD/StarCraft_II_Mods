@@ -1,0 +1,304 @@
+include "TriggerLibs/NativeLib"
+
+include "LibD3E83EF3_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void libD3E83EF3_InitLibraries () {
+    libNtve_InitVariables();
+}
+
+// Variable Initialization
+bool libD3E83EF3_InitVariables_completed = false;
+
+void libD3E83EF3_InitVariables () {
+    if (libD3E83EF3_InitVariables_completed) {
+        return;
+    }
+
+    libD3E83EF3_InitVariables_completed = true;
+
+    libD3E83EF3_gv_uBKindexZerg = 0.9;
+    libD3E83EF3_gv_uBKindexTerran = 1.0;
+    libD3E83EF3_gv_uBKindexProtoss = 1.1;
+}
+
+// Functions
+fixed libD3E83EF3_gf_UBKmaxLife (int lp_kills, fixed lp_index) {
+    // Automatic Variable Declarations
+    // Implementation
+    return (1.0 + (lp_kills / (libD3E83EF3_gv_uBKkillBuff * lp_index)));
+}
+
+fixed libD3E83EF3_gf_UBKmaxShield (int lp_kills, fixed lp_index) {
+    // Automatic Variable Declarations
+    // Implementation
+    return (1.0 + (lp_kills / (libD3E83EF3_gv_uBKkillBuff * lp_index)));
+}
+
+fixed libD3E83EF3_gf_UBKregenLife (int lp_kills, fixed lp_index) {
+    // Automatic Variable Declarations
+    // Implementation
+    return ((lp_kills * libD3E83EF3_gv_uBKdataBonus) / lp_index);
+}
+
+fixed libD3E83EF3_gf_UBKregenShield (int lp_kills, fixed lp_index) {
+    // Automatic Variable Declarations
+    // Implementation
+    return ((lp_kills * libD3E83EF3_gv_uBKdataBonus) / lp_index);
+}
+
+fixed libD3E83EF3_gf_UBKgetSizeUnit (int lp_kills) {
+    // Automatic Variable Declarations
+    // Implementation
+    return (Pow((1.0 + (lp_kills * (1.0 / libD3E83EF3_gv_uBKkillBuff))), 0.3333) * 100.0);
+}
+
+fixed libD3E83EF3_gf_UBKgetRadiusUnit (int lp_kills) {
+    // Automatic Variable Declarations
+    // Implementation
+    return (Pow((1.0 + (lp_kills * (1.0 / libD3E83EF3_gv_uBKkillBuff))), 0.3333) * 100.0);
+}
+
+string libD3E83EF3_gf_UBKgetBehavior (unit lp_unit, int lp_kills) {
+    // Automatic Variable Declarations
+    // Implementation
+    UnitBehaviorRemove(lp_unit, "BecomeBigID", -1);
+    UnitBehaviorRemove(lp_unit, "BecomeFlyingID", -1);
+    if (((lp_kills >= (libD3E83EF3_gv_uBKkillBuff * 1)) && (lp_kills < (libD3E83EF3_gv_uBKkillBuff * 2)))) {
+        return "BecomeBigID";
+    }
+    else {
+        if ((lp_kills >= (libD3E83EF3_gv_uBKkillBuff * 2))) {
+            return "BecomeFlyingID";
+        }
+        else {
+            return "";
+        }
+    }
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: UBK | launch
+//--------------------------------------------------------------------------------------------------
+bool libD3E83EF3_gt_UBKlaunch_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    string auto0ADE34F2_val;
+    playergroup autoD4D8C0A6_g;
+    int autoD4D8C0A6_var;
+    playergroup auto9F066E9E_g;
+    int auto9F066E9E_var;
+    playergroup auto58A50B70_g;
+    int auto58A50B70_var;
+    playergroup auto57BCE8C0_g;
+    int auto57BCE8C0_var;
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto0ADE34F2_val = GameAttributeGameValue("1");
+    if (auto0ADE34F2_val == "0001") {
+        libD3E83EF3_gv_uBKriseUnitLevel = true;
+        libD3E83EF3_gv_uBKdataBonus = 0.025;
+        libD3E83EF3_gv_uBKkillBuff = 40;
+        autoD4D8C0A6_g = PlayerGroupActive();
+        autoD4D8C0A6_var = -1;
+        while (true) {
+            autoD4D8C0A6_var = PlayerGroupNextPlayer(autoD4D8C0A6_g, autoD4D8C0A6_var);
+            if (autoD4D8C0A6_var < 0) { break; }
+            CatalogFieldValueModify(c_gameCatalogBehavior, "ArmorpiercingMode", "Modification.DamageTotalMultiplier[" + IntToString(0) + "]", autoD4D8C0A6_var, "0.025", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackIncreaseID", "Modification.DamageTotalMultiplier[" + IntToString(1) + "]", autoD4D8C0A6_var, "0.025", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackIncreaseID", "Modification.DamageTotalMultiplier[" + IntToString(2) + "]", autoD4D8C0A6_var, "0.025", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackIncreaseID", "Modification.DamageTotalMultiplier[" + IntToString(3) + "]", autoD4D8C0A6_var, "0.025", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackIncreaseID", "Modification.DamageTotalMultiplier[" + IntToString(4) + "]", autoD4D8C0A6_var, "0.025", c_upgradeOperationSet);
+        }
+    }
+    else if (auto0ADE34F2_val == "0002") {
+        libD3E83EF3_gv_uBKriseUnitLevel = true;
+        libD3E83EF3_gv_uBKdataBonus = 0.05;
+        libD3E83EF3_gv_uBKkillBuff = 20;
+        auto9F066E9E_g = PlayerGroupActive();
+        auto9F066E9E_var = -1;
+        while (true) {
+            auto9F066E9E_var = PlayerGroupNextPlayer(auto9F066E9E_g, auto9F066E9E_var);
+            if (auto9F066E9E_var < 0) { break; }
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackIncreaseID", "Modification.DamageTotalMultiplier[" + IntToString(0) + "]", auto9F066E9E_var, "0.05", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackIncreaseID", "Modification.DamageTotalMultiplier[" + IntToString(1) + "]", auto9F066E9E_var, "0.05", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackIncreaseID", "Modification.DamageTotalMultiplier[" + IntToString(2) + "]", auto9F066E9E_var, "0.05", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackIncreaseID", "Modification.DamageTotalMultiplier[" + IntToString(3) + "]", auto9F066E9E_var, "0.05", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackIncreaseID", "Modification.DamageTotalMultiplier[" + IntToString(4) + "]", auto9F066E9E_var, "0.05", c_upgradeOperationSet);
+        }
+    }
+    else if (auto0ADE34F2_val == "0003") {
+        libD3E83EF3_gv_uBKriseUnitLevel = true;
+        libD3E83EF3_gv_uBKdataBonus = 0.1;
+        libD3E83EF3_gv_uBKkillBuff = 10;
+        auto58A50B70_g = PlayerGroupActive();
+        auto58A50B70_var = -1;
+        while (true) {
+            auto58A50B70_var = PlayerGroupNextPlayer(auto58A50B70_g, auto58A50B70_var);
+            if (auto58A50B70_var < 0) { break; }
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackIncreaseID", "Modification.DamageTotalMultiplier[" + IntToString(0) + "]", auto58A50B70_var, "0.1", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackIncreaseID", "Modification.DamageTotalMultiplier[" + IntToString(1) + "]", auto58A50B70_var, "0.1", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackIncreaseID", "Modification.DamageTotalMultiplier[" + IntToString(2) + "]", auto58A50B70_var, "0.1", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackIncreaseID", "Modification.DamageTotalMultiplier[" + IntToString(3) + "]", auto58A50B70_var, "0.1", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackIncreaseID", "Modification.DamageTotalMultiplier[" + IntToString(4) + "]", auto58A50B70_var, "0.1", c_upgradeOperationSet);
+        }
+    }
+    else if (auto0ADE34F2_val == "0005") {
+        libD3E83EF3_gv_uBKriseUnitLevel = true;
+        libD3E83EF3_gv_uBKdataBonus = 0.2;
+        libD3E83EF3_gv_uBKkillBuff = 5;
+        auto57BCE8C0_g = PlayerGroupActive();
+        auto57BCE8C0_var = -1;
+        while (true) {
+            auto57BCE8C0_var = PlayerGroupNextPlayer(auto57BCE8C0_g, auto57BCE8C0_var);
+            if (auto57BCE8C0_var < 0) { break; }
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackIncreaseID", "Modification.DamageTotalMultiplier[" + IntToString(0) + "]", auto57BCE8C0_var, "0.2", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackIncreaseID", "Modification.DamageTotalMultiplier[" + IntToString(1) + "]", auto57BCE8C0_var, "0.2", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackIncreaseID", "Modification.DamageTotalMultiplier[" + IntToString(2) + "]", auto57BCE8C0_var, "0.2", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackIncreaseID", "Modification.DamageTotalMultiplier[" + IntToString(3) + "]", auto57BCE8C0_var, "0.2", c_upgradeOperationSet);
+            CatalogFieldValueModify(c_gameCatalogBehavior, "AttackIncreaseID", "Modification.DamageTotalMultiplier[" + IntToString(4) + "]", auto57BCE8C0_var, "0.2", c_upgradeOperationSet);
+        }
+    }
+    else {
+    }
+    if ((GameAttributeGameValue("2") == "0002")) {
+        libD3E83EF3_gv_uBKresizeUnit = true;
+    }
+
+    if ((GameAttributeGameValue("4") == "0002")) {
+        libD3E83EF3_gv_uBKdependingOnRace = true;
+    }
+
+    if ((GameAttributeGameValue("3") == "0001")) {
+        libD3E83EF3_gv_uBKdependingFromTheirUnit = true;
+    }
+
+    if (((libD3E83EF3_gv_uBKriseUnitLevel == true) || (libD3E83EF3_gv_uBKresizeUnit == true))) {
+        libD3E83EF3_gv_uBKdoesModWork = true;
+    }
+
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Param/Value/lib_D3E83EF3_2BF32BAE"));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libD3E83EF3_gt_UBKlaunch_Init () {
+    libD3E83EF3_gt_UBKlaunch = TriggerCreate("libD3E83EF3_gt_UBKlaunch_Func");
+    TriggerAddEventMapInit(libD3E83EF3_gt_UBKlaunch);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: UBK | makeUnitBuff
+//--------------------------------------------------------------------------------------------------
+bool libD3E83EF3_gt_UBKmakeUnitBuff_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unit lv__killingUnit;
+    string lv__typeKillingUnit;
+    int lv__kills;
+    fixed lv__sizeUnit;
+    fixed lv__indexRace;
+    fixed lv__indexRise;
+    int lv__originalMaxLife;
+    int lv__originalRegenLife;
+    int lv__originalMaxShield;
+    int lv__originalRegenShield;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv__killingUnit = libNtve_gf_KillingUnit();
+    lv__typeKillingUnit = UnitGetType(libNtve_gf_KillingUnit());
+    lv__kills = libNtve_gf_UnitGetPropertyKills(libNtve_gf_KillingUnit(), c_unitPropCurrent);
+    lv__indexRace = 1.0;
+    lv__indexRise = 1.0;
+
+    // Conditions
+    if (testConds) {
+        if (!((libD3E83EF3_gv_uBKdoesModWork == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((libD3E83EF3_gv_uBKriseUnitLevel == true)) {
+        if (((libD3E83EF3_gv_uBKdependingFromTheirUnit == true) && (UnitGetOwner(EventUnit()) == libNtve_gf_KillingPlayer()) && ((UnitGetType(libNtve_gf_KillingUnit()) != "OrbitalCommand") && (UnitGetType(EventUnit()) != "MULE")) && ((lv__typeKillingUnit != "AdeptPhaseShift") && (UnitGetType(libNtve_gf_KillingUnit()) != "AdeptPhaseShift") && (UnitGetType(EventUnit()) != "AdeptPhaseShift")))) {
+            UnitSetPropertyFixed(lv__killingUnit, c_unitPropKills, (UnitGetPropertyInt(lv__killingUnit, c_unitPropKills, c_unitPropCurrent) + 1));
+            lv__kills = libNtve_gf_UnitGetPropertyKills(lv__killingUnit, c_unitPropCurrent);
+        }
+
+        if ((libD3E83EF3_gv_uBKdependingOnRace == true)) {
+            if ((PlayerRace(libNtve_gf_KillingPlayer()) == "Zerg")) {
+                lv__indexRace = libD3E83EF3_gv_uBKindexZerg;
+            }
+            else if ((PlayerRace(libNtve_gf_KillingPlayer()) == "Terr")) {
+                lv__indexRace = libD3E83EF3_gv_uBKindexTerran;
+            }
+            else if ((PlayerRace(libNtve_gf_KillingPlayer()) == "Prot")) {
+                lv__indexRace = libD3E83EF3_gv_uBKindexProtoss;
+            }
+        }
+
+        lv__originalMaxLife = CatalogFieldValueGetAsInt(c_gameCatalogUnit, lv__typeKillingUnit, "LifeMax", libNtve_gf_KillingPlayer());
+        lv__originalRegenLife = CatalogFieldValueGetAsInt(c_gameCatalogUnit, lv__typeKillingUnit, "LifeRegenRate", libNtve_gf_KillingPlayer());
+        UnitSetPropertyFixed(lv__killingUnit, c_unitPropLifeMax, FloorI((lv__originalMaxLife * (libD3E83EF3_gf_UBKmaxLife(lv__kills, lv__indexRace) * lv__indexRise))));
+        UnitSetPropertyFixed(lv__killingUnit, c_unitPropLifeRegen, FloorI((lv__originalRegenLife + (libD3E83EF3_gf_UBKregenLife(lv__kills, lv__indexRace) * lv__indexRise))));
+        if ((PlayerRace(libNtve_gf_KillingPlayer()) == "Prot")) {
+            lv__originalMaxShield = CatalogFieldValueGetAsInt(c_gameCatalogUnit, lv__typeKillingUnit, "ShieldsMax", libNtve_gf_KillingPlayer());
+            lv__originalRegenShield = CatalogFieldValueGetAsInt(c_gameCatalogUnit, lv__typeKillingUnit, "ShieldRegenRate", libNtve_gf_KillingPlayer());
+            UnitSetPropertyFixed(lv__killingUnit, c_unitPropShieldsMax, FloorI((lv__originalMaxShield * (libD3E83EF3_gf_UBKmaxShield(lv__kills, lv__indexRace) * lv__indexRise))));
+            UnitSetPropertyFixed(lv__killingUnit, c_unitPropShieldsRegen, FloorI((lv__originalRegenShield + (libD3E83EF3_gf_UBKregenShield(lv__kills, lv__indexRace) * lv__indexRise))));
+        }
+
+        UnitBehaviorRemove(lv__killingUnit, "AttackIncreaseID", -1);
+        UnitBehaviorAdd(lv__killingUnit, "AttackIncreaseID", lv__killingUnit, FloorI((lv__kills * (1.0 / lv__indexRace))));
+        UnitBehaviorRemove(lv__killingUnit, "ArmorIncreaseID", -1);
+        UnitBehaviorAdd(lv__killingUnit, "ArmorIncreaseID", lv__killingUnit, FloorI((FloorI((lv__kills * (1.0 / lv__indexRace))) / libD3E83EF3_gv_uBKkillBuff)));
+    }
+
+    if ((libD3E83EF3_gv_uBKresizeUnit == true)) {
+        lv__sizeUnit = libD3E83EF3_gf_UBKgetSizeUnit(lv__kills);
+        UnitSetScale(lv__killingUnit, lv__sizeUnit, lv__sizeUnit, lv__sizeUnit);
+        UnitBehaviorAdd(lv__killingUnit, libD3E83EF3_gf_UBKgetBehavior(lv__killingUnit, lv__kills), lv__killingUnit, FloorI((UnitTypeGetProperty(UnitGetType(lv__killingUnit), c_unitPropRadius) * (lv__sizeUnit / 110.0))));
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libD3E83EF3_gt_UBKmakeUnitBuff_Init () {
+    libD3E83EF3_gt_UBKmakeUnitBuff = TriggerCreate("libD3E83EF3_gt_UBKmakeUnitBuff_Func");
+    TriggerAddEventUnitDied(libD3E83EF3_gt_UBKmakeUnitBuff, null);
+}
+
+void libD3E83EF3_InitTriggers () {
+    libD3E83EF3_gt_UBKlaunch_Init();
+    libD3E83EF3_gt_UBKmakeUnitBuff_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool libD3E83EF3_InitLib_completed = false;
+
+void libD3E83EF3_InitLib () {
+    if (libD3E83EF3_InitLib_completed) {
+        return;
+    }
+
+    libD3E83EF3_InitLib_completed = true;
+
+    libD3E83EF3_InitLibraries();
+    libD3E83EF3_InitVariables();
+    libD3E83EF3_InitTriggers();
+}
+

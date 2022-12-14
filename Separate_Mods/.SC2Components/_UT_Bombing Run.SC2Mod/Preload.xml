@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Preload>
+<Actor id="SYSTEM_ActorConfig"/>
+<Behavior id="BombBehavior"/>
+<Behavior id="BombCatcherBehavior"/>
+<Behavior id="SafeZone1"/>
+<Effect id="BurndownDamage"/>
+<Effect id="NukeDetonate"/>
+<Model id="SlaynElementalGrabAirUnit"/>
+<Sound id="TUIWarningPing"/>
+<Unit id="Colossus"/>
+<Unit id="Stalker"/>
+<Unit id="DarkTemplar"/>
+<Unit id="VoidRay"/>
+<Unit id="WarpPrism"/>
+<Unit id="SlaynElementalGrabAirUnit"/>
+<Unit id="Replicant"/>
+<Unit id="NovaPack03SearchNode2"/>
+</Preload>

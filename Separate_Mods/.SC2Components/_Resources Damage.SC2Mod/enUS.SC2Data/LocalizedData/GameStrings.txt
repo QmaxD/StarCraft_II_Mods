@@ -1,0 +1,8 @@
+﻿Behavior/Name/UnknownBehavior=Destructible Minerals
+Behavior/Name/UnknownBehavior2=Destructible Geysers
+Behavior/Tooltip/UnknownBehavior=Druze Life = Amount of Minerals * 0.25<n/>Armor 7 pts<n/>If we destroy life, the minerals in the Druse are also destroyed (decreased).
+Behavior/Tooltip/UnknownBehavior2=Geyser Life = Amount of Vespene * 0.33<n/>Armor 5 pts<n/>If life is destroyed, the Vespene in the geyser is destroyed (decreased).
+DocInfo/DescLong=Resources are now destroyable: Mineral Druze and Vespene Gases.<n/>Cut off your Incas! Let its economy die.<n/><n/>Resources on the map can be destroyed.<n/><n/>Creators: Swarm, Qmax.
+DocInfo/Name=[ ZERGTV ] Resource damage
+DocInfo/DescShort=Any
+DocInfo/Website=zergtv.tv/gg

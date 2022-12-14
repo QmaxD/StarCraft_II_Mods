@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CModel id="AmonEx2Portrait" parent="Portrait" Race="Zerg">
+        <Model value="Assets\Portraits\Protoss\SMX2_Amon_Portrait\SMX2_Amon_Portrait.m3"/>
+        <Image value="Assets\Textures\amonportrait_static.dds"/>
+        <Lighting value="PortraitAmonEX2"/>
+    </CModel>
+    <CModel id="AmonTentacleA" parent="Building" Race="Zerg">
+        <Model value="Assets\Units\Protoss\AmonShard_Focus\AmonShard_Focus.m3"/>
+        <Radius value="1.500000"/>
+        <ScaleMax value="0.850000,0.850000,0.850000"/>
+        <ScaleMin value="0.850000,0.850000,0.850000"/>
+        <SelectionLayer value="2"/>
+        <SelectionRadius value="2.500000"/>
+        <ShadowRadius value="2.500000"/>
+        <SquibTypeDefault value="Metal"/>
+    </CModel>
+    <CModel id="AmonTentacleADeath" parent="UnitDeath" Race="Protoss">
+        <Model value="Assets\Units\Protoss\AmonShard_Focus_Death\AmonShard_Focus_Death.m3"/>
+    </CModel>
+    <CModel id="AmonTentacleB" parent="Building" Race="Zerg">
+        <Model value="Assets\Units\Protoss\AmonShard_Aoe\AmonShard_Aoe.m3"/>
+        <AttachProps Id="Ref_Weapon">
+            <Keys index="SetA" value="0"/>
+        </AttachProps>
+        <AttachProps Id="Ref_Weapon 01">
+            <Keys index="SetA" value="0"/>
+        </AttachProps>
+        <AttachProps Id="Ref_Weapon 02">
+            <Keys index="SetA" value="0"/>
+        </AttachProps>
+        <Radius value="1.500000"/>
+        <ScaleMax value="0.850000,0.850000,0.850000"/>
+        <ScaleMin value="0.850000,0.850000,0.850000"/>
+        <SelectionLayer value="2"/>
+        <SelectionRadius value="2.500000"/>
+        <ShadowRadius value="2.500000"/>
+        <SquibTypeDefault value="Metal"/>
+    </CModel>
+    <CModel id="AmonTentacleBDeath" parent="UnitDeath" Race="Protoss">
+        <Model value="Assets\Units\Protoss\AmonShard_Aoe_Death\AmonShard_Aoe_Death.m3"/>
+    </CModel>
+    <CModel id="AmonTentacleC" parent="Building" Race="Zerg">
+        <Model value="Assets\Units\Protoss\AmonShard_Blast\AmonShard_Blast.m3"/>
+        <Radius value="1.500000"/>
+        <ScaleMax value="0.850000,0.850000,0.850000"/>
+        <ScaleMin value="0.850000,0.850000,0.850000"/>
+        <SelectionLayer value="2"/>
+        <SelectionRadius value="2.500000"/>
+        <ShadowRadius value="2.500000"/>
+        <SquibTypeDefault value="Flesh"/>
+    </CModel>
+    <CModel id="AmonTentacleCDeath" parent="UnitDeath" Race="Protoss">
+        <Model value="Assets\Units\Protoss\AmonShard_Blast_Death\AmonShard_Blast_Death.m3"/>
+    </CModel>
+    <CModel id="ChallengeShield" parent="ImpactFX">
+        <Model value="Assets\Effects\Other\ChallengeShield\ChallengeShield.m3"/>
+    </CModel>
+    <CModel id="KorhalFlag2" parent="Doodad">
+        <Model value="Assets\Doodads\KorhalFlag\KorhalFlag.m3"/>
+        <Lighting value="KorhalFlag"/>
+        <VariationCount value="3"/>
+    </CModel>
+    <CModel id="KorhalFlagDeath00" parent="UnitDeath" Race="Terran">
+        <Model value="Assets\Doodads\KorhalFlagPhysicsDeath\KorhalFlagPhysicsDeath_00.m3"/>
+    </CModel>
+    <CModel id="KorhalFlagDeath01" parent="UnitDeath" Race="Terran">
+        <Model value="Assets\Doodads\KorhalFlagPhysicsDeath\KorhalFlagPhysicsDeath_01.m3"/>
+    </CModel>
+    <CModel id="KorhalFlagDeath02" parent="UnitDeath" Race="Terran">
+        <Model value="Assets\Doodads\KorhalFlagPhysicsDeath\KorhalFlagPhysicsDeath_02.m3"/>
+    </CModel>
+    <CModel id="NovaPack03SearchNode2">
+        <Model value="Assets\UI\Feedback\AIBeaconCustom\AIBeaconCustom.m3"/>
+        <EditorCategories value="Race:Neutral"/>
+        <Lighting value="BeaconCustom1"/>
+        <PausedParticleSystemBehavior value="FreezeAll"/>
+        <ScaleMax value="0.900000,0.900000,0.900000"/>
+        <ScaleMin value="0.900000,0.900000,0.900000"/>
+        <SelectionRadius value="0.555400"/>
+        <ShadowRadius value="0.555400"/>
+    </CModel>
+</Catalog>

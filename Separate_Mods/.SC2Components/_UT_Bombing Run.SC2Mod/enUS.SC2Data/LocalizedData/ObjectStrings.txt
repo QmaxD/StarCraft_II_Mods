@@ -1,0 +1,6 @@
+﻿Actor/Name/NovaPack03SearchNode2=NovaPack03SearchNode (Unnamed) Copy
+Actor/Name/SafeZone1=Safe Zone
+Behavior/Name/SafeZone1=Safe Zone
+Model/Name/NovaPack03SearchNode2=NovaPack03SearchNode Copy
+Unit/EditorSuffix/SlaynElementalGrabAirUnit=- Fly
+Unit/EditorSuffix/SlaynElementalGrabGroundUnit=- Ground

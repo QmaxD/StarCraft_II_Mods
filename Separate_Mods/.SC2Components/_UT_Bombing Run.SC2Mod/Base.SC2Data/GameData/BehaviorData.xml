@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CBehaviorBuff id="BombBehavior">
+        <InfoIcon value="Assets\Textures\btn-ability-tychus-tychus-shreddergrenade.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <MoveSpeedBonus value="5"/>
+            <AccelerationBonus value="200"/>
+            <DecelerationBonus value="200"/>
+            <UnitNameOverride value="Бомба"/>
+            <VitalMaxArray index="Life" value="-149"/>
+            <VitalMaxArray index="Shields" value="-150"/>
+            <PlaneDelta index="Ground" value="1"/>
+            <PlaneDelta index="Air" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="BombCatcherBehavior">
+        <InfoIcon value="Assets\Textures\btn-upgrade-nova-equipment-flashgrenade.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification MoveSpeedMinimum="120">
+            <StateFlags index="Silence" value="1"/>
+            <StateFlags index="SuppressAttack" value="1"/>
+            <StateFlags index="SuppressCloak" value="1"/>
+            <StateFlags index="SuppressPassenger" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SafeZone1">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/SensorTowerRadar"/>
+            <Cooldown Link="Behavior/SensorTowerRadar"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-status-radar.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Structures"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Modification RadarFilters="-;Player,Ally,Neutral,Enemy,Air,Ground,Structure,Worker,RawResource,HarvestableResource,Missile,Destructible,Buried,Cloaked"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SensorTowerRadar"/>
+                <Cooldown Link="Behavior/SensorTowerRadar"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+</Catalog>

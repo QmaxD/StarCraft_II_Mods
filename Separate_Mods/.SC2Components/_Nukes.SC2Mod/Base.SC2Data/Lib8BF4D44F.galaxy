@@ -1,0 +1,717 @@
+include "TriggerLibs/NativeLib"
+
+include "Lib8BF4D44F_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void lib8BF4D44F_InitLibraries () {
+    libNtve_InitVariables();
+}
+
+// Variable Initialization
+bool lib8BF4D44F_InitVariables_completed = false;
+
+void lib8BF4D44F_InitVariables () {
+    if (lib8BF4D44F_InitVariables_completed) {
+        return;
+    }
+
+    lib8BF4D44F_InitVariables_completed = true;
+
+    lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisOnlyMainsSafeZone = true;
+    lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukeRadius = TextExpressionAssemble("Param/Expression/lib_8BF4D44F_50A0A80E");
+    lib8BF4D44F_gv_nukesplayerOptions.lv_nukespingModel = "PingNuke";
+    lib8BF4D44F_gv_nukessafeZone = RegionEmpty();
+    lib8BF4D44F_gv_nukestimer = TimerCreate();
+}
+
+// Functions
+trigger auto_lib8BF4D44F_gf_NukesSpawnNuke_Trigger = null;
+
+void lib8BF4D44F_gf_NukesSpawnNuke () {
+    if (auto_lib8BF4D44F_gf_NukesSpawnNuke_Trigger == null) {
+        auto_lib8BF4D44F_gf_NukesSpawnNuke_Trigger = TriggerCreate("auto_lib8BF4D44F_gf_NukesSpawnNuke_TriggerFunc");
+    }
+
+    TriggerExecute(auto_lib8BF4D44F_gf_NukesSpawnNuke_Trigger, false, false);
+}
+
+bool auto_lib8BF4D44F_gf_NukesSpawnNuke_TriggerFunc (bool testConds, bool runActions) {
+    // Variable Declarations
+    actor lv__actor;
+    point lv__nukePoint;
+    int lv__count;
+    int lv__ping;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv__ping = c_invalidPingId;
+
+    // Implementation
+    while ((lv__nukePoint == null) && (lv__count <= 40)) {
+        lv__nukePoint = RegionRandomPoint(RegionPlayableMap());
+        lv__count += 1;
+        if ((RegionContainsPoint(lib8BF4D44F_gv_nukessafeZone, lv__nukePoint) == true)) {
+            lv__nukePoint = null;
+        }
+
+    }
+    libNtve_gf_CreateModelAtPoint("GhostNukeIndicator", lv__nukePoint);
+    libNtve_gf_CreatePingFacingAngle(PlayerGroupAll(), lib8BF4D44F_gv_nukesplayerOptions.lv_nukespingModel, lv__nukePoint, ColorWithAlpha(78.43, 78.43, 3.92, 0.00), lib8BF4D44F_gv_nukesplayerOptions.lv_nukestimeNukeAttack, 225.0);
+    PingSetScale(PingLastCreated(), 0.75);
+    lv__actor = libNtve_gf_ActorLastCreated();
+    Wait(lib8BF4D44F_gv_nukesplayerOptions.lv_nukestimeNukeAttack, c_timeReal);
+    PlayerCreateEffectPoint(15, "NukeDetonate2", lv__nukePoint);
+    libNtve_gf_KillModel(lv__actor);
+    return true;
+}
+
+string lib8BF4D44F_gf_NukesGetRightBehaviourForBlob () {
+    // Automatic Variable Declarations
+    string auto446194A9_val;
+
+    // Implementation
+    auto446194A9_val = GameAttributeGameValue("3");
+    if (auto446194A9_val == "0005") {
+        return "SafeZone10";
+    }
+    else if (auto446194A9_val == "0006") {
+        return "SafeZone15";
+    }
+    else if (auto446194A9_val == "0001") {
+        return "SafeZone20";
+    }
+    else if (auto446194A9_val == "0007") {
+        return "SafeZone25";
+    }
+    else if (auto446194A9_val == "0002") {
+        return "SafeZone30";
+    }
+    else if (auto446194A9_val == "0008") {
+        return "SafeZone35";
+    }
+    else if (auto446194A9_val == "0003") {
+        return "SafeZone40";
+    }
+    else if (auto446194A9_val == "0009") {
+        return "SafeZone45";
+    }
+    else if (auto446194A9_val == "0004") {
+        return "SafeZone50";
+    }
+    else {
+        return "SafeZone50";
+    }
+}
+
+string lib8BF4D44F_gf_NukesGetRightBehaviourForLine () {
+    // Automatic Variable Declarations
+    string auto875BE66D_val;
+
+    // Implementation
+    auto875BE66D_val = GameAttributeGameValue("3");
+    if (auto875BE66D_val == "0005") {
+        return "SafeZone10Line";
+    }
+    else if (auto875BE66D_val == "0006") {
+        return "SafeZone15Line";
+    }
+    else if (auto875BE66D_val == "0001") {
+        return "SafeZone20Line";
+    }
+    else if (auto875BE66D_val == "0007") {
+        return "SafeZone25Line";
+    }
+    else if (auto875BE66D_val == "0002") {
+        return "SafeZone30Line";
+    }
+    else if (auto875BE66D_val == "0008") {
+        return "SafeZone35Line";
+    }
+    else if (auto875BE66D_val == "0003") {
+        return "SafeZone40Line";
+    }
+    else if (auto875BE66D_val == "0009") {
+        return "SafeZone45Line";
+    }
+    else if (auto875BE66D_val == "0004") {
+        return "SafeZone50Line";
+    }
+    else {
+        return "SafeZone50Line";
+    }
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: Nukes | Launch
+//--------------------------------------------------------------------------------------------------
+bool lib8BF4D44F_gt_NukesLaunch_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__Effects_NukeDamage_Amount;
+    fixed lv__Effects_NukeDetonate_InitialDelay;
+    int lv__Effects_NukeDetonate_RevealRadius;
+    fixed lv__Effects_NukeDamage_AreaArray0Fraction;
+    int lv__Effects_NukeDamage_AreaArray0Radius;
+    fixed lv__Effects_NukeDamage_AreaArray1Fraction;
+    int lv__Effects_NukeDamage_AreaArray1Radius;
+    fixed lv__Effects_NukeDamage_AreaArray2Fraction;
+    int lv__Effects_NukeDamage_AreaArray2Radius;
+
+    // Automatic Variable Declarations
+    string autoB5DAEDC3_val;
+    string auto193A3FC0_val;
+    string autoD1EF4A9A_val;
+    string auto3385F14B_val;
+    string auto6125D126_val;
+    string auto6106D877_val;
+    string auto71EA6D20_val;
+
+    // Variable Initialization
+    lv__Effects_NukeDamage_Amount = 300;
+    lv__Effects_NukeDetonate_InitialDelay = 1.25;
+    lv__Effects_NukeDetonate_RevealRadius = 8;
+    lv__Effects_NukeDamage_AreaArray0Fraction = 1.0;
+    lv__Effects_NukeDamage_AreaArray0Radius = 4;
+    lv__Effects_NukeDamage_AreaArray1Fraction = 0.75;
+    lv__Effects_NukeDamage_AreaArray1Radius = 6;
+    lv__Effects_NukeDamage_AreaArray2Fraction = 0.5;
+    lv__Effects_NukeDamage_AreaArray2Radius = 8;
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    autoB5DAEDC3_val = GameAttributeGameValue("1");
+    if (autoB5DAEDC3_val == "0005") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesperiodWaves = 5;
+    }
+    else if (autoB5DAEDC3_val == "0007") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesperiodWaves = 10;
+    }
+    else if (autoB5DAEDC3_val == "0006") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesperiodWaves = 15;
+    }
+    else if (autoB5DAEDC3_val == "0008") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesperiodWaves = 20;
+    }
+    else if (autoB5DAEDC3_val == "0001") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesperiodWaves = 30;
+    }
+    else if (autoB5DAEDC3_val == "0009") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesperiodWaves = 45;
+    }
+    else if (autoB5DAEDC3_val == "0002") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesperiodWaves = 60;
+    }
+    else if (autoB5DAEDC3_val == "0003") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesperiodWaves = 120;
+    }
+    else if (autoB5DAEDC3_val == "0004") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesperiodWaves = 180;
+    }
+    else {
+    }
+    auto193A3FC0_val = GameAttributeGameValue("2");
+    if (auto193A3FC0_val == "0001") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukesNumber = 1;
+    }
+    else if (auto193A3FC0_val == "0002") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukesNumber = 2;
+    }
+    else if (auto193A3FC0_val == "0003") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukesNumber = 3;
+    }
+    else if (auto193A3FC0_val == "0004") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukesNumber = 4;
+    }
+    else if (auto193A3FC0_val == "0005") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukesNumber = 5;
+    }
+    else if (auto193A3FC0_val == "0006") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukesNumber = 6;
+    }
+    else if (auto193A3FC0_val == "0007") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukesNumber = 7;
+    }
+    else if (auto193A3FC0_val == "0008") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukesNumber = 8;
+    }
+    else if (auto193A3FC0_val == "0009") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukesNumber = 9;
+    }
+    else if (auto193A3FC0_val == "0010") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukesNumber = 10;
+    }
+    else if (auto193A3FC0_val == "0011") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukesNumber = 15;
+    }
+    else if (auto193A3FC0_val == "0012") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukesNumber = 20;
+    }
+    else if (auto193A3FC0_val == "0013") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukesNumber = 30;
+    }
+    else if (auto193A3FC0_val == "0014") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukesNumber = 40;
+    }
+    else if (auto193A3FC0_val == "0015") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukesNumber = 50;
+    }
+    else {
+    }
+    autoD1EF4A9A_val = GameAttributeGameValue("3");
+    if (autoD1EF4A9A_val == "0005") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukessafeDistance = 10;
+    }
+    else if (autoD1EF4A9A_val == "0006") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukessafeDistance = 15;
+    }
+    else if (autoD1EF4A9A_val == "0001") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukessafeDistance = 20;
+    }
+    else if (autoD1EF4A9A_val == "0007") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukessafeDistance = 25;
+    }
+    else if (autoD1EF4A9A_val == "0002") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukessafeDistance = 30;
+    }
+    else if (autoD1EF4A9A_val == "0008") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukessafeDistance = 35;
+    }
+    else if (autoD1EF4A9A_val == "0003") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukessafeDistance = 40;
+    }
+    else if (autoD1EF4A9A_val == "0009") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukessafeDistance = 45;
+    }
+    else if (autoD1EF4A9A_val == "0004") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukessafeDistance = 50;
+    }
+    else {
+    }
+    lib8BF4D44F_gv_nukesplayerOptions.lv_nukesBehaviourForBlob = lib8BF4D44F_gf_NukesGetRightBehaviourForBlob();
+    lib8BF4D44F_gv_nukesplayerOptions.lv_nukesBehaviourForLine = lib8BF4D44F_gf_NukesGetRightBehaviourForLine();
+    auto3385F14B_val = GameAttributeGameValue("6");
+    if (auto3385F14B_val == "0003") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukestimeNukeAttack = 1;
+    }
+    else if (auto3385F14B_val == "0001") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukestimeNukeAttack = 5;
+    }
+    else if (auto3385F14B_val == "0002") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukestimeNukeAttack = 10;
+    }
+    else if (auto3385F14B_val == "0004") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukestimeNukeAttack = 15;
+    }
+    else if (auto3385F14B_val == "0005") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukestimeNukeAttack = 20;
+    }
+    else if (auto3385F14B_val == "0006") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukestimeNukeAttack = 30;
+    }
+    else {
+    }
+    if ((GameAttributeGameValue("4") == "0002")) {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisOnlyMainsSafeZone = false;
+    }
+
+    auto6125D126_val = GameAttributeGameValue("5");
+    if (auto6125D126_val == "0001") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisDisplaySafeZoneField = true;
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisDisplaySafeZoneLine = true;
+    }
+    else if (auto6125D126_val == "0004") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisDisplaySafeZoneField = true;
+    }
+    else if (auto6125D126_val == "0003") {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisDisplaySafeZoneLine = true;
+    }
+    else {
+    }
+    auto6106D877_val = GameAttributeGameValue("7");
+    if (auto6106D877_val == "0004") {
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "RevealRadius", 15, "4", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(0) + "].Fraction", 15, "1", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(0) + "].Radius", 15, "2", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(1) + "].Fraction", 15, "0.65", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(1) + "].Radius", 15, "3", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(2) + "].Fraction", 15, "0.35", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(2) + "].Radius", 15, "4", c_upgradeOperationSet);
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukeRadius = TextExpressionAssemble("Param/Expression/lib_8BF4D44F_7D855446");
+    }
+    else if (auto6106D877_val == "0003") {
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "RevealRadius", 15, "6", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(0) + "].Fraction", 15, "1", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(0) + "].Radius", 15, "3", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(1) + "].Fraction", 15, "0.5", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(1) + "].Radius", 15, "4", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(2) + "].Fraction", 15, "0.25", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(2) + "].Radius", 15, "6", c_upgradeOperationSet);
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukeRadius = TextExpressionAssemble("Param/Expression/lib_8BF4D44F_97F52E12");
+    }
+    else if (auto6106D877_val == "0005") {
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "RevealRadius", 15, "12", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(0) + "].Fraction", 15, "1", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(0) + "].Radius", 15, "6", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(1) + "].Fraction", 15, "0.6", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(1) + "].Radius", 15, "8", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(2) + "].Fraction", 15, "0.3", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(2) + "].Radius", 15, "12", c_upgradeOperationSet);
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukeRadius = TextExpressionAssemble("Param/Expression/lib_8BF4D44F_6616D6D3");
+    }
+    else if (auto6106D877_val == "0002") {
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "RevealRadius", 15, "16", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(0) + "].Fraction", 15, "1", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(0) + "].Radius", 15, "8", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(1) + "].Fraction", 15, "0.65", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(1) + "].Radius", 15, "12", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(2) + "].Fraction", 15, "0.35", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(2) + "].Radius", 15, "16", c_upgradeOperationSet);
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukeRadius = TextExpressionAssemble("Param/Expression/lib_8BF4D44F_B04C84E0");
+    }
+    else {
+    }
+    auto71EA6D20_val = GameAttributeGameValue("8");
+    if (auto71EA6D20_val == "0002") {
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "InitialDelay", 15, "0.25", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "Amount", 15, "50", c_upgradeOperationSet);
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukeDamage = 50;
+    }
+    else if (auto71EA6D20_val == "0001") {
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "InitialDelay", 15, "0.25", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "Amount", 15, "100", c_upgradeOperationSet);
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukeDamage = 100;
+    }
+    else if (auto71EA6D20_val == "0003") {
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "InitialDelay", 15, "0.25", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "Amount", 15, "150", c_upgradeOperationSet);
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukeDamage = 150;
+    }
+    else if (auto71EA6D20_val == "0004") {
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "InitialDelay", 15, "0.25", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "Amount", 15, "200", c_upgradeOperationSet);
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukeDamage = 200;
+    }
+    else if (auto71EA6D20_val == "0006") {
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "InitialDelay", 15, "0.25", c_upgradeOperationSet);
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukeDamage = 300;
+    }
+    else if (auto71EA6D20_val == "0005") {
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "InitialDelay", 15, "0.25", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "Amount", 15, "400", c_upgradeOperationSet);
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukeDamage = 400;
+    }
+    else if (auto71EA6D20_val == "0007") {
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "InitialDelay", 15, "0.25", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "Amount", 15, "500", c_upgradeOperationSet);
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukeDamage = 500;
+    }
+    else if (auto71EA6D20_val == "0008") {
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "InitialDelay", 15, "0.25", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "Amount", 15, "1000", c_upgradeOperationSet);
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukeDamage = 1000;
+    }
+    else {
+    }
+    Wait(0.1, c_timeGame);
+    TriggerExecute(lib8BF4D44F_gt_NukesStartSafeZoneAndTimer, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib8BF4D44F_gt_NukesLaunch_Init () {
+    lib8BF4D44F_gt_NukesLaunch = TriggerCreate("lib8BF4D44F_gt_NukesLaunch_Func");
+    TriggerAddEventMapInit(lib8BF4D44F_gt_NukesLaunch);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Nukes | StartSafeZoneAndTimer
+//--------------------------------------------------------------------------------------------------
+bool lib8BF4D44F_gt_NukesStartSafeZoneAndTimer_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unitgroup lv__mainsGroup;
+    point lv_Point;
+    unit lv_Point2;
+    text lv__playersSettings;
+
+    // Automatic Variable Declarations
+    playergroup autoC47B5189_g;
+    int autoC47B5189_var;
+    unitgroup autoE1724A7B_g;
+    int autoE1724A7B_u;
+    unit autoE1724A7B_var;
+
+    // Variable Initialization
+    lv__mainsGroup = UnitGroupEmpty();
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    autoC47B5189_g = PlayerGroupActive();
+    autoC47B5189_var = -1;
+    while (true) {
+        autoC47B5189_var = PlayerGroupNextPlayer(autoC47B5189_g, autoC47B5189_var);
+        if (autoC47B5189_var < 0) { break; }
+        if ((PlayerStatus(autoC47B5189_var) == c_playerStatusActive)) {
+            RegionAddCircle(lib8BF4D44F_gv_nukessafeZone, true, PlayerStartLocation(autoC47B5189_var), lib8BF4D44F_gv_nukesplayerOptions.lv_nukessafeDistance);
+        }
+
+    }
+    lv__mainsGroup = UnitGroup(null, c_playerAny, RegionEntireMap(), UnitFilter((1 << c_targetFilterStructure), 0, (1 << c_targetFilterNeutral), 0), 0);
+    autoE1724A7B_g = lv__mainsGroup;
+    autoE1724A7B_u = UnitGroupCount(autoE1724A7B_g, c_unitCountAll);
+    for (;; autoE1724A7B_u -= 1) {
+        autoE1724A7B_var = UnitGroupUnitFromEnd(autoE1724A7B_g, autoE1724A7B_u);
+        if (autoE1724A7B_var == null) { break; }
+        if (((UnitGetType(autoE1724A7B_var) == "Nexus") || (UnitGetType(autoE1724A7B_var) == "CommandCenter") || (UnitGetType(autoE1724A7B_var) == "OrbitalCommand") || (UnitGetType(autoE1724A7B_var) == "PlanetaryFortress") || (UnitGetType(autoE1724A7B_var) == "Hatchery") || (UnitGetType(autoE1724A7B_var) == "Lair") || (UnitGetType(autoE1724A7B_var) == "Hive"))) {
+            if ((lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisDisplaySafeZoneLine == true)) {
+                UnitBehaviorAdd(autoE1724A7B_var, lib8BF4D44F_gv_nukesplayerOptions.lv_nukesBehaviourForLine, autoE1724A7B_var, 1);
+            }
+
+            if ((lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisDisplaySafeZoneField == true)) {
+                UnitBehaviorAdd(autoE1724A7B_var, lib8BF4D44F_gv_nukesplayerOptions.lv_nukesBehaviourForBlob, autoE1724A7B_var, 1);
+            }
+
+        }
+
+    }
+    TimerStart(lib8BF4D44F_gv_nukestimer, lib8BF4D44F_gv_nukesplayerOptions.lv_nukesperiodWaves, true, c_timeReal);
+    TextExpressionSetToken("Param/Expression/lib_8BF4D44F_4EC5F5D1", "periodWaves", IntToText(lib8BF4D44F_gv_nukesplayerOptions.lv_nukesperiodWaves));
+    TextExpressionSetToken("Param/Expression/lib_8BF4D44F_4EC5F5D1", "nukesNumber", IntToText(lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukesNumber));
+    TextExpressionSetToken("Param/Expression/lib_8BF4D44F_4EC5F5D1", "timeNukeAttack", IntToText(lib8BF4D44F_gv_nukesplayerOptions.lv_nukestimeNukeAttack));
+    TextExpressionSetToken("Param/Expression/lib_8BF4D44F_4EC5F5D1", "safeDistance", IntToText(lib8BF4D44F_gv_nukesplayerOptions.lv_nukessafeDistance));
+    lv__playersSettings = (TextExpressionAssemble("Param/Expression/lib_8BF4D44F_CC57FF25") + TextExpressionAssemble("Param/Expression/lib_8BF4D44F_4EC5F5D1"));
+    if ((lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisOnlyMainsSafeZone == true)) {
+        lv__playersSettings = (lv__playersSettings + TextExpressionAssemble("Param/Expression/lib_8BF4D44F_CC181E4E"));
+    }
+    else {
+        lv__playersSettings = (lv__playersSettings + TextExpressionAssemble("Param/Expression/lib_8BF4D44F_12C1C29D"));
+    }
+    if (((lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisDisplaySafeZoneField == true) || (lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisDisplaySafeZoneLine == true))) {
+        lv__playersSettings = (lv__playersSettings + TextExpressionAssemble("Param/Expression/lib_8BF4D44F_68E5CB19"));
+    }
+    else {
+        lv__playersSettings = (lv__playersSettings + TextExpressionAssemble("Param/Expression/lib_8BF4D44F_E7486D2C"));
+    }
+    lv__playersSettings = (lv__playersSettings + TextExpressionAssemble("Param/Expression/lib_8BF4D44F_01767575"));
+    lv__playersSettings = (lv__playersSettings + lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukeRadius);
+    HelpPanelAddTip(PlayerGroupAll(), libNtve_gf_FormatTipTitle(StringExternal("Param/Value/lib_8BF4D44F_7ABFB191"), libNtve_ge_TipType_NormalTip), lv__playersSettings, StringExternal("Param/Value/lib_8BF4D44F_9EE7203B"), "Assets\\Textures\\btn-progression-hornerhan-14-nukefortelefrag.dds");
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Param/Value/lib_8BF4D44F_E60E3683"));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib8BF4D44F_gt_NukesStartSafeZoneAndTimer_Init () {
+    lib8BF4D44F_gt_NukesStartSafeZoneAndTimer = TriggerCreate("lib8BF4D44F_gt_NukesStartSafeZoneAndTimer_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Nukes | SpawnNukes
+//--------------------------------------------------------------------------------------------------
+bool lib8BF4D44F_gt_NukesSpawnNukes_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unitgroup lv_MineralGroup;
+    point lv_Point;
+
+    // Automatic Variable Declarations
+    unitgroup auto88F8B68B_g;
+    int auto88F8B68B_u;
+    unit auto88F8B68B_var;
+    int autoB2BF6642_ae;
+    int autoB2BF6642_var;
+
+    // Variable Initialization
+    lv_MineralGroup = UnitGroupEmpty();
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisOnlyMainsSafeZone == false)) {
+        lib8BF4D44F_gv_nukessafeZone = RegionEmpty();
+        lv_MineralGroup = UnitGroup(null, c_playerAny, RegionEntireMap(), UnitFilter((1 << c_targetFilterStructure), 0, (1 << c_targetFilterNeutral), 0), 0);
+        auto88F8B68B_g = lv_MineralGroup;
+        auto88F8B68B_u = UnitGroupCount(auto88F8B68B_g, c_unitCountAll);
+        for (;; auto88F8B68B_u -= 1) {
+            auto88F8B68B_var = UnitGroupUnitFromEnd(auto88F8B68B_g, auto88F8B68B_u);
+            if (auto88F8B68B_var == null) { break; }
+            if ((libNtve_gf_UnitIsUnderConstruction(auto88F8B68B_var) == false)) {
+                if (((UnitGetType(auto88F8B68B_var) == "Nexus") || (UnitGetType(auto88F8B68B_var) == "CommandCenter") || (UnitGetType(auto88F8B68B_var) == "OrbitalCommand") || (UnitGetType(auto88F8B68B_var) == "PlanetaryFortress") || (UnitGetType(auto88F8B68B_var) == "Hatchery") || (UnitGetType(auto88F8B68B_var) == "Lair") || (UnitGetType(auto88F8B68B_var) == "Hive"))) {
+                    lv_Point = UnitGetPosition(auto88F8B68B_var);
+                    RegionAddCircle(lib8BF4D44F_gv_nukessafeZone, true, lv_Point, lib8BF4D44F_gv_nukesplayerOptions.lv_nukessafeDistance);
+                }
+
+            }
+
+        }
+    }
+
+    if (((GameAttributeGameValue("1") == "0005") || (GameAttributeGameValue("1") == "0007") || (GameAttributeGameValue("1") == "0006"))) {
+        SoundPlayForPlayer(SoundLink("TUIWarningPing2", -1), c_maxPlayers, PlayerGroupActive(), 100.0, 0.0);
+    }
+    else {
+        if (((GameAttributeGameValue("1") == "0008") || (GameAttributeGameValue("1") == "0001") || (GameAttributeGameValue("1") == "0009"))) {
+            SoundPlayForPlayer(SoundLink("TUIWarningPing3", -1), c_maxPlayers, PlayerGroupActive(), 100.0, 0.0);
+        }
+        else {
+            if (((GameAttributeGameValue("1") == "0002") || (GameAttributeGameValue("1") == "0003") || (GameAttributeGameValue("1") == "0004"))) {
+                SoundPlayForPlayer(SoundLink("TUIWarningPing", -1), c_maxPlayers, PlayerGroupActive(), 100.0, 0.0);
+            }
+
+        }
+    }
+    autoB2BF6642_ae = lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukesNumber;
+    autoB2BF6642_var = 1;
+    for ( ; autoB2BF6642_var <= autoB2BF6642_ae; autoB2BF6642_var += 1 ) {
+        lib8BF4D44F_gf_NukesSpawnNuke();
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib8BF4D44F_gt_NukesSpawnNukes_Init () {
+    lib8BF4D44F_gt_NukesSpawnNukes = TriggerCreate("lib8BF4D44F_gt_NukesSpawnNukes_Func");
+    TriggerAddEventTimer(lib8BF4D44F_gt_NukesSpawnNukes, lib8BF4D44F_gv_nukestimer);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Nukes | SetNewBasesCircle
+//--------------------------------------------------------------------------------------------------
+bool lib8BF4D44F_gt_NukesSetNewBasesCircle_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisOnlyMainsSafeZone == false))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if (((UnitGetType(EventUnit()) == "Nexus") || (UnitGetType(EventUnit()) == "CommandCenter") || (UnitGetType(EventUnit()) == "OrbitalCommand") || (UnitGetType(EventUnit()) == "PlanetaryFortress") || (UnitGetType(EventUnit()) == "Hatchery") || (UnitGetType(EventUnit()) == "Lair") || (UnitGetType(EventUnit()) == "Hive"))) {
+        if ((lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisDisplaySafeZoneLine == true)) {
+            UnitBehaviorAdd(EventUnit(), lib8BF4D44F_gv_nukesplayerOptions.lv_nukesBehaviourForLine, EventUnit(), 1);
+        }
+
+        if ((lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisDisplaySafeZoneField == true)) {
+            UnitBehaviorAdd(EventUnit(), lib8BF4D44F_gv_nukesplayerOptions.lv_nukesBehaviourForBlob, EventUnit(), 1);
+        }
+
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib8BF4D44F_gt_NukesSetNewBasesCircle_Init () {
+    lib8BF4D44F_gt_NukesSetNewBasesCircle = TriggerCreate("lib8BF4D44F_gt_NukesSetNewBasesCircle_Func");
+    TriggerAddEventUnitRegion(lib8BF4D44F_gt_NukesSetNewBasesCircle, null, RegionEntireMap(), true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Nukes | TerransInTheAir
+//--------------------------------------------------------------------------------------------------
+bool lib8BF4D44F_gt_NukesTerransInTheAir_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisOnlyMainsSafeZone == false))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisDisplaySafeZoneLine == true)) {
+        UnitBehaviorRemove(EventUnit(), lib8BF4D44F_gv_nukesplayerOptions.lv_nukesBehaviourForLine, -1);
+    }
+
+    if ((lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisDisplaySafeZoneField == true)) {
+        UnitBehaviorRemove(EventUnit(), lib8BF4D44F_gv_nukesplayerOptions.lv_nukesBehaviourForBlob, -1);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib8BF4D44F_gt_NukesTerransInTheAir_Init () {
+    lib8BF4D44F_gt_NukesTerransInTheAir = TriggerCreate("lib8BF4D44F_gt_NukesTerransInTheAir_Func");
+    TriggerAddEventUnitAbility(lib8BF4D44F_gt_NukesTerransInTheAir, null, AbilityCommand("CommandCenterLiftOff", 0), c_unitAbilStageComplete, false);
+    TriggerAddEventUnitAbility(lib8BF4D44F_gt_NukesTerransInTheAir, null, AbilityCommand("OrbitalLiftOff", 0), c_unitAbilStageComplete, false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Nukes | TerransOnTheGround
+//--------------------------------------------------------------------------------------------------
+bool lib8BF4D44F_gt_NukesTerransOnTheGround_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisOnlyMainsSafeZone == false))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisDisplaySafeZoneLine == true)) {
+        UnitBehaviorAdd(EventUnit(), lib8BF4D44F_gv_nukesplayerOptions.lv_nukesBehaviourForLine, EventUnit(), 1);
+    }
+
+    if ((lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisDisplaySafeZoneField == true)) {
+        UnitBehaviorAdd(EventUnit(), lib8BF4D44F_gv_nukesplayerOptions.lv_nukesBehaviourForBlob, EventUnit(), 1);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib8BF4D44F_gt_NukesTerransOnTheGround_Init () {
+    lib8BF4D44F_gt_NukesTerransOnTheGround = TriggerCreate("lib8BF4D44F_gt_NukesTerransOnTheGround_Func");
+    TriggerAddEventUnitAbility(lib8BF4D44F_gt_NukesTerransOnTheGround, null, AbilityCommand("CommandCenterLand", 0), c_unitAbilStageComplete, false);
+    TriggerAddEventUnitAbility(lib8BF4D44F_gt_NukesTerransOnTheGround, null, AbilityCommand("OrbitalCommandLand", 0), c_unitAbilStageComplete, false);
+}
+
+void lib8BF4D44F_InitTriggers () {
+    lib8BF4D44F_gt_NukesLaunch_Init();
+    lib8BF4D44F_gt_NukesStartSafeZoneAndTimer_Init();
+    lib8BF4D44F_gt_NukesSpawnNukes_Init();
+    lib8BF4D44F_gt_NukesSetNewBasesCircle_Init();
+    lib8BF4D44F_gt_NukesTerransInTheAir_Init();
+    lib8BF4D44F_gt_NukesTerransOnTheGround_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool lib8BF4D44F_InitLib_completed = false;
+
+void lib8BF4D44F_InitLib () {
+    if (lib8BF4D44F_InitLib_completed) {
+        return;
+    }
+
+    lib8BF4D44F_InitLib_completed = true;
+
+    lib8BF4D44F_InitLibraries();
+    lib8BF4D44F_InitVariables();
+    lib8BF4D44F_InitTriggers();
+}
+

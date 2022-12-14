@@ -1,0 +1,17 @@
+﻿Category/Name/lib_8BD63CF6_55359713=Berserk (B): proportionally / with Stack Behaviors
+Category/Name/lib_8BD63CF6_8794D900=Variables
+Category/Name/lib_8BD63CF6_9C8C64AE=Triggers
+Library/Name/8BD63CF6=Library
+Trigger/Name/lib_8BD63CF6_1840036A=B | upgrade_Life
+Trigger/Name/lib_8BD63CF6_69B0AB07=B | upgrade_Shield
+Trigger/Name/lib_8BD63CF6_6F85DE6E=B | upgrade_with Stack Behaviors
+Trigger/Name/lib_8BD63CF6_7263444A=B | downgrade_with Stack Behaviors
+Trigger/Name/lib_8BD63CF6_E1DFD9A5=B | Launch
+Variable/Name/lib_8BD63CF6_06E99EBB=B | variation_Stack
+Variable/Name/lib_8BD63CF6_0D1EAF71=_raceOfPlayer
+Variable/Name/lib_8BD63CF6_0F0A9501=_raceOfPlayer
+Variable/Name/lib_8BD63CF6_70A45A16=B | is_Start_Berserk?
+Variable/Name/lib_8BD63CF6_B4B9E9FB=B | is_with_Stack_Attack?
+Variable/Name/lib_8BD63CF6_D5089E70=_raceOfPlayer
+Variable/Name/lib_8BD63CF6_F88A31E5=_raceOfPlayer
+Variable/Name/lib_8BD63CF6_FBCE4891=B | is_with_Damage?

@@ -1,0 +1,21 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// Variable Declarations
+bool lib8BD63CF6_gv_bis_Start_Berserk;
+int lib8BD63CF6_gv_bvariation_Stack;
+bool lib8BD63CF6_gv_bis_with_Damage;
+bool lib8BD63CF6_gv_bis_with_Stack_Attack;
+
+// Trigger Declarations
+trigger lib8BD63CF6_gt_BLaunch;
+trigger lib8BD63CF6_gt_Bupgrade_Life;
+trigger lib8BD63CF6_gt_Bupgrade_Shield;
+trigger lib8BD63CF6_gt_Bupgrade_withStackBehaviors;
+trigger lib8BD63CF6_gt_Bdowngrade_withStackBehaviors;
+
+// Library Initialization
+void lib8BD63CF6_InitVariables ();
+

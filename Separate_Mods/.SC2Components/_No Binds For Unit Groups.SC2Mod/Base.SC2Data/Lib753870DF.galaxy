@@ -1,0 +1,267 @@
+include "TriggerLibs/NativeLib"
+
+include "Lib753870DF_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: No Bind Unit Group
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void lib753870DF_InitLibraries () {
+    libNtve_InitVariables();
+}
+
+// Variable Initialization
+bool lib753870DF_InitVariables_completed = false;
+
+void lib753870DF_InitVariables () {
+    if (lib753870DF_InitVariables_completed) {
+        return;
+    }
+
+    lib753870DF_InitVariables_completed = true;
+
+    lib753870DF_gv_group_BindOfUnit = PlayerGroupEmpty();
+    lib753870DF_gv_group_LocationBind = PlayerGroupEmpty();
+    lib753870DF_gv_group_F2 = PlayerGroupEmpty();
+    lib753870DF_gv_group_F1 = PlayerGroupEmpty();
+    lib753870DF_gv_group_WarpIn = PlayerGroupEmpty();
+    lib753870DF_gv_group_CameraFollow = PlayerGroupEmpty();
+    lib753870DF_gv_group_Other = PlayerGroupEmpty();
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: create_Groups
+//--------------------------------------------------------------------------------------------------
+bool lib753870DF_gt_create_Groups_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    playergroup autoEBCD5C58_g;
+    int autoEBCD5C58_var;
+    playergroup autoB0E35AC0_g;
+    int autoB0E35AC0_var;
+    playergroup auto286C3AA1_g;
+    int auto286C3AA1_var;
+    playergroup autoFED09220_g;
+    int autoFED09220_var;
+    playergroup autoF1809DA4_g;
+    int autoF1809DA4_var;
+    playergroup autoAC7A55E9_g;
+    int autoAC7A55E9_var;
+    playergroup autoD1376703_g;
+    int autoD1376703_var;
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    Wait(1.0, c_timeReal);
+    if ((GameAttributeGameValue("1") == "0002")) {
+        autoEBCD5C58_g = PlayerGroupActive();
+        autoEBCD5C58_var = -1;
+        while (true) {
+            autoEBCD5C58_var = PlayerGroupNextPlayer(autoEBCD5C58_g, autoEBCD5C58_var);
+            if (autoEBCD5C58_var < 0) { break; }
+            if ((GameAttributePlayerValue("2", autoEBCD5C58_var) == "0001")) {
+                PlayerGroupAdd(lib753870DF_gv_group_BindOfUnit, autoEBCD5C58_var);
+            }
+
+        }
+    }
+
+    if ((GameAttributeGameValue("9") == "0002")) {
+        autoB0E35AC0_g = PlayerGroupActive();
+        autoB0E35AC0_var = -1;
+        while (true) {
+            autoB0E35AC0_var = PlayerGroupNextPlayer(autoB0E35AC0_g, autoB0E35AC0_var);
+            if (autoB0E35AC0_var < 0) { break; }
+            if ((GameAttributePlayerValue("12", autoB0E35AC0_var) == "0001")) {
+                PlayerGroupAdd(lib753870DF_gv_group_LocationBind, autoB0E35AC0_var);
+            }
+
+        }
+    }
+
+    if ((GameAttributeGameValue("4") == "0002")) {
+        auto286C3AA1_g = PlayerGroupActive();
+        auto286C3AA1_var = -1;
+        while (true) {
+            auto286C3AA1_var = PlayerGroupNextPlayer(auto286C3AA1_g, auto286C3AA1_var);
+            if (auto286C3AA1_var < 0) { break; }
+            if ((GameAttributePlayerValue("7", auto286C3AA1_var) == "0001")) {
+                PlayerGroupAdd(lib753870DF_gv_group_F2, auto286C3AA1_var);
+            }
+
+        }
+    }
+
+    if ((GameAttributeGameValue("5") == "0002")) {
+        autoFED09220_g = PlayerGroupActive();
+        autoFED09220_var = -1;
+        while (true) {
+            autoFED09220_var = PlayerGroupNextPlayer(autoFED09220_g, autoFED09220_var);
+            if (autoFED09220_var < 0) { break; }
+            if ((GameAttributePlayerValue("8", autoFED09220_var) == "0001")) {
+                PlayerGroupAdd(lib753870DF_gv_group_F1, autoFED09220_var);
+            }
+
+        }
+    }
+
+    if ((GameAttributeGameValue("3") == "0002")) {
+        autoF1809DA4_g = PlayerGroupActive();
+        autoF1809DA4_var = -1;
+        while (true) {
+            autoF1809DA4_var = PlayerGroupNextPlayer(autoF1809DA4_g, autoF1809DA4_var);
+            if (autoF1809DA4_var < 0) { break; }
+            if ((GameAttributePlayerValue("6", autoF1809DA4_var) == "0001")) {
+                PlayerGroupAdd(lib753870DF_gv_group_WarpIn, autoF1809DA4_var);
+            }
+
+        }
+    }
+
+    if ((GameAttributeGameValue("10") == "0002")) {
+        autoAC7A55E9_g = PlayerGroupActive();
+        autoAC7A55E9_var = -1;
+        while (true) {
+            autoAC7A55E9_var = PlayerGroupNextPlayer(autoAC7A55E9_g, autoAC7A55E9_var);
+            if (autoAC7A55E9_var < 0) { break; }
+            if ((GameAttributePlayerValue("13", autoAC7A55E9_var) == "0001")) {
+                PlayerGroupAdd(lib753870DF_gv_group_CameraFollow, autoAC7A55E9_var);
+            }
+
+        }
+    }
+
+    if ((GameAttributeGameValue("11") == "0002")) {
+        autoD1376703_g = PlayerGroupActive();
+        autoD1376703_var = -1;
+        while (true) {
+            autoD1376703_var = PlayerGroupNextPlayer(autoD1376703_g, autoD1376703_var);
+            if (autoD1376703_var < 0) { break; }
+            if ((GameAttributePlayerValue("14", autoD1376703_var) == "0001")) {
+                PlayerGroupAdd(lib753870DF_gv_group_Other, autoD1376703_var);
+            }
+
+        }
+    }
+
+    TriggerExecute(lib753870DF_gt_disable_Options, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib753870DF_gt_create_Groups_Init () {
+    lib753870DF_gt_create_Groups = TriggerCreate("lib753870DF_gt_create_Groups_Func");
+    TriggerAddEventMapInit(lib753870DF_gt_create_Groups);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: disable_Options
+//--------------------------------------------------------------------------------------------------
+bool lib753870DF_gt_disable_Options_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    HelpPanelAddTip(PlayerGroupAll(), libNtve_gf_FormatTipTitle(StringExternal("Param/Value/lib_753870DF_897C9E61"), libNtve_ge_TipType_NormalTip), StringExternal("Param/Value/lib_753870DF_BD45FE01"), StringExternal("Param/Value/lib_753870DF_C3449ACB"), "Assets\\Textures\\ui_ingame_help_techtree_questionmark.dds");
+    Wait(2.0, c_timeReal);
+    if ((GameAttributeGameValue("1") == "0001")) {
+        UISetFrameVisible(PlayerGroupAll(), c_syncFrameTypeControlGroupPanel, false);
+        UISetSelectionTypeEnabled(PlayerGroupAll(), c_localSelectionTypeControlGroup, false);
+    }
+    else {
+        UISetFrameVisible(lib753870DF_gv_group_BindOfUnit, c_syncFrameTypeControlGroupPanel, false);
+        UISetSelectionTypeEnabled(lib753870DF_gv_group_BindOfUnit, c_localSelectionTypeControlGroup, false);
+    }
+    if ((GameAttributeGameValue("9") == "0001")) {
+        UISetHotkeyAllowed(PlayerGroupActive(), c_hotkeyCameraView0, false);
+        UISetHotkeyAllowed(PlayerGroupActive(), c_hotkeyCameraView1, false);
+        UISetHotkeyAllowed(PlayerGroupActive(), c_hotkeyCameraView2, false);
+        UISetHotkeyAllowed(PlayerGroupActive(), c_hotkeyCameraView3, false);
+        UISetHotkeyAllowed(PlayerGroupActive(), c_hotkeyCameraView4, false);
+        UISetHotkeyAllowed(PlayerGroupActive(), c_hotkeyCameraView5, false);
+        UISetHotkeyAllowed(PlayerGroupActive(), c_hotkeyCameraView6, false);
+        UISetHotkeyAllowed(PlayerGroupActive(), c_hotkeyCameraView7, false);
+    }
+    else {
+        UISetHotkeyAllowed(lib753870DF_gv_group_LocationBind, c_hotkeyCameraView0, false);
+        UISetHotkeyAllowed(lib753870DF_gv_group_LocationBind, c_hotkeyCameraView1, false);
+        UISetHotkeyAllowed(lib753870DF_gv_group_LocationBind, c_hotkeyCameraView2, false);
+        UISetHotkeyAllowed(lib753870DF_gv_group_LocationBind, c_hotkeyCameraView3, false);
+        UISetHotkeyAllowed(lib753870DF_gv_group_LocationBind, c_hotkeyCameraView4, false);
+        UISetHotkeyAllowed(lib753870DF_gv_group_LocationBind, c_hotkeyCameraView5, false);
+        UISetHotkeyAllowed(lib753870DF_gv_group_LocationBind, c_hotkeyCameraView6, false);
+        UISetHotkeyAllowed(lib753870DF_gv_group_LocationBind, c_hotkeyCameraView7, false);
+    }
+    if ((GameAttributeGameValue("4") == "0001")) {
+        HelpPanelEnableTechGlossaryButton(PlayerGroupAll(), false);
+        UISetFrameVisible(PlayerGroupAll(), c_syncFrameTypeArmyButton, false);
+    }
+    else {
+        HelpPanelEnableTechGlossaryButton(lib753870DF_gv_group_F2, false);
+        UISetFrameVisible(lib753870DF_gv_group_F2, c_syncFrameTypeArmyButton, false);
+    }
+    if ((GameAttributeGameValue("5") == "0001")) {
+        HelpPanelEnableTechGlossaryButton(PlayerGroupAll(), false);
+        UISetFrameVisible(PlayerGroupAll(), c_syncFrameTypeIdleWorkerButton, false);
+    }
+    else {
+        HelpPanelEnableTechGlossaryButton(lib753870DF_gv_group_F1, false);
+        UISetFrameVisible(lib753870DF_gv_group_F1, c_syncFrameTypeIdleWorkerButton, false);
+    }
+    if ((GameAttributeGameValue("3") == "0001")) {
+        UISetFrameVisible(PlayerGroupAll(), c_syncFrameTypePylonButton, false);
+    }
+    else {
+        UISetFrameVisible(lib753870DF_gv_group_WarpIn, c_syncFrameTypePylonButton, false);
+    }
+    if ((GameAttributeGameValue("10") == "0001")) {
+        UISetHotkeyAllowed(PlayerGroupActive(), c_hotkeyCameraFollow, false);
+    }
+    else {
+        UISetHotkeyAllowed(lib753870DF_gv_group_CameraFollow, c_hotkeyCameraFollow, false);
+    }
+    if ((GameAttributeGameValue("11") == "0001")) {
+        UISetHotkeyAllowed(PlayerGroupActive(), c_hotkeyTownCamera, false);
+        UISetHotkeyAllowed(PlayerGroupActive(), c_hotkeyAlertRecall, false);
+        UISetSelectionTypeEnabled(PlayerGroupActive(), c_localSelectionTypeAlert, false);
+    }
+    else {
+        UISetHotkeyAllowed(lib753870DF_gv_group_Other, c_hotkeyTownCamera, false);
+        UISetHotkeyAllowed(lib753870DF_gv_group_Other, c_hotkeyAlertRecall, false);
+        UISetSelectionTypeEnabled(lib753870DF_gv_group_Other, c_localSelectionTypeAlert, false);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib753870DF_gt_disable_Options_Init () {
+    lib753870DF_gt_disable_Options = TriggerCreate("lib753870DF_gt_disable_Options_Func");
+}
+
+void lib753870DF_InitTriggers () {
+    lib753870DF_gt_create_Groups_Init();
+    lib753870DF_gt_disable_Options_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool lib753870DF_InitLib_completed = false;
+
+void lib753870DF_InitLib () {
+    if (lib753870DF_InitLib_completed) {
+        return;
+    }
+
+    lib753870DF_InitLib_completed = true;
+
+    lib753870DF_InitLibraries();
+    lib753870DF_InitVariables();
+    lib753870DF_InitTriggers();
+}
+

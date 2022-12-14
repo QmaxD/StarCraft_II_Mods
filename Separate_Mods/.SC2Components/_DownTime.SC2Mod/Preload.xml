@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Preload>
+<Asset path="assets\textures\btn-building-zerg-hive.dds" Type="Image"/>
+<Asset path="assets\textures\btn-building-zerg-lair.dds" Type="Image"/>
+<Asset path="assets\textures\sc2_ui_loadingscreen_extended_raceindicator_zerg.dds" Type="Image"/>
+<Asset path="assets\textures\btn-building-terran-factory.dds" Type="Image"/>
+<Asset path="assets\textures\btn-building-protoss-stargate.dds" Type="Image"/>
+<Asset path="assets\textures\sc2_ui_loadingscreen_extended_raceindicator_protoss.dds" Type="Image"/>
+<Asset path="assets\textures\btn-building-protoss-roboticsfacility.dds" Type="Image"/>
+<Asset path="assets\textures\btn-building-terran-starport.dds" Type="Image"/>
+<Asset path="assets\textures\btn-building-terran-barracks.dds" Type="Image"/>
+<Asset path="assets\textures\btn-building-protoss-gateway.dds" Type="Image"/>
+<Asset path="assets\textures\sc2_ui_loadingscreen_extended_raceindicator_terran.dds" Type="Image"/>
+<Asset path="assets\textures\btn-building-zerg-hatchery.dds" Type="Image"/>
+<Actor id="SYSTEM_ActorConfig"/>
+</Preload>

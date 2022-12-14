@@ -1,0 +1,351 @@
+include "TriggerLibs/NativeLib"
+
+include "Lib2BD458D7_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void lib2BD458D7_InitLibraries () {
+    libNtve_InitVariables();
+}
+
+// Variable Initialization
+bool lib2BD458D7_InitVariables_completed = false;
+
+void lib2BD458D7_InitVariables () {
+    if (lib2BD458D7_InitVariables_completed) {
+        return;
+    }
+
+    lib2BD458D7_InitVariables_completed = true;
+
+}
+
+// Functions
+bool lib2BD458D7_gf_IfUnitIsMineral1800 (unit lp_unit) {
+    // Automatic Variable Declarations
+    // Implementation
+    if (((UnitGetType(lp_unit) == "MineralField") || (UnitGetType(lp_unit) == "LabMineralField") || (UnitGetType(lp_unit) == "BattleStationMineralField") || (UnitGetType(lp_unit) == "PurifierMineralField") || (UnitGetType(lp_unit) == "MineralFieldOpaque"))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool lib2BD458D7_gf_IfUnitIsMineral1800Rich (unit lp_unit) {
+    // Automatic Variable Declarations
+    // Implementation
+    if (((UnitGetType(lp_unit) == "RichMineralField") || (UnitGetType(lp_unit) == "PurifierRichMineralField"))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool lib2BD458D7_gf_IfUnitIsMineral900 (unit lp_unit) {
+    // Automatic Variable Declarations
+    // Implementation
+    if (((UnitGetType(lp_unit) == "MineralField450") || (UnitGetType(lp_unit) == "MineralField750") || (UnitGetType(lp_unit) == "LabMineralField750") || (UnitGetType(lp_unit) == "BattleStationMineralField750") || (UnitGetType(lp_unit) == "PurifierMineralField750") || (UnitGetType(lp_unit) == "MineralFieldOpaque900"))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool lib2BD458D7_gf_IfUnitIsMineral900Rich (unit lp_unit) {
+    // Automatic Variable Declarations
+    // Implementation
+    if (((UnitGetType(lp_unit) == "RichMineralField750") || (UnitGetType(lp_unit) == "PurifierRichMineralField750"))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool lib2BD458D7_gf_IfUnitIsGas2250 (unit lp_unit) {
+    // Automatic Variable Declarations
+    // Implementation
+    if (((UnitGetType(lp_unit) == "VespeneGeyser") || (UnitGetType(lp_unit) == "SpacePlatformGeyser") || (UnitGetType(lp_unit) == "ProtossVespeneGeyser") || (UnitGetType(lp_unit) == "PurifierVespeneGeyser") || (UnitGetType(lp_unit) == "ShakurasVespeneGeyser"))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool lib2BD458D7_gf_IfUnitIsGas2250Rich (unit lp_unit) {
+    // Automatic Variable Declarations
+    // Implementation
+    if ((UnitGetType(lp_unit) == "RichVespeneGeyser")) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: RM | Launch
+//--------------------------------------------------------------------------------------------------
+bool lib2BD458D7_gt_InitHighMineral3_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    string auto68BA7EBD_val;
+    string autoFA5BFE61_val;
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto68BA7EBD_val = GameAttributeGameValue("1");
+    if (auto68BA7EBD_val == "0002") {
+        lib2BD458D7_gv_rMget_MiningMinerals = 1;
+    }
+    else if (auto68BA7EBD_val == "0003") {
+        lib2BD458D7_gv_rMget_MiningMinerals = 2;
+    }
+    else if (auto68BA7EBD_val == "0004") {
+        lib2BD458D7_gv_rMget_MiningMinerals = 3;
+    }
+    else if (auto68BA7EBD_val == "0005") {
+        lib2BD458D7_gv_rMget_MiningMinerals = 4;
+    }
+    else {
+    }
+    autoFA5BFE61_val = GameAttributeGameValue("2");
+    if (autoFA5BFE61_val == "0002") {
+        lib2BD458D7_gv_rMget_MiningVespenGas = 1;
+    }
+    else if (autoFA5BFE61_val == "0003") {
+        lib2BD458D7_gv_rMget_MiningVespenGas = 2;
+    }
+    else if (autoFA5BFE61_val == "0004") {
+        lib2BD458D7_gv_rMget_MiningVespenGas = 3;
+    }
+    else if (autoFA5BFE61_val == "0005") {
+        lib2BD458D7_gv_rMget_MiningVespenGas = 4;
+    }
+    else {
+    }
+    TriggerExecute(lib2BD458D7_gt_InitHighMineral4, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib2BD458D7_gt_InitHighMineral3_Init () {
+    lib2BD458D7_gt_InitHighMineral3 = TriggerCreate("lib2BD458D7_gt_InitHighMineral3_Func");
+    TriggerAddEventMapInit(lib2BD458D7_gt_InitHighMineral3);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: RM | Start
+//--------------------------------------------------------------------------------------------------
+bool lib2BD458D7_gt_InitHighMineral4_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unitgroup lv_MineralGroup;
+
+    // Automatic Variable Declarations
+    unitgroup auto2C0F1EAD_g;
+    int auto2C0F1EAD_u;
+    unit auto2C0F1EAD_var;
+    int auto1028E6BF_val;
+    int auto8BBA21C5_val;
+    int auto4D33FE2D_val;
+    int auto3EA89A30_val;
+    int autoB895937E_val;
+    int autoE955E2F2_val;
+
+    // Variable Initialization
+    lv_MineralGroup = UnitGroupEmpty();
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv_MineralGroup = UnitGroup(null, 0, RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterAlly) | (1 << c_targetFilterEnemy) | (1 << c_targetFilterMissile) | (1 << c_targetFilterDestructible), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+    auto2C0F1EAD_g = lv_MineralGroup;
+    auto2C0F1EAD_u = UnitGroupCount(auto2C0F1EAD_g, c_unitCountAll);
+    for (;; auto2C0F1EAD_u -= 1) {
+        auto2C0F1EAD_var = UnitGroupUnitFromEnd(auto2C0F1EAD_g, auto2C0F1EAD_u);
+        if (auto2C0F1EAD_var == null) { break; }
+        if (((lib2BD458D7_gf_IfUnitIsMineral1800(auto2C0F1EAD_var) == true))) {
+            if ((lib2BD458D7_gv_rMget_MiningMinerals != 0)) {
+                UnitBehaviorRemove(auto2C0F1EAD_var, "MineralFieldMinerals", 1);
+                UnitBehaviorRemove(auto2C0F1EAD_var, "MineralFieldMinerals750", 1);
+                UnitBehaviorRemove(auto2C0F1EAD_var, "MineralFieldMinerals450", 1);
+                UnitBehaviorRemove(auto2C0F1EAD_var, "MineralFieldMineralsOpaque", 1);
+                UnitBehaviorRemove(auto2C0F1EAD_var, "MineralFieldMineralsOpaque900", 1);
+            }
+
+            auto1028E6BF_val = lib2BD458D7_gv_rMget_MiningMinerals;
+            if (auto1028E6BF_val == 1) {
+                UnitBehaviorAdd(auto2C0F1EAD_var, "MineralField_1SB", auto2C0F1EAD_var, 1);
+            }
+            else if (auto1028E6BF_val == 2) {
+                UnitBehaviorAdd(auto2C0F1EAD_var, "MineralField_2SB", auto2C0F1EAD_var, 1);
+            }
+            else if (auto1028E6BF_val == 3) {
+                UnitBehaviorAdd(auto2C0F1EAD_var, "MineralField_3SB", auto2C0F1EAD_var, 1);
+            }
+            else if (auto1028E6BF_val == 4) {
+                UnitBehaviorAdd(auto2C0F1EAD_var, "MineralField_4SB", auto2C0F1EAD_var, 1);
+            }
+            else {
+            }
+        }
+
+        if (((lib2BD458D7_gf_IfUnitIsMineral900(auto2C0F1EAD_var) == true))) {
+            if ((lib2BD458D7_gv_rMget_MiningMinerals != 0)) {
+                UnitBehaviorRemove(auto2C0F1EAD_var, "MineralFieldMinerals", 1);
+                UnitBehaviorRemove(auto2C0F1EAD_var, "MineralFieldMinerals750", 1);
+                UnitBehaviorRemove(auto2C0F1EAD_var, "MineralFieldMinerals450", 1);
+                UnitBehaviorRemove(auto2C0F1EAD_var, "MineralFieldMineralsOpaque", 1);
+                UnitBehaviorRemove(auto2C0F1EAD_var, "MineralFieldMineralsOpaque900", 1);
+            }
+
+            auto8BBA21C5_val = lib2BD458D7_gv_rMget_MiningMinerals;
+            if (auto8BBA21C5_val == 1) {
+                UnitBehaviorAdd(auto2C0F1EAD_var, "MineralField_1Ss", auto2C0F1EAD_var, 1);
+            }
+            else if (auto8BBA21C5_val == 2) {
+                UnitBehaviorAdd(auto2C0F1EAD_var, "MineralField_2Ss", auto2C0F1EAD_var, 1);
+            }
+            else if (auto8BBA21C5_val == 3) {
+                UnitBehaviorAdd(auto2C0F1EAD_var, "MineralField_3Ss", auto2C0F1EAD_var, 1);
+            }
+            else if (auto8BBA21C5_val == 4) {
+                UnitBehaviorAdd(auto2C0F1EAD_var, "MineralField_4Ss", auto2C0F1EAD_var, 1);
+            }
+            else {
+            }
+        }
+
+        if (((lib2BD458D7_gf_IfUnitIsMineral1800Rich(auto2C0F1EAD_var) == true))) {
+            if ((lib2BD458D7_gv_rMget_MiningMinerals != 0)) {
+                UnitBehaviorRemove(auto2C0F1EAD_var, "HighYieldMineralFieldMinerals", 1);
+                UnitBehaviorRemove(auto2C0F1EAD_var, "HighYieldMineralFieldMinerals750", 1);
+            }
+
+            auto4D33FE2D_val = lib2BD458D7_gv_rMget_MiningMinerals;
+            if (auto4D33FE2D_val == 1) {
+                UnitBehaviorAdd(auto2C0F1EAD_var, "MineralField_1RB", auto2C0F1EAD_var, 1);
+            }
+            else if (auto4D33FE2D_val == 2) {
+                UnitBehaviorAdd(auto2C0F1EAD_var, "MineralField_2RB", auto2C0F1EAD_var, 1);
+            }
+            else if (auto4D33FE2D_val == 3) {
+                UnitBehaviorAdd(auto2C0F1EAD_var, "MineralField_3RB", auto2C0F1EAD_var, 1);
+            }
+            else if (auto4D33FE2D_val == 4) {
+                UnitBehaviorAdd(auto2C0F1EAD_var, "MineralField_4RB", auto2C0F1EAD_var, 1);
+            }
+            else {
+            }
+        }
+
+        if (((lib2BD458D7_gf_IfUnitIsMineral900Rich(auto2C0F1EAD_var) == true))) {
+            if ((lib2BD458D7_gv_rMget_MiningMinerals != 0)) {
+                UnitBehaviorRemove(auto2C0F1EAD_var, "HighYieldMineralFieldMinerals", 1);
+                UnitBehaviorRemove(auto2C0F1EAD_var, "HighYieldMineralFieldMinerals750", 1);
+            }
+
+            auto3EA89A30_val = lib2BD458D7_gv_rMget_MiningMinerals;
+            if (auto3EA89A30_val == 1) {
+                UnitBehaviorAdd(auto2C0F1EAD_var, "MineralField_1Rs", auto2C0F1EAD_var, 1);
+            }
+            else if (auto3EA89A30_val == 2) {
+                UnitBehaviorAdd(auto2C0F1EAD_var, "MineralField_2Rs", auto2C0F1EAD_var, 1);
+            }
+            else if (auto3EA89A30_val == 3) {
+                UnitBehaviorAdd(auto2C0F1EAD_var, "MineralField_3Rs", auto2C0F1EAD_var, 1);
+            }
+            else if (auto3EA89A30_val == 4) {
+                UnitBehaviorAdd(auto2C0F1EAD_var, "MineralField_4Rs", auto2C0F1EAD_var, 1);
+            }
+            else {
+            }
+        }
+
+        if ((lib2BD458D7_gf_IfUnitIsGas2250(auto2C0F1EAD_var) == true)) {
+            if ((lib2BD458D7_gv_rMget_MiningVespenGas != 0)) {
+                UnitBehaviorRemove(auto2C0F1EAD_var, "RawVespeneGeyserGas", 1);
+            }
+
+            autoB895937E_val = lib2BD458D7_gv_rMget_MiningVespenGas;
+            if (autoB895937E_val == 1) {
+                UnitBehaviorAdd(auto2C0F1EAD_var, "VespeneGeyser_1", auto2C0F1EAD_var, 1);
+            }
+            else if (autoB895937E_val == 2) {
+                UnitBehaviorAdd(auto2C0F1EAD_var, "VespeneGeyser_2", auto2C0F1EAD_var, 1);
+            }
+            else if (autoB895937E_val == 3) {
+                UnitBehaviorAdd(auto2C0F1EAD_var, "VespeneGeyser_3", auto2C0F1EAD_var, 1);
+            }
+            else if (autoB895937E_val == 4) {
+                UnitBehaviorAdd(auto2C0F1EAD_var, "VespeneGeyser_4", auto2C0F1EAD_var, 1);
+            }
+            else {
+            }
+        }
+
+        if ((lib2BD458D7_gf_IfUnitIsGas2250Rich(auto2C0F1EAD_var) == true)) {
+            if ((lib2BD458D7_gv_rMget_MiningVespenGas != 0)) {
+                UnitBehaviorRemove(auto2C0F1EAD_var, "RawRichVespeneGeyserGas", 1);
+            }
+
+            autoE955E2F2_val = lib2BD458D7_gv_rMget_MiningVespenGas;
+            if (autoE955E2F2_val == 1) {
+                UnitBehaviorAdd(auto2C0F1EAD_var, "VespeneGeyser_1R", auto2C0F1EAD_var, 1);
+            }
+            else if (autoE955E2F2_val == 2) {
+                UnitBehaviorAdd(auto2C0F1EAD_var, "VespeneGeyser_2R", auto2C0F1EAD_var, 1);
+            }
+            else if (autoE955E2F2_val == 3) {
+                UnitBehaviorAdd(auto2C0F1EAD_var, "VespeneGeyser_3R", auto2C0F1EAD_var, 1);
+            }
+            else if (autoE955E2F2_val == 4) {
+                UnitBehaviorAdd(auto2C0F1EAD_var, "VespeneGeyser_4R", auto2C0F1EAD_var, 1);
+            }
+            else {
+            }
+        }
+
+        UnitGroupRemove(lv_MineralGroup, auto2C0F1EAD_var);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib2BD458D7_gt_InitHighMineral4_Init () {
+    lib2BD458D7_gt_InitHighMineral4 = TriggerCreate("lib2BD458D7_gt_InitHighMineral4_Func");
+}
+
+void lib2BD458D7_InitTriggers () {
+    lib2BD458D7_gt_InitHighMineral3_Init();
+    lib2BD458D7_gt_InitHighMineral4_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool lib2BD458D7_InitLib_completed = false;
+
+void lib2BD458D7_InitLib () {
+    if (lib2BD458D7_InitLib_completed) {
+        return;
+    }
+
+    lib2BD458D7_InitLib_completed = true;
+
+    lib2BD458D7_InitLibraries();
+    lib2BD458D7_InitVariables();
+    lib2BD458D7_InitTriggers();
+}
+

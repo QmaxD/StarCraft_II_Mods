@@ -1,0 +1,16 @@
+﻿Category/Name/lib_753870DF_39417131=triggers
+Category/Name/lib_753870DF_40980552=variables
+Category/Name/lib_753870DF_ADE390C0=old
+Library/Name/753870DF=No Bind Unit Group
+Trigger/Name/lib_753870DF_3004753B=create_Groups
+Trigger/Name/lib_753870DF_51ED577A=disable Binds For All Players
+Trigger/Name/lib_753870DF_93720E4D=disable_Options
+Trigger/Name/lib_753870DF_B3E5E1D1=disable Binds For Specific Players
+Trigger/Name/lib_753870DF_FDA16C11=for test
+Variable/Name/lib_753870DF_2BBB4101=Group_WarpIn
+Variable/Name/lib_753870DF_42D8B1EC=Group_F2
+Variable/Name/lib_753870DF_68734B07=Group_CameraFollow
+Variable/Name/lib_753870DF_776773D6=Group_F1
+Variable/Name/lib_753870DF_B28C506D=Group_LocationBind
+Variable/Name/lib_753870DF_C2A1A35D=Group_Other
+Variable/Name/lib_753870DF_F7CBBF8D=Group_BindOfUnit

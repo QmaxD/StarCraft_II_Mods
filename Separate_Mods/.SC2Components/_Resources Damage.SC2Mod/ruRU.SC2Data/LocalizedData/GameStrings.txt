@@ -1,0 +1,8 @@
+﻿Behavior/Name/UnknownBehavior=Уничтожаемые минералы
+Behavior/Name/UnknownBehavior2=Уничтожаемые гейзеры
+Behavior/Tooltip/UnknownBehavior=Жизнь друзы = Количество минералов * 0,25<n/>Броня 7 ед.<n/>Если уничтожаем жизнь - уничтожаются (уменьшается) и минералы в друзе.
+Behavior/Tooltip/UnknownBehavior2=Жизнь гейзера = Количество веспена * 0,33<n/>Броня 5 ед.<n/>Если уничтожаем жизнь - уничтожается (уменьшается) и веспен в гейзере.
+DocInfo/DescLong=Теперь ресурсы: друзы минералов и газилки веспена можно уничтожать.<n/>Оборвите сопернику инкам! Пусть умрёт его экономика.<n/><n/>Resources on the map can be destroyed.<n/><n/>Создатели / Создатели: Swarm, Qmax.
+DocInfo/Name=[ ZERGTV ] Дамаг по ресурсам
+DocInfo/DescShort=Любой
+DocInfo/Website=zergtv.tv/gg

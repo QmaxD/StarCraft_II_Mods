@@ -1,0 +1,19 @@
+﻿Category/Name/lib_53355882_07A8E613===Инициализация: Убираем Ресурсы с Карты== 
+Category/Name/lib_53355882_B755660F===Переменные, Булево==
+Category/Name/lib_53355882_E49D18E1===Выдаем Ресурсы Игрокам==
+Library/Name/53355882=no Resources
+Trigger/Name/lib_53355882_094D2694=get Mineral & Gas _ цикл_3
+Trigger/Name/lib_53355882_233394E1=get Mineral & Gas _ цикл_2
+Trigger/Name/lib_53355882_28C4D1AD=noResourcesOnTheMap
+Trigger/Name/lib_53355882_3986DC48=startTimerOnTheMap
+Trigger/Name/lib_53355882_696DEF96=get Mineral & Gas _ цикл_1
+Trigger/Name/lib_53355882_7D221D70=get Mineral & Gas _ цикл_4
+Trigger/Name/lib_53355882_EC006722=get Mineral & Gas _ цикл_5
+Variable/Name/lib_53355882_4A646C58=цикл_4
+Variable/Name/lib_53355882_5CE9D4F9=Untitled Variable 001
+Variable/Name/lib_53355882_5F4C634D=цикл_1
+Variable/Name/lib_53355882_DD18AF88=цикл_2
+Variable/Name/lib_53355882_E1F8A9BB=Untitled Variable 001
+Variable/Name/lib_53355882_E5A66893=resourceTimerWindows
+Variable/Name/lib_53355882_FB1C56CD=цикл_5
+Variable/Name/lib_53355882_FF6D7909=цикл_3

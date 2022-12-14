@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CSound id="money1">
+        <AssetArray File="Resources\sound\00921.wav" FacialGroup=""/>
+    </CSound>
+    <CSound id="money2">
+        <AssetArray File="Resources\sound\Sound_16336.wav" FacialGroup=""/>
+    </CSound>
+</Catalog>

@@ -1,0 +1,49 @@
+﻿Category/Name/lib_53355882_0A41D78C===Инициализация==
+Category/Name/lib_53355882_447EFA22=своя раздача минералов
+Category/Name/lib_53355882_4E725D80===Переменные, Булево==
+Category/Name/lib_53355882_5E733EF0===Выдаем Ресурсы Игрокам==
+Category/Name/lib_53355882_6456A8DC=No Minerals | NoM
+Category/Name/lib_53355882_8F9318A1=раздача минералов, вар.1 и 2 
+Category/Name/lib_53355882_B5611964=раздача минералов, вар.2
+Category/Name/lib_53355882_BB2CDBBC=своя раздача минералов
+Category/Name/lib_53355882_C2023F5C===Functions==
+Category/Name/lib_53355882_DB9022BD=раздача минералов, вар.1
+FunctionDef/Name/lib_53355882_03412B7E=IfUnitIsMineral 900
+FunctionDef/Name/lib_53355882_4656A185=IfUnitIsMineral 1800
+FunctionDef/Name/lib_53355882_6C04A975=IfUnitIsGas 2250
+Library/Name/53355882=Library
+ParamDef/Name/lib_53355882_2AF13A4D=Unit
+ParamDef/Name/lib_53355882_4258623C=Unit
+ParamDef/Name/lib_53355882_5AF21468=Unit
+Trigger/Name/lib_53355882_270EEF75=NoM | Change
+Trigger/Name/lib_53355882_38AE0CCD=NoM | getMineral_вар.1_цикл_4
+Trigger/Name/lib_53355882_3C309B2E=NoM | Change_Increase
+Trigger/Name/lib_53355882_5FB5169C=NoM | Start
+Trigger/Name/lib_53355882_D538C1F1=NoM | getMineral_вар.1_цикл_2
+Trigger/Name/lib_53355882_D9820575=NoM | getMineral_вар.1_цикл_5
+Trigger/Name/lib_53355882_DD2CF8F5=NoM | getMineral_вар.1_цикл_3
+Trigger/Name/lib_53355882_EA004E13=NoM | getMineral_вар.1_цикл_1
+Trigger/Name/lib_53355882_F0687FC3=NoM | getMineral_вар.2
+Trigger/Name/lib_53355882_FFCFB0B9=NoM | destroyMinerals
+Variable/Name/lib_53355882_041C9E01=volume
+Variable/Name/lib_53355882_201D95B2=NoM | var.Change
+Variable/Name/lib_53355882_255717BE=_NOminerals | Point
+Variable/Name/lib_53355882_349CF2E5=NoM | var.2
+Variable/Name/lib_53355882_4011B4C3=NoM | var.1
+Variable/Name/lib_53355882_40852770=NoM | цикл_5
+Variable/Name/lib_53355882_445F30A7=NoM | цикл_2
+Variable/Name/lib_53355882_46C208F6=_NOminerals | Neutral Units
+Variable/Name/lib_53355882_566C6975=NoM | change | getTime_OfPeriod
+Variable/Name/lib_53355882_5B506CD7=NoM | change | getTime_IncreaseQuantity
+Variable/Name/lib_53355882_74797575=NoM | change | getMineral_InStart
+Variable/Name/lib_53355882_7C5236BE=NoM | change | Timer_OfPeriod
+Variable/Name/lib_53355882_7E545371=NoM | цикл_4
+Variable/Name/lib_53355882_834FCDD8=NoM | getTimer_Window
+Variable/Name/lib_53355882_B33759F1=NoM | цикл_3
+Variable/Name/lib_53355882_BAAF8977=NoM | change | getMineral
+Variable/Name/lib_53355882_BB1D8E18=NoM | var.NotUsed
+Variable/Name/lib_53355882_BDA26F11=NoM | цикл_1
+Variable/Name/lib_53355882_CF8AC6B7=NoM | TimerWindow
+Variable/Name/lib_53355882_DB8C3F0B=sound
+Variable/Name/lib_53355882_DC9C9D9A=NoM | change | Timer_IncreaseQuantity
+Variable/Name/lib_53355882_FF87B9B7=NoM | change | getCount_IncreaseQuantity

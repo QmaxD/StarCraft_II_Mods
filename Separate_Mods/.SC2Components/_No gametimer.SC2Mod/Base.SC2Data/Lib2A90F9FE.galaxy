@@ -1,0 +1,53 @@
+include "TriggerLibs/NativeLib"
+
+include "Lib2A90F9FE_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void lib2A90F9FE_InitLibraries () {
+    libNtve_InitVariables();
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: start
+//--------------------------------------------------------------------------------------------------
+bool lib2A90F9FE_gt_start_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UISetFrameVisible(PlayerGroupActive(), c_syncFrameTypeMissionTimePanel, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib2A90F9FE_gt_start_Init () {
+    lib2A90F9FE_gt_start = TriggerCreate("lib2A90F9FE_gt_start_Func");
+    TriggerAddEventMapInit(lib2A90F9FE_gt_start);
+}
+
+void lib2A90F9FE_InitTriggers () {
+    lib2A90F9FE_gt_start_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool lib2A90F9FE_InitLib_completed = false;
+
+void lib2A90F9FE_InitLib () {
+    if (lib2A90F9FE_InitLib_completed) {
+        return;
+    }
+
+    lib2A90F9FE_InitLib_completed = true;
+
+    lib2A90F9FE_InitLibraries();
+    lib2A90F9FE_InitTriggers();
+}
+

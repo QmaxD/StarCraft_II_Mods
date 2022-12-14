@@ -1,0 +1,12 @@
+﻿Attribute001/Name=Изменить угол камеры
+Attribute001/Value001/Name=Нет
+Attribute001/Value002/Desc=-45 градусов
+Attribute001/Value002/Name=Влево
+Attribute001/Value003/Desc=+ 45 градусов
+Attribute001/Value003/Name=Вправо
+Attribute001/Value004/Desc=от -45 до +45 градусов
+Attribute001/Value004/Name=Постоянно менять
+Attribute001/Value005/Desc=Смена от 0 до 359 градусов
+Attribute001/Value005/Name=Крутить
+DocInfo/DescLong=Изменяем угол поворота камеры игрока.<n/><n/>Создатели: Qmax
+DocInfo/Name=[ ZERGTV ] Угол обзора игрока

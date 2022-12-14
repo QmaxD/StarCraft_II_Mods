@@ -1,0 +1,62 @@
+include "TriggerLibs/NativeLib"
+
+include "Lib99084AD9_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: NoSupplyBlock
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void lib99084AD9_InitLibraries () {
+    libNtve_InitVariables();
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: NoSupplyBlock_Init
+//--------------------------------------------------------------------------------------------------
+bool lib99084AD9_gt_NoSupplyBlock_Init_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    playergroup autoC4F4C0DE_g;
+    int autoC4F4C0DE_var;
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    autoC4F4C0DE_g = PlayerGroupActive();
+    autoC4F4C0DE_var = -1;
+    while (true) {
+        autoC4F4C0DE_var = PlayerGroupNextPlayer(autoC4F4C0DE_g, autoC4F4C0DE_var);
+        if (autoC4F4C0DE_var < 0) { break; }
+        PlayerModifyPropertyInt(autoC4F4C0DE_var, c_playerPropSuppliesMade, c_playerPropOperSetTo, 200);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib99084AD9_gt_NoSupplyBlock_Init_Init () {
+    lib99084AD9_gt_NoSupplyBlock_Init = TriggerCreate("lib99084AD9_gt_NoSupplyBlock_Init_Func");
+    TriggerAddEventMapInit(lib99084AD9_gt_NoSupplyBlock_Init);
+}
+
+void lib99084AD9_InitTriggers () {
+    lib99084AD9_gt_NoSupplyBlock_Init_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool lib99084AD9_InitLib_completed = false;
+
+void lib99084AD9_InitLib () {
+    if (lib99084AD9_InitLib_completed) {
+        return;
+    }
+
+    lib99084AD9_InitLib_completed = true;
+
+    lib99084AD9_InitLibraries();
+    lib99084AD9_InitTriggers();
+}
+

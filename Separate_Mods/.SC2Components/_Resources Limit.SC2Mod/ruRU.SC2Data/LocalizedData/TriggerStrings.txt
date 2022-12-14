@@ -1,0 +1,13 @@
+﻿Category/Name/lib_DE6FE856_0EE8F7BC=Triggers
+Category/Name/lib_DE6FE856_949B3933=Variables
+Library/Name/DE6FE856=Resources Limit | RL
+Trigger/Name/lib_DE6FE856_2CF55BEC=RL | periodicModifyVespene
+Trigger/Name/lib_DE6FE856_6E6D52A3=RL | Launch
+Trigger/Name/lib_DE6FE856_70336050=RL | periodicModifyMinerals
+Trigger/Name/lib_DE6FE856_A882C31D=RL | playerModifyVespene
+Trigger/Name/lib_DE6FE856_E4D2C142=RL | playerModifyMinerals
+Variable/Name/lib_DE6FE856_10E75786=RL | limitVespenes
+Variable/Name/lib_DE6FE856_156C216E=RL | modifyVespenes
+Variable/Name/lib_DE6FE856_683805AD=RL | modifyMinerals
+Variable/Name/lib_DE6FE856_8F822552=RL | eventOption
+Variable/Name/lib_DE6FE856_E8FE28DC=RL | limitMinerals

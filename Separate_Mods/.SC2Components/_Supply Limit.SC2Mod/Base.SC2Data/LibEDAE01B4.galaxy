@@ -1,0 +1,173 @@
+include "TriggerLibs/NativeLib"
+
+include "LibEDAE01B4_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void libEDAE01B4_InitLibraries () {
+    libNtve_InitVariables();
+}
+
+// Variable Initialization
+bool libEDAE01B4_InitVariables_completed = false;
+
+void libEDAE01B4_InitVariables () {
+    if (libEDAE01B4_InitVariables_completed) {
+        return;
+    }
+
+    libEDAE01B4_InitVariables_completed = true;
+
+    libEDAE01B4_gv_getsupplieslimit = 200;
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: SL | Launch
+//--------------------------------------------------------------------------------------------------
+bool libEDAE01B4_gt_SLLaunch_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    string auto8BB898ED_val;
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto8BB898ED_val = GameAttributeGameValue("1");
+    if (auto8BB898ED_val == "0006") {
+        libEDAE01B4_gv_getsupplieslimit = 50;
+    }
+    else if (auto8BB898ED_val == "0002") {
+        libEDAE01B4_gv_getsupplieslimit = 75;
+    }
+    else if (auto8BB898ED_val == "0003") {
+        libEDAE01B4_gv_getsupplieslimit = 100;
+    }
+    else if (auto8BB898ED_val == "0004") {
+        libEDAE01B4_gv_getsupplieslimit = 125;
+    }
+    else if (auto8BB898ED_val == "0007") {
+        libEDAE01B4_gv_getsupplieslimit = 150;
+    }
+    else if (auto8BB898ED_val == "0011") {
+        libEDAE01B4_gv_getsupplieslimit = 175;
+    }
+    else if (auto8BB898ED_val == "0008") {
+        libEDAE01B4_gv_getsupplieslimit = 250;
+    }
+    else if (auto8BB898ED_val == "0005") {
+        libEDAE01B4_gv_getsupplieslimit = 300;
+    }
+    else if (auto8BB898ED_val == "0009") {
+        libEDAE01B4_gv_getsupplieslimit = 400;
+    }
+    else if (auto8BB898ED_val == "0010") {
+        libEDAE01B4_gv_getsupplieslimit = 500;
+    }
+    else if (auto8BB898ED_val == "0012") {
+        libEDAE01B4_gv_getsupplieslimit = 9999;
+    }
+    else {
+    }
+    Wait(0.1, c_timeGame);
+    TriggerExecute(libEDAE01B4_gt_SLGive_Limit_Supply, true, false);
+    Wait(0.1, c_timeGame);
+    if ((GameAttributeGameValue("2") == "0001")) {
+        TriggerExecute(libEDAE01B4_gt_SLNoSupplyBlock, true, false);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libEDAE01B4_gt_SLLaunch_Init () {
+    libEDAE01B4_gt_SLLaunch = TriggerCreate("libEDAE01B4_gt_SLLaunch_Func");
+    TriggerAddEventMapInit(libEDAE01B4_gt_SLLaunch);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: SL | Give_Limit_Supply
+//--------------------------------------------------------------------------------------------------
+bool libEDAE01B4_gt_SLGive_Limit_Supply_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__count_player;
+
+    // Automatic Variable Declarations
+    const int auto9AF7289E_ae = 14;
+    const int auto9AF7289E_ai = 1;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv__count_player = 1;
+    for ( ; ( (auto9AF7289E_ai >= 0 && lv__count_player <= auto9AF7289E_ae) || (auto9AF7289E_ai < 0 && lv__count_player >= auto9AF7289E_ae) ) ; lv__count_player += auto9AF7289E_ai ) {
+        PlayerModifyPropertyFixed(lv__count_player, c_playerPropSuppliesLimit, c_playerPropOperSetTo, libEDAE01B4_gv_getsupplieslimit);
+    }
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Param/Value/lib_EDAE01B4_F9FF69C4"));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libEDAE01B4_gt_SLGive_Limit_Supply_Init () {
+    libEDAE01B4_gt_SLGive_Limit_Supply = TriggerCreate("libEDAE01B4_gt_SLGive_Limit_Supply_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: SL | NoSupplyBlock
+//--------------------------------------------------------------------------------------------------
+bool libEDAE01B4_gt_SLNoSupplyBlock_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    playergroup autoE912B7E1_g;
+    int autoE912B7E1_var;
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    autoE912B7E1_g = PlayerGroupActive();
+    autoE912B7E1_var = -1;
+    while (true) {
+        autoE912B7E1_var = PlayerGroupNextPlayer(autoE912B7E1_g, autoE912B7E1_var);
+        if (autoE912B7E1_var < 0) { break; }
+        PlayerModifyPropertyInt(autoE912B7E1_var, c_playerPropSuppliesMade, c_playerPropOperSetTo, libEDAE01B4_gv_getsupplieslimit);
+    }
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Param/Value/lib_EDAE01B4_FAD7CBF2"));
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libEDAE01B4_gt_SLNoSupplyBlock_Init () {
+    libEDAE01B4_gt_SLNoSupplyBlock = TriggerCreate("libEDAE01B4_gt_SLNoSupplyBlock_Func");
+}
+
+void libEDAE01B4_InitTriggers () {
+    libEDAE01B4_gt_SLLaunch_Init();
+    libEDAE01B4_gt_SLGive_Limit_Supply_Init();
+    libEDAE01B4_gt_SLNoSupplyBlock_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool libEDAE01B4_InitLib_completed = false;
+
+void libEDAE01B4_InitLib () {
+    if (libEDAE01B4_InitLib_completed) {
+        return;
+    }
+
+    libEDAE01B4_InitLib_completed = true;
+
+    libEDAE01B4_InitLibraries();
+    libEDAE01B4_InitVariables();
+    libEDAE01B4_InitTriggers();
+}
+

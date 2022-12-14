@@ -1,0 +1,15 @@
+﻿Behavior/Name/BombBehavior=Bomb
+Behavior/Name/BombCatcherBehavior=Bomb Catcher
+Behavior/Tooltip/BombBehavior=Это бомба.
+Behavior/Tooltip/BombCatcherBehavior=Этот юнит несёт бомбу.
+DocInfo/DescShort=Любой
+DocInfo/Name=[ ZERGTV ] Бомбардибол | Unreal
+Param/Value/lib_974E4208_0B3BE4DC=Бомба на центре карты!
+Param/Value/lib_974E4208_22515900=Бомба была взорвана у игрока 
+Param/Value/lib_974E4208_30732233= подобрал бомбу!
+Param/Value/lib_974E4208_3ED0E3D3=Время до появления бомбы:
+Param/Value/lib_974E4208_8578181B=Бомба была потеряна!
+Param/Value/lib_974E4208_A85A385E=Время до появления бомбы:
+Param/Value/lib_974E4208_D0769E87=Бомба была взорвана у игрока 
+Param/Value/lib_974E4208_D45E29FA=Внимание! Игрок 
+Бомба=Бомба

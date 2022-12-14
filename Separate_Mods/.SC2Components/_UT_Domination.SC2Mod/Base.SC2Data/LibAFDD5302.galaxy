@@ -1,0 +1,1247 @@
+include "TriggerLibs/NativeLib"
+
+include "LibAFDD5302_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void libAFDD5302_InitLibraries () {
+    libNtve_InitVariables();
+}
+
+// Variable Initialization
+bool libAFDD5302_InitVariables_completed = false;
+
+void libAFDD5302_InitVariables () {
+    int init_i;
+
+    if (libAFDD5302_InitVariables_completed) {
+        return;
+    }
+
+    libAFDD5302_InitVariables_completed = true;
+
+    for (init_i = 0; init_i <= 15; init_i += 1) {
+        libAFDD5302_gv_get_Teams[init_i] = PlayerGroupEmpty();
+    }
+    libAFDD5302_gv_get_NumberOf_Towers = 1;
+    libAFDD5302_gv_get_size = 50.0;
+    libAFDD5302_gv_get_RadiusOf_TowerRegions = 2;
+    libAFDD5302_gv_get_NumberOf_Periods = 1;
+    libAFDD5302_gv_scoreboard = c_invalidDialogId;
+    for (init_i = 0; init_i <= 15; init_i += 1) {
+        libAFDD5302_gv_scoreboardScore[init_i] = c_invalidDialogControlId;
+    }
+}
+
+// Functions
+string libAFDD5302_gf_getRight_Behaviour () {
+    // Automatic Variable Declarations
+    string autoFCEF170B_val;
+
+    // Implementation
+    autoFCEF170B_val = GameAttributeGameValue("3");
+    if (autoFCEF170B_val == "0001") {
+        return "Zone2";
+    }
+    else if (autoFCEF170B_val == "0002") {
+        return "Zone3";
+    }
+    else if (autoFCEF170B_val == "0003") {
+        return "Zone4";
+    }
+    else if (autoFCEF170B_val == "0004") {
+        return "Zone5";
+    }
+    else if (autoFCEF170B_val == "0005") {
+        return "Zone6";
+    }
+    else {
+        return "Zone2";
+    }
+}
+
+point libAFDD5302_gf_getRight_PointOf_TowerFor_1 () {
+    // Variable Declarations
+    region lv__region;
+    fixed lv__radius;
+    point lv__randomPoint;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv__radius = 3.0;
+
+    // Implementation
+    lv__region = RegionEmpty();
+    lv__region = RegionCircle(libAFDD5302_gf_getRight_MiddleCentreOf_Map(), lv__radius);
+    lv__randomPoint = RegionRandomPoint(lv__region);
+    return lv__randomPoint;
+}
+
+point libAFDD5302_gf_getRight_PointOf_TowerFor_23 (int lp_tower) {
+    // Variable Declarations
+    fixed lv__currentX;
+    fixed lv__currentY;
+    int lv__count;
+    fixed lv__radius;
+    point lv__point;
+    region lv__region;
+    point lv__randomPoint;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv__radius = 3.0;
+
+    // Implementation
+    if ((libAFDD5302_gv_get_NumberOf_Teams_InGame == 2)) {
+        if ((lp_tower == 1)) {
+            lv__point = libAFDD5302_gf_getRight_MiddlePointOf_Team_And_Center(1);
+            lv__region = RegionEmpty();
+            lv__region = RegionCircle(lv__point, lv__radius);
+            lv__randomPoint = RegionRandomPoint(lv__region);
+        }
+        else {
+            if ((lp_tower == 2)) {
+                lv__point = libAFDD5302_gf_getRight_MiddlePointOf_Team_And_Center(2);
+                lv__region = RegionEmpty();
+                lv__region = RegionCircle(lv__point, lv__radius);
+                lv__randomPoint = RegionRandomPoint(lv__region);
+            }
+            else {
+                lv__randomPoint = libAFDD5302_gf_getRight_PointOf_TowerFor_1();
+            }
+        }
+    }
+
+    if ((libAFDD5302_gv_get_NumberOf_Teams_InGame == 4)) {
+        if ((lp_tower == 1)) {
+            lv__currentX += PointGetX(libAFDD5302_gf_getRight_MiddlePointOf_Team_And_Center(1));
+            lv__currentY += PointGetY(libAFDD5302_gf_getRight_MiddlePointOf_Team_And_Center(1));
+            lv__count += 1;
+            lv__currentX += PointGetX(libAFDD5302_gf_getRight_MiddlePointOf_Team_And_Center(2));
+            lv__currentY += PointGetY(libAFDD5302_gf_getRight_MiddlePointOf_Team_And_Center(2));
+            lv__count += 1;
+            lv__point = Point((lv__currentX / lv__count), (lv__currentY / lv__count));
+            lv__region = RegionEmpty();
+            lv__region = RegionCircle(lv__point, lv__radius);
+            lv__randomPoint = RegionRandomPoint(lv__region);
+        }
+        else {
+            if ((lp_tower == 2)) {
+                lv__currentX += PointGetX(libAFDD5302_gf_getRight_MiddlePointOf_Team_And_Center(3));
+                lv__currentY += PointGetY(libAFDD5302_gf_getRight_MiddlePointOf_Team_And_Center(3));
+                lv__count += 1;
+                lv__currentX += PointGetX(libAFDD5302_gf_getRight_MiddlePointOf_Team_And_Center(4));
+                lv__currentY += PointGetY(libAFDD5302_gf_getRight_MiddlePointOf_Team_And_Center(4));
+                lv__count += 1;
+                lv__point = Point((lv__currentX / lv__count), (lv__currentY / lv__count));
+                lv__region = RegionEmpty();
+                lv__region = RegionCircle(lv__point, lv__radius);
+                lv__randomPoint = RegionRandomPoint(lv__region);
+            }
+            else {
+                lv__randomPoint = libAFDD5302_gf_getRight_PointOf_TowerFor_1();
+            }
+        }
+    }
+
+    if ((libAFDD5302_gv_get_NumberOf_Teams_InGame == 3)) {
+        lv__radius = DistanceBetweenPoints(libAFDD5302_gf_getRight_MiddleCentreOf_Map(), libAFDD5302_gf_getRight_MiddlePointOf_Team_And_Center(1));
+        if ((lp_tower == 1)) {
+            lv__region = RegionEmpty();
+            lv__region = RegionCircle(lv__point, lv__radius);
+            lv__randomPoint = RegionRandomPoint(lv__region);
+        }
+        else {
+            if ((lp_tower == 2)) {
+                lv__region = RegionEmpty();
+                lv__region = RegionCircle(lv__point, lv__radius);
+                lv__randomPoint = RegionRandomPoint(lv__region);
+            }
+            else {
+                lv__randomPoint = libAFDD5302_gf_getRight_PointOf_TowerFor_1();
+            }
+        }
+    }
+
+    return lv__randomPoint;
+}
+
+void libAFDD5302_gf_getRight_NumberOf_Teams_InGame () {
+    // Variable Declarations
+    int lv__countTeam;
+
+    // Automatic Variable Declarations
+    int auto70C8E680_ae;
+    const int auto70C8E680_ai = 1;
+    playergroup autoA27C867F_g;
+    int autoA27C867F_var;
+
+    // Variable Initialization
+
+    // Implementation
+    auto70C8E680_ae = libAFDD5302_gv_get_NumberOf_Players_InGame;
+    lv__countTeam = 1;
+    for ( ; ( (auto70C8E680_ai >= 0 && lv__countTeam <= auto70C8E680_ae) || (auto70C8E680_ai < 0 && lv__countTeam >= auto70C8E680_ae) ) ; lv__countTeam += auto70C8E680_ai ) {
+        if ((PlayerGroupCount(GameAttributePlayersForTeam(lv__countTeam)) >= 1)) {
+            libAFDD5302_gv_get_NumberOf_Teams_InGame += 1;
+            autoA27C867F_g = GameAttributePlayersForTeam(lv__countTeam);
+            autoA27C867F_var = -1;
+            while (true) {
+                autoA27C867F_var = PlayerGroupNextPlayer(autoA27C867F_g, autoA27C867F_var);
+                if (autoA27C867F_var < 0) { break; }
+                if ((PlayerStatus(autoA27C867F_var) == c_playerStatusActive)) {
+                    PlayerGroupAdd(libAFDD5302_gv_get_Teams[libAFDD5302_gv_get_NumberOf_Teams_InGame], autoA27C867F_var);
+                }
+
+            }
+        }
+
+    }
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, (StringExternal("Param/Value/lib_AFDD5302_27068057") + IntToText(libAFDD5302_gv_get_NumberOf_Teams_InGame)));
+}
+
+void libAFDD5302_gf_getRight_NumberOf_Players_InGame () {
+    // Automatic Variable Declarations
+    playergroup auto859BFBA9_g;
+    int auto859BFBA9_var;
+
+    // Implementation
+    libAFDD5302_gv_get_NumberOf_Players_InGame = 0;
+    auto859BFBA9_g = PlayerGroupActive();
+    auto859BFBA9_var = -1;
+    while (true) {
+        auto859BFBA9_var = PlayerGroupNextPlayer(auto859BFBA9_g, auto859BFBA9_var);
+        if (auto859BFBA9_var < 0) { break; }
+        if ((PlayerStatus(auto859BFBA9_var) == c_playerStatusActive)) {
+            libAFDD5302_gv_get_NumberOf_Players_InGame += 1;
+        }
+
+    }
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, (StringExternal("Param/Value/lib_AFDD5302_B360DF7C") + (IntToText(libAFDD5302_gv_get_NumberOf_Players_InGame) + StringExternal("Param/Value/lib_AFDD5302_DCE62656"))));
+}
+
+point libAFDD5302_gf_getRight_MiddleCentreOf_Map () {
+    // Variable Declarations
+    fixed lv_currentX;
+    fixed lv_currentY;
+    int lv_playersInGame;
+
+    // Automatic Variable Declarations
+    playergroup auto6ED14AB2_g;
+    int auto6ED14AB2_var;
+
+    // Variable Initialization
+
+    // Implementation
+    auto6ED14AB2_g = PlayerGroupActive();
+    auto6ED14AB2_var = -1;
+    while (true) {
+        auto6ED14AB2_var = PlayerGroupNextPlayer(auto6ED14AB2_g, auto6ED14AB2_var);
+        if (auto6ED14AB2_var < 0) { break; }
+        if ((PlayerStatus(auto6ED14AB2_var) == c_playerStatusActive)) {
+            lv_currentX += PointGetX(PlayerStartLocation(auto6ED14AB2_var));
+            lv_currentY += PointGetY(PlayerStartLocation(auto6ED14AB2_var));
+            lv_playersInGame += 1;
+        }
+
+    }
+    return Point((lv_currentX / lv_playersInGame), (lv_currentY / lv_playersInGame));
+}
+
+point libAFDD5302_gf_getRight_MiddlePointOf_Team_And_Center (int lp_teamNumber) {
+    // Variable Declarations
+    fixed lv__currentX;
+    fixed lv__currentY;
+    int lv__count;
+    point lv__MiddlePointOf_TeamandCenter;
+
+    // Automatic Variable Declarations
+    playergroup autoC055AC5A_g;
+    int autoC055AC5A_var;
+
+    // Variable Initialization
+
+    // Implementation
+    if ((PlayerGroupCount(libAFDD5302_gv_get_Teams[lp_teamNumber]) >= 2)) {
+        lv__currentX += PointGetX(libAFDD5302_gf_getRight_MiddlePointOf_Players_InTeam(lp_teamNumber));
+        lv__currentY += PointGetY(libAFDD5302_gf_getRight_MiddlePointOf_Players_InTeam(lp_teamNumber));
+        lv__count += 1;
+        lv__currentX += PointGetX(libAFDD5302_gf_getRight_MiddleCentreOf_Map());
+        lv__currentY += PointGetY(libAFDD5302_gf_getRight_MiddleCentreOf_Map());
+        lv__count += 1;
+        lv__MiddlePointOf_TeamandCenter = Point((lv__currentX / lv__count), (lv__currentY / lv__count));
+    }
+    else {
+        if ((PlayerGroupCount(libAFDD5302_gv_get_Teams[lp_teamNumber]) == 1)) {
+            autoC055AC5A_g = libAFDD5302_gv_get_Teams[lp_teamNumber];
+            autoC055AC5A_var = -1;
+            while (true) {
+                autoC055AC5A_var = PlayerGroupNextPlayer(autoC055AC5A_g, autoC055AC5A_var);
+                if (autoC055AC5A_var < 0) { break; }
+                lv__currentX += PointGetX(PlayerStartLocation(autoC055AC5A_var));
+                lv__currentY += PointGetY(PlayerStartLocation(autoC055AC5A_var));
+                lv__count += 1;
+                lv__currentX += PointGetX(libAFDD5302_gf_getRight_MiddleCentreOf_Map());
+                lv__currentY += PointGetY(libAFDD5302_gf_getRight_MiddleCentreOf_Map());
+                lv__count += 1;
+                lv__MiddlePointOf_TeamandCenter = Point((lv__currentX / lv__count), (lv__currentY / lv__count));
+            }
+        }
+        else {
+            lv__MiddlePointOf_TeamandCenter = null;
+        }
+    }
+    return lv__MiddlePointOf_TeamandCenter;
+}
+
+point libAFDD5302_gf_getRight_MiddlePointOf_Players_InTeam (int lp_teamNumber) {
+    // Variable Declarations
+    fixed lv__currentX;
+    fixed lv__currentY;
+    int lv__playersInTeam;
+
+    // Automatic Variable Declarations
+    playergroup auto3EB48629_g;
+    int auto3EB48629_var;
+
+    // Variable Initialization
+
+    // Implementation
+    auto3EB48629_g = libAFDD5302_gv_get_Teams[lp_teamNumber];
+    auto3EB48629_var = -1;
+    while (true) {
+        auto3EB48629_var = PlayerGroupNextPlayer(auto3EB48629_g, auto3EB48629_var);
+        if (auto3EB48629_var < 0) { break; }
+        lv__currentX += PointGetX(PlayerStartLocation(auto3EB48629_var));
+        lv__currentY += PointGetY(PlayerStartLocation(auto3EB48629_var));
+        lv__playersInTeam += 1;
+    }
+    return Point((lv__currentX / lv__playersInTeam), (lv__currentY / lv__playersInTeam));
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: Launch
+//--------------------------------------------------------------------------------------------------
+bool libAFDD5302_gt_Launch_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__count;
+
+    // Automatic Variable Declarations
+    string auto6B1D6603_val;
+    string auto31293276_val;
+    string auto17A52D9A_val;
+    string auto248CBA18_val;
+    string autoDE987C77_val;
+    int auto84595F80_ae;
+    const int auto84595F80_ai = 1;
+    int autoEBB2B03E_ae;
+    const int autoEBB2B03E_ai = 1;
+    string auto8BF0EAAE_val;
+    string auto483B3C37_val;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    libAFDD5302_gf_getRight_NumberOf_Players_InGame();
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, (StringExternal("Param/Value/lib_AFDD5302_0DF99C9A") + IntToText(libAFDD5302_gv_get_NumberOf_Players_InGame)));
+    Wait(0.1, c_timeGame);
+    libAFDD5302_gf_getRight_NumberOf_Teams_InGame();
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, (StringExternal("Param/Value/lib_AFDD5302_3C1D940E") + IntToText(libAFDD5302_gv_get_NumberOf_Teams_InGame)));
+    Wait(0.1, c_timeGame);
+    auto6B1D6603_val = GameAttributeGameValue("1");
+    if (auto6B1D6603_val == "0001") {
+        libAFDD5302_gv_get_NumberOf_Towers = 1;
+    }
+    else if (auto6B1D6603_val == "0002") {
+        libAFDD5302_gv_get_NumberOf_Towers = 2;
+    }
+    else if (auto6B1D6603_val == "0003") {
+        libAFDD5302_gv_get_NumberOf_Towers = 3;
+    }
+    else {
+    }
+    if ((libAFDD5302_gv_get_NumberOf_Teams_InGame >= 5)) {
+        libAFDD5302_gv_get_NumberOf_Towers = 1;
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, (StringExternal("Param/Value/lib_AFDD5302_0B11E95E") + IntToText(libAFDD5302_gv_get_NumberOf_Towers)));
+    }
+    else {
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, (StringExternal("Param/Value/lib_AFDD5302_6787A8CD") + IntToText(libAFDD5302_gv_get_NumberOf_Towers)));
+    }
+    auto31293276_val = GameAttributeGameValue("2");
+    if (auto31293276_val == "0001") {
+        libAFDD5302_gv_get_TypeOf_Towers = 0;
+        libAFDD5302_gv_get_size = 50.0;
+    }
+    else if (auto31293276_val == "0002") {
+        libAFDD5302_gv_get_TypeOf_Towers = 1;
+        libAFDD5302_gv_get_size = 45.0;
+    }
+    else if (auto31293276_val == "0003") {
+        libAFDD5302_gv_get_TypeOf_Towers = 2;
+        libAFDD5302_gv_get_size = 100.0;
+    }
+    else if (auto31293276_val == "0004") {
+        libAFDD5302_gv_get_TypeOf_Towers = 3;
+        libAFDD5302_gv_get_size = 100.0;
+    }
+    else {
+    }
+    auto17A52D9A_val = GameAttributeGameValue("3");
+    if (auto17A52D9A_val == "0001") {
+        libAFDD5302_gv_get_RadiusOf_TowerRegions = 2;
+    }
+    else if (auto17A52D9A_val == "0002") {
+        libAFDD5302_gv_get_RadiusOf_TowerRegions = 3;
+    }
+    else if (auto17A52D9A_val == "0003") {
+        libAFDD5302_gv_get_RadiusOf_TowerRegions = 4;
+    }
+    else if (auto17A52D9A_val == "0004") {
+        libAFDD5302_gv_get_RadiusOf_TowerRegions = 5;
+    }
+    else if (auto17A52D9A_val == "0005") {
+        libAFDD5302_gv_get_RadiusOf_TowerRegions = 6;
+    }
+    else {
+    }
+    auto248CBA18_val = GameAttributeGameValue("5");
+    if (auto248CBA18_val == "0001") {
+        libAFDD5302_gv_get_TypeOf_Score = 0;
+        autoDE987C77_val = GameAttributeGameValue("4");
+        if (autoDE987C77_val == "0001") {
+            libAFDD5302_gv_get_Score[0] = 500;
+        }
+        else if (autoDE987C77_val == "0002") {
+            libAFDD5302_gv_get_Score[0] = 800;
+        }
+        else if (autoDE987C77_val == "0003") {
+            libAFDD5302_gv_get_Score[0] = 1000;
+        }
+        else if (autoDE987C77_val == "0004") {
+            libAFDD5302_gv_get_Score[0] = 1200;
+        }
+        else if (autoDE987C77_val == "0005") {
+            libAFDD5302_gv_get_Score[0] = 1500;
+        }
+        else if (autoDE987C77_val == "0006") {
+            libAFDD5302_gv_get_Score[0] = 2000;
+        }
+        else if (autoDE987C77_val == "0007") {
+            libAFDD5302_gv_get_Score[0] = 2500;
+        }
+        else if (autoDE987C77_val == "0008") {
+            libAFDD5302_gv_get_Score[0] = 3000;
+        }
+        else {
+            libAFDD5302_gv_get_Score[0] = 666;
+        }
+        auto84595F80_ae = libAFDD5302_gv_get_NumberOf_Teams_InGame;
+        lv__count = 1;
+        for ( ; ( (auto84595F80_ai >= 0 && lv__count <= auto84595F80_ae) || (auto84595F80_ai < 0 && lv__count >= auto84595F80_ae) ) ; lv__count += auto84595F80_ai ) {
+            libAFDD5302_gv_get_Score[lv__count] = 0;
+        }
+    }
+    else if (auto248CBA18_val == "0002") {
+        libAFDD5302_gv_get_TypeOf_Score = 1;
+        autoEBB2B03E_ae = libAFDD5302_gv_get_NumberOf_Teams_InGame;
+        lv__count = 1;
+        for ( ; ( (autoEBB2B03E_ai >= 0 && lv__count <= autoEBB2B03E_ae) || (autoEBB2B03E_ai < 0 && lv__count >= autoEBB2B03E_ae) ) ; lv__count += autoEBB2B03E_ai ) {
+            auto8BF0EAAE_val = GameAttributeGameValue("4");
+            if (auto8BF0EAAE_val == "0001") {
+                libAFDD5302_gv_get_Score[lv__count] = 500;
+            }
+            else if (auto8BF0EAAE_val == "0002") {
+                libAFDD5302_gv_get_Score[lv__count] = 800;
+            }
+            else if (auto8BF0EAAE_val == "0003") {
+                libAFDD5302_gv_get_Score[lv__count] = 1000;
+            }
+            else if (auto8BF0EAAE_val == "0004") {
+                libAFDD5302_gv_get_Score[lv__count] = 1200;
+            }
+            else if (auto8BF0EAAE_val == "0005") {
+                libAFDD5302_gv_get_Score[lv__count] = 1500;
+            }
+            else if (auto8BF0EAAE_val == "0006") {
+                libAFDD5302_gv_get_Score[lv__count] = 2000;
+            }
+            else if (auto8BF0EAAE_val == "0007") {
+                libAFDD5302_gv_get_Score[lv__count] = 2500;
+            }
+            else if (auto8BF0EAAE_val == "0008") {
+                libAFDD5302_gv_get_Score[lv__count] = 3000;
+            }
+            else {
+                libAFDD5302_gv_get_Score[lv__count] = 999;
+            }
+        }
+        libAFDD5302_gv_get_Score[0] = 0;
+    }
+    else {
+    }
+    auto483B3C37_val = GameAttributeGameValue("6");
+    if (auto483B3C37_val == "0001") {
+        libAFDD5302_gv_get_NumberOf_Periods = 1;
+    }
+    else if (auto483B3C37_val == "0002") {
+        libAFDD5302_gv_get_NumberOf_Periods = 3;
+    }
+    else if (auto483B3C37_val == "0003") {
+        libAFDD5302_gv_get_NumberOf_Periods = 5;
+    }
+    else if (auto483B3C37_val == "0004") {
+        libAFDD5302_gv_get_NumberOf_Periods = 7;
+    }
+    else {
+    }
+    TriggerExecute(libAFDD5302_gt_CreateTowerDialog, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libAFDD5302_gt_Launch_Init () {
+    libAFDD5302_gt_Launch = TriggerCreate("libAFDD5302_gt_Launch_Func");
+    TriggerAddEventMapInit(libAFDD5302_gt_Launch);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Create Tower & Dialog
+//--------------------------------------------------------------------------------------------------
+bool libAFDD5302_gt_CreateTowerDialog_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__count;
+    int lv__NumberOf_Towers;
+    string[5] lv__TypeOf_Towers;
+    point lv__currentPoint;
+
+    // Automatic Variable Declarations
+    int autoA5C59977_val;
+    int autoAB23E8D8_val;
+    int auto8C1C1D42_ae;
+    const int auto8C1C1D42_ai = 1;
+    int auto5BA77367_ae;
+    const int auto5BA77367_ai = 1;
+    int auto8D47352F_val;
+    int auto72AF1BCB_ae;
+    const int auto72AF1BCB_ai = 1;
+    int auto9D3F85FB_ae;
+    const int auto9D3F85FB_ai = 1;
+    int auto2F810655_val;
+    int auto6F71CFFF_val;
+    int auto4F60A52A_ae;
+    const int auto4F60A52A_ai = 1;
+    int autoC9483C82_ae;
+    const int autoC9483C82_ai = 1;
+    int autoB6049657_val;
+    int auto3EB3C954_ae;
+    const int auto3EB3C954_ai = 1;
+    int auto2B16B2B0_ae;
+    const int auto2B16B2B0_ai = 1;
+    int auto7507AA53_val;
+    int auto4A7A4F45_ae;
+    const int auto4A7A4F45_ai = 1;
+    int autoB79C4C77_ae;
+    const int autoB79C4C77_ai = 1;
+    int auto3C1713D7_val;
+    int auto3EEF260C_ae;
+    const int auto3EEF260C_ai = 1;
+    int autoDA3C4773_ae;
+    const int autoDA3C4773_ai = 1;
+    int autoAA76EB1D_val;
+    int auto4F787500_ae;
+    const int auto4F787500_ai = 1;
+    int auto8A2CB809_ae;
+    const int auto8A2CB809_ai = 1;
+    int autoBEF3363C_val;
+    int autoCB1100D5_ae;
+    const int autoCB1100D5_ai = 1;
+    int auto4FC8B762_ae;
+    const int auto4FC8B762_ai = 1;
+    int auto586C8A26_ae;
+    const int auto586C8A26_ai = 1;
+    int auto420E2C86_ae;
+    const int auto420E2C86_ai = 1;
+
+    // Variable Initialization
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    autoA5C59977_val = libAFDD5302_gv_get_TypeOf_Towers;
+    if (autoA5C59977_val == 0) {
+        autoAB23E8D8_val = libAFDD5302_gv_get_NumberOf_Towers;
+        if (autoAB23E8D8_val == 1) {
+            lv__NumberOf_Towers += 1;
+            lv__TypeOf_Towers[lv__NumberOf_Towers] = "BlueConstruct_B";
+        }
+        else if (autoAB23E8D8_val == 2) {
+            auto8C1C1D42_ae = libAFDD5302_gv_get_NumberOf_Towers;
+            lv__count = 1;
+            for ( ; ( (auto8C1C1D42_ai >= 0 && lv__count <= auto8C1C1D42_ae) || (auto8C1C1D42_ai < 0 && lv__count >= auto8C1C1D42_ae) ) ; lv__count += auto8C1C1D42_ai ) {
+                lv__NumberOf_Towers += 1;
+                if ((lv__NumberOf_Towers == 1)) {
+                    lv__TypeOf_Towers[lv__NumberOf_Towers] = "BlueConstruct_B";
+                }
+                else {
+                    lv__TypeOf_Towers[lv__NumberOf_Towers] = "Construct_C";
+                }
+            }
+        }
+        else if (autoAB23E8D8_val == 3) {
+            auto5BA77367_ae = libAFDD5302_gv_get_NumberOf_Towers;
+            lv__count = 1;
+            for ( ; ( (auto5BA77367_ai >= 0 && lv__count <= auto5BA77367_ae) || (auto5BA77367_ai < 0 && lv__count >= auto5BA77367_ae) ) ; lv__count += auto5BA77367_ai ) {
+                lv__NumberOf_Towers += 1;
+                if ((lv__NumberOf_Towers == 1)) {
+                    lv__TypeOf_Towers[lv__NumberOf_Towers] = "BlueConstruct_B";
+                }
+                else {
+                    if ((lv__NumberOf_Towers == 2)) {
+                        lv__TypeOf_Towers[lv__NumberOf_Towers] = "Construct_C";
+                    }
+                    else {
+                        lv__TypeOf_Towers[lv__NumberOf_Towers] = "RedConstruct_A";
+                    }
+                }
+            }
+        }
+        else {
+        }
+    }
+    else if (autoA5C59977_val == 1) {
+        auto8D47352F_val = libAFDD5302_gv_get_NumberOf_Towers;
+        if (auto8D47352F_val == 1) {
+            lv__NumberOf_Towers += 1;
+            lv__TypeOf_Towers[lv__NumberOf_Towers] = "BlueConstruct_B";
+        }
+        else if (auto8D47352F_val == 2) {
+            auto72AF1BCB_ae = libAFDD5302_gv_get_NumberOf_Towers;
+            lv__count = 1;
+            for ( ; ( (auto72AF1BCB_ai >= 0 && lv__count <= auto72AF1BCB_ae) || (auto72AF1BCB_ai < 0 && lv__count >= auto72AF1BCB_ae) ) ; lv__count += auto72AF1BCB_ai ) {
+                lv__NumberOf_Towers += 1;
+                if ((lv__NumberOf_Towers == 1)) {
+                    lv__TypeOf_Towers[lv__NumberOf_Towers] = "BlueConstruct_B";
+                }
+                else {
+                    lv__TypeOf_Towers[lv__NumberOf_Towers] = "Construct_C";
+                }
+            }
+        }
+        else if (auto8D47352F_val == 3) {
+            auto9D3F85FB_ae = libAFDD5302_gv_get_NumberOf_Towers;
+            lv__count = 1;
+            for ( ; ( (auto9D3F85FB_ai >= 0 && lv__count <= auto9D3F85FB_ae) || (auto9D3F85FB_ai < 0 && lv__count >= auto9D3F85FB_ae) ) ; lv__count += auto9D3F85FB_ai ) {
+                lv__NumberOf_Towers += 1;
+                if ((lv__NumberOf_Towers == 1)) {
+                    lv__TypeOf_Towers[lv__NumberOf_Towers] = "BlueConstruct_B";
+                }
+                else {
+                    if ((lv__NumberOf_Towers == 2)) {
+                        lv__TypeOf_Towers[lv__NumberOf_Towers] = "Construct_C";
+                    }
+                    else {
+                        lv__TypeOf_Towers[lv__NumberOf_Towers] = "RedConstruct_A";
+                    }
+                }
+            }
+        }
+        else {
+        }
+    }
+    else if (autoA5C59977_val == 2) {
+        auto2F810655_val = libAFDD5302_gv_get_RadiusOf_TowerRegions;
+        if (auto2F810655_val == 2) {
+            auto6F71CFFF_val = libAFDD5302_gv_get_NumberOf_Towers;
+            if (auto6F71CFFF_val == 1) {
+                lv__NumberOf_Towers += 1;
+                lv__TypeOf_Towers[lv__NumberOf_Towers] = "RepulsorField2";
+            }
+            else if (auto6F71CFFF_val == 2) {
+                auto4F60A52A_ae = libAFDD5302_gv_get_NumberOf_Towers;
+                lv__count = 1;
+                for ( ; ( (auto4F60A52A_ai >= 0 && lv__count <= auto4F60A52A_ae) || (auto4F60A52A_ai < 0 && lv__count >= auto4F60A52A_ae) ) ; lv__count += auto4F60A52A_ai ) {
+                    lv__NumberOf_Towers += 1;
+                    if ((lv__NumberOf_Towers == 1)) {
+                        lv__TypeOf_Towers[lv__NumberOf_Towers] = "RepulsorField2";
+                    }
+                    else {
+                        lv__TypeOf_Towers[lv__NumberOf_Towers] = "RepulsorField2";
+                    }
+                }
+            }
+            else if (auto6F71CFFF_val == 3) {
+                autoC9483C82_ae = libAFDD5302_gv_get_NumberOf_Towers;
+                lv__count = 1;
+                for ( ; ( (autoC9483C82_ai >= 0 && lv__count <= autoC9483C82_ae) || (autoC9483C82_ai < 0 && lv__count >= autoC9483C82_ae) ) ; lv__count += autoC9483C82_ai ) {
+                    lv__NumberOf_Towers += 1;
+                    if ((lv__NumberOf_Towers == 1)) {
+                        lv__TypeOf_Towers[lv__NumberOf_Towers] = "RepulsorField2";
+                    }
+                    else {
+                        if ((lv__NumberOf_Towers == 2)) {
+                            lv__TypeOf_Towers[lv__NumberOf_Towers] = "RepulsorField2";
+                        }
+                        else {
+                            lv__TypeOf_Towers[lv__NumberOf_Towers] = "RepulsorField2";
+                        }
+                    }
+                }
+            }
+            else {
+            }
+        }
+        else if (auto2F810655_val == 3) {
+            autoB6049657_val = libAFDD5302_gv_get_NumberOf_Towers;
+            if (autoB6049657_val == 1) {
+                lv__NumberOf_Towers += 1;
+                lv__TypeOf_Towers[lv__NumberOf_Towers] = "RepulsorField3";
+            }
+            else if (autoB6049657_val == 2) {
+                auto3EB3C954_ae = libAFDD5302_gv_get_NumberOf_Towers;
+                lv__count = 1;
+                for ( ; ( (auto3EB3C954_ai >= 0 && lv__count <= auto3EB3C954_ae) || (auto3EB3C954_ai < 0 && lv__count >= auto3EB3C954_ae) ) ; lv__count += auto3EB3C954_ai ) {
+                    lv__NumberOf_Towers += 1;
+                    if ((lv__NumberOf_Towers == 1)) {
+                        lv__TypeOf_Towers[lv__NumberOf_Towers] = "RepulsorField3";
+                    }
+                    else {
+                        lv__TypeOf_Towers[lv__NumberOf_Towers] = "RepulsorField3";
+                    }
+                }
+            }
+            else if (autoB6049657_val == 3) {
+                auto2B16B2B0_ae = libAFDD5302_gv_get_NumberOf_Towers;
+                lv__count = 1;
+                for ( ; ( (auto2B16B2B0_ai >= 0 && lv__count <= auto2B16B2B0_ae) || (auto2B16B2B0_ai < 0 && lv__count >= auto2B16B2B0_ae) ) ; lv__count += auto2B16B2B0_ai ) {
+                    lv__NumberOf_Towers += 1;
+                    if ((lv__NumberOf_Towers == 1)) {
+                        lv__TypeOf_Towers[lv__NumberOf_Towers] = "RepulsorField3";
+                    }
+                    else {
+                        if ((lv__NumberOf_Towers == 2)) {
+                            lv__TypeOf_Towers[lv__NumberOf_Towers] = "RepulsorField3";
+                        }
+                        else {
+                            lv__TypeOf_Towers[lv__NumberOf_Towers] = "RepulsorField3";
+                        }
+                    }
+                }
+            }
+            else {
+            }
+        }
+        else if (auto2F810655_val == 4) {
+            auto7507AA53_val = libAFDD5302_gv_get_NumberOf_Towers;
+            if (auto7507AA53_val == 1) {
+                lv__NumberOf_Towers += 1;
+                lv__TypeOf_Towers[lv__NumberOf_Towers] = "RepulsorField";
+            }
+            else if (auto7507AA53_val == 2) {
+                auto4A7A4F45_ae = libAFDD5302_gv_get_NumberOf_Towers;
+                lv__count = 1;
+                for ( ; ( (auto4A7A4F45_ai >= 0 && lv__count <= auto4A7A4F45_ae) || (auto4A7A4F45_ai < 0 && lv__count >= auto4A7A4F45_ae) ) ; lv__count += auto4A7A4F45_ai ) {
+                    lv__NumberOf_Towers += 1;
+                    if ((lv__NumberOf_Towers == 1)) {
+                        lv__TypeOf_Towers[lv__NumberOf_Towers] = "RepulsorField";
+                    }
+                    else {
+                        lv__TypeOf_Towers[lv__NumberOf_Towers] = "RepulsorField";
+                    }
+                }
+            }
+            else if (auto7507AA53_val == 3) {
+                autoB79C4C77_ae = libAFDD5302_gv_get_NumberOf_Towers;
+                lv__count = 1;
+                for ( ; ( (autoB79C4C77_ai >= 0 && lv__count <= autoB79C4C77_ae) || (autoB79C4C77_ai < 0 && lv__count >= autoB79C4C77_ae) ) ; lv__count += autoB79C4C77_ai ) {
+                    lv__NumberOf_Towers += 1;
+                    if ((lv__NumberOf_Towers == 1)) {
+                        lv__TypeOf_Towers[lv__NumberOf_Towers] = "RepulsorField";
+                    }
+                    else {
+                        if ((lv__NumberOf_Towers == 2)) {
+                            lv__TypeOf_Towers[lv__NumberOf_Towers] = "RepulsorField";
+                        }
+                        else {
+                            lv__TypeOf_Towers[lv__NumberOf_Towers] = "RepulsorField";
+                        }
+                    }
+                }
+            }
+            else {
+            }
+        }
+        else if (auto2F810655_val == 5) {
+            auto3C1713D7_val = libAFDD5302_gv_get_NumberOf_Towers;
+            if (auto3C1713D7_val == 1) {
+                lv__NumberOf_Towers += 1;
+                lv__TypeOf_Towers[lv__NumberOf_Towers] = "RepulsorField32";
+            }
+            else if (auto3C1713D7_val == 2) {
+                auto3EEF260C_ae = libAFDD5302_gv_get_NumberOf_Towers;
+                lv__count = 1;
+                for ( ; ( (auto3EEF260C_ai >= 0 && lv__count <= auto3EEF260C_ae) || (auto3EEF260C_ai < 0 && lv__count >= auto3EEF260C_ae) ) ; lv__count += auto3EEF260C_ai ) {
+                    lv__NumberOf_Towers += 1;
+                    if ((lv__NumberOf_Towers == 1)) {
+                        lv__TypeOf_Towers[lv__NumberOf_Towers] = "RepulsorField32";
+                    }
+                    else {
+                        lv__TypeOf_Towers[lv__NumberOf_Towers] = "RepulsorField32";
+                    }
+                }
+            }
+            else if (auto3C1713D7_val == 3) {
+                autoDA3C4773_ae = libAFDD5302_gv_get_NumberOf_Towers;
+                lv__count = 1;
+                for ( ; ( (autoDA3C4773_ai >= 0 && lv__count <= autoDA3C4773_ae) || (autoDA3C4773_ai < 0 && lv__count >= autoDA3C4773_ae) ) ; lv__count += autoDA3C4773_ai ) {
+                    lv__NumberOf_Towers += 1;
+                    if ((lv__NumberOf_Towers == 1)) {
+                        lv__TypeOf_Towers[lv__NumberOf_Towers] = "RepulsorField32";
+                    }
+                    else {
+                        if ((lv__NumberOf_Towers == 2)) {
+                            lv__TypeOf_Towers[lv__NumberOf_Towers] = "RepulsorField32";
+                        }
+                        else {
+                            lv__TypeOf_Towers[lv__NumberOf_Towers] = "RepulsorField32";
+                        }
+                    }
+                }
+            }
+            else {
+            }
+        }
+        else if (auto2F810655_val == 6) {
+            autoAA76EB1D_val = libAFDD5302_gv_get_NumberOf_Towers;
+            if (autoAA76EB1D_val == 1) {
+                lv__NumberOf_Towers += 1;
+                lv__TypeOf_Towers[lv__NumberOf_Towers] = "RepulsorField322";
+            }
+            else if (autoAA76EB1D_val == 2) {
+                auto4F787500_ae = libAFDD5302_gv_get_NumberOf_Towers;
+                lv__count = 1;
+                for ( ; ( (auto4F787500_ai >= 0 && lv__count <= auto4F787500_ae) || (auto4F787500_ai < 0 && lv__count >= auto4F787500_ae) ) ; lv__count += auto4F787500_ai ) {
+                    lv__NumberOf_Towers += 1;
+                    if ((lv__NumberOf_Towers == 1)) {
+                        lv__TypeOf_Towers[lv__NumberOf_Towers] = "RepulsorField322";
+                    }
+                    else {
+                        lv__TypeOf_Towers[lv__NumberOf_Towers] = "RepulsorField322";
+                    }
+                }
+            }
+            else if (autoAA76EB1D_val == 3) {
+                auto8A2CB809_ae = libAFDD5302_gv_get_NumberOf_Towers;
+                lv__count = 1;
+                for ( ; ( (auto8A2CB809_ai >= 0 && lv__count <= auto8A2CB809_ae) || (auto8A2CB809_ai < 0 && lv__count >= auto8A2CB809_ae) ) ; lv__count += auto8A2CB809_ai ) {
+                    lv__NumberOf_Towers += 1;
+                    if ((lv__NumberOf_Towers == 1)) {
+                        lv__TypeOf_Towers[lv__NumberOf_Towers] = "RepulsorField322";
+                    }
+                    else {
+                        if ((lv__NumberOf_Towers == 2)) {
+                            lv__TypeOf_Towers[lv__NumberOf_Towers] = "RepulsorField322";
+                        }
+                        else {
+                            lv__TypeOf_Towers[lv__NumberOf_Towers] = "RepulsorField322";
+                        }
+                    }
+                }
+            }
+            else {
+            }
+        }
+        else {
+        }
+    }
+    else if (autoA5C59977_val == 3) {
+        autoBEF3363C_val = libAFDD5302_gv_get_NumberOf_Towers;
+        if (autoBEF3363C_val == 1) {
+            lv__NumberOf_Towers += 1;
+            lv__TypeOf_Towers[lv__NumberOf_Towers] = "DestructibleKorhalFlag";
+        }
+        else if (autoBEF3363C_val == 2) {
+            autoCB1100D5_ae = libAFDD5302_gv_get_NumberOf_Towers;
+            lv__count = 1;
+            for ( ; ( (autoCB1100D5_ai >= 0 && lv__count <= autoCB1100D5_ae) || (autoCB1100D5_ai < 0 && lv__count >= autoCB1100D5_ae) ) ; lv__count += autoCB1100D5_ai ) {
+                lv__NumberOf_Towers += 1;
+                if ((lv__NumberOf_Towers == 1)) {
+                    lv__TypeOf_Towers[lv__NumberOf_Towers] = "DestructibleKorhalFlag";
+                }
+                else {
+                    lv__TypeOf_Towers[lv__NumberOf_Towers] = "DestructibleKorhalFlag";
+                }
+            }
+        }
+        else if (autoBEF3363C_val == 3) {
+            auto4FC8B762_ae = libAFDD5302_gv_get_NumberOf_Towers;
+            lv__count = 1;
+            for ( ; ( (auto4FC8B762_ai >= 0 && lv__count <= auto4FC8B762_ae) || (auto4FC8B762_ai < 0 && lv__count >= auto4FC8B762_ae) ) ; lv__count += auto4FC8B762_ai ) {
+                lv__NumberOf_Towers += 1;
+                if ((lv__NumberOf_Towers == 1)) {
+                    lv__TypeOf_Towers[lv__NumberOf_Towers] = "DestructibleKorhalFlag";
+                }
+                else {
+                    if ((lv__NumberOf_Towers == 2)) {
+                        lv__TypeOf_Towers[lv__NumberOf_Towers] = "DestructibleKorhalFlag";
+                    }
+                    else {
+                        lv__TypeOf_Towers[lv__NumberOf_Towers] = "DestructibleKorhalFlag";
+                    }
+                }
+            }
+        }
+        else {
+        }
+    }
+    else {
+    }
+    lv__NumberOf_Towers = 0;
+    Wait(0.1, c_timeGame);
+    if ((libAFDD5302_gv_get_NumberOf_Towers == 1)) {
+        lv__currentPoint = libAFDD5302_gf_getRight_PointOf_TowerFor_1();
+        libNtve_gf_CreateUnitsAtPoint2(1, lv__TypeOf_Towers[1], c_unitCreateIgnorePlacement, 0, lv__currentPoint);
+        UnitSetState(UnitLastCreated(), c_unitStateStoppable, true);
+        UnitSetState(UnitLastCreated(), c_unitStateInvulnerable, true);
+        UnitSetScale(UnitLastCreated(), libAFDD5302_gv_get_size, libAFDD5302_gv_get_size, libAFDD5302_gv_get_size);
+        libAFDD5302_gv_get_Tower[1] = UnitLastCreated();
+        libAFDD5302_gv_get_TowerRegions[1] = RegionEmpty();
+        libAFDD5302_gv_get_TowerRegions[1] = RegionCircle(lv__currentPoint, libAFDD5302_gv_get_RadiusOf_TowerRegions);
+        MinimapPing(PlayerGroupAll(), UnitGetPosition(libAFDD5302_gv_get_Tower[1]), 5.0, Color(100.00, 0.00, 0.00));
+        if (((libAFDD5302_gv_get_TypeOf_Towers == 1) || (libAFDD5302_gv_get_TypeOf_Towers == 3))) {
+            libNtve_gf_CreateUnitsAtPoint2(1, "NovaPack03SearchNode2", c_unitCreateIgnorePlacement, 0, lv__currentPoint);
+            UnitSetState(UnitLastCreated(), c_unitStateStoppable, true);
+            UnitSetState(UnitLastCreated(), c_unitStateInvulnerable, true);
+            UnitBehaviorAdd(UnitLastCreated(), libAFDD5302_gf_getRight_Behaviour(), UnitLastCreated(), 1);
+            libAFDD5302_gv_get_Search_Node[1] = UnitLastCreated();
+        }
+
+    }
+    else {
+        auto586C8A26_ae = libAFDD5302_gv_get_NumberOf_Towers;
+        lv__count = 1;
+        for ( ; ( (auto586C8A26_ai >= 0 && lv__count <= auto586C8A26_ae) || (auto586C8A26_ai < 0 && lv__count >= auto586C8A26_ae) ) ; lv__count += auto586C8A26_ai ) {
+            lv__currentPoint = libAFDD5302_gf_getRight_PointOf_TowerFor_23(lv__count);
+            libNtve_gf_CreateUnitsAtPoint2(1, lv__TypeOf_Towers[lv__count], c_unitCreateIgnorePlacement, 0, lv__currentPoint);
+            UnitSetState(UnitLastCreated(), c_unitStateStoppable, true);
+            UnitSetState(UnitLastCreated(), c_unitStateInvulnerable, true);
+            UnitSetScale(UnitLastCreated(), libAFDD5302_gv_get_size, libAFDD5302_gv_get_size, libAFDD5302_gv_get_size);
+            libAFDD5302_gv_get_Tower[lv__count] = UnitLastCreated();
+            libAFDD5302_gv_get_TowerRegions[lv__count] = RegionEmpty();
+            libAFDD5302_gv_get_TowerRegions[lv__count] = RegionCircle(lv__currentPoint, libAFDD5302_gv_get_RadiusOf_TowerRegions);
+            MinimapPing(PlayerGroupAll(), UnitGetPosition(libAFDD5302_gv_get_Tower[lv__count]), 5.0, Color(100.00, 0.00, 0.00));
+            if (((libAFDD5302_gv_get_TypeOf_Towers == 1) || (libAFDD5302_gv_get_TypeOf_Towers == 3))) {
+                libNtve_gf_CreateUnitsAtPoint2(1, "NovaPack03SearchNode2", c_unitCreateIgnorePlacement, 0, lv__currentPoint);
+                UnitSetState(UnitLastCreated(), c_unitStateStoppable, true);
+                UnitSetState(UnitLastCreated(), c_unitStateInvulnerable, true);
+                UnitBehaviorAdd(UnitLastCreated(), libAFDD5302_gf_getRight_Behaviour(), UnitLastCreated(), 1);
+                libAFDD5302_gv_get_Search_Node[lv__count] = UnitLastCreated();
+            }
+
+        }
+    }
+    DialogCreate(300, (90 + (libAFDD5302_gv_get_NumberOf_Teams_InGame * 40)), c_anchorTopRight, 0, 50, true);
+    libAFDD5302_gv_scoreboard = DialogLastCreated();
+    if ((libAFDD5302_gv_get_TypeOf_Score == 0)) {
+        libNtve_gf_CreateDialogItemLabel(DialogLastCreated(), 225, 45, c_anchorTopLeft, 30, 35, (StringExternal("Param/Value/lib_AFDD5302_F9E0E500") + IntToText(libAFDD5302_gv_get_Score[0])), Color(100,100,100), false, 2.0);
+    }
+    else {
+        libNtve_gf_CreateDialogItemLabel(DialogLastCreated(), 225, 45, c_anchorTopLeft, 30, 35, (StringExternal("Param/Value/lib_AFDD5302_BE3B9BE2") + StringExternal("Param/Value/lib_AFDD5302_03B9D1F0")), Color(100,100,100), false, 2.0);
+    }
+    auto420E2C86_ae = libAFDD5302_gv_get_NumberOf_Teams_InGame;
+    lv__count = 1;
+    for ( ; ( (auto420E2C86_ai >= 0 && lv__count <= auto420E2C86_ae) || (auto420E2C86_ai < 0 && lv__count >= auto420E2C86_ae) ) ; lv__count += auto420E2C86_ai ) {
+        libNtve_gf_CreateDialogItemLabel(DialogLastCreated(), 150, 40, c_anchorTopLeft, 35, (30 + (lv__count * 40)), (StringExternal("Param/Value/lib_AFDD5302_17311FC0") + IntToText(lv__count)), Color(100,100,100), false, 2.0);
+        libNtve_gf_CreateDialogItemLabel(DialogLastCreated(), 110, 40, c_anchorTopLeft, 170, (30 + (lv__count * 40)), (StringExternal("Param/Value/lib_AFDD5302_3BFEA2C8") + IntToText(libAFDD5302_gv_get_Score[lv__count])), Color(100,100,100), false, 2.0);
+        libAFDD5302_gv_scoreboardScore[lv__count] = DialogControlLastCreated();
+    }
+    DialogSetVisible(DialogLastCreated(), PlayerGroupAll(), true);
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Param/Value/lib_AFDD5302_125BBC6B"));
+    if ((libAFDD5302_gv_get_TypeOf_Score == 0)) {
+        libAFDD5302_gv_is_Start_positiveScore = true;
+        TriggerStop(libAFDD5302_gt_Periodic_negativeScore);
+    }
+    else {
+        libAFDD5302_gv_is_Start_negativeScore = true;
+        TriggerStop(libAFDD5302_gt_Periodic_positiveScore);
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libAFDD5302_gt_CreateTowerDialog_Init () {
+    libAFDD5302_gt_CreateTowerDialog = TriggerCreate("libAFDD5302_gt_CreateTowerDialog_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Periodic_positiveScore
+//--------------------------------------------------------------------------------------------------
+bool libAFDD5302_gt_Periodic_positiveScore_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__countTower;
+    int lv__countTeam_1;
+    int lv__countTeam_2;
+    int lv__countTeam_3;
+    int[16] lv__ownerTower;
+    int[16][16] lv__TeamHillCount;
+
+    // Automatic Variable Declarations
+    int auto07D13E3D_ae;
+    const int auto07D13E3D_ai = 1;
+    unitgroup autoB8FCD333_g;
+    int autoB8FCD333_u;
+    unit autoB8FCD333_var;
+    int auto9D19E788_ae;
+    const int auto9D19E788_ai = 1;
+    int autoC6723EE3_ae;
+    const int autoC6723EE3_ai = 1;
+    int auto69450E15_ae;
+    const int auto69450E15_ai = 1;
+    int autoEE53F1CF_ae;
+    const int autoEE53F1CF_ai = 1;
+    playergroup auto27401CCA_g;
+    int auto27401CCA_var;
+    int auto9C4B3C0D_ae;
+    const int auto9C4B3C0D_ai = 1;
+    playergroup auto05393295_g;
+    int auto05393295_var;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((libAFDD5302_gv_is_Start_positiveScore == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto07D13E3D_ae = libAFDD5302_gv_get_NumberOf_Towers;
+    lv__countTower = 1;
+    for ( ; ( (auto07D13E3D_ai >= 0 && lv__countTower <= auto07D13E3D_ae) || (auto07D13E3D_ai < 0 && lv__countTower >= auto07D13E3D_ae) ) ; lv__countTower += auto07D13E3D_ai ) {
+        autoB8FCD333_g = UnitGroup(null, c_playerAny, libAFDD5302_gv_get_TowerRegions[lv__countTower], UnitFilter(0, 0, (1 << c_targetFilterNeutral) | (1 << c_targetFilterStructure) | (1 << c_targetFilterRawResource) | (1 << c_targetFilterHarvestableResource) | (1 << c_targetFilterMissile) | (1 << c_targetFilterUncommandable), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32)) | (1 << (c_targetFilterInvulnerable - 32))), 0);
+        autoB8FCD333_u = UnitGroupCount(autoB8FCD333_g, c_unitCountAll);
+        for (;; autoB8FCD333_u -= 1) {
+            autoB8FCD333_var = UnitGroupUnitFromEnd(autoB8FCD333_g, autoB8FCD333_u);
+            if (autoB8FCD333_var == null) { break; }
+            auto9D19E788_ae = libAFDD5302_gv_get_NumberOf_Teams_InGame;
+            lv__countTeam_1 = 1;
+            for ( ; ( (auto9D19E788_ai >= 0 && lv__countTeam_1 <= auto9D19E788_ae) || (auto9D19E788_ai < 0 && lv__countTeam_1 >= auto9D19E788_ae) ) ; lv__countTeam_1 += auto9D19E788_ai ) {
+                if ((PlayerGroupHasPlayer(libAFDD5302_gv_get_Teams[lv__countTeam_1], UnitGetOwner(autoB8FCD333_var)) == true)) {
+                    lv__TeamHillCount[lv__countTower][lv__countTeam_1] += 1;
+                }
+
+            }
+        }
+        autoC6723EE3_ae = libAFDD5302_gv_get_NumberOf_Teams_InGame;
+        lv__countTeam_1 = 1;
+        for ( ; ( (autoC6723EE3_ai >= 0 && lv__countTeam_1 <= autoC6723EE3_ae) || (autoC6723EE3_ai < 0 && lv__countTeam_1 >= autoC6723EE3_ae) ) ; lv__countTeam_1 += autoC6723EE3_ai ) {
+            auto69450E15_ae = libAFDD5302_gv_get_NumberOf_Teams_InGame;
+            lv__countTeam_2 = 1;
+            for ( ; ( (auto69450E15_ai >= 0 && lv__countTeam_2 <= auto69450E15_ae) || (auto69450E15_ai < 0 && lv__countTeam_2 >= auto69450E15_ae) ) ; lv__countTeam_2 += auto69450E15_ai ) {
+                if ((lv__TeamHillCount[lv__countTower][lv__countTeam_1] >= lv__TeamHillCount[lv__countTower][lv__countTeam_2]) && (lv__TeamHillCount[lv__countTower][lv__countTeam_1] >= 1)) {
+                    lv__ownerTower[lv__countTower] = lv__countTeam_1;
+                }
+
+            }
+        }
+        if ((lv__ownerTower[lv__countTower] != 0)) {
+            libAFDD5302_gv_get_Score[lv__ownerTower[lv__countTower]] += 1;
+            libNtve_gf_SetDialogItemText(libAFDD5302_gv_scoreboardScore[lv__ownerTower[lv__countTower]], (StringExternal("Param/Value/lib_AFDD5302_39336B4B") + IntToText(libAFDD5302_gv_get_Score[lv__ownerTower[lv__countTower]])), PlayerGroupAll());
+        }
+
+    }
+    autoEE53F1CF_ae = libAFDD5302_gv_get_NumberOf_Teams_InGame;
+    lv__countTeam_3 = 1;
+    for ( ; ( (autoEE53F1CF_ai >= 0 && lv__countTeam_3 <= autoEE53F1CF_ae) || (autoEE53F1CF_ai < 0 && lv__countTeam_3 >= autoEE53F1CF_ae) ) ; lv__countTeam_3 += autoEE53F1CF_ai ) {
+        if ((libAFDD5302_gv_get_Score[lv__countTeam_3] >= libAFDD5302_gv_get_Score[0])) {
+            auto27401CCA_g = libAFDD5302_gv_get_Teams[lv__countTeam_3];
+            auto27401CCA_var = -1;
+            while (true) {
+                auto27401CCA_var = PlayerGroupNextPlayer(auto27401CCA_g, auto27401CCA_var);
+                if (auto27401CCA_var < 0) { break; }
+                GameOver(auto27401CCA_var, c_gameOverVictory, true, true);
+            }
+            auto9C4B3C0D_ae = libAFDD5302_gv_get_NumberOf_Teams_InGame;
+            lv__countTeam_1 = 1;
+            for ( ; ( (auto9C4B3C0D_ai >= 0 && lv__countTeam_1 <= auto9C4B3C0D_ae) || (auto9C4B3C0D_ai < 0 && lv__countTeam_1 >= auto9C4B3C0D_ae) ) ; lv__countTeam_1 += auto9C4B3C0D_ai ) {
+                auto05393295_g = libAFDD5302_gv_get_Teams[lv__countTeam_1];
+                auto05393295_var = -1;
+                while (true) {
+                    auto05393295_var = PlayerGroupNextPlayer(auto05393295_g, auto05393295_var);
+                    if (auto05393295_var < 0) { break; }
+                    if ((lv__countTeam_3 != lv__countTeam_1)) {
+                        GameOver(auto05393295_var, c_gameOverDefeat, true, true);
+                    }
+
+                }
+            }
+            TriggerStop(TriggerGetCurrent());
+        }
+
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libAFDD5302_gt_Periodic_positiveScore_Init () {
+    libAFDD5302_gt_Periodic_positiveScore = TriggerCreate("libAFDD5302_gt_Periodic_positiveScore_Func");
+    TriggerAddEventTimePeriodic(libAFDD5302_gt_Periodic_positiveScore, 1.0, c_timeReal);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Periodic_negativeScore
+//--------------------------------------------------------------------------------------------------
+bool libAFDD5302_gt_Periodic_negativeScore_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__countTower;
+    int lv__countTeam_1;
+    int lv__countTeam_2;
+    int lv__countTeam_3;
+    int[16] lv__ownerTower;
+    int[16][16] lv__TeamHillCount;
+
+    // Automatic Variable Declarations
+    int auto30CA91C1_ae;
+    const int auto30CA91C1_ai = 1;
+    unitgroup auto60ACA9CE_g;
+    int auto60ACA9CE_u;
+    unit auto60ACA9CE_var;
+    int auto538E3221_ae;
+    const int auto538E3221_ai = 1;
+    int autoB3EB3F5E_ae;
+    const int autoB3EB3F5E_ai = 1;
+    int auto304DDFC5_ae;
+    const int auto304DDFC5_ai = 1;
+    int auto6C9D8A70_ae;
+    const int auto6C9D8A70_ai = 1;
+    playergroup auto2B40CC6C_g;
+    int auto2B40CC6C_var;
+    int autoD067816D_ae;
+    const int autoD067816D_ai = 1;
+    playergroup autoF2ED89B0_g;
+    int autoF2ED89B0_var;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((libAFDD5302_gv_is_Start_negativeScore == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto30CA91C1_ae = libAFDD5302_gv_get_NumberOf_Towers;
+    lv__countTower = 1;
+    for ( ; ( (auto30CA91C1_ai >= 0 && lv__countTower <= auto30CA91C1_ae) || (auto30CA91C1_ai < 0 && lv__countTower >= auto30CA91C1_ae) ) ; lv__countTower += auto30CA91C1_ai ) {
+        auto60ACA9CE_g = UnitGroup(null, c_playerAny, libAFDD5302_gv_get_TowerRegions[lv__countTower], UnitFilter(0, 0, (1 << c_targetFilterNeutral) | (1 << c_targetFilterStructure) | (1 << c_targetFilterRawResource) | (1 << c_targetFilterHarvestableResource) | (1 << c_targetFilterMissile) | (1 << c_targetFilterUncommandable), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32)) | (1 << (c_targetFilterInvulnerable - 32))), 0);
+        auto60ACA9CE_u = UnitGroupCount(auto60ACA9CE_g, c_unitCountAll);
+        for (;; auto60ACA9CE_u -= 1) {
+            auto60ACA9CE_var = UnitGroupUnitFromEnd(auto60ACA9CE_g, auto60ACA9CE_u);
+            if (auto60ACA9CE_var == null) { break; }
+            auto538E3221_ae = libAFDD5302_gv_get_NumberOf_Teams_InGame;
+            lv__countTeam_1 = 1;
+            for ( ; ( (auto538E3221_ai >= 0 && lv__countTeam_1 <= auto538E3221_ae) || (auto538E3221_ai < 0 && lv__countTeam_1 >= auto538E3221_ae) ) ; lv__countTeam_1 += auto538E3221_ai ) {
+                if ((PlayerGroupHasPlayer(libAFDD5302_gv_get_Teams[lv__countTeam_1], UnitGetOwner(auto60ACA9CE_var)) == true)) {
+                    lv__TeamHillCount[lv__countTower][lv__countTeam_1] += 1;
+                }
+
+            }
+        }
+        autoB3EB3F5E_ae = libAFDD5302_gv_get_NumberOf_Teams_InGame;
+        lv__countTeam_1 = 1;
+        for ( ; ( (autoB3EB3F5E_ai >= 0 && lv__countTeam_1 <= autoB3EB3F5E_ae) || (autoB3EB3F5E_ai < 0 && lv__countTeam_1 >= autoB3EB3F5E_ae) ) ; lv__countTeam_1 += autoB3EB3F5E_ai ) {
+            auto304DDFC5_ae = libAFDD5302_gv_get_NumberOf_Teams_InGame;
+            lv__countTeam_2 = 1;
+            for ( ; ( (auto304DDFC5_ai >= 0 && lv__countTeam_2 <= auto304DDFC5_ae) || (auto304DDFC5_ai < 0 && lv__countTeam_2 >= auto304DDFC5_ae) ) ; lv__countTeam_2 += auto304DDFC5_ai ) {
+                if ((lv__TeamHillCount[lv__countTower][lv__countTeam_1] >= lv__TeamHillCount[lv__countTower][lv__countTeam_2]) && (lv__TeamHillCount[lv__countTower][lv__countTeam_1] >= 1)) {
+                    lv__ownerTower[lv__countTower] = lv__countTeam_1;
+                }
+
+            }
+        }
+        if ((lv__ownerTower[lv__countTower] != 0)) {
+            libAFDD5302_gv_get_Score[lv__ownerTower[lv__countTower]] -= 1;
+            libNtve_gf_SetDialogItemText(libAFDD5302_gv_scoreboardScore[lv__ownerTower[lv__countTower]], (StringExternal("Param/Value/lib_AFDD5302_284EC67F") + IntToText(libAFDD5302_gv_get_Score[lv__ownerTower[lv__countTower]])), PlayerGroupAll());
+        }
+
+    }
+    auto6C9D8A70_ae = libAFDD5302_gv_get_NumberOf_Teams_InGame;
+    lv__countTeam_3 = 1;
+    for ( ; ( (auto6C9D8A70_ai >= 0 && lv__countTeam_3 <= auto6C9D8A70_ae) || (auto6C9D8A70_ai < 0 && lv__countTeam_3 >= auto6C9D8A70_ae) ) ; lv__countTeam_3 += auto6C9D8A70_ai ) {
+        if ((libAFDD5302_gv_get_Score[lv__countTeam_3] <= libAFDD5302_gv_get_Score[0])) {
+            auto2B40CC6C_g = libAFDD5302_gv_get_Teams[lv__countTeam_3];
+            auto2B40CC6C_var = -1;
+            while (true) {
+                auto2B40CC6C_var = PlayerGroupNextPlayer(auto2B40CC6C_g, auto2B40CC6C_var);
+                if (auto2B40CC6C_var < 0) { break; }
+                GameOver(auto2B40CC6C_var, c_gameOverVictory, true, true);
+            }
+            autoD067816D_ae = libAFDD5302_gv_get_NumberOf_Teams_InGame;
+            lv__countTeam_1 = 1;
+            for ( ; ( (autoD067816D_ai >= 0 && lv__countTeam_1 <= autoD067816D_ae) || (autoD067816D_ai < 0 && lv__countTeam_1 >= autoD067816D_ae) ) ; lv__countTeam_1 += autoD067816D_ai ) {
+                autoF2ED89B0_g = libAFDD5302_gv_get_Teams[lv__countTeam_1];
+                autoF2ED89B0_var = -1;
+                while (true) {
+                    autoF2ED89B0_var = PlayerGroupNextPlayer(autoF2ED89B0_g, autoF2ED89B0_var);
+                    if (autoF2ED89B0_var < 0) { break; }
+                    if ((lv__countTeam_3 != lv__countTeam_1)) {
+                        GameOver(autoF2ED89B0_var, c_gameOverDefeat, true, true);
+                    }
+
+                }
+            }
+            TriggerStop(TriggerGetCurrent());
+        }
+
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libAFDD5302_gt_Periodic_negativeScore_Init () {
+    libAFDD5302_gt_Periodic_negativeScore = TriggerCreate("libAFDD5302_gt_Periodic_negativeScore_Func");
+    TriggerAddEventTimePeriodic(libAFDD5302_gt_Periodic_negativeScore, 1.0, c_timeReal);
+}
+
+void libAFDD5302_InitTriggers () {
+    libAFDD5302_gt_Launch_Init();
+    libAFDD5302_gt_CreateTowerDialog_Init();
+    libAFDD5302_gt_Periodic_positiveScore_Init();
+    libAFDD5302_gt_Periodic_negativeScore_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool libAFDD5302_InitLib_completed = false;
+
+void libAFDD5302_InitLib () {
+    if (libAFDD5302_InitLib_completed) {
+        return;
+    }
+
+    libAFDD5302_InitLib_completed = true;
+
+    libAFDD5302_InitLibraries();
+    libAFDD5302_InitVariables();
+    libAFDD5302_InitTriggers();
+}
+

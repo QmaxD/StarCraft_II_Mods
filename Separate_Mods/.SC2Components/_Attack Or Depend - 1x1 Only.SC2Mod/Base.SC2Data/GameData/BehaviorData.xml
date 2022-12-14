@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CBehaviorBuff id="CantAttackBattlBehavior">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification WeaponMinRange="500">
+            <DamageDealtMaximum index="Spell" value="0"/>
+            <DamageDealtMaximum index="Melee" value="0"/>
+            <DamageDealtMaximum index="Ranged" value="0"/>
+            <DamageDealtMaximum index="Splash" value="0"/>
+            <DamageDealtMaximum index="NoProc" value="0"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="CantAttackBehavior1">
+        <InfoIcon value="Assets\Textures\command_attack_ac.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <WeaponDisableArray value="ParticleBeam"/>
+            <WeaponDisableArray value="PsiBlades"/>
+            <WeaponDisableArray value="Adept"/>
+            <WeaponDisableArray value="DisruptionBeam"/>
+            <WeaponDisableArray value="ParticleDisruptors"/>
+            <WeaponDisableArray value="WarpBlades"/>
+            <WeaponDisableArray value="HighTemplarWeapon"/>
+            <WeaponDisableArray value="PsionicShockwave"/>
+            <WeaponDisableArray value="PhaseDisruptors"/>
+            <WeaponDisableArray value="PhaseDisruptersAir"/>
+            <WeaponDisableArray value="ThermalBeam"/>
+            <WeaponDisableArray value="ThermalLances"/>
+            <WeaponDisableArray value="ThermalLanceAir"/>
+            <WeaponDisableArray value="IonCannons"/>
+            <WeaponDisableArray value="PrismaticBeam"/>
+            <WeaponDisableArray value="VoidRaySwarmDummy"/>
+            <WeaponDisableArray value="VoidRaySwarmEnhanced"/>
+            <WeaponDisableArray value="VoidRaySwarm"/>
+            <WeaponDisableArray value="RipField"/>
+            <WeaponDisableArray value="Oracle"/>
+            <WeaponDisableArray value="InterceptorLaunch"/>
+            <WeaponDisableArray value="InterceptorBeam"/>
+            <WeaponDisableArray value="InterceptorsDummy"/>
+            <WeaponDisableArray value="Tempest"/>
+            <WeaponDisableArray value="TempestGround"/>
+            <WeaponDisableArray value="RepulsorCannon"/>
+            <WeaponDisableArray value="MothershipBeam"/>
+            <WeaponDisableArray value="PhotonCannon"/>
+            <WeaponDisableArray value="FusionCutter"/>
+            <WeaponDisableArray value="GuassRifle"/>
+            <WeaponDisableArray value="P38ScytheGuassPistol"/>
+            <WeaponDisableArray value="PunisherGrenades"/>
+            <WeaponDisableArray value="C10CanisterRifle"/>
+            <WeaponDisableArray value="InfernalFlameThrower"/>
+            <WeaponDisableArray value="HellionTank"/>
+            <WeaponDisableArray value="90mmCannons"/>
+            <WeaponDisableArray value="90mmCannonsFake"/>
+            <WeaponDisableArray value="CrucioShockCannon"/>
+            <WeaponDisableArray value="CycloneFakeWeapon"/>
+            <WeaponDisableArray value="CycloneLockOnDummy"/>
+            <WeaponDisableArray value="TyphoonMissilePod"/>
+            <WeaponDisableArray value="CycloneMissiles"/>
+            <WeaponDisableArray value="LanceMissileLaunchers"/>
+            <WeaponDisableArray value="JavelinMissileLaunchers"/>
+            <WeaponDisableArray value="ThorsHammer"/>
+            <WeaponDisableArray value="LanzerTorpedoes"/>
+            <WeaponDisableArray value="TwinGatlingCannon"/>
+            <WeaponDisableArray value="LiberatorAGWeapon"/>
+            <WeaponDisableArray value="LiberatorMissileLaunchers"/>
+            <WeaponDisableArray value="ATSLaserBattery"/>
+            <WeaponDisableArray value="ATALaserBattery"/>
+            <WeaponDisableArray value="BattlecruiserWeaponSwitch"/>
+            <WeaponDisableArray value="BacklashRockets"/>
+            <WeaponDisableArray value="TwinIbiksCannon"/>
+            <WeaponDisableArray value="LongboltMissile"/>
+            <WeaponDisableArray value="AutoTurret"/>
+            <WeaponDisableArray value="Spines"/>
+            <WeaponDisableArray value="Claws"/>
+            <WeaponDisableArray value="VolatileBurst"/>
+            <WeaponDisableArray value="VolatileBurstBuilding"/>
+            <WeaponDisableArray value="VolatileBurstDummy"/>
+            <WeaponDisableArray value="AcidSaliva"/>
+            <WeaponDisableArray value="RoachMelee"/>
+            <WeaponDisableArray value="RavagerWeapon"/>
+            <WeaponDisableArray value="HydraliskMelee"/>
+            <WeaponDisableArray value="NeedleSpines"/>
+            <WeaponDisableArray value="LurkerMP"/>
+            <WeaponDisableArray value="GlaiveWurm"/>
+            <WeaponDisableArray value="ParasiteSpore"/>
+            <WeaponDisableArray value="LocustMPMelee"/>
+            <WeaponDisableArray value="LocustMP"/>
+            <WeaponDisableArray value="LocustMPFlyingSwoopWeapon"/>
+            <WeaponDisableArray value="Ram"/>
+            <WeaponDisableArray value="KaiserBlades"/>
+            <WeaponDisableArray value="BroodlingStrike"/>
+            <WeaponDisableArray value="BroodlingEscort"/>
+            <WeaponDisableArray value="NeedleClaws"/>
+            <WeaponDisableArray value="AcidSpines"/>
+            <WeaponDisableArray value="Talons"/>
+            <WeaponDisableArray value="TalonsDummy"/>
+            <WeaponDisableArray value="TalonsMissile"/>
+            <WeaponDisableArray value="InfestedAcidSpines"/>
+            <WeaponDisableArray value="InfestedGuassRifle"/>
+            <WeaponDisableArray value="InfestedSwarmClaws"/>
+            <WeaponDisableArray value="ImpalerTentacle"/>
+            <WeaponDisableArray value="AcidSpew"/>
+            <TurretDisableArray value="Battlecruiser"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DefendRegion80">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/SensorTowerRadar"/>
+            <Cooldown Link="Behavior/SensorTowerRadar"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-status-radar.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Structures"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Modification RadarFilters="-;Player,Ally,Neutral,Enemy,Air,Ground,Structure,Worker,RawResource,HarvestableResource,Missile,Destructible,Buried,Cloaked"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SensorTowerRadar"/>
+                <Cooldown Link="Behavior/SensorTowerRadar"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DefendRegion90">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/SensorTowerRadar"/>
+            <Cooldown Link="Behavior/SensorTowerRadar"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-status-radar.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Structures"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Modification RadarFilters="-;Player,Ally,Neutral,Enemy,Air,Ground,Structure,Worker,RawResource,HarvestableResource,Missile,Destructible,Buried,Cloaked"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SensorTowerRadar"/>
+                <Cooldown Link="Behavior/SensorTowerRadar"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DefendRegion100">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/SensorTowerRadar"/>
+            <Cooldown Link="Behavior/SensorTowerRadar"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-status-radar.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Structures"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Modification RadarFilters="-;Player,Ally,Neutral,Enemy,Air,Ground,Structure,Worker,RawResource,HarvestableResource,Missile,Destructible,Buried,Cloaked"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SensorTowerRadar"/>
+                <Cooldown Link="Behavior/SensorTowerRadar"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="ImmuneToDamage">
+        <InfoFlags index="Hidden" value="1"/>
+        <DamageResponse Chance="1" ModifyFraction="0"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DefendRegion20">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/SensorTowerRadar"/>
+            <Cooldown Link="Behavior/SensorTowerRadar"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-status-radar.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Structures"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Modification RadarFilters="-;Player,Ally,Neutral,Enemy,Air,Ground,Structure,Worker,RawResource,HarvestableResource,Missile,Destructible,Buried,Cloaked"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SensorTowerRadar"/>
+                <Cooldown Link="Behavior/SensorTowerRadar"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DefendRegion25">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/SensorTowerRadar"/>
+            <Cooldown Link="Behavior/SensorTowerRadar"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-status-radar.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Structures"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Modification RadarFilters="-;Player,Ally,Neutral,Enemy,Air,Ground,Structure,Worker,RawResource,HarvestableResource,Missile,Destructible,Buried,Cloaked"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SensorTowerRadar"/>
+                <Cooldown Link="Behavior/SensorTowerRadar"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DefendRegion30">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/SensorTowerRadar"/>
+            <Cooldown Link="Behavior/SensorTowerRadar"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-status-radar.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Structures"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Modification RadarFilters="-;Player,Ally,Neutral,Enemy,Air,Ground,Structure,Worker,RawResource,HarvestableResource,Missile,Destructible,Buried,Cloaked"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SensorTowerRadar"/>
+                <Cooldown Link="Behavior/SensorTowerRadar"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DefendRegion35">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/SensorTowerRadar"/>
+            <Cooldown Link="Behavior/SensorTowerRadar"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-status-radar.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Structures"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Modification RadarFilters="-;Player,Ally,Neutral,Enemy,Air,Ground,Structure,Worker,RawResource,HarvestableResource,Missile,Destructible,Buried,Cloaked"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SensorTowerRadar"/>
+                <Cooldown Link="Behavior/SensorTowerRadar"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DefendRegion40">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/SensorTowerRadar"/>
+            <Cooldown Link="Behavior/SensorTowerRadar"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-status-radar.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Structures"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Modification RadarFilters="-;Player,Ally,Neutral,Enemy,Air,Ground,Structure,Worker,RawResource,HarvestableResource,Missile,Destructible,Buried,Cloaked"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SensorTowerRadar"/>
+                <Cooldown Link="Behavior/SensorTowerRadar"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DefendRegion45">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/SensorTowerRadar"/>
+            <Cooldown Link="Behavior/SensorTowerRadar"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-status-radar.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Structures"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Modification RadarFilters="-;Player,Ally,Neutral,Enemy,Air,Ground,Structure,Worker,RawResource,HarvestableResource,Missile,Destructible,Buried,Cloaked"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SensorTowerRadar"/>
+                <Cooldown Link="Behavior/SensorTowerRadar"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DefendRegion50">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/SensorTowerRadar"/>
+            <Cooldown Link="Behavior/SensorTowerRadar"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-status-radar.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Structures"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Modification RadarFilters="-;Player,Ally,Neutral,Enemy,Air,Ground,Structure,Worker,RawResource,HarvestableResource,Missile,Destructible,Buried,Cloaked"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SensorTowerRadar"/>
+                <Cooldown Link="Behavior/SensorTowerRadar"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DefendRegion60">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/SensorTowerRadar"/>
+            <Cooldown Link="Behavior/SensorTowerRadar"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-status-radar.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Structures"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Modification RadarFilters="-;Player,Ally,Neutral,Enemy,Air,Ground,Structure,Worker,RawResource,HarvestableResource,Missile,Destructible,Buried,Cloaked"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SensorTowerRadar"/>
+                <Cooldown Link="Behavior/SensorTowerRadar"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="DefendRegion70">
+        <Alignment value="Positive"/>
+        <Cost>
+            <Charge Link="Behavior/SensorTowerRadar"/>
+            <Cooldown Link="Behavior/SensorTowerRadar"/>
+        </Cost>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-status-radar.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Structures"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Modification RadarFilters="-;Player,Ally,Neutral,Enemy,Air,Ground,Structure,Worker,RawResource,HarvestableResource,Missile,Destructible,Buried,Cloaked"/>
+        <DamageResponse>
+            <Cost>
+                <Charge Link="Behavior/SensorTowerRadar"/>
+                <Cooldown Link="Behavior/SensorTowerRadar"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+</Catalog>

@@ -1,0 +1,45 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// Variable Declarations
+int libDAD24547_gv_timerWindow;
+bool libDAD24547_gv_lightBlackWhite1;
+bool libDAD24547_gv_lightBlackWhite2;
+timer libDAD24547_gv_lightTimerDay;
+timer libDAD24547_gv_lightTimerNight;
+bool libDAD24547_gv_lightDayNightv1;
+int libDAD24547_gv_timesofDay;
+bool libDAD24547_gv_lightDayNightv2;
+bool libDAD24547_gv_lightDayNightv3;
+bool libDAD24547_gv_lightDayNightv4;
+timer libDAD24547_gv_timerLSD;
+bool libDAD24547_gv_lSDColoring;
+bool libDAD24547_gv_changeLSDColoring1;
+bool libDAD24547_gv_changeLSDColoring2;
+int libDAD24547_gv_lSDColoringNow;
+
+// Trigger Declarations
+trigger libDAD24547_gt_AttributeLight;
+trigger libDAD24547_gt_TriggerBlackWhitev1;
+trigger libDAD24547_gt_TriggerBlackWhitev2;
+trigger libDAD24547_gt_v1_StartCycle;
+trigger libDAD24547_gt_v1_TriggerCycle;
+trigger libDAD24547_gt_v2_TriggerCycleofSunrise;
+trigger libDAD24547_gt_v2_TriggerCycleofDay;
+trigger libDAD24547_gt_v2_StartCycle;
+trigger libDAD24547_gt_v2_TriggerCycleofEvening;
+trigger libDAD24547_gt_v2_TriggerCycleofNight;
+trigger libDAD24547_gt_v3_TriggerCycleofSunrise;
+trigger libDAD24547_gt_v3_TriggerCycleofDay;
+trigger libDAD24547_gt_v3_StartCycle;
+trigger libDAD24547_gt_v3_TriggerCycleofEvening;
+trigger libDAD24547_gt_v3_TriggerCycleofNight;
+trigger libDAD24547_gt_v4_StartCycle;
+trigger libDAD24547_gt_LSDStartCycle;
+trigger libDAD24547_gt_LSDAllLight;
+
+// Library Initialization
+void libDAD24547_InitVariables ();
+

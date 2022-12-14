@@ -1,0 +1,785 @@
+include "TriggerLibs/NativeLib"
+
+include "LibDAD24547_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void libDAD24547_InitLibraries () {
+    libNtve_InitVariables();
+}
+
+// Variable Initialization
+bool libDAD24547_InitVariables_completed = false;
+
+void libDAD24547_InitVariables () {
+    if (libDAD24547_InitVariables_completed) {
+        return;
+    }
+
+    libDAD24547_InitVariables_completed = true;
+
+    libDAD24547_gv_timerWindow = c_timerWindowNone;
+    libDAD24547_gv_lightTimerDay = TimerCreate();
+    libDAD24547_gv_lightTimerNight = TimerCreate();
+    libDAD24547_gv_timerLSD = TimerCreate();
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: Attribute Light
+//--------------------------------------------------------------------------------------------------
+bool libDAD24547_gt_AttributeLight_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    string auto05535325_val;
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((GameAttributeGameValue("1") == "0004")) {
+        libDAD24547_gv_lightBlackWhite1 = true;
+        TriggerExecute(libDAD24547_gt_TriggerBlackWhitev1, true, false);
+    }
+    else {
+        if ((GameAttributeGameValue("1") == "0005")) {
+            libDAD24547_gv_lightBlackWhite2 = true;
+            TriggerExecute(libDAD24547_gt_TriggerBlackWhitev2, true, false);
+        }
+
+    }
+    if ((GameAttributeGameValue("1") == "0001")) {
+        libDAD24547_gv_lightDayNightv1 = true;
+        TriggerExecute(libDAD24547_gt_v1_StartCycle, true, false);
+    }
+    else {
+        if ((GameAttributeGameValue("1") == "0008")) {
+            libDAD24547_gv_lightDayNightv2 = true;
+            TriggerExecute(libDAD24547_gt_v2_StartCycle, true, false);
+        }
+        else {
+            if ((GameAttributeGameValue("1") == "0006")) {
+                libDAD24547_gv_lightDayNightv3 = true;
+                TriggerExecute(libDAD24547_gt_v3_StartCycle, true, false);
+            }
+            else {
+                if ((GameAttributeGameValue("1") == "0007")) {
+                    libDAD24547_gv_lightDayNightv4 = true;
+                    TriggerExecute(libDAD24547_gt_v4_StartCycle, true, false);
+                }
+                else {
+                    if ((GameAttributeGameValue("1") == "0009")) {
+                        GameSetLighting("MyLight_DarkNight", 0.0);
+                    }
+
+                }
+            }
+        }
+    }
+    if ((GameAttributeGameValue("1") == "0003")) {
+        libDAD24547_gv_lSDColoring = true;
+        if ((GameAttributeGameValue("2") == "0001")) {
+            libDAD24547_gv_changeLSDColoring1 = true;
+            TriggerExecute(libDAD24547_gt_LSDStartCycle, true, false);
+        }
+        else {
+            if ((GameAttributeGameValue("2") == "0013")) {
+                libDAD24547_gv_changeLSDColoring2 = true;
+                TriggerExecute(libDAD24547_gt_LSDStartCycle, true, false);
+            }
+            else {
+                auto05535325_val = GameAttributeGameValue("2");
+                if (auto05535325_val == "0002") {
+                    libDAD24547_gv_lSDColoringNow = 0;
+                }
+                else if (auto05535325_val == "0003") {
+                    libDAD24547_gv_lSDColoringNow = 1;
+                }
+                else if (auto05535325_val == "0004") {
+                    libDAD24547_gv_lSDColoringNow = 2;
+                }
+                else if (auto05535325_val == "0005") {
+                    libDAD24547_gv_lSDColoringNow = 3;
+                }
+                else if (auto05535325_val == "0006") {
+                    libDAD24547_gv_lSDColoringNow = 4;
+                }
+                else if (auto05535325_val == "0007") {
+                    libDAD24547_gv_lSDColoringNow = 5;
+                }
+                else if (auto05535325_val == "0008") {
+                    libDAD24547_gv_lSDColoringNow = 6;
+                }
+                else if (auto05535325_val == "0009") {
+                    libDAD24547_gv_lSDColoringNow = 7;
+                }
+                else if (auto05535325_val == "0010") {
+                    libDAD24547_gv_lSDColoringNow = 8;
+                }
+                else if (auto05535325_val == "0011") {
+                    libDAD24547_gv_lSDColoringNow = 9;
+                }
+                else if (auto05535325_val == "0012") {
+                    libDAD24547_gv_lSDColoringNow = 10;
+                }
+                else {
+                }
+                TriggerExecute(libDAD24547_gt_LSDAllLight, true, false);
+            }
+        }
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDAD24547_gt_AttributeLight_Init () {
+    libDAD24547_gt_AttributeLight = TriggerCreate("libDAD24547_gt_AttributeLight_Func");
+    TriggerAddEventMapInit(libDAD24547_gt_AttributeLight);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Trigger Black/White v.1
+//--------------------------------------------------------------------------------------------------
+bool libDAD24547_gt_TriggerBlackWhitev1_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libDAD24547_gv_lightBlackWhite1 == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    GameSetLighting("BlackWhite", 0.0);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDAD24547_gt_TriggerBlackWhitev1_Init () {
+    libDAD24547_gt_TriggerBlackWhitev1 = TriggerCreate("libDAD24547_gt_TriggerBlackWhitev1_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: Trigger Black/White v.2
+//--------------------------------------------------------------------------------------------------
+bool libDAD24547_gt_TriggerBlackWhitev2_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libDAD24547_gv_lightBlackWhite2 == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    GameSetLighting("BlackWhite2", 0.0);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDAD24547_gt_TriggerBlackWhitev2_Init () {
+    libDAD24547_gt_TriggerBlackWhitev2 = TriggerCreate("libDAD24547_gt_TriggerBlackWhitev2_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: v.1_Start Cycle
+//--------------------------------------------------------------------------------------------------
+bool libDAD24547_gt_v1_StartCycle_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libDAD24547_gv_lightDayNightv1 == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    GameSetLighting("MarSaraCampaignDay1", 0.0);
+    TriggerExecute(libDAD24547_gt_v1_TriggerCycle, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDAD24547_gt_v1_StartCycle_Init () {
+    libDAD24547_gt_v1_StartCycle = TriggerCreate("libDAD24547_gt_v1_StartCycle_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: v.1_Trigger Cycle
+//--------------------------------------------------------------------------------------------------
+bool libDAD24547_gt_v1_TriggerCycle_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libDAD24547_gv_lightDayNightv1 == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((libDAD24547_gv_timesofDay == 0)) {
+        GameSetLighting("MarSaraCampaignNight2", 60.0);
+        libDAD24547_gv_timesofDay = 1;
+    }
+    else {
+        GameSetLighting("MarSaraCampaignDay1", 60.0);
+        libDAD24547_gv_timesofDay = 0;
+    }
+    Wait(120.0, c_timeReal);
+    TriggerExecute(libDAD24547_gt_v1_TriggerCycle, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDAD24547_gt_v1_TriggerCycle_Init () {
+    libDAD24547_gt_v1_TriggerCycle = TriggerCreate("libDAD24547_gt_v1_TriggerCycle_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: v.2_Trigger Cycle of Sunrise
+//--------------------------------------------------------------------------------------------------
+bool libDAD24547_gt_v2_TriggerCycleofSunrise_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libDAD24547_gv_lightDayNightv2 == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    GameSetLighting("MyLight_01_Sunrise", 45.0);
+    Wait(90.0, c_timeReal);
+    TriggerExecute(libDAD24547_gt_v2_TriggerCycleofDay, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDAD24547_gt_v2_TriggerCycleofSunrise_Init () {
+    libDAD24547_gt_v2_TriggerCycleofSunrise = TriggerCreate("libDAD24547_gt_v2_TriggerCycleofSunrise_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: v.2_Trigger Cycle of Day
+//--------------------------------------------------------------------------------------------------
+bool libDAD24547_gt_v2_TriggerCycleofDay_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libDAD24547_gv_lightDayNightv2 == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    GameSetLighting("MyLight_02_Day", 45.0);
+    Wait(90.0, c_timeReal);
+    TriggerExecute(libDAD24547_gt_v2_TriggerCycleofEvening, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDAD24547_gt_v2_TriggerCycleofDay_Init () {
+    libDAD24547_gt_v2_TriggerCycleofDay = TriggerCreate("libDAD24547_gt_v2_TriggerCycleofDay_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: v.2_Start Cycle
+//--------------------------------------------------------------------------------------------------
+bool libDAD24547_gt_v2_StartCycle_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libDAD24547_gv_lightDayNightv2 == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    GameSetLighting("MyLight_02_Day", 0.0);
+    TriggerExecute(libDAD24547_gt_v2_TriggerCycleofEvening, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDAD24547_gt_v2_StartCycle_Init () {
+    libDAD24547_gt_v2_StartCycle = TriggerCreate("libDAD24547_gt_v2_StartCycle_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: v.2_Trigger Cycle of Evening
+//--------------------------------------------------------------------------------------------------
+bool libDAD24547_gt_v2_TriggerCycleofEvening_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libDAD24547_gv_lightDayNightv2 == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    GameSetLighting("MyLight_03_Evening", 45.0);
+    Wait(90.0, c_timeReal);
+    TriggerExecute(libDAD24547_gt_v2_TriggerCycleofNight, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDAD24547_gt_v2_TriggerCycleofEvening_Init () {
+    libDAD24547_gt_v2_TriggerCycleofEvening = TriggerCreate("libDAD24547_gt_v2_TriggerCycleofEvening_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: v.2_Trigger Cycle of Night
+//--------------------------------------------------------------------------------------------------
+bool libDAD24547_gt_v2_TriggerCycleofNight_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libDAD24547_gv_lightDayNightv2 == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    GameSetLighting("MyLight_04_Night", 45.0);
+    Wait(90.0, c_timeReal);
+    TriggerExecute(libDAD24547_gt_v2_TriggerCycleofSunrise, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDAD24547_gt_v2_TriggerCycleofNight_Init () {
+    libDAD24547_gt_v2_TriggerCycleofNight = TriggerCreate("libDAD24547_gt_v2_TriggerCycleofNight_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: v.3_Trigger Cycle of Sunrise
+//--------------------------------------------------------------------------------------------------
+bool libDAD24547_gt_v3_TriggerCycleofSunrise_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libDAD24547_gv_lightDayNightv3 == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    GameSetLighting("MyLight_01_Sunrise", 60.0);
+    Wait(150.0, c_timeReal);
+    TriggerExecute(libDAD24547_gt_v3_TriggerCycleofDay, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDAD24547_gt_v3_TriggerCycleofSunrise_Init () {
+    libDAD24547_gt_v3_TriggerCycleofSunrise = TriggerCreate("libDAD24547_gt_v3_TriggerCycleofSunrise_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: v.3_Trigger Cycle of Day
+//--------------------------------------------------------------------------------------------------
+bool libDAD24547_gt_v3_TriggerCycleofDay_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libDAD24547_gv_lightDayNightv3 == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    GameSetLighting("MyLight_02_Day", 60.0);
+    Wait(150.0, c_timeReal);
+    TriggerExecute(libDAD24547_gt_v3_TriggerCycleofEvening, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDAD24547_gt_v3_TriggerCycleofDay_Init () {
+    libDAD24547_gt_v3_TriggerCycleofDay = TriggerCreate("libDAD24547_gt_v3_TriggerCycleofDay_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: v.3_Start Cycle
+//--------------------------------------------------------------------------------------------------
+bool libDAD24547_gt_v3_StartCycle_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libDAD24547_gv_lightDayNightv3 == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    GameSetLighting("MyLight_02_Day", 0.0);
+    TriggerExecute(libDAD24547_gt_v3_TriggerCycleofEvening, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDAD24547_gt_v3_StartCycle_Init () {
+    libDAD24547_gt_v3_StartCycle = TriggerCreate("libDAD24547_gt_v3_StartCycle_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: v.3_Trigger Cycle of Evening
+//--------------------------------------------------------------------------------------------------
+bool libDAD24547_gt_v3_TriggerCycleofEvening_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libDAD24547_gv_lightDayNightv3 == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    GameSetLighting("MyLight_03_Evening", 60.0);
+    Wait(150.0, c_timeReal);
+    TriggerExecute(libDAD24547_gt_v3_TriggerCycleofNight, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDAD24547_gt_v3_TriggerCycleofEvening_Init () {
+    libDAD24547_gt_v3_TriggerCycleofEvening = TriggerCreate("libDAD24547_gt_v3_TriggerCycleofEvening_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: v.3_Trigger Cycle of Night
+//--------------------------------------------------------------------------------------------------
+bool libDAD24547_gt_v3_TriggerCycleofNight_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libDAD24547_gv_lightDayNightv3 == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    GameSetLighting("MyLight_04_Night", 60.0);
+    Wait(150.0, c_timeReal);
+    TriggerExecute(libDAD24547_gt_v3_TriggerCycleofSunrise, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDAD24547_gt_v3_TriggerCycleofNight_Init () {
+    libDAD24547_gt_v3_TriggerCycleofNight = TriggerCreate("libDAD24547_gt_v3_TriggerCycleofNight_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: v.4_Start Cycle
+//--------------------------------------------------------------------------------------------------
+bool libDAD24547_gt_v4_StartCycle_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libDAD24547_gv_lightDayNightv4 == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    GameSetLighting("zergtv_00", 0.0);
+    GameSetLighting("zergtv_01", 30.0);
+    Wait(30.0, c_timeReal);
+    GameSetLighting("zergtv_02", 30.0);
+    Wait(30.0, c_timeReal);
+    GameSetLighting("zergtv_03", 30.0);
+    Wait(30.0, c_timeReal);
+    GameSetLighting("zergtv_04", 30.0);
+    Wait(30.0, c_timeReal);
+    GameSetLighting("zergtv_05", 30.0);
+    Wait(30.0, c_timeReal);
+    GameSetLighting("zergtv_06", 30.0);
+    Wait(30.0, c_timeReal);
+    GameSetLighting("zergtv_07", 30.0);
+    Wait(30.0, c_timeReal);
+    GameSetLighting("zergtv_08", 30.0);
+    Wait(30.0, c_timeReal);
+    GameSetLighting("zergtv_09", 30.0);
+    Wait(30.0, c_timeReal);
+    GameSetLighting("zergtv_10", 30.0);
+    Wait(30.0, c_timeReal);
+    GameSetLighting("zergtv_11", 30.0);
+    Wait(30.0, c_timeReal);
+    GameSetLighting("zergtv_12", 30.0);
+    Wait(30.0, c_timeReal);
+    GameSetLighting("zergtv_13", 30.0);
+    Wait(30.0, c_timeReal);
+    GameSetLighting("zergtv_14", 30.0);
+    Wait(30.0, c_timeReal);
+    GameSetLighting("zergtv_15", 30.0);
+    Wait(30.0, c_timeReal);
+    GameSetLighting("zergtv_16", 30.0);
+    Wait(30.0, c_timeReal);
+    GameSetLighting("zergtv_17", 30.0);
+    Wait(30.0, c_timeReal);
+    GameSetLighting("zergtv_18", 30.0);
+    Wait(30.0, c_timeReal);
+    GameSetLighting("zergtv_19", 30.0);
+    Wait(30.0, c_timeReal);
+    GameSetLighting("zergtv_20", 30.0);
+    Wait(30.0, c_timeReal);
+    GameSetLighting("zergtv_21", 30.0);
+    Wait(30.0, c_timeReal);
+    GameSetLighting("zergtv_22", 30.0);
+    Wait(30.0, c_timeReal);
+    GameSetLighting("zergtv_23", 30.0);
+    Wait(30.0, c_timeReal);
+    GameSetLighting("zergtv_00", 30.0);
+    Wait(30.0, c_timeReal);
+    TriggerExecute(libDAD24547_gt_v4_StartCycle, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDAD24547_gt_v4_StartCycle_Init () {
+    libDAD24547_gt_v4_StartCycle = TriggerCreate("libDAD24547_gt_v4_StartCycle_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: LSD Start Cycle
+//--------------------------------------------------------------------------------------------------
+bool libDAD24547_gt_LSDStartCycle_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libDAD24547_gv_lSDColoring == true))) {
+            return false;
+        }
+
+        if (!(((libDAD24547_gv_changeLSDColoring1 == true) || (libDAD24547_gv_changeLSDColoring2 == true)))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    GameSetLighting("lsd_705", 0.0);
+    TriggerExecute(libDAD24547_gt_LSDAllLight, true, false);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDAD24547_gt_LSDStartCycle_Init () {
+    libDAD24547_gt_LSDStartCycle = TriggerCreate("libDAD24547_gt_LSDStartCycle_Func");
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: LSD AllLight
+//--------------------------------------------------------------------------------------------------
+bool libDAD24547_gt_LSDAllLight_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv_lSDNewLighForGame;
+
+    // Automatic Variable Declarations
+    int autoF4516B8A_val;
+
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((libDAD24547_gv_lSDColoring == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    autoF4516B8A_val = libDAD24547_gv_lSDColoringNow;
+    if (autoF4516B8A_val == 0) {
+        lv_lSDNewLighForGame = "lsd_405";
+    }
+    else if (autoF4516B8A_val == 1) {
+        lv_lSDNewLighForGame = "lsd_404";
+    }
+    else if (autoF4516B8A_val == 2) {
+        lv_lSDNewLighForGame = "lsd_403";
+    }
+    else if (autoF4516B8A_val == 3) {
+        lv_lSDNewLighForGame = "lsd_402";
+    }
+    else if (autoF4516B8A_val == 4) {
+        lv_lSDNewLighForGame = "lsd_401";
+    }
+    else if (autoF4516B8A_val == 5) {
+        lv_lSDNewLighForGame = "lsd_000";
+    }
+    else if (autoF4516B8A_val == 6) {
+        lv_lSDNewLighForGame = "lsd_701";
+    }
+    else if (autoF4516B8A_val == 7) {
+        lv_lSDNewLighForGame = "lsd_702";
+    }
+    else if (autoF4516B8A_val == 8) {
+        lv_lSDNewLighForGame = "lsd_703";
+    }
+    else if (autoF4516B8A_val == 9) {
+        lv_lSDNewLighForGame = "lsd_704";
+    }
+    else if (autoF4516B8A_val == 10) {
+        lv_lSDNewLighForGame = "lsd_705";
+    }
+    else {
+    }
+    if ((libDAD24547_gv_changeLSDColoring1 == true)) {
+        GameSetLighting(lv_lSDNewLighForGame, 5.0);
+        TimerStart(libDAD24547_gv_timerLSD, 60.0, false, c_timeReal);
+        libDAD24547_gv_timerLSD = TimerLastStarted();
+        TimerWindowCreate(TimerLastStarted(), StringExternal("Param/Value/lib_DAD24547_2B0E25C0"), true, false);
+        libDAD24547_gv_timerWindow = TimerWindowLastCreated();
+        TimerWindowSetFormat(TimerWindowLastCreated(), StringToText("<sectotal/>"));
+        TimerWindowSetAnchor(TimerWindowLastCreated(), c_anchorBottomRight, 0, 0);
+        Wait(60.0, c_timeReal);
+        TimerWindowDestroy(libDAD24547_gv_timerWindow);
+        libDAD24547_gv_lSDColoringNow = (libDAD24547_gv_lSDColoringNow + 1);
+        if ((libDAD24547_gv_lSDColoringNow >= 11)) {
+            libDAD24547_gv_lSDColoringNow = 0;
+        }
+
+        TriggerExecute(libDAD24547_gt_LSDAllLight, true, false);
+    }
+    else {
+        if ((libDAD24547_gv_changeLSDColoring2 == true)) {
+            GameSetLighting(lv_lSDNewLighForGame, 5.0);
+            TimerStart(libDAD24547_gv_timerLSD, 10.0, false, c_timeReal);
+            libDAD24547_gv_timerLSD = TimerLastStarted();
+            TimerWindowCreate(TimerLastStarted(), StringExternal("Param/Value/lib_DAD24547_7105FC48"), true, false);
+            libDAD24547_gv_timerWindow = TimerWindowLastCreated();
+            TimerWindowSetFormat(TimerWindowLastCreated(), StringToText("<sectotal/>"));
+            TimerWindowSetAnchor(TimerWindowLastCreated(), c_anchorBottomRight, 0, 0);
+            Wait(10.0, c_timeReal);
+            TimerWindowDestroy(libDAD24547_gv_timerWindow);
+            libDAD24547_gv_lSDColoringNow = (libDAD24547_gv_lSDColoringNow + 1);
+            if ((libDAD24547_gv_lSDColoringNow >= 11)) {
+                libDAD24547_gv_lSDColoringNow = 0;
+            }
+
+            TriggerExecute(libDAD24547_gt_LSDAllLight, true, false);
+        }
+        else {
+            GameSetLighting(lv_lSDNewLighForGame, 0.0);
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libDAD24547_gt_LSDAllLight_Init () {
+    libDAD24547_gt_LSDAllLight = TriggerCreate("libDAD24547_gt_LSDAllLight_Func");
+}
+
+void libDAD24547_InitTriggers () {
+    libDAD24547_gt_AttributeLight_Init();
+    libDAD24547_gt_TriggerBlackWhitev1_Init();
+    libDAD24547_gt_TriggerBlackWhitev2_Init();
+    libDAD24547_gt_v1_StartCycle_Init();
+    libDAD24547_gt_v1_TriggerCycle_Init();
+    libDAD24547_gt_v2_TriggerCycleofSunrise_Init();
+    libDAD24547_gt_v2_TriggerCycleofDay_Init();
+    libDAD24547_gt_v2_StartCycle_Init();
+    libDAD24547_gt_v2_TriggerCycleofEvening_Init();
+    libDAD24547_gt_v2_TriggerCycleofNight_Init();
+    libDAD24547_gt_v3_TriggerCycleofSunrise_Init();
+    libDAD24547_gt_v3_TriggerCycleofDay_Init();
+    libDAD24547_gt_v3_StartCycle_Init();
+    libDAD24547_gt_v3_TriggerCycleofEvening_Init();
+    libDAD24547_gt_v3_TriggerCycleofNight_Init();
+    libDAD24547_gt_v4_StartCycle_Init();
+    libDAD24547_gt_LSDStartCycle_Init();
+    libDAD24547_gt_LSDAllLight_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool libDAD24547_InitLib_completed = false;
+
+void libDAD24547_InitLib () {
+    if (libDAD24547_InitLib_completed) {
+        return;
+    }
+
+    libDAD24547_InitLib_completed = true;
+
+    libDAD24547_InitLibraries();
+    libDAD24547_InitVariables();
+    libDAD24547_InitTriggers();
+}
+

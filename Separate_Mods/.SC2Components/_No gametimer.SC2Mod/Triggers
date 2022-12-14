@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TriggerData>
+    <Library Id="2A90F9FE">
+        <Root>
+            <Item Type="Category" Library="2A90F9FE" Id="36ADF3A2"/>
+        </Root>
+        <Element Type="Category" Id="36ADF3A2">
+            <Item Type="Trigger" Library="2A90F9FE" Id="1419FED8"/>
+        </Element>
+        <Element Type="Trigger" Id="1419FED8">
+            <Event Type="FunctionCall" Library="2A90F9FE" Id="2704B70A"/>
+            <Action Type="FunctionCall" Library="2A90F9FE" Id="1EEDD59F"/>
+        </Element>
+        <Element Type="FunctionCall" Id="2704B70A">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000120"/>
+        </Element>
+        <Element Type="FunctionCall" Id="1EEDD59F">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="AE5AF605"/>
+            <Parameter Type="Param" Library="2A90F9FE" Id="355AD650"/>
+            <Parameter Type="Param" Library="2A90F9FE" Id="935DEA19"/>
+            <Parameter Type="Param" Library="2A90F9FE" Id="E586E216"/>
+        </Element>
+        <Element Type="Param" Id="355AD650">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="2F2BFE5E"/>
+            <FunctionCall Type="FunctionCall" Library="2A90F9FE" Id="D2C3A8D0"/>
+        </Element>
+        <Element Type="FunctionCall" Id="D2C3A8D0">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="F463A414"/>
+        </Element>
+        <Element Type="Param" Id="935DEA19">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="0E1B0C62"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="BEA851A0"/>
+        </Element>
+        <Element Type="Param" Id="E586E216">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="898D9753"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000121"/>
+        </Element>
+    </Library>
+</TriggerData>

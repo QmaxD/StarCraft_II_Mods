@@ -1,0 +1,74 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// Variable Declarations
+int lib974E4208_gv_uTBRScoreboard;
+int[16] lib974E4208_gv_uTBRScoreboardScore;
+int lib974E4208_gv_uTBRGet_TimeFor_StartBomb;
+int lib974E4208_gv_uTBRGet_TimeFor_Round;
+int lib974E4208_gv_uTBRGet_TypeOf_Victory;
+bool lib974E4208_gv_uTBRGet_TypeOf_Victory_ByScore_true;
+bool lib974E4208_gv_uTBRGet_TypeOf_Victory_MaxScoreOnTime_true;
+int lib974E4208_gv_uTBRGet_CountOf_Goal_max;
+int lib974E4208_gv_uTBRGet_TimeOf_EndGame;
+bool lib974E4208_gv_uTBRGet_Bomb_IsBadaBoom_true;
+int lib974E4208_gv_uTBRGet_BoomRadius;
+int lib974E4208_gv_uTBRGet_BoomDamage;
+int lib974E4208_gv_uTBRGet_NumberOf_Players_InGame;
+unit[16] lib974E4208_gv_uTBRGet_Search_Node_Copy;
+int lib974E4208_gv_uTBRGet_NumberOf_Teams_InGame;
+int[16] lib974E4208_gv_uTBRGet_NumberOf_PlayerTeam;
+playergroup[16] lib974E4208_gv_uTBRGet_PlayerTeam;
+fixed lib974E4208_gv_uTBRGet_RadiusOf_DangerArea;
+region[16] lib974E4208_gv_uTBRGet_Danger_Area;
+timer lib974E4208_gv_uTBRGet_TimerFor_TheFirstCreateBomb;
+int lib974E4208_gv_uTBRGet_TimerWindowFor_TheFirstCreateBomb;
+timer lib974E4208_gv_uTBRGet_TimerFor_Game;
+int lib974E4208_gv_uTBRGet_TimerWindowFor_Game;
+timer lib974E4208_gv_uTBRGet_TimerFor_Round;
+int lib974E4208_gv_uTBRGet_TimerWindowFor_Round;
+timer lib974E4208_gv_uTBRGet_TimerFor_Wait;
+int lib974E4208_gv_uTBRGet_TimerWindowFor_Wait;
+int lib974E4208_gv_uTBRGet_Wait_BetweenBomb;
+point lib974E4208_gv_uTBRGet_Start_PositionOf_Bomb;
+unit lib974E4208_gv_uTBRGet_Bomb;
+region lib974E4208_gv_uTBRGet_Bomb_Area;
+bool lib974E4208_gv_uTBRGet_Bomb_IsReady_true;
+unit lib974E4208_gv_uTBRGet_Unit_ThatBombOwner;
+int lib974E4208_gv_uTBRGet_Player_ThatBombOwner;
+int lib974E4208_gv_uTBRGet_TeamOf_Player_ThatBombOwner;
+bool lib974E4208_gv_uTBRGet_Bomb_IsPickUp_true;
+int[16] lib974E4208_gv_uTBRGet_CountOf_Goal_now;
+
+// Function Declarations
+point lib974E4208_gf_UTBRGerRight_CenterOf_Map ();
+region lib974E4208_gf_UTBRGetRight_RegionIn_CenterOf_Map ();
+bool lib974E4208_gf_UTBRBa_Da_Boom (point lp_bombPosition, int lp_bombDamage, int lp_bombRadius);
+void lib974E4208_gf_UTBRGetRight_NumberOf_Players_InGame ();
+void lib974E4208_gf_UTBRGetRight_NumberOf_Teams_InGame ();
+
+// Trigger Declarations
+trigger lib974E4208_gt_Debug;
+trigger lib974E4208_gt_UTBRStart_SafeZone_and_Timer;
+trigger lib974E4208_gt_UTBRSpawn;
+trigger lib974E4208_gt_UTBRSetNewBasesCircle;
+trigger lib974E4208_gt_UTBRTerransInTheAir;
+trigger lib974E4208_gt_UTBRTerransOnTheGround;
+trigger lib974E4208_gt_UTBRLaunch;
+trigger lib974E4208_gt_UTBRScoreboard;
+trigger lib974E4208_gt_UTBRTheFirstStartingBombingRun;
+trigger lib974E4208_gt_UTBRStartingBombingRun;
+trigger lib974E4208_gt_UTBRCreateTheBomb_AfterFirstStart;
+trigger lib974E4208_gt_UTBRCreateTheBomb_AfterWait;
+trigger lib974E4208_gt_UTBRPickUpBomb;
+trigger lib974E4208_gt_UTBRDropBomb;
+trigger lib974E4208_gt_UTBRBombinDangerArea;
+trigger lib974E4208_gt_UTBRWhoScorePoints;
+trigger lib974E4208_gt_UTBRIfWhoLiveGame;
+trigger lib974E4208_gt_UTBRIfRoundTimeIsEnd;
+
+// Library Initialization
+void lib974E4208_InitVariables ();
+

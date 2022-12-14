@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CModel id="ActorForceField2" parent="Doodad">
+        <Model value="Assets\Doodads\ActorForceField\ActorForceField.m3"/>
+    </CModel>
+    <CModel id="GhostNukeCollateralFire2" parent="OneShotSpellFX">
+        <Model value="Assets\Effects\Terran\FireImpact\FireImpact.m3"/>
+        <EditorCategories value="Race:Terran"/>
+    </CModel>
+    <CModel id="GhostNukeDrop2" parent="OneShotSpellFX">
+        <Model value="Assets\Effects\Terran\NukeFalling\NukeFalling.m3"/>
+        <EditorCategories value="Race:Terran"/>
+        <RadiusLoose value="1.000000"/>
+    </CModel>
+    <CModel id="GhostNukeExplode2" parent="OneShotSpellFX">
+        <Model value="Assets\Effects\Terran\Nuke\Nuke.m3"/>
+        <EditorCategories value="Race:Terran"/>
+        <RadiusLoose value="1.000000"/>
+    </CModel>
+    <CModel id="NovaPack03SearchNode2">
+        <Model value="Assets\UI\Feedback\AIBeaconCustom\AIBeaconCustom.m3"/>
+        <EditorCategories value="Race:Neutral"/>
+        <Lighting value="BeaconCustom1"/>
+        <PausedParticleSystemBehavior value="FreezeAll"/>
+        <ScaleMax value="0.900000,0.900000,0.900000"/>
+        <ScaleMin value="0.900000,0.900000,0.900000"/>
+        <SelectionRadius value="0.555400"/>
+        <ShadowRadius value="0.555400"/>
+    </CModel>
+    <CModel id="PingNuke">
+        <Model value="Assets\UI\Feedback\PingObjective\PingObjective.m3"/>
+    </CModel>
+    <CModel id="PowerRadius_Stetmann" parent="PersistentSpellFX_COOP" COOP="Stetmann" Race="Zerg">
+        <Model value="Assets\COOP\Stetmann\Effects\PowerRadius_Stetmann_LargeMap\PowerRadius_Stetmann_LargeMap.m3"/>
+    </CModel>
+</Catalog>

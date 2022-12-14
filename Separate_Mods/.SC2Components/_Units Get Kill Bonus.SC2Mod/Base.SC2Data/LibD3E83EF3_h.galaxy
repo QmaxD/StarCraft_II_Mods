@@ -1,0 +1,33 @@
+include "TriggerLibs/natives"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// Variable Declarations
+bool libD3E83EF3_gv_uBKdoesModWork;
+bool libD3E83EF3_gv_uBKriseUnitLevel;
+bool libD3E83EF3_gv_uBKresizeUnit;
+bool libD3E83EF3_gv_uBKdependingOnRace;
+bool libD3E83EF3_gv_uBKdependingFromTheirUnit;
+int libD3E83EF3_gv_uBKkillBuff;
+fixed libD3E83EF3_gv_uBKdataBonus;
+fixed libD3E83EF3_gv_uBKindexZerg;
+fixed libD3E83EF3_gv_uBKindexTerran;
+fixed libD3E83EF3_gv_uBKindexProtoss;
+
+// Function Declarations
+fixed libD3E83EF3_gf_UBKmaxLife (int lp_kills, fixed lp_index);
+fixed libD3E83EF3_gf_UBKmaxShield (int lp_kills, fixed lp_index);
+fixed libD3E83EF3_gf_UBKregenLife (int lp_kills, fixed lp_index);
+fixed libD3E83EF3_gf_UBKregenShield (int lp_kills, fixed lp_index);
+fixed libD3E83EF3_gf_UBKgetSizeUnit (int lp_kills);
+fixed libD3E83EF3_gf_UBKgetRadiusUnit (int lp_kills);
+string libD3E83EF3_gf_UBKgetBehavior (unit lp_unit, int lp_kills);
+
+// Trigger Declarations
+trigger libD3E83EF3_gt_UBKlaunch;
+trigger libD3E83EF3_gt_UBKmakeUnitBuff;
+
+// Library Initialization
+void libD3E83EF3_InitVariables ();
+

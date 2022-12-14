@@ -1,0 +1,1463 @@
+include "TriggerLibs/NativeLib"
+
+include "Lib8BD63CF6_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void lib8BD63CF6_InitLibraries () {
+    libNtve_InitVariables();
+}
+
+// Variable Initialization
+bool lib8BD63CF6_InitVariables_completed = false;
+
+void lib8BD63CF6_InitVariables () {
+    if (lib8BD63CF6_InitVariables_completed) {
+        return;
+    }
+
+    lib8BD63CF6_InitVariables_completed = true;
+
+    lib8BD63CF6_gv_bis_Start_Berserk = true;
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: B | Launch
+//--------------------------------------------------------------------------------------------------
+bool lib8BD63CF6_gt_BLaunch_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    string auto4EE3A578_val;
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((GameAttributeGameValue("1") == "0001")) {
+        lib8BD63CF6_gv_bis_Start_Berserk = false;
+    }
+    else {
+        auto4EE3A578_val = GameAttributeGameValue("2");
+        if (auto4EE3A578_val == "0001") {
+            lib8BD63CF6_gv_bis_with_Damage = false;
+            lib8BD63CF6_gv_bvariation_Stack = 1;
+        }
+        else if (auto4EE3A578_val == "0002") {
+            lib8BD63CF6_gv_bis_with_Damage = true;
+            lib8BD63CF6_gv_bvariation_Stack = 1;
+        }
+        else if (auto4EE3A578_val == "0003") {
+            lib8BD63CF6_gv_bis_with_Stack_Attack = false;
+            lib8BD63CF6_gv_bvariation_Stack = 2;
+        }
+        else if (auto4EE3A578_val == "0004") {
+            lib8BD63CF6_gv_bis_with_Stack_Attack = true;
+            lib8BD63CF6_gv_bvariation_Stack = 2;
+        }
+        else if (auto4EE3A578_val == "0005") {
+            lib8BD63CF6_gv_bis_with_Stack_Attack = false;
+            lib8BD63CF6_gv_bvariation_Stack = 3;
+        }
+        else if (auto4EE3A578_val == "0006") {
+            lib8BD63CF6_gv_bis_with_Stack_Attack = true;
+            lib8BD63CF6_gv_bvariation_Stack = 3;
+        }
+        else {
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib8BD63CF6_gt_BLaunch_Init () {
+    lib8BD63CF6_gt_BLaunch = TriggerCreate("lib8BD63CF6_gt_BLaunch_Func");
+    TriggerAddEventMapInit(lib8BD63CF6_gt_BLaunch);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: B | upgrade_Life
+//--------------------------------------------------------------------------------------------------
+bool lib8BD63CF6_gt_Bupgrade_Life_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv__raceOfPlayer;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv__raceOfPlayer = PlayerRace(UnitGetOwner(EventUnit()));
+
+    // Conditions
+    if (testConds) {
+        if (!(((lib8BD63CF6_gv_bis_Start_Berserk == true) && (lib8BD63CF6_gv_bvariation_Stack == 1)))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((lv__raceOfPlayer == "Prot")) {
+        UnitBehaviorRemove(EventUnit(), "Berserk1PL", -1);
+        UnitBehaviorRemove(EventUnit(), "Berserk10PL", -1);
+        UnitBehaviorRemove(EventUnit(), "Berserk20PL", -1);
+        UnitBehaviorRemove(EventUnit(), "Berserk30PL", -1);
+        UnitBehaviorRemove(EventUnit(), "Berserk40PL", -1);
+        UnitBehaviorRemove(EventUnit(), "Berserk50PL", -1);
+        UnitBehaviorRemove(EventUnit(), "Berserk60PL", -1);
+        UnitBehaviorRemove(EventUnit(), "Berserk70PL", -1);
+        UnitBehaviorRemove(EventUnit(), "Berserk80PL", -1);
+        UnitBehaviorRemove(EventUnit(), "Berserk90PL", -1);
+    }
+    else {
+        UnitBehaviorRemove(EventUnit(), "Berserk1", -1);
+        UnitBehaviorRemove(EventUnit(), "Berserk10", -1);
+        UnitBehaviorRemove(EventUnit(), "Berserk20", -1);
+        UnitBehaviorRemove(EventUnit(), "Berserk30", -1);
+        UnitBehaviorRemove(EventUnit(), "Berserk40", -1);
+        UnitBehaviorRemove(EventUnit(), "Berserk50", -1);
+        UnitBehaviorRemove(EventUnit(), "Berserk60", -1);
+        UnitBehaviorRemove(EventUnit(), "Berserk70", -1);
+        UnitBehaviorRemove(EventUnit(), "Berserk80", -1);
+        UnitBehaviorRemove(EventUnit(), "Berserk90", -1);
+        if ((lib8BD63CF6_gv_bis_with_Damage == true)) {
+            UnitBehaviorRemove(EventUnit(), "Berserk01A", -1);
+            UnitBehaviorRemove(EventUnit(), "Berserk10A", -1);
+            UnitBehaviorRemove(EventUnit(), "Berserk20A", -1);
+            UnitBehaviorRemove(EventUnit(), "Berserk30A", -1);
+            UnitBehaviorRemove(EventUnit(), "Berserk40A", -1);
+            UnitBehaviorRemove(EventUnit(), "Berserk50A", -1);
+            UnitBehaviorRemove(EventUnit(), "Berserk60A", -1);
+            UnitBehaviorRemove(EventUnit(), "Berserk70A", -1);
+            UnitBehaviorRemove(EventUnit(), "Berserk80A", -1);
+            UnitBehaviorRemove(EventUnit(), "Berserk90A", -1);
+        }
+
+    }
+    if ((lib8BD63CF6_gv_bis_with_Damage == true)) {
+        if ((lv__raceOfPlayer == "Prot")) {
+            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 1.0)) {
+                UnitBehaviorAdd(EventUnit(), "Berserk1PL", EventUnit(), 1);
+            }
+            else {
+                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 10.0)) {
+                    UnitBehaviorAdd(EventUnit(), "Berserk10PL", EventUnit(), 1);
+                }
+                else {
+                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 20.0)) {
+                        UnitBehaviorAdd(EventUnit(), "Berserk20PL", EventUnit(), 1);
+                    }
+                    else {
+                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 30.0)) {
+                            UnitBehaviorAdd(EventUnit(), "Berserk30PL", EventUnit(), 1);
+                        }
+                        else {
+                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 40.0)) {
+                                UnitBehaviorAdd(EventUnit(), "Berserk40PL", EventUnit(), 1);
+                            }
+                            else {
+                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 50.0)) {
+                                    UnitBehaviorAdd(EventUnit(), "Berserk50PL", EventUnit(), 1);
+                                }
+                                else {
+                                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 60.0)) {
+                                        UnitBehaviorAdd(EventUnit(), "Berserk60PL", EventUnit(), 1);
+                                    }
+                                    else {
+                                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 70.0)) {
+                                            UnitBehaviorAdd(EventUnit(), "Berserk70PL", EventUnit(), 1);
+                                        }
+                                        else {
+                                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 80.0)) {
+                                                UnitBehaviorAdd(EventUnit(), "Berserk80PL", EventUnit(), 1);
+                                            }
+                                            else {
+                                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 90.0)) {
+                                                    UnitBehaviorAdd(EventUnit(), "Berserk90PL", EventUnit(), 1);
+                                                }
+                                                else {
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk1PL", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk10PL", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk20PL", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk30PL", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk40PL", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk50PL", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk60PL", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk70PL", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk80PL", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk90PL", -1);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 1.0)) {
+                UnitBehaviorAdd(EventUnit(), "Berserk1", EventUnit(), 1);
+                UnitBehaviorAdd(EventUnit(), "Berserk01A", EventUnit(), 1);
+            }
+            else {
+                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 10.0)) {
+                    UnitBehaviorAdd(EventUnit(), "Berserk10", EventUnit(), 1);
+                    UnitBehaviorAdd(EventUnit(), "Berserk10A", EventUnit(), 1);
+                }
+                else {
+                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 20.0)) {
+                        UnitBehaviorAdd(EventUnit(), "Berserk20", EventUnit(), 1);
+                        UnitBehaviorAdd(EventUnit(), "Berserk20A", EventUnit(), 1);
+                    }
+                    else {
+                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 30.0)) {
+                            UnitBehaviorAdd(EventUnit(), "Berserk30", EventUnit(), 1);
+                            UnitBehaviorAdd(EventUnit(), "Berserk30A", EventUnit(), 1);
+                        }
+                        else {
+                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 40.0)) {
+                                UnitBehaviorAdd(EventUnit(), "Berserk40", EventUnit(), 1);
+                                UnitBehaviorAdd(EventUnit(), "Berserk40A", EventUnit(), 1);
+                            }
+                            else {
+                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 50.0)) {
+                                    UnitBehaviorAdd(EventUnit(), "Berserk50", EventUnit(), 1);
+                                    UnitBehaviorAdd(EventUnit(), "Berserk50A", EventUnit(), 1);
+                                }
+                                else {
+                                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 60.0)) {
+                                        UnitBehaviorAdd(EventUnit(), "Berserk60", EventUnit(), 1);
+                                        UnitBehaviorAdd(EventUnit(), "Berserk60A", EventUnit(), 1);
+                                    }
+                                    else {
+                                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 70.0)) {
+                                            UnitBehaviorAdd(EventUnit(), "Berserk70", EventUnit(), 1);
+                                            UnitBehaviorAdd(EventUnit(), "Berserk70A", EventUnit(), 1);
+                                        }
+                                        else {
+                                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 80.0)) {
+                                                UnitBehaviorAdd(EventUnit(), "Berserk80", EventUnit(), 1);
+                                                UnitBehaviorAdd(EventUnit(), "Berserk80A", EventUnit(), 1);
+                                            }
+                                            else {
+                                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 90.0)) {
+                                                    UnitBehaviorAdd(EventUnit(), "Berserk90", EventUnit(), 1);
+                                                    UnitBehaviorAdd(EventUnit(), "Berserk90A", EventUnit(), 1);
+                                                }
+                                                else {
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk1", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk10", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk20", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk30", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk40", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk50", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk60", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk70", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk80", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk90", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk01A", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk10A", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk20A", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk30A", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk40A", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk50A", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk60A", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk70A", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk80A", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk90A", -1);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    else {
+        if ((lv__raceOfPlayer == "Prot")) {
+            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 1.0)) {
+                UnitBehaviorAdd(EventUnit(), "Berserk1PL", EventUnit(), 1);
+            }
+            else {
+                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 10.0)) {
+                    UnitBehaviorAdd(EventUnit(), "Berserk10PL", EventUnit(), 1);
+                }
+                else {
+                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 20.0)) {
+                        UnitBehaviorAdd(EventUnit(), "Berserk20PL", EventUnit(), 1);
+                    }
+                    else {
+                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 30.0)) {
+                            UnitBehaviorAdd(EventUnit(), "Berserk30PL", EventUnit(), 1);
+                        }
+                        else {
+                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 40.0)) {
+                                UnitBehaviorAdd(EventUnit(), "Berserk40PL", EventUnit(), 1);
+                            }
+                            else {
+                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 50.0)) {
+                                    UnitBehaviorAdd(EventUnit(), "Berserk50PL", EventUnit(), 1);
+                                }
+                                else {
+                                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 60.0)) {
+                                        UnitBehaviorAdd(EventUnit(), "Berserk60PL", EventUnit(), 1);
+                                    }
+                                    else {
+                                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 70.0)) {
+                                            UnitBehaviorAdd(EventUnit(), "Berserk70PL", EventUnit(), 1);
+                                        }
+                                        else {
+                                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 80.0)) {
+                                                UnitBehaviorAdd(EventUnit(), "Berserk80PL", EventUnit(), 1);
+                                            }
+                                            else {
+                                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 90.0)) {
+                                                    UnitBehaviorAdd(EventUnit(), "Berserk90PL", EventUnit(), 1);
+                                                }
+                                                else {
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk1PL", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk10PL", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk20PL", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk30PL", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk40PL", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk50PL", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk60PL", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk70PL", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk80PL", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk90PL", -1);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 1.0)) {
+                UnitBehaviorAdd(EventUnit(), "Berserk1", EventUnit(), 1);
+            }
+            else {
+                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 10.0)) {
+                    UnitBehaviorAdd(EventUnit(), "Berserk10", EventUnit(), 1);
+                }
+                else {
+                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 20.0)) {
+                        UnitBehaviorAdd(EventUnit(), "Berserk20", EventUnit(), 1);
+                    }
+                    else {
+                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 30.0)) {
+                            UnitBehaviorAdd(EventUnit(), "Berserk30", EventUnit(), 1);
+                        }
+                        else {
+                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 40.0)) {
+                                UnitBehaviorAdd(EventUnit(), "Berserk40", EventUnit(), 1);
+                            }
+                            else {
+                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 50.0)) {
+                                    UnitBehaviorAdd(EventUnit(), "Berserk50", EventUnit(), 1);
+                                }
+                                else {
+                                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 60.0)) {
+                                        UnitBehaviorAdd(EventUnit(), "Berserk60", EventUnit(), 1);
+                                    }
+                                    else {
+                                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 70.0)) {
+                                            UnitBehaviorAdd(EventUnit(), "Berserk70", EventUnit(), 1);
+                                        }
+                                        else {
+                                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 80.0)) {
+                                                UnitBehaviorAdd(EventUnit(), "Berserk80", EventUnit(), 1);
+                                            }
+                                            else {
+                                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 90.0)) {
+                                                    UnitBehaviorAdd(EventUnit(), "Berserk90", EventUnit(), 1);
+                                                }
+                                                else {
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk1", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk10", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk20", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk30", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk40", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk50", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk60", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk70", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk80", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk90", -1);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib8BD63CF6_gt_Bupgrade_Life_Init () {
+    lib8BD63CF6_gt_Bupgrade_Life = TriggerCreate("lib8BD63CF6_gt_Bupgrade_Life_Func");
+    TriggerAddEventUnitProperty(lib8BD63CF6_gt_Bupgrade_Life, null, c_unitPropLifePercent);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: B | upgrade_Shield
+//--------------------------------------------------------------------------------------------------
+bool lib8BD63CF6_gt_Bupgrade_Shield_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv__raceOfPlayer;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv__raceOfPlayer = PlayerRace(UnitGetOwner(EventUnit()));
+
+    // Conditions
+    if (testConds) {
+        if (!(((lib8BD63CF6_gv_bis_Start_Berserk == true) && (lib8BD63CF6_gv_bvariation_Stack == 1)))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((lv__raceOfPlayer == "Prot")) {
+        UnitBehaviorRemove(EventUnit(), "Berserk1PS", -1);
+        UnitBehaviorRemove(EventUnit(), "Berserk10PS", -1);
+        UnitBehaviorRemove(EventUnit(), "Berserk20PS", -1);
+        UnitBehaviorRemove(EventUnit(), "Berserk30PS", -1);
+        UnitBehaviorRemove(EventUnit(), "Berserk40PS", -1);
+        UnitBehaviorRemove(EventUnit(), "Berserk50PS", -1);
+        UnitBehaviorRemove(EventUnit(), "Berserk60PS", -1);
+        UnitBehaviorRemove(EventUnit(), "Berserk70PS", -1);
+        UnitBehaviorRemove(EventUnit(), "Berserk80PS", -1);
+        UnitBehaviorRemove(EventUnit(), "Berserk90PS", -1);
+        if ((lib8BD63CF6_gv_bis_with_Damage == true)) {
+            UnitBehaviorRemove(EventUnit(), "Berserk01A", -1);
+            UnitBehaviorRemove(EventUnit(), "Berserk10A", -1);
+            UnitBehaviorRemove(EventUnit(), "Berserk20A", -1);
+            UnitBehaviorRemove(EventUnit(), "Berserk30A", -1);
+            UnitBehaviorRemove(EventUnit(), "Berserk40A", -1);
+            UnitBehaviorRemove(EventUnit(), "Berserk50A", -1);
+            UnitBehaviorRemove(EventUnit(), "Berserk60A", -1);
+            UnitBehaviorRemove(EventUnit(), "Berserk70A", -1);
+            UnitBehaviorRemove(EventUnit(), "Berserk80A", -1);
+            UnitBehaviorRemove(EventUnit(), "Berserk90A", -1);
+        }
+
+    }
+
+    if ((lib8BD63CF6_gv_bis_with_Damage == true)) {
+        if ((lv__raceOfPlayer == "Prot")) {
+            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 1.0)) {
+                UnitBehaviorAdd(EventUnit(), "Berserk1PS", EventUnit(), 1);
+                UnitBehaviorAdd(EventUnit(), "Berserk01A", EventUnit(), 1);
+            }
+            else {
+                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 10.0)) {
+                    UnitBehaviorAdd(EventUnit(), "Berserk10PS", EventUnit(), 1);
+                    UnitBehaviorAdd(EventUnit(), "Berserk10A", EventUnit(), 1);
+                }
+                else {
+                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 20.0)) {
+                        UnitBehaviorAdd(EventUnit(), "Berserk20PS", EventUnit(), 1);
+                        UnitBehaviorAdd(EventUnit(), "Berserk20A", EventUnit(), 1);
+                    }
+                    else {
+                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 30.0)) {
+                            UnitBehaviorAdd(EventUnit(), "Berserk30PS", EventUnit(), 1);
+                            UnitBehaviorAdd(EventUnit(), "Berserk30A", EventUnit(), 1);
+                        }
+                        else {
+                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 40.0)) {
+                                UnitBehaviorAdd(EventUnit(), "Berserk40PS", EventUnit(), 1);
+                                UnitBehaviorAdd(EventUnit(), "Berserk40A", EventUnit(), 1);
+                            }
+                            else {
+                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 50.0)) {
+                                    UnitBehaviorAdd(EventUnit(), "Berserk50PS", EventUnit(), 1);
+                                    UnitBehaviorAdd(EventUnit(), "Berserk50A", EventUnit(), 1);
+                                }
+                                else {
+                                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 60.0)) {
+                                        UnitBehaviorAdd(EventUnit(), "Berserk60PS", EventUnit(), 1);
+                                        UnitBehaviorAdd(EventUnit(), "Berserk60A", EventUnit(), 1);
+                                    }
+                                    else {
+                                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 70.0)) {
+                                            UnitBehaviorAdd(EventUnit(), "Berserk70PS", EventUnit(), 1);
+                                            UnitBehaviorAdd(EventUnit(), "Berserk70A", EventUnit(), 1);
+                                        }
+                                        else {
+                                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 80.0)) {
+                                                UnitBehaviorAdd(EventUnit(), "Berserk80PS", EventUnit(), 1);
+                                                UnitBehaviorAdd(EventUnit(), "Berserk80A", EventUnit(), 1);
+                                            }
+                                            else {
+                                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 90.0)) {
+                                                    UnitBehaviorAdd(EventUnit(), "Berserk90PS", EventUnit(), 1);
+                                                    UnitBehaviorAdd(EventUnit(), "Berserk90A", EventUnit(), 1);
+                                                }
+                                                else {
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk1PS", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk10PS", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk20PS", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk30PS", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk40PS", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk50PS", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk60PS", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk70PS", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk80PS", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk90PS", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk01A", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk10A", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk20A", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk30A", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk40A", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk50A", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk60A", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk70A", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk80A", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk90A", -1);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+    else {
+        if ((lv__raceOfPlayer == "Prot")) {
+            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 1.0)) {
+                UnitBehaviorAdd(EventUnit(), "Berserk1PS", EventUnit(), 1);
+            }
+            else {
+                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 10.0)) {
+                    UnitBehaviorAdd(EventUnit(), "Berserk10PS", EventUnit(), 1);
+                }
+                else {
+                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 20.0)) {
+                        UnitBehaviorAdd(EventUnit(), "Berserk20PS", EventUnit(), 1);
+                    }
+                    else {
+                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 30.0)) {
+                            UnitBehaviorAdd(EventUnit(), "Berserk30PS", EventUnit(), 1);
+                        }
+                        else {
+                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 40.0)) {
+                                UnitBehaviorAdd(EventUnit(), "Berserk40PS", EventUnit(), 1);
+                            }
+                            else {
+                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 50.0)) {
+                                    UnitBehaviorAdd(EventUnit(), "Berserk50PS", EventUnit(), 1);
+                                }
+                                else {
+                                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 60.0)) {
+                                        UnitBehaviorAdd(EventUnit(), "Berserk60PS", EventUnit(), 1);
+                                    }
+                                    else {
+                                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 70.0)) {
+                                            UnitBehaviorAdd(EventUnit(), "Berserk70PS", EventUnit(), 1);
+                                        }
+                                        else {
+                                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 80.0)) {
+                                                UnitBehaviorAdd(EventUnit(), "Berserk80PS", EventUnit(), 1);
+                                            }
+                                            else {
+                                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 90.0)) {
+                                                    UnitBehaviorAdd(EventUnit(), "Berserk90PS", EventUnit(), 1);
+                                                }
+                                                else {
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk1PS", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk10PS", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk20PS", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk30PS", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk40PS", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk50PS", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk60PS", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk70PS", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk80PS", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk90PS", -1);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib8BD63CF6_gt_Bupgrade_Shield_Init () {
+    lib8BD63CF6_gt_Bupgrade_Shield = TriggerCreate("lib8BD63CF6_gt_Bupgrade_Shield_Func");
+    TriggerAddEventUnitProperty(lib8BD63CF6_gt_Bupgrade_Shield, null, c_unitPropShieldsPercent);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: B | upgrade_with Stack Behaviors
+//--------------------------------------------------------------------------------------------------
+bool lib8BD63CF6_gt_Bupgrade_withStackBehaviors_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv__raceOfPlayer;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv__raceOfPlayer = PlayerRace(UnitGetOwner(EventUnit()));
+
+    // Conditions
+    if (testConds) {
+        if (!(((lib8BD63CF6_gv_bis_Start_Berserk == true) && (lib8BD63CF6_gv_bvariation_Stack == 2)))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((lib8BD63CF6_gv_bis_with_Stack_Attack == true)) {
+        if ((lv__raceOfPlayer == "Prot")) {
+            UnitBehaviorRemove(EventUnit(), "BerserkPL_ALL_up", -1);
+            UnitBehaviorRemove(EventUnit(), "BerserkPS_ALL_up", -1);
+            UnitBehaviorRemove(EventUnit(), "BerserkAPL_ALL_up", -1);
+            UnitBehaviorRemove(EventUnit(), "BerserkAPS_ALL_up", -1);
+        }
+        else {
+            UnitBehaviorRemove(EventUnit(), "Berserk_ALL_up", -1);
+            UnitBehaviorRemove(EventUnit(), "BerserkA_ALL_up", -1);
+        }
+    }
+    else {
+        if ((lv__raceOfPlayer == "Prot")) {
+            UnitBehaviorRemove(EventUnit(), "BerserkPL_ALL_up", -1);
+            UnitBehaviorRemove(EventUnit(), "BerserkPS_ALL_up", -1);
+        }
+        else {
+            UnitBehaviorRemove(EventUnit(), "Berserk_ALL_up", -1);
+        }
+    }
+    if ((lib8BD63CF6_gv_bis_with_Stack_Attack == true)) {
+        if ((lv__raceOfPlayer == "Prot")) {
+            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 1.0)) {
+                UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_up", EventUnit(), 10);
+                UnitBehaviorAdd(EventUnit(), "BerserkAPL_ALL_up", EventUnit(), 10);
+            }
+            else {
+                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 10.0)) {
+                    UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_up", EventUnit(), 9);
+                    UnitBehaviorAdd(EventUnit(), "BerserkAPL_ALL_up", EventUnit(), 9);
+                }
+                else {
+                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 20.0)) {
+                        UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_up", EventUnit(), 8);
+                        UnitBehaviorAdd(EventUnit(), "BerserkAPL_ALL_up", EventUnit(), 8);
+                    }
+                    else {
+                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 30.0)) {
+                            UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_up", EventUnit(), 7);
+                            UnitBehaviorAdd(EventUnit(), "BerserkAPL_ALL_up", EventUnit(), 7);
+                        }
+                        else {
+                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 40.0)) {
+                                UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_up", EventUnit(), 6);
+                                UnitBehaviorAdd(EventUnit(), "BerserkAPL_ALL_up", EventUnit(), 6);
+                            }
+                            else {
+                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 50.0)) {
+                                    UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_up", EventUnit(), 5);
+                                    UnitBehaviorAdd(EventUnit(), "BerserkAPL_ALL_up", EventUnit(), 5);
+                                }
+                                else {
+                                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 60.0)) {
+                                        UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_up", EventUnit(), 4);
+                                        UnitBehaviorAdd(EventUnit(), "BerserkAPL_ALL_up", EventUnit(), 4);
+                                    }
+                                    else {
+                                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 70.0)) {
+                                            UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_up", EventUnit(), 3);
+                                            UnitBehaviorAdd(EventUnit(), "BerserkAPL_ALL_up", EventUnit(), 3);
+                                        }
+                                        else {
+                                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 80.0)) {
+                                                UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_up", EventUnit(), 2);
+                                                UnitBehaviorAdd(EventUnit(), "BerserkAPL_ALL_up", EventUnit(), 2);
+                                            }
+                                            else {
+                                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 90.0)) {
+                                                    UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_up", EventUnit(), 1);
+                                                    UnitBehaviorAdd(EventUnit(), "BerserkAPL_ALL_up", EventUnit(), 1);
+                                                }
+                                                else {
+                                                    UnitBehaviorRemove(EventUnit(), "BerserkPL_ALL_up", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "BerserkAPL_ALL_up", -1);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 1.0)) {
+                UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_up", EventUnit(), 10);
+                UnitBehaviorAdd(EventUnit(), "BerserkAPS_ALL_up", EventUnit(), 10);
+            }
+            else {
+                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 10.0)) {
+                    UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_up", EventUnit(), 9);
+                    UnitBehaviorAdd(EventUnit(), "BerserkAPS_ALL_up", EventUnit(), 9);
+                }
+                else {
+                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 20.0)) {
+                        UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_up", EventUnit(), 8);
+                        UnitBehaviorAdd(EventUnit(), "BerserkAPS_ALL_up", EventUnit(), 8);
+                    }
+                    else {
+                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 30.0)) {
+                            UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_up", EventUnit(), 7);
+                            UnitBehaviorAdd(EventUnit(), "BerserkAPS_ALL_up", EventUnit(), 7);
+                        }
+                        else {
+                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 40.0)) {
+                                UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_up", EventUnit(), 6);
+                                UnitBehaviorAdd(EventUnit(), "BerserkAPS_ALL_up", EventUnit(), 6);
+                            }
+                            else {
+                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 50.0)) {
+                                    UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_up", EventUnit(), 5);
+                                    UnitBehaviorAdd(EventUnit(), "BerserkAPS_ALL_up", EventUnit(), 5);
+                                }
+                                else {
+                                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 60.0)) {
+                                        UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_up", EventUnit(), 4);
+                                        UnitBehaviorAdd(EventUnit(), "BerserkAPS_ALL_up", EventUnit(), 4);
+                                    }
+                                    else {
+                                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 70.0)) {
+                                            UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_up", EventUnit(), 3);
+                                            UnitBehaviorAdd(EventUnit(), "BerserkAPS_ALL_up", EventUnit(), 3);
+                                        }
+                                        else {
+                                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 80.0)) {
+                                                UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_up", EventUnit(), 2);
+                                                UnitBehaviorAdd(EventUnit(), "BerserkAPS_ALL_up", EventUnit(), 2);
+                                            }
+                                            else {
+                                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 90.0)) {
+                                                    UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_up", EventUnit(), 1);
+                                                    UnitBehaviorAdd(EventUnit(), "BerserkAPS_ALL_up", EventUnit(), 1);
+                                                }
+                                                else {
+                                                    UnitBehaviorRemove(EventUnit(), "BerserkPS_ALL_up", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "BerserkAPS_ALL_up", -1);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 1.0)) {
+                UnitBehaviorAdd(EventUnit(), "Berserk_ALL_up", EventUnit(), 10);
+                UnitBehaviorAdd(EventUnit(), "BerserkA_ALL_up", EventUnit(), 10);
+            }
+            else {
+                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 10.0)) {
+                    UnitBehaviorAdd(EventUnit(), "Berserk_ALL_up", EventUnit(), 9);
+                    UnitBehaviorAdd(EventUnit(), "BerserkA_ALL_up", EventUnit(), 9);
+                }
+                else {
+                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 20.0)) {
+                        UnitBehaviorAdd(EventUnit(), "Berserk_ALL_up", EventUnit(), 8);
+                        UnitBehaviorAdd(EventUnit(), "BerserkA_ALL_up", EventUnit(), 8);
+                    }
+                    else {
+                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 30.0)) {
+                            UnitBehaviorAdd(EventUnit(), "Berserk_ALL_up", EventUnit(), 7);
+                            UnitBehaviorAdd(EventUnit(), "BerserkA_ALL_up", EventUnit(), 7);
+                        }
+                        else {
+                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 40.0)) {
+                                UnitBehaviorAdd(EventUnit(), "Berserk_ALL_up", EventUnit(), 6);
+                                UnitBehaviorAdd(EventUnit(), "BerserkA_ALL_up", EventUnit(), 6);
+                            }
+                            else {
+                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 50.0)) {
+                                    UnitBehaviorAdd(EventUnit(), "Berserk_ALL_up", EventUnit(), 5);
+                                    UnitBehaviorAdd(EventUnit(), "BerserkA_ALL_up", EventUnit(), 5);
+                                }
+                                else {
+                                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 60.0)) {
+                                        UnitBehaviorAdd(EventUnit(), "Berserk_ALL_up", EventUnit(), 4);
+                                        UnitBehaviorAdd(EventUnit(), "BerserkA_ALL_up", EventUnit(), 4);
+                                    }
+                                    else {
+                                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 70.0)) {
+                                            UnitBehaviorAdd(EventUnit(), "Berserk_ALL_up", EventUnit(), 3);
+                                            UnitBehaviorAdd(EventUnit(), "BerserkA_ALL_up", EventUnit(), 3);
+                                        }
+                                        else {
+                                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 80.0)) {
+                                                UnitBehaviorAdd(EventUnit(), "Berserk_ALL_up", EventUnit(), 2);
+                                                UnitBehaviorAdd(EventUnit(), "BerserkA_ALL_up", EventUnit(), 2);
+                                            }
+                                            else {
+                                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 90.0)) {
+                                                    UnitBehaviorAdd(EventUnit(), "Berserk_ALL_up", EventUnit(), 1);
+                                                    UnitBehaviorAdd(EventUnit(), "BerserkA_ALL_up", EventUnit(), 1);
+                                                }
+                                                else {
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk_ALL_up", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "BerserkA_ALL_up", -1);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    else {
+        if ((lv__raceOfPlayer == "Prot")) {
+            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 1.0)) {
+                UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_up", EventUnit(), 10);
+            }
+            else {
+                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 10.0)) {
+                    UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_up", EventUnit(), 9);
+                }
+                else {
+                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 20.0)) {
+                        UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_up", EventUnit(), 8);
+                    }
+                    else {
+                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 30.0)) {
+                            UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_up", EventUnit(), 7);
+                        }
+                        else {
+                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 40.0)) {
+                                UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_up", EventUnit(), 6);
+                            }
+                            else {
+                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 50.0)) {
+                                    UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_up", EventUnit(), 5);
+                                }
+                                else {
+                                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 60.0)) {
+                                        UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_up", EventUnit(), 4);
+                                    }
+                                    else {
+                                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 70.0)) {
+                                            UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_up", EventUnit(), 3);
+                                        }
+                                        else {
+                                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 80.0)) {
+                                                UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_up", EventUnit(), 2);
+                                            }
+                                            else {
+                                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 90.0)) {
+                                                    UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_up", EventUnit(), 1);
+                                                }
+                                                else {
+                                                    UnitBehaviorRemove(EventUnit(), "BerserkPL_ALL_up", -1);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 1.0)) {
+                UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_up", EventUnit(), 10);
+            }
+            else {
+                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 10.0)) {
+                    UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_up", EventUnit(), 9);
+                }
+                else {
+                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 20.0)) {
+                        UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_up", EventUnit(), 8);
+                    }
+                    else {
+                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 30.0)) {
+                            UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_up", EventUnit(), 7);
+                        }
+                        else {
+                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 40.0)) {
+                                UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_up", EventUnit(), 6);
+                            }
+                            else {
+                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 50.0)) {
+                                    UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_up", EventUnit(), 5);
+                                }
+                                else {
+                                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 60.0)) {
+                                        UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_up", EventUnit(), 4);
+                                    }
+                                    else {
+                                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 70.0)) {
+                                            UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_up", EventUnit(), 3);
+                                        }
+                                        else {
+                                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 80.0)) {
+                                                UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_up", EventUnit(), 2);
+                                            }
+                                            else {
+                                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 90.0)) {
+                                                    UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_up", EventUnit(), 1);
+                                                }
+                                                else {
+                                                    UnitBehaviorRemove(EventUnit(), "BerserkPS_ALL_up", -1);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 1.0)) {
+                UnitBehaviorAdd(EventUnit(), "Berserk_ALL_up", EventUnit(), 10);
+            }
+            else {
+                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 10.0)) {
+                    UnitBehaviorAdd(EventUnit(), "Berserk_ALL_up", EventUnit(), 9);
+                }
+                else {
+                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 20.0)) {
+                        UnitBehaviorAdd(EventUnit(), "Berserk_ALL_up", EventUnit(), 8);
+                    }
+                    else {
+                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 30.0)) {
+                            UnitBehaviorAdd(EventUnit(), "Berserk_ALL_up", EventUnit(), 7);
+                        }
+                        else {
+                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 40.0)) {
+                                UnitBehaviorAdd(EventUnit(), "Berserk_ALL_up", EventUnit(), 6);
+                            }
+                            else {
+                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 50.0)) {
+                                    UnitBehaviorAdd(EventUnit(), "Berserk_ALL_up", EventUnit(), 5);
+                                }
+                                else {
+                                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 60.0)) {
+                                        UnitBehaviorAdd(EventUnit(), "Berserk_ALL_up", EventUnit(), 4);
+                                    }
+                                    else {
+                                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 70.0)) {
+                                            UnitBehaviorAdd(EventUnit(), "Berserk_ALL_up", EventUnit(), 3);
+                                        }
+                                        else {
+                                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 80.0)) {
+                                                UnitBehaviorAdd(EventUnit(), "Berserk_ALL_up", EventUnit(), 2);
+                                            }
+                                            else {
+                                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 90.0)) {
+                                                    UnitBehaviorAdd(EventUnit(), "Berserk_ALL_up", EventUnit(), 1);
+                                                }
+                                                else {
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk_ALL_up", -1);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib8BD63CF6_gt_Bupgrade_withStackBehaviors_Init () {
+    lib8BD63CF6_gt_Bupgrade_withStackBehaviors = TriggerCreate("lib8BD63CF6_gt_Bupgrade_withStackBehaviors_Func");
+    TriggerAddEventUnitProperty(lib8BD63CF6_gt_Bupgrade_withStackBehaviors, null, c_unitPropLifePercent);
+    TriggerAddEventUnitProperty(lib8BD63CF6_gt_Bupgrade_withStackBehaviors, null, c_unitPropShieldsPercent);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: B | downgrade_with Stack Behaviors
+//--------------------------------------------------------------------------------------------------
+bool lib8BD63CF6_gt_Bdowngrade_withStackBehaviors_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    string lv__raceOfPlayer;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv__raceOfPlayer = PlayerRace(UnitGetOwner(EventUnit()));
+
+    // Conditions
+    if (testConds) {
+        if (!(((lib8BD63CF6_gv_bis_Start_Berserk == true) && (lib8BD63CF6_gv_bvariation_Stack == 3)))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((lib8BD63CF6_gv_bis_with_Stack_Attack == true)) {
+        if ((PlayerRace(EventPlayer()) == "Prot")) {
+            UnitBehaviorRemove(EventUnit(), "BerserkPL_ALL_down", -1);
+            UnitBehaviorRemove(EventUnit(), "BerserkPS_ALL_down", -1);
+            UnitBehaviorRemove(EventUnit(), "BerserkAPL_ALL_down", -1);
+            UnitBehaviorRemove(EventUnit(), "BerserkAPS_ALL_down", -1);
+        }
+        else {
+            UnitBehaviorRemove(EventUnit(), "Berserk_ALL_down", -1);
+            UnitBehaviorRemove(EventUnit(), "BerserkA_ALL_down", -1);
+        }
+    }
+    else {
+        if ((PlayerRace(EventPlayer()) == "Prot")) {
+            UnitBehaviorRemove(EventUnit(), "BerserkPL_ALL_down", -1);
+            UnitBehaviorRemove(EventUnit(), "BerserkPS_ALL_down", -1);
+        }
+        else {
+            UnitBehaviorRemove(EventUnit(), "Berserk_ALL_down", -1);
+        }
+    }
+    if ((lib8BD63CF6_gv_bis_with_Stack_Attack == true)) {
+        if ((PlayerRace(EventPlayer()) == "Prot")) {
+            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 1.0)) {
+                UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_down", EventUnit(), 10);
+                UnitBehaviorAdd(EventUnit(), "BerserkAPL_ALL_down", EventUnit(), 10);
+            }
+            else {
+                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 10.0)) {
+                    UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_down", EventUnit(), 9);
+                    UnitBehaviorAdd(EventUnit(), "BerserkAPL_ALL_down", EventUnit(), 9);
+                }
+                else {
+                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 20.0)) {
+                        UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_down", EventUnit(), 8);
+                        UnitBehaviorAdd(EventUnit(), "BerserkAPL_ALL_down", EventUnit(), 8);
+                    }
+                    else {
+                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 30.0)) {
+                            UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_down", EventUnit(), 7);
+                            UnitBehaviorAdd(EventUnit(), "BerserkAPL_ALL_down", EventUnit(), 7);
+                        }
+                        else {
+                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 40.0)) {
+                                UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_down", EventUnit(), 6);
+                                UnitBehaviorAdd(EventUnit(), "BerserkAPL_ALL_down", EventUnit(), 6);
+                            }
+                            else {
+                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 50.0)) {
+                                    UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_down", EventUnit(), 5);
+                                    UnitBehaviorAdd(EventUnit(), "BerserkAPL_ALL_down", EventUnit(), 5);
+                                }
+                                else {
+                                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 60.0)) {
+                                        UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_down", EventUnit(), 4);
+                                        UnitBehaviorAdd(EventUnit(), "BerserkAPL_ALL_down", EventUnit(), 4);
+                                    }
+                                    else {
+                                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 70.0)) {
+                                            UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_down", EventUnit(), 3);
+                                            UnitBehaviorAdd(EventUnit(), "BerserkAPL_ALL_down", EventUnit(), 3);
+                                        }
+                                        else {
+                                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 80.0)) {
+                                                UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_down", EventUnit(), 2);
+                                                UnitBehaviorAdd(EventUnit(), "BerserkAPL_ALL_down", EventUnit(), 2);
+                                            }
+                                            else {
+                                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 90.0)) {
+                                                    UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_down", EventUnit(), 1);
+                                                    UnitBehaviorAdd(EventUnit(), "BerserkAPL_ALL_down", EventUnit(), 1);
+                                                }
+                                                else {
+                                                    UnitBehaviorRemove(EventUnit(), "BerserkPL_ALL_down", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "BerserkAPL_ALL_down", -1);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 1.0)) {
+                UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_down", EventUnit(), 10);
+                UnitBehaviorAdd(EventUnit(), "BerserkAPS_ALL_down", EventUnit(), 10);
+            }
+            else {
+                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 10.0)) {
+                    UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_down", EventUnit(), 9);
+                    UnitBehaviorAdd(EventUnit(), "BerserkAPS_ALL_down", EventUnit(), 9);
+                }
+                else {
+                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 20.0)) {
+                        UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_down", EventUnit(), 8);
+                        UnitBehaviorAdd(EventUnit(), "BerserkAPS_ALL_down", EventUnit(), 8);
+                    }
+                    else {
+                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 30.0)) {
+                            UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_down", EventUnit(), 7);
+                            UnitBehaviorAdd(EventUnit(), "BerserkAPS_ALL_down", EventUnit(), 7);
+                        }
+                        else {
+                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 40.0)) {
+                                UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_down", EventUnit(), 6);
+                                UnitBehaviorAdd(EventUnit(), "BerserkAPS_ALL_down", EventUnit(), 6);
+                            }
+                            else {
+                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 50.0)) {
+                                    UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_down", EventUnit(), 5);
+                                    UnitBehaviorAdd(EventUnit(), "BerserkAPS_ALL_down", EventUnit(), 5);
+                                }
+                                else {
+                                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 60.0)) {
+                                        UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_down", EventUnit(), 4);
+                                        UnitBehaviorAdd(EventUnit(), "BerserkAPS_ALL_down", EventUnit(), 4);
+                                    }
+                                    else {
+                                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 70.0)) {
+                                            UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_down", EventUnit(), 3);
+                                            UnitBehaviorAdd(EventUnit(), "BerserkAPS_ALL_down", EventUnit(), 3);
+                                        }
+                                        else {
+                                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 80.0)) {
+                                                UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_down", EventUnit(), 2);
+                                                UnitBehaviorAdd(EventUnit(), "BerserkAPS_ALL_down", EventUnit(), 2);
+                                            }
+                                            else {
+                                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 90.0)) {
+                                                    UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_down", EventUnit(), 1);
+                                                    UnitBehaviorAdd(EventUnit(), "BerserkAPS_ALL_down", EventUnit(), 1);
+                                                }
+                                                else {
+                                                    UnitBehaviorRemove(EventUnit(), "BerserkPS_ALL_down", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "BerserkAPS_ALL_down", -1);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 1.0)) {
+                UnitBehaviorAdd(EventUnit(), "Berserk_ALL_down", EventUnit(), 10);
+                UnitBehaviorAdd(EventUnit(), "BerserkA_ALL_down", EventUnit(), 10);
+            }
+            else {
+                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 10.0)) {
+                    UnitBehaviorAdd(EventUnit(), "Berserk_ALL_down", EventUnit(), 9);
+                    UnitBehaviorAdd(EventUnit(), "BerserkA_ALL_down", EventUnit(), 9);
+                }
+                else {
+                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 20.0)) {
+                        UnitBehaviorAdd(EventUnit(), "Berserk_ALL_down", EventUnit(), 8);
+                        UnitBehaviorAdd(EventUnit(), "BerserkA_ALL_down", EventUnit(), 8);
+                    }
+                    else {
+                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 30.0)) {
+                            UnitBehaviorAdd(EventUnit(), "Berserk_ALL_down", EventUnit(), 7);
+                            UnitBehaviorAdd(EventUnit(), "BerserkA_ALL_down", EventUnit(), 7);
+                        }
+                        else {
+                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 40.0)) {
+                                UnitBehaviorAdd(EventUnit(), "Berserk_ALL_down", EventUnit(), 6);
+                                UnitBehaviorAdd(EventUnit(), "BerserkA_ALL_down", EventUnit(), 6);
+                            }
+                            else {
+                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 50.0)) {
+                                    UnitBehaviorAdd(EventUnit(), "Berserk_ALL_down", EventUnit(), 5);
+                                    UnitBehaviorAdd(EventUnit(), "BerserkA_ALL_down", EventUnit(), 5);
+                                }
+                                else {
+                                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 60.0)) {
+                                        UnitBehaviorAdd(EventUnit(), "Berserk_ALL_down", EventUnit(), 4);
+                                        UnitBehaviorAdd(EventUnit(), "BerserkA_ALL_down", EventUnit(), 4);
+                                    }
+                                    else {
+                                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 70.0)) {
+                                            UnitBehaviorAdd(EventUnit(), "Berserk_ALL_down", EventUnit(), 3);
+                                            UnitBehaviorAdd(EventUnit(), "BerserkA_ALL_down", EventUnit(), 3);
+                                        }
+                                        else {
+                                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 80.0)) {
+                                                UnitBehaviorAdd(EventUnit(), "Berserk_ALL_down", EventUnit(), 2);
+                                                UnitBehaviorAdd(EventUnit(), "BerserkA_ALL_down", EventUnit(), 2);
+                                            }
+                                            else {
+                                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 90.0)) {
+                                                    UnitBehaviorAdd(EventUnit(), "Berserk_ALL_down", EventUnit(), 1);
+                                                    UnitBehaviorAdd(EventUnit(), "BerserkA_ALL_down", EventUnit(), 1);
+                                                }
+                                                else {
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk_ALL_down", -1);
+                                                    UnitBehaviorRemove(EventUnit(), "BerserkA_ALL_down", -1);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    else {
+        if ((PlayerRace(EventPlayer()) == "Prot")) {
+            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 1.0)) {
+                UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_down", EventUnit(), 10);
+            }
+            else {
+                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 10.0)) {
+                    UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_down", EventUnit(), 9);
+                }
+                else {
+                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 20.0)) {
+                        UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_down", EventUnit(), 8);
+                    }
+                    else {
+                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 30.0)) {
+                            UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_down", EventUnit(), 7);
+                        }
+                        else {
+                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 40.0)) {
+                                UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_down", EventUnit(), 6);
+                            }
+                            else {
+                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 50.0)) {
+                                    UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_down", EventUnit(), 5);
+                                }
+                                else {
+                                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 60.0)) {
+                                        UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_down", EventUnit(), 4);
+                                    }
+                                    else {
+                                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 70.0)) {
+                                            UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_down", EventUnit(), 3);
+                                        }
+                                        else {
+                                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 80.0)) {
+                                                UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_down", EventUnit(), 2);
+                                            }
+                                            else {
+                                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 90.0)) {
+                                                    UnitBehaviorAdd(EventUnit(), "BerserkPL_ALL_down", EventUnit(), 1);
+                                                }
+                                                else {
+                                                    UnitBehaviorRemove(EventUnit(), "BerserkPL_ALL_down", -1);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 1.0)) {
+                UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_down", EventUnit(), 10);
+            }
+            else {
+                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 10.0)) {
+                    UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_down", EventUnit(), 9);
+                }
+                else {
+                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 20.0)) {
+                        UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_down", EventUnit(), 8);
+                    }
+                    else {
+                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 30.0)) {
+                            UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_down", EventUnit(), 7);
+                        }
+                        else {
+                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 40.0)) {
+                                UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_down", EventUnit(), 6);
+                            }
+                            else {
+                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 50.0)) {
+                                    UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_down", EventUnit(), 5);
+                                }
+                                else {
+                                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 60.0)) {
+                                        UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_down", EventUnit(), 4);
+                                    }
+                                    else {
+                                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 70.0)) {
+                                            UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_down", EventUnit(), 3);
+                                        }
+                                        else {
+                                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 80.0)) {
+                                                UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_down", EventUnit(), 2);
+                                            }
+                                            else {
+                                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropShieldsPercent, c_unitPropCurrent) <= 90.0)) {
+                                                    UnitBehaviorAdd(EventUnit(), "BerserkPS_ALL_down", EventUnit(), 1);
+                                                }
+                                                else {
+                                                    UnitBehaviorRemove(EventUnit(), "BerserkPS_ALL_down", -1);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 1.0)) {
+                UnitBehaviorAdd(EventUnit(), "Berserk_ALL_down", EventUnit(), 10);
+            }
+            else {
+                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 10.0)) {
+                    UnitBehaviorAdd(EventUnit(), "Berserk_ALL_down", EventUnit(), 9);
+                }
+                else {
+                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 20.0)) {
+                        UnitBehaviorAdd(EventUnit(), "Berserk_ALL_down", EventUnit(), 8);
+                    }
+                    else {
+                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 30.0)) {
+                            UnitBehaviorAdd(EventUnit(), "Berserk_ALL_down", EventUnit(), 7);
+                        }
+                        else {
+                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 40.0)) {
+                                UnitBehaviorAdd(EventUnit(), "Berserk_ALL_down", EventUnit(), 6);
+                            }
+                            else {
+                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 50.0)) {
+                                    UnitBehaviorAdd(EventUnit(), "Berserk_ALL_down", EventUnit(), 5);
+                                }
+                                else {
+                                    if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 60.0)) {
+                                        UnitBehaviorAdd(EventUnit(), "Berserk_ALL_down", EventUnit(), 4);
+                                    }
+                                    else {
+                                        if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 70.0)) {
+                                            UnitBehaviorAdd(EventUnit(), "Berserk_ALL_down", EventUnit(), 3);
+                                        }
+                                        else {
+                                            if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 80.0)) {
+                                                UnitBehaviorAdd(EventUnit(), "Berserk_ALL_down", EventUnit(), 2);
+                                            }
+                                            else {
+                                                if ((UnitGetPropertyFixed(EventUnit(), c_unitPropLifePercent, c_unitPropCurrent) <= 90.0)) {
+                                                    UnitBehaviorAdd(EventUnit(), "Berserk_ALL_down", EventUnit(), 1);
+                                                }
+                                                else {
+                                                    UnitBehaviorRemove(EventUnit(), "Berserk_ALL_down", -1);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib8BD63CF6_gt_Bdowngrade_withStackBehaviors_Init () {
+    lib8BD63CF6_gt_Bdowngrade_withStackBehaviors = TriggerCreate("lib8BD63CF6_gt_Bdowngrade_withStackBehaviors_Func");
+    TriggerAddEventUnitProperty(lib8BD63CF6_gt_Bdowngrade_withStackBehaviors, null, c_unitPropLifePercent);
+    TriggerAddEventUnitProperty(lib8BD63CF6_gt_Bdowngrade_withStackBehaviors, null, c_unitPropShieldsPercent);
+}
+
+void lib8BD63CF6_InitTriggers () {
+    lib8BD63CF6_gt_BLaunch_Init();
+    lib8BD63CF6_gt_Bupgrade_Life_Init();
+    lib8BD63CF6_gt_Bupgrade_Shield_Init();
+    lib8BD63CF6_gt_Bupgrade_withStackBehaviors_Init();
+    lib8BD63CF6_gt_Bdowngrade_withStackBehaviors_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool lib8BD63CF6_InitLib_completed = false;
+
+void lib8BD63CF6_InitLib () {
+    if (lib8BD63CF6_InitLib_completed) {
+        return;
+    }
+
+    lib8BD63CF6_InitLib_completed = true;
+
+    lib8BD63CF6_InitLibraries();
+    lib8BD63CF6_InitVariables();
+    lib8BD63CF6_InitTriggers();
+}
+

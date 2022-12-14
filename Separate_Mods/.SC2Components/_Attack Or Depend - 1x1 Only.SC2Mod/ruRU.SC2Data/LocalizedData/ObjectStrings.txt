@@ -1,0 +1,6 @@
+﻿Actor/Name/RangeSightCommandCenter=Range Sight CommandCenter
+Actor/Name/RangeSightCommandCenter22=Range Sight CommandCenter
+Actor/Name/RangeSightHatchery=Range Sight Hatchery
+Actor/Name/RangeSightHatchery23=Range Sight Hatchery
+Actor/Name/RangeSightNexus=Range Sight Nexus
+Actor/Name/RangeSightNexus2=Range Sight Nexus

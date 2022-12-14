@@ -1,0 +1,576 @@
+include "TriggerLibs/NativeLib"
+
+include "Lib13484647_h"
+
+//--------------------------------------------------------------------------------------------------
+// Library: Library
+//--------------------------------------------------------------------------------------------------
+// External Library Initialization
+void lib13484647_InitLibraries () {
+    libNtve_InitVariables();
+}
+
+// Variable Initialization
+bool lib13484647_InitVariables_completed = false;
+
+void lib13484647_InitVariables () {
+    if (lib13484647_InitVariables_completed) {
+        return;
+    }
+
+    lib13484647_InitVariables_completed = true;
+
+    lib13484647_gv_aDDefendTimer_Window = c_timerWindowNone;
+    lib13484647_gv_aDDefendTimer_Countdown = TimerCreate();
+    lib13484647_gv_aDUnits_Of_DefenderPlayer = UnitGroup(null, lib13484647_gv_aDDefendPlayer, RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterNeutral) | (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+    lib13484647_gv_aDVictory_For_Time = true;
+}
+
+// Functions
+string lib13484647_gf_ADGetRightBehaviour () {
+    // Automatic Variable Declarations
+    string autoDEAEFDDB_val;
+
+    // Implementation
+    autoDEAEFDDB_val = GameAttributeGameValue("3");
+    if (autoDEAEFDDB_val == "0009") {
+        return "DefendRegion20";
+    }
+    else if (autoDEAEFDDB_val == "0008") {
+        return "DefendRegion25";
+    }
+    else if (autoDEAEFDDB_val == "0001") {
+        return "DefendRegion30";
+    }
+    else if (autoDEAEFDDB_val == "0002") {
+        return "DefendRegion35";
+    }
+    else if (autoDEAEFDDB_val == "0003") {
+        return "DefendRegion40";
+    }
+    else if (autoDEAEFDDB_val == "0004") {
+        return "DefendRegion45";
+    }
+    else if (autoDEAEFDDB_val == "0005") {
+        return "DefendRegion50";
+    }
+    else if (autoDEAEFDDB_val == "0006") {
+        return "DefendRegion60";
+    }
+    else if (autoDEAEFDDB_val == "0007") {
+        return "DefendRegion70";
+    }
+    else if (autoDEAEFDDB_val == "0010") {
+        return "DefendRegion80";
+    }
+    else if (autoDEAEFDDB_val == "0011") {
+        return "DefendRegion90";
+    }
+    else if (autoDEAEFDDB_val == "0012") {
+        return "DefendRegion100";
+    }
+    else {
+        return "DefendRegion20";
+    }
+}
+
+// Triggers
+//--------------------------------------------------------------------------------------------------
+// Trigger: A&D | Launch
+//--------------------------------------------------------------------------------------------------
+bool lib13484647_gt_ADLaunch_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    string auto71B94100_val;
+    string auto53D7BCC5_val;
+    int autoA551ACD4_val;
+    string autoD8FEB120_val;
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto71B94100_val = GameAttributeGameValue("2");
+    if (auto71B94100_val == "0015") {
+        lib13484647_gv_aDget_DefendTime = 240;
+    }
+    else if (auto71B94100_val == "0009") {
+        lib13484647_gv_aDget_DefendTime = 300;
+    }
+    else if (auto71B94100_val == "0010") {
+        lib13484647_gv_aDget_DefendTime = 360;
+    }
+    else if (auto71B94100_val == "0011") {
+        lib13484647_gv_aDget_DefendTime = 420;
+    }
+    else if (auto71B94100_val == "0012") {
+        lib13484647_gv_aDget_DefendTime = 480;
+    }
+    else if (auto71B94100_val == "0013") {
+        lib13484647_gv_aDget_DefendTime = 540;
+    }
+    else if (auto71B94100_val == "0001") {
+        lib13484647_gv_aDget_DefendTime = 600;
+    }
+    else if (auto71B94100_val == "0016") {
+        lib13484647_gv_aDget_DefendTime = 720;
+    }
+    else if (auto71B94100_val == "0002") {
+        lib13484647_gv_aDget_DefendTime = 900;
+    }
+    else if (auto71B94100_val == "0003") {
+        lib13484647_gv_aDget_DefendTime = 1200;
+    }
+    else if (auto71B94100_val == "0005") {
+        lib13484647_gv_aDget_DefendTime = 1500;
+    }
+    else if (auto71B94100_val == "0004") {
+        lib13484647_gv_aDget_DefendTime = 1800;
+    }
+    else if (auto71B94100_val == "0006") {
+        lib13484647_gv_aDget_DefendTime = 2100;
+    }
+    else if (auto71B94100_val == "0007") {
+        lib13484647_gv_aDget_DefendTime = 2400;
+    }
+    else if (auto71B94100_val == "0008") {
+        lib13484647_gv_aDget_DefendTime = 2700;
+    }
+    else if (auto71B94100_val == "0014") {
+        lib13484647_gv_aDget_DefendTime = 3600;
+    }
+    else {
+    }
+    auto53D7BCC5_val = GameAttributeGameValue("4");
+    if (auto53D7BCC5_val == "0002") {
+        lib13484647_gv_aDget_DefendTimer_Window = 1;
+    }
+    else if (auto53D7BCC5_val == "0003") {
+        lib13484647_gv_aDget_DefendTimer_Window = 2;
+    }
+    else if (auto53D7BCC5_val == "0004") {
+        lib13484647_gv_aDget_DefendTimer_Window = 3;
+    }
+    else {
+    }
+    TimerStart(lib13484647_gv_aDDefendTimer_Countdown, lib13484647_gv_aDget_DefendTime, false, c_timeReal);
+    lib13484647_gv_aDDefendTimer_Countdown = TimerLastStarted();
+    autoA551ACD4_val = lib13484647_gv_aDget_DefendTimer_Window;
+    if (autoA551ACD4_val == 1) {
+        TimerWindowCreate(lib13484647_gv_aDDefendTimer_Countdown, StringExternal("Param/Value/lib_13484647_D5F20033"), true, false);
+        TimerWindowSetFormat(TimerWindowLastCreated(), StringToText("<min2/>:<sec2/>"));
+        TimerWindowSetAnchor(TimerWindowLastCreated(), c_anchorBottomLeft, 0, -45);
+        lib13484647_gv_aDDefendTimer_Window = TimerWindowLastCreated();
+    }
+    else if (autoA551ACD4_val == 2) {
+        TimerWindowCreate(lib13484647_gv_aDDefendTimer_Countdown, StringExternal("Param/Value/lib_13484647_23FCA7A7"), true, false);
+        TimerWindowSetFormat(TimerWindowLastCreated(), StringToText("<min2/>:<sec2/>"));
+        TimerWindowSetAnchor(TimerWindowLastCreated(), c_anchorBottomRight, 0, -45);
+        lib13484647_gv_aDDefendTimer_Window = TimerWindowLastCreated();
+    }
+    else if (autoA551ACD4_val == 3) {
+        TimerWindowCreate(lib13484647_gv_aDDefendTimer_Countdown, StringExternal("Param/Value/lib_13484647_A77974D8"), true, false);
+        TimerWindowSetFormat(TimerWindowLastCreated(), StringToText("<min2/>:<sec2/>"));
+        TimerWindowSetAnchor(TimerWindowLastCreated(), c_anchorTopRight, 0, 45);
+        lib13484647_gv_aDDefendTimer_Window = TimerWindowLastCreated();
+    }
+    else {
+    }
+    if (((PlayerStatus(1) == c_playerStatusActive) && (GameAttributePlayerValue("1", 1) == "0002"))) {
+        lib13484647_gv_aDDefendPlayer = 1;
+        lib13484647_gv_aDAttackPlayer = 2;
+    }
+    else {
+        lib13484647_gv_aDDefendPlayer = 2;
+        lib13484647_gv_aDAttackPlayer = 1;
+    }
+    autoD8FEB120_val = GameAttributeGameValue("3");
+    if (autoD8FEB120_val == "0009") {
+        lib13484647_gv_aDget_Radius_Of_DefendRegion = 20;
+    }
+    else if (autoD8FEB120_val == "0008") {
+        lib13484647_gv_aDget_Radius_Of_DefendRegion = 25;
+    }
+    else if (autoD8FEB120_val == "0001") {
+        lib13484647_gv_aDget_Radius_Of_DefendRegion = 30;
+    }
+    else if (autoD8FEB120_val == "0002") {
+        lib13484647_gv_aDget_Radius_Of_DefendRegion = 35;
+    }
+    else if (autoD8FEB120_val == "0003") {
+        lib13484647_gv_aDget_Radius_Of_DefendRegion = 40;
+    }
+    else if (autoD8FEB120_val == "0004") {
+        lib13484647_gv_aDget_Radius_Of_DefendRegion = 45;
+    }
+    else if (autoD8FEB120_val == "0005") {
+        lib13484647_gv_aDget_Radius_Of_DefendRegion = 50;
+    }
+    else if (autoD8FEB120_val == "0006") {
+        lib13484647_gv_aDget_Radius_Of_DefendRegion = 60;
+    }
+    else if (autoD8FEB120_val == "0007") {
+        lib13484647_gv_aDget_Radius_Of_DefendRegion = 70;
+    }
+    else if (autoD8FEB120_val == "0010") {
+        lib13484647_gv_aDget_Radius_Of_DefendRegion = 80;
+    }
+    else if (autoD8FEB120_val == "0011") {
+        lib13484647_gv_aDget_Radius_Of_DefendRegion = 90;
+    }
+    else if (autoD8FEB120_val == "0012") {
+        lib13484647_gv_aDget_Radius_Of_DefendRegion = 100;
+    }
+    else {
+    }
+    if ((GameAttributeGameValue("5") == "0002")) {
+        lib13484647_gv_aDVictory_For_Time = false;
+    }
+
+    lib13484647_gv_aDget_Point_DefendPlayer = PlayerStartLocation(lib13484647_gv_aDDefendPlayer);
+    lib13484647_gv_aDget_DefendRegion = RegionCircle(lib13484647_gv_aDget_Point_DefendPlayer, lib13484647_gv_aDget_Radius_Of_DefendRegion);
+    libNtve_gf_CreateUnitsAtPoint2(1, "NovaPack03SearchNode2", c_unitCreateIgnorePlacement, lib13484647_gv_aDDefendPlayer, lib13484647_gv_aDget_Point_DefendPlayer);
+    UnitBehaviorAdd(UnitLastCreated(), lib13484647_gf_ADGetRightBehaviour(), UnitLastCreated(), 1);
+    lib13484647_gv_searchNodeCopy = UnitLastCreated();
+    Wait(1.0, c_timeReal);
+    lib13484647_gv_aDStart_LeaveEnterDefendRegion = true;
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib13484647_gt_ADLaunch_Init () {
+    lib13484647_gt_ADLaunch = TriggerCreate("lib13484647_gt_ADLaunch_Func");
+    TriggerAddEventMapInit(lib13484647_gt_ADLaunch);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: A&D | Unit LeaveFrom/EntersTo Defend Region
+//--------------------------------------------------------------------------------------------------
+bool lib13484647_gt_ADUnitLeaveFromEntersToDefendRegion_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    unitgroup autoD3989EF2_g;
+    int autoD3989EF2_u;
+    unit autoD3989EF2_var;
+
+    // Conditions
+    if (testConds) {
+        if (!((lib13484647_gv_aDStart_LeaveEnterDefendRegion == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    autoD3989EF2_g = lib13484647_gv_aDUnits_Of_DefenderPlayer;
+    autoD3989EF2_u = UnitGroupCount(autoD3989EF2_g, c_unitCountAll);
+    for (;; autoD3989EF2_u -= 1) {
+        autoD3989EF2_var = UnitGroupUnitFromEnd(autoD3989EF2_g, autoD3989EF2_u);
+        if (autoD3989EF2_var == null) { break; }
+        if ((RegionContainsPoint(lib13484647_gv_aDget_DefendRegion, UnitGetPosition(autoD3989EF2_var)) == false)) {
+            if (((UnitGetType(autoD3989EF2_var) == "SCV") || (UnitGetType(autoD3989EF2_var) == "Marine") || (UnitGetType(autoD3989EF2_var) == "Reaper") || (UnitGetType(autoD3989EF2_var) == "Marauder") || (UnitGetType(autoD3989EF2_var) == "Ghost") || (UnitGetType(autoD3989EF2_var) == "GhostAlternate") || (UnitGetType(autoD3989EF2_var) == "GhostNova") || (UnitGetType(autoD3989EF2_var) == "Hellion") || (UnitGetType(autoD3989EF2_var) == "HellionTank") || (UnitGetType(autoD3989EF2_var) == "WidowMine") || (UnitGetType(autoD3989EF2_var) == "WidowMineBurrowed") || (UnitGetType(autoD3989EF2_var) == "SiegeTankSieged") || (UnitGetType(autoD3989EF2_var) == "SiegeTank") || (UnitGetType(autoD3989EF2_var) == "Cyclone") || (UnitGetType(autoD3989EF2_var) == "ThorAP") || (UnitGetType(autoD3989EF2_var) == "Thor") || (UnitGetType(autoD3989EF2_var) == "VikingAssault") || (UnitGetType(autoD3989EF2_var) == "VikingFighter") || (UnitGetType(autoD3989EF2_var) == "Liberator") || (UnitGetType(autoD3989EF2_var) == "LiberatorAG") || (UnitGetType(autoD3989EF2_var) == "Raven") || (UnitGetType(autoD3989EF2_var) == "Battlecruiser") || (UnitGetType(autoD3989EF2_var) == "Banshee") || (UnitGetType(autoD3989EF2_var) == "PlanetaryFortress") || (UnitGetType(autoD3989EF2_var) == "MissileTurret") || (UnitGetType(autoD3989EF2_var) == "AutoTurret") || (UnitGetType(autoD3989EF2_var) == "Drone") || (UnitGetType(autoD3989EF2_var) == "DroneBurrowed") || (UnitGetType(autoD3989EF2_var) == "Zergling") || (UnitGetType(autoD3989EF2_var) == "ZerglingBurrowed") || (UnitGetType(autoD3989EF2_var) == "Baneling") || (UnitGetType(autoD3989EF2_var) == "BanelingBurrowed") || (UnitGetType(autoD3989EF2_var) == "BanelingCocoon") || (UnitGetType(autoD3989EF2_var) == "Roach") || (UnitGetType(autoD3989EF2_var) == "RoachBurrowed") || (UnitGetType(autoD3989EF2_var) == "Ravager") || (UnitGetType(autoD3989EF2_var) == "RavagerBurrowed") || (UnitGetType(autoD3989EF2_var) == "RavagerCocoon") || (UnitGetType(autoD3989EF2_var) == "Hydralisk") || (UnitGetType(autoD3989EF2_var) == "HydraliskBurrowed") || (UnitGetType(autoD3989EF2_var) == "LurkerMP") || (UnitGetType(autoD3989EF2_var) == "LurkerMPBurrowed") || (UnitGetType(autoD3989EF2_var) == "LurkerMPEgg") || (UnitGetType(autoD3989EF2_var) == "Viper") || (UnitGetType(autoD3989EF2_var) == "Mutalisk") || (UnitGetType(autoD3989EF2_var) == "Corruptor") || (UnitGetType(autoD3989EF2_var) == "SwarmHostMP") || (UnitGetType(autoD3989EF2_var) == "LocustMP") || (UnitGetType(autoD3989EF2_var) == "LocustMPFlying") || (UnitGetType(autoD3989EF2_var) == "SwarmHostBurrowedMP") || (UnitGetType(autoD3989EF2_var) == "Infestor") || (UnitGetType(autoD3989EF2_var) == "InfestorBurrowed") || (UnitGetType(autoD3989EF2_var) == "Ultralisk") || (UnitGetType(autoD3989EF2_var) == "UltraliskBurrowed") || (UnitGetType(autoD3989EF2_var) == "BroodLord") || (UnitGetType(autoD3989EF2_var) == "Broodling") || (UnitGetType(autoD3989EF2_var) == "BroodLordCocoon") || (UnitGetType(autoD3989EF2_var) == "Queen") || (UnitGetType(autoD3989EF2_var) == "QueenBurrowed") || (UnitGetType(autoD3989EF2_var) == "QueenMP") || (UnitGetType(autoD3989EF2_var) == "InfestorTerran") || (UnitGetType(autoD3989EF2_var) == "InfestorTerranBurrowed") || (UnitGetType(autoD3989EF2_var) == "SpineCrawler") || (UnitGetType(autoD3989EF2_var) == "SpineCrawlerUprooted") || (UnitGetType(autoD3989EF2_var) == "SporeCrawler") || (UnitGetType(autoD3989EF2_var) == "SporeCrawlerUprooted") || (UnitGetType(autoD3989EF2_var) == "Probe") || (UnitGetType(autoD3989EF2_var) == "Zealot") || (UnitGetType(autoD3989EF2_var) == "Adept") || (UnitGetType(autoD3989EF2_var) == "Sentry") || (UnitGetType(autoD3989EF2_var) == "Stalker") || (UnitGetType(autoD3989EF2_var) == "DarkTemplar") || (UnitGetType(autoD3989EF2_var) == "HighTemplar") || (UnitGetType(autoD3989EF2_var) == "Archon") || (UnitGetType(autoD3989EF2_var) == "Immortal") || (UnitGetType(autoD3989EF2_var) == "VoidMPImmortalReviveCorpse") || (UnitGetType(autoD3989EF2_var) == "Colossus") || (UnitGetType(autoD3989EF2_var) == "Disruptor") || (UnitGetType(autoD3989EF2_var) == "Phoenix") || (UnitGetType(autoD3989EF2_var) == "VoidRay") || (UnitGetType(autoD3989EF2_var) == "Oracle") || (UnitGetType(autoD3989EF2_var) == "Carrier") || (UnitGetType(autoD3989EF2_var) == "Tempest") || (UnitGetType(autoD3989EF2_var) == "Interceptor") || (UnitGetType(autoD3989EF2_var) == "Mothership") || (UnitGetType(autoD3989EF2_var) == "MothershipCore") || (UnitGetType(autoD3989EF2_var) == "PhotonCannon"))) {
+                UnitBehaviorAddPlayer(autoD3989EF2_var, "CantAttackBehavior1", lib13484647_gv_aDDefendPlayer, 1);
+            }
+
+            if ((UnitGetType(autoD3989EF2_var) == "Reaper")) {
+                UnitAbilityEnable(autoD3989EF2_var, "KD8Charge", false);
+            }
+
+            if (((UnitGetType(autoD3989EF2_var) == "Ghost") || (UnitGetType(autoD3989EF2_var) == "GhostAlternate") || (UnitGetType(autoD3989EF2_var) == "GhostNova"))) {
+                UnitAbilityEnable(autoD3989EF2_var, "ChannelSnipe", false);
+                UnitAbilityEnable(autoD3989EF2_var, "Snipe", false);
+                UnitAbilityEnable(autoD3989EF2_var, "TacNukeStrike", false);
+            }
+
+            if ((UnitGetType(autoD3989EF2_var) == "WidowMineBurrowed")) {
+                UnitAbilityEnable(autoD3989EF2_var, "WidowMineAttack", false);
+            }
+
+            if ((UnitGetType(autoD3989EF2_var) == "Cyclone")) {
+                UnitAbilityEnable(autoD3989EF2_var, "LockOn", false);
+                UnitAbilityEnable(autoD3989EF2_var, "LockOnAir", false);
+            }
+
+            if ((UnitGetType(autoD3989EF2_var) == "Raven")) {
+                UnitAbilityEnable(autoD3989EF2_var, "BuildAutoTurret", false);
+                UnitAbilityEnable(autoD3989EF2_var, "RavenBuild", false);
+            }
+
+            if ((UnitGetType(autoD3989EF2_var) == "Battlecruiser")) {
+                UnitBehaviorAddPlayer(autoD3989EF2_var, "CantAttackBattlBehavior", lib13484647_gv_aDDefendPlayer, 1);
+            }
+
+            if (((UnitGetType(autoD3989EF2_var) == "Baneling") || (UnitGetType(autoD3989EF2_var) == "BanelingBurrowed"))) {
+                UnitAbilityEnable(autoD3989EF2_var, "Explode", false);
+                UnitAbilityEnable(autoD3989EF2_var, "SapStructure", false);
+                UnitAbilityEnable(autoD3989EF2_var, "BanelingNestResearch", false);
+            }
+
+            if ((UnitGetType(autoD3989EF2_var) == "Ravager")) {
+                UnitAbilityEnable(autoD3989EF2_var, "RavagerCorrosiveBile", false);
+            }
+
+            if ((UnitGetType(autoD3989EF2_var) == "Viper")) {
+                UnitAbilityEnable(autoD3989EF2_var, "ParasiticBomb", false);
+            }
+
+            if ((UnitGetType(autoD3989EF2_var) == "Corruptor")) {
+                UnitAbilityEnable(autoD3989EF2_var, "CausticSpray", false);
+                UnitAbilityEnable(autoD3989EF2_var, "Corruption", false);
+            }
+
+            if (((UnitGetType(autoD3989EF2_var) == "Infestor") || (UnitGetType(autoD3989EF2_var) == "InfestorBurrowed"))) {
+                UnitAbilityEnable(autoD3989EF2_var, "FungalGrowth", false);
+            }
+
+            if ((UnitGetType(autoD3989EF2_var) == "Disruptor")) {
+                UnitAbilityEnable(autoD3989EF2_var, "PurificationNovaTargeted", false);
+                UnitAbilityEnable(autoD3989EF2_var, "PurificationNovaMorph", false);
+                UnitAbilityEnable(autoD3989EF2_var, "PurificationNovaMorphBack", false);
+            }
+
+            if ((UnitGetType(autoD3989EF2_var) == "Oracle")) {
+                UnitAbilityEnable(autoD3989EF2_var, "OracleWeapon", false);
+            }
+
+        }
+        else {
+            if (((UnitGetType(autoD3989EF2_var) == "SCV") || (UnitGetType(autoD3989EF2_var) == "Marine") || (UnitGetType(autoD3989EF2_var) == "Reaper") || (UnitGetType(autoD3989EF2_var) == "Marauder") || (UnitGetType(autoD3989EF2_var) == "Ghost") || (UnitGetType(autoD3989EF2_var) == "GhostAlternate") || (UnitGetType(autoD3989EF2_var) == "GhostNova") || (UnitGetType(autoD3989EF2_var) == "Hellion") || (UnitGetType(autoD3989EF2_var) == "HellionTank") || (UnitGetType(autoD3989EF2_var) == "WidowMine") || (UnitGetType(autoD3989EF2_var) == "WidowMineBurrowed") || (UnitGetType(autoD3989EF2_var) == "SiegeTankSieged") || (UnitGetType(autoD3989EF2_var) == "SiegeTank") || (UnitGetType(autoD3989EF2_var) == "Cyclone") || (UnitGetType(autoD3989EF2_var) == "ThorAP") || (UnitGetType(autoD3989EF2_var) == "Thor") || (UnitGetType(autoD3989EF2_var) == "VikingAssault") || (UnitGetType(autoD3989EF2_var) == "VikingFighter") || (UnitGetType(autoD3989EF2_var) == "Liberator") || (UnitGetType(autoD3989EF2_var) == "LiberatorAG") || (UnitGetType(autoD3989EF2_var) == "Raven") || (UnitGetType(autoD3989EF2_var) == "Battlecruiser") || (UnitGetType(autoD3989EF2_var) == "Banshee") || (UnitGetType(autoD3989EF2_var) == "PlanetaryFortress") || (UnitGetType(autoD3989EF2_var) == "MissileTurret") || (UnitGetType(autoD3989EF2_var) == "AutoTurret") || (UnitGetType(autoD3989EF2_var) == "Drone") || (UnitGetType(autoD3989EF2_var) == "DroneBurrowed") || (UnitGetType(autoD3989EF2_var) == "Zergling") || (UnitGetType(autoD3989EF2_var) == "ZerglingBurrowed") || (UnitGetType(autoD3989EF2_var) == "Baneling") || (UnitGetType(autoD3989EF2_var) == "BanelingBurrowed") || (UnitGetType(autoD3989EF2_var) == "BanelingCocoon") || (UnitGetType(autoD3989EF2_var) == "Roach") || (UnitGetType(autoD3989EF2_var) == "RoachBurrowed") || (UnitGetType(autoD3989EF2_var) == "Ravager") || (UnitGetType(autoD3989EF2_var) == "RavagerBurrowed") || (UnitGetType(autoD3989EF2_var) == "RavagerCocoon") || (UnitGetType(autoD3989EF2_var) == "Hydralisk") || (UnitGetType(autoD3989EF2_var) == "HydraliskBurrowed") || (UnitGetType(autoD3989EF2_var) == "LurkerMP") || (UnitGetType(autoD3989EF2_var) == "LurkerMPBurrowed") || (UnitGetType(autoD3989EF2_var) == "LurkerMPEgg") || (UnitGetType(autoD3989EF2_var) == "Viper") || (UnitGetType(autoD3989EF2_var) == "Mutalisk") || (UnitGetType(autoD3989EF2_var) == "Corruptor") || (UnitGetType(autoD3989EF2_var) == "SwarmHostMP") || (UnitGetType(autoD3989EF2_var) == "LocustMP") || (UnitGetType(autoD3989EF2_var) == "LocustMPFlying") || (UnitGetType(autoD3989EF2_var) == "SwarmHostBurrowedMP") || (UnitGetType(autoD3989EF2_var) == "Infestor") || (UnitGetType(autoD3989EF2_var) == "InfestorBurrowed") || (UnitGetType(autoD3989EF2_var) == "Ultralisk") || (UnitGetType(autoD3989EF2_var) == "UltraliskBurrowed") || (UnitGetType(autoD3989EF2_var) == "BroodLord") || (UnitGetType(autoD3989EF2_var) == "Broodling") || (UnitGetType(autoD3989EF2_var) == "BroodLordCocoon") || (UnitGetType(autoD3989EF2_var) == "Queen") || (UnitGetType(autoD3989EF2_var) == "QueenBurrowed") || (UnitGetType(autoD3989EF2_var) == "QueenMP") || (UnitGetType(autoD3989EF2_var) == "InfestorTerran") || (UnitGetType(autoD3989EF2_var) == "InfestorTerranBurrowed") || (UnitGetType(autoD3989EF2_var) == "SpineCrawler") || (UnitGetType(autoD3989EF2_var) == "SpineCrawlerUprooted") || (UnitGetType(autoD3989EF2_var) == "SporeCrawler") || (UnitGetType(autoD3989EF2_var) == "SporeCrawlerUprooted") || (UnitGetType(autoD3989EF2_var) == "Probe") || (UnitGetType(autoD3989EF2_var) == "Zealot") || (UnitGetType(autoD3989EF2_var) == "Adept") || (UnitGetType(autoD3989EF2_var) == "Sentry") || (UnitGetType(autoD3989EF2_var) == "Stalker") || (UnitGetType(autoD3989EF2_var) == "DarkTemplar") || (UnitGetType(autoD3989EF2_var) == "HighTemplar") || (UnitGetType(autoD3989EF2_var) == "Archon") || (UnitGetType(autoD3989EF2_var) == "Immortal") || (UnitGetType(autoD3989EF2_var) == "VoidMPImmortalReviveCorpse") || (UnitGetType(autoD3989EF2_var) == "Colossus") || (UnitGetType(autoD3989EF2_var) == "Disruptor") || (UnitGetType(autoD3989EF2_var) == "Phoenix") || (UnitGetType(autoD3989EF2_var) == "VoidRay") || (UnitGetType(autoD3989EF2_var) == "Oracle") || (UnitGetType(autoD3989EF2_var) == "Carrier") || (UnitGetType(autoD3989EF2_var) == "Tempest") || (UnitGetType(autoD3989EF2_var) == "Interceptor") || (UnitGetType(autoD3989EF2_var) == "Mothership") || (UnitGetType(autoD3989EF2_var) == "MothershipCore") || (UnitGetType(autoD3989EF2_var) == "PhotonCannon"))) {
+                UnitBehaviorRemovePlayer(autoD3989EF2_var, "CantAttackBehavior1", lib13484647_gv_aDDefendPlayer, 1);
+            }
+
+            if ((UnitGetType(autoD3989EF2_var) == "Reaper")) {
+                UnitAbilityEnable(autoD3989EF2_var, "KD8Charge", true);
+            }
+
+            if (((UnitGetType(autoD3989EF2_var) == "Ghost") || (UnitGetType(autoD3989EF2_var) == "GhostAlternate") || (UnitGetType(autoD3989EF2_var) == "GhostNova"))) {
+                UnitAbilityEnable(autoD3989EF2_var, "ChannelSnipe", true);
+                UnitAbilityEnable(autoD3989EF2_var, "Snipe", true);
+                UnitAbilityEnable(autoD3989EF2_var, "TacNukeStrike", true);
+            }
+
+            if ((UnitGetType(autoD3989EF2_var) == "WidowMineBurrowed")) {
+                UnitAbilityEnable(autoD3989EF2_var, "WidowMineAttack", true);
+            }
+
+            if ((UnitGetType(autoD3989EF2_var) == "Cyclone")) {
+                UnitAbilityEnable(autoD3989EF2_var, "LockOn", true);
+                UnitAbilityEnable(autoD3989EF2_var, "LockOnAir", true);
+            }
+
+            if ((UnitGetType(autoD3989EF2_var) == "Raven")) {
+                UnitAbilityEnable(autoD3989EF2_var, "BuildAutoTurret", true);
+                UnitAbilityEnable(autoD3989EF2_var, "RavenBuild", true);
+            }
+
+            if ((UnitGetType(autoD3989EF2_var) == "Battlecruiser")) {
+                UnitBehaviorRemovePlayer(autoD3989EF2_var, "CantAttackBattlBehavior", lib13484647_gv_aDDefendPlayer, 1);
+            }
+
+            if (((UnitGetType(autoD3989EF2_var) == "Baneling") || (UnitGetType(autoD3989EF2_var) == "BanelingBurrowed"))) {
+                UnitAbilityEnable(autoD3989EF2_var, "Explode", true);
+                UnitAbilityEnable(autoD3989EF2_var, "SapStructure", true);
+                UnitAbilityEnable(autoD3989EF2_var, "BanelingNestResearch", true);
+            }
+
+            if ((UnitGetType(autoD3989EF2_var) == "Ravager")) {
+                UnitAbilityEnable(autoD3989EF2_var, "RavagerCorrosiveBile", true);
+            }
+
+            if ((UnitGetType(autoD3989EF2_var) == "Viper")) {
+                UnitAbilityEnable(autoD3989EF2_var, "ParasiticBomb", true);
+            }
+
+            if ((UnitGetType(autoD3989EF2_var) == "Corruptor")) {
+                UnitAbilityEnable(autoD3989EF2_var, "CausticSpray", true);
+                UnitAbilityEnable(autoD3989EF2_var, "Corruption", true);
+            }
+
+            if (((UnitGetType(autoD3989EF2_var) == "Infestor") || (UnitGetType(autoD3989EF2_var) == "InfestorBurrowed"))) {
+                UnitAbilityEnable(autoD3989EF2_var, "FungalGrowth", true);
+            }
+
+            if ((UnitGetType(autoD3989EF2_var) == "Disruptor")) {
+                UnitAbilityEnable(autoD3989EF2_var, "PurificationNovaTargeted", true);
+                UnitAbilityEnable(autoD3989EF2_var, "PurificationNovaMorph", true);
+                UnitAbilityEnable(autoD3989EF2_var, "PurificationNovaMorphBack", true);
+            }
+
+            if ((UnitGetType(autoD3989EF2_var) == "Oracle")) {
+                UnitAbilityEnable(autoD3989EF2_var, "OracleWeapon", true);
+            }
+
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib13484647_gt_ADUnitLeaveFromEntersToDefendRegion_Init () {
+    lib13484647_gt_ADUnitLeaveFromEntersToDefendRegion = TriggerCreate("lib13484647_gt_ADUnitLeaveFromEntersToDefendRegion_Func");
+    TriggerAddEventTimePeriodic(lib13484647_gt_ADUnitLeaveFromEntersToDefendRegion, 0.5, c_timeGame);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: A&D | Unit Enters/Dies in Game
+//--------------------------------------------------------------------------------------------------
+bool lib13484647_gt_ADUnitEntersDiesinGame_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((lib13484647_gv_aDStart_LeaveEnterDefendRegion == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lib13484647_gv_aDUnits_Of_DefenderPlayer = UnitGroup(null, lib13484647_gv_aDDefendPlayer, RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterNeutral) | (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib13484647_gt_ADUnitEntersDiesinGame_Init () {
+    lib13484647_gt_ADUnitEntersDiesinGame = TriggerCreate("lib13484647_gt_ADUnitEntersDiesinGame_Func");
+    TriggerAddEventUnitRegion(lib13484647_gt_ADUnitEntersDiesinGame, null, RegionEntireMap(), true);
+    TriggerAddEventUnitDied(lib13484647_gt_ADUnitEntersDiesinGame, null);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: A&D | EndGame
+//--------------------------------------------------------------------------------------------------
+bool lib13484647_gt_ADEndGame_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    unitgroup auto4C1FD573_g;
+    int auto4C1FD573_u;
+    unit auto4C1FD573_var;
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((lib13484647_gv_aDVictory_For_Time == true)) {
+        GameOver(lib13484647_gv_aDDefendPlayer, c_gameOverVictory, true, true);
+        GameOver(lib13484647_gv_aDAttackPlayer, c_gameOverDefeat, true, true);
+    }
+    else {
+        TimerWindowDestroy(lib13484647_gv_aDDefendTimer_Window);
+        UnitBehaviorRemove(lib13484647_gv_searchNodeCopy, lib13484647_gf_ADGetRightBehaviour(), 1);
+        UnitRemove(lib13484647_gv_searchNodeCopy);
+        lib13484647_gv_aDStart_LeaveEnterDefendRegion = false;
+        SoundPlayForPlayer(SoundLink("UI_ZergWarning", -1), c_maxPlayers, PlayerGroupAll(), 150.0, 0.0);
+        UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, StringExternal("Param/Value/lib_13484647_FCBD21F5"));
+        Wait(1.0, c_timeReal);
+        UIDisplayMessage(PlayerGroupActive(), c_messageAreaChat, StringExternal("Param/Value/lib_13484647_40615940"));
+        lib13484647_gv_aDUnits_Of_DefenderPlayer = UnitGroup(null, lib13484647_gv_aDDefendPlayer, RegionEntireMap(), UnitFilter(0, 0, (1 << c_targetFilterNeutral) | (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0);
+        auto4C1FD573_g = lib13484647_gv_aDUnits_Of_DefenderPlayer;
+        auto4C1FD573_u = UnitGroupCount(auto4C1FD573_g, c_unitCountAll);
+        for (;; auto4C1FD573_u -= 1) {
+            auto4C1FD573_var = UnitGroupUnitFromEnd(auto4C1FD573_g, auto4C1FD573_u);
+            if (auto4C1FD573_var == null) { break; }
+            if (((UnitGetType(auto4C1FD573_var) == "SCV") || (UnitGetType(auto4C1FD573_var) == "Marine") || (UnitGetType(auto4C1FD573_var) == "Reaper") || (UnitGetType(auto4C1FD573_var) == "Marauder") || (UnitGetType(auto4C1FD573_var) == "Ghost") || (UnitGetType(auto4C1FD573_var) == "GhostAlternate") || (UnitGetType(auto4C1FD573_var) == "GhostNova") || (UnitGetType(auto4C1FD573_var) == "Hellion") || (UnitGetType(auto4C1FD573_var) == "HellionTank") || (UnitGetType(auto4C1FD573_var) == "WidowMine") || (UnitGetType(auto4C1FD573_var) == "WidowMineBurrowed") || (UnitGetType(auto4C1FD573_var) == "SiegeTankSieged") || (UnitGetType(auto4C1FD573_var) == "SiegeTank") || (UnitGetType(auto4C1FD573_var) == "Cyclone") || (UnitGetType(auto4C1FD573_var) == "ThorAP") || (UnitGetType(auto4C1FD573_var) == "Thor") || (UnitGetType(auto4C1FD573_var) == "VikingAssault") || (UnitGetType(auto4C1FD573_var) == "VikingFighter") || (UnitGetType(auto4C1FD573_var) == "Liberator") || (UnitGetType(auto4C1FD573_var) == "LiberatorAG") || (UnitGetType(auto4C1FD573_var) == "Raven") || (UnitGetType(auto4C1FD573_var) == "Battlecruiser") || (UnitGetType(auto4C1FD573_var) == "Banshee") || (UnitGetType(auto4C1FD573_var) == "PlanetaryFortress") || (UnitGetType(auto4C1FD573_var) == "MissileTurret") || (UnitGetType(auto4C1FD573_var) == "AutoTurret") || (UnitGetType(auto4C1FD573_var) == "Drone") || (UnitGetType(auto4C1FD573_var) == "DroneBurrowed") || (UnitGetType(auto4C1FD573_var) == "Zergling") || (UnitGetType(auto4C1FD573_var) == "ZerglingBurrowed") || (UnitGetType(auto4C1FD573_var) == "Baneling") || (UnitGetType(auto4C1FD573_var) == "BanelingBurrowed") || (UnitGetType(auto4C1FD573_var) == "BanelingCocoon") || (UnitGetType(auto4C1FD573_var) == "Roach") || (UnitGetType(auto4C1FD573_var) == "RoachBurrowed") || (UnitGetType(auto4C1FD573_var) == "Ravager") || (UnitGetType(auto4C1FD573_var) == "RavagerBurrowed") || (UnitGetType(auto4C1FD573_var) == "RavagerCocoon") || (UnitGetType(auto4C1FD573_var) == "Hydralisk") || (UnitGetType(auto4C1FD573_var) == "HydraliskBurrowed") || (UnitGetType(auto4C1FD573_var) == "LurkerMP") || (UnitGetType(auto4C1FD573_var) == "LurkerMPBurrowed") || (UnitGetType(auto4C1FD573_var) == "LurkerMPEgg") || (UnitGetType(auto4C1FD573_var) == "Viper") || (UnitGetType(auto4C1FD573_var) == "Mutalisk") || (UnitGetType(auto4C1FD573_var) == "Corruptor") || (UnitGetType(auto4C1FD573_var) == "SwarmHostMP") || (UnitGetType(auto4C1FD573_var) == "LocustMP") || (UnitGetType(auto4C1FD573_var) == "LocustMPFlying") || (UnitGetType(auto4C1FD573_var) == "SwarmHostBurrowedMP") || (UnitGetType(auto4C1FD573_var) == "Infestor") || (UnitGetType(auto4C1FD573_var) == "InfestorBurrowed") || (UnitGetType(auto4C1FD573_var) == "Ultralisk") || (UnitGetType(auto4C1FD573_var) == "UltraliskBurrowed") || (UnitGetType(auto4C1FD573_var) == "BroodLord") || (UnitGetType(auto4C1FD573_var) == "Broodling") || (UnitGetType(auto4C1FD573_var) == "BroodLordCocoon") || (UnitGetType(auto4C1FD573_var) == "Queen") || (UnitGetType(auto4C1FD573_var) == "QueenBurrowed") || (UnitGetType(auto4C1FD573_var) == "QueenMP") || (UnitGetType(auto4C1FD573_var) == "InfestorTerran") || (UnitGetType(auto4C1FD573_var) == "InfestorTerranBurrowed") || (UnitGetType(auto4C1FD573_var) == "SpineCrawler") || (UnitGetType(auto4C1FD573_var) == "SpineCrawlerUprooted") || (UnitGetType(auto4C1FD573_var) == "SporeCrawler") || (UnitGetType(auto4C1FD573_var) == "SporeCrawlerUprooted") || (UnitGetType(auto4C1FD573_var) == "Probe") || (UnitGetType(auto4C1FD573_var) == "Zealot") || (UnitGetType(auto4C1FD573_var) == "Adept") || (UnitGetType(auto4C1FD573_var) == "Sentry") || (UnitGetType(auto4C1FD573_var) == "Stalker") || (UnitGetType(auto4C1FD573_var) == "DarkTemplar") || (UnitGetType(auto4C1FD573_var) == "HighTemplar") || (UnitGetType(auto4C1FD573_var) == "Archon") || (UnitGetType(auto4C1FD573_var) == "Immortal") || (UnitGetType(auto4C1FD573_var) == "VoidMPImmortalReviveCorpse") || (UnitGetType(auto4C1FD573_var) == "Colossus") || (UnitGetType(auto4C1FD573_var) == "Disruptor") || (UnitGetType(auto4C1FD573_var) == "Phoenix") || (UnitGetType(auto4C1FD573_var) == "VoidRay") || (UnitGetType(auto4C1FD573_var) == "Oracle") || (UnitGetType(auto4C1FD573_var) == "Carrier") || (UnitGetType(auto4C1FD573_var) == "Tempest") || (UnitGetType(auto4C1FD573_var) == "Interceptor") || (UnitGetType(auto4C1FD573_var) == "Mothership") || (UnitGetType(auto4C1FD573_var) == "MothershipCore") || (UnitGetType(auto4C1FD573_var) == "PhotonCannon"))) {
+                UnitBehaviorRemovePlayer(auto4C1FD573_var, "CantAttackBehavior1", lib13484647_gv_aDDefendPlayer, 1);
+            }
+
+            if ((UnitGetType(auto4C1FD573_var) == "Reaper")) {
+                UnitAbilityEnable(auto4C1FD573_var, "KD8Charge", true);
+            }
+
+            if (((UnitGetType(auto4C1FD573_var) == "Ghost") || (UnitGetType(auto4C1FD573_var) == "GhostAlternate") || (UnitGetType(auto4C1FD573_var) == "GhostNova"))) {
+                UnitAbilityEnable(auto4C1FD573_var, "ChannelSnipe", true);
+                UnitAbilityEnable(auto4C1FD573_var, "Snipe", true);
+                UnitAbilityEnable(auto4C1FD573_var, "TacNukeStrike", true);
+            }
+
+            if ((UnitGetType(auto4C1FD573_var) == "WidowMineBurrowed")) {
+                UnitAbilityEnable(auto4C1FD573_var, "WidowMineAttack", true);
+            }
+
+            if ((UnitGetType(auto4C1FD573_var) == "Cyclone")) {
+                UnitAbilityEnable(auto4C1FD573_var, "LockOn", true);
+                UnitAbilityEnable(auto4C1FD573_var, "LockOnAir", true);
+            }
+
+            if ((UnitGetType(auto4C1FD573_var) == "Raven")) {
+                UnitAbilityEnable(auto4C1FD573_var, "BuildAutoTurret", true);
+                UnitAbilityEnable(auto4C1FD573_var, "RavenBuild", true);
+            }
+
+            if ((UnitGetType(auto4C1FD573_var) == "Battlecruiser")) {
+                UnitBehaviorRemovePlayer(auto4C1FD573_var, "CantAttackBattlBehavior", lib13484647_gv_aDDefendPlayer, 1);
+            }
+
+            if (((UnitGetType(auto4C1FD573_var) == "Baneling") || (UnitGetType(auto4C1FD573_var) == "BanelingBurrowed"))) {
+                UnitAbilityEnable(auto4C1FD573_var, "Explode", true);
+                UnitAbilityEnable(auto4C1FD573_var, "SapStructure", true);
+                UnitAbilityEnable(auto4C1FD573_var, "BanelingNestResearch", true);
+            }
+
+            if ((UnitGetType(auto4C1FD573_var) == "Ravager")) {
+                UnitAbilityEnable(auto4C1FD573_var, "RavagerCorrosiveBile", true);
+            }
+
+            if ((UnitGetType(auto4C1FD573_var) == "Viper")) {
+                UnitAbilityEnable(auto4C1FD573_var, "ParasiticBomb", true);
+            }
+
+            if ((UnitGetType(auto4C1FD573_var) == "Corruptor")) {
+                UnitAbilityEnable(auto4C1FD573_var, "CausticSpray", true);
+                UnitAbilityEnable(auto4C1FD573_var, "Corruption", true);
+            }
+
+            if (((UnitGetType(auto4C1FD573_var) == "Infestor") || (UnitGetType(auto4C1FD573_var) == "InfestorBurrowed"))) {
+                UnitAbilityEnable(auto4C1FD573_var, "FungalGrowth", true);
+            }
+
+            if ((UnitGetType(auto4C1FD573_var) == "Disruptor")) {
+                UnitAbilityEnable(auto4C1FD573_var, "PurificationNovaTargeted", true);
+                UnitAbilityEnable(auto4C1FD573_var, "PurificationNovaMorph", true);
+                UnitAbilityEnable(auto4C1FD573_var, "PurificationNovaMorphBack", true);
+            }
+
+            if ((UnitGetType(auto4C1FD573_var) == "Oracle")) {
+                UnitAbilityEnable(auto4C1FD573_var, "OracleWeapon", true);
+            }
+
+        }
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib13484647_gt_ADEndGame_Init () {
+    lib13484647_gt_ADEndGame = TriggerCreate("lib13484647_gt_ADEndGame_Func");
+    TriggerAddEventTimer(lib13484647_gt_ADEndGame, lib13484647_gv_aDDefendTimer_Countdown);
+}
+
+void lib13484647_InitTriggers () {
+    lib13484647_gt_ADLaunch_Init();
+    lib13484647_gt_ADUnitLeaveFromEntersToDefendRegion_Init();
+    lib13484647_gt_ADUnitEntersDiesinGame_Init();
+    lib13484647_gt_ADEndGame_Init();
+}
+
+//--------------------------------------------------------------------------------------------------
+// Library Initialization
+//--------------------------------------------------------------------------------------------------
+bool lib13484647_InitLib_completed = false;
+
+void lib13484647_InitLib () {
+    if (lib13484647_InitLib_completed) {
+        return;
+    }
+
+    lib13484647_InitLib_completed = true;
+
+    lib13484647_InitLibraries();
+    lib13484647_InitVariables();
+    lib13484647_InitTriggers();
+}
+

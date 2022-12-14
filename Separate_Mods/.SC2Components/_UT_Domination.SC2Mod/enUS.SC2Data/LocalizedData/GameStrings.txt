@@ -1,0 +1,90 @@
+﻿Attribute001/Name=Количество точек захвата
+Attribute001/Value001/Name=1
+Attribute001/Value002/Name=2
+Attribute001/Value003/Name=3
+Attribute002/Name=Вид точек захвата
+Attribute002/Value001/Name=каменная башня
+Attribute002/Value002/Name=каменная башня + видимый радиус
+Attribute002/Value003/Name=зеленое поле
+Attribute002/Value004/Name=флаг с радиусом
+Attribute003/Name=Радиус точки захвата
+Attribute003/Value001/Name=2
+Attribute003/Value002/Name=3
+Attribute003/Value003/Name=4
+Attribute003/Value004/Name=5
+Attribute003/Value005/Name=6
+Attribute004/Name=Необходимое количество очков
+Attribute004/Value001/Name=500
+Attribute004/Value002/Name=800
+Attribute004/Value003/Name=1000
+Attribute004/Value004/Name=1200
+Attribute004/Value005/Name=1500
+Attribute004/Value006/Name=2000
+Attribute004/Value007/Name=2500
+Attribute004/Value008/Name=3000
+Attribute005/Name=Набор очков
+Attribute005/Value001/Desc=от 0 до необходимого количества
+Attribute005/Value001/Name=Положительный
+Attribute005/Value002/Desc=от необходимого количества отнимаются очки до 0
+Attribute005/Value002/Name=Отрицательный
+Attribute006/Name=Число попыток
+Attribute006/Value001/Desc=до первой победы
+Attribute006/Value001/Name=1
+Attribute006/Value002/Desc=большее из трех попыток
+Attribute006/Value002/Name=3
+Attribute006/Value003/Desc=большее из пяти попыток
+Attribute006/Value003/Name=5
+Attribute006/Value004/Desc=большее из семи попыток
+Attribute006/Value004/Name=7
+DocInfo/DescLong=Познай силу Unreal Tournament:<n/>Твоя команда зарабатывает очки, захватывая и удерживая контрольные точки на карте(точки доминирования).<n/><n/>Создатели / Creators: Unreal 2003/2004, Qmax.
+DocInfo/Name=[ ZERGTV ] Domination | Unreal
+DocInfo/Website=zergtv.tv/gg
+Effect/Name/RepulserField6SearchArea=Repulser Field (Search Area) 04
+Effect/Name/RepulserField6SearchArea2=Repulser Field (Search Area) 03
+Effect/Name/RepulserField6SearchArea3=Repulser Field (Search Area) 02
+Effect/Name/RepulserField6SearchArea4=Repulser Field (Search Area) 05
+Effect/Name/RepulserField6SearchArea42=Repulser Field (Search Area) 06
+Effect/Name/RepulserFieldApplyForce2=Repulser Field (Apply Force)
+Effect/Name/RepulserFieldIssueOrder2=Repulser Field Copy
+Effect/Name/RepulserFieldSet2=Repulser Field Copy 2
+Param/Value/lib_AFDD5302_03B9D1F0=<s val="ModLeftSize20Bold">
+Param/Value/lib_AFDD5302_0B11E95E=так как команд больше 4-х, то количество точек доминации: 
+Param/Value/lib_AFDD5302_0DF99C9A=количество игроков: 
+Param/Value/lib_AFDD5302_125BBC6B=Контролируйте точки доминации на карте, чтобы набрать очки и выиграть игру!
+Param/Value/lib_AFDD5302_16BFDCA3=Control the towers for the required time to win!
+Param/Value/lib_AFDD5302_17311FC0=<s val="ModLeftSize20Bold">Team 
+Param/Value/lib_AFDD5302_25D26EC7=<s val="ModLeftSize20Bold">Team 
+Param/Value/lib_AFDD5302_27068057=количество команд: 
+Param/Value/lib_AFDD5302_284EC67F=<s val="ModLeftSize20Bold">
+Param/Value/lib_AFDD5302_39336B4B=<s val="ModLeftSize20Bold">
+Param/Value/lib_AFDD5302_3BFEA2C8=<s val="ModLeftSize20Bold">- 
+Param/Value/lib_AFDD5302_3C1D940E=количество команд: 
+Param/Value/lib_AFDD5302_3D26C6BD=количество игроков: 
+Param/Value/lib_AFDD5302_6787A8CD=количество точек доминации: 
+Param/Value/lib_AFDD5302_8748F100=Контролируйте точки доминации на карте, чтобы набрать очки и выиграть игру!
+Param/Value/lib_AFDD5302_8F30FFCE=<s val="ModLeftSize20Bold">
+Param/Value/lib_AFDD5302_981231CA=<s val="ModLeftSize20Bold">Required:  
+Param/Value/lib_AFDD5302_B360DF7C=В игре сейчас находится 
+Param/Value/lib_AFDD5302_BE3B9BE2=<s val="ModLeftSize20Bold">Потратить очки
+Param/Value/lib_AFDD5302_C1EBC124=так как команд больше 4-х, то количество точек доминации: 
+Param/Value/lib_AFDD5302_CE29EB9A=количество команд: 
+Param/Value/lib_AFDD5302_D53BD420=<s val="ModLeftSize20Bold">Required:  
+Param/Value/lib_AFDD5302_DCE62656= активных участников.
+Param/Value/lib_AFDD5302_EB424432=<s val="ModLeftSize20Bold">
+Param/Value/lib_AFDD5302_F26212AC=количество точек доминации: 
+Param/Value/lib_AFDD5302_F9E0E500=<s val="ModLeftSize20Bold">Набрать: 
+Unit/Name/BlueConstruct_B=Blue Construct B
+Unit/Name/Construct_C=Orange Construct C
+Unit/Name/DestructibleKorhalFlag=Flag
+Unit/Name/NovaPack03SearchNode2=Search Node Copy
+Unit/Name/RedConstruct_A=Red Construct A
+Unit/Name/RepulserField6=Repulsor Field
+Unit/Name/RepulserField62=Repulsor Field
+Unit/Name/RepulserField63=Repulsor Field
+Unit/Name/RepulserField632=Repulsor Field
+Unit/Name/RepulserField6322=Repulsor Field
+Unit/Name/RepulsorField=Repulsor Field 04
+Unit/Name/RepulsorField2=Repulsor Field 02
+Unit/Name/RepulsorField3=Repulsor Field 03
+Unit/Name/RepulsorField32=Repulsor Field 05
+Unit/Name/RepulsorField322=Repulsor Field 06

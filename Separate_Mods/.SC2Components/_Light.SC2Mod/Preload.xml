@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Preload>
+<Actor id="SYSTEM_ActorConfig"/>
+<Light id="BlackWhite2"/>
+<Light id="MarSaraCampaignDay1"/>
+<Light id="MarSaraCampaignNight2"/>
+<Light id="MyLight_01_Sunrise"/>
+<Light id="MyLight_02_Day"/>
+<Light id="MyLight_03_Evening"/>
+<Light id="MyLight_04_Night"/>
+<Light id="MyLight_DarkNight"/>
+<Light id="zergtv_02"/>
+<Light id="zergtv_03"/>
+<Light id="lsd_705"/>
+<Light id="BlackWhite"/>
+<Light id="zergtv_00"/>
+<Light id="zergtv_01"/>
+<Light id="zergtv_04"/>
+<Light id="zergtv_05"/>
+<Light id="zergtv_06"/>
+<Light id="zergtv_07"/>
+<Light id="zergtv_08"/>
+<Light id="zergtv_09"/>
+<Light id="zergtv_10"/>
+<Light id="zergtv_11"/>
+<Light id="zergtv_12"/>
+<Light id="zergtv_13"/>
+<Light id="zergtv_14"/>
+<Light id="zergtv_15"/>
+<Light id="zergtv_16"/>
+<Light id="zergtv_17"/>
+<Light id="zergtv_18"/>
+<Light id="zergtv_19"/>
+<Light id="zergtv_20"/>
+<Light id="zergtv_21"/>
+<Light id="zergtv_22"/>
+<Light id="zergtv_23"/>
+</Preload>

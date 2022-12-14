@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CActorUnit id="AmonShardA" parent="GenericUnitBase" unitName="RedConstruct_A">
+        <On Terms="ActorCreation" Send="$Birth 0 0.000000"/>
+        <On Terms="Abil.AmonTentacleA.SourceCastStart" Send="AnimClear Birth"/>
+        <On Terms="Abil.AmonTentacleA.SourceCastStart" Send="AnimBracketStart Laser Stand,Work,Start Stand,Work Stand,Work,End"/>
+        <On Terms="Abil.AmonTentacleA.SourceCastStop" Send="AnimPlay Attack Attack"/>
+        <On Terms="Abil.AmonTentacleA.SourceChannelStop" Send="TimerSet 4.000000 LaserAttack"/>
+        <On Terms="TimerExpired; TimerName LaserAttack; !ValidateUnitType AmonShardAAttacking" Send="AnimBracketStop Laser"/>
+        <Model value="AmonTentacleA"/>
+        <AnimBlendTime value="0.200000"/>
+        <BuildModel value="AmonTentacleA"/>
+        <DeathArray index="Normal" ModelLink="AmonTentacleADeath" SoundLink="PEpilogue03_AmonTentacleDeath" VoiceLink="PEpilogue03_AmonTentacleDeathDelayed"/>
+        <PlacementModel value="AmonTentacleA"/>
+        <PortraitActor value="AmonEx2Portrait"/>
+        <PortraitModel value="AmonEx2Portrait"/>
+        <BarOffset value="300"/>
+        <BarWidth value="85"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Protoss-VoidConstruct.dds"/>
+        </GroupIcon>
+        <HighlightTooltip value="Unit/Name/AmonShardA"/>
+        <LifeArmorIcon value="Assets\Textures\amonshards _armor.dds"/>
+        <Wireframe>
+            <Image value="Assets\Textures\Wireframe-Protoss-VoidConstruct.dds"/>
+        </Wireframe>
+    </CActorUnit>
+    <CActorUnit id="AmonShardB" parent="GenericUnitBase" unitName="BlueConstruct_B">
+        <On Terms="ActorCreation" Send="$Birth 0 0.000000"/>
+        <On Terms="Abil.AmonTentacleB.SourceCastStart" Send="AnimClear Birth"/>
+        <On Terms="Abil.AmonTentacleB.SourceCastStart" Send="AnimBracketStart AoE Stand,Work,Start Stand,Work Stand,Work,End"/>
+        <On Terms="Abil.AmonTentacleB.SourceCastStop" Send="AnimPlay Attack Attack"/>
+        <On Terms="Abil.AmonTentacleB.SourceChannelStop" Send="TimerSet 5.000000 AoEAttack"/>
+        <On Terms="TimerExpired; TimerName AoEAttack; !ValidateUnitType AmonShardBAttacking" Send="AnimBracketStop AoE"/>
+        <Model value="AmonTentacleB"/>
+        <AnimBlendTime value="0.200000"/>
+        <BuildModel value="AmonTentacleB"/>
+        <DeathArray index="Normal" ModelLink="AmonTentacleBDeath" SoundLink="PEpilogue03_AmonTentacleDeath" VoiceLink="PEpilogue03_AmonTentacleDeathDelayed"/>
+        <PlacementModel value="AmonTentacleB"/>
+        <PortraitActor value="AmonEx2Portrait"/>
+        <PortraitModel value="AmonEx2Portrait"/>
+        <BarOffset value="300"/>
+        <BarWidth value="85"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Protoss-VoidConstruct.dds"/>
+        </GroupIcon>
+        <HighlightTooltip value="Unit/Name/AmonShardB"/>
+        <LifeArmorIcon value="Assets\Textures\amonshards _armor.dds"/>
+        <Wireframe>
+            <Image value="Assets\Textures\Wireframe-Protoss-VoidConstruct.dds"/>
+        </Wireframe>
+    </CActorUnit>
+    <CActorUnit id="AmonShardC" parent="GenericUnitBase" unitName="Construct_C">
+        <On Terms="ActorCreation" Send="$Birth 0 0.000000"/>
+        <On Terms="Abil.AmonTentacleC.SourceCastStart" Send="AnimClear Birth"/>
+        <On Terms="Abil.AmonTentacleC.SourceCastStart" Send="AnimBracketStart Blast Stand,Work,Start Stand,Work Stand,Work,End ContentPlayOnce"/>
+        <On Terms="Abil.AmonTentacleC.SourceCastStop" Send="AnimPlay Attack Attack"/>
+        <Model value="AmonTentacleC"/>
+        <AnimBlendTime value="0.200000"/>
+        <BuildModel value="AmonTentacleC"/>
+        <DeathArray index="Normal" ModelLink="AmonTentacleCDeath" SoundLink="PEpilogue03_AmonTentacleDeath" VoiceLink="PEpilogue03_AmonTentacleDeathDelayed"/>
+        <PlacementModel value="AmonTentacleC"/>
+        <PortraitActor value="AmonEx2Portrait"/>
+        <PortraitModel value="AmonEx2Portrait"/>
+        <BarOffset value="300"/>
+        <BarWidth value="85"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Protoss-VoidConstruct.dds"/>
+        </GroupIcon>
+        <HighlightTooltip value="Unit/Name/AmonShardC"/>
+        <LifeArmorIcon value="Assets\Textures\amonshards _armor.dds"/>
+        <Wireframe>
+            <Image value="Assets\Textures\Wireframe-Protoss-VoidConstruct.dds"/>
+        </Wireframe>
+    </CActorUnit>
+    <CActorUnit id="DestructibleKorhalFlag" parent="GenericUnitStandardNoAutoSoundLinks" unitName="DestructibleKorhalFlag">
+        <On Terms="UnitDeathCustomize; ModelVariation 0" Send="DeathCustomize Variation0"/>
+        <On Terms="UnitDeathCustomize; ModelVariation 1" Send="DeathCustomize Variation1"/>
+        <On Terms="UnitDeathCustomize; ModelVariation 2" Send="DeathCustomize Variation2"/>
+        <On Terms="ActorCreation" Send="Create SoundEmitter Doodad_KorhalFlag"/>
+        <Model value="KorhalFlag"/>
+        <DeathArray index="Normal" ModelLink="KorhalFlagDeath00" SoundLink="Destructible_KorhalFlagDeath"/>
+        <DeathCustoms ModelLink="KorhalFlagDeath00" Name="Variation0"/>
+        <DeathCustoms ModelLink="KorhalFlagDeath01" Name="Variation1"/>
+        <DeathCustoms ModelLink="KorhalFlagDeath02" Name="Variation2"/>
+        <BarOffset value="22"/>
+        <BarWidth value="45"/>
+        <StatusBarFlags index="Shields" value="0"/>
+        <StatusBarFlags index="Life" value="0"/>
+        <StatusBarFlags index="Energy" value="0"/>
+        <StatusBarFlags index="Cargo" value="0"/>
+        <StatusBarFlags index="Progress" value="0"/>
+        <StatusBarFlags index="Duration" value="0"/>
+    </CActorUnit>
+    <CActorUnit id="NovaPack03SearchNode2" parent="GenericUnitStandardNoAutoSoundLinks" unitName="NovaPack03SearchNode2">
+        <On Terms="ActorCreation" Send="AnimSetPausedAll"/>
+        <On Terms="AssetPreInit; IsInEditor" Send="ModelLinkCustomize NovaPack03SearchNode"/>
+        <Model value="Invisible"/>
+        <ModelFlags index="AutomateGlobalLoops" value="0"/>
+        <WalkAnimMoveSpeed value="0"/>
+        <StatusBarFlags index="Shields" value="0"/>
+        <StatusBarFlags index="Life" value="0"/>
+        <StatusBarFlags index="Energy" value="0"/>
+        <StatusBarFlags index="Cargo" value="0"/>
+        <StatusBarFlags index="Progress" value="0"/>
+        <StatusBarFlags index="Duration" value="0"/>
+        <UnitFlags index="ShowBlobShadow" value="0"/>
+    </CActorUnit>
+    <CActorUnit id="RepulserField6" parent="GenericUnitMinimal" unitName="RepulsorField">
+        <Model value="ChallengeShield"/>
+        <Scale value="0.660000,0.660000,1.000000"/>
+        <HighlightTooltip value="Unit/Name/RepulserField6"/>
+        <UnitFlags index="ShowBlobShadow" value="0"/>
+    </CActorUnit>
+    <CActorUnit id="RepulserField62" parent="GenericUnitMinimal" unitName="RepulsorField2">
+        <Model value="ChallengeShield"/>
+        <Scale value="0.330000,0.330000,1.000000"/>
+        <HighlightTooltip value="Unit/Name/RepulserField62"/>
+        <UnitFlags index="ShowBlobShadow" value="0"/>
+    </CActorUnit>
+    <CActorUnit id="RepulserField63" parent="GenericUnitMinimal" unitName="RepulsorField3">
+        <Model value="ChallengeShield"/>
+        <Scale value="0.500000,0.500000,1.000000"/>
+        <HighlightTooltip value="Unit/Name/RepulserField63"/>
+        <UnitFlags index="ShowBlobShadow" value="0"/>
+    </CActorUnit>
+    <CActorUnit id="RepulserField632" parent="GenericUnitMinimal" unitName="RepulsorField32">
+        <Model value="ChallengeShield"/>
+        <Scale value="0.833000,0.833000,1.000000"/>
+        <HighlightTooltip value="Unit/Name/RepulserField632"/>
+        <UnitFlags index="ShowBlobShadow" value="0"/>
+    </CActorUnit>
+    <CActorUnit id="RepulserField6322" parent="GenericUnitMinimal" unitName="RepulsorField322">
+        <Model value="ChallengeShield"/>
+        <HighlightTooltip value="Unit/Name/RepulserField6322"/>
+        <UnitFlags index="ShowBlobShadow" value="0"/>
+    </CActorUnit>
+    <CActorRange id="Zone2">
+        <VisibleTo index="Self" value="1"/>
+        <VisibleTo index="Ally" value="1"/>
+        <Inherits index="Visibility" value="0"/>
+        <FogVisibility value="Visible"/>
+        <On Terms="Behavior.Zone2.On" Send="Create"/>
+        <On Terms="Behavior.Zone2.Off" Send="Destroy"/>
+        <Range value="1.500000"/>
+        <Icon value="Assets\Textures\radaricon1.dds"/>
+        <IconArcLength value="1.000000"/>
+        <RangeFlags index="Minimap" value="1"/>
+    </CActorRange>
+    <CActorRange id="Zone4">
+        <VisibleTo index="Self" value="1"/>
+        <VisibleTo index="Ally" value="1"/>
+        <Inherits index="Visibility" value="0"/>
+        <FogVisibility value="Visible"/>
+        <On Terms="Behavior.Zone4.On" Send="Create"/>
+        <On Terms="Behavior.Zone4.Off" Send="Destroy"/>
+        <Range value="3.500000"/>
+        <Icon value="Assets\Textures\radaricon1.dds"/>
+        <IconArcLength value="1.000000"/>
+        <RangeFlags index="Minimap" value="1"/>
+    </CActorRange>
+    <CActorRange id="Zone3">
+        <VisibleTo index="Self" value="1"/>
+        <VisibleTo index="Ally" value="1"/>
+        <Inherits index="Visibility" value="0"/>
+        <FogVisibility value="Visible"/>
+        <On Terms="Behavior.Zone3.On" Send="Create"/>
+        <On Terms="Behavior.Zone3.Off" Send="Destroy"/>
+        <Range value="2.500000"/>
+        <Icon value="Assets\Textures\radaricon1.dds"/>
+        <IconArcLength value="1.000000"/>
+        <RangeFlags index="Minimap" value="1"/>
+    </CActorRange>
+    <CActorRange id="Zone5">
+        <VisibleTo index="Self" value="1"/>
+        <VisibleTo index="Ally" value="1"/>
+        <Inherits index="Visibility" value="0"/>
+        <FogVisibility value="Visible"/>
+        <On Terms="Behavior.Zone5.On" Send="Create"/>
+        <On Terms="Behavior.Zone5.Off" Send="Destroy"/>
+        <Range value="4.500000"/>
+        <Icon value="Assets\Textures\radaricon1.dds"/>
+        <IconArcLength value="1.000000"/>
+        <RangeFlags index="Minimap" value="1"/>
+    </CActorRange>
+    <CActorRange id="Zone6">
+        <VisibleTo index="Self" value="1"/>
+        <VisibleTo index="Ally" value="1"/>
+        <Inherits index="Visibility" value="0"/>
+        <FogVisibility value="Visible"/>
+        <On Terms="Behavior.Zone6.On" Send="Create"/>
+        <On Terms="Behavior.Zone6.Off" Send="Destroy"/>
+        <Range value="5.500000"/>
+        <Icon value="Assets\Textures\radaricon1.dds"/>
+        <IconArcLength value="1.000000"/>
+        <RangeFlags index="Minimap" value="1"/>
+    </CActorRange>
+</Catalog>

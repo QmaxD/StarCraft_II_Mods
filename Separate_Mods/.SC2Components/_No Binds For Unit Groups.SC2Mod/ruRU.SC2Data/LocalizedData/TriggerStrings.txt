@@ -1,0 +1,4 @@
+﻿Category/Name/lib_753870DF_ADE390C0=No Bind
+Library/Name/753870DF=Untitled Library 001
+Trigger/Name/lib_753870DF_51ED577A=disable bind
+Trigger/Name/lib_753870DF_69ADDB2C=default bind everytime
