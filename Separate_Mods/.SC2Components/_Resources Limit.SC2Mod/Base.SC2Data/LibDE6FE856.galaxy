@@ -258,6 +258,10 @@ bool libDE6FE856_gt_RLCreateDialog_Func (bool testConds, bool runActions) {
     text lv__dialogItemTextCollected;
     color lv__colorLost;
     color lv__colorCollected;
+    int lv__dialogCheckOffsetX;
+    int lv__dialogCheckOffsetY;
+    int lv__dialogResourceOffsetX;
+    int lv__dialogResourceOffsetY;
 
     // Automatic Variable Declarations
     playergroup autoFBF461F0_g;
@@ -271,8 +275,10 @@ bool libDE6FE856_gt_RLCreateDialog_Func (bool testConds, bool runActions) {
     lv__dialogItemVespenText = TextExpressionAssemble("Param/Expression/lib_DE6FE856_E1F32FF9");
     lv__dialogItemTextLost = TextExpressionAssemble("Param/Expression/lib_DE6FE856_C813B7EF");
     lv__dialogItemTextCollected = TextExpressionAssemble("Param/Expression/lib_DE6FE856_F485DDB8");
-    lv__colorLost = Color(100.00, 0.00, 0.00);
-    lv__colorCollected = Color(16*100/255,98*100/255,70*100/255);
+    lv__colorLost = Color(66.67, 15.69, 15.69);
+    lv__colorCollected = Color(15.69, 66.67, 15.69);
+    lv__dialogCheckOffsetY = 50;
+    lv__dialogResourceOffsetY = 100;
 
     // Actions
     if (!runActions) {
@@ -284,10 +290,11 @@ bool libDE6FE856_gt_RLCreateDialog_Func (bool testConds, bool runActions) {
     while (true) {
         autoFBF461F0_var = PlayerGroupNextPlayer(autoFBF461F0_g, autoFBF461F0_var);
         if (autoFBF461F0_var < 0) { break; }
-        DialogCreate(135, 60, c_anchorTopLeft, 0, 0, true);
+        DialogCreate(135, 60, c_anchorTopLeft, lv__dialogCheckOffsetX, lv__dialogCheckOffsetY, true);
         libDE6FE856_gv_dialogCheck[autoFBF461F0_var] = DialogLastCreated();
         libNtve_gf_CreateDialogItemCheckBox(libDE6FE856_gv_dialogCheck[autoFBF461F0_var], 50, 50, c_anchorTopLeft, 0, 5, StringExternal("Param/Value/lib_DE6FE856_0A81B989"), false);
         libDE6FE856_gv_dialogItemCheckValue[autoFBF461F0_var] = DialogControlLastCreated();
+        libNtve_gf_SetDialogItemChecked(libDE6FE856_gv_dialogItemCheckValue[autoFBF461F0_var], true, PlayerGroupSingle(autoFBF461F0_var));
         TextExpressionSetToken("Param/Expression/lib_DE6FE856_4D3F154F", "A", lv__dialogItemCheckText);
         libNtve_gf_CreateDialogItemButton(libDE6FE856_gv_dialogCheck[autoFBF461F0_var], 80, 30, c_anchorTopLeft, 40, 15, StringToText(""), TextExpressionAssemble("Param/Expression/lib_DE6FE856_4D3F154F"), "");
         libDE6FE856_gv_dialogItemCheckText[autoFBF461F0_var] = DialogControlLastCreated();
@@ -299,7 +306,7 @@ bool libDE6FE856_gt_RLCreateDialog_Func (bool testConds, bool runActions) {
     while (true) {
         auto388A1C58_var = PlayerGroupNextPlayer(auto388A1C58_g, auto388A1C58_var);
         if (auto388A1C58_var < 0) { break; }
-        DialogCreate(280, 220, c_anchorTopLeft, 0, 50, true);
+        DialogCreate(280, 220, c_anchorTopLeft, lv__dialogResourceOffsetX, lv__dialogResourceOffsetY, true);
         libDE6FE856_gv_dialogLostResources[auto388A1C58_var] = DialogLastCreated();
         libNtve_gf_CreateDialogItemLabel(libDE6FE856_gv_dialogLostResources[auto388A1C58_var], 130, 35, c_anchorTopRight, 20, 35, lv__dialogItemMineralsText, ColorWithAlpha(0,0,0,0), false, 2.0);
         libNtve_gf_CreateDialogItemLabel(libDE6FE856_gv_dialogLostResources[auto388A1C58_var], 130, 35, c_anchorTopRight, 115, 60, lv__dialogItemTextLost, ColorWithAlpha(0,0,0,0), false, 2.0);
@@ -323,6 +330,7 @@ bool libDE6FE856_gt_RLCreateDialog_Func (bool testConds, bool runActions) {
         libDE6FE856_gv_dialogItemVespenCollected[auto388A1C58_var] = DialogControlLastCreated();
         libNtve_gf_SetDialogItemStyle(libDE6FE856_gv_dialogItemVespenCollected[auto388A1C58_var], "ResourceValue", PlayerGroupSingle(auto388A1C58_var));
         libNtve_gf_SetDialogItemColor(libDE6FE856_gv_dialogItemVespenCollected[auto388A1C58_var], lv__colorCollected, PlayerGroupSingle(auto388A1C58_var));
+        DialogSetVisible(libDE6FE856_gv_dialogLostResources[auto388A1C58_var], PlayerGroupSingle(auto388A1C58_var), true);
     }
     return true;
 }
@@ -581,6 +589,10 @@ bool libDE6FE856_gt_RLEnterTextBox_Func (bool testConds, bool runActions) {
         DialogSetVisible(libDE6FE856_gv_dialogLostResources[EventPlayer()], PlayerGroupSingle(EventPlayer()), true);
     }
 
+    if (((EventDialogControl() == libDE6FE856_gv_dialogItemCheckText[EventPlayer()]) && (libDE6FE856_gv_isCheck == true))) {
+        DialogSetVisible(libDE6FE856_gv_dialogLostResources[EventPlayer()], PlayerGroupSingle(EventPlayer()), false);
+    }
+
     return true;
 }
 
@@ -602,6 +614,10 @@ bool libDE6FE856_gt_RLExitTextBox_Func (bool testConds, bool runActions) {
 
     if (((EventDialogControl() == libDE6FE856_gv_dialogItemCheckText[EventPlayer()]) && (libDE6FE856_gv_isCheck == false))) {
         DialogSetVisible(libDE6FE856_gv_dialogLostResources[EventPlayer()], PlayerGroupSingle(EventPlayer()), false);
+    }
+
+    if (((EventDialogControl() == libDE6FE856_gv_dialogItemCheckText[EventPlayer()]) && (libDE6FE856_gv_isCheck == true))) {
+        DialogSetVisible(libDE6FE856_gv_dialogLostResources[EventPlayer()], PlayerGroupSingle(EventPlayer()), true);
     }
 
     return true;

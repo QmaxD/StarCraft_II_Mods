@@ -440,6 +440,10 @@ void libA56FBBB5_gf_RLCreateLostDialog () {
     text lv__dialogItemTextCollected;
     color lv__colorLost;
     color lv__colorCollected;
+    int lv__dialogCheckOffsetX;
+    int lv__dialogCheckOffsetY;
+    int lv__dialogResourceOffsetX;
+    int lv__dialogResourceOffsetY;
 
     // Automatic Variable Declarations
     playergroup auto50023AC9_g;
@@ -455,6 +459,8 @@ void libA56FBBB5_gf_RLCreateLostDialog () {
     lv__dialogItemTextCollected = TextExpressionAssemble("Param/Expression/lib_A56FBBB5_1C23B8FF");
     lv__colorLost = Color(100.00, 0.00, 0.00);
     lv__colorCollected = Color(16*100/255,98*100/255,70*100/255);
+    lv__dialogCheckOffsetY = 50;
+    lv__dialogResourceOffsetY = 100;
 
     // Implementation
     auto50023AC9_g = lib36280BFF_gv_commonplayers_Active_Group;
@@ -462,10 +468,11 @@ void libA56FBBB5_gf_RLCreateLostDialog () {
     while (true) {
         auto50023AC9_var = PlayerGroupNextPlayer(auto50023AC9_g, auto50023AC9_var);
         if (auto50023AC9_var < 0) { break; }
-        DialogCreate(135, 60, c_anchorTopLeft, 0, 50, true);
+        DialogCreate(135, 60, c_anchorTopLeft, lv__dialogCheckOffsetX, lv__dialogCheckOffsetY, true);
         libA56FBBB5_gv_rLdialogCheck[auto50023AC9_var] = DialogLastCreated();
         libNtve_gf_CreateDialogItemCheckBox(libA56FBBB5_gv_rLdialogCheck[auto50023AC9_var], 50, 50, c_anchorTopLeft, 0, 5, StringExternal("Param/Value/lib_A56FBBB5_85C5D6FB"), false);
         libA56FBBB5_gv_rLdialogItemCheckValue[auto50023AC9_var] = DialogControlLastCreated();
+        libNtve_gf_SetDialogItemChecked(libA56FBBB5_gv_rLdialogItemCheckValue[auto50023AC9_var], true, PlayerGroupSingle(auto50023AC9_var));
         TextExpressionSetToken("Param/Expression/lib_A56FBBB5_2FDA8A25", "A", lv__dialogItemCheckText);
         libNtve_gf_CreateDialogItemButton(libA56FBBB5_gv_rLdialogCheck[auto50023AC9_var], 80, 30, c_anchorTopLeft, 40, 15, StringToText(""), TextExpressionAssemble("Param/Expression/lib_A56FBBB5_2FDA8A25"), "");
         libA56FBBB5_gv_rLdialogItemCheckText[auto50023AC9_var] = DialogControlLastCreated();
@@ -477,7 +484,7 @@ void libA56FBBB5_gf_RLCreateLostDialog () {
     while (true) {
         auto654AE70F_var = PlayerGroupNextPlayer(auto654AE70F_g, auto654AE70F_var);
         if (auto654AE70F_var < 0) { break; }
-        DialogCreate(280, 220, c_anchorTopLeft, 0, 100, true);
+        DialogCreate(280, 220, c_anchorTopLeft, lv__dialogResourceOffsetX, lv__dialogResourceOffsetY, true);
         libA56FBBB5_gv_rLdialogLostResources[auto654AE70F_var] = DialogLastCreated();
         libNtve_gf_CreateDialogItemLabel(libA56FBBB5_gv_rLdialogLostResources[auto654AE70F_var], 130, 35, c_anchorTopRight, 20, 35, lv__dialogItemMineralsText, ColorWithAlpha(0,0,0,0), false, 2.0);
         libNtve_gf_CreateDialogItemLabel(libA56FBBB5_gv_rLdialogLostResources[auto654AE70F_var], 130, 35, c_anchorTopRight, 115, 60, lv__dialogItemTextLost, ColorWithAlpha(0,0,0,0), false, 2.0);
@@ -689,6 +696,10 @@ bool libA56FBBB5_gt_RLEnterTextBox_Func (bool testConds, bool runActions) {
         DialogSetVisible(libA56FBBB5_gv_rLdialogLostResources[EventPlayer()], PlayerGroupSingle(EventPlayer()), true);
     }
 
+    if (((EventDialogControl() == libA56FBBB5_gv_rLdialogItemCheckText[EventPlayer()]) && (libA56FBBB5_gv_rLisCheck == true))) {
+        DialogSetVisible(libA56FBBB5_gv_rLdialogLostResources[EventPlayer()], PlayerGroupSingle(EventPlayer()), false);
+    }
+
     return true;
 }
 
@@ -711,6 +722,10 @@ bool libA56FBBB5_gt_RLExitTextBox_Func (bool testConds, bool runActions) {
 
     if (((EventDialogControl() == libA56FBBB5_gv_rLdialogItemCheckText[EventPlayer()]) && (libA56FBBB5_gv_rLisCheck == false))) {
         DialogSetVisible(libA56FBBB5_gv_rLdialogLostResources[EventPlayer()], PlayerGroupSingle(EventPlayer()), false);
+    }
+
+    if (((EventDialogControl() == libA56FBBB5_gv_rLdialogItemCheckText[EventPlayer()]) && (libA56FBBB5_gv_rLisCheck == true))) {
+        DialogSetVisible(libA56FBBB5_gv_rLdialogLostResources[EventPlayer()], PlayerGroupSingle(EventPlayer()), true);
     }
 
     return true;
