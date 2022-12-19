@@ -499,7 +499,7 @@ bool lib36280BFF_gt_CommonPlayerLeaveFromGame_Func (bool testConds, bool runActi
 //--------------------------------------------------------------------------------------------------
 void lib36280BFF_gt_CommonPlayerLeaveFromGame_Init () {
     lib36280BFF_gt_CommonPlayerLeaveFromGame = TriggerCreate("lib36280BFF_gt_CommonPlayerLeaveFromGame_Func");
-    TriggerAddEventPlayerLeft(lib36280BFF_gt_CommonPlayerLeaveFromGame, c_playerAny, c_gameResultUndecided);
+    TriggerAddEventPlayerLeft(lib36280BFF_gt_CommonPlayerLeaveFromGame, c_playerAny, c_gameResultDefeat);
 }
 
 void lib36280BFF_InitTriggers () {

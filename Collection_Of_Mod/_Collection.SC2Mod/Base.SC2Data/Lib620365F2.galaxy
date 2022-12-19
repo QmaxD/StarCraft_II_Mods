@@ -71,12 +71,12 @@ void lib620365F2_InitVariables () {
     lib620365F2_gv_modInformation.lv_wLOption_2D092D18BD0B4D0B0D182D18CD0BBD0B8D0BCD0B8D182D180D0B0D0B1D0BED187D0B8D185 = "Выдать лимит рабочих";
     lib620365F2_gv_modInformation.lv_wLOption_2D092D0B2D0B5D181D182D0B8D0B7D0BDD0B0D187D0B5D0BDD0B8D0B5 = "Ввести значение";
     for (init_i = 0; init_i <= lib36280BFF_gv_commonamount_Players_InGame; init_i += 1) {
-        lib620365F2_gv_wLget_WorkerLimit[init_i] = 12;
+        lib620365F2_gv_wLgetWorkersLimit[init_i] = 12;
     }
     for (init_i = 0; init_i <= lib36280BFF_gv_commonamount_Players_InGame; init_i += 1) {
-        lib620365F2_gv_wLgive_WorkersInStart[init_i] = 12;
+        lib620365F2_gv_wLgiveWorkersInStart[init_i] = 12;
     }
-    lib620365F2_gv_wLis_Start = true;
+    lib620365F2_gv_wLisStart = true;
 }
 
 // Functions
@@ -263,41 +263,51 @@ void lib620365F2_gf_GetOptions () {
     // Variable Initialization
 
     // Implementation
-    auto8B41012E_g = PlayerGroupActive();
+    auto8B41012E_g = lib36280BFF_gv_commonplayers_Active_Group;
     lv__number_Player = -1;
     while (true) {
         lv__number_Player = PlayerGroupNextPlayer(auto8B41012E_g, lv__number_Player);
         if (lv__number_Player < 0) { break; }
         autoD2251C07_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[1].lv_values[0].lv_valueString;
         if (autoD2251C07_val == lib620365F2_gv_modInformation.lv_wLOption_1D091D0B5D0B7D0BBD0B8D0BCD0B8D182D0B0D180D0B0D0B1D0BED187D0B8D185) {
-            lib620365F2_gv_wLis_Start = false;
-            TriggerEnable(lib620365F2_gt_WLLookAfter_WorkerLimit, false);
-            TriggerStop(lib620365F2_gt_WLLookAfter_WorkerLimit);
+            TriggerStop(lib620365F2_gt_WLWorkerUnitEnter);
+            TriggerStop(lib620365F2_gt_WLWorkerUnitDies);
+            TriggerStop(lib620365F2_gt_WLWorkerUnitMorph);
+            TriggerStop(lib620365F2_gt_WLPeriodicCheckWorkers);
+            TriggerEnable(lib620365F2_gt_WLWorkerUnitEnter, false);
+            TriggerEnable(lib620365F2_gt_WLWorkerUnitDies, false);
+            TriggerEnable(lib620365F2_gt_WLWorkerUnitMorph, false);
+            TriggerEnable(lib620365F2_gt_WLPeriodicCheckWorkers, false);
         }
         else if (autoD2251C07_val == lib620365F2_gv_modInformation.lv_wLOption_1D097D0B0D0BFD180D0B5D182D0B8D182D18CD181D182D180D0BED0B8D182D18CD180D0B0D0B1D0BED187D0B8D185) {
-            lib620365F2_gv_wLis_Worker_BuildingBan_Permanently[lv__number_Player] = true;
+            lib620365F2_gv_wLisWorkerBuildingBan[lv__number_Player] = true;
         }
         else {
-            lib620365F2_gv_wLget_WorkerLimit[lv__number_Player] = StringToInt(lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[1].lv_values[0].lv_valueString);
-            lib620365F2_gv_wLis_LookAfter_WorkerLimit[lv__number_Player] = true;
+            lib620365F2_gv_wLgetWorkersLimit[lv__number_Player] = StringToInt(lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[1].lv_values[0].lv_valueString);
+            lib620365F2_gv_wLisStart = true;
         }
         auto5039890F_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[2].lv_values[0].lv_valueString;
         if (auto5039890F_val == lib620365F2_gv_modInformation.lv_wLOption_2D0A3D0BDD0B8D187D182D0BED0B6D0B8D182D18CD180D0B0D0B1D0BED187D0B8D185) {
-            lib620365F2_gv_wLgive_WorkersInStart[lv__number_Player] = 0;
+            lib620365F2_gv_wLgiveWorkersInStart[lv__number_Player] = 0;
         }
         else if (auto5039890F_val == lib620365F2_gv_modInformation.lv_wLOption_2D09DD0B5D182) {
         }
         else if (auto5039890F_val == lib620365F2_gv_modInformation.lv_wLOption_2D092D18BD0B4D0B0D182D18CD0BBD0B8D0BCD0B8D182D180D0B0D0B1D0BED187D0B8D185) {
-            lib620365F2_gv_wLgive_WorkersInStart[lv__number_Player] = lib620365F2_gv_wLget_WorkerLimit[lv__number_Player];
+            lib620365F2_gv_wLgiveWorkersInStart[lv__number_Player] = lib620365F2_gv_wLgetWorkersLimit[lv__number_Player];
         }
         else {
-            lib620365F2_gv_wLgive_WorkersInStart[lv__number_Player] = StringToInt(lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[2].lv_values[0].lv_valueString);
+            lib620365F2_gv_wLgiveWorkersInStart[lv__number_Player] = StringToInt(lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[2].lv_values[0].lv_valueString);
         }
     }
 }
 
 void lib620365F2_gf_TriggersTurnOn () {
     // Automatic Variable Declarations
+    // Implementation
+    TriggerEnable(lib620365F2_gt_WLWorkerUnitEnter, true);
+    TriggerEnable(lib620365F2_gt_WLWorkerUnitDies, true);
+    TriggerEnable(lib620365F2_gt_WLWorkerUnitMorph, true);
+    TriggerEnable(lib620365F2_gt_WLPeriodicCheckWorkers, true);
 }
 
 void lib620365F2_gf_WLGetInfoForPlayer () {
@@ -320,26 +330,26 @@ void lib620365F2_gf_WLGetInfoForPlayer () {
         TextExpressionSetToken("Param/Expression/lib_620365F2_FEEA61B0", "NumberPlayer", IntToText(lv__number_Player));
         TextExpressionSetToken("Param/Expression/lib_620365F2_FEEA61B0", "NamePlayer", TextWithColor(PlayerName(lv__number_Player), libNtve_gf_ConvertPlayerColorToColor(PlayerGetColorIndex(lv__number_Player, false))));
         lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_620365F2_FEEA61B0"));
-        if ((lib620365F2_gv_wLis_Worker_BuildingBan_Permanently[lv__number_Player] == true)) {
+        if ((lib620365F2_gv_wLisWorkerBuildingBan[lv__number_Player] == true)) {
             lv__description = (lv__description + StringExternal("Param/Value/lib_620365F2_696E65B8"));
         }
         else {
-            if ((lib620365F2_gv_wLis_Start == false)) {
+            if ((lib620365F2_gv_wLisStart == false)) {
                 lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_620365F2_B6F21FE8"));
             }
             else {
-                TextExpressionSetToken("Param/Expression/lib_620365F2_97B4FC90", "WorkerLimit", IntToText(lib620365F2_gv_wLget_WorkerLimit[lv__number_Player]));
+                TextExpressionSetToken("Param/Expression/lib_620365F2_97B4FC90", "WorkerLimit", IntToText(lib620365F2_gv_wLgetWorkersLimit[lv__number_Player]));
                 lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_620365F2_97B4FC90"));
             }
         }
-        if ((lib620365F2_gv_wLgive_WorkersInStart[lv__number_Player] < 12)) {
-            TextExpressionSetToken("Param/Expression/lib_620365F2_3E487991", "AmountWorkers", IntToText(lib620365F2_gv_wLgive_WorkersInStart[lv__number_Player]));
+        if ((lib620365F2_gv_wLgiveWorkersInStart[lv__number_Player] < 12)) {
+            TextExpressionSetToken("Param/Expression/lib_620365F2_3E487991", "AmountWorkers", IntToText(lib620365F2_gv_wLgiveWorkersInStart[lv__number_Player]));
             lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_620365F2_3E487991"));
         }
-        else if ((lib620365F2_gv_wLgive_WorkersInStart[lv__number_Player] == 12)) {
+        else if ((lib620365F2_gv_wLgiveWorkersInStart[lv__number_Player] == 12)) {
         }
-        else if ((lib620365F2_gv_wLgive_WorkersInStart[lv__number_Player] > 12)) {
-            TextExpressionSetToken("Param/Expression/lib_620365F2_0F5D2D12", "AmountWorkers", IntToText(lib620365F2_gv_wLgive_WorkersInStart[lv__number_Player]));
+        else if ((lib620365F2_gv_wLgiveWorkersInStart[lv__number_Player] > 12)) {
+            TextExpressionSetToken("Param/Expression/lib_620365F2_0F5D2D12", "AmountWorkers", IntToText(lib620365F2_gv_wLgiveWorkersInStart[lv__number_Player]));
             lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_620365F2_0F5D2D12"));
         }
     }
@@ -361,52 +371,39 @@ void lib620365F2_gf_WLStart () {
     while (true) {
         lv__number_Player = PlayerGroupNextPlayer(autoCC036371_g, lv__number_Player);
         if (lv__number_Player < 0) { break; }
-        if ((lib620365F2_gv_wLgive_WorkersInStart[lv__number_Player] != 12)) {
-            if ((lib620365F2_gv_wLgive_WorkersInStart[lv__number_Player] == lib620365F2_gv_wLget_WorkerLimit[lv__number_Player])) {
-                lib620365F2_gf_WLDisableWorkersForPlayer(lv__number_Player);
-                lib620365F2_gf_WLGiveAmountWorkersForCreate(lv__number_Player);
-            }
-            else {
-                lib620365F2_gf_WLGiveAmountWorkersForCreate(lv__number_Player);
-            }
-        }
-
-        if ((lib620365F2_gv_wLis_Worker_BuildingBan_Permanently[lv__number_Player] == true)) {
+        if ((lib620365F2_gv_wLisWorkerBuildingBan[lv__number_Player] == true)) {
             lib620365F2_gf_WLDisableWorkersForPlayer(lv__number_Player);
-            lib620365F2_gv_wLis_Start = false;
+            lib620365F2_gv_wLisStart = false;
         }
-        else {
-            if ((lib620365F2_gv_wLis_Start == false)) {
+
+        if ((lib620365F2_gv_wLgiveWorkersInStart[lv__number_Player] != 12)) {
+            if ((lib620365F2_gv_wLgiveWorkersInStart[lv__number_Player] == lib620365F2_gv_wLgetWorkersLimit[lv__number_Player])) {
+                lib620365F2_gf_WLDisableWorkersForPlayer(lv__number_Player);
+                lib620365F2_gf_WLGiveWorkersCommandAndType(lv__number_Player);
             }
             else {
-                lib620365F2_gv_wLis_LookAfter_WorkerLimit[lv__number_Player] = true;
+                lib620365F2_gf_WLGiveWorkersCommandAndType(lv__number_Player);
             }
         }
-    }
-    if ((lib620365F2_gv_wLis_Start == true)) {
-        TriggerExecute(lib620365F2_gt_WLLookAfter_WorkerLimit, true, false);
-    }
-    else {
-        TriggerEnable(lib620365F2_gt_WLLookAfter_WorkerLimit, false);
-        TriggerStop(lib620365F2_gt_WLLookAfter_WorkerLimit);
+
     }
 }
 
-trigger auto_lib620365F2_gf_WLGiveAmountWorkersForCreate_Trigger = null;
-int auto_lib620365F2_gf_WLGiveAmountWorkersForCreate_lp_numberPlayer;
+trigger auto_lib620365F2_gf_WLGiveWorkersCommandAndType_Trigger = null;
+int auto_lib620365F2_gf_WLGiveWorkersCommandAndType_lp_numberPlayer;
 
-void lib620365F2_gf_WLGiveAmountWorkersForCreate (int lp_numberPlayer) {
-    auto_lib620365F2_gf_WLGiveAmountWorkersForCreate_lp_numberPlayer = lp_numberPlayer;
+void lib620365F2_gf_WLGiveWorkersCommandAndType (int lp_numberPlayer) {
+    auto_lib620365F2_gf_WLGiveWorkersCommandAndType_lp_numberPlayer = lp_numberPlayer;
 
-    if (auto_lib620365F2_gf_WLGiveAmountWorkersForCreate_Trigger == null) {
-        auto_lib620365F2_gf_WLGiveAmountWorkersForCreate_Trigger = TriggerCreate("auto_lib620365F2_gf_WLGiveAmountWorkersForCreate_TriggerFunc");
+    if (auto_lib620365F2_gf_WLGiveWorkersCommandAndType_Trigger == null) {
+        auto_lib620365F2_gf_WLGiveWorkersCommandAndType_Trigger = TriggerCreate("auto_lib620365F2_gf_WLGiveWorkersCommandAndType_TriggerFunc");
     }
 
-    TriggerExecute(auto_lib620365F2_gf_WLGiveAmountWorkersForCreate_Trigger, false, false);
+    TriggerExecute(auto_lib620365F2_gf_WLGiveWorkersCommandAndType_Trigger, false, false);
 }
 
-bool auto_lib620365F2_gf_WLGiveAmountWorkersForCreate_TriggerFunc (bool testConds, bool runActions) {
-    int lp_numberPlayer = auto_lib620365F2_gf_WLGiveAmountWorkersForCreate_lp_numberPlayer;
+bool auto_lib620365F2_gf_WLGiveWorkersCommandAndType_TriggerFunc (bool testConds, bool runActions) {
+    int lp_numberPlayer = auto_lib620365F2_gf_WLGiveWorkersCommandAndType_lp_numberPlayer;
 
     // Variable Declarations
     const int lv__workers_InStartGame = 12;
@@ -442,49 +439,49 @@ bool auto_lib620365F2_gf_WLGiveAmountWorkersForCreate_TriggerFunc (bool testCond
     }
     else {
     }
-    lv__workers_Create = (lib620365F2_gv_wLgive_WorkersInStart[lp_numberPlayer] - lv__workers_InStartGame);
+    lv__workers_Create = (lib620365F2_gv_wLgiveWorkersInStart[lp_numberPlayer] - lv__workers_InStartGame);
     if ((lv__workers_Create < 0)) {
         lib620365F2_gf_WLRemoveWorker((lv__workers_Create * -1), lv__unit_Type, lp_numberPlayer, lv__race_Of_Player);
     }
     else {
-        lib620365F2_gf_WLCreateWorkersandOrderToMineral(lv__workers_Create, lv__unit_Type, lv__abilityCommand, lp_numberPlayer, lv__race_Of_Player, lv__radiusCreateWorkers, lv__radiusGetWorkers);
+        lib620365F2_gf_WLCreateWorkersAndOrderToMineral(lv__workers_Create, lv__unit_Type, lv__abilityCommand, lp_numberPlayer, lv__race_Of_Player, lv__radiusCreateWorkers, lv__radiusGetWorkers);
     }
     return true;
 }
 
-trigger auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_Trigger = null;
-int auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_amountWokersCreate;
-string auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_unitType;
-string auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_command;
-int auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_numberPlayer;
-string auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_raceOfPlayer;
-fixed auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_radiusCreate;
-fixed auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_radiusResources;
+trigger auto_lib620365F2_gf_WLCreateWorkersAndOrderToMineral_Trigger = null;
+int auto_lib620365F2_gf_WLCreateWorkersAndOrderToMineral_lp_amountWokersCreate;
+string auto_lib620365F2_gf_WLCreateWorkersAndOrderToMineral_lp_unitType;
+string auto_lib620365F2_gf_WLCreateWorkersAndOrderToMineral_lp_command;
+int auto_lib620365F2_gf_WLCreateWorkersAndOrderToMineral_lp_numberPlayer;
+string auto_lib620365F2_gf_WLCreateWorkersAndOrderToMineral_lp_raceOfPlayer;
+fixed auto_lib620365F2_gf_WLCreateWorkersAndOrderToMineral_lp_radiusCreate;
+fixed auto_lib620365F2_gf_WLCreateWorkersAndOrderToMineral_lp_radiusResources;
 
-void lib620365F2_gf_WLCreateWorkersandOrderToMineral (int lp_amountWokersCreate, string lp_unitType, string lp_command, int lp_numberPlayer, string lp_raceOfPlayer, fixed lp_radiusCreate, fixed lp_radiusResources) {
-    auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_amountWokersCreate = lp_amountWokersCreate;
-    auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_unitType = lp_unitType;
-    auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_command = lp_command;
-    auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_numberPlayer = lp_numberPlayer;
-    auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_raceOfPlayer = lp_raceOfPlayer;
-    auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_radiusCreate = lp_radiusCreate;
-    auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_radiusResources = lp_radiusResources;
+void lib620365F2_gf_WLCreateWorkersAndOrderToMineral (int lp_amountWokersCreate, string lp_unitType, string lp_command, int lp_numberPlayer, string lp_raceOfPlayer, fixed lp_radiusCreate, fixed lp_radiusResources) {
+    auto_lib620365F2_gf_WLCreateWorkersAndOrderToMineral_lp_amountWokersCreate = lp_amountWokersCreate;
+    auto_lib620365F2_gf_WLCreateWorkersAndOrderToMineral_lp_unitType = lp_unitType;
+    auto_lib620365F2_gf_WLCreateWorkersAndOrderToMineral_lp_command = lp_command;
+    auto_lib620365F2_gf_WLCreateWorkersAndOrderToMineral_lp_numberPlayer = lp_numberPlayer;
+    auto_lib620365F2_gf_WLCreateWorkersAndOrderToMineral_lp_raceOfPlayer = lp_raceOfPlayer;
+    auto_lib620365F2_gf_WLCreateWorkersAndOrderToMineral_lp_radiusCreate = lp_radiusCreate;
+    auto_lib620365F2_gf_WLCreateWorkersAndOrderToMineral_lp_radiusResources = lp_radiusResources;
 
-    if (auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_Trigger == null) {
-        auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_Trigger = TriggerCreate("auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_TriggerFunc");
+    if (auto_lib620365F2_gf_WLCreateWorkersAndOrderToMineral_Trigger == null) {
+        auto_lib620365F2_gf_WLCreateWorkersAndOrderToMineral_Trigger = TriggerCreate("auto_lib620365F2_gf_WLCreateWorkersAndOrderToMineral_TriggerFunc");
     }
 
-    TriggerExecute(auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_Trigger, false, false);
+    TriggerExecute(auto_lib620365F2_gf_WLCreateWorkersAndOrderToMineral_Trigger, false, false);
 }
 
-bool auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_TriggerFunc (bool testConds, bool runActions) {
-    int lp_amountWokersCreate = auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_amountWokersCreate;
-    string lp_unitType = auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_unitType;
-    string lp_command = auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_command;
-    int lp_numberPlayer = auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_numberPlayer;
-    string lp_raceOfPlayer = auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_raceOfPlayer;
-    fixed lp_radiusCreate = auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_radiusCreate;
-    fixed lp_radiusResources = auto_lib620365F2_gf_WLCreateWorkersandOrderToMineral_lp_radiusResources;
+bool auto_lib620365F2_gf_WLCreateWorkersAndOrderToMineral_TriggerFunc (bool testConds, bool runActions) {
+    int lp_amountWokersCreate = auto_lib620365F2_gf_WLCreateWorkersAndOrderToMineral_lp_amountWokersCreate;
+    string lp_unitType = auto_lib620365F2_gf_WLCreateWorkersAndOrderToMineral_lp_unitType;
+    string lp_command = auto_lib620365F2_gf_WLCreateWorkersAndOrderToMineral_lp_command;
+    int lp_numberPlayer = auto_lib620365F2_gf_WLCreateWorkersAndOrderToMineral_lp_numberPlayer;
+    string lp_raceOfPlayer = auto_lib620365F2_gf_WLCreateWorkersAndOrderToMineral_lp_raceOfPlayer;
+    fixed lp_radiusCreate = auto_lib620365F2_gf_WLCreateWorkersAndOrderToMineral_lp_radiusCreate;
+    fixed lp_radiusResources = auto_lib620365F2_gf_WLCreateWorkersAndOrderToMineral_lp_radiusResources;
 
     // Automatic Variable Declarations
     unitgroup auto19791AEF_g;
@@ -638,6 +635,65 @@ bool auto_lib620365F2_gf_WLEnableWorkersForPlayer_TriggerFunc (bool testConds, b
     return true;
 }
 
+string lib620365F2_gf_WLGetUnitType (int lp_player) {
+    // Variable Declarations
+    string lv__playerRace;
+
+    // Automatic Variable Declarations
+    string autoB4132EDC_val;
+
+    // Variable Initialization
+
+    // Implementation
+    lv__playerRace = PlayerRace(lp_player);
+    autoB4132EDC_val = lv__playerRace;
+    if (autoB4132EDC_val == "Prot") {
+        return "Probe";
+    }
+    else if (autoB4132EDC_val == "Terr") {
+        return "SCV";
+    }
+    else if (autoB4132EDC_val == "Zerg") {
+        return "Drone";
+    }
+    else {
+        return "MothershipCore";
+    }
+}
+
+void lib620365F2_gf_WLLookAfterWorkerLimit (int lp_player) {
+    // Variable Declarations
+    string lv__unitType;
+    int lv__amountWorkers;
+    int lv__removedNumber;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Implementation
+    lv__unitType = lib620365F2_gf_WLGetUnitType(lp_player);
+    lv__amountWorkers = UnitCount(lv__unitType, lp_player, RegionEntireMap(), UnitFilter((1 << c_targetFilterWorker), 0, (1 << c_targetFilterAlly) | (1 << c_targetFilterNeutral) | (1 << c_targetFilterEnemy) | (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32))), 0);
+    if ((lv__amountWorkers > lib620365F2_gv_wLgetWorkersLimit[lp_player])) {
+        lib620365F2_gf_WLDisableWorkersForPlayer(lp_player);
+        lv__removedNumber = (lv__amountWorkers - lib620365F2_gv_wLgetWorkersLimit[lp_player]);
+        do {
+            UnitKill(UnitGroupRandomUnit(UnitGroup(lv__unitType, lp_player, RegionEntireMap(), UnitFilter((1 << c_targetFilterWorker), 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0), c_unitCountAlive));
+            lv__removedNumber -= 1;
+        }while ((lv__removedNumber > 0));
+    }
+    else {
+        if ((lv__amountWorkers == lib620365F2_gv_wLgetWorkersLimit[lp_player])) {
+            lib620365F2_gf_WLDisableWorkersForPlayer(lp_player);
+        }
+        else {
+            if ((lv__amountWorkers < lib620365F2_gv_wLgetWorkersLimit[lp_player])) {
+                lib620365F2_gf_WLEnableWorkersForPlayer(lp_player);
+            }
+
+        }
+    }
+}
+
 // Triggers
 //--------------------------------------------------------------------------------------------------
 // Trigger: Launch
@@ -649,6 +705,7 @@ bool lib620365F2_gt_Launch_Func (bool testConds, bool runActions) {
         return true;
     }
 
+    lib620365F2_gf_TriggersTurnOn();
     lib620365F2_gf_GetOptions();
     lib620365F2_gf_WLGetInfoForPlayer();
     TextExpressionSetToken("Param/Expression/lib_620365F2_B3B5B58A", "FulName", lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_fullName);
@@ -664,21 +721,18 @@ void lib620365F2_gt_Launch_Init () {
 }
 
 //--------------------------------------------------------------------------------------------------
-// Trigger: WL | LookAfter_WorkerLimit
+// Trigger: WL | WorkerUnitEnter
 //--------------------------------------------------------------------------------------------------
-bool lib620365F2_gt_WLLookAfter_WorkerLimit_Func (bool testConds, bool runActions) {
+bool lib620365F2_gt_WLWorkerUnitEnter_Func (bool testConds, bool runActions) {
     // Variable Declarations
-    int lv__countWorkers;
+    int lv__player;
 
     // Automatic Variable Declarations
-    playergroup autoC44A708A_g;
-    int autoC44A708A_var;
-
     // Variable Initialization
 
     // Conditions
     if (testConds) {
-        if (!((lib620365F2_gv_wLis_Start == true))) {
+        if (!(((lib620365F2_gv_wLisStart == true) && ((UnitGetType(EventUnit()) == "Probe") || (UnitGetType(EventUnit()) == "SCV") || (UnitGetType(EventUnit()) == "Drone"))))) {
             return false;
         }
     }
@@ -688,46 +742,156 @@ bool lib620365F2_gt_WLLookAfter_WorkerLimit_Func (bool testConds, bool runAction
         return true;
     }
 
-    autoC44A708A_g = lib36280BFF_gv_commonplayers_Active_Group;
-    autoC44A708A_var = -1;
-    while (true) {
-        autoC44A708A_var = PlayerGroupNextPlayer(autoC44A708A_g, autoC44A708A_var);
-        if (autoC44A708A_var < 0) { break; }
-        lv__countWorkers = UnitCount(null, autoC44A708A_var, RegionEntireMap(), UnitFilter((1 << c_targetFilterWorker), 0, (1 << c_targetFilterAlly) | (1 << c_targetFilterNeutral) | (1 << c_targetFilterEnemy) | (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32))), 0);
-        if ((lib620365F2_gv_wLis_Worker_BuildingBan[autoC44A708A_var] == true)) {
-        }
-        else {
-            if ((lv__countWorkers > lib620365F2_gv_wLget_WorkerLimit[autoC44A708A_var])) {
-                lib620365F2_gf_WLDisableWorkersForPlayer(autoC44A708A_var);
-                if ((PlayerRace(autoC44A708A_var) == "Terr")) {
-                    UnitKill(UnitGroupRandomUnit(UnitGroup("SCV", autoC44A708A_var, RegionEntireMap(), UnitFilter((1 << c_targetFilterWorker), 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0), c_unitCountAlive));
-                }
-                else {
-                    UnitKill(UnitGroupRandomUnit(UnitGroup(null, autoC44A708A_var, RegionEntireMap(), UnitFilter((1 << c_targetFilterWorker), 0, (1 << c_targetFilterMissile), (1 << (c_targetFilterDead - 32)) | (1 << (c_targetFilterHidden - 32))), 0), c_unitCountAlive));
-                }
-            }
-            else if ((lv__countWorkers == lib620365F2_gv_wLget_WorkerLimit[autoC44A708A_var])) {
-                lib620365F2_gf_WLDisableWorkersForPlayer(autoC44A708A_var);
-            }
-            else if ((lv__countWorkers < lib620365F2_gv_wLget_WorkerLimit[autoC44A708A_var])) {
-                lib620365F2_gf_WLEnableWorkersForPlayer(autoC44A708A_var);
-            }
-        }
+    lv__player = UnitGetOwner(EventUnit());
+    if ((lib620365F2_gv_wLisWorkerBuildingBan[lv__player] == false)) {
+        lib620365F2_gf_WLLookAfterWorkerLimit(lv__player);
     }
-    Wait(1.0, c_timeGame);
-    TriggerExecute(lib620365F2_gt_WLLookAfter_WorkerLimit, true, false);
+
     return true;
 }
 
 //--------------------------------------------------------------------------------------------------
-void lib620365F2_gt_WLLookAfter_WorkerLimit_Init () {
-    lib620365F2_gt_WLLookAfter_WorkerLimit = TriggerCreate("lib620365F2_gt_WLLookAfter_WorkerLimit_Func");
-    TriggerEnable(lib620365F2_gt_WLLookAfter_WorkerLimit, false);
+void lib620365F2_gt_WLWorkerUnitEnter_Init () {
+    lib620365F2_gt_WLWorkerUnitEnter = TriggerCreate("lib620365F2_gt_WLWorkerUnitEnter_Func");
+    TriggerEnable(lib620365F2_gt_WLWorkerUnitEnter, false);
+    TriggerAddEventUnitRegion(lib620365F2_gt_WLWorkerUnitEnter, null, RegionEntireMap(), true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: WL | WorkerUnitDies
+//--------------------------------------------------------------------------------------------------
+bool lib620365F2_gt_WLWorkerUnitDies_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__player;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!(((lib620365F2_gv_wLisStart == true) && ((UnitGetType(EventUnit()) == "Probe") || (UnitGetType(EventUnit()) == "SCV") || (UnitGetType(EventUnit()) == "Drone"))))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv__player = UnitGetOwner(EventUnit());
+    if ((lib620365F2_gv_wLisWorkerBuildingBan[lv__player] == false)) {
+        lib620365F2_gf_WLLookAfterWorkerLimit(lv__player);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib620365F2_gt_WLWorkerUnitDies_Init () {
+    lib620365F2_gt_WLWorkerUnitDies = TriggerCreate("lib620365F2_gt_WLWorkerUnitDies_Func");
+    TriggerEnable(lib620365F2_gt_WLWorkerUnitDies, false);
+    TriggerAddEventUnitDied(lib620365F2_gt_WLWorkerUnitDies, null);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: WL | WorkerUnitMorph
+//--------------------------------------------------------------------------------------------------
+bool lib620365F2_gt_WLWorkerUnitMorph_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    int lv__player;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+
+    // Conditions
+    if (testConds) {
+        if (!((lib620365F2_gv_wLisStart == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    lv__player = UnitGetOwner(EventUnit());
+    if ((lib620365F2_gv_wLisWorkerBuildingBan[lv__player] == false)) {
+        lib620365F2_gf_WLLookAfterWorkerLimit(lv__player);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib620365F2_gt_WLWorkerUnitMorph_Init () {
+    lib620365F2_gt_WLWorkerUnitMorph = TriggerCreate("lib620365F2_gt_WLWorkerUnitMorph_Func");
+    TriggerEnable(lib620365F2_gt_WLWorkerUnitMorph, false);
+    TriggerAddEventUnitAbility(lib620365F2_gt_WLWorkerUnitMorph, null, AbilityCommand("ZergBuild", 30), c_abilMorphStageAbilsStart, false);
+    TriggerAddEventUnitAbility(lib620365F2_gt_WLWorkerUnitMorph, null, AbilityCommand("ZergBuild", 1), c_abilMorphStageAbilsStart, false);
+    TriggerAddEventUnitAbility(lib620365F2_gt_WLWorkerUnitMorph, null, AbilityCommand("ZergBuild", 10), c_abilMorphStageAbilsStart, false);
+    TriggerAddEventUnitAbility(lib620365F2_gt_WLWorkerUnitMorph, null, AbilityCommand("ZergBuild", 4), c_abilMorphStageAbilsStart, false);
+    TriggerAddEventUnitAbility(lib620365F2_gt_WLWorkerUnitMorph, null, AbilityCommand("ZergBuild", 2), c_abilMorphStageAbilsStart, false);
+    TriggerAddEventUnitAbility(lib620365F2_gt_WLWorkerUnitMorph, null, AbilityCommand("ZergBuild", 0), c_abilMorphStageAbilsStart, false);
+    TriggerAddEventUnitAbility(lib620365F2_gt_WLWorkerUnitMorph, null, AbilityCommand("ZergBuild", 5), c_abilMorphStageAbilsStart, false);
+    TriggerAddEventUnitAbility(lib620365F2_gt_WLWorkerUnitMorph, null, AbilityCommand("ZergBuild", 8), c_abilMorphStageAbilsStart, false);
+    TriggerAddEventUnitAbility(lib620365F2_gt_WLWorkerUnitMorph, null, AbilityCommand("ZergBuild", 11), c_abilMorphStageAbilsStart, false);
+    TriggerAddEventUnitAbility(lib620365F2_gt_WLWorkerUnitMorph, null, AbilityCommand("ZergBuild", 9), c_abilMorphStageAbilsStart, false);
+    TriggerAddEventUnitAbility(lib620365F2_gt_WLWorkerUnitMorph, null, AbilityCommand("ZergBuild", 13), c_abilMorphStageAbilsStart, false);
+    TriggerAddEventUnitAbility(lib620365F2_gt_WLWorkerUnitMorph, null, AbilityCommand("ZergBuild", 3), c_abilMorphStageAbilsStart, false);
+    TriggerAddEventUnitAbility(lib620365F2_gt_WLWorkerUnitMorph, null, AbilityCommand("ZergBuild", 14), c_abilMorphStageAbilsStart, false);
+    TriggerAddEventUnitAbility(lib620365F2_gt_WLWorkerUnitMorph, null, AbilityCommand("ZergBuild", 6), c_abilMorphStageAbilsStart, false);
+    TriggerAddEventUnitAbility(lib620365F2_gt_WLWorkerUnitMorph, null, AbilityCommand("ZergBuild", 15), c_abilMorphStageAbilsStart, false);
+    TriggerAddEventUnitAbility(lib620365F2_gt_WLWorkerUnitMorph, null, AbilityCommand("ZergBuild", 7), c_abilMorphStageAbilsStart, false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: WL | PeriodicCheckWorkers
+//--------------------------------------------------------------------------------------------------
+bool lib620365F2_gt_WLPeriodicCheckWorkers_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    playergroup auto1EEDA1D8_g;
+    int auto1EEDA1D8_var;
+
+    // Conditions
+    if (testConds) {
+        if (!((lib620365F2_gv_wLisStart == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    auto1EEDA1D8_g = lib36280BFF_gv_commonplayers_Active_Group;
+    auto1EEDA1D8_var = -1;
+    while (true) {
+        auto1EEDA1D8_var = PlayerGroupNextPlayer(auto1EEDA1D8_g, auto1EEDA1D8_var);
+        if (auto1EEDA1D8_var < 0) { break; }
+        if ((lib620365F2_gv_wLisWorkerBuildingBan[auto1EEDA1D8_var] == false)) {
+            lib620365F2_gf_WLLookAfterWorkerLimit(auto1EEDA1D8_var);
+        }
+
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib620365F2_gt_WLPeriodicCheckWorkers_Init () {
+    lib620365F2_gt_WLPeriodicCheckWorkers = TriggerCreate("lib620365F2_gt_WLPeriodicCheckWorkers_Func");
+    TriggerEnable(lib620365F2_gt_WLPeriodicCheckWorkers, false);
+    TriggerAddEventTimePeriodic(lib620365F2_gt_WLPeriodicCheckWorkers, 30.0, c_timeReal);
 }
 
 void lib620365F2_InitTriggers () {
     lib620365F2_gt_Launch_Init();
-    lib620365F2_gt_WLLookAfter_WorkerLimit_Init();
+    lib620365F2_gt_WLWorkerUnitEnter_Init();
+    lib620365F2_gt_WLWorkerUnitDies_Init();
+    lib620365F2_gt_WLWorkerUnitMorph_Init();
+    lib620365F2_gt_WLPeriodicCheckWorkers_Init();
 }
 
 //--------------------------------------------------------------------------------------------------

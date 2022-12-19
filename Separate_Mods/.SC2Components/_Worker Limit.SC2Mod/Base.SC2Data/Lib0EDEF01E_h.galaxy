@@ -4,24 +4,30 @@ include "TriggerLibs/natives"
 // Library: Library Worker Limit (WL)
 //--------------------------------------------------------------------------------------------------
 // Variable Declarations
-playergroup lib0EDEF01E_gv_wLplayers_InGame;
-int[18] lib0EDEF01E_gv_wLget_WorkerLimit;
-bool[17] lib0EDEF01E_gv_wLget_Worker_BuildingBan;
-int[18] lib0EDEF01E_gv_wLgive_WorkersInStart;
-bool lib0EDEF01E_gv_wLget_LookAfter_WorkerLimit_true;
+playergroup lib0EDEF01E_gv_wLplayersGroup;
+int[18] lib0EDEF01E_gv_wLworkersLimit;
+int[18] lib0EDEF01E_gv_wLworkersInStart;
+bool[17] lib0EDEF01E_gv_wLisWorkerBan;
+bool lib0EDEF01E_gv_wLisLookAfterWorkerLimit;
 
 // Function Declarations
 void lib0EDEF01E_gf_WLDisableWorkersForPlayer (int lp_player, string lp_raceOfPlayer);
 void lib0EDEF01E_gf_WLEnableWorkersForPlayer (int lp_player, string lp_raceOfPlayer);
 void lib0EDEF01E_gf_WLCreateWorkersandOrderToMineral (int lp_countCreate, string lp_unitType, string lp_command, int lp_player, string lp_raceOfPlayer, fixed lp_radiusCreate, fixed lp_radiusGetWorkers);
 string lib0EDEF01E_gf_WLGetResourceType (int lp_player, fixed lp_radius);
+string lib0EDEF01E_gf_WLGetUnitType (int lp_player);
+void lib0EDEF01E_gf_WLLookAfterWorkerLimit (int lp_player);
 
 // Trigger Declarations
 trigger lib0EDEF01E_gt_WLLaunch;
 trigger lib0EDEF01E_gt_WLGetAttribute;
 trigger lib0EDEF01E_gt_WLGiveWorkers;
 trigger lib0EDEF01E_gt_WLMessage;
-trigger lib0EDEF01E_gt_WLLookAfter_WorkerLimit;
+trigger lib0EDEF01E_gt_WLPlayerLeaveFromGame;
+trigger lib0EDEF01E_gt_WLWorkerUnitEnter;
+trigger lib0EDEF01E_gt_WLWorkerUnitDies;
+trigger lib0EDEF01E_gt_WLWorkerUnitMorph;
+trigger lib0EDEF01E_gt_WLPeriodicCheckWorkers;
 
 // Library Initialization
 void lib0EDEF01E_InitVariables ();

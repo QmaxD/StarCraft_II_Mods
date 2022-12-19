@@ -53,12 +53,10 @@ struct lib620365F2_gs_Information {
 
 // Variable Declarations
 lib620365F2_gs_Information lib620365F2_gv_modInformation;
-bool[lib36280BFF_gv_commonamount_Players_InGame + 1] lib620365F2_gv_wLis_LookAfter_WorkerLimit;
-bool[lib36280BFF_gv_commonamount_Players_InGame + 1] lib620365F2_gv_wLis_Worker_BuildingBan_Permanently;
-int[lib36280BFF_gv_commonamount_Players_InGame + 1] lib620365F2_gv_wLget_WorkerLimit;
-int[lib36280BFF_gv_commonamount_Players_InGame + 1] lib620365F2_gv_wLgive_WorkersInStart;
-bool lib620365F2_gv_wLis_Start;
-bool[lib36280BFF_gv_commonamount_Players_InGame + 1] lib620365F2_gv_wLis_Worker_BuildingBan;
+bool[lib36280BFF_gv_commonamount_Players_InGame + 1] lib620365F2_gv_wLisWorkerBuildingBan;
+int[lib36280BFF_gv_commonamount_Players_InGame + 1] lib620365F2_gv_wLgetWorkersLimit;
+int[lib36280BFF_gv_commonamount_Players_InGame + 1] lib620365F2_gv_wLgiveWorkersInStart;
+bool lib620365F2_gv_wLisStart;
 
 // Function Declarations
 void lib620365F2_gf_SetupInformation (int lp_modIndex);
@@ -66,15 +64,20 @@ void lib620365F2_gf_GetOptions ();
 void lib620365F2_gf_TriggersTurnOn ();
 void lib620365F2_gf_WLGetInfoForPlayer ();
 void lib620365F2_gf_WLStart ();
-void lib620365F2_gf_WLGiveAmountWorkersForCreate (int lp_numberPlayer);
-void lib620365F2_gf_WLCreateWorkersandOrderToMineral (int lp_amountWokersCreate, string lp_unitType, string lp_command, int lp_numberPlayer, string lp_raceOfPlayer, fixed lp_radiusCreate, fixed lp_radiusResources);
+void lib620365F2_gf_WLGiveWorkersCommandAndType (int lp_numberPlayer);
+void lib620365F2_gf_WLCreateWorkersAndOrderToMineral (int lp_amountWokersCreate, string lp_unitType, string lp_command, int lp_numberPlayer, string lp_raceOfPlayer, fixed lp_radiusCreate, fixed lp_radiusResources);
 void lib620365F2_gf_WLRemoveWorker (int lp_amountWokersKill, string lp_unitType, int lp_numberPlayer, string lp_raceOfPlayer);
 void lib620365F2_gf_WLDisableWorkersForPlayer (int lp_numberPlayer);
 void lib620365F2_gf_WLEnableWorkersForPlayer (int lp_numberPlayer);
+string lib620365F2_gf_WLGetUnitType (int lp_player);
+void lib620365F2_gf_WLLookAfterWorkerLimit (int lp_player);
 
 // Trigger Declarations
 trigger lib620365F2_gt_Launch;
-trigger lib620365F2_gt_WLLookAfter_WorkerLimit;
+trigger lib620365F2_gt_WLWorkerUnitEnter;
+trigger lib620365F2_gt_WLWorkerUnitDies;
+trigger lib620365F2_gt_WLWorkerUnitMorph;
+trigger lib620365F2_gt_WLPeriodicCheckWorkers;
 
 // Library Initialization
 void lib620365F2_InitVariables ();
