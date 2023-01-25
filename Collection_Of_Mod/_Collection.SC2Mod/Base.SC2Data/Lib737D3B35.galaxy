@@ -407,7 +407,7 @@ void lib737D3B35_gf_OBGStart () {
                     UnitSetPropertyFixed(lv_Druza, c_unitPropResources, lv_Quant);
                 }
             }
-            else if (((lib737D3B35_gv_oBGoption_2_rich_Resources == true) && ((lib737D3B35_gv_oBGoption_2_resize_Resources > 1.0) || (lib737D3B35_gv_oBGoption_2_resize_Resources < 1.0)))) {
+            else if (((lib737D3B35_gv_oBGoption_2_rich_Resources == true) && ((lib737D3B35_gv_oBGoption_2_resize_Resources > 1.0) || (lib737D3B35_gv_oBGoption_2_resize_Resources <= 1.0)))) {
                 if (((lib36280BFF_gf_Commonis_RichMineral_1800(autoF09C7C7F_var) == true) || (lib36280BFF_gf_Commonis_RichMineral_900(autoF09C7C7F_var) == true) || (lib36280BFF_gf_Commonis_RichVespene_2250(autoF09C7C7F_var) == true))) {
                     UnitSetPropertyFixed(autoF09C7C7F_var, c_unitPropResources, lv_Quant);
                 }
