@@ -237,6 +237,7 @@ bool auto_libCBA2262F_gf_BUADisallowAirUpgrades_TriggerFunc (bool testConds, boo
         TechTreeUpgradeAllow(auto268E8C9D_var, "ZergFlyerArmorsLevel2", false);
         TechTreeUpgradeAllow(auto268E8C9D_var, "ZergFlyerArmorsLevel3", false);
         TechTreeAbilityAllow(auto268E8C9D_var, AbilityCommand("MorphToBroodLord", 0), false);
+        TechTreeAbilityAllow(auto268E8C9D_var, AbilityCommand("UpgradeToGreaterSpire", 0), false);
     }
     return true;
 }
@@ -520,12 +521,20 @@ bool libCBA2262F_gt_BUADisableAirUnitAttack_Func (bool testConds, bool runAction
             UnitAbilityEnable(EventUnit(), "BattlecruiserAttack", false);
             UnitAbilityEnable(EventUnit(), "BattlecruiserAttackEvaluator", false);
             UnitAbilityEnable(EventUnit(), "Yamato", false);
+            UnitAbilityEnable(EventUnit(), "attack", false);
         }
         else if (auto75B6A0AF_val == "Corruptor") {
             UnitAbilityEnable(EventUnit(), "CausticSpray", false);
+            UnitAbilityEnable(EventUnit(), "attack", false);
+        }
+        else if (auto75B6A0AF_val == "LiberatorSkinPreview") {
+            UnitAbilityEnable(EventUnit(), "attack", false);
         }
         else if (auto75B6A0AF_val == "Raven") {
             UnitAbilityEnable(EventUnit(), "BuildAutoTurret", false);
+        }
+        else if (auto75B6A0AF_val == "Viper") {
+            UnitAbilityEnable(EventUnit(), "ParasiticBomb", false);
         }
         else {
             UnitAbilityEnable(EventUnit(), "attack", false);
@@ -547,7 +556,7 @@ void libCBA2262F_gt_BUADisableAirUnitAttack_Init () {
 //--------------------------------------------------------------------------------------------------
 bool libCBA2262F_gt_BUADisableGroundUnitAttack_Func (bool testConds, bool runActions) {
     // Automatic Variable Declarations
-    string autoE465ABF1_val;
+    string auto8A197908_val;
 
     // Conditions
     if (testConds) {
@@ -566,21 +575,52 @@ bool libCBA2262F_gt_BUADisableGroundUnitAttack_Func (bool testConds, bool runAct
     }
 
     if (((UnitGetType(EventUnit()) == "LocustMP") || (UnitGetType(EventUnit()) == "LocustMPFlying") || (UnitFilterMatch(EventUnit(), EventPlayer(), UnitFilter((1 << c_targetFilterGround), 0, (1 << c_targetFilterNeutral) | (1 << c_targetFilterStructure) | (1 << c_targetFilterWorker), 0)) == true))) {
-        autoE465ABF1_val = UnitGetType(EventUnit());
-        if (autoE465ABF1_val == "WidowMine") {
+        auto8A197908_val = UnitGetType(EventUnit());
+        if (auto8A197908_val == "HighTemplar") {
+            UnitAbilityEnable(EventUnit(), "Feedback", false);
+            UnitAbilityEnable(EventUnit(), "PsiStorm", false);
+            UnitAbilityEnable(EventUnit(), "attack", false);
+        }
+        else if (auto8A197908_val == "Reaper") {
+            UnitAbilityEnable(EventUnit(), "KD8Charge", false);
+            UnitAbilityEnable(EventUnit(), "attack", false);
+        }
+        else if (auto8A197908_val == "Ghost") {
+            UnitAbilityEnable(EventUnit(), "Snipe", false);
+            UnitAbilityEnable(EventUnit(), "EMP", false);
+            UnitAbilityEnable(EventUnit(), "TacNukeStrike", false);
+            UnitAbilityEnable(EventUnit(), "attack", false);
+        }
+        else if (auto8A197908_val == "WidowMine") {
             UnitAbilityEnable(EventUnit(), "WidowMineAttack", false);
             UnitAbilityEnable(EventUnit(), "attack", false);
         }
-        else if (autoE465ABF1_val == "Ravager") {
+        else if (auto8A197908_val == "Cyclone") {
+            UnitAbilityEnable(EventUnit(), "LockOn", false);
+            UnitAbilityEnable(EventUnit(), "LockOnAir", false);
+            UnitAbilityEnable(EventUnit(), "attack", false);
+        }
+        else if (auto8A197908_val == "Baneling") {
+            UnitAbilityEnable(EventUnit(), "Explode", false);
+            UnitAbilityEnable(EventUnit(), "SapStructure", false);
+            UnitAbilityEnable(EventUnit(), "attack", false);
+        }
+        else if (auto8A197908_val == "Ravager") {
             UnitAbilityEnable(EventUnit(), "RavagerCorrosiveBile", false);
             UnitAbilityEnable(EventUnit(), "attack", false);
         }
-        else if (autoE465ABF1_val == "Cyclone") {
-            UnitAbilityEnable(EventUnit(), "LockOn", false);
-            UnitAbilityEnable(EventUnit(), "LockOnAir", false);
+        else if (auto8A197908_val == "LurkerMP") {
+            UnitAbilityEnable(EventUnit(), "attack", false);
         }
-        else if (autoE465ABF1_val == "Reaper") {
-            UnitAbilityEnable(EventUnit(), "KD8Charge", false);
+        else if (auto8A197908_val == "SwarmHostMP") {
+            UnitAbilityEnable(EventUnit(), "SwarmHostSpawnLocusts", false);
+            UnitAbilityEnable(EventUnit(), "attack", false);
+        }
+        else if (auto8A197908_val == "Infestor") {
+            UnitAbilityEnable(EventUnit(), "AmorphousArmorcloud", false);
+            UnitAbilityEnable(EventUnit(), "FungalGrowth", false);
+            UnitAbilityEnable(EventUnit(), "Siphon", false);
+            UnitAbilityEnable(EventUnit(), "attack", false);
         }
         else {
             UnitAbilityEnable(EventUnit(), "attack", false);
