@@ -17,6 +17,7 @@ struct lib8BF4D44F_gs_Nukesoptions {
     int lv_nukesnukeDamage;
     text lv_nukesnukeRadius;
     string lv_nukespingModel;
+    bool lv_nukesisShowRedPoind;
 };
 
 // Variable Declarations

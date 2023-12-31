@@ -29,6 +29,7 @@ Variable/Name/lib_8BF4D44F_41A41EE8=Nukes | playerOptions
 Variable/Name/lib_8BF4D44F_4FB4D3FE=Nukes | safeZone
 Variable/Name/lib_8BF4D44F_54CBB30E=_count
 Variable/Name/lib_8BF4D44F_56C31318=_Effects_NukeDetonate_RevealRadius
+Variable/Name/lib_8BF4D44F_64B4F02D=Nukes | isShowRedPoind
 Variable/Name/lib_8BF4D44F_6F93D7D8=_nukePoint
 Variable/Name/lib_8BF4D44F_78B49900=_ping
 Variable/Name/lib_8BF4D44F_78EA6E77=Nukes | timeNukeAttack

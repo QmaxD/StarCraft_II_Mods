@@ -297,19 +297,15 @@
             <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="756787DC"/>
             <FunctionCall Type="Comment" Library="8BF4D44F" Id="02FEF11A"/>
             <FunctionCall Type="Comment" Library="8BF4D44F" Id="2FF17B39"/>
-            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="4B4C1BF4"/>
-            <FunctionCall Type="Comment" Library="8BF4D44F" Id="8A2E84E5"/>
+            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="F8241C8E"/>
             <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="81CDD38E"/>
             <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="1D2480BB"/>
             <FunctionCall Type="Comment" Library="8BF4D44F" Id="9F9B1623"/>
-            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="14C2F4A2"/>
-            <FunctionCall Type="Comment" Library="8BF4D44F" Id="E44FF4FB"/>
             <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="B82633F1"/>
             <FunctionCall Type="Comment" Library="8BF4D44F" Id="1CA56BD8"/>
             <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="90A3655F"/>
             <FunctionCall Type="Comment" Library="8BF4D44F" Id="415C56C6"/>
-            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="711B6884"/>
-            <FunctionCall Type="Comment" Library="8BF4D44F" Id="D6BF466E"/>
+            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="05127CB2"/>
         </Element>
         <Element Type="Variable" Id="8D0FD34B">
             <VariableType>
@@ -566,8 +562,17 @@
                 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             </Comment>
         </Element>
+        <Element Type="FunctionCall" Id="F8241C8E">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000137"/>
+            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="4B4C1BF4"/>
+            <FunctionCall Type="Comment" Library="8BF4D44F" Id="8A2E84E5"/>
+            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="14C2F4A2"/>
+            <FunctionCall Type="Comment" Library="8BF4D44F" Id="E44FF4FB"/>
+            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="CFCB6FF5"/>
+        </Element>
         <Element Type="FunctionCall" Id="4B4C1BF4">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="9E360BAC"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
             <Parameter Type="Param" Library="8BF4D44F" Id="2A3C9F9E"/>
             <Parameter Type="Param" Library="8BF4D44F" Id="68A9345D"/>
         </Element>
@@ -585,6 +590,54 @@
             <Comment>
                 создадим модель (красное поле, которое превращается в точку) сброса бомбы в точке спауна
             </Comment>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+        </Element>
+        <Element Type="FunctionCall" Id="14C2F4A2">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="8BF4D44F" Id="80EABBB5"/>
+            <Parameter Type="Param" Library="8BF4D44F" Id="8C18A7C0"/>
+        </Element>
+        <Element Type="Param" Id="80EABBB5">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
+            <Variable Type="Variable" Library="8BF4D44F" Id="8D0FD34B"/>
+        </Element>
+        <Element Type="Param" Id="8C18A7C0">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
+            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="049100DB"/>
+        </Element>
+        <Element Type="FunctionCall" Id="049100DB">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="0F696993"/>
+        </Element>
+        <Element Type="Comment" Id="E44FF4FB">
+            <Comment>
+                записываем созданный Actor в локальную переменную
+            </Comment>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+        </Element>
+        <Element Type="FunctionCall" Id="CFCB6FF5">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
+            <Parameter Type="Param" Library="8BF4D44F" Id="E678F0CF"/>
+            <Parameter Type="Param" Library="8BF4D44F" Id="1B53CDA4"/>
+            <Parameter Type="Param" Library="8BF4D44F" Id="7F612E85"/>
+        </Element>
+        <Element Type="Param" Id="E678F0CF">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
+            <Variable Type="Variable" Library="8BF4D44F" Id="41A41EE8"/>
+            <StructMember Type="Param" Library="8BF4D44F" Id="0F87B12E"/>
+        </Element>
+        <Element Type="Param" Id="0F87B12E">
+            <Variable Type="Variable" Library="8BF4D44F" Id="64B4F02D"/>
+        </Element>
+        <Element Type="Param" Id="1B53CDA4">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="1E7A4625"/>
+        </Element>
+        <Element Type="Param" Id="7F612E85">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
+            <Value>true</Value>
+            <ValueType Type="bool"/>
         </Element>
         <Element Type="FunctionCall" Id="81CDD38E">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="F09DDBE5"/>
@@ -654,27 +707,6 @@
                 покажем для Всех Игроков точку спауна бомбы как модель спауна бомбы (для союзников) с цветом (окраской) и яркостью
             </Comment>
         </Element>
-        <Element Type="FunctionCall" Id="14C2F4A2">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
-            <Parameter Type="Param" Library="8BF4D44F" Id="80EABBB5"/>
-            <Parameter Type="Param" Library="8BF4D44F" Id="8C18A7C0"/>
-        </Element>
-        <Element Type="Param" Id="80EABBB5">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
-            <Variable Type="Variable" Library="8BF4D44F" Id="8D0FD34B"/>
-        </Element>
-        <Element Type="Param" Id="8C18A7C0">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
-            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="049100DB"/>
-        </Element>
-        <Element Type="FunctionCall" Id="049100DB">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="0F696993"/>
-        </Element>
-        <Element Type="Comment" Id="E44FF4FB">
-            <Comment>
-                записываем созданный Actor в локальную переменную
-            </Comment>
-        </Element>
         <Element Type="FunctionCall" Id="B82633F1">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000242"/>
             <Parameter Type="Param" Library="8BF4D44F" Id="0CD03577"/>
@@ -723,8 +755,15 @@
                 создаем событие взрыва в точке спауна бомбы
             </Comment>
         </Element>
+        <Element Type="FunctionCall" Id="05127CB2">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000137"/>
+            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="711B6884"/>
+            <FunctionCall Type="Comment" Library="8BF4D44F" Id="D6BF466E"/>
+            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="CD45F6DE"/>
+        </Element>
         <Element Type="FunctionCall" Id="711B6884">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="04454841"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
             <Parameter Type="Param" Library="8BF4D44F" Id="3EE5CFED"/>
         </Element>
         <Element Type="Param" Id="3EE5CFED">
@@ -735,6 +774,31 @@
             <Comment>
                 убираем Actor после его отработки
             </Comment>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+        </Element>
+        <Element Type="FunctionCall" Id="CD45F6DE">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
+            <Parameter Type="Param" Library="8BF4D44F" Id="06A12123"/>
+            <Parameter Type="Param" Library="8BF4D44F" Id="2A820C43"/>
+            <Parameter Type="Param" Library="8BF4D44F" Id="CB6F07D1"/>
+        </Element>
+        <Element Type="Param" Id="06A12123">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
+            <Variable Type="Variable" Library="8BF4D44F" Id="41A41EE8"/>
+            <StructMember Type="Param" Library="8BF4D44F" Id="A22F44A7"/>
+        </Element>
+        <Element Type="Param" Id="A22F44A7">
+            <Variable Type="Variable" Library="8BF4D44F" Id="64B4F02D"/>
+        </Element>
+        <Element Type="Param" Id="2A820C43">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="1E7A4625"/>
+        </Element>
+        <Element Type="Param" Id="CB6F07D1">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
+            <Value>true</Value>
+            <ValueType Type="bool"/>
         </Element>
         <Element Type="Comment" Id="3819D315">
             <Comment>
@@ -1290,6 +1354,8 @@
             <Variable Type="Comment" Library="8BF4D44F" Id="B6C25ED1"/>
             <Variable Type="Variable" Library="8BF4D44F" Id="F6FDE11A"/>
             <Variable Type="Comment" Library="8BF4D44F" Id="FD123DD2"/>
+            <Variable Type="Variable" Library="8BF4D44F" Id="64B4F02D"/>
+            <Variable Type="Comment" Library="8BF4D44F" Id="CABBDE19"/>
         </Element>
         <Element Type="Variable" Id="FEA1E8D5">
             <VariableType>
@@ -1464,6 +1530,21 @@
                 модель пинга на миникарте
             </Comment>
         </Element>
+        <Element Type="Variable" Id="64B4F02D">
+            <VariableType>
+                <Type Value="bool"/>
+            </VariableType>
+            <Value Type="Param" Library="8BF4D44F" Id="6F714AAA"/>
+        </Element>
+        <Element Type="Param" Id="6F714AAA">
+            <Value>true</Value>
+            <ValueType Type="bool"/>
+        </Element>
+        <Element Type="Comment" Id="CABBDE19">
+            <Comment>
+                красная точка в месте сброса бомбы
+            </Comment>
+        </Element>
         <Element Type="Comment" Id="B56AF4E8">
             <Comment>
                 класс Опции: хранение данных по игре
@@ -1580,6 +1661,9 @@
             <Action Type="FunctionCall" Library="8BF4D44F" Id="71EA6D20"/>
             <Action Type="Comment" Library="8BF4D44F" Id="2128F280"/>
             <Action Type="Comment" Library="8BF4D44F" Id="B1E53AB1"/>
+            <Action Type="FunctionCall" Library="8BF4D44F" Id="731A7AB6"/>
+            <Action Type="Comment" Library="8BF4D44F" Id="F70773BA"/>
+            <Action Type="Comment" Library="8BF4D44F" Id="55D0D975"/>
             <Action Type="FunctionCall" Library="8BF4D44F" Id="BA99B385"/>
             <Action Type="FunctionCall" Library="8BF4D44F" Id="A294764F"/>
         </Element>
@@ -5589,6 +5673,71 @@
             </Comment>
         </Element>
         <Element Type="Comment" Id="B1E53AB1">
+            <Comment>
+                -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            </Comment>
+        </Element>
+        <Element Type="FunctionCall" Id="731A7AB6">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000137"/>
+            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="3327C88A"/>
+            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="832A1B4C"/>
+        </Element>
+        <Element Type="FunctionCall" Id="3327C88A">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="8BF4D44F" Id="53281431"/>
+            <Parameter Type="Param" Library="8BF4D44F" Id="2CD2EF40"/>
+        </Element>
+        <Element Type="Param" Id="53281431">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
+            <Variable Type="Variable" Library="8BF4D44F" Id="41A41EE8"/>
+            <StructMember Type="Param" Library="8BF4D44F" Id="014D2438"/>
+        </Element>
+        <Element Type="Param" Id="014D2438">
+            <Variable Type="Variable" Library="8BF4D44F" Id="64B4F02D"/>
+        </Element>
+        <Element Type="Param" Id="2CD2EF40">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
+            <Value>false</Value>
+            <ValueType Type="bool"/>
+        </Element>
+        <Element Type="FunctionCall" Id="832A1B4C">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
+            <Parameter Type="Param" Library="8BF4D44F" Id="4E71BC85"/>
+            <Parameter Type="Param" Library="8BF4D44F" Id="F39820B0"/>
+            <Parameter Type="Param" Library="8BF4D44F" Id="42B9D586"/>
+        </Element>
+        <Element Type="Param" Id="4E71BC85">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
+            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="AAC2C815"/>
+        </Element>
+        <Element Type="FunctionCall" Id="AAC2C815">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="9AC9D531"/>
+            <Parameter Type="Param" Library="8BF4D44F" Id="1E9AEEBE"/>
+        </Element>
+        <Element Type="Param" Id="1E9AEEBE">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="6CB812B6"/>
+            <Value>&quot;9&quot;</Value>
+            <ValueType Type="attributegame"/>
+            <DisplayText>Show red point?</DisplayText>
+        </Element>
+        <Element Type="Param" Id="F39820B0">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="1E7A4625"/>
+        </Element>
+        <Element Type="Param" Id="42B9D586">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
+            <Value>&quot;9|0002&quot;</Value>
+            <ValueType Type="attributevalue"/>
+            <DisplayText>No</DisplayText>
+        </Element>
+        <Element Type="Comment" Id="F70773BA">
+            <Comment>
+                надо ли показывать красную точку в месте взрыва бомбы
+            </Comment>
+        </Element>
+        <Element Type="Comment" Id="55D0D975">
             <Comment>
                 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
             </Comment>
