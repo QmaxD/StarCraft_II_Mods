@@ -4,10 +4,10 @@ include "TriggerLibs/natives"
 // Library: Library
 //--------------------------------------------------------------------------------------------------
 // Constants
-const int lib394B321C_gv_uGupgradesAmount = 44;
+const int lib394B321C_gv_uGupgradesAmount = 42;
 const int lib394B321C_gv_uGprotossUpgradesAmount = 12;
-const int lib394B321C_gv_uGterranUpgradesAmount = 17;
-const int lib394B321C_gv_uGzergUpgradesAmount = 15;
+const int lib394B321C_gv_uGterranUpgradesAmount = 16;
+const int lib394B321C_gv_uGzergUpgradesAmount = 14;
 
 // Variable Declarations
 bool lib394B321C_gv_uGisMaxUnitEnergy;

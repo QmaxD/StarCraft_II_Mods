@@ -93,7 +93,6 @@ bool auto_lib394B321C_gf_UGAllowAddUpgrades_1_TriggerFunc (bool testConds, bool 
         }
     }
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, TextExpressionAssemble("Param/Expression/lib_394B321C_505D2CB2"));
-    UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, TextExpressionAssemble("Param/Expression/lib_394B321C_5EB7CFF5"));
     return true;
 }
 
@@ -219,6 +218,7 @@ bool auto_lib394B321C_gf_UGAllowAddUpgrades_2_TriggerFunc (bool testConds, bool 
         else {
         }
     }
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaSubtitle, TextExpressionAssemble("Param/Expression/lib_394B321C_8D5615CD"));
     return true;
 }
 
@@ -328,6 +328,7 @@ bool lib394B321C_gt_UGWriteUpgrades_Func (bool testConds, bool runActions) {
     lv__countAllUpgades += 1;
     lib394B321C_gv_uGupgradesArrayOfRace[1][lv__countProtossUpgades] = ("TempestGroundAttackUpgrade");
     lv__countProtossUpgades += 1;
+
     lib394B321C_gv_uGupgradesArray[lv__countAllUpgades] = ("ShieldWall");
     lv__countAllUpgades += 1;
     lib394B321C_gv_uGupgradesArrayOfRace[2][lv__countTerranUpgades] = ("ShieldWall");
@@ -340,10 +341,6 @@ bool lib394B321C_gt_UGWriteUpgrades_Func (bool testConds, bool runActions) {
     lv__countAllUpgades += 1;
     lib394B321C_gv_uGupgradesArrayOfRace[2][lv__countTerranUpgades] = ("PunisherGrenades");
     lv__countTerranUpgades += 1;
-    lib394B321C_gv_uGupgradesArray[lv__countAllUpgades] = ("EnhancedShockwaves");
-    lv__countAllUpgades += 1;
-    lib394B321C_gv_uGupgradesArrayOfRace[2][lv__countTerranUpgades] = ("EnhancedShockwaves");
-    lv__countTerranUpgades += 1;
     lib394B321C_gv_uGupgradesArray[lv__countAllUpgades] = ("PersonalCloaking");
     lv__countAllUpgades += 1;
     lib394B321C_gv_uGupgradesArrayOfRace[2][lv__countTerranUpgades] = ("PersonalCloaking");
@@ -352,9 +349,9 @@ bool lib394B321C_gt_UGWriteUpgrades_Func (bool testConds, bool runActions) {
     lv__countAllUpgades += 1;
     lib394B321C_gv_uGupgradesArrayOfRace[2][lv__countTerranUpgades] = ("HighCapacityBarrels");
     lv__countTerranUpgades += 1;
-    lib394B321C_gv_uGupgradesArray[lv__countAllUpgades] = ("CycloneLockOnDamageUpgrade");
+    lib394B321C_gv_uGupgradesArray[lv__countAllUpgades] = ("HurricaneThrusters");
     lv__countAllUpgades += 1;
-    lib394B321C_gv_uGupgradesArrayOfRace[2][lv__countTerranUpgades] = ("CycloneLockOnDamageUpgrade");
+    lib394B321C_gv_uGupgradesArrayOfRace[2][lv__countTerranUpgades] = ("HurricaneThrusters");
     lv__countTerranUpgades += 1;
     lib394B321C_gv_uGupgradesArray[lv__countAllUpgades] = ("DrillClaws");
     lv__countAllUpgades += 1;
@@ -364,9 +361,9 @@ bool lib394B321C_gt_UGWriteUpgrades_Func (bool testConds, bool runActions) {
     lv__countAllUpgades += 1;
     lib394B321C_gv_uGupgradesArrayOfRace[2][lv__countTerranUpgades] = ("SmartServos");
     lv__countTerranUpgades += 1;
-    lib394B321C_gv_uGupgradesArray[lv__countAllUpgades] = ("RavenCorvidReactor");
+    lib394B321C_gv_uGupgradesArray[lv__countAllUpgades] = ("InterferenceMatrix");
     lv__countAllUpgades += 1;
-    lib394B321C_gv_uGupgradesArrayOfRace[2][lv__countTerranUpgades] = ("RavenCorvidReactor");
+    lib394B321C_gv_uGupgradesArrayOfRace[2][lv__countTerranUpgades] = ("InterferenceMatrix");
     lv__countTerranUpgades += 1;
     lib394B321C_gv_uGupgradesArray[lv__countAllUpgades] = ("BansheeCloak");
     lv__countAllUpgades += 1;
@@ -380,9 +377,9 @@ bool lib394B321C_gt_UGWriteUpgrades_Func (bool testConds, bool runActions) {
     lv__countAllUpgades += 1;
     lib394B321C_gv_uGupgradesArrayOfRace[2][lv__countTerranUpgades] = ("BattlecruiserEnableSpecializations");
     lv__countTerranUpgades += 1;
-    lib394B321C_gv_uGupgradesArray[lv__countAllUpgades] = ("MedivacIncreaseSpeedBoost");
+    lib394B321C_gv_uGupgradesArray[lv__countAllUpgades] = ("MedivacCaduceusReactor");
     lv__countAllUpgades += 1;
-    lib394B321C_gv_uGupgradesArrayOfRace[2][lv__countTerranUpgades] = ("MedivacIncreaseSpeedBoost");
+    lib394B321C_gv_uGupgradesArrayOfRace[2][lv__countTerranUpgades] = ("MedivacCaduceusReactor");
     lv__countTerranUpgades += 1;
     lib394B321C_gv_uGupgradesArray[lv__countAllUpgades] = ("LiberatorAGRangeUpgrade");
     lv__countAllUpgades += 1;
@@ -396,6 +393,7 @@ bool lib394B321C_gt_UGWriteUpgrades_Func (bool testConds, bool runActions) {
     lv__countAllUpgades += 1;
     lib394B321C_gv_uGupgradesArrayOfRace[2][lv__countTerranUpgades] = ("TerranBuildingArmor");
     lv__countTerranUpgades += 1;
+
     lib394B321C_gv_uGupgradesArray[lv__countAllUpgades] = ("zerglingmovementspeed");
     lv__countAllUpgades += 1;
     lib394B321C_gv_uGupgradesArrayOfRace[3][lv__countZergUpgades] = ("zerglingmovementspeed");
@@ -440,10 +438,6 @@ bool lib394B321C_gt_UGWriteUpgrades_Func (bool testConds, bool runActions) {
     lv__countAllUpgades += 1;
     lib394B321C_gv_uGupgradesArrayOfRace[3][lv__countZergUpgades] = ("LurkerRange");
     lv__countZergUpgades += 1;
-    lib394B321C_gv_uGupgradesArray[lv__countAllUpgades] = ("InfestorEnergyUpgrade");
-    lv__countAllUpgades += 1;
-    lib394B321C_gv_uGupgradesArrayOfRace[3][lv__countZergUpgades] = ("InfestorEnergyUpgrade");
-    lv__countZergUpgades += 1;
     lib394B321C_gv_uGupgradesArray[lv__countAllUpgades] = ("NeuralParasite");
     lv__countAllUpgades += 1;
     lib394B321C_gv_uGupgradesArrayOfRace[3][lv__countZergUpgades] = ("NeuralParasite");
@@ -456,6 +450,7 @@ bool lib394B321C_gt_UGWriteUpgrades_Func (bool testConds, bool runActions) {
     lv__countAllUpgades += 1;
     lib394B321C_gv_uGupgradesArrayOfRace[3][lv__countZergUpgades] = ("AnabolicSynthesis");
     lv__countZergUpgades += 1;
+
     lv__countAllUpgades -= 1;
     lv__countProtossUpgades -= 1;
     lv__countTerranUpgades -= 1;
