@@ -52,7 +52,7 @@ void lib620365F2_InitVariables () {
     lib620365F2_gv_modInformation.lv_wLOption_206 = "6";
     lib620365F2_gv_modInformation.lv_wLOption_208 = "8";
     lib620365F2_gv_modInformation.lv_wLOption_210 = "10";
-    lib620365F2_gv_modInformation.lv_wLOption_2D09DD0B5D182 = "Нет. Оставить стандартные 12";
+    lib620365F2_gv_modInformation.lv_wLOption_2D09DD0B5D182 = "Оставить стандартные 12";
     lib620365F2_gv_modInformation.lv_wLOption_216 = "16";
     lib620365F2_gv_modInformation.lv_wLOption_222 = "22";
     lib620365F2_gv_modInformation.lv_wLOption_224 = "24";
