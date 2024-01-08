@@ -229,6 +229,7 @@ void lib81F0063E_gf_AUWriteUpgrades () {
     lv__countAllUpgades += 1;
     lib81F0063E_gv_aUupgradesArrayOfRace[1][lv__countProtossUpgades] = ("TempestGroundAttackUpgrade");
     lv__countProtossUpgades += 1;
+
     lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("ShieldWall");
     lv__countAllUpgades += 1;
     lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__countTerranUpgades] = ("ShieldWall");
@@ -241,10 +242,6 @@ void lib81F0063E_gf_AUWriteUpgrades () {
     lv__countAllUpgades += 1;
     lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__countTerranUpgades] = ("PunisherGrenades");
     lv__countTerranUpgades += 1;
-    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("EnhancedShockwaves");
-    lv__countAllUpgades += 1;
-    lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__countTerranUpgades] = ("EnhancedShockwaves");
-    lv__countTerranUpgades += 1;
     lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("PersonalCloaking");
     lv__countAllUpgades += 1;
     lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__countTerranUpgades] = ("PersonalCloaking");
@@ -253,9 +250,9 @@ void lib81F0063E_gf_AUWriteUpgrades () {
     lv__countAllUpgades += 1;
     lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__countTerranUpgades] = ("HighCapacityBarrels");
     lv__countTerranUpgades += 1;
-    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("CycloneLockOnDamageUpgrade");
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("HurricaneThrusters");
     lv__countAllUpgades += 1;
-    lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__countTerranUpgades] = ("CycloneLockOnDamageUpgrade");
+    lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__countTerranUpgades] = ("HurricaneThrusters");
     lv__countTerranUpgades += 1;
     lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("DrillClaws");
     lv__countAllUpgades += 1;
@@ -265,9 +262,9 @@ void lib81F0063E_gf_AUWriteUpgrades () {
     lv__countAllUpgades += 1;
     lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__countTerranUpgades] = ("SmartServos");
     lv__countTerranUpgades += 1;
-    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("RavenCorvidReactor");
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("InterferenceMatrix");
     lv__countAllUpgades += 1;
-    lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__countTerranUpgades] = ("RavenCorvidReactor");
+    lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__countTerranUpgades] = ("InterferenceMatrix");
     lv__countTerranUpgades += 1;
     lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("BansheeCloak");
     lv__countAllUpgades += 1;
@@ -281,9 +278,9 @@ void lib81F0063E_gf_AUWriteUpgrades () {
     lv__countAllUpgades += 1;
     lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__countTerranUpgades] = ("BattlecruiserEnableSpecializations");
     lv__countTerranUpgades += 1;
-    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("MedivacIncreaseSpeedBoost");
+    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("MedivacCaduceusReactor");
     lv__countAllUpgades += 1;
-    lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__countTerranUpgades] = ("MedivacIncreaseSpeedBoost");
+    lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__countTerranUpgades] = ("MedivacCaduceusReactor");
     lv__countTerranUpgades += 1;
     lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("LiberatorAGRangeUpgrade");
     lv__countAllUpgades += 1;
@@ -297,6 +294,7 @@ void lib81F0063E_gf_AUWriteUpgrades () {
     lv__countAllUpgades += 1;
     lib81F0063E_gv_aUupgradesArrayOfRace[2][lv__countTerranUpgades] = ("TerranBuildingArmor");
     lv__countTerranUpgades += 1;
+
     lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("zerglingmovementspeed");
     lv__countAllUpgades += 1;
     lib81F0063E_gv_aUupgradesArrayOfRace[3][lv__countZergUpgades] = ("zerglingmovementspeed");
@@ -341,10 +339,6 @@ void lib81F0063E_gf_AUWriteUpgrades () {
     lv__countAllUpgades += 1;
     lib81F0063E_gv_aUupgradesArrayOfRace[3][lv__countZergUpgades] = ("LurkerRange");
     lv__countZergUpgades += 1;
-    lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("InfestorEnergyUpgrade");
-    lv__countAllUpgades += 1;
-    lib81F0063E_gv_aUupgradesArrayOfRace[3][lv__countZergUpgades] = ("InfestorEnergyUpgrade");
-    lv__countZergUpgades += 1;
     lib81F0063E_gv_aUupgradesArray[lv__countAllUpgades] = ("NeuralParasite");
     lv__countAllUpgades += 1;
     lib81F0063E_gv_aUupgradesArrayOfRace[3][lv__countZergUpgades] = ("NeuralParasite");
@@ -357,6 +351,7 @@ void lib81F0063E_gf_AUWriteUpgrades () {
     lv__countAllUpgades += 1;
     lib81F0063E_gv_aUupgradesArrayOfRace[3][lv__countZergUpgades] = ("AnabolicSynthesis");
     lv__countZergUpgades += 1;
+
     lv__countAllUpgades -= 1;
     lv__countProtossUpgades -= 1;
     lv__countTerranUpgades -= 1;

@@ -4,10 +4,10 @@ include "TriggerLibs/natives"
 // Library: 17 All Upgrades | AU
 //--------------------------------------------------------------------------------------------------
 // Constants
-const int lib81F0063E_gv_aUupgradesAmount = 44;
+const int lib81F0063E_gv_aUupgradesAmount = 42;
 const int lib81F0063E_gv_aUprotossUpgradesAmount = 12;
-const int lib81F0063E_gv_aUterranUpgradesAmount = 17;
-const int lib81F0063E_gv_aUzergUpgradesAmount = 15;
+const int lib81F0063E_gv_aUterranUpgradesAmount = 16;
+const int lib81F0063E_gv_aUzergUpgradesAmount = 14;
 
 // Structures
 struct lib81F0063E_gs_Information {
