@@ -27,6 +27,7 @@ string lib36280BFF_gf_CommonGetRandomResourceTypeFromRegion (int lp_player, fixe
 bool lib36280BFF_gf_Commonis_Hallucination (unit lp_unit);
 bool lib36280BFF_gf_Commonis_UnitInMorphGroup (unit lp_unit);
 bool lib36280BFF_gf_Commonis_UnitOwnerActivePlayer (unit lp_unit);
+bool lib36280BFF_gf_Commonis_MainBuilding (unit lp_unit);
 
 // Trigger Declarations
 trigger lib36280BFF_gt_Debug_GetAllUnits;

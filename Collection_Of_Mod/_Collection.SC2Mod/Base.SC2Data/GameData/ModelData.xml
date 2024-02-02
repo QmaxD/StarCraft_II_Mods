@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CModel id="PowerRadius_Stetmann" parent="PersistentSpellFX_COOP" COOP="Stetmann" Race="Zerg">
+        <Model value="Assets\COOP\Stetmann\Effects\PowerRadius_Stetmann_LargeMap\PowerRadius_Stetmann_LargeMap.m3"/>
+    </CModel>
+</Catalog>

@@ -241,6 +241,17 @@ bool lib36280BFF_gf_Commonis_UnitOwnerActivePlayer (unit lp_unit) {
     return false;
 }
 
+bool lib36280BFF_gf_Commonis_MainBuilding (unit lp_unit) {
+    // Automatic Variable Declarations
+    // Implementation
+    if (((UnitGetType(lp_unit) == "Nexus") || (UnitGetType(lp_unit) == "CommandCenter") || (UnitGetType(lp_unit) == "OrbitalCommand") || (UnitGetType(lp_unit) == "PlanetaryFortress") || (UnitGetType(lp_unit) == "Hatchery") || (UnitGetType(lp_unit) == "Lair") || (UnitGetType(lp_unit) == "Hive"))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
 // Triggers
 //--------------------------------------------------------------------------------------------------
 // Trigger: Debug_GetAllUnits

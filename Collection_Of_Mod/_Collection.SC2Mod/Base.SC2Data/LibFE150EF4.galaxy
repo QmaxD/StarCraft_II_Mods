@@ -1,17 +1,17 @@
 include "TriggerLibs/NativeLib"
 include "Lib39D1ECFB_h"
-include "Lib3A730930_h"
+include "Lib36280BFF_h"
 
 include "LibFE150EF4_h"
 
 //--------------------------------------------------------------------------------------------------
-// Library: ++11 Nukes | NN
+// Library: 11 Nukes | NN
 //--------------------------------------------------------------------------------------------------
 // External Library Initialization
 void libFE150EF4_InitLibraries () {
     libNtve_InitVariables();
     lib39D1ECFB_InitVariables();
-    lib3A730930_InitVariables();
+    lib36280BFF_InitVariables();
 }
 
 // Variable Initialization
@@ -24,33 +24,901 @@ void libFE150EF4_InitVariables () {
 
     libFE150EF4_InitVariables_completed = true;
 
-    libFE150EF4_gv_modInformation.lv_gSOption_1 = "";
+    libFE150EF4_gv_modInformation.lv_nNOption_15 = "5";
+    libFE150EF4_gv_modInformation.lv_nNOption_110 = "10";
+    libFE150EF4_gv_modInformation.lv_nNOption_115 = "15";
+    libFE150EF4_gv_modInformation.lv_nNOption_120 = "20";
+    libFE150EF4_gv_modInformation.lv_nNOption_130 = "30";
+    libFE150EF4_gv_modInformation.lv_nNOption_145 = "45";
+    libFE150EF4_gv_modInformation.lv_nNOption_160 = "60";
+    libFE150EF4_gv_modInformation.lv_nNOption_1120 = "120";
+    libFE150EF4_gv_modInformation.lv_nNOption_1180 = "180";
+    libFE150EF4_gv_modInformation.lv_nNOption_21 = "1";
+    libFE150EF4_gv_modInformation.lv_nNOption_22 = "2";
+    libFE150EF4_gv_modInformation.lv_nNOption_23 = "3";
+    libFE150EF4_gv_modInformation.lv_nNOption_24 = "4";
+    libFE150EF4_gv_modInformation.lv_nNOption_25 = "5";
+    libFE150EF4_gv_modInformation.lv_nNOption_26 = "6";
+    libFE150EF4_gv_modInformation.lv_nNOption_27 = "7";
+    libFE150EF4_gv_modInformation.lv_nNOption_28 = "8";
+    libFE150EF4_gv_modInformation.lv_nNOption_29 = "9";
+    libFE150EF4_gv_modInformation.lv_nNOption_210 = "10";
+    libFE150EF4_gv_modInformation.lv_nNOption_215 = "15";
+    libFE150EF4_gv_modInformation.lv_nNOption_220 = "20";
+    libFE150EF4_gv_modInformation.lv_nNOption_230 = "30";
+    libFE150EF4_gv_modInformation.lv_nNOption_240 = "40";
+    libFE150EF4_gv_modInformation.lv_nNOption_250 = "50";
+    libFE150EF4_gv_modInformation.lv_nNOption_310 = "10";
+    libFE150EF4_gv_modInformation.lv_nNOption_315 = "15";
+    libFE150EF4_gv_modInformation.lv_nNOption_320 = "20";
+    libFE150EF4_gv_modInformation.lv_nNOption_325 = "25";
+    libFE150EF4_gv_modInformation.lv_nNOption_330 = "30";
+    libFE150EF4_gv_modInformation.lv_nNOption_335 = "35";
+    libFE150EF4_gv_modInformation.lv_nNOption_340 = "40";
+    libFE150EF4_gv_modInformation.lv_nNOption_345 = "45";
+    libFE150EF4_gv_modInformation.lv_nNOption_350 = "50";
+    libFE150EF4_gv_modInformation.lv_nNOption_41 = "1";
+    libFE150EF4_gv_modInformation.lv_nNOption_45 = "5";
+    libFE150EF4_gv_modInformation.lv_nNOption_410 = "10";
+    libFE150EF4_gv_modInformation.lv_nNOption_415 = "15";
+    libFE150EF4_gv_modInformation.lv_nNOption_420 = "20";
+    libFE150EF4_gv_modInformation.lv_nNOption_430 = "30";
+    libFE150EF4_gv_modInformation.lv_nNOption_5D0A2D0BED0BBD18CD0BAD0BED0BCD0B5D0B9D0BDD18B = "Только мейны игроков. Неизменяемая зона безопасности";
+    libFE150EF4_gv_modInformation.lv_nNOption_5D092D181D0B5D0B1D0B0D0B7D18B = "Каждая база игроков. Зона безопасности динамичная";
+    libFE150EF4_gv_modInformation.lv_nNOption_6D098D0BFD0BED0BBD0B5D0B8D0B3D180D0B0D0BDD0B8D186D0B0 = "Показывать и поле и границу зоны";
+    libFE150EF4_gv_modInformation.lv_nNOption_6D093D180D0B0D0BDD0B8D186D0B0 = "Показывать только границу зоны";
+    libFE150EF4_gv_modInformation.lv_nNOption_6D09FD0BED0BBD0B5 = "Показывать только поле зоны";
+    libFE150EF4_gv_modInformation.lv_nNOption_6D09DD0B8D187D0B5D0B3D0BE = "Ничего";
+    libFE150EF4_gv_modInformation.lv_nNOption_7D09CD0B0D0BBD18BD0B9 = "Радиус поражения 4, малый";
+    libFE150EF4_gv_modInformation.lv_nNOption_7D09CD0B5D0BDD18CD188D0B5D181D182D0B0D0BDD0B4D0B0D180D182D0BDD0BED0B3D0BE = "Радиус поражения 6, меньше стандартного";
+    libFE150EF4_gv_modInformation.lv_nNOption_7D0A1D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0B9 = "Радиус поражения 8, стандартный";
+    libFE150EF4_gv_modInformation.lv_nNOption_7D091D0BED0BBD18CD188D0B5D181D182D0B0D0BDD0B4D0B0D180D182D0BDD0BED0B3D0BE = "Радиус поражения 12, больше стандартного";
+    libFE150EF4_gv_modInformation.lv_nNOption_7D091D0BED0BBD18CD188D0BED0B9 = "Радиус поражения 16, большой";
+    libFE150EF4_gv_modInformation.lv_nNOption_850 = "Сила поражения бомбы 50";
+    libFE150EF4_gv_modInformation.lv_nNOption_8100 = "Сила поражения бомбы 100";
+    libFE150EF4_gv_modInformation.lv_nNOption_8150 = "Сила поражения бомбы 150";
+    libFE150EF4_gv_modInformation.lv_nNOption_8200 = "Сила поражения бомбы 200";
+    libFE150EF4_gv_modInformation.lv_nNOption_8300 = "Сила поражения бомбы 300, стандартная";
+    libFE150EF4_gv_modInformation.lv_nNOption_8400 = "Сила поражения бомбы 400";
+    libFE150EF4_gv_modInformation.lv_nNOption_8500 = "Сила поражения бомбы 500";
+    libFE150EF4_gv_modInformation.lv_nNOption_81000 = "Сила поражения бомбы 1000";
+    libFE150EF4_gv_modInformation.lv_nNOption_9D094D0B0 = "Да. Показывать";
+    libFE150EF4_gv_modInformation.lv_nNOption_9D09DD0B5D182 = "Нет. Скрыть";
+    libFE150EF4_gv_nNplayerOptions.lv_nukesisOnlyMainsSafeZone = true;
+    libFE150EF4_gv_nNplayerOptions.lv_nukesnukeRadius = TextExpressionAssemble("Param/Expression/lib_FE150EF4_590A5762");
+    libFE150EF4_gv_nNplayerOptions.lv_nukespingModel = "PingNuke";
+    libFE150EF4_gv_nNplayerOptions.lv_nukesisShowRedPoind = true;
+    libFE150EF4_gv_nNsafeZone = RegionEmpty();
+    libFE150EF4_gv_nNtimer = TimerCreate();
 }
 
 // Functions
 void libFE150EF4_gf_SetupInformation (int lp_modIndex) {
+    // Variable Declarations
+    int lv__optionIndex;
+    int lv__optionValueIndex;
+    int lv__default_Option_1;
+    int lv__default_Option_2;
+    int lv__default_Option_3;
+    int lv__default_Option_4;
+    int lv__default_Option_5;
+    int lv__default_Option_6;
+    int lv__default_Option_7;
+    int lv__default_Option_8;
+    int lv__default_Option_9;
+
     // Automatic Variable Declarations
+    // Variable Initialization
+    lv__default_Option_1 = 5;
+    lv__default_Option_2 = 10;
+    lv__default_Option_3 = 5;
+    lv__default_Option_4 = 2;
+    lv__default_Option_5 = 2;
+    lv__default_Option_6 = 3;
+    lv__default_Option_7 = 3;
+    lv__default_Option_8 = 5;
+    lv__default_Option_9 = 1;
+
     // Implementation
     lib39D1ECFB_gv_mods[lp_modIndex].lv_name = StringExternal("Param/Value/lib_FE150EF4_160E91E8");
     lib39D1ECFB_gv_mods[lp_modIndex].lv_fullName = StringExternal("Param/Value/lib_FE150EF4_AC03C84C");
     lib39D1ECFB_gv_mods[lp_modIndex].lv_description = StringExternal("Param/Value/lib_FE150EF4_D76A01AB");
     lib39D1ECFB_gv_mods[lp_modIndex].lv_icon_Path = "Assets\\Textures\\btn-progression-hornerhan-14-nukefortelefrag.dds";
-    lib39D1ECFB_gv_mods[lp_modIndex].lv_is_Included = false;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_is_Included = true;
     lib39D1ECFB_gv_mods[lp_modIndex].lv_saturation = 2;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_FE150EF4_375A4BE6");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_FE150EF4_7B102AA8");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_15;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_199A3A18");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_110;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_C984B007");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_115;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_A9C80333");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_120;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_D593690D");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_130;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_122E91C6");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_145;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_7652EC3E");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_160;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_EB04D336");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_1120;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_5575421B");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_1180;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_4C19BF86");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_1].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_FE150EF4_532E9B11");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_FE150EF4_B16F843D");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_21;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_31DF06B4");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_22;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_4BC2A65C");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_23;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_524FAA17");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_24;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_3E1DB202");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_25;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_9168B51F");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_26;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_52A63EAD");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_27;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_37A51329");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_28;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_5351D036");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_29;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_1D9BA6C7");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_210;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_89054862");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_215;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_95CBBCF0");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_220;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_780A1E06");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_230;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_8CE75053");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_240;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_0CB0CB66");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_250;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_CB4B97FC");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_2;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_2].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_FE150EF4_0DDCA812");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_FE150EF4_A10A0941");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_310;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_B9FE34EB");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_315;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_0F13A1F6");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_320;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_2EDCD9F8");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_325;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_FACC1810");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_330;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_D6A3B207");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_335;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_0E1E47D2");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_340;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_089218A3");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_345;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_D10E0C99");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_350;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_FEC80730");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_3;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_3].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_FE150EF4_1CE7D0FF");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_FE150EF4_4A61E718");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_41;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_33B6C44B");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_45;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_DAEAC159");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_410;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_41A1FD97");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_415;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_5D471D64");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_420;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_607FA708");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_430;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_454F6AF4");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_4;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_4].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_FE150EF4_D335FF04");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_FE150EF4_EF6AF80A");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_5D0A2D0BED0BBD18CD0BAD0BED0BCD0B5D0B9D0BDD18B;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_99DFC640");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_5D092D181D0B5D0B1D0B0D0B7D18B;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_51FBC22C");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_5;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_5].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_FE150EF4_61A3A180");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_FE150EF4_4BBBA4F0");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_6D098D0BFD0BED0BBD0B5D0B8D0B3D180D0B0D0BDD0B8D186D0B0;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_B6FDF8BA");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_6D093D180D0B0D0BDD0B8D186D0B0;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_1044B147");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_6D09FD0BED0BBD0B5;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_2C0F0EC8");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_6D09DD0B8D187D0B5D0B3D0BE;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_FB29CDCD");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_6;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_6].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_FE150EF4_725963A2");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_FE150EF4_FC28EE98");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_7D09CD0B0D0BBD18BD0B9;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_F936BD36");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_7D09CD0B5D0BDD18CD188D0B5D181D182D0B0D0BDD0B4D0B0D180D182D0BDD0BED0B3D0BE;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_0CB89B45");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_7D0A1D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0B9;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_1BE923FF");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_7D091D0BED0BBD18CD188D0B5D181D182D0B0D0BDD0B4D0B0D180D182D0BDD0BED0B3D0BE;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_4FC627B1");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_7D091D0BED0BBD18CD188D0BED0B9;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_730FBC6B");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_7;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_7].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_FE150EF4_5FC412C1");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_FE150EF4_39D568C8");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_850;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_E564FAAE");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_8100;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_2B26171B");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_8150;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_A26118FC");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_8200;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_3107E609");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_8300;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_96C224A3");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_8400;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_81AEED7A");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_8500;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_A2FF9F88");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_81000;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_F0C4A5DA");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_8;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_8].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_FE150EF4_8C694680");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_FE150EF4_ABD234AC");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_9D094D0B0;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_B2DC25F3");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_9D09DD0B5D182;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_985C7940");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_9;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_9].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_number_Game_Options = lv__optionIndex;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_start_Trigger = libFE150EF4_gt_Launch;
 }
 
 void libFE150EF4_gf_GetOptions () {
+    // Variable Declarations
+    int lv__Effects_NukeDamage_Amount;
+    fixed lv__Effects_NukeDetonate_InitialDelay;
+    int lv__Effects_NukeDetonate_RevealRadius;
+    fixed lv__Effects_NukeDamage_AreaArray0Fraction;
+    int lv__Effects_NukeDamage_AreaArray0Radius;
+    fixed lv__Effects_NukeDamage_AreaArray1Fraction;
+    int lv__Effects_NukeDamage_AreaArray1Radius;
+    fixed lv__Effects_NukeDamage_AreaArray2Fraction;
+    int lv__Effects_NukeDamage_AreaArray2Radius;
+
     // Automatic Variable Declarations
+    string autoAABEC346_val;
+    string autoFC069BCB_val;
+    string auto6A3901F4_val;
+    string autoF36C8973_val;
+    string autoEAE7F3E1_val;
+    string auto7692420B_val;
+    string autoF3A3DB92_val;
+    string autoE77F0D8B_val;
+    string auto4473EF56_val;
+
+    // Variable Initialization
+    lv__Effects_NukeDamage_Amount = 300;
+    lv__Effects_NukeDetonate_InitialDelay = 1.25;
+    lv__Effects_NukeDetonate_RevealRadius = 8;
+    lv__Effects_NukeDamage_AreaArray0Fraction = 1.0;
+    lv__Effects_NukeDamage_AreaArray0Radius = 4;
+    lv__Effects_NukeDamage_AreaArray1Fraction = 0.75;
+    lv__Effects_NukeDamage_AreaArray1Radius = 6;
+    lv__Effects_NukeDamage_AreaArray2Fraction = 0.5;
+    lv__Effects_NukeDamage_AreaArray2Radius = 8;
+
+    // Implementation
+    autoAABEC346_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[1].lv_values[0].lv_valueString;
+    if (autoAABEC346_val == libFE150EF4_gv_modInformation.lv_nNOption_15) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesperiodWaves = 5;
+    }
+    else if (autoAABEC346_val == libFE150EF4_gv_modInformation.lv_nNOption_110) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesperiodWaves = 10;
+    }
+    else if (autoAABEC346_val == libFE150EF4_gv_modInformation.lv_nNOption_115) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesperiodWaves = 15;
+    }
+    else if (autoAABEC346_val == libFE150EF4_gv_modInformation.lv_nNOption_120) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesperiodWaves = 20;
+    }
+    else if (autoAABEC346_val == libFE150EF4_gv_modInformation.lv_nNOption_130) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesperiodWaves = 30;
+    }
+    else if (autoAABEC346_val == libFE150EF4_gv_modInformation.lv_nNOption_145) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesperiodWaves = 45;
+    }
+    else if (autoAABEC346_val == libFE150EF4_gv_modInformation.lv_nNOption_160) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesperiodWaves = 60;
+    }
+    else if (autoAABEC346_val == libFE150EF4_gv_modInformation.lv_nNOption_1120) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesperiodWaves = 120;
+    }
+    else if (autoAABEC346_val == libFE150EF4_gv_modInformation.lv_nNOption_1180) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesperiodWaves = 180;
+    }
+    else {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesperiodWaves = 180;
+    }
+    autoFC069BCB_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[2].lv_values[0].lv_valueString;
+    if (autoFC069BCB_val == libFE150EF4_gv_modInformation.lv_nNOption_21) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 1;
+    }
+    else if (autoFC069BCB_val == libFE150EF4_gv_modInformation.lv_nNOption_22) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 2;
+    }
+    else if (autoFC069BCB_val == libFE150EF4_gv_modInformation.lv_nNOption_23) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 3;
+    }
+    else if (autoFC069BCB_val == libFE150EF4_gv_modInformation.lv_nNOption_24) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 4;
+    }
+    else if (autoFC069BCB_val == libFE150EF4_gv_modInformation.lv_nNOption_25) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 5;
+    }
+    else if (autoFC069BCB_val == libFE150EF4_gv_modInformation.lv_nNOption_26) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 6;
+    }
+    else if (autoFC069BCB_val == libFE150EF4_gv_modInformation.lv_nNOption_27) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 7;
+    }
+    else if (autoFC069BCB_val == libFE150EF4_gv_modInformation.lv_nNOption_28) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 8;
+    }
+    else if (autoFC069BCB_val == libFE150EF4_gv_modInformation.lv_nNOption_29) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 9;
+    }
+    else if (autoFC069BCB_val == libFE150EF4_gv_modInformation.lv_nNOption_210) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 10;
+    }
+    else if (autoFC069BCB_val == libFE150EF4_gv_modInformation.lv_nNOption_215) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 15;
+    }
+    else if (autoFC069BCB_val == libFE150EF4_gv_modInformation.lv_nNOption_220) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 20;
+    }
+    else if (autoFC069BCB_val == libFE150EF4_gv_modInformation.lv_nNOption_230) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 30;
+    }
+    else if (autoFC069BCB_val == libFE150EF4_gv_modInformation.lv_nNOption_240) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 40;
+    }
+    else if (autoFC069BCB_val == libFE150EF4_gv_modInformation.lv_nNOption_250) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 50;
+    }
+    else {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 10;
+    }
+    auto6A3901F4_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[3].lv_values[0].lv_valueString;
+    if (auto6A3901F4_val == libFE150EF4_gv_modInformation.lv_nNOption_310) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance = 10;
+    }
+    else if (auto6A3901F4_val == libFE150EF4_gv_modInformation.lv_nNOption_315) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance = 15;
+    }
+    else if (auto6A3901F4_val == libFE150EF4_gv_modInformation.lv_nNOption_320) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance = 20;
+    }
+    else if (auto6A3901F4_val == libFE150EF4_gv_modInformation.lv_nNOption_325) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance = 25;
+    }
+    else if (auto6A3901F4_val == libFE150EF4_gv_modInformation.lv_nNOption_330) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance = 30;
+    }
+    else if (auto6A3901F4_val == libFE150EF4_gv_modInformation.lv_nNOption_335) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance = 35;
+    }
+    else if (auto6A3901F4_val == libFE150EF4_gv_modInformation.lv_nNOption_340) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance = 40;
+    }
+    else if (auto6A3901F4_val == libFE150EF4_gv_modInformation.lv_nNOption_345) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance = 45;
+    }
+    else if (auto6A3901F4_val == libFE150EF4_gv_modInformation.lv_nNOption_350) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance = 50;
+    }
+    else {
+        libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance = 25;
+    }
+    libFE150EF4_gv_nNplayerOptions.lv_nukesBehaviourForBlob = libFE150EF4_gf_NNGetRightBehaviourForBlob(libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance);
+    libFE150EF4_gv_nNplayerOptions.lv_nukesBehaviourForLine = libFE150EF4_gf_NNGetRightBehaviourForLine(libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance);
+    autoF36C8973_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[4].lv_values[0].lv_valueString;
+    if (autoF36C8973_val == libFE150EF4_gv_modInformation.lv_nNOption_41) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukestimeNukeAttack = 1;
+    }
+    else if (autoF36C8973_val == libFE150EF4_gv_modInformation.lv_nNOption_45) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukestimeNukeAttack = 5;
+    }
+    else if (autoF36C8973_val == libFE150EF4_gv_modInformation.lv_nNOption_410) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukestimeNukeAttack = 10;
+    }
+    else if (autoF36C8973_val == libFE150EF4_gv_modInformation.lv_nNOption_415) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukestimeNukeAttack = 15;
+    }
+    else if (autoF36C8973_val == libFE150EF4_gv_modInformation.lv_nNOption_420) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukestimeNukeAttack = 20;
+    }
+    else if (autoF36C8973_val == libFE150EF4_gv_modInformation.lv_nNOption_430) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukestimeNukeAttack = 30;
+    }
+    else {
+        libFE150EF4_gv_nNplayerOptions.lv_nukestimeNukeAttack = 5;
+    }
+    autoEAE7F3E1_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[5].lv_values[0].lv_valueString;
+    if (autoEAE7F3E1_val == libFE150EF4_gv_modInformation.lv_nNOption_5D092D181D0B5D0B1D0B0D0B7D18B) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesisOnlyMainsSafeZone = false;
+    }
+    else if (autoEAE7F3E1_val == libFE150EF4_gv_modInformation.lv_nNOption_5D0A2D0BED0BBD18CD0BAD0BED0BCD0B5D0B9D0BDD18B) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesisOnlyMainsSafeZone = true;
+    }
+    else {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesisOnlyMainsSafeZone = true;
+    }
+    auto7692420B_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[6].lv_values[0].lv_valueString;
+    if (auto7692420B_val == libFE150EF4_gv_modInformation.lv_nNOption_6D098D0BFD0BED0BBD0B5D0B8D0B3D180D0B0D0BDD0B8D186D0B0) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneField = true;
+        libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneLine = true;
+    }
+    else if (auto7692420B_val == libFE150EF4_gv_modInformation.lv_nNOption_6D093D180D0B0D0BDD0B8D186D0B0) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneLine = true;
+    }
+    else if (auto7692420B_val == libFE150EF4_gv_modInformation.lv_nNOption_6D09FD0BED0BBD0B5) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneField = true;
+    }
+    else if (auto7692420B_val == libFE150EF4_gv_modInformation.lv_nNOption_6D09DD0B8D187D0B5D0B3D0BE) {
+    }
+    else {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneField = true;
+        libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneLine = true;
+    }
+    autoF3A3DB92_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[7].lv_values[0].lv_valueString;
+    if (autoF3A3DB92_val == libFE150EF4_gv_modInformation.lv_nNOption_7D09CD0B0D0BBD18BD0B9) {
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "RevealRadius", 15, "4", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(0) + "].Fraction", 15, "1", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(0) + "].Radius", 15, "2", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(1) + "].Fraction", 15, "0.65", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(1) + "].Radius", 15, "3", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(2) + "].Fraction", 15, "0.35", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(2) + "].Radius", 15, "4", c_upgradeOperationSet);
+        libFE150EF4_gv_nNplayerOptions.lv_nukesnukeRadius = TextExpressionAssemble("Param/Expression/lib_FE150EF4_33ABB0DD");
+    }
+    else if (autoF3A3DB92_val == libFE150EF4_gv_modInformation.lv_nNOption_7D09CD0B5D0BDD18CD188D0B5D181D182D0B0D0BDD0B4D0B0D180D182D0BDD0BED0B3D0BE) {
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "RevealRadius", 15, "6", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(0) + "].Fraction", 15, "1", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(0) + "].Radius", 15, "3", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(1) + "].Fraction", 15, "0.5", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(1) + "].Radius", 15, "4", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(2) + "].Fraction", 15, "0.25", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(2) + "].Radius", 15, "6", c_upgradeOperationSet);
+        libFE150EF4_gv_nNplayerOptions.lv_nukesnukeRadius = TextExpressionAssemble("Param/Expression/lib_FE150EF4_5F81806A");
+    }
+    else if (autoF3A3DB92_val == libFE150EF4_gv_modInformation.lv_nNOption_7D0A1D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0B9) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesnukeRadius = TextExpressionAssemble("Param/Expression/lib_FE150EF4_87428B99");
+    }
+    else if (autoF3A3DB92_val == libFE150EF4_gv_modInformation.lv_nNOption_7D091D0BED0BBD18CD188D0B5D181D182D0B0D0BDD0B4D0B0D180D182D0BDD0BED0B3D0BE) {
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "RevealRadius", 15, "12", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(0) + "].Fraction", 15, "1", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(0) + "].Radius", 15, "6", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(1) + "].Fraction", 15, "0.6", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(1) + "].Radius", 15, "8", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(2) + "].Fraction", 15, "0.3", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(2) + "].Radius", 15, "12", c_upgradeOperationSet);
+        libFE150EF4_gv_nNplayerOptions.lv_nukesnukeRadius = TextExpressionAssemble("Param/Expression/lib_FE150EF4_BBA48398");
+    }
+    else if (autoF3A3DB92_val == libFE150EF4_gv_modInformation.lv_nNOption_7D091D0BED0BBD18CD188D0BED0B9) {
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "RevealRadius", 15, "16", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(0) + "].Fraction", 15, "1", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(0) + "].Radius", 15, "8", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(1) + "].Fraction", 15, "0.65", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(1) + "].Radius", 15, "12", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(2) + "].Fraction", 15, "0.35", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(2) + "].Radius", 15, "16", c_upgradeOperationSet);
+        libFE150EF4_gv_nNplayerOptions.lv_nukesnukeRadius = TextExpressionAssemble("Param/Expression/lib_FE150EF4_53E1A808");
+    }
+    else {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesnukeRadius = TextExpressionAssemble("Param/Expression/lib_FE150EF4_8E26E2D6");
+    }
+    autoE77F0D8B_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[8].lv_values[0].lv_valueString;
+    if (autoE77F0D8B_val == libFE150EF4_gv_modInformation.lv_nNOption_850) {
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "InitialDelay", 15, "0.25", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "Amount", 15, "50", c_upgradeOperationSet);
+        libFE150EF4_gv_nNplayerOptions.lv_nukesnukeDamage = 50;
+    }
+    else if (autoE77F0D8B_val == libFE150EF4_gv_modInformation.lv_nNOption_8100) {
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "InitialDelay", 15, "0.25", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "Amount", 15, "100", c_upgradeOperationSet);
+        libFE150EF4_gv_nNplayerOptions.lv_nukesnukeDamage = 100;
+    }
+    else if (autoE77F0D8B_val == libFE150EF4_gv_modInformation.lv_nNOption_8150) {
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "InitialDelay", 15, "0.25", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "Amount", 15, "150", c_upgradeOperationSet);
+        libFE150EF4_gv_nNplayerOptions.lv_nukesnukeDamage = 150;
+    }
+    else if (autoE77F0D8B_val == libFE150EF4_gv_modInformation.lv_nNOption_8200) {
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "InitialDelay", 15, "0.25", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "Amount", 15, "200", c_upgradeOperationSet);
+        libFE150EF4_gv_nNplayerOptions.lv_nukesnukeDamage = 200;
+    }
+    else if (autoE77F0D8B_val == libFE150EF4_gv_modInformation.lv_nNOption_8300) {
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "InitialDelay", 15, "0.25", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "Amount", 15, "300", c_upgradeOperationSet);
+        libFE150EF4_gv_nNplayerOptions.lv_nukesnukeDamage = 300;
+    }
+    else if (autoE77F0D8B_val == libFE150EF4_gv_modInformation.lv_nNOption_8400) {
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "InitialDelay", 15, "0.25", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "Amount", 15, "400", c_upgradeOperationSet);
+        libFE150EF4_gv_nNplayerOptions.lv_nukesnukeDamage = 400;
+    }
+    else if (autoE77F0D8B_val == libFE150EF4_gv_modInformation.lv_nNOption_8500) {
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "InitialDelay", 15, "0.25", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "Amount", 15, "500", c_upgradeOperationSet);
+        libFE150EF4_gv_nNplayerOptions.lv_nukesnukeDamage = 500;
+    }
+    else if (autoE77F0D8B_val == libFE150EF4_gv_modInformation.lv_nNOption_81000) {
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "InitialDelay", 15, "0.25", c_upgradeOperationSet);
+        CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "Amount", 15, "1000", c_upgradeOperationSet);
+        libFE150EF4_gv_nNplayerOptions.lv_nukesnukeDamage = 1000;
+    }
+    else {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesnukeDamage = 300;
+    }
+    auto4473EF56_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[9].lv_values[0].lv_valueString;
+    if (auto4473EF56_val == libFE150EF4_gv_modInformation.lv_nNOption_9D094D0B0) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesisShowRedPoind = true;
+    }
+    else if (auto4473EF56_val == libFE150EF4_gv_modInformation.lv_nNOption_9D09DD0B5D182) {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesisShowRedPoind = false;
+    }
+    else {
+        libFE150EF4_gv_nNplayerOptions.lv_nukesisShowRedPoind = true;
+    }
 }
 
 void libFE150EF4_gf_TriggersTurnOn () {
     // Automatic Variable Declarations
     // Implementation
-    TriggerEnable(lib3A730930_gt_UntitledTrigger002, true);
+    TriggerEnable(libFE150EF4_gt_NNSpawnNukes, true);
+    if ((libFE150EF4_gv_nNplayerOptions.lv_nukesisOnlyMainsSafeZone == false)) {
+        TriggerEnable(libFE150EF4_gt_NNSetNewBasesCircle, true);
+        TriggerEnable(libFE150EF4_gt_NNTerransInTheAir, true);
+        TriggerEnable(libFE150EF4_gt_NNTerransOnTheGround, true);
+    }
+
+}
+
+void libFE150EF4_gf_NNStartSafeZoneAndTimer () {
+    // Variable Declarations
+    unitgroup lv__mainsGroup;
+    point lv_Point;
+    string lv_Point3;
+    unit lv_Point2;
+
+    // Automatic Variable Declarations
+    playergroup auto300AFC44_g;
+    int auto300AFC44_var;
+    playergroup autoB5F2ED69_g;
+    int autoB5F2ED69_var;
+    string auto3429F125_val;
+    unitgroup auto9F5DE228_g;
+    int auto9F5DE228_u;
+    unit auto9F5DE228_var;
+
+    // Variable Initialization
+    lv__mainsGroup = UnitGroupEmpty();
+
+    // Implementation
+    auto300AFC44_g = lib36280BFF_gv_commonplayers_Active_Group;
+    auto300AFC44_var = -1;
+    while (true) {
+        auto300AFC44_var = PlayerGroupNextPlayer(auto300AFC44_g, auto300AFC44_var);
+        if (auto300AFC44_var < 0) { break; }
+        RegionAddCircle(libFE150EF4_gv_nNsafeZone, true, PlayerStartLocation(auto300AFC44_var), libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance);
+    }
+    if (((libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneLine == true) || (libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneField == true))) {
+        if ((libFE150EF4_gv_nNplayerOptions.lv_nukesisOnlyMainsSafeZone == false)) {
+            lv__mainsGroup = UnitGroup(null, c_playerAny, RegionEntireMap(), UnitFilter((1 << c_targetFilterStructure), 0, (1 << c_targetFilterNeutral), 0), 0);
+        }
+        else {
+            autoB5F2ED69_g = lib36280BFF_gv_commonplayers_Active_Group;
+            autoB5F2ED69_var = -1;
+            while (true) {
+                autoB5F2ED69_var = PlayerGroupNextPlayer(autoB5F2ED69_g, autoB5F2ED69_var);
+                if (autoB5F2ED69_var < 0) { break; }
+                auto3429F125_val = PlayerRace(autoB5F2ED69_var);
+                if (auto3429F125_val == "Prot") {
+                    lv_Point3 = "Nexus";
+                }
+                else if (auto3429F125_val == "Terr") {
+                    lv_Point3 = "CommandCenter";
+                }
+                else if (auto3429F125_val == "Zerg") {
+                    lv_Point3 = "Hatchery";
+                }
+                else {
+                }
+                UnitCreate(1, lv_Point3, c_unitCreateIgnorePlacement, 0, PlayerStartLocation(autoB5F2ED69_var), 270.0);
+                lv_Point2 = UnitLastCreated();
+                libNtve_gf_ShowHideUnit(lv_Point2, false);
+                UnitBehaviorAdd(lv_Point2, "ImmuneToDamage", lv_Point2, 1);
+                UnitGroupAdd(lv__mainsGroup, lv_Point2);
+            }
+        }
+        auto9F5DE228_g = lv__mainsGroup;
+        auto9F5DE228_u = UnitGroupCount(auto9F5DE228_g, c_unitCountAll);
+        for (;; auto9F5DE228_u -= 1) {
+            auto9F5DE228_var = UnitGroupUnitFromEnd(auto9F5DE228_g, auto9F5DE228_u);
+            if (auto9F5DE228_var == null) { break; }
+            if ((lib36280BFF_gf_Commonis_MainBuilding(auto9F5DE228_var) == true)) {
+                if ((libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneLine == true)) {
+                    UnitBehaviorAdd(auto9F5DE228_var, libFE150EF4_gv_nNplayerOptions.lv_nukesBehaviourForLine, auto9F5DE228_var, 1);
+                }
+
+                if ((libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneField == true)) {
+                    UnitBehaviorAdd(auto9F5DE228_var, libFE150EF4_gv_nNplayerOptions.lv_nukesBehaviourForBlob, auto9F5DE228_var, 1);
+                }
+
+            }
+            else {
+                UnitGroupRemove(lv__mainsGroup, auto9F5DE228_var);
+            }
+        }
+    }
+
+    TimerStart(libFE150EF4_gv_nNtimer, libFE150EF4_gv_nNplayerOptions.lv_nukesperiodWaves, true, c_timeReal);
 }
 
 void libFE150EF4_gf_GetInfoForPlayer () {
+    // Variable Declarations
+    text lv__description;
+
     // Automatic Variable Declarations
+    // Variable Initialization
+    lv__description = StringExternal("Param/Value/lib_FE150EF4_C42346D4");
+
+    // Implementation
+    TextExpressionSetToken("Param/Expression/lib_FE150EF4_CEEDB8A8", "periodWaves", IntToText(libFE150EF4_gv_nNplayerOptions.lv_nukesperiodWaves));
+    TextExpressionSetToken("Param/Expression/lib_FE150EF4_CEEDB8A8", "nukesNumber", IntToText(libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber));
+    TextExpressionSetToken("Param/Expression/lib_FE150EF4_CEEDB8A8", "timeNukeAttack", IntToText(libFE150EF4_gv_nNplayerOptions.lv_nukestimeNukeAttack));
+    TextExpressionSetToken("Param/Expression/lib_FE150EF4_CEEDB8A8", "safeDistance", IntToText(libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance));
+    lv__description = (TextExpressionAssemble("Param/Expression/lib_FE150EF4_B14D5408") + TextExpressionAssemble("Param/Expression/lib_FE150EF4_CEEDB8A8"));
+    if ((libFE150EF4_gv_nNplayerOptions.lv_nukesisOnlyMainsSafeZone == true)) {
+        lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_FE150EF4_17554597"));
+    }
+    else {
+        lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_FE150EF4_343EAC98"));
+    }
+    if (((libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneLine == true) || (libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneField == true))) {
+        lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_FE150EF4_F2565657"));
+    }
+    else {
+        lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_FE150EF4_F3CEF9EC"));
+    }
+    TextExpressionSetToken("Param/Expression/lib_FE150EF4_EA775E38", "nukeDamage", IntToText(libFE150EF4_gv_nNplayerOptions.lv_nukesnukeDamage));
+    lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_FE150EF4_EA775E38"));
+    lv__description = (lv__description + libFE150EF4_gv_nNplayerOptions.lv_nukesnukeRadius);
+    lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = lv__description;
+    lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat = StringToText("");
+}
+
+trigger auto_libFE150EF4_gf_NNSpawnNuke_Trigger = null;
+
+void libFE150EF4_gf_NNSpawnNuke () {
+    if (auto_libFE150EF4_gf_NNSpawnNuke_Trigger == null) {
+        auto_libFE150EF4_gf_NNSpawnNuke_Trigger = TriggerCreate("auto_libFE150EF4_gf_NNSpawnNuke_TriggerFunc");
+    }
+
+    TriggerExecute(auto_libFE150EF4_gf_NNSpawnNuke_Trigger, false, false);
+}
+
+bool auto_libFE150EF4_gf_NNSpawnNuke_TriggerFunc (bool testConds, bool runActions) {
+    // Variable Declarations
+    actor lv__actor;
+    point lv__nukePoint;
+    int lv__count;
+    int lv__ping;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv__ping = c_invalidPingId;
+
+    // Implementation
+    while ((lv__nukePoint == null) && (lv__count <= 40)) {
+        lv__nukePoint = RegionRandomPoint(RegionPlayableMap());
+        lv__count += 1;
+        if ((RegionContainsPoint(libFE150EF4_gv_nNsafeZone, lv__nukePoint) == true)) {
+            lv__nukePoint = null;
+        }
+
+    }
+    if ((libFE150EF4_gv_nNplayerOptions.lv_nukesisShowRedPoind == true)) {
+        libNtve_gf_CreateModelAtPoint("GhostNukeIndicator", lv__nukePoint);
+        lv__actor = libNtve_gf_ActorLastCreated();
+    }
+
+    libNtve_gf_CreatePingFacingAngle(PlayerGroupAll(), libFE150EF4_gv_nNplayerOptions.lv_nukespingModel, lv__nukePoint, ColorWithAlpha(78.43, 78.43, 3.92, 0.00), libFE150EF4_gv_nNplayerOptions.lv_nukestimeNukeAttack, 225.0);
+    PingSetScale(PingLastCreated(), 0.75);
+    Wait(libFE150EF4_gv_nNplayerOptions.lv_nukestimeNukeAttack, c_timeReal);
+    PlayerCreateEffectPoint(15, "NukeDetonate2", lv__nukePoint);
+    if ((libFE150EF4_gv_nNplayerOptions.lv_nukesisShowRedPoind == true)) {
+        libNtve_gf_KillModel(lv__actor);
+    }
+
+    return true;
+}
+
+string libFE150EF4_gf_NNGetRightBehaviourForBlob (int lp__radius) {
+    // Automatic Variable Declarations
+    int autoEF387997_val;
+
+    // Implementation
+    autoEF387997_val = lp__radius;
+    if (autoEF387997_val == 10) {
+        return "SafeZoneBlob10";
+    }
+    else if (autoEF387997_val == 15) {
+        return "SafeZoneBlob15";
+    }
+    else if (autoEF387997_val == 20) {
+        return "SafeZoneBlob20";
+    }
+    else if (autoEF387997_val == 25) {
+        return "SafeZoneBlob25";
+    }
+    else if (autoEF387997_val == 30) {
+        return "SafeZoneBlob30";
+    }
+    else if (autoEF387997_val == 35) {
+        return "SafeZoneBlob35";
+    }
+    else if (autoEF387997_val == 40) {
+        return "SafeZoneBlob40";
+    }
+    else if (autoEF387997_val == 45) {
+        return "SafeZoneBlob45";
+    }
+    else if (autoEF387997_val == 50) {
+        return "SafeZoneBlob50";
+    }
+    else {
+        return "SafeZoneBlob25";
+    }
+}
+
+string libFE150EF4_gf_NNGetRightBehaviourForLine (int lp__radius) {
+    // Automatic Variable Declarations
+    int autoDE224B95_val;
+
+    // Implementation
+    autoDE224B95_val = lp__radius;
+    if (autoDE224B95_val == 10) {
+        return "SafeZoneLine10";
+    }
+    else if (autoDE224B95_val == 15) {
+        return "SafeZoneLine15";
+    }
+    else if (autoDE224B95_val == 20) {
+        return "SafeZoneLine20";
+    }
+    else if (autoDE224B95_val == 25) {
+        return "SafeZoneLine25";
+    }
+    else if (autoDE224B95_val == 30) {
+        return "SafeZoneLine30";
+    }
+    else if (autoDE224B95_val == 35) {
+        return "SafeZoneLine35";
+    }
+    else if (autoDE224B95_val == 40) {
+        return "SafeZoneLine40";
+    }
+    else if (autoDE224B95_val == 45) {
+        return "SafeZoneLine45";
+    }
+    else if (autoDE224B95_val == 50) {
+        return "SafeZoneLine50";
+    }
+    else {
+        return "SafeZoneLine25";
+    }
 }
 
 // Triggers
@@ -64,7 +932,13 @@ bool libFE150EF4_gt_Launch_Func (bool testConds, bool runActions) {
         return true;
     }
 
+    libFE150EF4_gf_GetOptions();
+    libFE150EF4_gf_GetInfoForPlayer();
+    TextExpressionSetToken("Param/Expression/lib_FE150EF4_0304392A", "FulName", lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_fullName);
+    HelpPanelAddTip(PlayerGroupAll(), libNtve_gf_FormatTipTitle(TextExpressionAssemble("Param/Expression/lib_FE150EF4_0304392A"), libNtve_ge_TipType_NormalTip), lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_name, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_icon_Path);
+    UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat);
     libFE150EF4_gf_TriggersTurnOn();
+    libFE150EF4_gf_NNStartSafeZoneAndTimer();
     return true;
 }
 
@@ -73,8 +947,205 @@ void libFE150EF4_gt_Launch_Init () {
     libFE150EF4_gt_Launch = TriggerCreate("libFE150EF4_gt_Launch_Func");
 }
 
+//--------------------------------------------------------------------------------------------------
+// Trigger: NN | SpawnNukes
+//--------------------------------------------------------------------------------------------------
+bool libFE150EF4_gt_NNSpawnNukes_Func (bool testConds, bool runActions) {
+    // Variable Declarations
+    unitgroup lv_MineralGroup;
+    point lv_Point;
+
+    // Automatic Variable Declarations
+    unitgroup auto81B8E974_g;
+    int auto81B8E974_u;
+    unit auto81B8E974_var;
+    int auto93E11E33_ae;
+    int auto93E11E33_var;
+
+    // Variable Initialization
+    lv_MineralGroup = UnitGroupEmpty();
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((libFE150EF4_gv_nNplayerOptions.lv_nukesisOnlyMainsSafeZone == false)) {
+        libFE150EF4_gv_nNsafeZone = RegionEmpty();
+        lv_MineralGroup = UnitGroup(null, c_playerAny, RegionEntireMap(), UnitFilter((1 << c_targetFilterStructure), 0, (1 << c_targetFilterNeutral), 0), 0);
+        auto81B8E974_g = lv_MineralGroup;
+        auto81B8E974_u = UnitGroupCount(auto81B8E974_g, c_unitCountAll);
+        for (;; auto81B8E974_u -= 1) {
+            auto81B8E974_var = UnitGroupUnitFromEnd(auto81B8E974_g, auto81B8E974_u);
+            if (auto81B8E974_var == null) { break; }
+            if ((libNtve_gf_UnitIsUnderConstruction(auto81B8E974_var) == false)) {
+                if ((lib36280BFF_gf_Commonis_MainBuilding(auto81B8E974_var) == true)) {
+                    lv_Point = UnitGetPosition(auto81B8E974_var);
+                    RegionAddCircle(libFE150EF4_gv_nNsafeZone, true, lv_Point, libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance);
+                }
+
+            }
+
+        }
+    }
+
+    if (((GameAttributeGameValue("1") == "0005") || (GameAttributeGameValue("1") == "0007") || (GameAttributeGameValue("1") == "0006"))) {
+        SoundPlayForPlayer(SoundLink("TUIWarningPing2", -1), c_maxPlayers, PlayerGroupActive(), 100.0, 0.0);
+    }
+    else {
+        if (((GameAttributeGameValue("1") == "0008") || (GameAttributeGameValue("1") == "0001") || (GameAttributeGameValue("1") == "0009"))) {
+            SoundPlayForPlayer(SoundLink("TUIWarningPing3", -1), c_maxPlayers, PlayerGroupActive(), 100.0, 0.0);
+        }
+        else {
+            if (((GameAttributeGameValue("1") == "0002") || (GameAttributeGameValue("1") == "0003") || (GameAttributeGameValue("1") == "0004"))) {
+                SoundPlayForPlayer(SoundLink("TUIWarningPing", -1), c_maxPlayers, PlayerGroupActive(), 100.0, 0.0);
+            }
+
+        }
+    }
+    auto93E11E33_ae = libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber;
+    auto93E11E33_var = 1;
+    for ( ; auto93E11E33_var <= auto93E11E33_ae; auto93E11E33_var += 1 ) {
+        libFE150EF4_gf_NNSpawnNuke();
+    }
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFE150EF4_gt_NNSpawnNukes_Init () {
+    libFE150EF4_gt_NNSpawnNukes = TriggerCreate("libFE150EF4_gt_NNSpawnNukes_Func");
+    TriggerEnable(libFE150EF4_gt_NNSpawnNukes, false);
+    TriggerAddEventTimer(libFE150EF4_gt_NNSpawnNukes, libFE150EF4_gv_nNtimer);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: NN | SetNewBasesCircle
+//--------------------------------------------------------------------------------------------------
+bool libFE150EF4_gt_NNSetNewBasesCircle_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libFE150EF4_gv_nNplayerOptions.lv_nukesisOnlyMainsSafeZone == false))) {
+            return false;
+        }
+
+        if (!(((libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneLine == true) || (libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneField == true)))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((lib36280BFF_gf_Commonis_MainBuilding(EventUnit()) == true)) {
+        if ((libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneLine == true)) {
+            UnitBehaviorAdd(EventUnit(), libFE150EF4_gv_nNplayerOptions.lv_nukesBehaviourForLine, EventUnit(), 1);
+        }
+
+        if ((libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneField == true)) {
+            UnitBehaviorAdd(EventUnit(), libFE150EF4_gv_nNplayerOptions.lv_nukesBehaviourForBlob, EventUnit(), 1);
+        }
+
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFE150EF4_gt_NNSetNewBasesCircle_Init () {
+    libFE150EF4_gt_NNSetNewBasesCircle = TriggerCreate("libFE150EF4_gt_NNSetNewBasesCircle_Func");
+    TriggerEnable(libFE150EF4_gt_NNSetNewBasesCircle, false);
+    TriggerAddEventUnitRegion(libFE150EF4_gt_NNSetNewBasesCircle, null, RegionEntireMap(), true);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: NN | TerransInTheAir
+//--------------------------------------------------------------------------------------------------
+bool libFE150EF4_gt_NNTerransInTheAir_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libFE150EF4_gv_nNplayerOptions.lv_nukesisOnlyMainsSafeZone == false))) {
+            return false;
+        }
+
+        if (!(((libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneLine == true) || (libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneField == true)))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneLine == true)) {
+        UnitBehaviorRemove(EventUnit(), libFE150EF4_gv_nNplayerOptions.lv_nukesBehaviourForLine, -1);
+    }
+
+    if ((libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneField == true)) {
+        UnitBehaviorRemove(EventUnit(), libFE150EF4_gv_nNplayerOptions.lv_nukesBehaviourForBlob, -1);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFE150EF4_gt_NNTerransInTheAir_Init () {
+    libFE150EF4_gt_NNTerransInTheAir = TriggerCreate("libFE150EF4_gt_NNTerransInTheAir_Func");
+    TriggerEnable(libFE150EF4_gt_NNTerransInTheAir, false);
+    TriggerAddEventUnitAbility(libFE150EF4_gt_NNTerransInTheAir, null, AbilityCommand("CommandCenterLiftOff", 0), c_unitAbilStageComplete, false);
+    TriggerAddEventUnitAbility(libFE150EF4_gt_NNTerransInTheAir, null, AbilityCommand("OrbitalLiftOff", 0), c_unitAbilStageComplete, false);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Trigger: NN | TerransOnTheGround
+//--------------------------------------------------------------------------------------------------
+bool libFE150EF4_gt_NNTerransOnTheGround_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((libFE150EF4_gv_nNplayerOptions.lv_nukesisOnlyMainsSafeZone == false))) {
+            return false;
+        }
+
+        if (!(((libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneLine == true) || (libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneField == true)))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    if ((libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneLine == true)) {
+        UnitBehaviorAdd(EventUnit(), libFE150EF4_gv_nNplayerOptions.lv_nukesBehaviourForLine, EventUnit(), 1);
+    }
+
+    if ((libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneField == true)) {
+        UnitBehaviorAdd(EventUnit(), libFE150EF4_gv_nNplayerOptions.lv_nukesBehaviourForBlob, EventUnit(), 1);
+    }
+
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void libFE150EF4_gt_NNTerransOnTheGround_Init () {
+    libFE150EF4_gt_NNTerransOnTheGround = TriggerCreate("libFE150EF4_gt_NNTerransOnTheGround_Func");
+    TriggerEnable(libFE150EF4_gt_NNTerransOnTheGround, false);
+    TriggerAddEventUnitAbility(libFE150EF4_gt_NNTerransOnTheGround, null, AbilityCommand("CommandCenterLand", 0), c_unitAbilStageComplete, false);
+    TriggerAddEventUnitAbility(libFE150EF4_gt_NNTerransOnTheGround, null, AbilityCommand("OrbitalCommandLand", 0), c_unitAbilStageComplete, false);
+}
+
 void libFE150EF4_InitTriggers () {
     libFE150EF4_gt_Launch_Init();
+    libFE150EF4_gt_NNSpawnNukes_Init();
+    libFE150EF4_gt_NNSetNewBasesCircle_Init();
+    libFE150EF4_gt_NNTerransInTheAir_Init();
+    libFE150EF4_gt_NNTerransOnTheGround_Init();
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -95,5 +1166,5 @@ void libFE150EF4_InitLib () {
 }
 
 include "Lib39D1ECFB"
-include "Lib3A730930"
+include "Lib36280BFF"
 

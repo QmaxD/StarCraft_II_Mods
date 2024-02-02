@@ -25,6 +25,7 @@
 <Abil id="HallucinationDisruptor"/>
 <Abil id="HallucinationAdept"/>
 <Actor id="SYSTEM_ActorConfig"/>
+<Behavior id="ImmuneToDamage"/>
 <Behavior id="ArmorUpgradeID"/>
 <Behavior id="AttackUpgradeID"/>
 <Behavior id="BerserkDownAttack_ForProtossLife"/>
@@ -59,7 +60,12 @@
 <Behavior id="RawVespeneGeyserGas10"/>
 <Behavior id="UnknownBehavior"/>
 <Behavior id="UnknownBehavior2"/>
+<Effect id="NukeDetonate2"/>
+<Model id="GhostNukeIndicator"/>
+<Sound id="TUIWarningPing"/>
 <Sound id="StartTurn"/>
+<Sound id="TUIWarningPing2"/>
+<Sound id="TUIWarningPing3"/>
 <Unit id="Colossus"/>
 <Unit id="Baneling"/>
 <Unit id="Mothership"/>

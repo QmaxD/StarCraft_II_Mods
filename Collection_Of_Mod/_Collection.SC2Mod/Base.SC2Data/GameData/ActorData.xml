@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CActorModel id="GenericAttackLaunchModel2" parent="GenericAttackModel"/>
+    <CActorSound id="GenericAttackLaunchSound2" parent="GenericAttackSound"/>
+    <CActorModel id="GenericAttackModel2" parent="ModelAnimationStyleOneShotNoOrphan">
+        <Flags index="SuppressCreationErrors" value="1"/>
+        <Inherits index="Visibility" value="1"/>
+        <ModelFlags index="AllowHitTest" value="0"/>
+    </CActorModel>
+    <CActorSound id="GenericAttackSound2" parent="SoundOneShot">
+        <Flags index="SuppressCreationErrors" value="1"/>
+    </CActorSound>
+    <CActorModel id="GhostNukeCollateralFire2">
+        <On Terms="Effect.NukeDamage2.Start; At Target" Send="Create"/>
+        <HostSiteOps Ops="SOpShadow"/>
+        <Model value="GhostNukeCollateralFire"/>
+    </CActorModel>
+    <CActorModel id="GhostNukeDrop2">
+        <On Terms="Effect.NukeDetonate2.Start" Send="Create"/>
+        <On Terms="Effect.NukeDetonate2.Start" Send="$Birth"/>
+        <On Terms="Effect.NukeDamage2" Send="Destroy"/>
+        <HostSiteOps Ops="SOpTargetPointStationary SOpShadow"/>
+        <Model value="GhostNukeDrop"/>
+    </CActorModel>
+    <CActorSound id="GhostNukeDropSound2" parent="SoundContinuous">
+        <On Terms="Effect.NukeDetonate2.Start" Send="Create"/>
+        <On Terms="Effect.NukeDamage2" Send="Destroy"/>
+        <Sound value="Ghost_NukeDrop"/>
+    </CActorSound>
+    <CActorSquib id="GhostNukeExplode2">
+        <On Terms="Effect.NukeDamage2.Start; At Effect" Send="Create"/>
+        <HostSiteOps Ops="SOpTargetPointStationary SOpShadow"/>
+        <Map index="None" Model="GhostNukeExplode" Sound="Ghost_NukeExplode"/>
+    </CActorSquib>
+    <CActorFoliageFXSpawner id="GhostNukeFoliageFXSpawner2" parent="FoliageFXSpawnerFire">
+        <On Terms="Effect.NukeDamage2.Start" Send="Create"/>
+        <Radius value="5.000000"/>
+    </CActorFoliageFXSpawner>
+    <CActorAction id="GhostNukeShieldHitter2" parent="AoESplashShieldHitter" effectHit="NukeDamage2">
+        <LaunchModel value="GenericAttackLaunchModel2"/>
+        <LaunchSound value="GenericAttackLaunchSound2"/>
+        <DamageModel value="GenericAttackModel2"/>
+        <DamageSound value="GenericAttackSound2"/>
+    </CActorAction>
+    <CActorForceCylinder id="NukeShockwave2" parent="NukeShockwaveBase">
+        <On Terms="Effect.NukeDamage2.Start" Send="Create"/>
+        <On Terms="ActorCreation" Send="Create NukeShockwave00"/>
+        <On Terms="ActorCreation" Send="Create NukeShockwave01"/>
+        <On Terms="ActorCreation" Send="Create NukeShockwave02"/>
+        <On Terms="ActorCreation" Send="Create NukeShockwave03"/>
+        <HostSiteOps Ops="SOpTargetPoint SOpShadow SOpMoveUpBy6"/>
+    </CActorForceCylinder>
+    <CActorRegionCircle id="NukeTreeKiller2">
+        <On Terms="Effect.NukeDamage2.Start; At Effect" Send="Create"/>
+        <On Terms="Effect.HeroNukeDamage.Start; At Effect" Send="Create"/>
+        <On Terms="ActorCreation" Send="QueryRegion ::Self TreeBurnQuery AgainstCenter"/>
+        <On Terms="ActorCreation" Send="QueryRegion ::Self NukedQuery AgainstCenter"/>
+        <On Terms="Effect.NukeDamage2.Start; At Effect" Send="Destroy"/>
+        <On Terms="Effect.HeroNukeDamage.Start; At Effect" Send="Destroy"/>
+        <Radius value="8.000000"/>
+    </CActorRegionCircle>
+    <!--                                                                                         -->
+    <!--                                                                                         -->
+    <!-- Global Config ========================================================================= -->
+    <!--                                                                                         -->
+    <!--                                                                                         -->
+    <CActorGlobalConfig id="SYSTEM_ActorConfig">
+        <SplatEmitterInit>
+            <TextureResolution value="512,512"/>
+            <ProjectorModel value="PowerRadius_Stetmann"/>
+            <MaskBlobPath value="Assets\Textures\stetmannpowerfieldmask.dds"/>
+            <ScaleDeltaTime value="0.010000,0.010000"/>
+            <ScaleUpdateTime value="30"/>
+            <MaxBlobScale value="0.110000,0.110000"/>
+            <Tint value="255,255,255,255"/>
+            <TerrainUVTiling value="1.000000,1.000000,0.001000,-0.001000"/>
+            <MinHeightValue value="-1.000000"/>
+            <MaterialInfo>
+                <ReplacementLayers index="AlphaMask" value="1"/>
+            </MaterialInfo>
+            <MaterialInfo MaterialId="1">
+                <ReplacementLayers index="AlphaMask" value="1"/>
+                <ReplacementLayers index="AlphaMask2" value="1"/>
+            </MaterialInfo>
+        </SplatEmitterInit>
+    </CActorGlobalConfig>
+    <CActorBlob id="SafeZoneBlob10">
+        <EditorCategories value=""/>
+        <On Terms="ActorOrphan" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SplatEmitterAddBlob"/>
+        <On Terms="ActorCreation" Send="Create SuperGary_PowerField_Start"/>
+        <On Terms="ActorDestruction" Send="Create SuperGary_PowerField_Stop"/>
+        <On Terms="ActorCreation" Send="Create SuperGary_PowerField_Loop"/>
+        <On Terms="ActorDestruction" Target="SuperGary_PowerField_Loop" Send="Destroy"/>
+        <On Terms="Behavior.SafeZoneBlob10.On" Send="Create"/>
+        <On Terms="Behavior.SafeZoneBlob10.Off" Send="Destroy"/>
+        <MaxScale value="0.180000,0.180000"/>
+    </CActorBlob>
+    <CActorBlob id="SafeZoneBlob15">
+        <EditorCategories value=""/>
+        <On Terms="ActorOrphan" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SplatEmitterAddBlob"/>
+        <On Terms="ActorCreation" Send="Create SuperGary_PowerField_Start"/>
+        <On Terms="ActorDestruction" Send="Create SuperGary_PowerField_Stop"/>
+        <On Terms="ActorCreation" Send="Create SuperGary_PowerField_Loop"/>
+        <On Terms="ActorDestruction" Target="SuperGary_PowerField_Loop" Send="Destroy"/>
+        <On Terms="Behavior.SafeZoneBlob15.On" Send="Create"/>
+        <On Terms="Behavior.SafeZoneBlob15.Off" Send="Destroy"/>
+        <MaxScale value="0.265000,0.265000"/>
+    </CActorBlob>
+    <CActorBlob id="SafeZoneBlob20">
+        <EditorCategories value=""/>
+        <On Terms="ActorOrphan" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SplatEmitterAddBlob"/>
+        <On Terms="ActorCreation" Send="Create SuperGary_PowerField_Start"/>
+        <On Terms="ActorDestruction" Send="Create SuperGary_PowerField_Stop"/>
+        <On Terms="ActorCreation" Send="Create SuperGary_PowerField_Loop"/>
+        <On Terms="ActorDestruction" Target="SuperGary_PowerField_Loop" Send="Destroy"/>
+        <On Terms="Behavior.SafeZoneBlob20.On" Send="Create"/>
+        <On Terms="Behavior.SafeZoneBlob20.Off" Send="Destroy"/>
+        <MaxScale value="0.350000,0.350000"/>
+    </CActorBlob>
+    <CActorBlob id="SafeZoneBlob25">
+        <EditorCategories value=""/>
+        <On Terms="ActorOrphan" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SplatEmitterAddBlob"/>
+        <On Terms="ActorCreation" Send="Create SuperGary_PowerField_Start"/>
+        <On Terms="ActorDestruction" Send="Create SuperGary_PowerField_Stop"/>
+        <On Terms="ActorCreation" Send="Create SuperGary_PowerField_Loop"/>
+        <On Terms="ActorDestruction" Target="SuperGary_PowerField_Loop" Send="Destroy"/>
+        <On Terms="Behavior.SafeZoneBlob25.On" Send="Create"/>
+        <On Terms="Behavior.SafeZoneBlob25.Off" Send="Destroy"/>
+        <MaxScale value="0.435000,0.435000"/>
+    </CActorBlob>
+    <CActorBlob id="SafeZoneBlob30">
+        <EditorCategories value=""/>
+        <On Terms="ActorOrphan" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SplatEmitterAddBlob"/>
+        <On Terms="ActorCreation" Send="Create SuperGary_PowerField_Start"/>
+        <On Terms="ActorDestruction" Send="Create SuperGary_PowerField_Stop"/>
+        <On Terms="ActorCreation" Send="Create SuperGary_PowerField_Loop"/>
+        <On Terms="ActorDestruction" Target="SuperGary_PowerField_Loop" Send="Destroy"/>
+        <On Terms="Behavior.SafeZoneBlob30.On" Send="Create"/>
+        <On Terms="Behavior.SafeZoneBlob30.Off" Send="Destroy"/>
+        <MaxScale value="0.525000,0.525000"/>
+    </CActorBlob>
+    <CActorBlob id="SafeZoneBlob35">
+        <EditorCategories value=""/>
+        <On Terms="ActorOrphan" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SplatEmitterAddBlob"/>
+        <On Terms="ActorCreation" Send="Create SuperGary_PowerField_Start"/>
+        <On Terms="ActorDestruction" Send="Create SuperGary_PowerField_Stop"/>
+        <On Terms="ActorCreation" Send="Create SuperGary_PowerField_Loop"/>
+        <On Terms="ActorDestruction" Target="SuperGary_PowerField_Loop" Send="Destroy"/>
+        <On Terms="Behavior.SafeZoneBlob35.On" Send="Create"/>
+        <On Terms="Behavior.SafeZoneBlob35.Off" Send="Destroy"/>
+        <MaxScale value="0.615000,0.615000"/>
+    </CActorBlob>
+    <CActorBlob id="SafeZoneBlob40">
+        <EditorCategories value=""/>
+        <On Terms="ActorOrphan" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SplatEmitterAddBlob"/>
+        <On Terms="ActorCreation" Send="Create SuperGary_PowerField_Start"/>
+        <On Terms="ActorDestruction" Send="Create SuperGary_PowerField_Stop"/>
+        <On Terms="ActorCreation" Send="Create SuperGary_PowerField_Loop"/>
+        <On Terms="ActorDestruction" Target="SuperGary_PowerField_Loop" Send="Destroy"/>
+        <On Terms="Behavior.SafeZoneBlob40.On" Send="Create"/>
+        <On Terms="Behavior.SafeZoneBlob40.Off" Send="Destroy"/>
+        <MaxScale value="0.700000,0.700000"/>
+    </CActorBlob>
+    <CActorBlob id="SafeZoneBlob45">
+        <EditorCategories value=""/>
+        <On Terms="ActorOrphan" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SplatEmitterAddBlob"/>
+        <On Terms="ActorCreation" Send="Create SuperGary_PowerField_Start"/>
+        <On Terms="ActorDestruction" Send="Create SuperGary_PowerField_Stop"/>
+        <On Terms="ActorCreation" Send="Create SuperGary_PowerField_Loop"/>
+        <On Terms="ActorDestruction" Target="SuperGary_PowerField_Loop" Send="Destroy"/>
+        <On Terms="Behavior.SafeZoneBlob45.On" Send="Create"/>
+        <On Terms="Behavior.SafeZoneBlob45.Off" Send="Destroy"/>
+        <MaxScale value="0.780000,0.780000"/>
+    </CActorBlob>
+    <CActorBlob id="SafeZoneBlob50">
+        <EditorCategories value=""/>
+        <On Terms="ActorOrphan" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SplatEmitterAddBlob"/>
+        <On Terms="ActorCreation" Send="Create SuperGary_PowerField_Start"/>
+        <On Terms="ActorDestruction" Send="Create SuperGary_PowerField_Stop"/>
+        <On Terms="ActorCreation" Send="Create SuperGary_PowerField_Loop"/>
+        <On Terms="ActorDestruction" Target="SuperGary_PowerField_Loop" Send="Destroy"/>
+        <On Terms="Behavior.SafeZoneBlob50.On" Send="Create"/>
+        <On Terms="Behavior.SafeZoneBlob50.Off" Send="Destroy"/>
+        <MaxScale value="0.865000,0.865000"/>
+    </CActorBlob>
+    <CActorRange id="SafeZoneRange10">
+        <VisibleTo index="Self" value="1"/>
+        <VisibleTo index="Ally" value="1"/>
+        <VisibleTo index="Neutral" value="1"/>
+        <Inherits index="LocalTintColor" value="1"/>
+        <Inherits index="TeamColor" value="1"/>
+        <Inherits index="TintColor" value="1"/>
+        <Inherits index="Visibility" value="0"/>
+        <FogVisibility value="Visible"/>
+        <On Terms="Behavior.SafeZoneLine10.On" Send="Create"/>
+        <On Terms="Behavior.SafeZoneLine10.Off" Send="Destroy"/>
+        <Range value="7.500000"/>
+        <Icon value="Assets\Textures\radaricon2.dds"/>
+        <IconArcLength value="1.000000"/>
+        <RangeFlags index="Minimap" value="1"/>
+    </CActorRange>
+    <CActorRange id="SafeZoneRange15">
+        <VisibleTo index="Self" value="1"/>
+        <VisibleTo index="Ally" value="1"/>
+        <Inherits index="LocalTintColor" value="1"/>
+        <Inherits index="TeamColor" value="1"/>
+        <Inherits index="TintColor" value="1"/>
+        <Inherits index="Visibility" value="0"/>
+        <FogVisibility value="Visible"/>
+        <On Terms="Behavior.SafeZoneLine15.On" Send="Create"/>
+        <On Terms="Behavior.SafeZoneLine15.Off" Send="Destroy"/>
+        <Range value="12.500000"/>
+        <Icon value="Assets\Textures\radaricon1.dds"/>
+        <IconArcLength value="0.800000"/>
+        <RangeFlags index="Minimap" value="1"/>
+    </CActorRange>
+    <CActorRange id="SafeZoneRange20">
+        <VisibleTo index="Self" value="1"/>
+        <VisibleTo index="Ally" value="1"/>
+        <Inherits index="LocalTintColor" value="1"/>
+        <Inherits index="TeamColor" value="1"/>
+        <Inherits index="TintColor" value="1"/>
+        <Inherits index="Visibility" value="0"/>
+        <FogVisibility value="Visible"/>
+        <On Terms="Behavior.SafeZoneLine20.On" Send="Create"/>
+        <On Terms="Behavior.SafeZoneLine20.Off" Send="Destroy"/>
+        <Range value="17.500000"/>
+        <Icon value="Assets\Textures\radaricon1.dds"/>
+        <IconArcLength value="0.700000"/>
+        <RangeFlags index="Minimap" value="1"/>
+    </CActorRange>
+    <CActorRange id="SafeZoneRange25">
+        <VisibleTo index="Self" value="1"/>
+        <VisibleTo index="Ally" value="1"/>
+        <Inherits index="LocalTintColor" value="1"/>
+        <Inherits index="TeamColor" value="1"/>
+        <Inherits index="TintColor" value="1"/>
+        <Inherits index="Visibility" value="0"/>
+        <FogVisibility value="Visible"/>
+        <On Terms="Behavior.SafeZoneLine25.On" Send="Create"/>
+        <On Terms="Behavior.SafeZoneLine25.Off" Send="Destroy"/>
+        <Range value="22.500000"/>
+        <Icon value="Assets\Textures\radaricon1.dds"/>
+        <IconArcLength value="0.600000"/>
+        <RangeFlags index="Minimap" value="1"/>
+    </CActorRange>
+    <CActorRange id="SafeZoneRange30">
+        <VisibleTo index="Self" value="1"/>
+        <VisibleTo index="Ally" value="1"/>
+        <Inherits index="LocalTintColor" value="1"/>
+        <Inherits index="TeamColor" value="1"/>
+        <Inherits index="TintColor" value="1"/>
+        <Inherits index="Visibility" value="0"/>
+        <FogVisibility value="Visible"/>
+        <On Terms="Behavior.SafeZoneLine30.On" Send="Create"/>
+        <On Terms="Behavior.SafeZoneLine30.Off" Send="Destroy"/>
+        <Range value="27.500000"/>
+        <Icon value="Assets\Textures\radaricon1.dds"/>
+        <IconArcLength value="0.500000"/>
+        <RangeFlags index="Minimap" value="1"/>
+    </CActorRange>
+    <CActorRange id="SafeZoneRange35">
+        <VisibleTo index="Self" value="1"/>
+        <VisibleTo index="Ally" value="1"/>
+        <Inherits index="LocalTintColor" value="1"/>
+        <Inherits index="TeamColor" value="1"/>
+        <Inherits index="TintColor" value="1"/>
+        <Inherits index="Visibility" value="0"/>
+        <FogVisibility value="Visible"/>
+        <On Terms="Behavior.SafeZoneLine35.On" Send="Create"/>
+        <On Terms="Behavior.SafeZoneLine35.Off" Send="Destroy"/>
+        <Range value="32.500000"/>
+        <Icon value="Assets\Textures\radaricon1.dds"/>
+        <IconArcLength value="0.500000"/>
+        <RangeFlags index="Minimap" value="1"/>
+    </CActorRange>
+    <CActorRange id="SafeZoneRange40">
+        <VisibleTo index="Self" value="1"/>
+        <VisibleTo index="Ally" value="1"/>
+        <Inherits index="LocalTintColor" value="1"/>
+        <Inherits index="TeamColor" value="1"/>
+        <Inherits index="TintColor" value="1"/>
+        <Inherits index="Visibility" value="0"/>
+        <FogVisibility value="Visible"/>
+        <On Terms="Behavior.SafeZoneLine40.On" Send="Create"/>
+        <On Terms="Behavior.SafeZoneLine40.Off" Send="Destroy"/>
+        <Range value="37.500000"/>
+        <Icon value="Assets\Textures\radaricon1.dds"/>
+        <IconArcLength value="0.500000"/>
+        <RangeFlags index="Minimap" value="1"/>
+    </CActorRange>
+    <CActorRange id="SafeZoneRange45">
+        <VisibleTo index="Self" value="1"/>
+        <VisibleTo index="Ally" value="1"/>
+        <Inherits index="LocalTintColor" value="1"/>
+        <Inherits index="TeamColor" value="1"/>
+        <Inherits index="TintColor" value="1"/>
+        <Inherits index="Visibility" value="0"/>
+        <FogVisibility value="Visible"/>
+        <On Terms="Behavior.SafeZoneLine45.On" Send="Create"/>
+        <On Terms="Behavior.SafeZoneLine45.Off" Send="Destroy"/>
+        <Range value="42.000000"/>
+        <Icon value="Assets\Textures\radaricon1.dds"/>
+        <IconArcLength value="0.500000"/>
+        <RangeFlags index="Minimap" value="1"/>
+    </CActorRange>
+    <CActorRange id="SafeZoneRange50">
+        <VisibleTo index="Self" value="1"/>
+        <VisibleTo index="Ally" value="1"/>
+        <Inherits index="LocalTintColor" value="1"/>
+        <Inherits index="TeamColor" value="1"/>
+        <Inherits index="TintColor" value="1"/>
+        <Inherits index="Visibility" value="0"/>
+        <FogVisibility value="Visible"/>
+        <On Terms="Behavior.SafeZoneLine50.On" Send="Create"/>
+        <On Terms="Behavior.SafeZoneLine50.Off" Send="Destroy"/>
+        <Range value="47.000000"/>
+        <Icon value="Assets\Textures\radaricon1.dds"/>
+        <IconArcLength value="0.500000"/>
+        <RangeFlags index="Minimap" value="1"/>
+    </CActorRange>
+    <CActorSound id="SuperGary_PowerField_Loop" parent="SoundContinuous">
+        <EditorCategories value=""/>
+    </CActorSound>
+    <CActorSound id="SuperGary_PowerField_Start" parent="SoundOneShot">
+        <EditorCategories value=""/>
+    </CActorSound>
+    <CActorSound id="SuperGary_PowerField_Stop" parent="SoundOneShot">
+        <EditorCategories value=""/>
+    </CActorSound>
+</Catalog>

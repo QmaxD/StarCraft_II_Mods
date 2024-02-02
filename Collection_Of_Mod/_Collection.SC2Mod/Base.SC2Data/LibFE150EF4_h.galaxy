@@ -1,24 +1,110 @@
 include "TriggerLibs/natives"
 
 //--------------------------------------------------------------------------------------------------
-// Library: ++11 Nukes | NN
+// Library: 11 Nukes | NN
 //--------------------------------------------------------------------------------------------------
 // Structures
 struct libFE150EF4_gs_Information {
-    string lv_gSOption_1;
+    string lv_nNOption_15;
+    string lv_nNOption_110;
+    string lv_nNOption_115;
+    string lv_nNOption_120;
+    string lv_nNOption_130;
+    string lv_nNOption_145;
+    string lv_nNOption_160;
+    string lv_nNOption_1120;
+    string lv_nNOption_1180;
+    string lv_nNOption_21;
+    string lv_nNOption_22;
+    string lv_nNOption_23;
+    string lv_nNOption_24;
+    string lv_nNOption_25;
+    string lv_nNOption_26;
+    string lv_nNOption_27;
+    string lv_nNOption_28;
+    string lv_nNOption_29;
+    string lv_nNOption_210;
+    string lv_nNOption_215;
+    string lv_nNOption_220;
+    string lv_nNOption_230;
+    string lv_nNOption_240;
+    string lv_nNOption_250;
+    string lv_nNOption_310;
+    string lv_nNOption_315;
+    string lv_nNOption_320;
+    string lv_nNOption_325;
+    string lv_nNOption_330;
+    string lv_nNOption_335;
+    string lv_nNOption_340;
+    string lv_nNOption_345;
+    string lv_nNOption_350;
+    string lv_nNOption_41;
+    string lv_nNOption_45;
+    string lv_nNOption_410;
+    string lv_nNOption_415;
+    string lv_nNOption_420;
+    string lv_nNOption_430;
+    string lv_nNOption_5D0A2D0BED0BBD18CD0BAD0BED0BCD0B5D0B9D0BDD18B;
+    string lv_nNOption_5D092D181D0B5D0B1D0B0D0B7D18B;
+    string lv_nNOption_6D098D0BFD0BED0BBD0B5D0B8D0B3D180D0B0D0BDD0B8D186D0B0;
+    string lv_nNOption_6D093D180D0B0D0BDD0B8D186D0B0;
+    string lv_nNOption_6D09FD0BED0BBD0B5;
+    string lv_nNOption_6D09DD0B8D187D0B5D0B3D0BE;
+    string lv_nNOption_7D09CD0B0D0BBD18BD0B9;
+    string lv_nNOption_7D09CD0B5D0BDD18CD188D0B5D181D182D0B0D0BDD0B4D0B0D180D182D0BDD0BED0B3D0BE;
+    string lv_nNOption_7D0A1D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0B9;
+    string lv_nNOption_7D091D0BED0BBD18CD188D0B5D181D182D0B0D0BDD0B4D0B0D180D182D0BDD0BED0B3D0BE;
+    string lv_nNOption_7D091D0BED0BBD18CD188D0BED0B9;
+    string lv_nNOption_850;
+    string lv_nNOption_8100;
+    string lv_nNOption_8150;
+    string lv_nNOption_8200;
+    string lv_nNOption_8300;
+    string lv_nNOption_8400;
+    string lv_nNOption_8500;
+    string lv_nNOption_81000;
+    string lv_nNOption_9D094D0B0;
+    string lv_nNOption_9D09DD0B5D182;
+};
+
+struct libFE150EF4_gs_NNNukeOptions {
+    int lv_nukesperiodWaves;
+    int lv_nukesnukesNumber;
+    int lv_nukessafeDistance;
+    string lv_nukesBehaviourForBlob;
+    string lv_nukesBehaviourForLine;
+    int lv_nukestimeNukeAttack;
+    bool lv_nukesisOnlyMainsSafeZone;
+    bool lv_nukesisDisplaySafeZoneField;
+    bool lv_nukesisDisplaySafeZoneLine;
+    int lv_nukesnukeDamage;
+    text lv_nukesnukeRadius;
+    string lv_nukespingModel;
+    bool lv_nukesisShowRedPoind;
 };
 
 // Variable Declarations
 libFE150EF4_gs_Information libFE150EF4_gv_modInformation;
+libFE150EF4_gs_NNNukeOptions libFE150EF4_gv_nNplayerOptions;
+region libFE150EF4_gv_nNsafeZone;
+timer libFE150EF4_gv_nNtimer;
 
 // Function Declarations
 void libFE150EF4_gf_SetupInformation (int lp_modIndex);
 void libFE150EF4_gf_GetOptions ();
 void libFE150EF4_gf_TriggersTurnOn ();
+void libFE150EF4_gf_NNStartSafeZoneAndTimer ();
 void libFE150EF4_gf_GetInfoForPlayer ();
+void libFE150EF4_gf_NNSpawnNuke ();
+string libFE150EF4_gf_NNGetRightBehaviourForBlob (int lp__radius);
+string libFE150EF4_gf_NNGetRightBehaviourForLine (int lp__radius);
 
 // Trigger Declarations
 trigger libFE150EF4_gt_Launch;
+trigger libFE150EF4_gt_NNSpawnNukes;
+trigger libFE150EF4_gt_NNSetNewBasesCircle;
+trigger libFE150EF4_gt_NNTerransInTheAir;
+trigger libFE150EF4_gt_NNTerransOnTheGround;
 
 // Library Initialization
 void libFE150EF4_InitVariables ();

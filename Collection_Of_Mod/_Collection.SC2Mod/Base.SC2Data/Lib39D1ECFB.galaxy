@@ -483,6 +483,7 @@ void lib39D1ECFB_gf_CreateModSettingsDialogs () {
     int lv__item_Label_offsetY;
     int lv__item_Pulldown_offsetX;
     int lv__item_Pulldown_offsetY;
+    bool lv__is_amount_greater_than_8;
 
     // Automatic Variable Declarations
     int autoE1148EA6_ae;
@@ -505,6 +506,12 @@ void lib39D1ECFB_gf_CreateModSettingsDialogs () {
     autoE1148EA6_ae = lib39D1ECFB_gv_amount_Mods;
     lv__number_Mod = 1;
     for ( ; ( (autoE1148EA6_ai >= 0 && lv__number_Mod <= autoE1148EA6_ae) || (autoE1148EA6_ai < 0 && lv__number_Mod >= autoE1148EA6_ae) ) ; lv__number_Mod += autoE1148EA6_ai ) {
+        if ((lib39D1ECFB_gv_mods[lv__number_Mod].lv_number_Game_Options > 8)) {
+            lv__is_amount_greater_than_8 = true;
+        }
+        else {
+            lv__is_amount_greater_than_8 = false;
+        }
         DialogCreate(lib39D1ECFB_gv_dialog_ModSettings_Width, lib39D1ECFB_gv_dialog_ModSettings_Height, c_anchorCenter, lib39D1ECFB_gv_dialog_ModSettings_OffsetX, lib39D1ECFB_gv_dialog_ModSettings_OffsetY, true);
         lib39D1ECFB_gv_mods[lv__number_Mod].lv_modSettingsDialog = DialogLastCreated();
         DialogSetImageVisible(DialogLastCreated(), false);
@@ -522,6 +529,14 @@ void lib39D1ECFB_gf_CreateModSettingsDialogs () {
         autoAD166E90_ae = lib39D1ECFB_gv_mods[lv__number_Mod].lv_number_Game_Options;
         lv__number_Option = 1;
         for ( ; ( (autoAD166E90_ai >= 0 && lv__number_Option <= autoAD166E90_ae) || (autoAD166E90_ai < 0 && lv__number_Option >= autoAD166E90_ae) ) ; lv__number_Option += autoAD166E90_ai ) {
+            if ((lv__number_Option > 8) && (lv__is_amount_greater_than_8 == true)) {
+                lv__is_amount_greater_than_8 = false;
+                lv__item_Label_offsetX += 500;
+                lv__item_Label_offsetY = 85;
+                lv__item_Pulldown_offsetX += 500;
+                lv__item_Pulldown_offsetY = 130;
+            }
+
             libNtve_gf_CreateDialogItemLabel(DialogLastCreated(), 400, 50, c_anchorTopLeft, lv__item_Label_offsetX, lv__item_Label_offsetY, lib39D1ECFB_gv_mods[lv__number_Mod].lv_game_Options[lv__number_Option].lv_optionName, ColorWithAlpha(0,0,0,0), false, 2.0);
             lib39D1ECFB_gv_mods[lv__number_Mod].lv_game_Options[lv__number_Option].lv_listBox_Label = DialogControlLastCreated();
             libNtve_gf_SetDialogItemStyle(lib39D1ECFB_gv_mods[lv__number_Mod].lv_game_Options[lv__number_Option].lv_listBox_Label, "_Question_what_to_do", PlayerGroupAll());
