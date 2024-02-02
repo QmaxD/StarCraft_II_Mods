@@ -16,6 +16,7 @@ Trigger/Name/lib_8BF4D44F_8B2CC799=Nukes | TerransInTheAir
 Trigger/Name/lib_8BF4D44F_D16E3FAB=Nukes | TerransOnTheGround
 Trigger/Name/lib_8BF4D44F_FC6E7ACD=Nukes | StartSafeZoneAndTimer
 Variable/Name/lib_8BF4D44F_003BA6F2=_Effects_NukeDamage_AreaArray[1].Radius
+Variable/Name/lib_8BF4D44F_06513B9C=_unitType
 Variable/Name/lib_8BF4D44F_0A2BB338=_Effects_NukeDetonate_InitialDelay
 Variable/Name/lib_8BF4D44F_0E073777=_Effects_NukeDamage_AreaArray[2].Fraction
 Variable/Name/lib_8BF4D44F_17B6D767=_Effects_NukeDamage_AreaArray[0].Radius

@@ -2,6 +2,7 @@
 <Preload>
 <Asset path="assets\textures\btn-progression-hornerhan-14-nukefortelefrag.dds" Type="Image"/>
 <Actor id="SYSTEM_ActorConfig"/>
+<Behavior id="ImmuneToDamage"/>
 <Effect id="NukeDetonate2"/>
 <Model id="GhostNukeIndicator"/>
 <Sound id="TUIWarningPing"/>

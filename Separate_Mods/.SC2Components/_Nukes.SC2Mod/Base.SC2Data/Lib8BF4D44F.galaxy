@@ -447,15 +447,19 @@ bool lib8BF4D44F_gt_NukesStartSafeZoneAndTimer_Func (bool testConds, bool runAct
     // Variable Declarations
     unitgroup lv__mainsGroup;
     point lv_Point;
+    string lv_Point4;
     unit lv_Point2;
     text lv__playersSettings;
 
     // Automatic Variable Declarations
     playergroup autoC47B5189_g;
     int autoC47B5189_var;
-    unitgroup autoE1724A7B_g;
-    int autoE1724A7B_u;
-    unit autoE1724A7B_var;
+    playergroup autoC66A86F7_g;
+    int autoC66A86F7_var;
+    string auto7F757498_val;
+    unitgroup auto8FEAD1D0_g;
+    int auto8FEAD1D0_u;
+    unit auto8FEAD1D0_var;
 
     // Variable Initialization
     lv__mainsGroup = UnitGroupEmpty();
@@ -475,24 +479,56 @@ bool lib8BF4D44F_gt_NukesStartSafeZoneAndTimer_Func (bool testConds, bool runAct
         }
 
     }
-    lv__mainsGroup = UnitGroup(null, c_playerAny, RegionEntireMap(), UnitFilter((1 << c_targetFilterStructure), 0, (1 << c_targetFilterNeutral), 0), 0);
-    autoE1724A7B_g = lv__mainsGroup;
-    autoE1724A7B_u = UnitGroupCount(autoE1724A7B_g, c_unitCountAll);
-    for (;; autoE1724A7B_u -= 1) {
-        autoE1724A7B_var = UnitGroupUnitFromEnd(autoE1724A7B_g, autoE1724A7B_u);
-        if (autoE1724A7B_var == null) { break; }
-        if (((UnitGetType(autoE1724A7B_var) == "Nexus") || (UnitGetType(autoE1724A7B_var) == "CommandCenter") || (UnitGetType(autoE1724A7B_var) == "OrbitalCommand") || (UnitGetType(autoE1724A7B_var) == "PlanetaryFortress") || (UnitGetType(autoE1724A7B_var) == "Hatchery") || (UnitGetType(autoE1724A7B_var) == "Lair") || (UnitGetType(autoE1724A7B_var) == "Hive"))) {
-            if ((lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisDisplaySafeZoneLine == true)) {
-                UnitBehaviorAdd(autoE1724A7B_var, lib8BF4D44F_gv_nukesplayerOptions.lv_nukesBehaviourForLine, autoE1724A7B_var, 1);
-            }
-
-            if ((lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisDisplaySafeZoneField == true)) {
-                UnitBehaviorAdd(autoE1724A7B_var, lib8BF4D44F_gv_nukesplayerOptions.lv_nukesBehaviourForBlob, autoE1724A7B_var, 1);
-            }
-
+    if (((lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisDisplaySafeZoneField == true) || (lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisDisplaySafeZoneLine == true))) {
+        if ((lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisOnlyMainsSafeZone == false)) {
+            lv__mainsGroup = UnitGroup(null, c_playerAny, RegionEntireMap(), UnitFilter((1 << c_targetFilterStructure), 0, (1 << c_targetFilterNeutral), 0), 0);
         }
+        else {
+            autoC66A86F7_g = PlayerGroupActive();
+            autoC66A86F7_var = -1;
+            while (true) {
+                autoC66A86F7_var = PlayerGroupNextPlayer(autoC66A86F7_g, autoC66A86F7_var);
+                if (autoC66A86F7_var < 0) { break; }
+                auto7F757498_val = PlayerRace(autoC66A86F7_var);
+                if (auto7F757498_val == "Prot") {
+                    lv_Point4 = "Nexus";
+                }
+                else if (auto7F757498_val == "Terr") {
+                    lv_Point4 = "PlanetaryFortress";
+                }
+                else if (auto7F757498_val == "Zerg") {
+                    lv_Point4 = "Hatchery";
+                }
+                else {
+                }
+                UnitCreate(1, lv_Point4, c_unitCreateIgnorePlacement, 0, PlayerStartLocation(autoC66A86F7_var), 270.0);
+                lv_Point2 = UnitLastCreated();
+                libNtve_gf_ShowHideUnit(lv_Point2, false);
+                UnitBehaviorAdd(lv_Point2, "ImmuneToDamage", lv_Point2, 1);
+                UnitGroupAdd(lv__mainsGroup, lv_Point2);
+            }
+        }
+        auto8FEAD1D0_g = lv__mainsGroup;
+        auto8FEAD1D0_u = UnitGroupCount(auto8FEAD1D0_g, c_unitCountAll);
+        for (;; auto8FEAD1D0_u -= 1) {
+            auto8FEAD1D0_var = UnitGroupUnitFromEnd(auto8FEAD1D0_g, auto8FEAD1D0_u);
+            if (auto8FEAD1D0_var == null) { break; }
+            if (((UnitGetType(auto8FEAD1D0_var) == "Nexus") || (UnitGetType(auto8FEAD1D0_var) == "CommandCenter") || (UnitGetType(auto8FEAD1D0_var) == "OrbitalCommand") || (UnitGetType(auto8FEAD1D0_var) == "PlanetaryFortress") || (UnitGetType(auto8FEAD1D0_var) == "Hatchery") || (UnitGetType(auto8FEAD1D0_var) == "Lair") || (UnitGetType(auto8FEAD1D0_var) == "Hive"))) {
+                if ((lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisDisplaySafeZoneLine == true)) {
+                    UnitBehaviorAdd(auto8FEAD1D0_var, lib8BF4D44F_gv_nukesplayerOptions.lv_nukesBehaviourForLine, auto8FEAD1D0_var, 1);
+                }
 
+                if ((lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisDisplaySafeZoneField == true)) {
+                    UnitBehaviorAdd(auto8FEAD1D0_var, lib8BF4D44F_gv_nukesplayerOptions.lv_nukesBehaviourForBlob, auto8FEAD1D0_var, 1);
+                }
+
+            }
+            else {
+                UnitGroupRemove(lv__mainsGroup, auto8FEAD1D0_var);
+            }
+        }
     }
+
     TimerStart(lib8BF4D44F_gv_nukestimer, lib8BF4D44F_gv_nukesplayerOptions.lv_nukesperiodWaves, true, c_timeReal);
     TextExpressionSetToken("Param/Expression/lib_8BF4D44F_4EC5F5D1", "periodWaves", IntToText(lib8BF4D44F_gv_nukesplayerOptions.lv_nukesperiodWaves));
     TextExpressionSetToken("Param/Expression/lib_8BF4D44F_4EC5F5D1", "nukesNumber", IntToText(lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukesNumber));

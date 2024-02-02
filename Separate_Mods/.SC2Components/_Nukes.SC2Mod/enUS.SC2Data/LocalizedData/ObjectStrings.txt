@@ -12,6 +12,7 @@ Actor/Name/GhostNukeShieldHitter2=Ghost Nuke Shield Hitter Copy
 Actor/Name/NovaPack03SearchNode2=NovaPack03SearchNode (Unnamed) Copy
 Actor/Name/NukeShockwave2=Nuke Shockwave Copy
 Actor/Name/NukeTreeKiller2=Nuke Tree Killer Copy
+Actor/Name/SYSTEM_ActorConfig2=SYSTEM_ActorConfig
 Actor/Name/SafeZoneBlob10=SafeZone Blob 10
 Actor/Name/SafeZoneBlob15=SafeZone Blob 15
 Actor/Name/SafeZoneBlob20=SafeZone Blob 20

@@ -163,7 +163,7 @@
         </Value>
         <Default>
             <Slot Id="Global"/>
-            <Value Id="2"/>
+            <Value Id="1"/>
         </Default>
     </Attribute>
     <Attribute>
@@ -353,7 +353,7 @@
         </Value>
         <Default>
             <Slot Id="Global"/>
-            <Value Id="1"/>
+            <Value Id="4"/>
         </Default>
     </Attribute>
     <Attribute>
