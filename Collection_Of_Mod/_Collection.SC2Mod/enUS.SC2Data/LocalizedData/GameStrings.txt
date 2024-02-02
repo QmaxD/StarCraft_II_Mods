@@ -115,7 +115,6 @@ Param/Expression/lib_FE150EF4_8E26E2D6=</n>- максимальный радиу
 Param/Expression/lib_FE150EF4_B14D5408=Мод Ядерный дождь <c val="1CB73F">активирован</c>.<n/>Выбраны настройки:
 Param/Expression/lib_FE150EF4_BBA48398=</n>- максимальный радиус поражения составляет <c val="D50000">12</c> ед.:<n/>( в радиусе до 6 поражение 100%<n/> в радиусе до 8 поражение 60%<n/> в радиусе до 12 поражение 30% )
 Param/Expression/lib_FE150EF4_CEEDB8A8= <n/>- период сброса волн бомб каждые <c val="D50000">~periodWaves~</c> сек.,<n/>- количество бомб в волне <c val="D50000">~nukesNumber~</c> шт., <n/>- сброс бомб в точке после <c val="D50000">~timeNukeAttack~</c> сек.,<n/>- радиус зоны безопасности <c val="D50000"> ~safeDistance~</c> ед.,
-Param/Expression/lib_FE150EF4_E6CC850D=Damage: ~damage~ Radius: ~radius~
 Param/Expression/lib_FE150EF4_EA775E38=<n/>- максимальная сила взрыва (дамаг) составляет <c val="D50000">~nukeDamage~</c> ед.,
 Param/Expression/lib_FE150EF4_F2565657=<n/>- <c val="1CB73F">видимая</c> зона безопасности (поле или граница),
 Param/Expression/lib_FE150EF4_F3CEF9EC=<n/>- <c val="D50000">скрытая</c> зона безопасности,

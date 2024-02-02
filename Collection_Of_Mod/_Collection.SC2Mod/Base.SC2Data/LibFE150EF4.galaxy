@@ -86,7 +86,7 @@ void libFE150EF4_InitVariables () {
     libFE150EF4_gv_modInformation.lv_nNOption_9D09DD0B5D182 = "Нет. Скрыть";
     libFE150EF4_gv_nNplayerOptions.lv_nukesisOnlyMainsSafeZone = true;
     libFE150EF4_gv_nNplayerOptions.lv_nukesnukeRadius = TextExpressionAssemble("Param/Expression/lib_FE150EF4_590A5762");
-    libFE150EF4_gv_nNplayerOptions.lv_nukespingModel = "PingNuke";
+    libFE150EF4_gv_nNplayerOptions.lv_nukespingModel = "PingNuke2";
     libFE150EF4_gv_nNplayerOptions.lv_nukesisShowRedPoind = true;
     libFE150EF4_gv_nNsafeZone = RegionEmpty();
     libFE150EF4_gv_nNtimer = TimerCreate();
@@ -685,6 +685,39 @@ void libFE150EF4_gf_TriggersTurnOn () {
 
 }
 
+void libFE150EF4_gf_GetInfoForPlayer () {
+    // Variable Declarations
+    text lv__description;
+
+    // Automatic Variable Declarations
+    // Variable Initialization
+    lv__description = StringExternal("Param/Value/lib_FE150EF4_C42346D4");
+
+    // Implementation
+    TextExpressionSetToken("Param/Expression/lib_FE150EF4_CEEDB8A8", "periodWaves", IntToText(libFE150EF4_gv_nNplayerOptions.lv_nukesperiodWaves));
+    TextExpressionSetToken("Param/Expression/lib_FE150EF4_CEEDB8A8", "nukesNumber", IntToText(libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber));
+    TextExpressionSetToken("Param/Expression/lib_FE150EF4_CEEDB8A8", "timeNukeAttack", IntToText(libFE150EF4_gv_nNplayerOptions.lv_nukestimeNukeAttack));
+    TextExpressionSetToken("Param/Expression/lib_FE150EF4_CEEDB8A8", "safeDistance", IntToText(libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance));
+    lv__description = (TextExpressionAssemble("Param/Expression/lib_FE150EF4_B14D5408") + TextExpressionAssemble("Param/Expression/lib_FE150EF4_CEEDB8A8"));
+    if ((libFE150EF4_gv_nNplayerOptions.lv_nukesisOnlyMainsSafeZone == true)) {
+        lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_FE150EF4_17554597"));
+    }
+    else {
+        lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_FE150EF4_343EAC98"));
+    }
+    if (((libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneLine == true) || (libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneField == true))) {
+        lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_FE150EF4_F2565657"));
+    }
+    else {
+        lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_FE150EF4_F3CEF9EC"));
+    }
+    TextExpressionSetToken("Param/Expression/lib_FE150EF4_EA775E38", "nukeDamage", IntToText(libFE150EF4_gv_nNplayerOptions.lv_nukesnukeDamage));
+    lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_FE150EF4_EA775E38"));
+    lv__description = (lv__description + libFE150EF4_gv_nNplayerOptions.lv_nukesnukeRadius);
+    lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = lv__description;
+    lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat = StringToText("");
+}
+
 void libFE150EF4_gf_NNStartSafeZoneAndTimer () {
     // Variable Declarations
     unitgroup lv__mainsGroup;
@@ -764,39 +797,6 @@ void libFE150EF4_gf_NNStartSafeZoneAndTimer () {
     }
 
     TimerStart(libFE150EF4_gv_nNtimer, libFE150EF4_gv_nNplayerOptions.lv_nukesperiodWaves, true, c_timeReal);
-}
-
-void libFE150EF4_gf_GetInfoForPlayer () {
-    // Variable Declarations
-    text lv__description;
-
-    // Automatic Variable Declarations
-    // Variable Initialization
-    lv__description = StringExternal("Param/Value/lib_FE150EF4_C42346D4");
-
-    // Implementation
-    TextExpressionSetToken("Param/Expression/lib_FE150EF4_CEEDB8A8", "periodWaves", IntToText(libFE150EF4_gv_nNplayerOptions.lv_nukesperiodWaves));
-    TextExpressionSetToken("Param/Expression/lib_FE150EF4_CEEDB8A8", "nukesNumber", IntToText(libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber));
-    TextExpressionSetToken("Param/Expression/lib_FE150EF4_CEEDB8A8", "timeNukeAttack", IntToText(libFE150EF4_gv_nNplayerOptions.lv_nukestimeNukeAttack));
-    TextExpressionSetToken("Param/Expression/lib_FE150EF4_CEEDB8A8", "safeDistance", IntToText(libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance));
-    lv__description = (TextExpressionAssemble("Param/Expression/lib_FE150EF4_B14D5408") + TextExpressionAssemble("Param/Expression/lib_FE150EF4_CEEDB8A8"));
-    if ((libFE150EF4_gv_nNplayerOptions.lv_nukesisOnlyMainsSafeZone == true)) {
-        lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_FE150EF4_17554597"));
-    }
-    else {
-        lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_FE150EF4_343EAC98"));
-    }
-    if (((libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneLine == true) || (libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneField == true))) {
-        lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_FE150EF4_F2565657"));
-    }
-    else {
-        lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_FE150EF4_F3CEF9EC"));
-    }
-    TextExpressionSetToken("Param/Expression/lib_FE150EF4_EA775E38", "nukeDamage", IntToText(libFE150EF4_gv_nNplayerOptions.lv_nukesnukeDamage));
-    lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_FE150EF4_EA775E38"));
-    lv__description = (lv__description + libFE150EF4_gv_nNplayerOptions.lv_nukesnukeRadius);
-    lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = lv__description;
-    lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat = StringToText("");
 }
 
 trigger auto_libFE150EF4_gf_NNSpawnNuke_Trigger = null;
@@ -989,18 +989,15 @@ bool libFE150EF4_gt_NNSpawnNukes_Func (bool testConds, bool runActions) {
         }
     }
 
-    if (((GameAttributeGameValue("1") == "0005") || (GameAttributeGameValue("1") == "0007") || (GameAttributeGameValue("1") == "0006"))) {
+    if ((libFE150EF4_gv_nNplayerOptions.lv_nukesperiodWaves <= 15)) {
         SoundPlayForPlayer(SoundLink("TUIWarningPing2", -1), c_maxPlayers, PlayerGroupActive(), 100.0, 0.0);
     }
     else {
-        if (((GameAttributeGameValue("1") == "0008") || (GameAttributeGameValue("1") == "0001") || (GameAttributeGameValue("1") == "0009"))) {
+        if ((libFE150EF4_gv_nNplayerOptions.lv_nukesperiodWaves <= 45)) {
             SoundPlayForPlayer(SoundLink("TUIWarningPing3", -1), c_maxPlayers, PlayerGroupActive(), 100.0, 0.0);
         }
         else {
-            if (((GameAttributeGameValue("1") == "0002") || (GameAttributeGameValue("1") == "0003") || (GameAttributeGameValue("1") == "0004"))) {
-                SoundPlayForPlayer(SoundLink("TUIWarningPing", -1), c_maxPlayers, PlayerGroupActive(), 100.0, 0.0);
-            }
-
+            SoundPlayForPlayer(SoundLink("TUIWarningPing", -1), c_maxPlayers, PlayerGroupActive(), 100.0, 0.0);
         }
     }
     auto93E11E33_ae = libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber;
