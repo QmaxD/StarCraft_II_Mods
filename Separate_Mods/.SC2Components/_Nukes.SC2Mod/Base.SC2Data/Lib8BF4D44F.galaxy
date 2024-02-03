@@ -24,6 +24,7 @@ void lib8BF4D44F_InitVariables () {
     lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukeRadius = TextExpressionAssemble("Param/Expression/lib_8BF4D44F_50A0A80E");
     lib8BF4D44F_gv_nukesplayerOptions.lv_nukespingModel = "PingNuke";
     lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisShowRedPoind = true;
+    lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisPlayPingSound = true;
     lib8BF4D44F_gv_nukessafeZone = RegionEmpty();
     lib8BF4D44F_gv_nukestimer = TimerCreate();
 }
@@ -70,6 +71,41 @@ bool auto_lib8BF4D44F_gf_NukesSpawnNuke_TriggerFunc (bool testConds, bool runAct
     PlayerCreateEffectPoint(15, "NukeDetonate2", lv__nukePoint);
     if ((lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisShowRedPoind == true)) {
         libNtve_gf_KillModel(lv__actor);
+    }
+
+    return true;
+}
+
+trigger auto_lib8BF4D44F_gf_NukesPlayPingSound_Trigger = null;
+bool auto_lib8BF4D44F_gf_NukesPlayPingSound_lp_isPlaySound;
+
+void lib8BF4D44F_gf_NukesPlayPingSound (bool lp_isPlaySound) {
+    auto_lib8BF4D44F_gf_NukesPlayPingSound_lp_isPlaySound = lp_isPlaySound;
+
+    if (auto_lib8BF4D44F_gf_NukesPlayPingSound_Trigger == null) {
+        auto_lib8BF4D44F_gf_NukesPlayPingSound_Trigger = TriggerCreate("auto_lib8BF4D44F_gf_NukesPlayPingSound_TriggerFunc");
+    }
+
+    TriggerExecute(auto_lib8BF4D44F_gf_NukesPlayPingSound_Trigger, false, false);
+}
+
+bool auto_lib8BF4D44F_gf_NukesPlayPingSound_TriggerFunc (bool testConds, bool runActions) {
+    bool lp_isPlaySound = auto_lib8BF4D44F_gf_NukesPlayPingSound_lp_isPlaySound;
+
+    // Automatic Variable Declarations
+    // Implementation
+    if ((lp_isPlaySound == true)) {
+        if ((lib8BF4D44F_gv_nukesplayerOptions.lv_nukesperiodWaves <= 15)) {
+            SoundPlayForPlayer(SoundLink("TUIWarningPing2", -1), c_maxPlayers, PlayerGroupActive(), 100.0, 0.0);
+        }
+        else {
+            if ((lib8BF4D44F_gv_nukesplayerOptions.lv_nukesperiodWaves <= 45)) {
+                SoundPlayForPlayer(SoundLink("TUIWarningPing3", -1), c_maxPlayers, PlayerGroupActive(), 100.0, 0.0);
+            }
+            else {
+                SoundPlayForPlayer(SoundLink("TUIWarningPing", -1), c_maxPlayers, PlayerGroupActive(), 100.0, 0.0);
+            }
+        }
     }
 
     return true;
@@ -429,6 +465,10 @@ bool lib8BF4D44F_gt_NukesLaunch_Func (bool testConds, bool runActions) {
         lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisShowRedPoind = false;
     }
 
+    if ((GameAttributeGameValue("10") == "0002")) {
+        lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisPlayPingSound = false;
+    }
+
     Wait(0.1, c_timeGame);
     TriggerExecute(lib8BF4D44F_gt_NukesStartSafeZoneAndTimer, true, false);
     return true;
@@ -601,20 +641,7 @@ bool lib8BF4D44F_gt_NukesSpawnNukes_Func (bool testConds, bool runActions) {
         }
     }
 
-    if (((GameAttributeGameValue("1") == "0005") || (GameAttributeGameValue("1") == "0007") || (GameAttributeGameValue("1") == "0006"))) {
-        SoundPlayForPlayer(SoundLink("TUIWarningPing2", -1), c_maxPlayers, PlayerGroupActive(), 100.0, 0.0);
-    }
-    else {
-        if (((GameAttributeGameValue("1") == "0008") || (GameAttributeGameValue("1") == "0001") || (GameAttributeGameValue("1") == "0009"))) {
-            SoundPlayForPlayer(SoundLink("TUIWarningPing3", -1), c_maxPlayers, PlayerGroupActive(), 100.0, 0.0);
-        }
-        else {
-            if (((GameAttributeGameValue("1") == "0002") || (GameAttributeGameValue("1") == "0003") || (GameAttributeGameValue("1") == "0004"))) {
-                SoundPlayForPlayer(SoundLink("TUIWarningPing", -1), c_maxPlayers, PlayerGroupActive(), 100.0, 0.0);
-            }
-
-        }
-    }
+    lib8BF4D44F_gf_NukesPlayPingSound(lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisPlayPingSound);
     autoB2BF6642_ae = lib8BF4D44F_gv_nukesplayerOptions.lv_nukesnukesNumber;
     autoB2BF6642_var = 1;
     for ( ; autoB2BF6642_var <= autoB2BF6642_ae; autoB2BF6642_var += 1 ) {

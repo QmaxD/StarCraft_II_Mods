@@ -18,6 +18,7 @@ struct lib8BF4D44F_gs_Nukesoptions {
     text lv_nukesnukeRadius;
     string lv_nukespingModel;
     bool lv_nukesisShowRedPoind;
+    bool lv_nukesisPlayPingSound;
 };
 
 // Variable Declarations
@@ -27,6 +28,7 @@ timer lib8BF4D44F_gv_nukestimer;
 
 // Function Declarations
 void lib8BF4D44F_gf_NukesSpawnNuke ();
+void lib8BF4D44F_gf_NukesPlayPingSound (bool lp_isPlaySound);
 string lib8BF4D44F_gf_NukesGetRightBehaviourForBlob ();
 string lib8BF4D44F_gf_NukesGetRightBehaviourForLine ();
 
