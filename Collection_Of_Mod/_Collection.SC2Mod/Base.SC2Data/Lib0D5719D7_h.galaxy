@@ -1,21 +1,85 @@
 include "TriggerLibs/natives"
 
 //--------------------------------------------------------------------------------------------------
-// Library: ++05 Hide UI | HUI
+// Library: 05 Hide UI | UI
 //--------------------------------------------------------------------------------------------------
 // Structures
 struct lib0D5719D7_gs_Information {
-    string lv_gSOption_1;
+    string lv_gSOption_1D09FD0BED0BAD0B0D0B7D0B0D182D18C;
+    string lv_gSOption_1D0A1D0BAD180D18BD182D18C;
+    string lv_gSOption_2D09FD0BED0BAD0B0D0B7D0B0D182D18C;
+    string lv_gSOption_2D0A1D0BAD180D18BD182D18C;
+    string lv_gSOption_3D09FD0BED0BAD0B0D0B7D0B0D182D18C;
+    string lv_gSOption_3D0A1D0BAD180D18BD182D18C;
+    string lv_gSOption_4D09FD0BED0BAD0B0D0B7D0B0D182D18C;
+    string lv_gSOption_4D0A1D0BAD180D18BD182D18C;
+    string lv_gSOption_5D09FD0BED0BAD0B0D0B7D0B0D182D18C;
+    string lv_gSOption_5D0A1D0BAD180D18BD182D18C;
+    string lv_gSOption_5D0A1D0BAD180D18BD182D18CD0B8D0B2D18BD0BAD0BBD18ED187D0B8D182D18C;
+    string lv_gSOption_6D09FD0BED0BAD0B0D0B7D0B0D182D18C;
+    string lv_gSOption_6D0A1D0BAD180D18BD182D18C;
+    string lv_gSOption_7D09FD0BED0BAD0B0D0B7D0B0D182D18C;
+    string lv_gSOption_7D0A1D0BAD180D18BD182D18C;
+    string lv_gSOption_8D09FD0BED0BAD0B0D0B7D0B0D182D18C;
+    string lv_gSOption_8D0A1D0BAD180D18BD182D18C;
+    string lv_gSOption_9D09FD0BED0BAD0B0D0B7D0B0D182D18C;
+    string lv_gSOption_9D0A1D0BAD180D18BD182D18C;
+    string lv_gSOption_9D0A1D0BAD180D18BD182D18CD0B8D0B4D0B5D0B0D0BAD182D0B8D0B2D0B8D180D0BED0B2D0B0D182D18C;
+    string lv_gSOption_10D0A0D0B0D0B7D180D0B5D188D0B8D182D18C;
+    string lv_gSOption_10D097D0B0D0BFD180D0B5D182D0B8D182D18C;
+    string lv_gSOption_11D09FD0BED0BAD0B0D0B7D0B0D182D18C;
+    string lv_gSOption_11D0A1D0BAD180D18BD182D18C;
+    string lv_gSOption_12D09FD0BED0BAD0B0D0B7D0B0D182D18C;
+    string lv_gSOption_12D0A1D0BAD180D18BD182D18C;
+    string lv_gSOption_12D0A1D0BAD180D18BD182D18CD0B8D0B2D18BD0BAD0BBD18ED187D0B8D182D18C;
+    string lv_gSOption_13D09FD0BED0BAD0B0D0B7D0B0D182D18C;
+    string lv_gSOption_13D0A1D0BAD180D18BD182D18C;
+};
+
+struct lib0D5719D7_gs_HideUI_Option {
+    text lv_text_Hide_Minimap;
+    bool lv_is_Hide_Minimap;
+    text lv_text_Hide_Cursor;
+    bool lv_is_Hide_Cursor;
+    text lv_text_Hide_ResourceFrame;
+    bool lv_is_Hide_ResourceFrame;
+    text lv_text_Hide_SupplyFrame;
+    bool lv_is_Hide_SupplyFrame;
+    text lv_text_Hide_F1F2;
+    bool lv_is_Hide_F1F2;
+    bool lv_is_Off_F1F2;
+    text lv_text_Hide_TimePanel;
+    bool lv_is_Hide_TimePanel;
+    text lv_text_Hide_InfoPanel;
+    bool lv_is_Hide_InfoPanel;
+    text lv_text_Hide_CommandPanel;
+    bool lv_is_Hide_CommandPanel;
+    text lv_text_Hide_GroupPanel;
+    bool lv_is_Hide_GroupPanel;
+    bool lv_is_Off_GroupPanel;
+    text lv_text_Hide_WarpIn;
+    bool lv_is_Hide_WarpIn;
+    text lv_text_Hide_MenuBar;
+    bool lv_is_Hide_MenuBar;
+    text lv_text_Hide_AllianceButton;
+    bool lv_is_Hide_AlianceButton;
+    bool lv_is_Off_AlianceButton;
+    text lv_text_Hide_ConsolePanel;
+    bool lv_is_Hide_ConsolePanel;
 };
 
 // Variable Declarations
 lib0D5719D7_gs_Information lib0D5719D7_gv_modInformation;
+color lib0D5719D7_gv_uIcolor_Red;
+color lib0D5719D7_gv_uIcolor_Green;
+lib0D5719D7_gs_HideUI_Option lib0D5719D7_gv_uIhideUIOptions;
 
 // Function Declarations
 void lib0D5719D7_gf_SetupInformation (int lp_modIndex);
 void lib0D5719D7_gf_GetOptions ();
 void lib0D5719D7_gf_TriggersTurnOn ();
 void lib0D5719D7_gf_GetInfoForPlayer ();
+void lib0D5719D7_gf_UIApplySettings ();
 
 // Trigger Declarations
 trigger lib0D5719D7_gt_Launch;

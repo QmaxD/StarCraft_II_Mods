@@ -65,9 +65,11 @@ struct libFE150EF4_gs_Information {
     string lv_nNOption_81000;
     string lv_nNOption_9D094D0B0;
     string lv_nNOption_9D09DD0B5D182;
+    string lv_nNOption_10D094D0B0;
+    string lv_nNOption_10D09DD0B5D182;
 };
 
-struct libFE150EF4_gs_NNNukeOptions {
+struct libFE150EF4_gs_Nukes_Option {
     int lv_nukesperiodWaves;
     int lv_nukesnukesNumber;
     int lv_nukessafeDistance;
@@ -81,11 +83,12 @@ struct libFE150EF4_gs_NNNukeOptions {
     text lv_nukesnukeRadius;
     string lv_nukespingModel;
     bool lv_nukesisShowRedPoind;
+    bool lv_nukesisPlayPingSound;
 };
 
 // Variable Declarations
 libFE150EF4_gs_Information libFE150EF4_gv_modInformation;
-libFE150EF4_gs_NNNukeOptions libFE150EF4_gv_nNplayerOptions;
+libFE150EF4_gs_Nukes_Option libFE150EF4_gv_nNnukesOptions;
 region libFE150EF4_gv_nNsafeZone;
 timer libFE150EF4_gv_nNtimer;
 
@@ -96,6 +99,7 @@ void libFE150EF4_gf_TriggersTurnOn ();
 void libFE150EF4_gf_GetInfoForPlayer ();
 void libFE150EF4_gf_NNStartSafeZoneAndTimer ();
 void libFE150EF4_gf_NNSpawnNuke ();
+void libFE150EF4_gf_NNPlayPingSound (bool lp_isPlaySound);
 string libFE150EF4_gf_NNGetRightBehaviourForBlob (int lp__radius);
 string libFE150EF4_gf_NNGetRightBehaviourForLine (int lp__radius);
 

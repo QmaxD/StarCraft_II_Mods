@@ -319,6 +319,7 @@ void lib39D1ECFB_gf_StartMods () {
     DialogDestroy(lib39D1ECFB_gv_dialog_ModBottom);
     DialogDestroy(lib39D1ECFB_gv_mods[0].lv_modDescriptionDialog);
     DialogDestroy(lib39D1ECFB_gv_mods[0].lv_modSettingsDialog);
+    lib39D1ECFB_gf_UIPlayerElements(true);
     autoE3AE3986_ae = lib39D1ECFB_gv_amount_Mods;
     lib39D1ECFB_gv_selected_Mod = 1;
     for ( ; ( (autoE3AE3986_ai >= 0 && lib39D1ECFB_gv_selected_Mod <= autoE3AE3986_ae) || (autoE3AE3986_ai < 0 && lib39D1ECFB_gv_selected_Mod >= autoE3AE3986_ae) ) ; lib39D1ECFB_gv_selected_Mod += autoE3AE3986_ai ) {
@@ -329,7 +330,6 @@ void lib39D1ECFB_gf_StartMods () {
         }
 
     }
-    lib39D1ECFB_gf_UIPlayerElements(true);
     lib39D1ECFB_gf_GetCount();
     lib39D1ECFB_gf_UnpauseGame();
 }

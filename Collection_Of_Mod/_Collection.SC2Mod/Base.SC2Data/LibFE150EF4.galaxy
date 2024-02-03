@@ -84,10 +84,13 @@ void libFE150EF4_InitVariables () {
     libFE150EF4_gv_modInformation.lv_nNOption_81000 = "Сила поражения бомбы 1000";
     libFE150EF4_gv_modInformation.lv_nNOption_9D094D0B0 = "Да. Показывать";
     libFE150EF4_gv_modInformation.lv_nNOption_9D09DD0B5D182 = "Нет. Скрыть";
-    libFE150EF4_gv_nNplayerOptions.lv_nukesisOnlyMainsSafeZone = true;
-    libFE150EF4_gv_nNplayerOptions.lv_nukesnukeRadius = TextExpressionAssemble("Param/Expression/lib_FE150EF4_590A5762");
-    libFE150EF4_gv_nNplayerOptions.lv_nukespingModel = "PingNuke2";
-    libFE150EF4_gv_nNplayerOptions.lv_nukesisShowRedPoind = true;
+    libFE150EF4_gv_modInformation.lv_nNOption_10D094D0B0 = "Да. Оставить";
+    libFE150EF4_gv_modInformation.lv_nNOption_10D09DD0B5D182 = "Убрать звук";
+    libFE150EF4_gv_nNnukesOptions.lv_nukesisOnlyMainsSafeZone = true;
+    libFE150EF4_gv_nNnukesOptions.lv_nukesnukeRadius = TextExpressionAssemble("Param/Expression/lib_FE150EF4_590A5762");
+    libFE150EF4_gv_nNnukesOptions.lv_nukespingModel = "PingNuke2";
+    libFE150EF4_gv_nNnukesOptions.lv_nukesisShowRedPoind = true;
+    libFE150EF4_gv_nNnukesOptions.lv_nukesisPlayPingSound = true;
     libFE150EF4_gv_nNsafeZone = RegionEmpty();
     libFE150EF4_gv_nNtimer = TimerCreate();
 }
@@ -106,6 +109,7 @@ void libFE150EF4_gf_SetupInformation (int lp_modIndex) {
     int lv__default_Option_7;
     int lv__default_Option_8;
     int lv__default_Option_9;
+    int lv__default_Option_10;
 
     // Automatic Variable Declarations
     // Variable Initialization
@@ -118,6 +122,7 @@ void libFE150EF4_gf_SetupInformation (int lp_modIndex) {
     lv__default_Option_7 = 3;
     lv__default_Option_8 = 5;
     lv__default_Option_9 = 1;
+    lv__default_Option_10 = 1;
 
     // Implementation
     lib39D1ECFB_gv_mods[lp_modIndex].lv_name = StringExternal("Param/Value/lib_FE150EF4_160E91E8");
@@ -369,6 +374,19 @@ void libFE150EF4_gf_SetupInformation (int lp_modIndex) {
     lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_9;
     lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_9].lv_valueString;
     lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
+    lv__optionIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionName = StringExternal("Param/Value/lib_FE150EF4_35DCAF9A");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_optionComment = StringExternal("Param/Value/lib_FE150EF4_61E3979F");
+    lv__optionValueIndex = 0;
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_10D094D0B0;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_6386B69E");
+    lv__optionValueIndex += 1;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueString = libFE150EF4_gv_modInformation.lv_nNOption_10D09DD0B5D182;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__optionValueIndex].lv_valueComment = StringExternal("Param/Value/lib_FE150EF4_39807B86");
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_defaultIndex = lv__default_Option_10;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[0].lv_valueString = lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_values[lv__default_Option_10].lv_valueString;
+    lib39D1ECFB_gv_mods[lp_modIndex].lv_game_Options[lv__optionIndex].lv_valuesNumber = lv__optionValueIndex;
     lib39D1ECFB_gv_mods[lp_modIndex].lv_number_Game_Options = lv__optionIndex;
     lib39D1ECFB_gv_mods[lp_modIndex].lv_start_Trigger = libFE150EF4_gt_Launch;
 }
@@ -395,6 +413,7 @@ void libFE150EF4_gf_GetOptions () {
     string autoF3A3DB92_val;
     string autoE77F0D8B_val;
     string auto4473EF56_val;
+    string auto49E028E9_val;
 
     // Variable Initialization
     lv__Effects_NukeDamage_Amount = 300;
@@ -410,165 +429,165 @@ void libFE150EF4_gf_GetOptions () {
     // Implementation
     autoAABEC346_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[1].lv_values[0].lv_valueString;
     if (autoAABEC346_val == libFE150EF4_gv_modInformation.lv_nNOption_15) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesperiodWaves = 5;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesperiodWaves = 5;
     }
     else if (autoAABEC346_val == libFE150EF4_gv_modInformation.lv_nNOption_110) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesperiodWaves = 10;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesperiodWaves = 10;
     }
     else if (autoAABEC346_val == libFE150EF4_gv_modInformation.lv_nNOption_115) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesperiodWaves = 15;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesperiodWaves = 15;
     }
     else if (autoAABEC346_val == libFE150EF4_gv_modInformation.lv_nNOption_120) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesperiodWaves = 20;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesperiodWaves = 20;
     }
     else if (autoAABEC346_val == libFE150EF4_gv_modInformation.lv_nNOption_130) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesperiodWaves = 30;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesperiodWaves = 30;
     }
     else if (autoAABEC346_val == libFE150EF4_gv_modInformation.lv_nNOption_145) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesperiodWaves = 45;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesperiodWaves = 45;
     }
     else if (autoAABEC346_val == libFE150EF4_gv_modInformation.lv_nNOption_160) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesperiodWaves = 60;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesperiodWaves = 60;
     }
     else if (autoAABEC346_val == libFE150EF4_gv_modInformation.lv_nNOption_1120) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesperiodWaves = 120;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesperiodWaves = 120;
     }
     else if (autoAABEC346_val == libFE150EF4_gv_modInformation.lv_nNOption_1180) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesperiodWaves = 180;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesperiodWaves = 180;
     }
     else {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesperiodWaves = 180;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesperiodWaves = 180;
     }
     autoFC069BCB_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[2].lv_values[0].lv_valueString;
     if (autoFC069BCB_val == libFE150EF4_gv_modInformation.lv_nNOption_21) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 1;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesnukesNumber = 1;
     }
     else if (autoFC069BCB_val == libFE150EF4_gv_modInformation.lv_nNOption_22) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 2;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesnukesNumber = 2;
     }
     else if (autoFC069BCB_val == libFE150EF4_gv_modInformation.lv_nNOption_23) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 3;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesnukesNumber = 3;
     }
     else if (autoFC069BCB_val == libFE150EF4_gv_modInformation.lv_nNOption_24) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 4;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesnukesNumber = 4;
     }
     else if (autoFC069BCB_val == libFE150EF4_gv_modInformation.lv_nNOption_25) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 5;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesnukesNumber = 5;
     }
     else if (autoFC069BCB_val == libFE150EF4_gv_modInformation.lv_nNOption_26) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 6;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesnukesNumber = 6;
     }
     else if (autoFC069BCB_val == libFE150EF4_gv_modInformation.lv_nNOption_27) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 7;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesnukesNumber = 7;
     }
     else if (autoFC069BCB_val == libFE150EF4_gv_modInformation.lv_nNOption_28) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 8;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesnukesNumber = 8;
     }
     else if (autoFC069BCB_val == libFE150EF4_gv_modInformation.lv_nNOption_29) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 9;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesnukesNumber = 9;
     }
     else if (autoFC069BCB_val == libFE150EF4_gv_modInformation.lv_nNOption_210) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 10;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesnukesNumber = 10;
     }
     else if (autoFC069BCB_val == libFE150EF4_gv_modInformation.lv_nNOption_215) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 15;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesnukesNumber = 15;
     }
     else if (autoFC069BCB_val == libFE150EF4_gv_modInformation.lv_nNOption_220) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 20;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesnukesNumber = 20;
     }
     else if (autoFC069BCB_val == libFE150EF4_gv_modInformation.lv_nNOption_230) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 30;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesnukesNumber = 30;
     }
     else if (autoFC069BCB_val == libFE150EF4_gv_modInformation.lv_nNOption_240) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 40;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesnukesNumber = 40;
     }
     else if (autoFC069BCB_val == libFE150EF4_gv_modInformation.lv_nNOption_250) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 50;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesnukesNumber = 50;
     }
     else {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber = 10;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesnukesNumber = 10;
     }
     auto6A3901F4_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[3].lv_values[0].lv_valueString;
     if (auto6A3901F4_val == libFE150EF4_gv_modInformation.lv_nNOption_310) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance = 10;
+        libFE150EF4_gv_nNnukesOptions.lv_nukessafeDistance = 10;
     }
     else if (auto6A3901F4_val == libFE150EF4_gv_modInformation.lv_nNOption_315) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance = 15;
+        libFE150EF4_gv_nNnukesOptions.lv_nukessafeDistance = 15;
     }
     else if (auto6A3901F4_val == libFE150EF4_gv_modInformation.lv_nNOption_320) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance = 20;
+        libFE150EF4_gv_nNnukesOptions.lv_nukessafeDistance = 20;
     }
     else if (auto6A3901F4_val == libFE150EF4_gv_modInformation.lv_nNOption_325) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance = 25;
+        libFE150EF4_gv_nNnukesOptions.lv_nukessafeDistance = 25;
     }
     else if (auto6A3901F4_val == libFE150EF4_gv_modInformation.lv_nNOption_330) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance = 30;
+        libFE150EF4_gv_nNnukesOptions.lv_nukessafeDistance = 30;
     }
     else if (auto6A3901F4_val == libFE150EF4_gv_modInformation.lv_nNOption_335) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance = 35;
+        libFE150EF4_gv_nNnukesOptions.lv_nukessafeDistance = 35;
     }
     else if (auto6A3901F4_val == libFE150EF4_gv_modInformation.lv_nNOption_340) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance = 40;
+        libFE150EF4_gv_nNnukesOptions.lv_nukessafeDistance = 40;
     }
     else if (auto6A3901F4_val == libFE150EF4_gv_modInformation.lv_nNOption_345) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance = 45;
+        libFE150EF4_gv_nNnukesOptions.lv_nukessafeDistance = 45;
     }
     else if (auto6A3901F4_val == libFE150EF4_gv_modInformation.lv_nNOption_350) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance = 50;
+        libFE150EF4_gv_nNnukesOptions.lv_nukessafeDistance = 50;
     }
     else {
-        libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance = 25;
+        libFE150EF4_gv_nNnukesOptions.lv_nukessafeDistance = 25;
     }
-    libFE150EF4_gv_nNplayerOptions.lv_nukesBehaviourForBlob = libFE150EF4_gf_NNGetRightBehaviourForBlob(libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance);
-    libFE150EF4_gv_nNplayerOptions.lv_nukesBehaviourForLine = libFE150EF4_gf_NNGetRightBehaviourForLine(libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance);
+    libFE150EF4_gv_nNnukesOptions.lv_nukesBehaviourForBlob = libFE150EF4_gf_NNGetRightBehaviourForBlob(libFE150EF4_gv_nNnukesOptions.lv_nukessafeDistance);
+    libFE150EF4_gv_nNnukesOptions.lv_nukesBehaviourForLine = libFE150EF4_gf_NNGetRightBehaviourForLine(libFE150EF4_gv_nNnukesOptions.lv_nukessafeDistance);
     autoF36C8973_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[4].lv_values[0].lv_valueString;
     if (autoF36C8973_val == libFE150EF4_gv_modInformation.lv_nNOption_41) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukestimeNukeAttack = 1;
+        libFE150EF4_gv_nNnukesOptions.lv_nukestimeNukeAttack = 1;
     }
     else if (autoF36C8973_val == libFE150EF4_gv_modInformation.lv_nNOption_45) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukestimeNukeAttack = 5;
+        libFE150EF4_gv_nNnukesOptions.lv_nukestimeNukeAttack = 5;
     }
     else if (autoF36C8973_val == libFE150EF4_gv_modInformation.lv_nNOption_410) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukestimeNukeAttack = 10;
+        libFE150EF4_gv_nNnukesOptions.lv_nukestimeNukeAttack = 10;
     }
     else if (autoF36C8973_val == libFE150EF4_gv_modInformation.lv_nNOption_415) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukestimeNukeAttack = 15;
+        libFE150EF4_gv_nNnukesOptions.lv_nukestimeNukeAttack = 15;
     }
     else if (autoF36C8973_val == libFE150EF4_gv_modInformation.lv_nNOption_420) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukestimeNukeAttack = 20;
+        libFE150EF4_gv_nNnukesOptions.lv_nukestimeNukeAttack = 20;
     }
     else if (autoF36C8973_val == libFE150EF4_gv_modInformation.lv_nNOption_430) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukestimeNukeAttack = 30;
+        libFE150EF4_gv_nNnukesOptions.lv_nukestimeNukeAttack = 30;
     }
     else {
-        libFE150EF4_gv_nNplayerOptions.lv_nukestimeNukeAttack = 5;
+        libFE150EF4_gv_nNnukesOptions.lv_nukestimeNukeAttack = 5;
     }
     autoEAE7F3E1_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[5].lv_values[0].lv_valueString;
     if (autoEAE7F3E1_val == libFE150EF4_gv_modInformation.lv_nNOption_5D092D181D0B5D0B1D0B0D0B7D18B) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesisOnlyMainsSafeZone = false;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesisOnlyMainsSafeZone = false;
     }
     else if (autoEAE7F3E1_val == libFE150EF4_gv_modInformation.lv_nNOption_5D0A2D0BED0BBD18CD0BAD0BED0BCD0B5D0B9D0BDD18B) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesisOnlyMainsSafeZone = true;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesisOnlyMainsSafeZone = true;
     }
     else {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesisOnlyMainsSafeZone = true;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesisOnlyMainsSafeZone = true;
     }
     auto7692420B_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[6].lv_values[0].lv_valueString;
     if (auto7692420B_val == libFE150EF4_gv_modInformation.lv_nNOption_6D098D0BFD0BED0BBD0B5D0B8D0B3D180D0B0D0BDD0B8D186D0B0) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneField = true;
-        libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneLine = true;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesisDisplaySafeZoneField = true;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesisDisplaySafeZoneLine = true;
     }
     else if (auto7692420B_val == libFE150EF4_gv_modInformation.lv_nNOption_6D093D180D0B0D0BDD0B8D186D0B0) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneLine = true;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesisDisplaySafeZoneLine = true;
     }
     else if (auto7692420B_val == libFE150EF4_gv_modInformation.lv_nNOption_6D09FD0BED0BBD0B5) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneField = true;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesisDisplaySafeZoneField = true;
     }
     else if (auto7692420B_val == libFE150EF4_gv_modInformation.lv_nNOption_6D09DD0B8D187D0B5D0B3D0BE) {
     }
     else {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneField = true;
-        libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneLine = true;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesisDisplaySafeZoneField = true;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesisDisplaySafeZoneLine = true;
     }
     autoF3A3DB92_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[7].lv_values[0].lv_valueString;
     if (autoF3A3DB92_val == libFE150EF4_gv_modInformation.lv_nNOption_7D09CD0B0D0BBD18BD0B9) {
@@ -579,7 +598,7 @@ void libFE150EF4_gf_GetOptions () {
         CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(1) + "].Radius", 15, "3", c_upgradeOperationSet);
         CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(2) + "].Fraction", 15, "0.35", c_upgradeOperationSet);
         CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(2) + "].Radius", 15, "4", c_upgradeOperationSet);
-        libFE150EF4_gv_nNplayerOptions.lv_nukesnukeRadius = TextExpressionAssemble("Param/Expression/lib_FE150EF4_33ABB0DD");
+        libFE150EF4_gv_nNnukesOptions.lv_nukesnukeRadius = TextExpressionAssemble("Param/Expression/lib_FE150EF4_33ABB0DD");
     }
     else if (autoF3A3DB92_val == libFE150EF4_gv_modInformation.lv_nNOption_7D09CD0B5D0BDD18CD188D0B5D181D182D0B0D0BDD0B4D0B0D180D182D0BDD0BED0B3D0BE) {
         CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "RevealRadius", 15, "6", c_upgradeOperationSet);
@@ -589,10 +608,10 @@ void libFE150EF4_gf_GetOptions () {
         CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(1) + "].Radius", 15, "4", c_upgradeOperationSet);
         CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(2) + "].Fraction", 15, "0.25", c_upgradeOperationSet);
         CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(2) + "].Radius", 15, "6", c_upgradeOperationSet);
-        libFE150EF4_gv_nNplayerOptions.lv_nukesnukeRadius = TextExpressionAssemble("Param/Expression/lib_FE150EF4_5F81806A");
+        libFE150EF4_gv_nNnukesOptions.lv_nukesnukeRadius = TextExpressionAssemble("Param/Expression/lib_FE150EF4_5F81806A");
     }
     else if (autoF3A3DB92_val == libFE150EF4_gv_modInformation.lv_nNOption_7D0A1D182D0B0D0BDD0B4D0B0D180D182D0BDD18BD0B9) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesnukeRadius = TextExpressionAssemble("Param/Expression/lib_FE150EF4_87428B99");
+        libFE150EF4_gv_nNnukesOptions.lv_nukesnukeRadius = TextExpressionAssemble("Param/Expression/lib_FE150EF4_87428B99");
     }
     else if (autoF3A3DB92_val == libFE150EF4_gv_modInformation.lv_nNOption_7D091D0BED0BBD18CD188D0B5D181D182D0B0D0BDD0B4D0B0D180D182D0BDD0BED0B3D0BE) {
         CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "RevealRadius", 15, "12", c_upgradeOperationSet);
@@ -602,7 +621,7 @@ void libFE150EF4_gf_GetOptions () {
         CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(1) + "].Radius", 15, "8", c_upgradeOperationSet);
         CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(2) + "].Fraction", 15, "0.3", c_upgradeOperationSet);
         CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(2) + "].Radius", 15, "12", c_upgradeOperationSet);
-        libFE150EF4_gv_nNplayerOptions.lv_nukesnukeRadius = TextExpressionAssemble("Param/Expression/lib_FE150EF4_BBA48398");
+        libFE150EF4_gv_nNnukesOptions.lv_nukesnukeRadius = TextExpressionAssemble("Param/Expression/lib_FE150EF4_BBA48398");
     }
     else if (autoF3A3DB92_val == libFE150EF4_gv_modInformation.lv_nNOption_7D091D0BED0BBD18CD188D0BED0B9) {
         CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "RevealRadius", 15, "16", c_upgradeOperationSet);
@@ -612,64 +631,74 @@ void libFE150EF4_gf_GetOptions () {
         CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(1) + "].Radius", 15, "12", c_upgradeOperationSet);
         CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(2) + "].Fraction", 15, "0.35", c_upgradeOperationSet);
         CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "AreaArray[" + IntToString(2) + "].Radius", 15, "16", c_upgradeOperationSet);
-        libFE150EF4_gv_nNplayerOptions.lv_nukesnukeRadius = TextExpressionAssemble("Param/Expression/lib_FE150EF4_53E1A808");
+        libFE150EF4_gv_nNnukesOptions.lv_nukesnukeRadius = TextExpressionAssemble("Param/Expression/lib_FE150EF4_53E1A808");
     }
     else {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesnukeRadius = TextExpressionAssemble("Param/Expression/lib_FE150EF4_8E26E2D6");
+        libFE150EF4_gv_nNnukesOptions.lv_nukesnukeRadius = TextExpressionAssemble("Param/Expression/lib_FE150EF4_8E26E2D6");
     }
     autoE77F0D8B_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[8].lv_values[0].lv_valueString;
     if (autoE77F0D8B_val == libFE150EF4_gv_modInformation.lv_nNOption_850) {
         CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "InitialDelay", 15, "0.25", c_upgradeOperationSet);
         CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "Amount", 15, "50", c_upgradeOperationSet);
-        libFE150EF4_gv_nNplayerOptions.lv_nukesnukeDamage = 50;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesnukeDamage = 50;
     }
     else if (autoE77F0D8B_val == libFE150EF4_gv_modInformation.lv_nNOption_8100) {
         CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "InitialDelay", 15, "0.25", c_upgradeOperationSet);
         CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "Amount", 15, "100", c_upgradeOperationSet);
-        libFE150EF4_gv_nNplayerOptions.lv_nukesnukeDamage = 100;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesnukeDamage = 100;
     }
     else if (autoE77F0D8B_val == libFE150EF4_gv_modInformation.lv_nNOption_8150) {
         CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "InitialDelay", 15, "0.25", c_upgradeOperationSet);
         CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "Amount", 15, "150", c_upgradeOperationSet);
-        libFE150EF4_gv_nNplayerOptions.lv_nukesnukeDamage = 150;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesnukeDamage = 150;
     }
     else if (autoE77F0D8B_val == libFE150EF4_gv_modInformation.lv_nNOption_8200) {
         CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "InitialDelay", 15, "0.25", c_upgradeOperationSet);
         CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "Amount", 15, "200", c_upgradeOperationSet);
-        libFE150EF4_gv_nNplayerOptions.lv_nukesnukeDamage = 200;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesnukeDamage = 200;
     }
     else if (autoE77F0D8B_val == libFE150EF4_gv_modInformation.lv_nNOption_8300) {
         CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "InitialDelay", 15, "0.25", c_upgradeOperationSet);
         CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "Amount", 15, "300", c_upgradeOperationSet);
-        libFE150EF4_gv_nNplayerOptions.lv_nukesnukeDamage = 300;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesnukeDamage = 300;
     }
     else if (autoE77F0D8B_val == libFE150EF4_gv_modInformation.lv_nNOption_8400) {
         CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "InitialDelay", 15, "0.25", c_upgradeOperationSet);
         CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "Amount", 15, "400", c_upgradeOperationSet);
-        libFE150EF4_gv_nNplayerOptions.lv_nukesnukeDamage = 400;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesnukeDamage = 400;
     }
     else if (autoE77F0D8B_val == libFE150EF4_gv_modInformation.lv_nNOption_8500) {
         CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "InitialDelay", 15, "0.25", c_upgradeOperationSet);
         CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "Amount", 15, "500", c_upgradeOperationSet);
-        libFE150EF4_gv_nNplayerOptions.lv_nukesnukeDamage = 500;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesnukeDamage = 500;
     }
     else if (autoE77F0D8B_val == libFE150EF4_gv_modInformation.lv_nNOption_81000) {
         CatalogFieldValueModify(c_gameCatalogEffect, "NukeDetonate2", "InitialDelay", 15, "0.25", c_upgradeOperationSet);
         CatalogFieldValueModify(c_gameCatalogEffect, "NukeDamage2", "Amount", 15, "1000", c_upgradeOperationSet);
-        libFE150EF4_gv_nNplayerOptions.lv_nukesnukeDamage = 1000;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesnukeDamage = 1000;
     }
     else {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesnukeDamage = 300;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesnukeDamage = 300;
     }
     auto4473EF56_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[9].lv_values[0].lv_valueString;
     if (auto4473EF56_val == libFE150EF4_gv_modInformation.lv_nNOption_9D094D0B0) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesisShowRedPoind = true;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesisShowRedPoind = true;
     }
     else if (auto4473EF56_val == libFE150EF4_gv_modInformation.lv_nNOption_9D09DD0B5D182) {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesisShowRedPoind = false;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesisShowRedPoind = false;
     }
     else {
-        libFE150EF4_gv_nNplayerOptions.lv_nukesisShowRedPoind = true;
+        libFE150EF4_gv_nNnukesOptions.lv_nukesisShowRedPoind = true;
+    }
+    auto49E028E9_val = lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_game_Options[10].lv_values[0].lv_valueString;
+    if (auto49E028E9_val == libFE150EF4_gv_modInformation.lv_nNOption_10D094D0B0) {
+        libFE150EF4_gv_nNnukesOptions.lv_nukesisPlayPingSound = true;
+    }
+    else if (auto49E028E9_val == libFE150EF4_gv_modInformation.lv_nNOption_10D09DD0B5D182) {
+        libFE150EF4_gv_nNnukesOptions.lv_nukesisPlayPingSound = false;
+    }
+    else {
+        libFE150EF4_gv_nNnukesOptions.lv_nukesisShowRedPoind = true;
     }
 }
 
@@ -677,7 +706,7 @@ void libFE150EF4_gf_TriggersTurnOn () {
     // Automatic Variable Declarations
     // Implementation
     TriggerEnable(libFE150EF4_gt_NNSpawnNukes, true);
-    if ((libFE150EF4_gv_nNplayerOptions.lv_nukesisOnlyMainsSafeZone == false)) {
+    if ((libFE150EF4_gv_nNnukesOptions.lv_nukesisOnlyMainsSafeZone == false)) {
         TriggerEnable(libFE150EF4_gt_NNSetNewBasesCircle, true);
         TriggerEnable(libFE150EF4_gt_NNTerransInTheAir, true);
         TriggerEnable(libFE150EF4_gt_NNTerransOnTheGround, true);
@@ -694,26 +723,26 @@ void libFE150EF4_gf_GetInfoForPlayer () {
     lv__description = StringExternal("Param/Value/lib_FE150EF4_C42346D4");
 
     // Implementation
-    TextExpressionSetToken("Param/Expression/lib_FE150EF4_CEEDB8A8", "periodWaves", IntToText(libFE150EF4_gv_nNplayerOptions.lv_nukesperiodWaves));
-    TextExpressionSetToken("Param/Expression/lib_FE150EF4_CEEDB8A8", "nukesNumber", IntToText(libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber));
-    TextExpressionSetToken("Param/Expression/lib_FE150EF4_CEEDB8A8", "timeNukeAttack", IntToText(libFE150EF4_gv_nNplayerOptions.lv_nukestimeNukeAttack));
-    TextExpressionSetToken("Param/Expression/lib_FE150EF4_CEEDB8A8", "safeDistance", IntToText(libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance));
+    TextExpressionSetToken("Param/Expression/lib_FE150EF4_CEEDB8A8", "periodWaves", IntToText(libFE150EF4_gv_nNnukesOptions.lv_nukesperiodWaves));
+    TextExpressionSetToken("Param/Expression/lib_FE150EF4_CEEDB8A8", "nukesNumber", IntToText(libFE150EF4_gv_nNnukesOptions.lv_nukesnukesNumber));
+    TextExpressionSetToken("Param/Expression/lib_FE150EF4_CEEDB8A8", "timeNukeAttack", IntToText(libFE150EF4_gv_nNnukesOptions.lv_nukestimeNukeAttack));
+    TextExpressionSetToken("Param/Expression/lib_FE150EF4_CEEDB8A8", "safeDistance", IntToText(libFE150EF4_gv_nNnukesOptions.lv_nukessafeDistance));
     lv__description = (TextExpressionAssemble("Param/Expression/lib_FE150EF4_B14D5408") + TextExpressionAssemble("Param/Expression/lib_FE150EF4_CEEDB8A8"));
-    if ((libFE150EF4_gv_nNplayerOptions.lv_nukesisOnlyMainsSafeZone == true)) {
+    if ((libFE150EF4_gv_nNnukesOptions.lv_nukesisOnlyMainsSafeZone == true)) {
         lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_FE150EF4_17554597"));
     }
     else {
         lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_FE150EF4_343EAC98"));
     }
-    if (((libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneLine == true) || (libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneField == true))) {
+    if (((libFE150EF4_gv_nNnukesOptions.lv_nukesisDisplaySafeZoneLine == true) || (libFE150EF4_gv_nNnukesOptions.lv_nukesisDisplaySafeZoneField == true))) {
         lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_FE150EF4_F2565657"));
     }
     else {
         lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_FE150EF4_F3CEF9EC"));
     }
-    TextExpressionSetToken("Param/Expression/lib_FE150EF4_EA775E38", "nukeDamage", IntToText(libFE150EF4_gv_nNplayerOptions.lv_nukesnukeDamage));
+    TextExpressionSetToken("Param/Expression/lib_FE150EF4_EA775E38", "nukeDamage", IntToText(libFE150EF4_gv_nNnukesOptions.lv_nukesnukeDamage));
     lv__description = (lv__description + TextExpressionAssemble("Param/Expression/lib_FE150EF4_EA775E38"));
-    lv__description = (lv__description + libFE150EF4_gv_nNplayerOptions.lv_nukesnukeRadius);
+    lv__description = (lv__description + libFE150EF4_gv_nNnukesOptions.lv_nukesnukeRadius);
     lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = lv__description;
     lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat = StringToText("");
 }
@@ -744,10 +773,10 @@ void libFE150EF4_gf_NNStartSafeZoneAndTimer () {
     while (true) {
         auto300AFC44_var = PlayerGroupNextPlayer(auto300AFC44_g, auto300AFC44_var);
         if (auto300AFC44_var < 0) { break; }
-        RegionAddCircle(libFE150EF4_gv_nNsafeZone, true, PlayerStartLocation(auto300AFC44_var), libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance);
+        RegionAddCircle(libFE150EF4_gv_nNsafeZone, true, PlayerStartLocation(auto300AFC44_var), libFE150EF4_gv_nNnukesOptions.lv_nukessafeDistance);
     }
-    if (((libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneLine == true) || (libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneField == true))) {
-        if ((libFE150EF4_gv_nNplayerOptions.lv_nukesisOnlyMainsSafeZone == false)) {
+    if (((libFE150EF4_gv_nNnukesOptions.lv_nukesisDisplaySafeZoneLine == true) || (libFE150EF4_gv_nNnukesOptions.lv_nukesisDisplaySafeZoneField == true))) {
+        if ((libFE150EF4_gv_nNnukesOptions.lv_nukesisOnlyMainsSafeZone == false)) {
             lv__mainsGroup = UnitGroup(null, c_playerAny, RegionEntireMap(), UnitFilter((1 << c_targetFilterStructure), 0, (1 << c_targetFilterNeutral), 0), 0);
         }
         else {
@@ -781,12 +810,12 @@ void libFE150EF4_gf_NNStartSafeZoneAndTimer () {
             auto9F5DE228_var = UnitGroupUnitFromEnd(auto9F5DE228_g, auto9F5DE228_u);
             if (auto9F5DE228_var == null) { break; }
             if ((lib36280BFF_gf_Commonis_MainBuilding(auto9F5DE228_var) == true)) {
-                if ((libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneLine == true)) {
-                    UnitBehaviorAdd(auto9F5DE228_var, libFE150EF4_gv_nNplayerOptions.lv_nukesBehaviourForLine, auto9F5DE228_var, 1);
+                if ((libFE150EF4_gv_nNnukesOptions.lv_nukesisDisplaySafeZoneLine == true)) {
+                    UnitBehaviorAdd(auto9F5DE228_var, libFE150EF4_gv_nNnukesOptions.lv_nukesBehaviourForLine, auto9F5DE228_var, 1);
                 }
 
-                if ((libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneField == true)) {
-                    UnitBehaviorAdd(auto9F5DE228_var, libFE150EF4_gv_nNplayerOptions.lv_nukesBehaviourForBlob, auto9F5DE228_var, 1);
+                if ((libFE150EF4_gv_nNnukesOptions.lv_nukesisDisplaySafeZoneField == true)) {
+                    UnitBehaviorAdd(auto9F5DE228_var, libFE150EF4_gv_nNnukesOptions.lv_nukesBehaviourForBlob, auto9F5DE228_var, 1);
                 }
 
             }
@@ -796,7 +825,7 @@ void libFE150EF4_gf_NNStartSafeZoneAndTimer () {
         }
     }
 
-    TimerStart(libFE150EF4_gv_nNtimer, libFE150EF4_gv_nNplayerOptions.lv_nukesperiodWaves, true, c_timeReal);
+    TimerStart(libFE150EF4_gv_nNtimer, libFE150EF4_gv_nNnukesOptions.lv_nukesperiodWaves, true, c_timeReal);
 }
 
 trigger auto_libFE150EF4_gf_NNSpawnNuke_Trigger = null;
@@ -829,17 +858,52 @@ bool auto_libFE150EF4_gf_NNSpawnNuke_TriggerFunc (bool testConds, bool runAction
         }
 
     }
-    if ((libFE150EF4_gv_nNplayerOptions.lv_nukesisShowRedPoind == true)) {
+    if ((libFE150EF4_gv_nNnukesOptions.lv_nukesisShowRedPoind == true)) {
         libNtve_gf_CreateModelAtPoint("GhostNukeIndicator", lv__nukePoint);
         lv__actor = libNtve_gf_ActorLastCreated();
     }
 
-    libNtve_gf_CreatePingFacingAngle(PlayerGroupAll(), libFE150EF4_gv_nNplayerOptions.lv_nukespingModel, lv__nukePoint, ColorWithAlpha(78.43, 78.43, 3.92, 0.00), libFE150EF4_gv_nNplayerOptions.lv_nukestimeNukeAttack, 225.0);
+    libNtve_gf_CreatePingFacingAngle(PlayerGroupAll(), libFE150EF4_gv_nNnukesOptions.lv_nukespingModel, lv__nukePoint, ColorWithAlpha(78.43, 78.43, 3.92, 0.00), libFE150EF4_gv_nNnukesOptions.lv_nukestimeNukeAttack, 225.0);
     PingSetScale(PingLastCreated(), 0.75);
-    Wait(libFE150EF4_gv_nNplayerOptions.lv_nukestimeNukeAttack, c_timeReal);
+    Wait(libFE150EF4_gv_nNnukesOptions.lv_nukestimeNukeAttack, c_timeReal);
     PlayerCreateEffectPoint(15, "NukeDetonate2", lv__nukePoint);
-    if ((libFE150EF4_gv_nNplayerOptions.lv_nukesisShowRedPoind == true)) {
+    if ((libFE150EF4_gv_nNnukesOptions.lv_nukesisShowRedPoind == true)) {
         libNtve_gf_KillModel(lv__actor);
+    }
+
+    return true;
+}
+
+trigger auto_libFE150EF4_gf_NNPlayPingSound_Trigger = null;
+bool auto_libFE150EF4_gf_NNPlayPingSound_lp_isPlaySound;
+
+void libFE150EF4_gf_NNPlayPingSound (bool lp_isPlaySound) {
+    auto_libFE150EF4_gf_NNPlayPingSound_lp_isPlaySound = lp_isPlaySound;
+
+    if (auto_libFE150EF4_gf_NNPlayPingSound_Trigger == null) {
+        auto_libFE150EF4_gf_NNPlayPingSound_Trigger = TriggerCreate("auto_libFE150EF4_gf_NNPlayPingSound_TriggerFunc");
+    }
+
+    TriggerExecute(auto_libFE150EF4_gf_NNPlayPingSound_Trigger, false, false);
+}
+
+bool auto_libFE150EF4_gf_NNPlayPingSound_TriggerFunc (bool testConds, bool runActions) {
+    bool lp_isPlaySound = auto_libFE150EF4_gf_NNPlayPingSound_lp_isPlaySound;
+
+    // Automatic Variable Declarations
+    // Implementation
+    if ((lp_isPlaySound == true)) {
+        if ((libFE150EF4_gv_nNnukesOptions.lv_nukesperiodWaves <= 15)) {
+            SoundPlayForPlayer(SoundLink("TUIWarningPing2", -1), c_maxPlayers, PlayerGroupActive(), 100.0, 0.0);
+        }
+        else {
+            if ((libFE150EF4_gv_nNnukesOptions.lv_nukesperiodWaves <= 45)) {
+                SoundPlayForPlayer(SoundLink("TUIWarningPing3", -1), c_maxPlayers, PlayerGroupActive(), 100.0, 0.0);
+            }
+            else {
+                SoundPlayForPlayer(SoundLink("TUIWarningPing", -1), c_maxPlayers, PlayerGroupActive(), 100.0, 0.0);
+            }
+        }
     }
 
     return true;
@@ -970,7 +1034,7 @@ bool libFE150EF4_gt_NNSpawnNukes_Func (bool testConds, bool runActions) {
         return true;
     }
 
-    if ((libFE150EF4_gv_nNplayerOptions.lv_nukesisOnlyMainsSafeZone == false)) {
+    if ((libFE150EF4_gv_nNnukesOptions.lv_nukesisOnlyMainsSafeZone == false)) {
         libFE150EF4_gv_nNsafeZone = RegionEmpty();
         lv_MineralGroup = UnitGroup(null, c_playerAny, RegionEntireMap(), UnitFilter((1 << c_targetFilterStructure), 0, (1 << c_targetFilterNeutral), 0), 0);
         auto81B8E974_g = lv_MineralGroup;
@@ -981,7 +1045,7 @@ bool libFE150EF4_gt_NNSpawnNukes_Func (bool testConds, bool runActions) {
             if ((libNtve_gf_UnitIsUnderConstruction(auto81B8E974_var) == false)) {
                 if ((lib36280BFF_gf_Commonis_MainBuilding(auto81B8E974_var) == true)) {
                     lv_Point = UnitGetPosition(auto81B8E974_var);
-                    RegionAddCircle(libFE150EF4_gv_nNsafeZone, true, lv_Point, libFE150EF4_gv_nNplayerOptions.lv_nukessafeDistance);
+                    RegionAddCircle(libFE150EF4_gv_nNsafeZone, true, lv_Point, libFE150EF4_gv_nNnukesOptions.lv_nukessafeDistance);
                 }
 
             }
@@ -989,18 +1053,8 @@ bool libFE150EF4_gt_NNSpawnNukes_Func (bool testConds, bool runActions) {
         }
     }
 
-    if ((libFE150EF4_gv_nNplayerOptions.lv_nukesperiodWaves <= 15)) {
-        SoundPlayForPlayer(SoundLink("TUIWarningPing2", -1), c_maxPlayers, PlayerGroupActive(), 100.0, 0.0);
-    }
-    else {
-        if ((libFE150EF4_gv_nNplayerOptions.lv_nukesperiodWaves <= 45)) {
-            SoundPlayForPlayer(SoundLink("TUIWarningPing3", -1), c_maxPlayers, PlayerGroupActive(), 100.0, 0.0);
-        }
-        else {
-            SoundPlayForPlayer(SoundLink("TUIWarningPing", -1), c_maxPlayers, PlayerGroupActive(), 100.0, 0.0);
-        }
-    }
-    auto93E11E33_ae = libFE150EF4_gv_nNplayerOptions.lv_nukesnukesNumber;
+    libFE150EF4_gf_NNPlayPingSound(libFE150EF4_gv_nNnukesOptions.lv_nukesisPlayPingSound);
+    auto93E11E33_ae = libFE150EF4_gv_nNnukesOptions.lv_nukesnukesNumber;
     auto93E11E33_var = 1;
     for ( ; auto93E11E33_var <= auto93E11E33_ae; auto93E11E33_var += 1 ) {
         libFE150EF4_gf_NNSpawnNuke();
@@ -1022,11 +1076,11 @@ bool libFE150EF4_gt_NNSetNewBasesCircle_Func (bool testConds, bool runActions) {
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libFE150EF4_gv_nNplayerOptions.lv_nukesisOnlyMainsSafeZone == false))) {
+        if (!((libFE150EF4_gv_nNnukesOptions.lv_nukesisOnlyMainsSafeZone == false))) {
             return false;
         }
 
-        if (!(((libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneLine == true) || (libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneField == true)))) {
+        if (!(((libFE150EF4_gv_nNnukesOptions.lv_nukesisDisplaySafeZoneLine == true) || (libFE150EF4_gv_nNnukesOptions.lv_nukesisDisplaySafeZoneField == true)))) {
             return false;
         }
     }
@@ -1037,12 +1091,12 @@ bool libFE150EF4_gt_NNSetNewBasesCircle_Func (bool testConds, bool runActions) {
     }
 
     if ((lib36280BFF_gf_Commonis_MainBuilding(EventUnit()) == true)) {
-        if ((libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneLine == true)) {
-            UnitBehaviorAdd(EventUnit(), libFE150EF4_gv_nNplayerOptions.lv_nukesBehaviourForLine, EventUnit(), 1);
+        if ((libFE150EF4_gv_nNnukesOptions.lv_nukesisDisplaySafeZoneLine == true)) {
+            UnitBehaviorAdd(EventUnit(), libFE150EF4_gv_nNnukesOptions.lv_nukesBehaviourForLine, EventUnit(), 1);
         }
 
-        if ((libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneField == true)) {
-            UnitBehaviorAdd(EventUnit(), libFE150EF4_gv_nNplayerOptions.lv_nukesBehaviourForBlob, EventUnit(), 1);
+        if ((libFE150EF4_gv_nNnukesOptions.lv_nukesisDisplaySafeZoneField == true)) {
+            UnitBehaviorAdd(EventUnit(), libFE150EF4_gv_nNnukesOptions.lv_nukesBehaviourForBlob, EventUnit(), 1);
         }
 
     }
@@ -1064,11 +1118,11 @@ bool libFE150EF4_gt_NNTerransInTheAir_Func (bool testConds, bool runActions) {
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libFE150EF4_gv_nNplayerOptions.lv_nukesisOnlyMainsSafeZone == false))) {
+        if (!((libFE150EF4_gv_nNnukesOptions.lv_nukesisOnlyMainsSafeZone == false))) {
             return false;
         }
 
-        if (!(((libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneLine == true) || (libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneField == true)))) {
+        if (!(((libFE150EF4_gv_nNnukesOptions.lv_nukesisDisplaySafeZoneLine == true) || (libFE150EF4_gv_nNnukesOptions.lv_nukesisDisplaySafeZoneField == true)))) {
             return false;
         }
     }
@@ -1078,12 +1132,12 @@ bool libFE150EF4_gt_NNTerransInTheAir_Func (bool testConds, bool runActions) {
         return true;
     }
 
-    if ((libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneLine == true)) {
-        UnitBehaviorRemove(EventUnit(), libFE150EF4_gv_nNplayerOptions.lv_nukesBehaviourForLine, -1);
+    if ((libFE150EF4_gv_nNnukesOptions.lv_nukesisDisplaySafeZoneLine == true)) {
+        UnitBehaviorRemove(EventUnit(), libFE150EF4_gv_nNnukesOptions.lv_nukesBehaviourForLine, -1);
     }
 
-    if ((libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneField == true)) {
-        UnitBehaviorRemove(EventUnit(), libFE150EF4_gv_nNplayerOptions.lv_nukesBehaviourForBlob, -1);
+    if ((libFE150EF4_gv_nNnukesOptions.lv_nukesisDisplaySafeZoneField == true)) {
+        UnitBehaviorRemove(EventUnit(), libFE150EF4_gv_nNnukesOptions.lv_nukesBehaviourForBlob, -1);
     }
 
     return true;
@@ -1104,11 +1158,11 @@ bool libFE150EF4_gt_NNTerransOnTheGround_Func (bool testConds, bool runActions) 
     // Automatic Variable Declarations
     // Conditions
     if (testConds) {
-        if (!((libFE150EF4_gv_nNplayerOptions.lv_nukesisOnlyMainsSafeZone == false))) {
+        if (!((libFE150EF4_gv_nNnukesOptions.lv_nukesisOnlyMainsSafeZone == false))) {
             return false;
         }
 
-        if (!(((libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneLine == true) || (libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneField == true)))) {
+        if (!(((libFE150EF4_gv_nNnukesOptions.lv_nukesisDisplaySafeZoneLine == true) || (libFE150EF4_gv_nNnukesOptions.lv_nukesisDisplaySafeZoneField == true)))) {
             return false;
         }
     }
@@ -1118,12 +1172,12 @@ bool libFE150EF4_gt_NNTerransOnTheGround_Func (bool testConds, bool runActions) 
         return true;
     }
 
-    if ((libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneLine == true)) {
-        UnitBehaviorAdd(EventUnit(), libFE150EF4_gv_nNplayerOptions.lv_nukesBehaviourForLine, EventUnit(), 1);
+    if ((libFE150EF4_gv_nNnukesOptions.lv_nukesisDisplaySafeZoneLine == true)) {
+        UnitBehaviorAdd(EventUnit(), libFE150EF4_gv_nNnukesOptions.lv_nukesBehaviourForLine, EventUnit(), 1);
     }
 
-    if ((libFE150EF4_gv_nNplayerOptions.lv_nukesisDisplaySafeZoneField == true)) {
-        UnitBehaviorAdd(EventUnit(), libFE150EF4_gv_nNplayerOptions.lv_nukesBehaviourForBlob, EventUnit(), 1);
+    if ((libFE150EF4_gv_nNnukesOptions.lv_nukesisDisplaySafeZoneField == true)) {
+        UnitBehaviorAdd(EventUnit(), libFE150EF4_gv_nNnukesOptions.lv_nukesBehaviourForBlob, EventUnit(), 1);
     }
 
     return true;
