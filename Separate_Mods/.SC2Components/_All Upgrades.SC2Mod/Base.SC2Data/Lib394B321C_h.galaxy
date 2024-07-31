@@ -11,6 +11,7 @@ const int lib394B321C_gv_uGzergUpgradesAmount = 14;
 
 // Variable Declarations
 bool lib394B321C_gv_uGisMaxUnitEnergy;
+bool lib394B321C_gv_uGisFastUpgradeLearning;
 string[91] lib394B321C_gv_uGupgradesArray;
 string[5][34] lib394B321C_gv_uGupgradesArrayOfRace;
 
@@ -23,6 +24,7 @@ void lib394B321C_gf_UGAllowAddUpgrades_2 ();
 trigger lib394B321C_gt_UGLaunch;
 trigger lib394B321C_gt_UGWriteUpgrades;
 trigger lib394B321C_gt_UGSetMaxEnergy;
+trigger lib394B321C_gt_UGStartUpgradeLeaning;
 
 // Library Initialization
 void lib394B321C_InitVariables ();

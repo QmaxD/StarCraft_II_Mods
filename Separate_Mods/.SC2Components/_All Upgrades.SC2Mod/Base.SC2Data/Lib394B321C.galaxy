@@ -249,6 +249,10 @@ bool lib394B321C_gt_UGLaunch_Func (bool testConds, bool runActions) {
         }
     }
 
+    if ((GameAttributeGameValue("3") == "0002")) {
+        lib394B321C_gv_uGisFastUpgradeLearning = true;
+    }
+
     return true;
 }
 
@@ -519,10 +523,38 @@ void lib394B321C_gt_UGSetMaxEnergy_Init () {
     TriggerAddEventUnitAbility(lib394B321C_gt_UGSetMaxEnergy, null, AbilityCommand("MorphToOverseer", 0), c_abilMorphStageAbilsEnd, false);
 }
 
+//--------------------------------------------------------------------------------------------------
+// Trigger: UG | StartUpgradeLeaning
+//--------------------------------------------------------------------------------------------------
+bool lib394B321C_gt_UGStartUpgradeLeaning_Func (bool testConds, bool runActions) {
+    // Automatic Variable Declarations
+    // Conditions
+    if (testConds) {
+        if (!((lib394B321C_gv_uGisFastUpgradeLearning == true))) {
+            return false;
+        }
+    }
+
+    // Actions
+    if (!runActions) {
+        return true;
+    }
+
+    UnitSetProgressComplete(EventUnit(), 1, 100);
+    return true;
+}
+
+//--------------------------------------------------------------------------------------------------
+void lib394B321C_gt_UGStartUpgradeLeaning_Init () {
+    lib394B321C_gt_UGStartUpgradeLeaning = TriggerCreate("lib394B321C_gt_UGStartUpgradeLeaning_Func");
+    TriggerAddEventUnitResearchProgress(lib394B321C_gt_UGStartUpgradeLeaning, null, c_unitProgressStageStart);
+}
+
 void lib394B321C_InitTriggers () {
     lib394B321C_gt_UGLaunch_Init();
     lib394B321C_gt_UGWriteUpgrades_Init();
     lib394B321C_gt_UGSetMaxEnergy_Init();
+    lib394B321C_gt_UGStartUpgradeLeaning_Init();
 }
 
 //--------------------------------------------------------------------------------------------------
