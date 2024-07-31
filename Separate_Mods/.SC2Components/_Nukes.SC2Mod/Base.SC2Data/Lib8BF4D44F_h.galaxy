@@ -24,6 +24,7 @@ struct lib8BF4D44F_gs_Nukesoptions {
 // Variable Declarations
 lib8BF4D44F_gs_Nukesoptions lib8BF4D44F_gv_nukesplayerOptions;
 region lib8BF4D44F_gv_nukessafeZone;
+region lib8BF4D44F_gv_nNnukeZone;
 timer lib8BF4D44F_gv_nukestimer;
 
 // Function Declarations

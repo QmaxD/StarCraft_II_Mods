@@ -26,6 +26,7 @@ void lib8BF4D44F_InitVariables () {
     lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisShowRedPoind = true;
     lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisPlayPingSound = true;
     lib8BF4D44F_gv_nukessafeZone = RegionEmpty();
+    lib8BF4D44F_gv_nNnukeZone = RegionEmpty();
     lib8BF4D44F_gv_nukestimer = TimerCreate();
 }
 
@@ -42,24 +43,14 @@ void lib8BF4D44F_gf_NukesSpawnNuke () {
 
 bool auto_lib8BF4D44F_gf_NukesSpawnNuke_TriggerFunc (bool testConds, bool runActions) {
     // Variable Declarations
-    actor lv__actor;
     point lv__nukePoint;
-    int lv__count;
-    int lv__ping;
+    actor lv__actor;
 
     // Automatic Variable Declarations
     // Variable Initialization
-    lv__ping = c_invalidPingId;
 
     // Implementation
-    while ((lv__nukePoint == null) && (lv__count <= 40)) {
-        lv__nukePoint = RegionRandomPoint(RegionPlayableMap());
-        lv__count += 1;
-        if ((RegionContainsPoint(lib8BF4D44F_gv_nukessafeZone, lv__nukePoint) == true)) {
-            lv__nukePoint = null;
-        }
-
-    }
+    lv__nukePoint = RegionRandomPoint(lib8BF4D44F_gv_nNnukeZone);
     if ((lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisShowRedPoind == true)) {
         libNtve_gf_CreateModelAtPoint("GhostNukeIndicator", lv__nukePoint);
         lv__actor = libNtve_gf_ActorLastCreated();
@@ -633,12 +624,14 @@ bool lib8BF4D44F_gt_NukesSpawnNukes_Func (bool testConds, bool runActions) {
             if ((libNtve_gf_UnitIsUnderConstruction(auto88F8B68B_var) == false)) {
                 if (((UnitGetType(auto88F8B68B_var) == "Nexus") || (UnitGetType(auto88F8B68B_var) == "CommandCenter") || (UnitGetType(auto88F8B68B_var) == "OrbitalCommand") || (UnitGetType(auto88F8B68B_var) == "PlanetaryFortress") || (UnitGetType(auto88F8B68B_var) == "Hatchery") || (UnitGetType(auto88F8B68B_var) == "Lair") || (UnitGetType(auto88F8B68B_var) == "Hive"))) {
                     lv_Point = UnitGetPosition(auto88F8B68B_var);
-                    RegionAddCircle(lib8BF4D44F_gv_nukessafeZone, true, lv_Point, lib8BF4D44F_gv_nukesplayerOptions.lv_nukessafeDistance);
+                    RegionAddCircle(lib8BF4D44F_gv_nukessafeZone, false, lv_Point, lib8BF4D44F_gv_nukesplayerOptions.lv_nukessafeDistance);
                 }
 
             }
 
         }
+        lib8BF4D44F_gv_nNnukeZone = RegionPlayableMap();
+        RegionAddRegion(lib8BF4D44F_gv_nNnukeZone, lib8BF4D44F_gv_nukessafeZone);
     }
 
     lib8BF4D44F_gf_NukesPlayPingSound(lib8BF4D44F_gv_nukesplayerOptions.lv_nukesisPlayPingSound);

@@ -288,16 +288,12 @@
         <Element Type="FunctionDef" Id="3C0E267B">
             <FlagAction/>
             <FlagCreateThread/>
-            <Variable Type="Variable" Library="8BF4D44F" Id="8D0FD34B"/>
-            <Variable Type="Comment" Library="8BF4D44F" Id="048C7B48"/>
             <Variable Type="Variable" Library="8BF4D44F" Id="6F93D7D8"/>
             <Variable Type="Comment" Library="8BF4D44F" Id="B8BAFF3E"/>
-            <Variable Type="Variable" Library="8BF4D44F" Id="54CBB30E"/>
-            <Variable Type="Comment" Library="8BF4D44F" Id="0D814188"/>
-            <Variable Type="Variable" Library="8BF4D44F" Id="78B49900"/>
-            <Variable Type="Comment" Library="8BF4D44F" Id="7BF81296"/>
-            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="756787DC"/>
-            <FunctionCall Type="Comment" Library="8BF4D44F" Id="02FEF11A"/>
+            <Variable Type="Variable" Library="8BF4D44F" Id="8D0FD34B"/>
+            <Variable Type="Comment" Library="8BF4D44F" Id="048C7B48"/>
+            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="E7CE4602"/>
+            <FunctionCall Type="Comment" Library="8BF4D44F" Id="223F5C3D"/>
             <FunctionCall Type="Comment" Library="8BF4D44F" Id="2FF17B39"/>
             <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="F8241C8E"/>
             <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="81CDD38E"/>
@@ -308,20 +304,6 @@
             <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="90A3655F"/>
             <FunctionCall Type="Comment" Library="8BF4D44F" Id="415C56C6"/>
             <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="05127CB2"/>
-        </Element>
-        <Element Type="Variable" Id="8D0FD34B">
-            <VariableType>
-                <Type Value="actor"/>
-            </VariableType>
-            <Value Type="Param" Library="8BF4D44F" Id="6D7F7DAC"/>
-        </Element>
-        <Element Type="Param" Id="6D7F7DAC">
-            <Preset Type="PresetValue" Library="Ntve" Id="52D5A28A"/>
-        </Element>
-        <Element Type="Comment" Id="048C7B48">
-            <Comment>
-                модель взрыва
-            </Comment>
         </Element>
         <Element Type="Variable" Id="6F93D7D8">
             <VariableType>
@@ -337,102 +319,22 @@
                 точка спауна бомбы
             </Comment>
         </Element>
-        <Element Type="Variable" Id="54CBB30E">
+        <Element Type="Variable" Id="8D0FD34B">
             <VariableType>
-                <Type Value="int"/>
+                <Type Value="actor"/>
             </VariableType>
-            <Value Type="Param" Library="8BF4D44F" Id="5483A599"/>
+            <Value Type="Param" Library="8BF4D44F" Id="6D7F7DAC"/>
         </Element>
-        <Element Type="Param" Id="5483A599">
-            <Value>0</Value>
-            <ValueType Type="int"/>
+        <Element Type="Param" Id="6D7F7DAC">
+            <Preset Type="PresetValue" Library="Ntve" Id="52D5A28A"/>
         </Element>
-        <Element Type="Comment" Id="0D814188">
+        <Element Type="Comment" Id="048C7B48">
             <Comment>
-                счёт (не зависит от количества бомб)
-                идёт счёт 1-20: если точка попадает в safeзону, то +1 и поиск точки спауна заново
+                модель взрыва
             </Comment>
-        </Element>
-        <Element Type="Variable" Id="78B49900">
-            <VariableType>
-                <Type Value="ping"/>
-            </VariableType>
-            <Value Type="Param" Library="8BF4D44F" Id="1D3FED79"/>
-        </Element>
-        <Element Type="Param" Id="1D3FED79">
-            <Preset Type="PresetValue" Library="Ntve" Id="362A0F1D"/>
-        </Element>
-        <Element Type="Comment" Id="7BF81296">
-            <Comment>
-                пинг на миникарте
-            </Comment>
-        </Element>
-        <Element Type="FunctionCall" Id="756787DC">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="71596144"/>
-            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="9BC4D5AB"/>
-            <FunctionCall Type="Comment" Library="8BF4D44F" Id="EF578166"/>
-            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="3BA788C5"/>
-            <FunctionCall Type="Comment" Library="8BF4D44F" Id="7F1EE372"/>
-            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="E7CE4602"/>
-            <FunctionCall Type="Comment" Library="8BF4D44F" Id="34910C01"/>
-            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="16B1D510"/>
-            <FunctionCall Type="Comment" Library="8BF4D44F" Id="092509C0"/>
-            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="CFB2CE4A"/>
-        </Element>
-        <Element Type="FunctionCall" Id="9BC4D5AB">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="20298AEC"/>
-            <Parameter Type="Param" Library="8BF4D44F" Id="9AE0535C"/>
-            <Parameter Type="Param" Library="8BF4D44F" Id="2A150C9E"/>
-            <Parameter Type="Param" Library="8BF4D44F" Id="63D7DB64"/>
-        </Element>
-        <Element Type="Param" Id="9AE0535C">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
-            <Variable Type="Variable" Library="8BF4D44F" Id="6F93D7D8"/>
-        </Element>
-        <Element Type="Param" Id="2A150C9E">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="1E7A4625"/>
-        </Element>
-        <Element Type="Param" Id="63D7DB64">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="568CBBF1"/>
-        </Element>
-        <Element Type="Comment" Id="EF578166">
-            <Comment>
-                если точки спауна нет
-            </Comment>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="20298AEC"/>
-        </Element>
-        <Element Type="FunctionCall" Id="3BA788C5">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="20298AEC"/>
-            <Parameter Type="Param" Library="8BF4D44F" Id="176C282F"/>
-            <Parameter Type="Param" Library="8BF4D44F" Id="385D65DF"/>
-            <Parameter Type="Param" Library="8BF4D44F" Id="F1CEDC9D"/>
-        </Element>
-        <Element Type="Param" Id="176C282F">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
-            <Variable Type="Variable" Library="8BF4D44F" Id="54CBB30E"/>
-        </Element>
-        <Element Type="Param" Id="385D65DF">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="E123C832"/>
-        </Element>
-        <Element Type="Param" Id="F1CEDC9D">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
-            <Value>40</Value>
-            <ValueType Type="int"/>
-        </Element>
-        <Element Type="Comment" Id="7F1EE372">
-            <Comment>
-                если переменная i меньше или равна 20
-            </Comment>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="20298AEC"/>
         </Element>
         <Element Type="FunctionCall" Id="E7CE4602">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="A1B37466"/>
             <Parameter Type="Param" Library="8BF4D44F" Id="79066257"/>
             <Parameter Type="Param" Library="8BF4D44F" Id="82B068C1"/>
         </Element>
@@ -450,113 +352,11 @@
         </Element>
         <Element Type="Param" Id="B2CAB613">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="17F291FD"/>
-            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="7C1CA7C1"/>
+            <Variable Type="Variable" Library="8BF4D44F" Id="5FCEAF2B"/>
         </Element>
-        <Element Type="FunctionCall" Id="7C1CA7C1">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="46F2D5B8"/>
-        </Element>
-        <Element Type="Comment" Id="34910C01">
+        <Element Type="Comment" Id="223F5C3D">
             <Comment>
-                установим точку спауна в любой точке региона Карта
-            </Comment>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="A1B37466"/>
-        </Element>
-        <Element Type="FunctionCall" Id="16B1D510">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="A0F31305"/>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="A1B37466"/>
-            <Parameter Type="Param" Library="8BF4D44F" Id="3F1DD64E"/>
-            <Parameter Type="Param" Library="8BF4D44F" Id="6E503EA8"/>
-            <Parameter Type="Param" Library="8BF4D44F" Id="A9DA2073"/>
-        </Element>
-        <Element Type="Param" Id="3F1DD64E">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="5BFF7323"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="00000085"/>
-        </Element>
-        <Element Type="Param" Id="6E503EA8">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="6725C0EB"/>
-            <Value>1</Value>
-            <ValueType Type="int"/>
-        </Element>
-        <Element Type="Param" Id="A9DA2073">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="7B3B0884"/>
-            <Variable Type="Variable" Library="8BF4D44F" Id="54CBB30E"/>
-        </Element>
-        <Element Type="Comment" Id="092509C0">
-            <Comment>
-                повышаем каждый раз переменную i на 1 единицу
-            </Comment>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="A1B37466"/>
-        </Element>
-        <Element Type="FunctionCall" Id="CFB2CE4A">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000137"/>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="A1B37466"/>
-            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="AC0287FD"/>
-            <FunctionCall Type="Comment" Library="8BF4D44F" Id="1FDCF2CF"/>
-            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="BA0B4D42"/>
-            <FunctionCall Type="Comment" Library="8BF4D44F" Id="652B285D"/>
-        </Element>
-        <Element Type="FunctionCall" Id="AC0287FD">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
-            <Parameter Type="Param" Library="8BF4D44F" Id="B90B1D54"/>
-            <Parameter Type="Param" Library="8BF4D44F" Id="A89A03EC"/>
-        </Element>
-        <Element Type="Param" Id="B90B1D54">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
-            <Variable Type="Variable" Library="8BF4D44F" Id="6F93D7D8"/>
-        </Element>
-        <Element Type="Param" Id="A89A03EC">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="568CBBF1"/>
-        </Element>
-        <Element Type="Comment" Id="1FDCF2CF">
-            <Comment>
-                тогда точка спауна = 0 и стартуем заново по циклу
-            </Comment>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
-        </Element>
-        <Element Type="FunctionCall" Id="BA0B4D42">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="C439C375"/>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
-            <Parameter Type="Param" Library="8BF4D44F" Id="FBD6E23E"/>
-            <Parameter Type="Param" Library="8BF4D44F" Id="D50C3E7E"/>
-            <Parameter Type="Param" Library="8BF4D44F" Id="6EDD9EA9"/>
-        </Element>
-        <Element Type="Param" Id="FBD6E23E">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="ABB380C4"/>
-            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="E6D82772"/>
-        </Element>
-        <Element Type="FunctionCall" Id="E6D82772">
-            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000036"/>
-            <Parameter Type="Param" Library="8BF4D44F" Id="3E2D69C2"/>
-            <Parameter Type="Param" Library="8BF4D44F" Id="A2A612EF"/>
-        </Element>
-        <Element Type="Param" Id="3E2D69C2">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000066"/>
-            <Variable Type="Variable" Library="8BF4D44F" Id="4FB4D3FE"/>
-        </Element>
-        <Element Type="Param" Id="A2A612EF">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000067"/>
-            <Variable Type="Variable" Library="8BF4D44F" Id="6F93D7D8"/>
-        </Element>
-        <Element Type="Param" Id="D50C3E7E">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="51567265"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="1E7A4625"/>
-        </Element>
-        <Element Type="Param" Id="6EDD9EA9">
-            <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
-            <Value>true</Value>
-            <ValueType Type="bool"/>
-        </Element>
-        <Element Type="Comment" Id="652B285D">
-            <Comment>
-                Если точка спауна оказывается в точке safe зоны
-            </Comment>
-            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003"/>
-        </Element>
-        <Element Type="Comment" Id="02FEF11A">
-            <Comment>
-                постоянный цикл
+                установим точку спауна бомбы в любой точке региона nukeZone
             </Comment>
         </Element>
         <Element Type="Comment" Id="2FF17B39">
@@ -1544,6 +1344,8 @@
             <Item Type="Comment" Library="8BF4D44F" Id="FF595D0F"/>
             <Item Type="Variable" Library="8BF4D44F" Id="4FB4D3FE"/>
             <Item Type="Comment" Library="8BF4D44F" Id="923C4015"/>
+            <Item Type="Variable" Library="8BF4D44F" Id="5FCEAF2B"/>
+            <Item Type="Comment" Library="8BF4D44F" Id="E0727C09"/>
             <Item Type="Variable" Library="8BF4D44F" Id="A7C6E860"/>
             <Item Type="Comment" Library="8BF4D44F" Id="C7FA55BF"/>
         </Element>
@@ -1810,6 +1612,24 @@
         <Element Type="Comment" Id="923C4015">
             <Comment>
                 безопасная зона, где не будет сброса бомб
+            </Comment>
+        </Element>
+        <Element Type="Variable" Id="5FCEAF2B">
+            <Label Type="Label" Library="Ntve" Id="CE915C5A"/>
+            <VariableType>
+                <Type Value="region"/>
+            </VariableType>
+            <Value Type="Param" Library="8BF4D44F" Id="B1662EDA"/>
+        </Element>
+        <Element Type="Param" Id="B1662EDA">
+            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="7CD21D07"/>
+        </Element>
+        <Element Type="FunctionCall" Id="7CD21D07">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000028"/>
+        </Element>
+        <Element Type="Comment" Id="E0727C09">
+            <Comment>
+                опасная зона, где будет сброса бомб
             </Comment>
         </Element>
         <Element Type="Variable" Id="A7C6E860">
@@ -6090,6 +5910,7 @@
             <Action Type="Comment" Library="8BF4D44F" Id="9B900B63"/>
             <Action Type="Comment" Library="8BF4D44F" Id="F38BD5C8"/>
             <Action Type="FunctionCall" Library="8BF4D44F" Id="5160BA41"/>
+            <Action Type="Comment" Library="8BF4D44F" Id="F67E96E2"/>
             <Action Type="Comment" Library="8BF4D44F" Id="88CE30E4"/>
             <Action Type="FunctionCall" Library="8BF4D44F" Id="E567A1EE"/>
             <Action Type="Comment" Library="8BF4D44F" Id="AA9299D1"/>
@@ -6306,7 +6127,7 @@
             <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000005"/>
             <Parameter Type="Param" Library="8BF4D44F" Id="7D09049E"/>
             <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="7F757498"/>
-            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="5703EB68"/>
+            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="80CD960B"/>
             <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="918347F3"/>
             <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="6F0EDE97"/>
             <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="0E235B5E"/>
@@ -6426,53 +6247,53 @@
             <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
             <Variable Type="Variable" Library="8BF4D44F" Id="06513B9C"/>
         </Element>
-        <Element Type="FunctionCall" Id="5703EB68">
+        <Element Type="FunctionCall" Id="80CD960B">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="6C39A0DF"/>
             <SubFunctionType Type="SubFuncType" Library="Ntve" Id="DEA91B62"/>
-            <Parameter Type="Param" Library="8BF4D44F" Id="8ECCDC5C"/>
-            <Parameter Type="Param" Library="8BF4D44F" Id="DBFA4C1E"/>
-            <Parameter Type="Param" Library="8BF4D44F" Id="54BA515C"/>
-            <Parameter Type="Param" Library="8BF4D44F" Id="63AA7754"/>
-            <Parameter Type="Param" Library="8BF4D44F" Id="E517165F"/>
-            <Parameter Type="Param" Library="8BF4D44F" Id="09A036C2"/>
+            <Parameter Type="Param" Library="8BF4D44F" Id="D472A747"/>
+            <Parameter Type="Param" Library="8BF4D44F" Id="1CCB6BCD"/>
+            <Parameter Type="Param" Library="8BF4D44F" Id="9A51C278"/>
+            <Parameter Type="Param" Library="8BF4D44F" Id="4817E0DF"/>
+            <Parameter Type="Param" Library="8BF4D44F" Id="ABC41621"/>
+            <Parameter Type="Param" Library="8BF4D44F" Id="633AD4A9"/>
         </Element>
-        <Element Type="Param" Id="8ECCDC5C">
+        <Element Type="Param" Id="D472A747">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="972A74CB"/>
             <Value>1</Value>
             <ValueType Type="int"/>
         </Element>
-        <Element Type="Param" Id="DBFA4C1E">
+        <Element Type="Param" Id="1CCB6BCD">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="5AC69524"/>
             <ValueType Type="preset"/>
             <ValueElement Type="Preset" Library="Ntve" Id="E85564CA"/>
             <ValuePreset Type="PresetValue" Library="Ntve" Id="7491C9A8"/>
         </Element>
-        <Element Type="Param" Id="54BA515C">
+        <Element Type="Param" Id="9A51C278">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="1EC7B7A1"/>
             <Value>0</Value>
             <ValueType Type="int"/>
         </Element>
-        <Element Type="Param" Id="63AA7754">
+        <Element Type="Param" Id="4817E0DF">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="5908CAE6"/>
             <Value>270.0</Value>
             <ValueType Type="fixed"/>
         </Element>
-        <Element Type="Param" Id="E517165F">
+        <Element Type="Param" Id="ABC41621">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="9329BF02"/>
-            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="0E111C48"/>
+            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="0F6342A1"/>
         </Element>
-        <Element Type="FunctionCall" Id="0E111C48">
+        <Element Type="FunctionCall" Id="0F6342A1">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000151"/>
-            <Parameter Type="Param" Library="8BF4D44F" Id="F435FC2F"/>
+            <Parameter Type="Param" Library="8BF4D44F" Id="ACEE3DA4"/>
         </Element>
-        <Element Type="Param" Id="F435FC2F">
+        <Element Type="Param" Id="ACEE3DA4">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="00000240"/>
-            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="6F082CBF"/>
+            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="9D0DB943"/>
         </Element>
-        <Element Type="FunctionCall" Id="6F082CBF">
+        <Element Type="FunctionCall" Id="9D0DB943">
             <FunctionDef Type="FunctionDef" Library="Ntve" Id="8570CA61"/>
         </Element>
-        <Element Type="Param" Id="09A036C2">
+        <Element Type="Param" Id="633AD4A9">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="EF0CF6FF"/>
             <Variable Type="Variable" Library="8BF4D44F" Id="06513B9C"/>
         </Element>
@@ -7090,6 +6911,11 @@
         <Element Type="Param" Id="DEA98891">
             <Variable Type="Variable" Library="8BF4D44F" Id="B7A4EC8B"/>
         </Element>
+        <Element Type="Comment" Id="F67E96E2">
+            <Comment>
+                обозначаем границы сейфзоны с помощью behavior
+            </Comment>
+        </Element>
         <Element Type="Comment" Id="88CE30E4">
             <Comment>
                 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -7648,6 +7474,9 @@
             <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="DD587BE7"/>
             <FunctionCall Type="Comment" Library="8BF4D44F" Id="DB1BC2E3"/>
             <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="88F8B68B"/>
+            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="3B346ED8"/>
+            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="1C7B3157"/>
+            <FunctionCall Type="Comment" Library="8BF4D44F" Id="83768600"/>
             <FunctionCall Type="Comment" Library="8BF4D44F" Id="055C66DF"/>
             <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="AC86F03C"/>
         </Element>
@@ -7786,7 +7615,7 @@
         </Element>
         <Element Type="Param" Id="48305CCB">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="00000058"/>
-            <Preset Type="PresetValue" Library="Ntve" Id="00000008"/>
+            <Preset Type="PresetValue" Library="Ntve" Id="00000009"/>
         </Element>
         <Element Type="Param" Id="FE44E41A">
             <ParameterDef Type="ParamDef" Library="Ntve" Id="00000059"/>
@@ -8076,6 +7905,43 @@
             <ParameterDef Type="ParamDef" Library="Ntve" Id="4A15EC5F"/>
             <Value>false</Value>
             <ValueType Type="bool"/>
+        </Element>
+        <Element Type="FunctionCall" Id="3B346ED8">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000136"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="8BF4D44F" Id="19B3F5A5"/>
+            <Parameter Type="Param" Library="8BF4D44F" Id="3E7692F7"/>
+        </Element>
+        <Element Type="Param" Id="19B3F5A5">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000220"/>
+            <FunctionCall Type="FunctionCall" Library="8BF4D44F" Id="A4965BE3"/>
+        </Element>
+        <Element Type="FunctionCall" Id="A4965BE3">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="46F2D5B8"/>
+        </Element>
+        <Element Type="Param" Id="3E7692F7">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000219"/>
+            <Variable Type="Variable" Library="8BF4D44F" Id="5FCEAF2B"/>
+        </Element>
+        <Element Type="FunctionCall" Id="1C7B3157">
+            <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000033"/>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
+            <Parameter Type="Param" Library="8BF4D44F" Id="6FCFDE3F"/>
+            <Parameter Type="Param" Library="8BF4D44F" Id="A64DDA37"/>
+        </Element>
+        <Element Type="Param" Id="6FCFDE3F">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000061"/>
+            <Variable Type="Variable" Library="8BF4D44F" Id="5FCEAF2B"/>
+        </Element>
+        <Element Type="Param" Id="A64DDA37">
+            <ParameterDef Type="ParamDef" Library="Ntve" Id="00000062"/>
+            <Variable Type="Variable" Library="8BF4D44F" Id="4FB4D3FE"/>
+        </Element>
+        <Element Type="Comment" Id="83768600">
+            <Comment>
+                создадим зону сброса бомб
+            </Comment>
+            <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004"/>
         </Element>
         <Element Type="Comment" Id="055C66DF">
             <Comment>
