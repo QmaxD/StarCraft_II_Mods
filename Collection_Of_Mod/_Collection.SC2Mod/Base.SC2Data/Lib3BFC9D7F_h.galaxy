@@ -17,8 +17,8 @@ bool lib3BFC9D7F_gv_nVGis_useVespenWhenOrderUnit;
 // Function Declarations
 void lib3BFC9D7F_gf_SetupInformation (int lp_modIndex);
 void lib3BFC9D7F_gf_GetOptions ();
+void lib3BFC9D7F_gf_GetInfoForPlayer ();
 void lib3BFC9D7F_gf_TriggersTurnOn ();
-void lib3BFC9D7F_gf_NVGGetInfoForPlayer ();
 void lib3BFC9D7F_gf_NVGStart ();
 
 // Trigger Declarations

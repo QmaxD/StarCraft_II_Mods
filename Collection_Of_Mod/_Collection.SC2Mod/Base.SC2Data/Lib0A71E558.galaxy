@@ -5,7 +5,7 @@ include "Lib36280BFF_h"
 include "Lib0A71E558_h"
 
 //--------------------------------------------------------------------------------------------------
-// Library: Berserk | BB
+// Library: 20 Berserk | BB
 //--------------------------------------------------------------------------------------------------
 // External Library Initialization
 void lib0A71E558_InitLibraries () {
@@ -100,27 +100,7 @@ void lib0A71E558_gf_GetOptions () {
 
 }
 
-void lib0A71E558_gf_TriggersTurnOn () {
-    // Automatic Variable Declarations
-    int autoFB422FA1_val;
-
-    // Implementation
-    autoFB422FA1_val = lib0A71E558_gv_bBberserkOption;
-    if (autoFB422FA1_val == 0) {
-    }
-    else if (autoFB422FA1_val == 1) {
-    }
-    else if (autoFB422FA1_val == 2) {
-        TriggerEnable(lib0A71E558_gt_BBChangeBehavior, true);
-    }
-    else if (autoFB422FA1_val == 3) {
-        TriggerEnable(lib0A71E558_gt_BBChangeBehavior, true);
-    }
-    else {
-    }
-}
-
-void lib0A71E558_gf_BBGetInfoForPlayer () {
+void lib0A71E558_gf_GetInfoForPlayer () {
     // Variable Declarations
     text lv__description;
 
@@ -153,6 +133,26 @@ void lib0A71E558_gf_BBGetInfoForPlayer () {
     }
     lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = lv__description;
     lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat = StringToText("");
+}
+
+void lib0A71E558_gf_TriggersTurnOn () {
+    // Automatic Variable Declarations
+    int autoFB422FA1_val;
+
+    // Implementation
+    autoFB422FA1_val = lib0A71E558_gv_bBberserkOption;
+    if (autoFB422FA1_val == 0) {
+    }
+    else if (autoFB422FA1_val == 1) {
+    }
+    else if (autoFB422FA1_val == 2) {
+        TriggerEnable(lib0A71E558_gt_BBChangeBehavior, true);
+    }
+    else if (autoFB422FA1_val == 3) {
+        TriggerEnable(lib0A71E558_gt_BBChangeBehavior, true);
+    }
+    else {
+    }
 }
 
 bool lib0A71E558_gf_BBCanAttack (unit lp_unit) {
@@ -396,7 +396,7 @@ bool lib0A71E558_gt_Launch_Func (bool testConds, bool runActions) {
     }
 
     lib0A71E558_gf_GetOptions();
-    lib0A71E558_gf_BBGetInfoForPlayer();
+    lib0A71E558_gf_GetInfoForPlayer();
     TextExpressionSetToken("Param/Expression/lib_0A71E558_D594B484", "FulName", lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_fullName);
     HelpPanelAddTip(PlayerGroupAll(), libNtve_gf_FormatTipTitle(TextExpressionAssemble("Param/Expression/lib_0A71E558_D594B484"), libNtve_ge_TipType_NormalTip), lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_name, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_icon_Path);
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat);

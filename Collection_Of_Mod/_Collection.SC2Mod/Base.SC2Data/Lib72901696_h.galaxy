@@ -35,8 +35,8 @@ fixed lib72901696_gv_lTUvespenFacror;
 // Function Declarations
 void lib72901696_gf_SetupInformation (int lp_modIndex);
 void lib72901696_gf_GetOptions ();
+void lib72901696_gf_GetInfoForPlayer ();
 void lib72901696_gf_TriggersTurnOn ();
-void lib72901696_gf_LTUGetInfoForPlayer ();
 void lib72901696_gf_LTUStart ();
 fixed lib72901696_gf_LTUGetTimeExistingOfUnitType (unit lp_unit);
 fixed lib72901696_gf_LTUGiveTimeToWorker ();

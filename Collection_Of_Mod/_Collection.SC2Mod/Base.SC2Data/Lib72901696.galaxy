@@ -174,15 +174,7 @@ void lib72901696_gf_GetOptions () {
     }
 }
 
-void lib72901696_gf_TriggersTurnOn () {
-    // Automatic Variable Declarations
-    // Implementation
-    TriggerEnable(lib72901696_gt_LTUAgingStart, true);
-    TriggerEnable(lib72901696_gt_LTUMorphStart, true);
-    TriggerEnable(lib72901696_gt_LTUUnitAreOld, true);
-}
-
-void lib72901696_gf_LTUGetInfoForPlayer () {
+void lib72901696_gf_GetInfoForPlayer () {
     // Variable Declarations
     text lv__description;
 
@@ -254,6 +246,14 @@ void lib72901696_gf_LTUGetInfoForPlayer () {
     }
     lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = lv__description;
     lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat = StringToText("");
+}
+
+void lib72901696_gf_TriggersTurnOn () {
+    // Automatic Variable Declarations
+    // Implementation
+    TriggerEnable(lib72901696_gt_LTUAgingStart, true);
+    TriggerEnable(lib72901696_gt_LTUMorphStart, true);
+    TriggerEnable(lib72901696_gt_LTUUnitAreOld, true);
 }
 
 trigger auto_lib72901696_gf_LTUStart_Trigger = null;
@@ -528,7 +528,7 @@ bool lib72901696_gt_Launch_Func (bool testConds, bool runActions) {
     }
 
     lib72901696_gf_GetOptions();
-    lib72901696_gf_LTUGetInfoForPlayer();
+    lib72901696_gf_GetInfoForPlayer();
     TextExpressionSetToken("Param/Expression/lib_72901696_96CB7188", "FulName", lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_fullName);
     HelpPanelAddTip(PlayerGroupAll(), libNtve_gf_FormatTipTitle(TextExpressionAssemble("Param/Expression/lib_72901696_96CB7188"), libNtve_ge_TipType_NormalTip), lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_name, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_icon_Path);
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat);

@@ -77,8 +77,8 @@ lib0D5719D7_gs_HideUI_Option lib0D5719D7_gv_uIhideUIOptions;
 // Function Declarations
 void lib0D5719D7_gf_SetupInformation (int lp_modIndex);
 void lib0D5719D7_gf_GetOptions ();
-void lib0D5719D7_gf_TriggersTurnOn ();
 void lib0D5719D7_gf_GetInfoForPlayer ();
+void lib0D5719D7_gf_TriggersTurnOn ();
 void lib0D5719D7_gf_UIApplySettings ();
 
 // Trigger Declarations

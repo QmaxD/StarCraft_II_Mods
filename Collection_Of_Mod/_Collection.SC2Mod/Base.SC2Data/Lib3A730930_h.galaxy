@@ -59,8 +59,8 @@ text lib3A730930_gv_gStimeFormat;
 // Function Declarations
 void lib3A730930_gf_SetupInformation (int lp_modIndex);
 void lib3A730930_gf_GetOptions ();
+void lib3A730930_gf_GetInfoForPlayer ();
 void lib3A730930_gf_TriggersTurnOn ();
-void lib3A730930_gf_GSGetInfoForPlayer ();
 void lib3A730930_gf_GSStartGameTimer ();
 void lib3A730930_gf_GSChangeGameTimer ();
 void lib3A730930_gf_GSChangeGameSpeed ();

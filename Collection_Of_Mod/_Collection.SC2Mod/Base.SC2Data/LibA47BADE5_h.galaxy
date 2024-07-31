@@ -1,7 +1,7 @@
 include "TriggerLibs/natives"
 
 //--------------------------------------------------------------------------------------------------
-// Library: Resources damage | RD
+// Library: 19 Resources damage | RD
 //--------------------------------------------------------------------------------------------------
 // Constants
 const fixed libA47BADE5_gv_rDMinResToLife = 0.25;
@@ -19,8 +19,8 @@ bool libA47BADE5_gv_rDis_Enable;
 // Function Declarations
 void libA47BADE5_gf_SetupInformation (int lp_modIndex);
 void libA47BADE5_gf_GetOptions ();
+void libA47BADE5_gf_GetInfoForPlayer ();
 void libA47BADE5_gf_TriggersTurnOn ();
-void libA47BADE5_gf_RDGetInfoForPlayer ();
 void libA47BADE5_gf_RDMakeResourcesVulnerable ();
 
 // Trigger Declarations

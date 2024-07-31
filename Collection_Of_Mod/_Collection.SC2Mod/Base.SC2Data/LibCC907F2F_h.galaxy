@@ -21,8 +21,8 @@ bool libCC907F2F_gv_rRis_Replace_Small_Resources;
 // Function Declarations
 void libCC907F2F_gf_SetupInformation (int lp_modIndex);
 void libCC907F2F_gf_GetOptions ();
+void libCC907F2F_gf_GetInfoForPlayer ();
 void libCC907F2F_gf_TriggersTurnOn ();
-void libCC907F2F_gf_RRGetInfoForPlayer ();
 void libCC907F2F_gf_RRPickEachResources ();
 bool libCC907F2F_gf_RRis_ReplaceSmallResource (unit lp_unit);
 void libCC907F2F_gf_RRReplaceMineral1800 (unit lp_unit);

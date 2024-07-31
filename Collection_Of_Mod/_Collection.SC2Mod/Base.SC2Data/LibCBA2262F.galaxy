@@ -121,29 +121,7 @@ void libCBA2262F_gf_GetOptions () {
 
 }
 
-void libCBA2262F_gf_TriggersTurnOn () {
-    // Automatic Variable Declarations
-    // Implementation
-    TriggerEnable(libCBA2262F_gt_BUAVikingTransformAG, true);
-    TriggerEnable(libCBA2262F_gt_BUAVikingTransformGA, true);
-    if ((libCBA2262F_gv_isBlockingAirUnitAttack == true)) {
-        TriggerEnable(libCBA2262F_gt_BUADisableAirUnitAttack, true);
-    }
-
-    if ((libCBA2262F_gv_isBlockingGroundUnitAttack == true)) {
-        TriggerEnable(libCBA2262F_gt_BUADisableGroundUnitAttack, true);
-    }
-
-    if ((libCBA2262F_gv_isBlockingStructuresAttack == true)) {
-        TriggerEnable(libCBA2262F_gt_BUADisableStructuresAttack, true);
-    }
-
-    if ((libCBA2262F_gv_isBlockingWorkerAttack == true)) {
-    }
-
-}
-
-void libCBA2262F_gf_BUAGetInfoForPlayer () {
+void libCBA2262F_gf_GetInfoForPlayer () {
     // Variable Declarations
     text lv__description;
 
@@ -170,6 +148,28 @@ void libCBA2262F_gf_BUAGetInfoForPlayer () {
 
     lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = lv__description;
     lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat = StringToText("");
+}
+
+void libCBA2262F_gf_TriggersTurnOn () {
+    // Automatic Variable Declarations
+    // Implementation
+    TriggerEnable(libCBA2262F_gt_BUAVikingTransformAG, true);
+    TriggerEnable(libCBA2262F_gt_BUAVikingTransformGA, true);
+    if ((libCBA2262F_gv_isBlockingAirUnitAttack == true)) {
+        TriggerEnable(libCBA2262F_gt_BUADisableAirUnitAttack, true);
+    }
+
+    if ((libCBA2262F_gv_isBlockingGroundUnitAttack == true)) {
+        TriggerEnable(libCBA2262F_gt_BUADisableGroundUnitAttack, true);
+    }
+
+    if ((libCBA2262F_gv_isBlockingStructuresAttack == true)) {
+        TriggerEnable(libCBA2262F_gt_BUADisableStructuresAttack, true);
+    }
+
+    if ((libCBA2262F_gv_isBlockingWorkerAttack == true)) {
+    }
+
 }
 
 void libCBA2262F_gf_BUAStart () {
@@ -397,7 +397,7 @@ bool libCBA2262F_gt_Launch_Func (bool testConds, bool runActions) {
     }
 
     libCBA2262F_gf_GetOptions();
-    libCBA2262F_gf_BUAGetInfoForPlayer();
+    libCBA2262F_gf_GetInfoForPlayer();
     TextExpressionSetToken("Param/Expression/lib_CBA2262F_2E8488A3", "FulName", lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_fullName);
     HelpPanelAddTip(PlayerGroupAll(), libNtve_gf_FormatTipTitle(TextExpressionAssemble("Param/Expression/lib_CBA2262F_2E8488A3"), libNtve_ge_TipType_NormalTip), lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_name, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_icon_Path);
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat);

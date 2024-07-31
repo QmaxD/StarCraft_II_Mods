@@ -23,8 +23,8 @@ bool libCBA2262F_gv_isBlockingWorkerAttack;
 // Function Declarations
 void libCBA2262F_gf_SetupInformation (int lp_modIndex);
 void libCBA2262F_gf_GetOptions ();
+void libCBA2262F_gf_GetInfoForPlayer ();
 void libCBA2262F_gf_TriggersTurnOn ();
-void libCBA2262F_gf_BUAGetInfoForPlayer ();
 void libCBA2262F_gf_BUAStart ();
 void libCBA2262F_gf_BUADisallowAirUpgrades ();
 void libCBA2262F_gf_BUADisallowGroundUpgrades ();

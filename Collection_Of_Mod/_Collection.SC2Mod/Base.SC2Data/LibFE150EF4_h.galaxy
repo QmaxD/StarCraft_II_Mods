@@ -90,13 +90,14 @@ struct libFE150EF4_gs_Nukes_Option {
 libFE150EF4_gs_Information libFE150EF4_gv_modInformation;
 libFE150EF4_gs_Nukes_Option libFE150EF4_gv_nNnukesOptions;
 region libFE150EF4_gv_nNsafeZone;
+region libFE150EF4_gv_nNnukeZone;
 timer libFE150EF4_gv_nNtimer;
 
 // Function Declarations
 void libFE150EF4_gf_SetupInformation (int lp_modIndex);
 void libFE150EF4_gf_GetOptions ();
-void libFE150EF4_gf_TriggersTurnOn ();
 void libFE150EF4_gf_GetInfoForPlayer ();
+void libFE150EF4_gf_TriggersTurnOn ();
 void libFE150EF4_gf_NNStartSafeZoneAndTimer ();
 void libFE150EF4_gf_NNSpawnNuke ();
 void libFE150EF4_gf_NNPlayPingSound (bool lp_isPlaySound);

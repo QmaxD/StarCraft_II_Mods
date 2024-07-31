@@ -64,8 +64,8 @@ int[16] libA56FBBB5_gv_rLlostVespene;
 // Function Declarations
 void libA56FBBB5_gf_SetupInformation (int lp_modIndex);
 void libA56FBBB5_gf_GetOptions ();
+void libA56FBBB5_gf_GetInfoForPlayer ();
 void libA56FBBB5_gf_TriggersTurnOn ();
-void libA56FBBB5_gf_RLGetInfoForPlayer ();
 void libA56FBBB5_gf_RLCreateLostDialog ();
 
 // Trigger Declarations

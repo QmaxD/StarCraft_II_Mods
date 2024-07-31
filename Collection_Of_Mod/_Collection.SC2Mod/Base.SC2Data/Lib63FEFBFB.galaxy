@@ -5,7 +5,7 @@ include "Lib36280BFF_h"
 include "Lib63FEFBFB_h"
 
 //--------------------------------------------------------------------------------------------------
-// Library: Resource mining | RM
+// Library: 18 Resource mining | RM
 //--------------------------------------------------------------------------------------------------
 // External Library Initialization
 void lib63FEFBFB_InitLibraries () {
@@ -148,11 +148,7 @@ void lib63FEFBFB_gf_GetOptions () {
     }
 }
 
-void lib63FEFBFB_gf_TriggersTurnOn () {
-    // Automatic Variable Declarations
-}
-
-void lib63FEFBFB_gf_RMGetInfoForPlayer () {
+void lib63FEFBFB_gf_GetInfoForPlayer () {
     // Variable Declarations
     text lv__description;
 
@@ -202,6 +198,10 @@ void lib63FEFBFB_gf_RMGetInfoForPlayer () {
     }
     lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = lv__description;
     lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat = StringToText("");
+}
+
+void lib63FEFBFB_gf_TriggersTurnOn () {
+    // Automatic Variable Declarations
 }
 
 void lib63FEFBFB_gf_RMChangeMining () {
@@ -283,7 +283,7 @@ void lib63FEFBFB_gf_RMChangeMining () {
                 UnitBehaviorRemove(auto3CDCFCB9_var, "RawVespeneGeyserGas", 1);
             }
 
-            autoD46A7F28_val = lib63FEFBFB_gv_rMget_MiningMinerals;
+            autoD46A7F28_val = lib63FEFBFB_gv_rMget_MiningVespenGas;
             if (autoD46A7F28_val == 2) {
                 UnitBehaviorAdd(auto3CDCFCB9_var, "RawVespeneGeyserGas6", auto3CDCFCB9_var, 1);
             }
@@ -306,7 +306,7 @@ void lib63FEFBFB_gf_RMChangeMining () {
                 UnitBehaviorRemove(auto3CDCFCB9_var, "RawRichVespeneGeyserGas", 1);
             }
 
-            auto8AFA2F04_val = lib63FEFBFB_gv_rMget_MiningMinerals;
+            auto8AFA2F04_val = lib63FEFBFB_gv_rMget_MiningVespenGas;
             if (auto8AFA2F04_val == 2) {
                 UnitBehaviorAdd(auto3CDCFCB9_var, "RawRichVespeneGeyserGas12", auto3CDCFCB9_var, 1);
             }
@@ -338,7 +338,7 @@ bool lib63FEFBFB_gt_Launch_Func (bool testConds, bool runActions) {
     }
 
     lib63FEFBFB_gf_GetOptions();
-    lib63FEFBFB_gf_RMGetInfoForPlayer();
+    lib63FEFBFB_gf_GetInfoForPlayer();
     TextExpressionSetToken("Param/Expression/lib_63FEFBFB_0DA08FDC", "FulName", lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_fullName);
     HelpPanelAddTip(PlayerGroupAll(), libNtve_gf_FormatTipTitle(TextExpressionAssemble("Param/Expression/lib_63FEFBFB_0DA08FDC"), libNtve_ge_TipType_NormalTip), lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_name, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_icon_Path);
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat);

@@ -49,8 +49,8 @@ timer lib737D3B35_gv_oBGtimer;
 // Function Declarations
 void lib737D3B35_gf_SetupInformation (int lp_modIndex);
 void lib737D3B35_gf_GetOptions ();
+void lib737D3B35_gf_GetInfoForPlayer ();
 void lib737D3B35_gf_TriggersTurnOn ();
-void lib737D3B35_gf_OBGGetInfoForPlayer ();
 void lib737D3B35_gf_OBGStart ();
 void lib737D3B35_gf_OBGCutResources ();
 void lib737D3B35_gf_OBGGrowResources ();

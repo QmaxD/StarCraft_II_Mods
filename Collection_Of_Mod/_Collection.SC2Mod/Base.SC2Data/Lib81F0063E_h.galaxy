@@ -13,11 +13,14 @@ const int lib81F0063E_gv_aUzergUpgradesAmount = 14;
 struct lib81F0063E_gs_Information {
     string lv_aUOption_1D090D0BFD0B3D180D0B5D0B9D0B4D18BD182D0BED0BBD18CD0BAD0BED0BDD0B0D0B0D182D0B0D0BAD183D0B1D180D0BED0BDD18ED0B8D189D0B8D182D18B;
     string lv_aUOption_1D092D181D0B5D0B0D0BFD0B3D180D0B5D0B9D0B4D18BD180D0B0D181D18BD0B8D0B3D180D0BED0BAD0B0;
+    string lv_aUOption_2D090D0BFD0B3D180D0B5D0B9D0B4D18B0D0B3D0BED183D180D0BED0B2D0BDD18F;
     string lv_aUOption_2D090D0BFD0B3D180D0B5D0B9D0B4D18B1D0B3D0BED183D180D0BED0B2D0BDD18F;
     string lv_aUOption_2D090D0BFD0B3D180D0B5D0B9D0B4D18B2D0B3D0BED183D180D0BED0B2D0BDD18F;
     string lv_aUOption_2D090D0BFD0B3D180D0B5D0B9D0B4D18B3D0B3D0BED183D180D0BED0B2D0BDD18F;
     string lv_aUOption_3D094D0B0;
     string lv_aUOption_3D09DD0B5D182;
+    string lv_aUOption_4D094D0B0;
+    string lv_aUOption_4D0A1D182D0B0D0BDD0B4D0B0D180D182D0BDD0BE;
 };
 
 // Variable Declarations
@@ -25,14 +28,15 @@ lib81F0063E_gs_Information lib81F0063E_gv_modInformation;
 bool lib81F0063E_gv_aUis_SetupAllUpgrades;
 int lib81F0063E_gv_aULevelOfBasicUpgrades;
 bool lib81F0063E_gv_aUis_SetMaxUnitEnergy;
+bool lib81F0063E_gv_aUis_FastUpgradeLearning;
 string[91] lib81F0063E_gv_aUupgradesArray;
 string[5][34] lib81F0063E_gv_aUupgradesArrayOfRace;
 
 // Function Declarations
 void lib81F0063E_gf_SetupInformation (int lp_modIndex);
 void lib81F0063E_gf_GetOptions ();
+void lib81F0063E_gf_GetInfoForPlayer ();
 void lib81F0063E_gf_TriggersTurnOn ();
-void lib81F0063E_gf_AUGetInfoForPlayer ();
 void lib81F0063E_gf_AUWriteUpgrades ();
 void lib81F0063E_gf_AUSetUpgrades ();
 void lib81F0063E_gf_AUAllowAddBasicUpgrades (int lp_numberPlayer);
@@ -41,6 +45,7 @@ void lib81F0063E_gf_AUAllowAddExtraUpgrades (int lp_numberPlayer);
 // Trigger Declarations
 trigger lib81F0063E_gt_Launch;
 trigger lib81F0063E_gt_AUSetMaxEnergy;
+trigger lib81F0063E_gt_AUStartUpgradeLeaning;
 
 // Library Initialization
 void lib81F0063E_InitVariables ();

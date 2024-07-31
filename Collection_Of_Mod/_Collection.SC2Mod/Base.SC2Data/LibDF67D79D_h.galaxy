@@ -1,24 +1,56 @@
 include "TriggerLibs/natives"
 
 //--------------------------------------------------------------------------------------------------
-// Library: ++15 Opponent visibility and minimap | OVM
+// Library: 15 Opponent visibility and map | OVM
 //--------------------------------------------------------------------------------------------------
 // Structures
 struct libDF67D79D_gs_Information {
-    string lv_gSOption_1;
+    string lv_gSOption_1D0A1D182D0B0D0BDD0B4D0B0D180D182D0BDD0BE;
+    string lv_gSOption_1D091D0B5D0B7D182D183D0BCD0B0D0BDD0B0D0B2D0BED0B9D0BDD18B;
+    string lv_gSOption_1D09DD0B5D0B8D181D181D0BBD0B5D0B4D0BED0B2D0B0D0BDD0BDD0B0D18FD0BAD0B0D180D182D0B0;
+    string lv_gSOption_2D0A1D182D0B0D0BDD0B4D0B0D180D182D0BDD0BE;
+    string lv_gSOption_2D092D0B8D0B4D0BDD18B;
+    string lv_gSOption_3D0A1D182D0B0D0BDD0B4D0B0D180D182D0BDD0BE;
+    string lv_gSOption_3D092D0B8D0B4D0BDD18B;
+    string lv_gSOption_4D0A1D182D0B0D0BDD0B4D0B0D180D182D0BDD0BE;
+    string lv_gSOption_4D092D0B8D0B4D0BDD18B;
+    string lv_gSOption_5D0A1D182D0B0D0BDD0B4D0B0D180D182D0BDD0BE;
+    string lv_gSOption_5D092D0B8D0B4D0BDD18B;
+    string lv_gSOption_6D0A1D182D0B0D0BDD0B4D0B0D180D182D0BDD0BE;
+    string lv_gSOption_6D092D0B8D0B4D0BDD18B;
+    string lv_gSOption_7D0A1D182D0B0D0BDD0B4D0B0D180D182D0BDD0BE;
+    string lv_gSOption_7D092D0B8D0B4D0BDD18B;
+};
+
+struct libDF67D79D_gs_OVM_Option {
+    bool lv_isNoWarFog;
+    bool lv_isMapHidden;
+    bool lv_isZergBuried;
+    bool lv_isTerranBuried;
+    bool lv_isProtossHidden;
+    bool lv_isTerranHidden;
+    bool lv_isZergCreep;
+    bool lv_isProtossMothership;
 };
 
 // Variable Declarations
 libDF67D79D_gs_Information libDF67D79D_gv_modInformation;
+libDF67D79D_gs_OVM_Option libDF67D79D_gv_oVMOVM_Options;
 
 // Function Declarations
 void libDF67D79D_gf_SetupInformation (int lp_modIndex);
 void libDF67D79D_gf_GetOptions ();
-void libDF67D79D_gf_TriggersTurnOn ();
 void libDF67D79D_gf_GetInfoForPlayer ();
+void libDF67D79D_gf_TriggersTurnOn ();
+bool libDF67D79D_gf_OVMIsBuriedUnit (string lp_unitType);
+bool libDF67D79D_gf_OVMIsHiddenUnit (string lp_unitType);
+bool libDF67D79D_gf_OVMIsMothership (string lp_unitType);
+bool libDF67D79D_gf_OVMIsCreepTumor (string lp_unitType);
+void libDF67D79D_gf_OVMSetMapVisibility ();
 
 // Trigger Declarations
 trigger libDF67D79D_gt_Launch;
+trigger libDF67D79D_gt_OVMunitEnter;
 
 // Library Initialization
 void libDF67D79D_InitVariables ();

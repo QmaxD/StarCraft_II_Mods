@@ -5,7 +5,7 @@ include "Lib36280BFF_h"
 include "LibA47BADE5_h"
 
 //--------------------------------------------------------------------------------------------------
-// Library: Resources damage | RD
+// Library: 19 Resources damage | RD
 //--------------------------------------------------------------------------------------------------
 // External Library Initialization
 void libA47BADE5_InitLibraries () {
@@ -60,18 +60,18 @@ void libA47BADE5_gf_GetOptions () {
     libA47BADE5_gv_rDis_Enable = true;
 }
 
+void libA47BADE5_gf_GetInfoForPlayer () {
+    // Automatic Variable Declarations
+    // Implementation
+    lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = StringExternal("Param/Value/lib_A47BADE5_D4768285");
+    lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat = StringToText("");
+}
+
 void libA47BADE5_gf_TriggersTurnOn () {
     // Automatic Variable Declarations
     // Implementation
     TriggerEnable(libA47BADE5_gt_InitHighMineral7, true);
     TriggerEnable(libA47BADE5_gt_InitHighMineral6, true);
-}
-
-void libA47BADE5_gf_RDGetInfoForPlayer () {
-    // Automatic Variable Declarations
-    // Implementation
-    lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = StringExternal("Param/Value/lib_A47BADE5_D4768285");
-    lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat = StringToText("");
 }
 
 void libA47BADE5_gf_RDMakeResourcesVulnerable () {
@@ -119,7 +119,7 @@ bool libA47BADE5_gt_Launch_Func (bool testConds, bool runActions) {
     }
 
     libA47BADE5_gf_GetOptions();
-    libA47BADE5_gf_RDGetInfoForPlayer();
+    libA47BADE5_gf_GetInfoForPlayer();
     TextExpressionSetToken("Param/Expression/lib_A47BADE5_D3D56ABD", "FulName", lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_fullName);
     HelpPanelAddTip(PlayerGroupAll(), libNtve_gf_FormatTipTitle(TextExpressionAssemble("Param/Expression/lib_A47BADE5_D3D56ABD"), libNtve_ge_TipType_NormalTip), lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_name, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_icon_Path);
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat);

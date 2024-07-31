@@ -170,11 +170,7 @@ void lib1F00594A_gf_GetOptions () {
 
 }
 
-void lib1F00594A_gf_TriggersTurnOn () {
-    // Automatic Variable Declarations
-}
-
-void lib1F00594A_gf_SLGetInfoForPlayer () {
+void lib1F00594A_gf_GetInfoForPlayer () {
     // Variable Declarations
     text lv__description;
 
@@ -189,6 +185,10 @@ void lib1F00594A_gf_SLGetInfoForPlayer () {
     }
 
     lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = lv__description;
+}
+
+void lib1F00594A_gf_TriggersTurnOn () {
+    // Automatic Variable Declarations
 }
 
 trigger auto_lib1F00594A_gf_SLGiveSupplyLimit_Trigger = null;
@@ -238,7 +238,7 @@ bool lib1F00594A_gt_Launch_Func (bool testConds, bool runActions) {
     }
 
     lib1F00594A_gf_GetOptions();
-    lib1F00594A_gf_SLGetInfoForPlayer();
+    lib1F00594A_gf_GetInfoForPlayer();
     TextExpressionSetToken("Param/Expression/lib_1F00594A_70A59A91", "FulName", lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_fullName);
     HelpPanelAddTip(PlayerGroupAll(), libNtve_gf_FormatTipTitle(TextExpressionAssemble("Param/Expression/lib_1F00594A_70A59A91"), libNtve_ge_TipType_NormalTip), lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_name, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_icon_Path);
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat);

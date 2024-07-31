@@ -29,8 +29,8 @@ bool lib1F00594A_gv_sLis_NoSupplyBlock;
 // Function Declarations
 void lib1F00594A_gf_SetupInformation (int lp_modIndex);
 void lib1F00594A_gf_GetOptions ();
+void lib1F00594A_gf_GetInfoForPlayer ();
 void lib1F00594A_gf_TriggersTurnOn ();
-void lib1F00594A_gf_SLGetInfoForPlayer ();
 void lib1F00594A_gf_SLGiveSupplyLimit ();
 
 // Trigger Declarations

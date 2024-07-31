@@ -1,7 +1,7 @@
 include "TriggerLibs/natives"
 
 //--------------------------------------------------------------------------------------------------
-// Library: Resource mining | RM
+// Library: 18 Resource mining | RM
 //--------------------------------------------------------------------------------------------------
 // Structures
 struct lib63FEFBFB_gs_Information {
@@ -25,8 +25,8 @@ int lib63FEFBFB_gv_rMget_MiningVespenGas;
 // Function Declarations
 void lib63FEFBFB_gf_SetupInformation (int lp_modIndex);
 void lib63FEFBFB_gf_GetOptions ();
+void lib63FEFBFB_gf_GetInfoForPlayer ();
 void lib63FEFBFB_gf_TriggersTurnOn ();
-void lib63FEFBFB_gf_RMGetInfoForPlayer ();
 void lib63FEFBFB_gf_RMChangeMining ();
 
 // Trigger Declarations

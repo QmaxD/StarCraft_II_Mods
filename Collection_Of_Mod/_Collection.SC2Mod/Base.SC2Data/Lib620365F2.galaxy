@@ -301,16 +301,7 @@ void lib620365F2_gf_GetOptions () {
     }
 }
 
-void lib620365F2_gf_TriggersTurnOn () {
-    // Automatic Variable Declarations
-    // Implementation
-    TriggerEnable(lib620365F2_gt_WLWorkerUnitEnter, true);
-    TriggerEnable(lib620365F2_gt_WLWorkerUnitDies, true);
-    TriggerEnable(lib620365F2_gt_WLWorkerUnitMorph, true);
-    TriggerEnable(lib620365F2_gt_WLPeriodicCheckWorkers, true);
-}
-
-void lib620365F2_gf_WLGetInfoForPlayer () {
+void lib620365F2_gf_GetInfoForPlayer () {
     // Variable Declarations
     int lv__number_Player;
     text lv__description;
@@ -354,6 +345,15 @@ void lib620365F2_gf_WLGetInfoForPlayer () {
         }
     }
     lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = lv__description;
+}
+
+void lib620365F2_gf_TriggersTurnOn () {
+    // Automatic Variable Declarations
+    // Implementation
+    TriggerEnable(lib620365F2_gt_WLWorkerUnitEnter, true);
+    TriggerEnable(lib620365F2_gt_WLWorkerUnitDies, true);
+    TriggerEnable(lib620365F2_gt_WLWorkerUnitMorph, true);
+    TriggerEnable(lib620365F2_gt_WLPeriodicCheckWorkers, true);
 }
 
 void lib620365F2_gf_WLStart () {
@@ -707,7 +707,7 @@ bool lib620365F2_gt_Launch_Func (bool testConds, bool runActions) {
 
     lib620365F2_gf_TriggersTurnOn();
     lib620365F2_gf_GetOptions();
-    lib620365F2_gf_WLGetInfoForPlayer();
+    lib620365F2_gf_GetInfoForPlayer();
     TextExpressionSetToken("Param/Expression/lib_620365F2_B3B5B58A", "FulName", lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_fullName);
     HelpPanelAddTip(PlayerGroupAll(), libNtve_gf_FormatTipTitle(TextExpressionAssemble("Param/Expression/lib_620365F2_B3B5B58A"), libNtve_ge_TipType_NormalTip), lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_name, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_icon_Path);
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat);

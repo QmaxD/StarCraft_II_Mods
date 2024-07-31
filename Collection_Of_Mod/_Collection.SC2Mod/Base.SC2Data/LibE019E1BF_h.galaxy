@@ -14,8 +14,8 @@ libE019E1BF_gs_Information libE019E1BF_gv_modInformation;
 // Function Declarations
 void libE019E1BF_gf_SetupInformation (int lp_modIndex);
 void libE019E1BF_gf_GetOptions ();
+void libE019E1BF_gf_GetInfoForPlayer ();
 void libE019E1BF_gf_TriggersTurnOn ();
-void libE019E1BF_gf_UKUGetInfoForPlayer ();
 void libE019E1BF_gf_UKUApplyOptions ();
 void libE019E1BF_gf_UKUEnableAirGroundWeaponForPlayer (int lp_player);
 

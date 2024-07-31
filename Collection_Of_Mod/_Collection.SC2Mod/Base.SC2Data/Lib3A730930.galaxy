@@ -75,9 +75,9 @@ void lib3A730930_gf_SetupInformation (int lp_modIndex) {
 
     // Automatic Variable Declarations
     // Variable Initialization
-    lv__default_Option_1 = 7;
-    lv__default_Option_2 = 2;
-    lv__default_Option_3 = 2;
+    lv__default_Option_1 = 14;
+    lv__default_Option_2 = 1;
+    lv__default_Option_3 = 1;
 
     // Implementation
     lib39D1ECFB_gv_mods[lp_modIndex].lv_name = StringExternal("Param/Value/lib_3A730930_2FF96B78");
@@ -306,14 +306,7 @@ void lib3A730930_gf_GetOptions () {
     }
 }
 
-void lib3A730930_gf_TriggersTurnOn () {
-    // Automatic Variable Declarations
-    // Implementation
-    TriggerEnable(lib3A730930_gt_UntitledTrigger002, true);
-    TriggerEnable(lib3A730930_gt_GSChangeTimerFormat, true);
-}
-
-void lib3A730930_gf_GSGetInfoForPlayer () {
+void lib3A730930_gf_GetInfoForPlayer () {
     // Variable Declarations
     int lv__speedForText;
 
@@ -337,6 +330,13 @@ void lib3A730930_gf_GSGetInfoForPlayer () {
         lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = TextExpressionAssemble("Param/Expression/lib_3A730930_DA35EBDF");
         lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat = (StringExternal("Param/Value/lib_3A730930_F399F42A") + (IntToText(lv__speedForText) + StringExternal("Param/Value/lib_3A730930_E1176E4C")));
     }
+}
+
+void lib3A730930_gf_TriggersTurnOn () {
+    // Automatic Variable Declarations
+    // Implementation
+    TriggerEnable(lib3A730930_gt_UntitledTrigger002, true);
+    TriggerEnable(lib3A730930_gt_GSChangeTimerFormat, true);
 }
 
 trigger auto_lib3A730930_gf_GSStartGameTimer_Trigger = null;
@@ -522,7 +522,7 @@ bool lib3A730930_gt_Launch_Func (bool testConds, bool runActions) {
 
     GameSetSpeedLocked(false);
     lib3A730930_gf_GetOptions();
-    lib3A730930_gf_GSGetInfoForPlayer();
+    lib3A730930_gf_GetInfoForPlayer();
     TextExpressionSetToken("Param/Expression/lib_3A730930_21B26F44", "FulName", lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_fullName);
     HelpPanelAddTip(PlayerGroupAll(), libNtve_gf_FormatTipTitle(TextExpressionAssemble("Param/Expression/lib_3A730930_21B26F44"), libNtve_ge_TipType_NormalTip), lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_name, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_icon_Path);
     UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat);

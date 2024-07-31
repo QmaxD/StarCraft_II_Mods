@@ -1,21 +1,69 @@
 include "TriggerLibs/natives"
 
 //--------------------------------------------------------------------------------------------------
-// Library: Handicap | HH
+// Library: 01 Handicap | HH
 //--------------------------------------------------------------------------------------------------
 // Structures
 struct libA97D4977_gs_Information {
-    string lv_aUKUOption_1;
+    string lv_hHOption_1025;
+    string lv_hHOption_1030;
+    string lv_hHOption_1035;
+    string lv_hHOption_1040;
+    string lv_hHOption_1045;
+    string lv_hHOption_1050;
+    string lv_hHOption_1055;
+    string lv_hHOption_1060;
+    string lv_hHOption_1065;
+    string lv_hHOption_1070;
+    string lv_hHOption_1075;
+    string lv_hHOption_1080;
+    string lv_hHOption_1085;
+    string lv_hHOption_1090;
+    string lv_hHOption_1095;
+    string lv_hHOption_1100;
+    string lv_hHOption_1105;
+    string lv_hHOption_1110;
+    string lv_hHOption_1115;
+    string lv_hHOption_1120;
+    string lv_hHOption_1125;
+    string lv_hHOption_1130;
+    string lv_hHOption_1135;
+    string lv_hHOption_1140;
+    string lv_hHOption_1145;
+    string lv_hHOption_1150;
+    string lv_hHOption_1155;
+    string lv_hHOption_1160;
+    string lv_hHOption_1165;
+    string lv_hHOption_1170;
+    string lv_hHOption_1175;
+    string lv_hHOption_1180;
+    string lv_hHOption_1185;
+    string lv_hHOption_1190;
+    string lv_hHOption_1195;
+    string lv_hHOption_1200;
+    string lv_hHOption_1210;
+    string lv_hHOption_1220;
+    string lv_hHOption_1230;
+    string lv_hHOption_1240;
+    string lv_hHOption_1250;
+    string lv_hHOption_1275;
+    string lv_hHOption_1300;
+    string lv_hHOption_1350;
+    string lv_hHOption_1400;
+    string lv_hHOption_1450;
+    string lv_hHOption_1500;
 };
 
 // Variable Declarations
 libA97D4977_gs_Information libA97D4977_gv_modInformation;
+int[17] libA97D4977_gv_hHplayersHandicaps;
 
 // Function Declarations
 void libA97D4977_gf_SetupInformation (int lp_modIndex);
 void libA97D4977_gf_TriggersTurnOn ();
-void libA97D4977_gf_GetOptions ();
 void libA97D4977_gf_GetInfoForPlayer ();
+void libA97D4977_gf_GetOptions ();
+void libA97D4977_gf_HHSetHandicapForPlayers ();
 
 // Trigger Declarations
 trigger libA97D4977_gt_Launch;

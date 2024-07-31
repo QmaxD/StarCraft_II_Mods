@@ -4,12 +4,12 @@
         <AssetArray File="Assets\Sounds\Uni\UI\BattleNet_UI\UI_Bnet_GameModeBig.ogg" FacialGroup=""/>
     </CSound>
     <CSound id="TUIWarningPing2" parent="UI">
-        <AssetArray File="Resources\Sound\ui_warningping.1ping.wav" FacialGroup=""/>
+        <AssetArray File="Resources\Mods\Nukes\Sound\ping_warningping.1ping.wav" FacialGroup=""/>
         <DupeDestroyCount value="3"/>
         <Volume value="-6.000000,-6.000000"/>
     </CSound>
     <CSound id="TUIWarningPing3" parent="UI">
-        <AssetArray File="Resources\Sound\ui_warningping.2ping.wav" FacialGroup=""/>
+        <AssetArray File="Resources\Mods\Nukes\Sound\ping_warningping.2ping.wav" FacialGroup=""/>
         <DupeDestroyCount value="3"/>
         <Volume value="-6.000000,-6.000000"/>
     </CSound>

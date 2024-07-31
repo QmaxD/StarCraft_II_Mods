@@ -34,8 +34,8 @@ bool lib1F307236_gv_uBKis_DependingFromTheirUnit;
 // Function Declarations
 void lib1F307236_gf_SetupInformation (int lp_modIndex);
 void lib1F307236_gf_GetOptions ();
+void lib1F307236_gf_GetInfoForPlayer ();
 void lib1F307236_gf_TriggersTurnOn ();
-void lib1F307236_gf_UBKGetInfoForPlayer ();
 fixed lib1F307236_gf_UBKmaxLife (int lp_kills, fixed lp_index);
 fixed lib1F307236_gf_UBKmaxShield (int lp_kills, fixed lp_index);
 fixed lib1F307236_gf_UBKregenLife (int lp_kills, fixed lp_index);

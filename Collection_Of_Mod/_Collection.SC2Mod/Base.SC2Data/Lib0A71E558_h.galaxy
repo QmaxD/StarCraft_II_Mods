@@ -1,7 +1,7 @@
 include "TriggerLibs/natives"
 
 //--------------------------------------------------------------------------------------------------
-// Library: Berserk | BB
+// Library: 20 Berserk | BB
 //--------------------------------------------------------------------------------------------------
 // Structures
 struct lib0A71E558_gs_Information {
@@ -19,8 +19,8 @@ bool lib0A71E558_gv_bBis_WithDamage;
 // Function Declarations
 void lib0A71E558_gf_SetupInformation (int lp_modIndex);
 void lib0A71E558_gf_GetOptions ();
+void lib0A71E558_gf_GetInfoForPlayer ();
 void lib0A71E558_gf_TriggersTurnOn ();
-void lib0A71E558_gf_BBGetInfoForPlayer ();
 bool lib0A71E558_gf_BBCanAttack (unit lp_unit);
 int lib0A71E558_gf_BBGetCountBehaviorFromLife (unit lp_unit);
 int lib0A71E558_gf_BBGetCountBehaviorFromShield (unit lp_unit);

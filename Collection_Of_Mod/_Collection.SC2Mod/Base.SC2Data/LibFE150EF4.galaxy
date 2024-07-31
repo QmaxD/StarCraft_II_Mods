@@ -92,6 +92,7 @@ void libFE150EF4_InitVariables () {
     libFE150EF4_gv_nNnukesOptions.lv_nukesisShowRedPoind = true;
     libFE150EF4_gv_nNnukesOptions.lv_nukesisPlayPingSound = true;
     libFE150EF4_gv_nNsafeZone = RegionEmpty();
+    libFE150EF4_gv_nNnukeZone = RegionEmpty();
     libFE150EF4_gv_nNtimer = TimerCreate();
 }
 
@@ -702,18 +703,6 @@ void libFE150EF4_gf_GetOptions () {
     }
 }
 
-void libFE150EF4_gf_TriggersTurnOn () {
-    // Automatic Variable Declarations
-    // Implementation
-    TriggerEnable(libFE150EF4_gt_NNSpawnNukes, true);
-    if ((libFE150EF4_gv_nNnukesOptions.lv_nukesisOnlyMainsSafeZone == false)) {
-        TriggerEnable(libFE150EF4_gt_NNSetNewBasesCircle, true);
-        TriggerEnable(libFE150EF4_gt_NNTerransInTheAir, true);
-        TriggerEnable(libFE150EF4_gt_NNTerransOnTheGround, true);
-    }
-
-}
-
 void libFE150EF4_gf_GetInfoForPlayer () {
     // Variable Declarations
     text lv__description;
@@ -745,6 +734,18 @@ void libFE150EF4_gf_GetInfoForPlayer () {
     lv__description = (lv__description + libFE150EF4_gv_nNnukesOptions.lv_nukesnukeRadius);
     lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = lv__description;
     lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat = StringToText("");
+}
+
+void libFE150EF4_gf_TriggersTurnOn () {
+    // Automatic Variable Declarations
+    // Implementation
+    TriggerEnable(libFE150EF4_gt_NNSpawnNukes, true);
+    if ((libFE150EF4_gv_nNnukesOptions.lv_nukesisOnlyMainsSafeZone == false)) {
+        TriggerEnable(libFE150EF4_gt_NNSetNewBasesCircle, true);
+        TriggerEnable(libFE150EF4_gt_NNTerransInTheAir, true);
+        TriggerEnable(libFE150EF4_gt_NNTerransOnTheGround, true);
+    }
+
 }
 
 void libFE150EF4_gf_NNStartSafeZoneAndTimer () {
@@ -840,24 +841,14 @@ void libFE150EF4_gf_NNSpawnNuke () {
 
 bool auto_libFE150EF4_gf_NNSpawnNuke_TriggerFunc (bool testConds, bool runActions) {
     // Variable Declarations
-    actor lv__actor;
     point lv__nukePoint;
-    int lv__count;
-    int lv__ping;
+    actor lv__actor;
 
     // Automatic Variable Declarations
     // Variable Initialization
-    lv__ping = c_invalidPingId;
 
     // Implementation
-    while ((lv__nukePoint == null) && (lv__count <= 40)) {
-        lv__nukePoint = RegionRandomPoint(RegionPlayableMap());
-        lv__count += 1;
-        if ((RegionContainsPoint(libFE150EF4_gv_nNsafeZone, lv__nukePoint) == true)) {
-            lv__nukePoint = null;
-        }
-
-    }
+    lv__nukePoint = RegionRandomPoint(libFE150EF4_gv_nNnukeZone);
     if ((libFE150EF4_gv_nNnukesOptions.lv_nukesisShowRedPoind == true)) {
         libNtve_gf_CreateModelAtPoint("GhostNukeIndicator", lv__nukePoint);
         lv__actor = libNtve_gf_ActorLastCreated();
@@ -1045,12 +1036,14 @@ bool libFE150EF4_gt_NNSpawnNukes_Func (bool testConds, bool runActions) {
             if ((libNtve_gf_UnitIsUnderConstruction(auto81B8E974_var) == false)) {
                 if ((lib36280BFF_gf_Commonis_MainBuilding(auto81B8E974_var) == true)) {
                     lv_Point = UnitGetPosition(auto81B8E974_var);
-                    RegionAddCircle(libFE150EF4_gv_nNsafeZone, true, lv_Point, libFE150EF4_gv_nNnukesOptions.lv_nukessafeDistance);
+                    RegionAddCircle(libFE150EF4_gv_nNsafeZone, false, lv_Point, libFE150EF4_gv_nNnukesOptions.lv_nukessafeDistance);
                 }
 
             }
 
         }
+        libFE150EF4_gv_nNnukeZone = RegionPlayableMap();
+        RegionAddRegion(libFE150EF4_gv_nNnukeZone, libFE150EF4_gv_nNsafeZone);
     }
 
     libFE150EF4_gf_NNPlayPingSound(libFE150EF4_gv_nNnukesOptions.lv_nukesisPlayPingSound);

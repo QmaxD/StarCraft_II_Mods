@@ -61,8 +61,8 @@ bool lib620365F2_gv_wLisStart;
 // Function Declarations
 void lib620365F2_gf_SetupInformation (int lp_modIndex);
 void lib620365F2_gf_GetOptions ();
+void lib620365F2_gf_GetInfoForPlayer ();
 void lib620365F2_gf_TriggersTurnOn ();
-void lib620365F2_gf_WLGetInfoForPlayer ();
 void lib620365F2_gf_WLStart ();
 void lib620365F2_gf_WLGiveWorkersCommandAndType (int lp_numberPlayer);
 void lib620365F2_gf_WLCreateWorkersAndOrderToMineral (int lp_amountWokersCreate, string lp_unitType, string lp_command, int lp_numberPlayer, string lp_raceOfPlayer, fixed lp_radiusCreate, fixed lp_radiusResources);

@@ -485,12 +485,6 @@ void lib0D5719D7_gf_GetOptions () {
     }
 }
 
-void lib0D5719D7_gf_TriggersTurnOn () {
-    // Automatic Variable Declarations
-    // Implementation
-    TriggerEnable(lib3A730930_gt_UntitledTrigger002, true);
-}
-
 void lib0D5719D7_gf_GetInfoForPlayer () {
     // Variable Declarations
     text lv__description;
@@ -519,6 +513,12 @@ void lib0D5719D7_gf_GetInfoForPlayer () {
     lv__description = (TextExpressionAssemble("Param/Expression/lib_0D5719D7_58E453EC"));
     lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_tip_Description = lv__description;
     lib39D1ECFB_gv_mods[lib39D1ECFB_gv_selected_Mod].lv_message_Chat = StringToText("");
+}
+
+void lib0D5719D7_gf_TriggersTurnOn () {
+    // Automatic Variable Declarations
+    // Implementation
+    TriggerEnable(lib3A730930_gt_UntitledTrigger002, true);
 }
 
 void lib0D5719D7_gf_UIApplySettings () {
