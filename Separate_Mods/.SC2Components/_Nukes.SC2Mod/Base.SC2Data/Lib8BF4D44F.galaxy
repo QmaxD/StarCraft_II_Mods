@@ -500,13 +500,15 @@ bool lib8BF4D44F_gt_NukesStartSafeZoneAndTimer_Func (bool testConds, bool runAct
         return true;
     }
 
+    lib8BF4D44F_gv_nNnukeZone = RegionPlayableMap();
     autoC47B5189_g = PlayerGroupActive();
     autoC47B5189_var = -1;
     while (true) {
         autoC47B5189_var = PlayerGroupNextPlayer(autoC47B5189_g, autoC47B5189_var);
         if (autoC47B5189_var < 0) { break; }
         if ((PlayerStatus(autoC47B5189_var) == c_playerStatusActive)) {
-            RegionAddCircle(lib8BF4D44F_gv_nukessafeZone, true, PlayerStartLocation(autoC47B5189_var), lib8BF4D44F_gv_nukesplayerOptions.lv_nukessafeDistance);
+            RegionAddCircle(lib8BF4D44F_gv_nukessafeZone, false, PlayerStartLocation(autoC47B5189_var), lib8BF4D44F_gv_nukesplayerOptions.lv_nukessafeDistance);
+            RegionAddRegion(lib8BF4D44F_gv_nNnukeZone, lib8BF4D44F_gv_nukessafeZone);
         }
 
     }
