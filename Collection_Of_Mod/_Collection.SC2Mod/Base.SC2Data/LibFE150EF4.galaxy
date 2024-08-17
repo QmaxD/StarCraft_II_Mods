@@ -116,7 +116,7 @@ void libFE150EF4_gf_SetupInformation (int lp_modIndex) {
     // Variable Initialization
     lv__default_Option_1 = 5;
     lv__default_Option_2 = 10;
-    lv__default_Option_3 = 5;
+    lv__default_Option_3 = 3;
     lv__default_Option_4 = 2;
     lv__default_Option_5 = 2;
     lv__default_Option_6 = 3;
@@ -769,12 +769,14 @@ void libFE150EF4_gf_NNStartSafeZoneAndTimer () {
     lv__mainsGroup = UnitGroupEmpty();
 
     // Implementation
+    libFE150EF4_gv_nNnukeZone = RegionPlayableMap();
     auto300AFC44_g = lib36280BFF_gv_commonplayers_Active_Group;
     auto300AFC44_var = -1;
     while (true) {
         auto300AFC44_var = PlayerGroupNextPlayer(auto300AFC44_g, auto300AFC44_var);
         if (auto300AFC44_var < 0) { break; }
-        RegionAddCircle(libFE150EF4_gv_nNsafeZone, true, PlayerStartLocation(auto300AFC44_var), libFE150EF4_gv_nNnukesOptions.lv_nukessafeDistance);
+        RegionAddCircle(libFE150EF4_gv_nNsafeZone, false, PlayerStartLocation(auto300AFC44_var), libFE150EF4_gv_nNnukesOptions.lv_nukessafeDistance);
+        RegionAddRegion(libFE150EF4_gv_nNnukeZone, libFE150EF4_gv_nNsafeZone);
     }
     if (((libFE150EF4_gv_nNnukesOptions.lv_nukesisDisplaySafeZoneLine == true) || (libFE150EF4_gv_nNnukesOptions.lv_nukesisDisplaySafeZoneField == true))) {
         if ((libFE150EF4_gv_nNnukesOptions.lv_nukesisOnlyMainsSafeZone == false)) {
